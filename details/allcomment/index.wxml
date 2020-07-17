@@ -1,0 +1,87 @@
+<view class="content">
+  <view class="tbody" wx:for="{{comment}}" wx:key="index">
+    <view class="header">
+      <view class="imged">
+        <image src="{{item.avatar}}" mode="widthFix"></image>
+        <view class="leftge">
+          <text>{{item.nickname}}</text>
+          <text class="time">时间</text>
+        </view>
+      </view>
+      <view class="xuanjie" bindtap="replys" data-user="{{item.user_id}}" data-comment="{{item.to_user_id}}">
+        <text class="color">回复</text>
+      </view>
+    </view>
+    <view class="cakan">
+      <text>{{item.comment}}</text>
+    </view>
+    
+    <view class="middle">
+      <!-- <view class="imged">
+        <image src="/images/temp/caipin.png"></image>
+        <view class="leftged timed">
+          <view>
+            <text>青椒炒腊肉</text>
+          </view>
+          <text>青椒炒腊肉是以腊肉、青椒、葱姜蒜碎、糖、盐、鸡粉、料</text>
+        </view>
+      </view> -->
+
+    </view>
+     <!-- <view class="cakan">
+      <text class="timed">生鲜小妹：</text>
+      <text> 味道太棒了</text>
+    </view> -->
+    <view class="cakan" wx:for="{{item.items}}" wx:key="index" wx:for-item="itemName">
+      <text class="timed">{{itemName.comment}}</text>
+      <!-- <text> {{item.}}</text> -->
+    </view>
+
+    <view class="inputde">
+     <input placeholder="回复"></input>
+    </view>
+  </view>
+  <!--  -->
+  <!-- <view class="tbody">
+    <view class="header">
+      <view class="imged">
+        <image src="/images/details/xiaohua.png" mode="widthFix"></image>
+        <view class="leftge">
+          <text>生鲜小妹</text>
+          <text class="time">昨天 16:25</text>
+        </view>
+      </view>
+      <view class="xuanjie">
+        <text class="color">回复</text>
+      </view>
+    </view>
+    <view class="cakan">
+      <text>做法很简单，做出来也很美味</text>
+    </view>
+    
+    <view class="middle">
+      <view class="imged">
+        <image src="/images/temp/caipin.png"></image>
+        <view class="leftged timed">
+          <view>
+            <text>青椒炒腊肉</text>
+          </view>
+          <text>青椒炒腊肉是以腊肉、青椒、葱姜蒜碎、糖、盐、鸡粉、料</text>
+        </view>
+      </view>
+
+    </view>
+     <view class="cakan">
+      <text class="timed">生鲜小妹：</text>
+      <text> 味道太棒了</text>
+    </view>
+    <view class="cakan">
+      <text class="timed">绿色食品：</text>
+      <text> 我这边有其他菜品，可以试着做哦。</text>
+    </view>
+
+    <view class="inputde">
+     <input placeholder="回复生鲜小哥"></input>
+    </view>
+  </view> -->
+</view>

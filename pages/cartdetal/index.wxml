@@ -1,0 +1,56 @@
+<view class="title">
+  <view class="header">
+    <text>收货人信息</text>
+  </view>
+  <view class="content" wx:if="{{addreslist!=null}}">
+    <view>
+      <text>收货地址：{{addreslist.province_name}} {{addreslist.city_name}} {{addreslist.county_name}} {{addreslist.address}}</text>
+    </view>
+    <view class="huo">
+      <text>收  货 人：{{addreslist.name}}</text>
+    </view>
+    <view class="huo">
+      <text>收货电话：{{addreslist.tel}}</text>
+    </view>
+    <view class="toAddress" bindtap="addresd">
+      <i class="fal fa-angle-right"></i>
+    </view>
+  </view>
+  <view class="content" wx:else bindtap="addresd">
+     <view class="color">暂无地址信息请选择地址>></view>
+  </view>
+
+</view>
+<view class="payment">
+ <checkbox-group class="weui-flex" bindchange="checkboxChange">
+  <view class="paym" wx:for="{{payment_list}}" wx:key="unique" wx:if="{{index<2}}">
+    <text>{{item.name}}支付</text>
+    <view bindtap="switch" data-id="{{item.id}}">
+      <checkbox class="checked" value="{{item.id}}" checked="{{item.checked}}" color='#3B9EF5' />
+    </view>
+  </view>
+  </checkbox-group>
+</view>
+<view class="wuhua">
+  <!-- <view class="meat">
+    <view class="color" bindtap="toDetalInfo">
+      <text>订单详情</text>
+    </view>
+  </view> -->
+  <!-- <view wx:for="{{goods_list}}" wx:key="unique">
+    <view class="meat active">
+      <text>{{item.title}}</text>
+      <text>{{item.stock}}/{{item.inventory_unit}}</text>
+      <text>￥{{item.total_price}}元</text>
+    </view>
+  </view> -->
+ 
+</view>
+<view class="heji">
+  <view>
+    <text>共{{goods_list.length}}件 合计：</text>
+    <text class="ff9" wx:if="{{shopNowPrice == ''}}">￥ {{actual_price.actual_price}}元</text>
+    <text class="ff9" wx:else>￥ {{shopNowPrice *100 * shopAttribute.num/100}}元</text>
+  </view>
+    <view class="zhonged" bindtap="payment">支付</view>
+</view>

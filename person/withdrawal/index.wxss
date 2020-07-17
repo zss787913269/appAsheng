@@ -1,0 +1,96 @@
+.header{
+  width: 95%;
+  height: 200rpx;
+  margin: 30rpx auto;
+  background: #9bcc81;
+  border-radius:20rpx; 
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+}
+.yue{
+   width: 95%;
+  height: 80rpx;
+  background: #9bcc81;
+  color: #fff;
+  display: flex;
+  flex-flow: column;
+  line-height: 50rpx;
+}
+.font{
+  font-size:40rpx; 
+}
+.leiji{
+  color: #fff;
+  margin-top:40rpx;
+  font-size: 25rpx; 
+  display: flex;
+  justify-content: space-between;
+}
+.boder{
+  width: 150rpx;
+  height: 35rpx;
+  text-align: center;
+  border: 1px solid #fff;
+  border-radius:20rpx; 
+}
+.content{
+  width: 95%;
+  height: 400rpx;
+  margin: 30rpx auto;
+  border-radius:20rpx; 
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+}
+.title{
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+.shuru{
+  width: 100%;
+  height: auto;
+  display: flex;
+ justify-content: space-between;
+ flex-wrap:wrap; 
+ 
+}
+.shuru view{
+  width: 45%;
+  height: 80rpx;
+  margin-top:20rpx;
+  border: 1px solid #ccc;
+  border-radius:15rpx;  
+  text-align: center;
+  line-height: 80rpx;
+}
+.shuru input{
+  width: 100%;
+  height: 100%;
+}
+.active{
+  background: #ffa531;
+  color: #fff
+}
+.tbody{
+  width: 100%;
+  height: 300rpx;
+  padding: 0 30rpx;
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  color: #717171;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.tixain{
+  width: 80%;
+  height: 100rpx;
+  background: #9bcc81;
+  margin: 0 auto;
+  border-radius:100rpx; 
+  color: #fff;
+  text-align: center;
+  line-height: 100rpx;
+}

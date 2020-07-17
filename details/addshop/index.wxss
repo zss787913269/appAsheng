@@ -1,0 +1,161 @@
+.title{
+ width: 95%;
+ height: 100rpx;
+ margin: 0 auto;
+ background: #efeeee;
+ margin-top:20rpx; 
+ margin-bottom:50rpx; 
+ display: flex;
+  padding-left:20rpx;
+  box-sizing: border-box;
+  border-radius:10rpx  
+}
+.selectArrayText{
+  line-height: 100rpx;
+}
+.jin{
+  background-color: #eee;
+  padding-left:50rpx;
+  width:73%;
+  height:100rpx;
+  line-height: 100rpx;
+  display: block;
+  margin-top:10rpx;
+  border-radius: 10rpx;
+  margin-left:130rpx;
+}
+.glable{
+  width: 25%;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.glableShop{
+   width: auto;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.title input{
+  width: 65%;
+  margin-left:20rpx; 
+  height: 100rpx;
+}
+.titleed input{
+  width:65%;
+  margin-left:20rpx; 
+  height: 100rpx;
+}
+.titleed{
+   width: 95%;
+ height: 100rpx;
+ margin: 0 auto;
+ background: #efeeee;
+ margin-top:20rpx; 
+ display: flex;
+  padding-left:20rpx;
+  box-sizing: border-box;
+  border-radius:10rpx  
+}
+.light{
+  font-size: 40rpx;
+  line-height: 108rpx;
+  color: #ccc;
+  margin-left: 25rpx;
+}
+.submit{
+  width: 75%;
+  height: 80rpx;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 80rpx;
+  background: #62a241;
+  color: #fff;
+  border-radius:10rpx;
+  margin-top:100rpx;  
+  margin-bottom:100rpx;  
+  
+}
+.shop{
+  /* border:2rpx solid #ff9000; */
+  background: #fff;
+  height:50%;
+  line-height: 147%;
+  padding:10rpx;
+  margin-top:12rpx;
+  margin-left:20rpx;
+  border-radius: 10rpx;
+}
+.other{
+  line-height: 98rpx;
+}
+.citypickers{
+  position: fixed;
+  height: auto;
+  width: 100%;
+  min-height: 100%;
+}
+
+
+.citybody {
+  position: fixed;
+  bottom: 0px;
+  background: #fff;
+  border-top:2rpx solid #ccc; 
+  z-index: 20;
+}
+
+.cityheader {
+  position: absolute;
+  top:0px;
+  width: 100%;
+  z-index: 4;
+}
+
+.city-cancel {
+  float: left;
+  margin: 20rpx;
+  color: #818181;
+}
+
+.city-true {
+  float: right;
+  margin: 20rpx;
+  color: #2FB42E
+}
+
+.option_box{
+ position: absolute;
+ top: 117rpx;
+ /* width: 100%; */
+ border:1px solid #efefef;
+ box-sizing: border-box;
+ height: 0;
+ overflow-y: auto;
+ border-top: 0;
+ background: #fff;
+ transition: height 0.3s;
+ left:166rpx;
+ text-align: center;
+ z-index: 100;
+}
+.select{
+ box-sizing: border-box;
+ width: 100%;
+ height: 70rpx;
+ border:1px solid #efefef;
+ border-radius: 8rpx;
+ display: flex;
+ align-items: center;
+ padding: 0 20rpx;
+}
+.select_text{
+ font-size: 30rpx;
+ flex: 1;
+}
+.option{
+ display: block;
+ line-height: 40rpx;
+ font-size: 30rpx;
+ border-bottom: 1px solid #efefef;
+ padding: 10rpx;
+ width: 170rpx;
+}

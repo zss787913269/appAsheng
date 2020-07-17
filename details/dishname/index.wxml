@@ -1,0 +1,164 @@
+<view>
+  <swiper autoplay="true" indicator-dots="true" indicator-color="#fff" indicator-active-color="#ffcf4c">
+    <swiper-item wx:for="{{foodInfo.img}}" wx:key="key">
+      <image src="{{item}}" />
+    </swiper-item>
+  </swiper>
+</view>
+<view class="details">
+  <text>{{foodInfo.name}}</text>
+  <!-- <text class="font">420查看</text> -->
+</view>
+<view class="xinchuang">
+  <view class="craed">
+    <view class="imged">
+      <image src="/images/index/zhuchu.png" mode="widthFix"></image>
+    </view>
+    <view class="xuanjie">
+      <view>
+        <text>{{cookInfo.name}}</text>
+        <text> [职位: {{cookInfo.proname}}]</text> </view>
+      <text>菜系：{{cookInfo.disname}}</text>
+    </view>
+    <view class="yuyue">
+      <!-- <navigator url="/pages/examine/examine" hover-class="other-navigator-hover"> -->
+        <view class="balck" bindtap="goCook" data-id="{{cookInfo.id}}">
+          <text>预约</text>
+        </view>
+      <!-- </navigator> -->
+    </view>
+  </view>
+</view>
+<!--  -->
+<view class="science">
+  <text>{{foodInfo.describe}}</text>
+</view>
+<view>
+  <view class="title">
+    <image src="/images/details/shicai.png"></image>
+    <text> 主要食材</text>
+  </view>
+  <view class="content" wx:for="{{mainFood.f}}" wx:key="index" bindtap="asd" data-index="{{item}}">
+  <text>{{mainFood.f[index]}}</text>
+  <text>{{mainFood.l[index]}}</text>
+  </view>
+  <view class="title">
+    <image src="/images/details/tiaon.png"></image>
+    <text>配料</text>
+  </view>
+  <view class="content" wx:for="{{mixedIngredients.fu}}" wx:key="index">
+    <text>{{mixedIngredients.fu[index]}}</text>
+    <text>{{mixedIngredients.li[index]}}</text>
+  </view>
+  <view class="title">
+    <image src="/images/details/tiaon.png"></image>
+    <text>调料</text>
+  </view>
+  <view class="content" wx:for="{{mixedIngredients.fu}}" wx:key="index">
+    <text>{{seasoning.tiao[index]}}</text>
+    <text>{{seasoning.liang[index]}}</text>
+  </view>
+</view>
+    <view class="seeStop" bindtap="seeStop" wx:if="{{!seeStep}}">查看步骤</view>
+<view class="zuofa" wx:if="{{seeStep}}">
+  <view>
+    <text>做法步骤</text> </view>
+  <view class="buzhou">
+    <text wx:for="{{step}}" wx:key="index">{{item}}。</text>
+  </view>
+</view>
+
+<view class="pinglun">
+  <view class="cakan">
+    <text>菜品评论</text>
+    <text class="color" bindtap="seeComment">查看全部</text>
+  </view>
+  <!-- <view class="craed">
+    <view class="imged">
+      <image src="/images/details/xiaohua.png" mode="widthFix"></image>
+    </view>
+    <view class="xuanjie">
+      <view>
+        <text>绿色食品</text> </view>
+      <text>2019-5-15</text>
+    </view>
+  </view>
+  <view class="cakan">
+    <text>做法很简单，做出来也很美味，很赞。</text>
+  </view> -->
+</view>
+<!-- <view class="pinglun">
+  <view class="cakan">
+    <text>提 问</text>
+    <text class="color" bindtap="seequestions">查看全部</text>
+  </view>
+  <view class="craed">
+    <view class="imged">
+      <image src="/images/details/xiaohua.png" mode="widthFix"></image>
+    </view>
+    <view class="xuanjie">
+      <view>
+        <text>绿色食品</text> </view>
+      <text>2019-5-15</text>
+    </view>
+  </view>
+  <view class="cakan">
+    <text>这道菜老年人适合吃吗？</text>
+  </view>
+</view> -->
+<view class="chang">
+  <view class="shou" bindtap="collection">
+    <image src="/images/details/shou.png"></image>
+    <text>{{collection}}</text>
+  </view>
+  <view class="shou" bindtap="goCook" data-id="{{cookInfo.id}}">
+    <image src="/images/details/lie.png"></image>
+    <text bindtap="toCookList">私厨列表</text>
+  </view>
+  <view class="pin">
+    <!-- <view class="wen active">
+     <navigator url="/details/questions/index" hover-class="other-navigator-hover">
+      <text>提问</text>
+      </navigator>
+    </view> -->
+  </view>
+  <view class="pin">
+    <view class="wen active">
+    <!-- <navigator url='/details/comment/index?id='+ hover-class="other-navigator-hover"> -->
+      <text bindtap="toComment">评论</text>
+      <!-- </navigator> -->
+    </view>
+  </view>
+
+</view>
+
+<!-- <view>
+  <view class='bg' hidden="{{isHidden}}">
+    <view class='modalContent'>
+      <view class='title'>请输入具体的日期, 方便你更准确的预约</view>
+      <view class='contents'>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">用餐时间 </label>
+          <input type="text" name="sex" id="male" />
+        </view>
+      </view>
+      <view class='contents'>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">用餐人数 </label>
+          <input type="text" name="sex" id="male" />
+        </view>
+      </view>
+      <view class="cansole">
+        <view class="sole">
+          <navigator url="/pages/makeanapp/index" hover-class="other-navigator-hover">
+            <view bindtap='sunmit' class="itemd activeed"> 预约</view>
+          </navigator>
+        </view>
+
+        <view bindtap='sunmit' class="sole">
+          <view class="itemd"> 取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> -->

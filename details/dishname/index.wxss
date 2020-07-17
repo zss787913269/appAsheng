@@ -1,0 +1,274 @@
+swiper {
+  display: block;
+  width: 100%;
+}
+
+swiper image {
+  display: block;
+  width: 100%;
+  height: 300rpx;
+}
+.details{
+  width: 95%;
+  height: 100rpx;
+  margin: 10rpx auto; 
+  display: flex;
+  flex-flow: column;
+  line-height: 50rpx;
+}
+.font{
+  font-size:25rpx; 
+  color: #717171;
+}
+.xinchuang {
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.seeStop{
+  width:100%;
+  text-align: center;
+}
+.craed {
+  height: 150rpx;
+  width: 100%;
+  display: flex;
+}
+
+.imged {
+  width: 150rpx;
+  height: 150rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.craed .imged image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.craed .xuanjie {
+  width: 350rpx;
+  height: 100rpx;
+  display: flex;
+  flex-flow: column;
+  padding: 20rpx 0;
+}
+
+.craed .xuanjie text:nth-child(1) {
+  font-size: 35rpx;
+}
+
+.craed .xuanjie text:nth-child(2) {
+  font-size: 25rpx;
+  color: #717171;
+}
+
+.yuyue {
+  width: 200rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.balck {
+  width: 130rpx;
+  height: 50rpx;
+  border:1px solid #ffcf4c;
+  color: #ffcf4c;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  padding: 20rpx 0;
+}
+
+.science{
+  width: 95%;
+  margin: 10rpx auto; 
+  border-bottom:1px solid #ccc;
+  padding-bottom:20rpx 
+}
+.title{
+   width: 95%;
+   height: 80rpx;
+  margin: 10rpx auto; 
+  line-height: 80rpx;
+  border-bottom:1px solid #ccc;
+}
+.title image{
+ width: 30rpx;
+ height: 30rpx;
+}
+.content{
+   width: 95%;
+   height: 80rpx;
+   margin: 10rpx auto; 
+   line-height: 80rpx;
+   display: flex;
+   justify-content: space-between;
+   border-bottom:1px solid #ccc;
+}
+.zuofa{
+  width: 95%;
+   margin: 30rpx auto;   
+}
+.buzhou{
+    display: flex;
+    flex-flow: column;
+    margin-top:20rpx;
+    line-height: 40rpx; 
+}
+.pinglun{
+  width: 100%;
+  height: 60rpx;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.2);
+  padding-top:20rpx;
+  margin-top:20rpx;  
+
+  }
+  .cakan{
+   width: 95%;
+   height: 50rpx;
+   margin: 0 auto; 
+   display: flex;
+   justify-content: space-between;
+}
+.color{
+  color: #ff9000;
+}
+.chang{
+  width: 100%;
+  height: 100rpx;
+  background: #eee;
+  margin-top:60rpx; 
+  display: flex;
+}
+.chang image{
+ width: 30rpx;
+ height: 30rpx;
+}
+.shou{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 25rpx;
+  width: 150rpx;
+}
+
+.pin{
+   width: 200rpx;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wen{
+   width: 150rpx;
+   height: 50rpx;
+   border: 1px solid #ff9000;
+   line-height: 50rpx;
+   background: #fff;
+   color: #ff9000;
+    text-align: center;
+    border-radius:10rpx 
+}
+.active{
+  background:#ff9000;
+  color: #fff 
+}
+.yishen {
+  width: 150rpx;
+  height: 100rpx;
+  text-align: center;
+  border-right: 1px solid #000;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #ccc;
+  font-size: 25rpx;
+  border-radius: 10rpx;
+  display: flex;
+  flex-flow: column;
+}
+
+/* 莫泰框 */
+
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.modalContent {
+  border: 1px solid #ccc;
+  height: 50%;
+  width: 80%;
+  position: absolute; /*让节点脱离文档流,我的理解就是,从页面上浮出来,不再按照文档其它内容布局*/
+  margin: 0 auto;
+  top: 10%; /*节点脱离了文档流,如果设置位置需要用top和left,right,bottom定位*/
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2; /*个人理解为层级关系,由于这个节点要在顶部显示,所以这个值比其余节点的都大*/
+  background: white;
+}
+
+.title {
+  height: 85rpx;
+  line-height: 85rpx;
+  background: #f5f5f5;
+  color: #666;
+  padding-left: 20rpx;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.contents {
+  display: inline-block;
+  margin-top: 60rpx;
+  padding-left: 20rpx;
+}
+
+.goUrl {
+  display: flex;
+  align-items: center;
+}
+
+.goUrl input {
+  border: 1px solid #999;
+  border-radius: 5rpx;
+  margin-left: 30rpx;
+}
+
+.cansole {
+  width: 80%;
+  height: 100rpx;
+  margin: 0 auto;
+  margin-top: 100rpx;
+  display: flex;
+}
+
+.sole{
+  width: 50%;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.itemd{
+   width: 150rpx;
+  height: 50rpx;
+  background: #eee;
+  border-radius:50rpx; 
+  text-align: center;
+  color: #ccc;
+  line-height: 50rpx;
+}
+.activeed{
+  background: #ff9000;
+    color: #fff;
+}

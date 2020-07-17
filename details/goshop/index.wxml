@@ -1,0 +1,95 @@
+<view class="content">
+  <view class="title">
+    <view>
+      <text>店铺名称</text>
+    </view>
+    <view>
+      <text class="color">老菜新创店铺</text>
+    </view>
+    <navigator url="/details/addshop/index" hover-class="other-navigator-hover">
+      <view class="leftbtn"> + 添加</view>
+    </navigator>
+  </view>
+
+  <view class="iteme">
+    <view>
+      <text>商品类型</text>
+    </view>
+    <view>
+      <text class="colord">肉类</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>商品类别</text>
+    </view>
+    <view>
+      <text class="colord">鸡肉</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>饲养方法</text>
+    </view>
+    <view>
+      <text class="colord">散养</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>饲养时间</text>
+    </view>
+    <view>
+      <text class="colord">120天</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>活</text>
+    </view>
+    <view>
+      <text class="colord">50元/只,3.3-3.6/斤</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>净鸡</text>
+    </view>
+    <view>
+      <text class="colord">去毛15元/斤</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>加工</text>
+    </view>
+    <view>
+      <text class="colord">开膛</text>
+    </view>
+  </view>
+  <view class="item">
+    <view>
+      <text>价格</text>
+    </view>
+    <view>
+      <text class="colord">45.8斤</text>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="itemed">
+      <view class="itemded">
+        <text>修改商品</text>
+      </view>
+    </view>
+
+    <view class="itemed">
+
+      <view class="itemded">
+        <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
+          <text>订单处理</text>
+        </navigator>
+      </view>
+    </view>
+
+  </view>
+</view>

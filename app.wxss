@@ -1,0 +1,41 @@
+/**app.wxss**/
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200rpx 0;
+    box-sizing: border-box;
+}
+
+.f {
+    display: flex;
+}
+
+.jc {
+    justify-content: center;
+}
+
+.jb {
+    justify-content: space-between;
+}
+
+.ja {
+    justify-content: space-around;
+}
+
+.tc {
+    text-align: center;
+}
+
+.ac {
+    align-items: center;
+}
+
+page {
+    font-size: 30rpx;
+}
+
+@import "/utils/fontawesome.wxss";

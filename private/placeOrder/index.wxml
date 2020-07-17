@@ -1,0 +1,58 @@
+<!--pages/questions/questions.wxml-->
+<view class="gouwu">
+<text class="color">购物车 </text>
+ <image src="/images/index/gouwu.png" mode="widthFix" />
+</view>
+<view class="title">
+  <view class=""> 下单总数</view>
+  <view>订单号：00000000000 </view>
+</view>
+<!-- 下面 -->
+<view class="buttom">
+  <view class="tbody">
+    <view class="table">
+      <view class="tr">
+        <view class="th">名称</view>
+        <view class="th">规格</view>
+        <view class="th">价格</view>
+        <view class="th">数量</view>
+      </view>
+      <block wx:for="{{listData}}" wx:key="{{code}}">
+        <view class="tr">
+          <view class="td">
+            <text>猪肚</text>
+            <text>加工:</text>
+          </view>
+          <view class="td">
+            <text>10个 2.5元-3.5元/斤</text>
+            <text> 备注:不要有黄胆的</text>
+          </view>
+          <view class="td">10元/斤</view>
+          <view class="td">
+            <text>10</text>
+
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+</view>
+
+<view class="chang">
+  <view class="pin">
+    <view class="wen">
+      <navigator url="" hover-class="other-navigator-hover">
+        <text>提交</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="pin">
+    <view class="wen active">
+      <navigator url="" hover-class="other-navigator-hover">
+        <text>联系商家</text>
+      </navigator>
+    </view>
+  </view>
+
+</view>

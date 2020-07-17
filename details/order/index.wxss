@@ -1,0 +1,56 @@
+.title{
+  height: 500rpx;
+  width: 95%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.header{
+  width: 100%;
+  height: 80rpx;
+  line-height: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid #ccc; 
+}
+.content{
+  display: flex;
+  height: 280rpx;
+  flex-flow: column;
+  border-bottom:1px solid #ccc; 
+}
+.content view{
+  margin:10rpx 0; 
+}
+.color{
+  color: #96cc79;
+}
+.buttom{
+  color: #ff9d34;
+  text-align: right;
+  line-height: 100rpx;
+}
+.huo{
+ display: flex;
+  justify-content: space-between;
+}
+.zhong{
+  width: 200rpx;
+  height: 60rpx;
+  background:#96cc79;
+  color: #fff; 
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 30rpx 0 0 30rpx; 
+}
+.zhonged{
+  width: 200rpx;
+  height: 60rpx;
+  background:#ff9d34;
+  color: #fff; 
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  margin-top: 20rpx;
+}

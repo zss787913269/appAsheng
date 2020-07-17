@@ -1,0 +1,26 @@
+.comtent{
+  width: 100%;
+  height: 150rpx;
+  border-bottom: 1px solid #ccc;
+  margin-top: 20rpx;
+  padding: 20rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.recodfl{
+  display: flex;
+  flex-flow: column;
+  line-height: 60rpx;
+}
+.recodfr{
+  line-height: 80rpx;
+}
+.color{
+  color: red;
+  font-size: 50rpx
+}
+.font{
+  font-size: 25rpx;
+  color: #717171;
+}

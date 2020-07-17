@@ -1,0 +1,79 @@
+/* pages/hotSearch/hotSearch.wxss */
+.hotSearch{
+  padding:20px;
+}
+.hotSearch-conter{
+  display:flex;
+  flex-wrap:wrap;
+}
+.texts{
+  margin-right:18px;
+  height:16px;
+  padding:5px 14px;
+  margin-top:14px;
+  background:#FBE8DA;
+  line-height:16px;
+  color:#FB7B4F;
+  border-radius: 5px;
+  font-size:13px;
+}
+.hotSearch-title2{
+  margin-top:15px;
+}
+.texts2{
+  margin-right:18px;
+  height:16px;
+  padding:5px 14px;
+  margin-top:14px;
+  background:#d4d4d4;
+  line-height:16px;
+  border-radius: 5px;
+  font-size:13px;
+  }
+
+  .header {
+  background: #62a241;
+  padding: 10rpx 0 10rpx 50rpx;
+  display: flex;
+  position: relative;
+  padding-bottom: 30rpx;
+}
+
+.absult {
+  width: 100rpx;
+  height: 100rpx;
+  background: #62a241;
+  color: #fff;
+  font-size: 120rpx;
+  display: flex;
+  justify-content: center;
+  line-height: 88rpx;
+  border-radius: 50%;
+  opacity: 0.6;
+  position: fixed;
+  right: 0;
+  top: 900rpx;
+}
+
+.header i {
+  position: absolute;
+  left: 145rpx;
+  top: 30rpx;
+  color: #ccc;
+}
+
+.header input {
+  background: #fff;
+  width: 500rpx;
+  height: 65rpx;
+  border-radius: 50rpx;
+  padding-left: 60rpx;
+}
+
+.user-header-name {
+  padding: 0 10rpx;
+  line-height: 65rpx;
+}
+.with{
+  color: #fff;
+}

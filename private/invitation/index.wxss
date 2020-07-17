@@ -1,0 +1,52 @@
+.header{
+  width: 100%;
+}
+.header image{
+ width: 100%;
+}
+.code{
+  width: 90%;
+  height: 680;
+  margin: 40rpx auto;
+  border: 1px solid #98cfff;
+  border-radius:20rpx; 
+  box-shadow: 0 0 15rpx #f2f5ff;
+  position: relative;
+  
+}
+.codene{
+  width: 70%;
+  height: 480rpx;
+  margin: 100rpx auto;
+  border: 1px solid #98cfff;
+  border-radius:20rpx; 
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.codene image{
+  width: 100%;
+  height: 100%;
+}
+.getcode{
+  width: 550rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  background: #f79837;
+  color: #fff;
+  border-radius:15rpx;
+  position: absolute;
+  left: 60rpx;
+  top: -40rpx;
+}
+
+.submit{
+  width: 90%;
+  height: 100rpx;
+  text-align: center;
+  margin: 50rpx auto;
+  line-height: 100rpx;
+  background: #ffc33d;
+  color: #fff;
+  border-radius:50rpx;
+}

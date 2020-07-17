@@ -1,0 +1,103 @@
+
+
+.content{
+  width: 100%;
+  height: auto;
+  background: #fafafa;
+  padding-top:20rpx;
+  padding-bottom:50rpx;
+   box-sizing: border-box;  
+}
+.tbody{
+   width: 100%;
+   height: auto;
+   background: #fff;
+   padding-top:20rpx;
+   padding-bottom:50rpx;
+   box-sizing: border-box;  
+   margin-bottom:30rpx 
+}
+.header{
+  width: 100%;
+  height: 150rpx;
+  padding:20rpx;
+  box-sizing: border-box;  
+  display: flex;
+  justify-content: space-between;
+  }
+  .cakan{
+   width: 95%;
+   margin: 0 auto; 
+  
+}
+.color{
+  color: #ff9000;
+}
+
+.imged{
+  height: 100rpx;
+  display: flex;
+}
+.leftge{
+  margin-left: 30rpx;
+  display: flex;
+  flex-flow: column;
+  align-items:flex-start;
+   line-height: 50rpx;
+}
+.time{
+font-size: 25rpx;
+color: #717171;
+}
+.timed{
+color: #717171;
+}
+
+
+.header .imged image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.header .xuanjie {
+  height: 100rpx;
+  padding: 20rpx 0;
+}
+/* .middle{
+ width: 100%;
+  height: 200rpx;
+  padding:20rpx;
+  box-sizing: border-box;  
+  display: flex;
+} */
+.middle .imged{
+ height: 165rpx;
+ width: 100%;
+ background: #ececec;
+}
+.middle .imged image {
+  width: 200rpx;
+  height: 165rpx;
+}
+.middle .leftged{
+  height: 165rpx;
+  margin:0rpx;
+  padding-left:20rpx;
+  padding-top:20rpx;
+  box-sizing: border-box; 
+}
+.inputde{
+  width: 95%;
+  height: 50rpx;
+  margin: 0 auto;
+  background: #ececec;
+  margin-top:50rpx; 
+  padding-left: 20rpx;
+  padding-right: 30rpx;
+  box-sizing: border-box;
+}
+.inputde input{
+  width: 100%;
+  height: 100%;
+  background: #ececec;
+}

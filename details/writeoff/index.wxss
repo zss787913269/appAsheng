@@ -1,0 +1,21 @@
+.QRcode{
+  width:100%;
+  height:1000rpx;
+  background:#f8f9fd;
+  display:flex;
+  justify-content:center;
+  /* align-items:center; */
+}
+.QRcode-box{
+  border-top:10px solid #62A241; 
+  height:700rpx;
+  width:70%;
+  background:#ffffff;
+  margin-top:100rpx;
+  display:flex;
+  align-items:center;
+  box-sizing: border-box;
+}
+.image{
+  width:100%;
+}

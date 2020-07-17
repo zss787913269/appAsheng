@@ -1,0 +1,75 @@
+/* private/superman/index.wxss */
+
+.swiper-tab {
+    padding: 0 40rpx;
+    display: flex;
+}
+
+.swiper-tab-item {
+    height: 66rpx;
+    width: 50%;
+    font-size: 30rpx;
+    background: #8bc76a;
+    color: #fff;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    text-align: center;
+    line-height: 66rpx;
+}
+
+.swiper-tab-item:nth-child(1) {
+    border-radius: 10rpx 0rpx 0rpx 10rpx;
+}
+
+.swiper-tab-item:nth-child(4) {
+    border-radius: 0rpx 10rpx 10rpx 0rpx;
+}
+
+.active {
+    background: #62a241;
+}
+
+.allfont {
+    font-size: 25rpx;
+}
+
+.btn {
+    background: #FF9500;
+    color: white;
+    width: 115rpx !important;
+    font-size: 20rpx !important;
+    padding: 4rpx 12rpx;
+}
+
+.title {
+    height: 400rpx;
+    width: 95%;
+    margin: 20rpx auto;
+    box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.everyline {
+    padding: 10rpx 0;
+}
+
+.left {
+    width: 555rpx;
+}
+
+.left-t {
+    padding: 0 15rpx;
+}
+
+.r-b {
+    position: relative;
+    left: 15rpx;
+}
+
+.l-t {
+    padding-left: 25rpx;
+}
+
+.gosee {
+    font-size: 30rpx;
+}

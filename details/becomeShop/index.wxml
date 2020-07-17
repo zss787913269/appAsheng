@@ -1,0 +1,83 @@
+<!--操作菜单-->
+<view class="view_power">
+	<view class="user_tab">
+		<form bindsubmit='submit'>
+			<view class="goUrl">
+				<label class="glable" for="male">菜市场</label>
+				<view class="occupation">
+					<picker bindchange="changeMarket" value="{{index}}" range="{{market}}" range-key="name">
+						<view class="picker">
+							{{foodMarketNum==null? "请选择":market[foodMarketNum].name}}
+						</view>
+					</picker>
+					<!-- <Select prop-array='{{market}}' bind:myget='getDate'></Select> -->
+				</view>
+				<!-- <input type="text" name="fullName" placeholder="请输入" id="male" value="{{fullName}}" /> -->
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">类别</label>
+				<view class="occupation">
+        <picker bindchange="changeClass" value="{{index}}" range="{{category}}" range-key="name">
+						<view class="picker">
+							{{classMarketNum==null? "请选择":category[classMarketNum].name}}
+						</view>
+					</picker>
+					<!-- <Select prop-array='{{category}}' bind:myget='getDatecategory'></Select> -->
+				</view>
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">店铺名称</label>
+				<input type="text" name="shopName" placeholder="请输入" id="male" value="{{shopName}}" />
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">选择区域</label>
+				<!-- <input type="text" name="background" placeholder="请输入" id="male" value="{{background}}" /> -->
+				<view>{{province}}-{{city}}-{{county}} </view>
+				<i class="fal fa-angle-right" bindtap="open"></i>
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">详细地址</label>
+				<input type="text" name="address" placeholder="请输入" id="male" value="{{address}}" />
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">电话</label>
+				<input type="text" placeholder="请输入" name="tel" id="male" value="{{tel}}" bindinput='getInputValue' />
+				<view id="zhon" bindtap="sendCode">发送验证码</view>
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">验证码</label>
+				<input type="text" placeholder="请输入" name="code" id="male" value="{{code}}" />
+			</view>
+			<view class="goUrl">
+				<label class="glable" for="male">账期</label>
+				<input type="text" name="account" placeholder="最多365" id="male" value="{{account}}" />
+			</view>
+
+			<view class="submit">
+				<button formType="submit" style="background:#ff9000;color:#fff;width:100%;">提 交</button>
+			</view>
+		</form>
+	</view>
+</view>
+<!-- 选择地址 -->
+<!-- <view class="container">
+</view> -->
+<view wx:if="{{condition}}" class="citypicker">
+	<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" data-citys="{{cityids}}" value="{{value}}" bindchange="bindChange" class="citybody">
+		<view class="cityheader">
+			<view bindtap="open" class="city-cancel">取消</view>
+			<view bindtap="open" class="city-true">确定</view>
+		</view>
+
+		<picker-view-column>
+			<view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+		</picker-view-column>
+
+	</picker-view>
+</view>

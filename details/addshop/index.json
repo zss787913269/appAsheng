@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "添加/编辑商品",
+  "usingComponents": {
+    "Select": "/component/select3/select"
+  }
+}

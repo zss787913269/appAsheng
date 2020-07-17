@@ -1,0 +1,39 @@
+<view class="bank">
+  <!-- <text>+添加银行卡</text> -->
+</view>
+<view class="tixain">
+  <text>提 现 金 额</text>
+</view>
+<view class="tixain">
+  <view class="goUrl" bindtap="goUrl" data-url="profit">
+    <label class="glable" for="male">￥</label>
+    <input type="number" name="sex" id="male" />
+  </view>
+</view>
+<view class="jine">
+  <view>
+    <text>可提现金额：</text>
+    <text class="red">{{balance}}</text>
+    <text>元</text>
+  </view>
+  
+  <view>
+    <navigator url="/person/rawalsre/index" hover-class="other-navigator-hover">
+    <text class="ccc">提现记录</text>
+    </navigator>
+  </view>
+</view>
+<view class="quanbu ccc">
+  <text class="yellow">! </text>
+  <text>每天提现金额不可超过1000元,</text>
+  <text class="ff8">全部提现</text>
+</view>
+<view class="quanbu ccc">
+  <text class="yellow">! </text>
+  <text>余额直接提现至微信余额</text>
+  <!-- <text class="ff8">全部提现</text> -->
+</view>
+<view class="button" bindtap="confirmTX">
+  <text class="">确认提现</text>
+  
+</view>

@@ -1,0 +1,96 @@
+<view class="card">
+	<view class="cardname">
+		<view class="imged">
+			<image src="/images/index/zhuchu.png" mode="widthFix"></image>
+		</view>
+		<text class="redact_btn" bindtap="gotoChange">编辑信息</text>
+		<view class="xuanjie">
+			<text>{{userInfo.name}}</text>
+			<text class="fontsiz">擅长 : {{userInfo.disname}}</text>
+			<text class="fontsiz">职位 : {{userInfo.proname}}</text>
+			<text class="fontsiz">工作经验：{{userInfo.work_experience}}</text>
+			<text class="fontsiz">电话：{{userInfo.tel}}</text>
+		</view>
+	</view>
+	<view bindtap="releaseFood" class="releaseFood">发布菜品</view>
+</view>
+<view class="cardtime">
+	<view class="timeyue">
+		<!-- <view>预约时间</view>
+    <view>用餐时间
+      <view class="backgr">
+        <input class="timetwo" placeholder="请输入"></input>
+      </view> 用餐人数
+      <view class="backgr"> 
+        <input class="timetwo" placeholder="请输入"></input>
+      </view>
+    </view> -->
+		<view>菜系：{{userInfo.disname}}</view>
+		<view>菜品:
+			<text class="food_margin"> {{foods}}</text>
+    </view>
+		<view>价格：
+			<text class="color">{{userInfo.price}}元/天</text>
+		</view>
+	</view>
+</view>
+<view class="list">
+	<view class="title">
+		<text>预约列表</text>
+	</view>
+	<block wx:if="{{makeList != ''}}">
+		<view class="middle" wx:for="{{makeList}}" wx:key="index">
+			<view class="tbody">
+				<view class="portrait">
+					<image src="{{item.avatar}}"></image>
+					<view class="introduce">
+						<text>{{item.name}}</text>
+						<!-- <text class="fontsiz">11-18日</text> -->
+					</view>
+				</view>
+				<view class="accept" bindtap="accept" data-id="{{item.id}}">
+					<text>接受</text>
+				</view>
+				<view class="accept" bindtap="refuse" data-id="{{item.id}}">
+					<text>拒绝</text>
+				</view>
+			</view>
+			<view class="nottom">
+				<view>
+					<text class="color">用餐时间：</text>
+					<text>{{item.make_time}}</text>
+				</view>
+				<view>
+					<text class="color">用餐人数：</text>
+					<text>{{item.number}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+	<view class="noTime" wx:else>暂无预约</view>
+	<!-- 拒绝 -->
+	<!-- <view class="middle">
+    <view class="tbody">
+      <view class="portrait">
+        <image src="/images/index/zhuchu.png"></image>
+        <view class="introduce">
+          <text>这个名称</text>
+          <text class="fontsiz">11-18日</text>
+        </view>
+      </view>
+      <view class="accept">
+        <text>拒绝</text>
+      </view>
+    </view>
+    <view class="nottom">
+      <view>
+      <text class="color">用餐时间：</text>
+      <text>11月18日上午10.30-下午13.30</text>
+      </view>
+      <view>
+      <text class="color">用餐时间：</text>
+      <text>30个人，3桌</text>
+      </view>
+    </view>
+  </view> -->
+</view>

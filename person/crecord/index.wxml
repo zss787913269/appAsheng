@@ -1,0 +1,13 @@
+<view class="comtent" wx:for="{{recharge}}" wx:key="index">
+ <view class="recodfl">
+  <text>{{item.status_name}}</text>
+  <text class="font">{{item.add_time_time}}</text>
+ </view>
+  <view class="recodfl">
+  <view><text class="color" wx:if="{{item.status == 1}}">+{{item.money}}</text>
+  <text class="color" wx:if="{{item.status == 0}}">{{item.money}}</text>
+  <text>元</text></view>
+
+  <text class="font">当前{{item.pay_money}}元</text>
+ </view>
+</view>

@@ -1,0 +1,84 @@
+<view class="bankuai">
+  <view class="xinchuang">
+    <view class="craed">
+      <view class="filex">
+        <view class="imged">
+          <image src="/images/index/zhuchu.png" mode="widthFix"></image>
+        </view>
+        <view class="fuwu">
+          <text>生鲜小哥</text>
+          <view class="yuan">服务员</view>
+        </view>
+      </view>
+      <view>
+        <view class="timeed">扫生鲜小妹加入</view>
+        <view class="jine">扫一扫：2019-10-10</view>
+      </view>
+    </view>
+  </view>
+  <!--生鲜配送  -->
+  <view class="xinchuang" wx:for="{{commissionInfo}}" wx:key="index">
+
+    <view class="craeded">
+      <view class="yuyueed">
+        <view class="timeed">
+          <text>生鲜配送</text>
+          <!-- <text>订单号:2008454544</text> -->
+          <text>2019-10-10</text>
+        </view>
+        <view class="pieson">
+          <view class="jine">
+            <text class="ffc">￥{{item.money}}元</text>
+            <text>订单金额</text>
+          </view>
+          <view class="jine">
+            <text class="ffc">￥{{item.now_yongj}}元</text>
+            <text>好友佣金</text>
+          </view>
+          <view class="jine">
+            <text class="ffc">￥{{item.order_money}}元</text>
+            <text>他的佣金</text>
+          </view>
+          <view class="jine">
+            <text class="ffc">￥{{item.yongj}}元</text>
+            <text>我的佣金</text>
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <!--  -->
+
+  </view>
+  <!-- <view class="xinchuang">
+
+    <view class="craeded">
+      <view class="yuyueed">
+        <view class="timeed">
+          <text>生鲜配送</text>
+          <text>2019-10-10</text>
+        </view>
+        <view class="pieson">
+          <view class="jine">
+            <text class="ffc">￥24.6元</text>
+            <text>订单金额</text>
+          </view>
+          <view class="jine">
+            <text class="ffc">￥24.6元</text>
+            <text>好友佣金</text>
+          </view>
+          <view class="jine">
+            <text class="ffc">￥24.6元</text>
+            <text>他的佣金</text>
+          </view>
+          <view class="jine">
+            <text class="ffc">￥24.6元</text>
+            <text>我的佣金</text>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view> -->
+
+</view>

@@ -1,0 +1,42 @@
+
+<!--操作菜单-->
+<view class="item">
+   <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">酒店订单
+      <sup wx:if="{{ hotelList.length>0 && hotelList.length<99}}" class="total">{{hotelList.length}}</sup>
+      <sup wx:elif="{{ hotelList.length>99 }}" class="total">99+</sup>
+    </view>
+    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">个人订单
+      <sup wx:if="{{ personList.length>0 && personList.length<99}}" class="total">{{personList.length}}</sup>
+      <sup wx:elif="{{ personList.length>99 }}" class="total">99+</sup>
+    </view>
+  </view>
+<checkbox-group bindchange="checkboxChange" style="padding-bottom:187rpx;">
+  <view class="itemed" wx:for="{{tableList}}" wx:key="unique">
+    <checkbox class="checked"   value="{{item.id}}" checked="{{checkedAll}}"  color='#3B9EF5'/>
+    <text>{{item.title}}</text>
+    
+    <text>￥{{item.price}}元/{{item.inventory_unit}}</text>
+    <view class="red" data-index="{{item.id}}" bindtap='remove'>
+     移除
+    </view>
+    <view class="bujin">
+      <view data-index="{{index}}" bindtap='sub'>
+         <image class="marri" src="/images/nav/jian.png"></image>
+      </view>
+      <view class="num">
+        <text>{{item.stock}}</text>
+      </view>
+      <view data-index="{{index}}" bindtap='add'>
+          <image class="marle" src="/images/nav/jia.png" ></image>
+      </view>
+    </view>
+  </view>
+</checkbox-group>
+  <view class="bottom">
+    <text>共{{tableList.length}}件,合计</text>
+    <text class="color">￥{{totalPrice}}元</text>
+    <view class="but" bindtap='submit'> 提交订单</view>
+  </view>
+</view>
+ 

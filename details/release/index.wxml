@@ -1,0 +1,31 @@
+<!--操作菜单-->
+<view class="view_power">
+  <view class="user_tab">
+    <form bindsubmit="release">
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">用餐人数</label>
+        <input type="text" name="number" placeholder="请输入用餐人数" id="male" value="{{number}}"/>
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">预约时间</label>
+        <input type="text" placeholder="请输入用餐时间" name="time" id="male" value="{{time}}"/>
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">价　格</label>
+        <input type="text" name="requirement" placeholder="请输入要求" id="male" value="{{requirement}}"/>
+
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">电　话</label>
+        <input type="text" placeholder="请输入电话" name="tel" id="male" value="{{tel}}"/>
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">地　址</label>
+        <input type="text" placeholder="请输入地址" name="address" id="male" value="{{address}}"/>
+      </view>
+      <view id="submit">
+        <button class="btnSub" formType="submit" style="width:580rpx;">发  布</button>
+      </view>
+    </form>
+  </view>
+</view>

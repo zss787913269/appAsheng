@@ -1,0 +1,89 @@
+<!--操作菜单-->
+<view class="view_power">
+	<view class="user_tab">
+		<form bindsubmit='submit'>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">你的姓名</label>
+				<input type="text" name="fullName" placeholder="请输入" id="male" value="{{fullName}}" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">身份证号</label>
+				<input type="text" placeholder="请输入" name="number" id="male" value="{{number}}" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">工作经验</label>
+				<input type="text" name="background" placeholder="请输入" id="male" value="{{background}}" />
+
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">现居地址</label>
+				<input type="text" placeholder="请输入" name="address" id="male" value="{{address}}" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">联系方式</label>
+				<input type="text" placeholder="请输入" name="tel" id="male" value="{{tel}}" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">价 格</label>
+				<input type="text" placeholder="请输入（元/天）" name="price" id="male" value="{{price}}" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">职业</label>
+				<view class="occupation">
+					<picker bindchange="changePosition" value="{{index}}" range="{{selectArray}}" range-key="name">
+						<view class="picker">
+							{{occupationNum==null? "请选择":occupation}}
+						</view>
+					</picker>
+					<!-- <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select> -->
+				</view>
+				<!-- <input type="text" placeholder="请输入" name="occupation" id="male" value="{{occupation}}"/> -->
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">擅长菜系</label>
+				<view class="occupation">
+					<picker mode="multiSelector" bindchange="changeGoods"  value="{{index}}" range="{{beGoodBox}}" range-key="name">
+						<view class="picker">
+							{{styleGood_name==null? "请选择":styleGood_name}}
+						</view>
+					</picker>
+					<!-- <Select prop-array='{{beGood}}' bind:myget='getDatebeGood'></Select> -->
+				</view>
+				<!-- <input type="text" placeholder="请输入" name="beGood" id="male" value="{{beGood}}" /> -->
+			</view>
+			<view class="submit">
+				<button formType="submit" style="background:#ff9000;color:#fff;width:100%;">提 交</button>
+			</view>
+		</form>
+		<view class="downone">
+			<view class="itemname">
+				<text>身份证照</text>
+			</view>
+			<view class="itemone" bindtap="upload" data-index="0">
+				<image src="{{cardPhoto}}" mode="scaleToFill"></image>
+				<!-- <image wx:else src="/images/temp/zheng.png" mode="widthFix"></image> -->
+			</view>
+			<view class="itemtwo" bindtap="upload" data-index="1">
+				<image src="{{otherPhoto}}" mode="scaleToFill"></image>
+			</view>
+		</view>
+		<view class="downone">
+			<view class="itemname">
+				<text>健 康 证</text>
+			</view>
+			<view class="itemone" bindtap="upload" data-index="2">
+				<image src="{{healthyPhoto}}" mode="scaleToFill"></image>
+			</view>
+
+		</view>
+		<view class="downone">
+			<view class="itemname">
+				<text>厨 师 证</text>
+			</view>
+			<view class="itemone" bindtap="upload" data-index="3">
+				<image src="{{cookPhoto}}" mode="scaleToFill"></image>
+			</view>
+
+		</view>
+	</view>
+</view>

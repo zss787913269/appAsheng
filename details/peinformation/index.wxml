@@ -1,0 +1,70 @@
+<!--操作菜单-->
+<view class="view_power">
+  <view class="user_tab">
+    <form bindsubmit='submit'>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">您的姓名</label>
+        <input type="text" name="fullName" placeholder="请输入" id="male" value="{{fullName}}" />
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">身份证号</label>
+        <input type="text" placeholder="请输入" name="number" id="male" value="{{number}}" />
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">工作经验</label>
+        <input type="text" name="background" placeholder="请输入" id="male" value="{{background}}" />
+
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">现居地址</label>
+        <input type="text" placeholder="请输入" name="address" id="male" value="{{address}}" />
+      </view>
+      <view class="goUrl" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">联系方式</label>
+        <input type="text" placeholder="请输入" name="tel" id="male" value="{{tel}}" />
+      </view>
+      <view class="goUrl location" bindtap="goUrl" data-url="profit">
+        <label class="glable" for="male">区 域</label>
+        <view>{{province}}-{{city}}-{{county}} </view>
+        <i class="fal fa-angle-right" bindtap="open"></i>
+      </view>
+      <view class="submit">
+        <button formType="submit" style="background:#ff9000;color:#fff;width:100%;">提 交</button>
+      </view>
+    </form>
+    <view class="downone">
+      <view class="itemname">
+        <text>身份证照</text>
+      </view>
+      <view class="itemone" bindtap="upload" data-index="0">
+        <image src="{{cardPhoto}}" mode="scaleToFill"></image>
+      </view>
+      <view class="itemtwo"  bindtap="upload" data-index="1">
+        <image src="{{otherPhoto}}" mode="scaleToFill"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 选择地址 -->
+<!-- <view class="container">
+</view> -->
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" data-citys="{{cityids}}" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="open" class="city-cancel">取消</view>
+      <view bindtap="open" class="city-true">确定</view>
+    </view>
+
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+    </picker-view-column>
+
+  </picker-view>
+</view>

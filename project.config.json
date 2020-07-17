@@ -1,0 +1,225 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": false,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": false,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": false,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"packNpmManually": false,
+		"packNpmRelationList": []
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.10.4",
+	"appid": "wx73fd0c6b65fcc3a1",
+	"projectname": "AppSheng",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "private/hotelpeople/index",
+					"pathName": "private/hotelpeople/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "person/map/index",
+					"pathName": "person/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/workbench/index",
+					"pathName": "pages/workbench/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/deliver/index",
+					"pathName": "pages/deliver/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/addshop/index",
+					"pathName": "details/addshop/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/handle/index",
+					"pathName": "details/handle/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/index",
+					"pathName": "pages/user/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "private/kitchen/index",
+					"pathName": "private/kitchen/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/workbench/index",
+					"pathName": "pages/workbench/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "private/superman/index",
+					"pathName": "private/superman/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "private/staff/index",
+					"pathName": "private/staff/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/Promanage/index",
+					"pathName": "details/Promanage/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/becomeShop/index",
+					"pathName": "details/becomeShop/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/myshop/index",
+					"pathName": "details/myshop/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/deliver/index",
+					"pathName": "pages/deliver/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/exchange/index",
+					"pathName": "pages/exchange/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/find/index",
+					"pathName": "pages/find/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/becomeShop/index",
+					"pathName": "details/becomeShop/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "details/addshop/index",
+					"pathName": "details/addshop/index",
+					"scene": null
+				}
+			]
+		}
+	}
+}

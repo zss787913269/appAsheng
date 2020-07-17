@@ -1,0 +1,105 @@
+
+.header{
+  width: 100%;
+  height: 750rpx;
+  background: #62a241;
+}
+.fr{
+  height: 50rpx;
+  float: right;
+  font-size: 25rpx;
+  color: #Fff;
+  overflow: hidden;
+  padding-right: 30rpx;
+}
+.title{
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box; 
+  color: #Fff;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tbody{
+    width:100%;
+  height: 400rpx;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content{
+  width: 360rpx;
+  height: 360rpx;
+  border: 8rpx solid #fff;
+  border-radius:50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.leiron{
+  width: 330rpx;
+  height: 330rpx;
+  background: #8bc76a;
+   border-radius:50%; 
+   color: #Fff;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60rpx;
+}
+.xian{
+  width: 80%;
+  height: 30rpx;
+  margin: 0 auto;
+  margin-bottom:20rpx; 
+  border-bottom:1px solid #82c6ff;
+}
+.leiji{
+  width: 80%;
+  height: 150rpx;
+  margin: 0 auto;
+  display: flex;
+}
+.leiji view{
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 50rpx;
+  color: #fff;
+}
+.leftder{
+  border-left:1px solid #82c6ff; 
+}
+.bottom{
+  width: 100%;
+  height: 100rpx;
+  margin-top: 80rpx;
+   display: flex;
+}
+.itemed{
+  width: 50%;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item{
+  width: 70%;
+  height: 80rpx;
+  border: 1px solid #ff9000;
+  border-radius:10rpx; 
+  color: #ff9000;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.active{
+  background:#ff9000;
+  color: #Fff; 
+}

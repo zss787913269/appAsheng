@@ -1,0 +1,6 @@
+<!--pages/QRcode/QRcode.wxml-->
+<view class="QRcode">
+  <view class="QRcode-box">
+    <image class="image" src="/images/details/yang1.png" mode="widthFix"></image>
+  </view>
+</view>

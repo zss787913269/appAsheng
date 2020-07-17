@@ -1,0 +1,121 @@
+.header {
+  background: #62a241;
+  padding: 10rpx;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  padding-bottom: 10rpx;
+  color: #fff;
+}
+
+
+.user-header-name{
+  padding:0 10rpx; 
+ line-height: 65rpx;
+}
+.active{
+  background:#62a241;
+}
+.xinchuang{
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;  
+  margin-top: 20rpx;
+}
+.craed{
+  height: 250rpx;
+  width: 100%;
+  display: flex;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+}
+.imged{
+  width: 150rpx;
+  height: 250rpx; 
+  padding: 20rpx;
+  box-sizing: border-box;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imged .imghui{
+  width: 80rpx;
+  height: 80rpx; 
+  background: #ccc; 
+  color: #fff;
+  border-radius:50%;
+  text-align: center;
+  line-height: 80rpx; 
+}
+.craed .imged image{
+  width: 155rpx;
+  height: 155rpx; 
+}
+.craed .xuanjie{
+  width: 400rpx;
+  height: 155rpx; 
+  display: flex;
+  flex-flow: column;
+  padding: 20rpx 0;
+  
+}
+.xuanjie view{
+  margin-bottom: 10rpx;
+}
+ .ipone{
+  font-size: 30rpx;
+  color: #717171;
+  
+}
+ .dizhi{
+  font-size: 30rpx;
+  color: #333333ed;
+}
+
+
+.yuyue{
+   width: 150rpx;
+  height: 250rpx; 
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  /* align-items: center;  */
+}
+.jiuname{
+  display: flex;
+  margin-bottom: 20rpx;
+}
+.zhaopin{
+  background: #8bc76a;
+}
+.shenhe{
+  border-left: 1px solid #ccc;
+  padding-left: 20rpx;
+  
+}
+.jiudian{
+  width: 80rpx;
+  height: 50rpx;
+  background:#ffcf4c; 
+  color:#fff;
+  text-align: center;
+  border-radius:5rpx; 
+  margin-left:20rpx; 
+  display: inline-block;
+}
+/* 已审核 */
+.yishen{
+  width: 150rpx;
+  height: 100rpx; 
+  text-align: center;
+  border-right: 1px solid  #000;
+  border-top: 1px solid #CCC;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #CCC;
+  font-size: 25rpx;
+   border-radius: 10rpx;
+   display: flex;
+   flex-flow: column;
+}
+.red{
+color: red
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "Select": "/component/select2/select"
+  },
+  "navigationBarTitleText": "我的酒店地址"
+}

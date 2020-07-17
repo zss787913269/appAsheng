@@ -1,0 +1,38 @@
+<view class="header">
+   <view class="yue">
+       <text>我的余额</text>
+       <text class="font">{{balance}}元</text>
+    </view>
+   <!-- <view class="leiji">
+     <view>
+      <text>已累计提现积分 </text>
+       <text>570分</text>
+      </view>
+       <view class="boder">
+       <text>提现记录</text>
+      </view>
+   </view> -->
+ 
+</view>
+
+<view class="content">
+ <view class="title"><text>提现到余额</text></view>
+ <view class="shuru">
+  <view class="active"><text>10积分</text></view>
+  <view><text>20积分</text></view>
+  <view><text>50积分</text></view>
+  <view><input placeholder="请输入具体积分" bindinput="specific"></input></view>
+ </view>
+</view>
+
+<view>
+ <view class="title"><text>提现须知</text></view>
+<view class="tbody">
+  <text>1、你将提现到当前账号余额。</text>
+  <text>2、提现申请将在七天内到账，如遇高峰期，可能会延迟到帐，烦请耐心等待。</text>
+  <text>3、最终解释权归店铺所有。</text>
+</view>
+</view>
+<view class="tixain" bindtap="cashWithdrawal">
+ <text>立即提现</text>
+</view>

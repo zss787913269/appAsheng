@@ -1,0 +1,38 @@
+<view class="header">
+
+  <view class="jifen">
+    <view class="flet">
+      <text class="sizeed">总积分（10积分抵一元）</text>
+      <text class="size">{{newTime}}</text>
+    </view>
+    <view class="right">
+      <navigator url="/person/record/index" hover-class="other-navigator-hover">
+      <text class="sizeed">积分记录</text>
+      </navigator>
+        <!-- <navigator url="/person/Waiting/index" hover-class="other-navigator-hover">
+      <view class="dailin">待领取积分</view>
+       </navigator> -->
+       <text class="integral">{{integral}}</text>
+    </view>
+  </view>
+</view>
+<view class="hebotom">
+  <image src="/images/index/jifen.png" mode="widthFix">
+  </image>
+</view>
+ <navigator url="/person/withdrawal/index" hover-class="other-navigator-hover">
+<view class="subimt">
+  <text>积分提现</text>
+  <i class="fal fa-angle-right"></i>
+</view>
+ </navigator>
+
+ <!-- <view class="xaidan">
+    <view>
+     <image src="/images/index/jifen1.png" ></image>
+    </view>
+    <view>
+    <text class="sizeed">每日下单得积分</text>
+    <view class="dailined">点击前往下单</view>
+    </view>
+  </view> -->

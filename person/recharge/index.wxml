@@ -1,0 +1,28 @@
+<!-- <view class="bank">
+  <text>+添加银行卡</text>
+</view> -->
+<view class="tixain">
+  <text>充 值 金 额</text>
+</view>
+<view class="tixain">
+  <view class="goUrl" bindtap="goUrl" data-url="profit">
+    <label class="glable" for="male">￥</label>
+    <input type="number" name="sex" id="male"  bindinput="intBange"/>
+  </view>
+</view>
+<view class="jine">
+  <view>
+    
+  </view>
+  
+  <view>
+    <navigator url="/person/crecord/index" hover-class="other-navigator-hover">
+    <text class="ccc">充值记录</text>
+    </navigator>
+  </view>
+</view>
+
+<view class="button">
+  <text class="" bindtap="getPlugins">确认充值</text>
+  
+</view>

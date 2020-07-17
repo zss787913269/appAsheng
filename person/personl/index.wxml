@@ -1,0 +1,98 @@
+<view class="cardtime">
+  <view class="timeyue">
+    <view class="iteme matop">
+      <view>姓名：{{myResponsible.data[0].to_user_name}}</view>
+      <view>
+        <text class="color">押金：{{myResponsible.data[0].money}}元</text> </view>
+    </view>
+    <view class="fontsiz">当天：未收50 以收：300</view>
+  </view>
+</view>
+
+
+
+
+<view class="card">
+  <view class="cardname">
+    <view class="table">
+      <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">我负责的店</view>
+      <view class="right">|</view>
+      <view class="right" class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">我的回收记录</view>
+    </view>
+    <view wx:if="{{currentTab==1}}">
+      <view class="iteme" wx:for="{{myResponsible.data}}" wx:key="index">
+        <view>{{item.d_name}}</view>
+        <view class="">
+          <input type="number" name="shopName" id="male" bindinput="recoveryNum" value="{{shopName}}" data-index="{{index}}" />
+        </view>
+        <view class="color" wx:if="{{item.status == 1}}">以收</view>
+         <view class="colored" wx:if="{{item.status == 0}}">未收</view>
+        <view class="submit bc76" bindtap="submitNum" data-id="{{item.id}}" data-index="{{index}}">提交</view>
+      </view>
+      <view class="iteme">
+        <view>小云小吃</view>
+        <view class="submit bc76">
+          <input type="number" name="shopName" bindinput="recoveryNum" id="male" value="{{shopName}}" data-index="1" />
+        </view>
+        <view class="colored">未收</view>
+        <view class="submit bc76">提交</view>
+      </view>
+      <view class="iteme">
+        <view>小云小吃</view>
+        <view class="submit bc76">2桶</view>
+        <view class="color">以收</view>
+        <view class="submit bc76">提交</view>
+      </view>
+      <view class="iteme">
+        <view>小云小吃</view>
+        <view class="submit bc76">2桶</view>
+        <view class="color">以收</view>
+        <view class="submit bc76">提交</view>
+      </view>
+    </view>
+
+    <view wx:if="{{currentTab==2}}">
+      <view class="iteme">
+        <view>2019.11.25: 回收50桶</view>
+
+      </view>
+      <view class="iteme">
+        <view>2019年11月</view>
+        <view>共计3000桶</view>
+      </view>
+      <view class="iteme">
+        <view>2019年11月</view>
+        <view>共计3000桶</view>
+      </view>
+      <view class="iteme">
+        <view>2019年11月</view>
+        <view>共计3000桶</view>
+      </view>
+
+
+    </view>
+
+
+
+  </view>
+</view>
+
+
+<view class="bottom">
+  <!-- <view class="itemed">
+    <view class="itemded">
+      <navigator url="/person/slops/index" hover-class="other-navigator-hover">
+        <text>一键下单</text>
+      </navigator>
+    </view>
+  </view> -->
+
+  <view class="itemed">
+
+    <view class="itemded bc76">
+
+      <text>联系公司</text>
+
+    </view>
+  </view>
+</view>

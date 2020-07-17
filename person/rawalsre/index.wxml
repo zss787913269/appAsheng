@@ -1,0 +1,55 @@
+<view class="comtent">
+ <view class="recodfl">
+  <text>银行卡提现</text>
+  <text class="font">2019-05-01 11:00</text>
+ </view>
+  <view class="recodfl">
+  <view><text class="color">-100</text><text>元</text></view>
+
+  <text class="font">当前140元</text>
+ </view>
+</view>
+<view class="comtent">
+ <view class="recodfl">
+  <text>银行卡提现</text>
+  <text class="font">2019-05-01 11:00</text>
+ </view>
+  <view class="recodfl">
+  <view><text class="color">-100</text><text>元</text></view>
+
+  <text class="font">当前140元</text>
+ </view>
+</view>
+<view class="comtent">
+ <view class="recodfl">
+  <text>银行卡提现</text>
+  <text class="font">2019-05-01 11:00</text>
+ </view>
+  <view class="recodfl">
+  <view><text class="color">-100</text><text>元</text></view>
+
+  <text class="font">当前140元</text>
+ </view>
+</view>
+<view class="comtent">
+ <view class="recodfl">
+  <text>银行卡提现</text>
+  <text class="font">2019-05-01 11:00</text>
+ </view>
+  <view class="recodfl">
+  <view><text class="color">-100</text><text>元</text></view>
+
+  <text class="font">当前140元</text>
+ </view>
+</view>
+<view class="comtent">
+ <view class="recodfl">
+  <text>银行卡提现</text>
+  <text class="font">2019-05-01 11:00</text>
+ </view>
+  <view class="recodfl">
+  <view><text class="color">-100</text><text>元</text></view>
+
+  <text class="font">当前140元</text>
+ </view>
+</view>

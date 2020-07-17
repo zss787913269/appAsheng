@@ -1,0 +1,234 @@
+<view>
+	<view class="swiper-tab">
+		<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">平台订单
+			<sup wx:if="{{ 99>=hotelOrder>0 && hotelOrder!==0}}" class="total">{{hotelOrder}}</sup>
+			<sup wx:elif="{{ hotelOrder>99 }}" class="total">99+</sup>
+		</view>
+		<view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">自购订单
+			<sup wx:if="{{ 99>=myOrder>0 && myOrder!==0}}" class="total">{{myOrder}}</sup>
+			<sup wx:elif="{{ myOrder>99 }}" class="total">99+</sup>
+		</view>
+
+	</view>
+
+</view>
+
+<view wx:if="{{currentTab==1}}">
+	<!-- 上面 -->
+	<view class="hotel">
+		<view class="ruzhang">
+			<text>{{hoteInfo.h_name}}</text>
+			<!-- <text>下单员陈东</text> -->
+		</view>
+		<view class="ruzhang">
+			<!-- <text>下单总数:30</text>
+      <text>总金额:1568</text> -->
+		</view>
+		<view class="ruzhang">
+			<!-- <text>已支付:30%</text>
+      <text>未支付:70% </text>
+      <text>未送达:23</text>
+      <text>已送达:27</text> -->
+		</view>
+		<view class="hotelposon">
+			<!-- <view class="zhon">
+        <text>联系配送</text>
+      </view> -->
+			<!-- <view class="zhon">
+        <text>联系客户经理</text>
+      </view> -->
+		</view>
+		<!-- <view class="caidan">
+      <view class="scroll_box">
+        <scroll-view scroll-x>
+          <view class="itblak color">
+            <text>系统已确认→</text>
+          </view>
+          <block wx:for="{{hoteRole}}" wx:key="index">
+            <view class="itblak color" wx:for="{{item}}" wx:key="ind" wx:for-item="itemName">
+              <text wx:if="{{itemName == 1}}">下单员已确认→</text>
+              <text wx:if="{{itemName == 2}}">厨师长已确认→</text>
+              <text wx:if="{{itemName == 3}}">采购已确认→</text>
+              <text wx:if="{{itemName == 4}}">仓库已确认→</text>
+              <text wx:if="{{itemName == 5}}">财务已确认→</text>
+              <text wx:if="{{itemName == 6}}">店长已确认→</text>
+              <text wx:if="{{itemName == 7}}">老板已确认→</text>
+            </view>
+          </block>
+
+          <!-- <view class="itblak colorNow">
+            <text>采购已确认→</text>
+          </view>
+          <view class="itblak color">
+            <text>财务已确认→</text>
+          </view> 
+          <view class="itblak color">
+            <text>确认订单→</text>
+          </view>
+          <view class="itblak color">
+            <text>商家已打印→</text>
+          </view>
+          <view class="itblak color">
+            <text>配送员已取货→</text>
+          </view>
+          <view class="itblak color">
+            <text>配送中→</text>
+          </view>
+          <view class="itblak color">
+            <text>已送达→</text>
+            <text style="color:#fff;background:#ff9d34">查看送达图片</text>
+          </view>
+        </scroll-view>
+      </view>
+    </view> -->
+	</view>
+
+	<!-- 下面 -->
+	<view class="title" wx:for="{{hoteList}}" wx:key="unique" wx:for-index="idx">
+		<view>
+
+
+			<view class="title1">
+				<view class="header">
+					<!-- <text>收货人信息</text> -->
+					<text>订单ID： {{item.order_no}}</text>
+				</view>
+				<view class="content">
+					<view class="scroll_box">
+						<scroll-view scroll-x>
+							<view class="itblak color">
+								<text>系统已确认→</text>
+							</view>
+							<block wx:for="{{hoteRole}}" wx:key="index">
+								<view class="itblak color" wx:for="{{item}}" wx:key="ind" wx:for-item="itemName">
+									<text wx:if="{{itemName == 1}}">下单员已确认→</text>
+									<text wx:if="{{itemName == 2}}">厨师长已确认→</text>
+									<text wx:if="{{itemName == 3}}">采购已确认→</text>
+									<text wx:if="{{itemName == 4}}">仓库已确认→</text>
+									<text wx:if="{{itemName == 5}}">财务已确认→</text>
+									<text wx:if="{{itemName == 6}}">店长已确认→</text>
+									<text wx:if="{{itemName == 7}}">老板已确认→</text>
+								</view>
+							</block>
+
+							<!-- <view class="itblak colorNow">
+            <text>采购已确认→</text>
+          </view>
+          <view class="itblak color">
+            <text>财务已确认→</text>
+          </view> -->
+							<view class="itblak color">
+								<text>确认订单→</text>
+							</view>
+							<view class="itblak color">
+								<text>商家已打印→</text>
+							</view>
+							<view class="itblak color">
+								<text>配送员已取货→</text>
+							</view>
+							<view class="itblak color">
+								<text>配送中→</text>
+							</view>
+							<view class="itblak color">
+								<text>已送达→</text>
+								<text style="color:#fff;background:#ff9d34">查看送达图片</text>
+							</view>
+						</scroll-view>
+					</view>
+					<!-- <view>
+      <text>收  货 人：{{item.address_data.name}}</text>
+    </view> -->
+					<view class="huo">
+						<text>{{item.describe}}</text>
+						<view class="zhong" wx:if="{{item.pay_status_name !='待支付'}}" style="position:absolute;top:62rpx;right:10rpx;">
+							<text wx:if="{{item.is_send_ok == 0}}">未接单</text>
+							<text wx:if="{{item.is_send_ok == 1}}" bindtap="receivingGoods" data-id="{{item.id}}">确认收货</text>
+							<!-- <text wx:if="{{item.is_send_ok == 1}}" bindtap="exchange" data-id="{{item.id}}">退换货</text> -->
+							<text wx:if="{{item.is_send_ok == 2}}">完成</text>
+						</view>
+					</view>
+					<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">
+						<text>点击查看订单详情</text>
+					</view>
+					<view class="confirmCancel" wx:if="{{item.nowRole == true}}">
+						<view wx:if="{{item.status != 5}}">
+							<view class="confirm text" bindtap="confirmOrder" data-id="{{item.id}}">确认订单</view>
+							<view class="cancel text" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</view>
+						</view>
+
+					</view>
+					<view wx:if="{{!item.nowRole && item.status != 5}}" bindtap="payment" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.price}}">
+						<text class="payment" wx:if="{{item.pay_status_name == '待支付'}}">支付</text>
+					</view>
+					<view>
+						<text class="payment" wx:if="{{item.status == '4'||item.status == '3'||item.status == '2'}}" data-value="{{item}}" bindtap="print">打印</text>
+					</view>
+					<view class="invalid">
+						<text wx:if="{{item.status == 5}}">已失效</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view class="zhigou">
+      <text>添加到自购分单</text>
+    </view> -->
+	</view>
+	<view class="bottom">
+		<!-- <view class="itemed">
+      <view class="itemded">
+        <text>扫一扫</text>
+      </view>
+    </view> -->
+
+		<view class="itemed">
+
+			<view class="itemded">
+				<button open-type="contact" class="btn">联 系 我 们</button>
+			</view>
+		</view>
+	</view>
+</view>
+<view wx:if="{{currentTab==2}}">
+	<!-- <view class="hotelone">
+    <view class="ruzhang">
+      <text>南宁国际大酒店</text>
+      <text>下单员陈东</text>
+    </view>
+    <view class="ruzhang">
+      <text>下单总数:30</text>
+      <text>总金额:1568</text>
+    </view>
+    <view class="hotelposone">
+      <view class="zhon active">
+        <text>确认订单</text>
+      </view>
+      <view class="zhon">
+        <text>联系下单员</text>
+      </view>
+    </view>
+  </view> -->
+
+	<!-- 下面 -->
+	<view class="titleLe" wx:for="{{myShop}}" wx:key="index">
+		<view>商品名：{{item.title}}</view>
+		<view>商品价格：{{item.price}}</view>
+		<view class="zhigou" bindtap="addPlatform" data-orderdetid="{{item.id}}" data-orderid="{{item.order_id}}">
+			<text class="colorone">添加至平台</text>
+		</view>
+	</view>
+	<!-- <view class="bottom">
+    <view class="itemed">
+      <view class="itemded">
+        <text>确认订单</text>
+      </view>
+    </view>
+    <view class="itemed">
+
+      <view class="itemded">
+        <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
+          <text>联系我们</text>
+        </navigator>
+      </view>
+    </view>
+  </view> -->
+</view>

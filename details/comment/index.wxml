@@ -1,0 +1,5 @@
+<!--pages/questions/questions.wxml-->
+<view class="questions">
+      <textarea placeholder-style="color:#BDBDBD;" bindblur="bindTextAreaBlur" bindinput="bindinput" placeholder="请填写评论类容" class="textarea" />
+    <view class="buttons" bindtap="submit">提交</view>
+</view>

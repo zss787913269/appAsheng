@@ -1,0 +1,54 @@
+<view class="list">
+  <view class="title">
+    <text>预约列表</text>
+  </view>
+  <view class="middle" wx:for="{{makeList}}" wx:key="index">
+    <view class="tbody">
+      <view class="portrait">
+        <image src="{{item.avatar}}"></image>
+        <view class="introduce">
+          <text>{{item.name}}</text>
+          <!-- <text class="fontsiz">11-18日</text> -->
+        </view>
+      </view>
+      <view class="accept">
+        <text>已做完</text>
+      </view>
+    </view>
+    <view class="nottom">
+      <view>
+      <text class="color">用餐时间：</text>
+      <text>{{item.make_time}}</text>
+      </view>
+      <view>
+      <text class="color">用餐人数：</text>
+      <text>{{item.number}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 拒绝 -->
+  <!-- <view class="middle">
+    <view class="tbody">
+      <view class="portrait">
+        <image src="/images/index/zhuchu.png"></image>
+        <view class="introduce">
+          <text>这个名称</text>
+          <text class="fontsiz">11-18日</text>
+        </view>
+      </view>
+      <view class="accept">
+        <text>已做完</text>
+      </view>
+    </view>
+    <view class="nottom">
+      <view>
+      <text class="color">用餐时间：</text>
+      <text>11月18日上午10.30-下午13.30</text>
+      </view>
+      <view>
+      <text class="color">用餐时间：</text>
+      <text>30个人，3桌</text>
+      </view>
+    </view>
+  </view> -->
+</view>

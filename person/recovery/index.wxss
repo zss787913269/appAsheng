@@ -1,0 +1,98 @@
+
+
+/*操作菜单 */
+
+.user {
+  padding: 0;
+}
+
+.user image {
+  width: 100%;
+  display: block;
+}
+ .view_power{
+   margin-bottom: 50rpx;
+ }
+
+.user_tab {
+  background: #eee;
+}
+
+.user_tab view {
+  border-bottom: 1rpx solid #eee;
+  line-height: 108rpx;
+  padding: 0 30rpx;
+  background: #fff;
+}
+.goUrl{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #999;
+}
+
+.glable{
+  width: 20%;
+}
+.goUrl input{
+  width: 70%;
+  margin-left:20rpx; 
+}
+.bottom{
+  width: 100%;
+  /* height: 100rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position:absolute;
+  bottom:375rpx;
+  left:-32rpx;
+  border-bottom: none !important;
+}
+.checked{
+  width: 60%;
+  background: #62a241;
+  color: #fff;
+}
+
+.citypickers{
+  position: fixed;
+  height: auto;
+  width: 100%;
+  min-height: 100%;
+}
+
+.citybody {
+  position: fixed;
+  bottom: 0px;
+  background: #fff;
+  border-top:2rpx solid #ccc; 
+}
+
+.cityheader {
+  position: absolute;
+  top:0px;
+  width: 100%;
+  z-index: 4;
+}
+
+.city-cancel {
+  float: left;
+  margin: 20rpx;
+  color: #818181;
+}
+
+.city-true {
+  float: right;
+  margin: 20rpx;
+  color: #2FB42E
+}
+
+.pos{
+  position:relative;
+}
+.fal{
+  position: absolute;
+  right:25rpx;
+  top:0rpx;
+  font-size:45rpx;
+}

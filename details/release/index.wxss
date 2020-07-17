@@ -1,0 +1,99 @@
+/*操作菜单 */
+
+.user {
+  padding: 0;
+}
+
+.user image {
+  width: 100%;
+  display: block;
+}
+
+.view_power {
+  margin-bottom: 50rpx;
+}
+
+.user_tab {
+  /* background: #eee; */
+}
+
+.user_tab view {
+  border-bottom: 1rpx solid #eee;
+  line-height: 108rpx;
+  padding: 0 30rpx;
+  background: #fff;
+}
+
+.goUrl {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #999;
+}
+
+.glable {
+  width: 20%;
+}
+
+.goUrl input {
+  width: 70%;
+  margin-left: 20rpx;
+}
+
+.bottom {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+}
+
+.checked {
+  border: 1px solid #ccc;
+}
+
+.downone {
+  width: 100%;
+  height: 200rpx;
+  border-bottom: 1px solid #ccc;
+  padding: 30rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.itemname {
+  width: 18%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.itemone {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.itemtwo {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+image {
+  width: 200rpx;
+}
+
+#submit {
+  margin-top: 60rpx;
+  border-bottom: none;
+}
+.btnSub{
+  background:#2FB42E;
+  color: #fff;
+  /* width:30%; */
+}

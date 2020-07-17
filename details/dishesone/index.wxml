@@ -1,0 +1,84 @@
+<view class="tbody">
+  <view class="content">
+    <view class="head">
+      <image src="/images/details/shicai.png" mode="widthFix"></image>
+      <text>主要食材</text>
+    </view>
+    <block wx:for="{{arr}}" wx:key="index">
+      <view class="tianxie">
+        <view>
+          <input type="text" placeholder="填写用料" name="sex" id="male" bindinput="mainRecipes" data-index="{{index}}" />
+        </view>
+        <view class="boder">
+          <input type="text" placeholder="用量" name="sex" id="male" bindinput="mainRecipes" bindfocus="mainLineFeed" 
+          data-idx="{{index}}" data-item="{{index}}" />
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="tbody">
+  <view class="content">
+    <view class="head">
+      <image src="/images/details/tiaon.png" mode="widthFix"></image>
+      <text>配料</text>
+    </view>
+    <block wx:for="{{arr2}}" wx:key="index">
+      <view class="tianxie">
+        <view>
+          <input type="text" placeholder="填写用料" name="sex" id="male" bindinput="matchRecipes" data-index="{{index}}" />
+        </view>
+        <view class="boder">
+          <input type="text" placeholder="用量" name="sex" id="male" bindinput="matchRecipes" data-idx="{{index}}" bindfocus="matchLineFeed" data-item="{{index}}" />
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="tbody">
+  <view class="content">
+    <view class="head">
+      <image src="/images/details/tiaon.png" mode="widthFix"></image>
+      <text>调料</text>
+    </view>
+    <block wx:for="{{arr4}}" wx:key="index">
+      <view class="tianxie">
+        <view>
+          <input type="text" placeholder="填写用料" name="sex" id="male" bindinput="matchSeasoning" data-index="{{index}}" />
+        </view>
+        <view class="boder">
+          <input type="text" placeholder="用量" name="sex" id="male" bindinput="matchSeasoning" data-idx="{{index}}" bindfocus="matchLineSeas" data-item="{{index}}" />
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="tbody">
+  <view class="content">
+    <view class="head">
+      <image src="/images/details/lie.png" mode="widthFix"></image>
+      <text>做法步骤</text>
+    </view>
+    <block wx:for="{{arr3}}" wx:key="index">
+      <view class="tianxie">
+        <view class="stepNum">
+          <input type="text" placeholder="填写做法" name="sex" id="male" bindinput="stepRecipes" data-index="{{index}}" bindfocus="stepLineFeed" data-item="{{index}}"/>
+          <text class="numText">{{index+1 + '、'}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="buttons" bindtap="showDialogBtn">发布</view>
+<!-- 弹窗 -->
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">发布成功</view>
+  <view class="modal-content">
+    <view class="itemematop">
+      <view class="color">获得积分</view>
+      <view class="ittui backf9"> </view>
+    </view>
+  </view>
+
+</view>

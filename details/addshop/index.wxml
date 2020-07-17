@@ -1,0 +1,74 @@
+<view class="titleed">
+  <label class="glable" for="male">商品类型</label>
+  <view class="occupation">
+    <text class="selectArrayText" bindtap="selectClick">{{selectArray[selectArrayIndex].name}}</text>
+  </view>
+  <i class="fal fa-angle-down light"></i>
+  <view class='option_box' style='height:{{showSelectArray?(selectArray.length>5?300:selectData.length*60):0}}rpx;'>
+  <text class='option' style='{{index==selectArray.length-1&&"border:0;"}}' wx:for='{{selectArray}}' wx:key='this' data-id="{{item.id}}" data-index='{{index}}' catchtap='optionTap'>{{item.name}}</text>
+ </view>
+</view>
+<view class="titleed other" bindtap="open">
+  <label class="glable" for="male">商品类别</label>
+  <view class="occupation">
+    <view>{{twoClassification}}-{{threeClassification}}</view>
+    <!-- <Select prop-array='{{twoSelectArray}}' bind:myget='getDatecategory'></Select> -->
+  </view>
+  <i class="fal fa-angle-down light"  style="margin-left:25rpx;"></i>
+</view>
+<view class="titleed">
+  <label class="glable" for="male">库存单位</label>
+  <input type="text" placeholder="" name="shopCompany" id="male" bindinput="intChang" value="{{shopCompany}}" />
+</view>
+<block wx:for="{{exhibition}}" wx:key="index">
+  <view class="titleed">
+    <label class="glable" for="male">{{index}}</label>
+    <input type="text" placeholder="默认{{item}}" name="1" id="male" bindinput="intExhibition" data-index="{{index}}" />
+  </view>
+</block>
+
+<block wx:for="{{quotationLine}}" wx:key="index">
+  <view class="titleed other">
+    <label class="glableShop" for="male" bindtap="toQuot" data-index="{{index}}">{{index}}</label>
+   
+  </view>
+  <block wx:for="{{quotationLine[specificationsNum]}}" wx:key="index" wx:for-index="indexName">
+    <label class="jin" for="male" wx:if="{{specificationsNum == index}}" bindtap="toQuotTwo" data-index="{{indexName}}">{{indexName}}</label>
+  </block>
+  <block wx:if="{{specificationsNum == index}}">
+    <view class="titleed" wx:for="{{quotationLine[specificationsNum][numTwo]}}" wx:key="index" wx:for-index="indexName">
+    <label class="glableShop" for="male">{{numTwo}}:
+    <text wx:for="{{item}}" wx:key="index" wx:for-index="idxName" wx:for-item="iteName">{{idxName}}</text>
+    </label>
+    <block wx:for="{{item}}" wx:key="index" wx:for-index="idxName" wx:for-item="iteName">
+    <input type="text" placeholder="请输入价格" bindinput="sendPrice" data-index="{{indexName}}" data-item="{{item}}" 
+    value="{{iteName}}" name="sHOPNAME" data-idx="{{idxName}}" style="width:24%;"/>
+    </block>
+  </view>
+  </block>
+</block>
+
+
+<view class="submit" bindtap="submit">
+  <text>提  交</text>
+</view>
+
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" data-citys="{{cityids}}" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="open" class="city-cancel">取消</view>
+      <view bindtap="open" class="city-true">确定</view>
+    </view>
+
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+    </picker-view-column>
+    <!-- <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+    </picker-view-column> -->
+
+  </picker-view>
+</view>

@@ -1,0 +1,59 @@
+.bank{
+  width: 90%;
+  height: 100rpx;
+  /* background: #eee; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30rpx auto;
+  /* color: #717171; */
+  border-radius:10rpx; 
+}
+.tixain{
+  width: 90%;
+  height: 100rpx;
+  margin: 0rpx auto; 
+}
+.goUrl{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #999;
+  font-size: 50rpx;
+}
+.jine{
+  width: 90%;
+  height: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto; 
+}
+.red{
+  color: red;
+}
+.ccc{
+  color: #717171;
+  font-size: 28rpx;
+}
+.yellow{
+  color: #ff9000;
+  font-size:30rpx; 
+  font-weight: bold;
+}
+.quanbu{
+   width: 90%;
+  height: 50rpx;
+  margin: 0 auto; 
+}
+.ff8{
+ color: #82c6ff;
+}
+.button{
+  width: 90%;
+  height: 80rpx;
+  margin: 50rpx auto; 
+  background: #8bc76a;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius:50rpx; 
+}

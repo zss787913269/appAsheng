@@ -1,0 +1,11 @@
+
+<view class="comtent" wx:for="{{integralList}}" wx:key="index">
+ <view class="recodfl">
+  <text>{{item.msg}}</text>
+  <text class="font">{{item.add_time}}</text>
+ </view>
+  <view class="recodfr">
+  <text class="color" wx:if="{{item.type == 0}}">-{{item.integral}}</text>
+  <text class="color" wx:if="{{item.type == 1}}">+{{item.integral}}</text>
+ </view>
+</view>

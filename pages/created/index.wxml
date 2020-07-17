@@ -1,0 +1,110 @@
+<view>
+  <swiper autoplay="true" indicator-dots="true" indicator-color="#fff" indicator-active-color="#ffcf4c">
+    <swiper-item wx:for="{{ads}}" wx:key="key">
+      <image src="{{item}}" mode="widthFix" />
+    </swiper-item>
+  </swiper>
+</view>
+<view class="details">
+  <text>青椒炒腊肉</text>
+  <text class="font">420查看</text>
+</view>
+<view class="xinchuang">
+  <view class="craed">
+    <view class="imged">
+      <image src="/images/index/zhuchu.png" mode="widthFix"></image>
+    </view>
+    <view class="xuanjie">
+      <view>
+        <text>绿色食品</text>
+        <text> [职位: 厨师长]</text> </view>
+      <text>要求：家常菜 用餐人数：7-9人</text>
+    </view>
+    <view class="yuyue">
+      <navigator url="/pages/examine/examine" hover-class="other-navigator-hover">
+        <view class="balck">
+          <text>预约</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+<!--  -->
+<view class="science">
+  <text>青椒炒腊肉是一道美味的菜品。是以腊肉、青椒、葱姜蒜碎、糖、盐、鸡粉、料酒等为原材料制作而成。做法简单，营养丰富，咸香的滋味，很适合下饭。</text>
+</view>
+<view>
+  <view class="title">
+    <image src="/images/details/shicai.png"></image>
+    <text> 主要食材</text>
+  </view>
+  <view class="content">
+    <text>腊肉</text>
+    <text>500g</text>
+  </view>
+  <view class="content">
+    <text>青椒</text>
+    <text>3个</text>
+  </view>
+  <view class="title">
+    <image src="/images/details/tiaon.png"></image>
+    <text> 主要食材</text>
+  </view>
+  <view class="content">
+    <text>葱</text>
+    <text>4g</text>
+  </view>
+  <view class="content">
+    <text>姜</text>
+    <text>4g</text>
+  </view>
+  <view class="content">
+    <text>蒜</text>
+    <text>4g</text>
+  </view>
+  <view class="content">
+    <text>糖</text>
+    <text>4g</text>
+  </view>
+  <view class="content">
+    <text>盐</text>
+    <text>少许</text>
+  </view>
+  <view class="content">
+    <text>鸡粉</text>
+    <text>2勺</text>
+  </view>
+  <view class="content">
+    <text>料酒</text>
+    <text>1勺</text>
+  </view>
+</view>
+
+<view class="zuofa">
+  <view>
+    <text>做法步骤</text> </view>
+  <view class="buzhou">
+    <text>1、腊肉上锅蒸10分钟，切片备用。青椒掰片备用。</text>
+    <text>2、油热葱姜蒜末爆香放入腊肉翻炒至腊肉卷曲出油，肥肉部分透明。</text>
+    <text>3、放入青椒片，加糖、盐、鸡粉、料酒调味。腊肉本身已经咸，酌量。 </text>
+    <text>4、青椒断生后出锅即可。</text>
+  </view>
+</view>
+
+<view class="chang">
+  <view class="pin">
+    <view class="wen">
+      <navigator url="/details/questions/index" hover-class="other-navigator-hover">
+        <text>通过</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="pin">
+    <view class="wen active">
+      <navigator url="/details/comment/index" hover-class="other-navigator-hover">
+        <text>编辑</text>
+      </navigator>
+    </view>
+  </view>
+
+</view>

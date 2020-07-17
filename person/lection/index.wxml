@@ -1,0 +1,69 @@
+<view>
+<!--  -->
+  <view class="xinchuang" wx:for="{{collectionList}}" wx:key="index">
+    <view class="craed">
+      <view class="imged">
+        <image src="{{item.img[0]}}" mode="widthFix"></image>
+      </view>
+      <view class="xuanjie">
+      <view class="shouc">  
+        <text>{{item.name}}</text>
+        <text class="shenhe">{{item.describe}}</text>
+      </view>
+       <view class="shouctwo">
+        <text class="xiang" bindtap="toInfo" data-id="{{item.id}}">详情</text>
+        <view>
+         <image src="/images/user/pinglun.png"></image><text class="shenhe">({{item.comment}})</text>
+         <image src="/images/user/zan.png"></image><text class="shenhe">({{item.fabulous}})</text>
+        </view>
+        
+       </view>
+      </view>
+    </view>
+  </view>
+  <!--  -->
+  <!-- <view class="xinchuang">
+    <view class="craed">
+      <view class="imged">
+        <image src="/images/index/shouchang.png" mode="widthFix"></image>
+      </view>
+      <view class="xuanjie">
+      <view class="shouc">  
+        <text>爆炒花甲</text>
+        <text class="shenhe">百变做法，不腻的鲜嫩味道</text>
+      </view>
+       <view class="shouctwo">
+        <text class="xiang">详情</text>
+        <view>
+         <image src="/images/user/pinglun.png"></image><text class="shenhe">(959)</text>
+         <image src="/images/user/zan.png"></image><text class="shenhe">(959)</text>
+        </view>
+        
+       </view>
+      </view>
+    </view>
+  </view>
+  <view class="xinchuang">
+    <view class="craed">
+      <view class="imged">
+        <image src="/images/index/shouchang.png" mode="widthFix"></image>
+      </view>
+      <view class="xuanjie">
+      <view class="shouc">  
+        <text>爆炒花甲</text>
+        <text class="shenhe">百变做法，不腻的鲜嫩味道</text>
+      </view>
+       <view class="shouctwo">
+        <text class="xiang">详情</text>
+        <view>
+         <image src="/images/user/pinglun.png"></image><text class="shenhe">(959)</text>
+         <image src="/images/user/zan.png"></image><text class="shenhe">(959)</text>
+        </view>
+        
+       </view>
+      </view>
+    </view>
+  </view>
+  -->
+
+</view> 

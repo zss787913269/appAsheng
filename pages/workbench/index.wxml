@@ -1,0 +1,95 @@
+<view class="content">
+ <!-- <view class="title" data-url="{{url}}" bindtap="showModal">
+    <image src="/images/details/tai.png"></image>
+    <text>我的订单</text>
+  </view>
+  <view class="title" data-url="{{url1}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>订单处理</text>
+  </view>
+  <view class="title" data-url="{{url2}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>订单列表</text>
+  </view>
+  <view class="title" data-url="{{url13}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>配送接单</text>
+  </view>
+  <view class="title" data-url="{{url13}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>外聘配送员</text>
+  </view>
+  <view class="title" data-url="{{url14}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>下单商品</text>
+  </view>
+
+  <view class="title" data-url="{{url9}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>超级员工-供应商审核端</text>
+  </view>
+  <view class="title" data-url="{{url4}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>超级员工-供应商管理端</text>
+  </view>
+  <view class="title" data-url="{{url5}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>发现-老菜新创-审核端</text>
+  </view>
+  <view class="title" data-url="{{url6}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>发现-老菜新创-超级员工审核端</text>
+  </view>
+  <view class="title" data-url="{{url7}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>超级员工端-信息审核</text>
+  </view>
+  <view class="title" data-url="{{url8}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>供应商订单-菜市信息</text>
+  </view>
+  <view class="title" data-url="{{url10}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>酒店人员-平台订单</text>
+  </view>
+  <view class="title" data-url="{{url11}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>员工-酒店平台订单</text>
+  </view>
+  <view class="title" data-url="{{url12}}" bindtap="gotoikPage">
+    <image src="/images/details/tai.png"></image>
+    <text>酒店订单-订单详情</text>
+  </view> -->
+   <!-- <view class="title"  bindtap="showModal">
+    <image src="/images/details/tai.png"></image>
+    <text>我的订单</text>
+  </view>
+   <view class="title" data-list="{{optionList1}}" >
+    <image src="/images/details/tai.png"></image>
+    <text>订单处理</text>
+  </view> -->
+   <!-- <view class="title" data-list="{{optionList}}" bindtap="showModal">
+   <text>二级菜单</text>
+  </view> -->
+</view>
+
+<view class="wrap">
+  <!-- modal  -->
+  <view class="modal modal-bottom-dialog">
+    <!-- <view class="modal-cancel" bindtap="hideModal"></view>
+    <view class="bottom-dialog-body bottom-positon" animation="{{animationData}}"> -->
+      <!--  -->
+      <view class='Mselect'>
+        <view wx:for="{{optionList}}" wx:key="unique" data-value='{{item.url}}' bindtap='getOption'>
+          {{item.name}}
+        </view>
+      </view>
+      <view></view>
+      <!-- <view class='Mcancel' bindtap='mCancel'>
+        <text>取消</text>
+      </view>
+  -->
+    <!-- </view> -->
+  </view>
+ 
+</view>

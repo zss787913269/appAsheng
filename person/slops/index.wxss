@@ -1,0 +1,119 @@
+.card{
+width: 100%;
+height: 400rpx;
+padding: 20rpx;
+box-sizing: border-box;
+}
+.cardname{
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+  
+}
+
+.fontsiz{
+  color: #717171;
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+
+.cardtime{
+width: 100%;
+height: 230rpx;
+padding: 10rpx;
+box-sizing: border-box;
+}
+.timeyue{
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.color{
+    color: #ff9000;
+}
+.colored{
+    color: #8bc76a;
+}
+
+.matop{
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+
+.iteme{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  font-size:28rpx; 
+}
+
+.table{
+  width: 100%;
+  height: 80rpx;
+  border-bottom:1px solid #ccc;
+  margin-bottom:30rpx;  
+  line-height: 80rpx
+}
+.table view{
+  width: 50%;
+  display: flex;
+}
+ .right{
+   color: #717171; 
+   font-size: 25rpx;
+ }
+.submit{
+  width: 150rpx;
+  height: 45rpx;
+  color: #fff;
+  padding-left: 10rpx;
+  border-radius:5rpx; 
+  text-align: center;
+  background:#ff9000; 
+  line-height: 45rpx
+}
+
+
+
+
+
+
+
+
+
+
+
+.bottom{
+  width: 80%;
+  height: 80rpx;
+  margin: 0 auto;
+  padding-top: 50rpx;
+   box-sizing: border-box;
+   text-align: center;
+   line-height: 80rpx;
+   border-radius:10rpx; 
+  
+}
+.ff9{
+  width:200rpx;
+ background:#ff9000;
+ color: #fff; 
+}
+.bc76{
+  background:#8bc76a;
+  color: #fff; 
+}
+
+
+
+
+
+
+
+
+

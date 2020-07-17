@@ -1,0 +1,30 @@
+<view>
+<!--  -->
+<block wx:if="{{myFood != ''}}">
+  <view class="xinchuang" wx:for="{{myFood}}" wx:key="index">
+    <view class="craed">
+      <view class="imged">
+        <image src="{{item.img[1]}}" mode="widthFix"></image>
+      </view>
+      <view class="xuanjie">
+      <view class="shouc">  
+        <text>{{item.name}}</text>
+        <text class="shenhe">{{item.describe}}</text>
+      </view>
+       <view class="shouctwo">
+        <text class="xiang" bindtap="toFoodInfo" data-id="{{item.id}}">详情</text>
+        <view>
+         <image src="/images/user/pinglun.png"></image><text class="shenhe">({{item.comment}})</text>
+         <image src="/images/user/zan.png"></image><text class="shenhe">({{item.fabulous}})</text>
+        </view>
+        
+       </view>
+      </view>
+    </view>
+  </view>
+</block>
+  <view class="noTime" wx:else>
+    还没有发布
+  </view>
+
+</view>

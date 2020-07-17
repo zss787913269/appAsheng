@@ -1,0 +1,33 @@
+<view class="header">
+  <navigator url="/person/add/index" hover-class="other-navigator-hover">
+    <view class="user-header-name">
+      <text>添加收货地址</text>
+    </view>
+  </navigator>
+</view>
+<view>
+  <view class="xinchuang" wx:for="{{categoryList}}" wx:key="unique">
+    <view class="craed">
+      <view class="imged">
+        <view>
+          <checkbox bindtap="checkboxChange" data-id="{{item.id}}" checked="{{item.is_default=='1'?'true':''}}"></checkbox>
+        </view>
+      </view>
+      <view class="xuanjie">
+        <view >
+          <text>{{item.name}} </text>
+          <text class="ipone">{{item.tel}}</text> </view>  
+        <text class="dizhi">{{item.province_name}} {{item.city_name}} {{item.county_name}} {{item.address}}</text>
+      </view>
+      <view class="yuyue">
+          <view class="ipone shenhe" data-id="{{item.id}}" bindtap="editor">
+            <text>编辑</text>
+          </view>
+          <view class="ipone shenhe" data-id="{{item.id}}" bindtap="deleteed">
+            <text class="red">删除</text>
+          </view>
+      </view>
+    </view>
+  </view>
+
+</view>

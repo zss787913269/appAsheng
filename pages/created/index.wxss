@@ -1,0 +1,167 @@
+swiper {
+  display: block;
+  width: 100%;
+}
+
+swiper image {
+  display: block;
+  width: 100%;
+  height: 300rpx;
+}
+.details{
+  width: 95%;
+  height: 100rpx;
+  margin: 10rpx auto; 
+  display: flex;
+  flex-flow: column;
+  line-height: 50rpx;
+}
+.font{
+  font-size:25rpx; 
+  color: #717171;
+}
+.xinchuang {
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.craed {
+  height: 150rpx;
+  width: 100%;
+  display: flex;
+}
+
+.imged {
+  width: 150rpx;
+  height: 150rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.craed .imged image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.craed .xuanjie {
+  width: 350rpx;
+  height: 100rpx;
+  display: flex;
+  flex-flow: column;
+  padding: 20rpx 0;
+}
+
+.craed .xuanjie text:nth-child(1) {
+  font-size: 35rpx;
+}
+
+.craed .xuanjie text:nth-child(2) {
+  font-size: 25rpx;
+  color: #717171;
+}
+
+.yuyue {
+  width: 200rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.balck {
+  width: 130rpx;
+  height: 50rpx;
+  border:1px solid #ffcf4c;
+  color: #ffcf4c;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  padding: 20rpx 0;
+}
+
+.science{
+  width: 95%;
+  margin: 10rpx auto; 
+  border-bottom:1px solid #ccc;
+  padding-bottom:20rpx 
+}
+.title{
+   width: 95%;
+   height: 80rpx;
+  margin: 10rpx auto; 
+  line-height: 80rpx;
+  border-bottom:1px solid #ccc;
+}
+.title image{
+ width: 30rpx;
+ height: 30rpx;
+}
+.content{
+   width: 95%;
+   height: 80rpx;
+   margin: 10rpx auto; 
+   line-height: 80rpx;
+   display: flex;
+   justify-content: space-between;
+   border-bottom:1px solid #ccc;
+}
+.zuofa{
+  width: 95%;
+   margin: 30rpx auto;   
+}
+.buzhou{
+    display: flex;
+    flex-flow: column;
+    margin-top:20rpx;
+    line-height: 40rpx; 
+}
+
+  .cakan{
+   width: 95%;
+   height: 50rpx;
+   margin: 0 auto; 
+   display: flex;
+   justify-content: space-between;
+}
+.color{
+  color: #ff9000;
+}
+.chang{
+  width: 100%;
+  height: 100rpx;
+  background: #eee;
+  margin-top:60rpx; 
+  display: flex;
+}
+.chang image{
+ width: 30rpx;
+ height: 30rpx;
+}
+.shou{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 25rpx;
+  width: 150rpx;
+}
+
+.pin{
+   width: 50%;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wen{
+   width: 250rpx;
+   height: 50rpx;
+   line-height: 50rpx;
+   background: #62a241;
+   color: #fff;
+    text-align: center;
+    border-radius:10rpx 
+}
+.active{
+  background:#ff9000;
+}

@@ -1,0 +1,85 @@
+<!--private/superman/index.wxml-->
+<view class="swiper-tab">
+  <view wx:for="{{list}}" bindtap="changeActive" data-title="{{item.title}}" data-index="{{index}}" wx:key="index" class="swiper-tab-item {{active == index?'active':''}}">
+    {{item.name}}
+  </view>
+</view>
+<view class="allfont" wx:if="{{active == 0}}">
+  <view class="everyline title">
+    <view class="f ja">
+      <view class="">
+        审员工：98
+      </view>
+      <view class="">
+        酒员工：35
+      </view>
+      <view class="">
+        供员工：120
+      </view>
+      <view class="r-b">
+        <button class="btn">添加员工</button>
+      </view>
+    </view>
+    <view class="f everyline ja ac">
+      <view class="left">
+        <view class="f jb left-t">
+          <view class="">
+            2019.12.10
+          </view>
+          <view class="">
+            前台登：38
+          </view>
+          <view class="">
+            后台登：38
+          </view>        
+        </view>
+        <view class="f ja">
+          <view class="">
+            陈东
+          </view>
+          <view class="">
+            权限：信息审核
+          </view>
+          <view class="">
+            已审：34
+          </view>        
+          <view class="">
+            未审：34
+          </view>                
+        </view>        
+      </view>
+      <view>
+        <button class="btn">提醒他</button>
+      </view>
+    </view>
+    <view class="everyline">
+      <view class="left">
+        <view class="f jb l-t ">
+          <view class="">
+            2019.12.10
+          </view>
+          <view class="">
+            前台登：38
+          </view>
+          <view class="">
+            后台登：38
+          </view>        
+        </view>
+        <view class="f ja">
+          <view class="">
+            陈东
+          </view>
+          <view class="">
+            权限：供应商管理
+          </view>
+          <view class="">
+            新增供应商：34
+          </view>             
+        </view>        
+      </view>
+    </view>
+  </view>
+  <view bindtap="goTo" class="gosee tc">
+    前往审核 >>
+  </view>
+</view>

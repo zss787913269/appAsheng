@@ -1,0 +1,159 @@
+
+
+/*操作菜单 */
+
+.user {
+  padding: 0;
+}
+
+.user image {
+  width: 100%;
+  display: block;
+}
+ .view_power{
+   margin-bottom: 50rpx;
+ }
+
+.user_tab {
+  background: #eee;
+}
+
+.user_tab view {
+  border-bottom: 1rpx solid #eee;
+  line-height: 108rpx;
+  padding: 0 30rpx;
+  background: #fff;
+}
+.goUrl{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #999;
+  position: relative
+}
+
+.glable{
+  width: 20%;
+}
+.goUrl input{
+  width: 70%;
+  margin-left:20rpx; 
+}
+.bottom{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx;
+  box-sizing:border-box; 
+ box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+}
+.checked{
+  border: 1px solid #ccc;
+}
+.downone{
+  width: 100%;
+  height: 200rpx;
+  border-bottom:1px solid #ccc; 
+  padding:30rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+.itemname{
+  width: 18%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.itemone{
+  width: 30%;
+  height: 100%;
+   display: flex;
+  align-items: center;
+}
+.itemtwo{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+image{
+  width: 200rpx;
+  height:130rpx;
+}
+.submit{
+  position: absolute;
+  bottom: 160rpx;
+  left:66rpx;
+  width: 75%;
+  height: 80rpx;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 80rpx;
+  background: #ff9000;
+  color: #fff;
+  border-radius:10rpx;
+  margin-top:100rpx;  
+  margin-bottom:100rpx;  
+  
+}
+.occupation{
+  position: absolute;
+  top:0;
+  left:140rpx;
+  height:108rpx;
+}
+.citypickers{
+  position: fixed;
+  height: auto;
+  width: 100%;
+  min-height: 100%;
+}
+
+
+.citybody {
+  position: fixed;
+  bottom: 0px;
+  background: #fff;
+  border-top:2rpx solid #ccc; 
+  z-index:10;
+}
+
+.cityheader {
+  position: absolute;
+  top:0px;
+  width: 100%;
+  z-index: 4;
+}
+
+.city-cancel {
+  float: left;
+  margin: 20rpx;
+  color: #818181;
+}
+
+.city-true {
+  float: right;
+  margin: 20rpx;
+  color: #2FB42E
+}
+.location{
+  position: relative;
+}
+.fal{
+  position: absolute;
+  right:20rpx;
+  top:4rpx;
+  font-size:50rpx;
+}
+#zhon{
+  width:200rpx;
+  height: 50rpx;
+  background:#ff9d34;
+  color: #fff; 
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 5rpx;
+  font-size: 30rpx;
+  padding:0 10rpx;
+}

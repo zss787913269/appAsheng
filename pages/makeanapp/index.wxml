@@ -1,0 +1,11 @@
+<view class="sucess">
+<image src="/images/nav/chen.png"></image>
+<text>预约成功</text>
+</view>
+<!-- <view class="lainxi">
+<view class="zhiwei"><view>厨师职位： </view><view>主厨</view></view>
+<view class="zhiwei"><view>擅 长 ： </view><view>砂锅</view></view>
+<view class="zhiwei"><view>联系电话： </view><view>021-8018 7116</view></view>
+<view class="zhiwei"><view>姓 名 ： </view><view>保罗</view></view>
+</view> -->
+<!-- <view class="buttom">立即联系</view> -->

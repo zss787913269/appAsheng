@@ -1,0 +1,70 @@
+<!--pages/questions/questions.wxml-->
+<view class="group">
+  <view wx:for="{{groupShop}}" wx:key="index" class="groupBox">
+    <view class="shopName text-wei shopColor">{{item.name}}</view>
+    <view class="textColor text-wei">
+      {{item.start_time}}开始下单{{item.send_time}}点前配送
+    </view>
+    <!-- <view class="textColor">每隔{{item.raise_time}}分钟涨价{{item.raise_price}}元/{{item.raise_time_sta}}点开始涨价</view> -->
+    <!-- <view class="textColor">{{item.send_time}}点前配送</view> -->
+    <view class="grouostart" bindtap="clickPurchase" data-index="{{index}}">
+      <view class="grouostart-left">
+        <view class="start">
+          <view class="startPrice shopColor text-wei">组团开始价
+            <text class="donwn"> </text>
+          </view>
+          <view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
+        </view>
+        <view class="sprice">
+          <text class="startWei">￥</text>
+          <text class="initialPrice">{{item.price}}</text>
+          <text class="txtCol startWei">/{{item.inventory_unit}}</text>
+        </view>
+      </view>
+      <view class="grouostart-left">
+        <view class="start">
+          <view class="startPrice shopColor text-wei PriceRise">每隔{{item.raise_time}}涨价{{item.raise_price}}
+            <text class="donwn"> </text>
+          </view>
+          <view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
+        </view>
+
+        <view class="sprice">
+          <text class="initialPrice nowPrice">当前价格</text>
+          <text class="startWei">￥</text>
+          <text class="initialPrice">{{item.nowPrice}}</text>
+          <text class="txtCol startWei">/{{item.inventory_unit}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="group-bottom">
+      <view class="group-bottom-left">
+        <text class="shopTitle groupLeft">{{item.title}}</text>
+        <text class="minimum groupLeft">最低订购量{{item.goods_number}}</text>
+      </view>
+      <view class="group-bottom-left ">
+        <text class="shopTitle groupLeft">总库存：{{item.total_inventory}}</text>
+        <text class="minimum groupLeft" style="background:#fc745c;">剩：{{item.inventory}}</text>
+      </view>
+    </view>
+    <view class="purchase">
+      <view class="liang">
+        <text class="liantext float">数量 </text>
+        <view class="zhonged background float" bindtap="bindPlus">
+          <text> +</text>
+        </view>
+        <view class="zhong corlor float">
+          <input type="number" bindchange="bindManual" value="{{num}}" />
+        </view>
+        <view class="zhonged borde float" bindtap="bindMinus">
+          <text>-</text>
+        </view>
+      </view>
+      <view class="purchase-right">
+        <view class="purchase-btn" bindtap="personalPurchase">个人采购</view>
+        <view class="purchase-btn" bindtap="hotelPurchase" data-price="{{item.nowPrice}}">酒店采购</view>
+      </view>
+      <!-- <text class="purchase-btn" bindtap="personalPurchase">个人采购</text><text class="purchase-btn">酒店采购</text> -->
+    </view>
+  </view>
+</view>

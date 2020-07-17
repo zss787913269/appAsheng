@@ -1,0 +1,12 @@
+<!--pages/exchange/index.wxml-->
+<view class="goUrl">
+  <label class="glable" for="male">请选择退/换货</label>
+  <view class="occupation">
+    <Select prop-array='{{market}}' bind:myget='getDate'></Select>
+  </view>
+  <!-- <input type="text" name="fullName" placeholder="请输入" id="male" value="{{fullName}}" /> -->
+</view>
+<view class="questions">
+  <textarea placeholder-style="color:#BDBDBD;" bindblur="bindTextAreaBlur" bindinput="bindinput" placeholder="请填写退换货原因" class="textarea" />
+  <view class="buttons" bindtap="submit">提交</view>
+</view>

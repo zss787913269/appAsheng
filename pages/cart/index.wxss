@@ -1,0 +1,151 @@
+.checked{
+ border-radius:50%; 
+}
+.itemed{
+  width:720rpx;
+  height:115rpx;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex; 
+  margin: 0 auto;
+ padding-top: 50rpx;
+ box-sizing: border-box;
+ justify-content: space-between;
+}
+.itemed image{
+ width: 35rpx;
+ height: 35rpx;
+ vertical-align: middle;
+}
+.total{
+  font-size: 15rpx;
+  background-color: #FF9000;
+  border-radius: 50%;
+  position: absolute;
+  width: 35rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+  top: 25rpx;
+}
+.marri{
+ margin-right: 10rpx;
+}
+.marle{
+ margin-left: 10rpx;
+}
+.bottom{
+  width: 100%;
+  height: 130rpx;
+  margin-top: 50rpx;
+  border-top:4rpx solid #ccc;
+  border-bottom:1rpx solid #ccc;
+  text-align: center;
+  line-height: 130rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+}
+.color{
+  color:#ff9000; 
+}
+.but{
+  width: 150rpx;
+  height: 50rpx;
+  background:#ff9000; 
+  color: #fff; 
+  line-height: 50rpx;
+  margin-left:50rpx;
+  border-radius:30rpx;  
+}
+checkbox {
+
+width: 30rpx;
+
+height: 30rpx;
+border-radius:50%;
+}
+
+
+
+checkbox .wx-checkbox-input {
+
+width: 30rpx;
+
+height: 30rpx;
+border-radius:50%;
+}
+
+
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+
+background: #62a241;
+
+}
+
+
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+
+width: 28rpx;
+
+height: 28rpx;
+
+line-height: 28rpx;
+
+text-align: center;
+
+font-size: 22rpx;
+
+color: #fff;
+ 
+background: transparent;
+
+transform: translate(-50%, -50%) scale(1);
+
+-webkit-transform: translate(-50%, -50%) scale(1);
+
+}
+.bujin{
+  display: flex;
+  
+}
+.num{
+  width: 30px;
+  text-align: center
+}
+.red{
+  color: red;
+}
+
+.swiper-tab {
+  padding: 0 40rpx;
+  display: flex;
+}
+
+.swiper-tab-item {
+  height: 66rpx;
+  width: 50%;
+  font-size: 30rpx;
+  background: #8bc76a;
+  color: #fff;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+  line-height: 66rpx;
+}
+
+.swiper-tab-item:nth-child(1) {
+  border-radius: 10rpx 0rpx 0rpx 10rpx;
+}
+
+.swiper-tab-item:nth-child(3) {
+  border-radius: 0rpx 10rpx 10rpx 0rpx;
+}
+.active {
+  background: #62a241;
+}

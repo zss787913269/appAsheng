@@ -1,0 +1,37 @@
+ <view>
+
+
+ 	<view class="title" wx:for="{{orderlist}}" wx:key="unique">
+ 		<view class="header">
+ 			<text>收货人信息</text>
+ 			<text>订单ID： {{item.order_no}}</text>
+ 		</view>
+ 		<view class="content">
+ 			<view>
+ 				<text>收货地址：{{item.address_data.province_name}} {{item.address_data.city_name}} {{item.address_data.county_name}} {{item.address_data.address}}
+      </text>
+ 			</view>
+ 			<view>
+ 				<text>收  货 人：{{item.address_data.name}}</text>
+ 			</view>
+ 			<view class="huo">
+ 				<text>收货电话：{{item.address_data.tel}}</text>
+ 				<view class="zhong" wx:if="{{item.status == 2}}"> 待发货</view>
+ 				<view class="zhong" wx:if="{{item.status == 3}}" bindtap="confirmReceipt" data-id="{{item.id}}"> 确认收货</view>
+ 				<view class="zhong" wx:if="{{item.status == 4}}"> 已完成</view>
+ 				<view class="zhong" wx:if="{{item.status == 5 || item.status == 6}}">已失效</view>
+ 			</view>
+ 			<view class="color" bindtap="detalis" data-id="{{item.id}}">
+ 				<text>点击查看订单详情</text>
+ 			</view>
+ 		</view>
+ 		<view class="buttom">
+ 			<view class="huo">
+ 				<text>{{item.pay_status_name}}</text>
+ 				<view class="zhonged" data-payid="{{item}}" wx:if="{{item.pay_status_name=='待支付'}}" bindtap="payment">支付</view>
+				<view class="zhonged" data-value="{{item}}" wx:if="{{item.status == '4'||item.status == '3'||item.status == '2'}}"  bindtap="print">打印</view>
+ 			</view>
+
+ 		</view>
+ 	</view>
+ </view>

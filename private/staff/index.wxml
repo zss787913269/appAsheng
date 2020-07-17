@@ -1,0 +1,267 @@
+<view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">我的酒店
+    </view>
+    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">未支付订单
+    </view>
+    <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">酒店自购单
+    </view>
+
+  </view>
+
+</view>
+
+<view wx:if="{{currentTab==1}}">
+  <!-- 上面 -->
+  <view class="hotel" wx:for="{{myHoteList}}" wx:key="index">
+    <view class="ruzhang">
+      <text>总店量：50</text>
+      <text>总订单:100</text>
+    </view>
+    <view class="ruzhang">
+      <text>{{item.h_name}}</text>
+      <text>下单员陈东</text>
+    </view>
+    <view class="ruzhang">
+      <text>下单总数:30</text>
+      <text>总金额:1568</text>
+    </view>
+    <view class="ruzhang">
+      <text>已支付:30%</text>
+      <text>未支付:70% </text>
+      <text>未送达:23</text>
+      <text>已送达:27</text>
+    </view>
+    <view class="hotelposon">
+      <view class="zhon active">
+        <text>提醒酒店操作</text>
+      </view>
+      <view class="zhon">
+        <text>联系配送员</text>
+      </view>
+      <view class="zhon">
+        <text>打印酒店订单</text>
+      </view>
+    </view>
+    <view class="caidan">
+      <!-- <view class="scroll_box">
+        <scroll-view scroll-x>
+          <view class="itblak color">
+            <text>系统已确认→采购已确认→财务已确认→</text>
+          </view>
+          <view class="zhon itblak active">
+            <text>确认订单</text>
+          </view>
+          <view class="itblak color">
+            <text>请确认订单</text>
+          </view>
+        </scroll-view>
+      </view> -->
+      <view wx:if="{{item.status == 0}}" class="examine notex" bindtap="examine" data-id="{{item.id}}">审核</view>
+      <view wx:if="{{item.status == 1}}" class="examine alreadyex">已审核</view>
+    </view>
+
+
+  </view>
+
+  <!-- 下面 -->
+  <!-- <view class="title">
+    <view class="header">
+      <text>猪肉</text>
+      <text>牛肉</text>
+      <text>鸡肉</text>
+      <text>兔肉</text>
+    </view>
+    <view class="content">
+      <view class="huo">
+        <view>
+          <text>排骨</text>
+          <text>　预估2.5-3.5重</text>
+        </view>
+        <view>
+          <text>20斤</text>
+          <text>　10</text>
+          <text>　200元</text>
+        </view>
+        <view>
+          <text>砍好成粒</text>
+          <text>不要太肥</text>
+        </view>
+        <view>
+          <text>供应地:</text>
+          <text>淡村市</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="zhong actived"> 退货</view>
+        <view class="zhong"> 修改数量</view>
+        <view class="zhong actived"> 删除</view>
+      </view>
+    </view>
+    <view class="zhigoued">
+      <text class="colorone">提醒供应商打印</text>
+      <text class="colorone">联系供应商</text>
+    </view>
+  </view> -->
+  <!-- <view class="bottom">
+    <view class="itemed">
+      <view class="itemded">
+        <text>扫一扫</text>
+      </view>
+    </view>
+
+    <view class="itemed">
+
+      <view class="itemded">
+        <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
+          <text>一键收货</text>
+        </navigator>
+      </view>
+    </view>
+  </view> -->
+</view>
+<view wx:if="{{currentTab==2}}">
+  <view class="hotelone">
+    <view class="ruzhang">
+      <text>总店量：50</text>
+      <text>总订单：1000</text>
+    </view>
+    <view class="ruzhang">
+      <text>南宁国际大酒店</text>
+      <text>下单员陈东</text>
+    </view>
+    <view class="ruzhang">
+      <text>下单总数：30</text>
+      <text>总金额：1568</text>
+    </view>
+    <view class="hotelposon">
+      <text class="colorone">未支付：25000</text>
+      <text>2019.12.20</text>
+      <text class="colorone">提醒付款</text>
+    </view>
+  </view>
+
+  <!-- 下面 -->
+  <view class="title">
+    <view class="header">
+      <text>猪肉</text>
+      <text>牛肉</text>
+      <text>鸡肉</text>
+      <text>兔肉</text>
+    </view>
+    <view>
+      <view class="ruzhang">
+        <text>排骨</text>
+        <text>预估2.5-3.5重</text>
+        <text>2019.12.20</text>
+      </view>
+      <view class="ruzhang">
+        <text>20斤</text>
+        <text>10</text>
+        <text>200元</text>
+        <text class="colorone">未支付25000</text>
+      </view>
+      <view class="ruzhang">
+        <text>砍好成粒 不要太肥</text>
+      </view>
+      <view class="ruzhang">
+        <text>供应地: 淡村市</text>
+        <text class="colorone">提醒付款</text>
+
+      </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="itemed">
+      <view class="itemded">
+        <text>扫一扫</text>
+      </view>
+    </view>
+
+    <view class="itemed">
+
+      <view class="itemded">
+        <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
+          <text>联系公司</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{currentTab==3}}">
+  <!-- 上面 -->
+  <view class="hotelone">
+    <view class="ruzhang">
+      <text>总店量：50</text>
+      <text>总订单：1000</text>
+    </view>
+    <view class="ruzhang">
+      <text>南宁国际大酒店</text>
+      <text>下单员陈东</text>
+    </view>
+    <view class="ruzhang">
+      <text>下单总数：30</text>
+      <text>总金额：1568</text>
+    </view>
+    <view class="hotelzong">
+      联系酒店
+    </view>
+  </view>
+
+  <!-- 下面 -->
+  <view class="title">
+    <view class="header">
+      <text>猪肉</text>
+      <text>牛肉</text>
+      <text>鸡肉</text>
+      <text>兔肉</text>
+    </view>
+    <view class="content">
+      <view class="huo">
+        <view>
+          <text>排骨</text>
+          <text>　预估2.5-3.5重</text>
+        </view>
+        <view>
+          <text>20斤</text>
+          <text>　10</text>
+          <text>　200元</text>
+        </view>
+        <view>
+          <text>砍好成粒</text>
+          <text>不要太肥</text>
+        </view>
+        <view>
+          <text>供应地:</text>
+          <text>淡村市</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="zhong actived"> 退货</view>
+        <view class="zhong"> 修改数量</view>
+        <view class="zhong actived"> 删除</view>
+      </view>
+    </view>
+    <view class="zhigou">
+      <text class="colorone">添加至平台订单</text>
+
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="itemed">
+      <view class="itemded">
+        <text>扫一扫</text>
+      </view>
+    </view>
+
+    <view class="itemed">
+
+      <view class="itemded">
+        <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
+          <text>一键收货</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,94 @@
+/* details/Promanage/index.wxss */
+
+.swiper-tab {
+    padding: 0 40rpx;
+    display: flex;
+}
+
+.swiper-tab-item {
+    height: 66rpx;
+    width: 50%;
+    font-size: 30rpx;
+    background: #8bc76a;
+    color: #fff;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    text-align: center;
+    line-height: 66rpx;
+}
+
+.swiper-tab-item:nth-child(1) {
+    border-radius: 10rpx 0rpx 0rpx 10rpx;
+}
+
+.swiper-tab-item:nth-child(2) {
+    border-radius: 0rpx 10rpx 10rpx 0rpx;
+}
+
+.active {
+    background: #62a241;
+}
+
+.title {
+    height: auto;
+    width: 95%;
+    margin: 20rpx auto;
+    box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.btn {
+    width: 115rpx !important;
+    font-size: 20rpx !important;
+    padding: 4rpx 12rpx;
+    color: white;
+}
+
+.lianxi {
+    background: #FF9500;
+}
+
+.notice {
+    background: #8BC66A;
+}
+
+.top-content {
+    padding: 10rpx 20rpx;
+}
+
+.bottom {
+    color: #FF9500;
+}
+
+.everyline {
+    margin: 20rpx 0;
+}
+
+.around {
+    margin-left: 45rpx;
+}
+
+.bor-bottom {
+    border-bottom: 1rpx solid grey;
+    padding: 20rpx 10rpx;
+}
+
+.b-around {
+    margin-left: 150rpx;
+}
+
+.edit {
+    color: #62a241;
+}
+
+.delete {
+    color: red;
+}
+
+.shenhe {
+    font-size: 30rpx !important;
+}
+
+.all-content {
+    font-size: 30rpx;
+}

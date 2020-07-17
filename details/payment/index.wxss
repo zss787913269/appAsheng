@@ -1,0 +1,67 @@
+.sucess{
+  width: 100%;
+  height: 350rpx;
+  box-shadow:0 0 15rpx rgba(0, 0, 0, 0.2);
+  display: flex;
+  background: #62a241;
+  color: #fff;
+  justify-content: center;
+  align-items: center; 
+  font-size:40rpx; 
+  margin-bottom:20rpx; 
+}
+.sucess image{
+  width: 50rpx;
+  height: 50rpx;
+  margin-right:30rpx; 
+}
+
+
+.comtent{
+  width: 95%;
+  height: 150rpx;
+  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+  margin: 20rpx auto;
+  padding: 20rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.recodfl{
+  display: flex;
+  flex-flow: column;
+  line-height: 40rpx;
+}
+.recodfr{
+  line-height: 80rpx;
+}
+.color{
+  color: #ff9000;
+  font-weight: bold;
+}
+.font{
+  font-size: 25rpx;
+  color: #717171;
+}
+image{
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 30rpx;
+}
+.fabu{
+  display: flex;
+
+}
+.xinxi{
+  line-height: 50rpx;
+}
+.frjifen{
+  width: 150rpx;
+  height: 50rpx;
+  background: #ff9000;
+  color: #fff;
+  border-radius: 50rpx;
+  margin-top:30rpx; 
+  line-height: 50rpx;
+  text-align: center;
+}

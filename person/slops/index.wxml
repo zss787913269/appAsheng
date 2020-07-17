@@ -1,0 +1,80 @@
+
+  <view class="card">
+    <view class="cardname">
+      <view class="iteme matop">
+      <view>生鲜大酒店</view>
+      <view class="submit">
+        <text>支付</text> </view>
+    </view>
+     <view class="iteme matop">
+      <view>费用：500/月 季度支付 <text class="right">(到期2019年12月15日)</text></view>
+     </view>
+     <view class="iteme">
+      <view>负责人：韩先生</view>
+      
+     </view>
+     <view class="iteme">
+      <view>地址： XX区XX路XX号XX店</view>
+     </view>
+     <view class="iteme">
+      <view>2019年10月</view>
+     </view>
+    
+    </view>
+  </view>
+
+
+
+
+<view class="cardtime">
+  <view class="timeyue">
+   <view class="fontsiz">本月以回收： 80桶</view>
+    <view class="fontsiz">回收员：黄天</view>
+    <view class="iteme matop">
+      <view>联系电话：123456789</view>
+      <view class="submit">
+        <text>拨打电话</text> </view>
+    </view>
+   
+  </view>
+</view>
+
+
+
+
+  <view class="card">
+    <view class="cardname">
+     <view class="table color">
+      <view>我负责的店</view>
+     </view>
+     <view class="iteme matop">
+      <view>当天：未收</view>
+      <view>以收：5桶</view>
+     </view>
+     <view class="iteme">
+      <view>2019年10月</view>
+      <view>100桶</view>
+      <view>查看台账</view>
+     </view>
+     <view class="iteme">
+      <view>2019年10月</view>
+      <view>100桶</view>
+      <view>查看台账</view>
+     </view>
+     <view class="iteme">
+      <view>2019年10月</view>
+      <view>100桶</view>
+      <view>查看台账</view>
+     </view>
+    
+    </view>
+  </view>
+
+
+
+
+
+<view class="bottom">
+<view class="bc76">联系我们
+</view>
+</view>

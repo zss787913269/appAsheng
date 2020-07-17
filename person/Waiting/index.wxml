@@ -1,0 +1,97 @@
+<view class="comtent">
+<view class="fabu">
+<image src="/images/index/jifendai.png" mode="widthFix"></image>   
+ <view class="recodfl">
+  <view class="xinxi">    
+  <text>发布信息 </text><text class="color">+10</text>
+  </view>
+  <text class="font">可前往“积分”查看</text>
+ </view>
+ </view>
+  <view class="recodfr">
+   <view class="frjifen">
+  <text>领取积分</text>
+ </view>
+ </view>
+</view>
+<view class="comtent">
+<view class="fabu">
+<image src="/images/index/jifendai.png" mode="widthFix"></image>   
+ <view class="recodfl">
+  <view class="xinxi">    
+  <text>发布信息 </text><text class="color">+10</text>
+  </view>
+  <text class="font">可前往“积分”查看</text>
+ </view>
+ </view>
+  <view class="recodfr">
+   <view class="frjifen">
+  <text>领取积分</text>
+ </view>
+ </view>
+</view>
+<view class="comtent">
+<view class="fabu">
+<image src="/images/index/jifendai.png" mode="widthFix"></image>   
+ <view class="recodfl">
+  <view class="xinxi">    
+  <text>发布信息 </text><text class="color">+10</text>
+  </view>
+  <text class="font">可前往“积分”查看</text>
+ </view>
+ </view>
+  <view class="recodfr">
+   <view class="frjifen">
+  <text>领取积分</text>
+ </view>
+ </view>
+</view>
+<view class="comtent">
+<view class="fabu">
+<image src="/images/index/jifendai.png" mode="widthFix"></image>   
+ <view class="recodfl">
+  <view class="xinxi">    
+  <text>发布信息 </text><text class="color">+10</text>
+  </view>
+  <text class="font">可前往“积分”查看</text>
+ </view>
+ </view>
+  <view class="recodfr">
+   <view class="frjifen">
+  <text>领取积分</text>
+ </view>
+ </view>
+</view>
+<view class="comtent">
+<view class="fabu">
+<image src="/images/index/jifendai.png" mode="widthFix"></image>   
+ <view class="recodfl">
+  <view class="xinxi">    
+  <text>发布信息 </text><text class="color">+10</text>
+  </view>
+  <text class="font">可前往“积分”查看</text>
+ </view>
+ </view>
+  <view class="recodfr">
+   <view class="frjifen">
+  <text>领取积分</text>
+ </view>
+ </view>
+</view>
+<view class="comtent">
+<view class="fabu">
+<image src="/images/index/jifendai.png" mode="widthFix"></image>   
+ <view class="recodfl">
+  <view class="xinxi">    
+  <text>发布信息 </text><text class="color">+10</text>
+  </view>
+  <text class="font">可前往“积分”查看</text>
+ </view>
+ </view>
+  <view class="recodfr">
+   <view class="frjifen">
+  <text>领取积分</text>
+ </view>
+ </view>
+</view>
+

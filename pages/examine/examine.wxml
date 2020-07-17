@@ -1,0 +1,37 @@
+<view class="card">
+ <view class="cardname">
+      <view class="imged">
+        <image src="/images/index/zhuchu.png" mode="widthFix"></image>
+      </view>
+      <view class="xuanjie">
+        <text>保罗（主厨</text>
+        <text class="fontsiz">擅长 : 砂锅</text>
+        <text class="fontsiz">工作经验：3-5年</text>
+        <text class="fontsiz">电话：021-8008 7116</text>
+    </view>
+ </view>
+</view>
+<view class="cardtime">
+ <view class="timeyue">
+     <view>预约时间</view>
+     <view>用餐时间<view class="backgr">10:00-13:00</view> 用餐人数<view class="backgr">7-9人</view></view>
+     <view>菜系：家常菜 . 法国菜</view>
+     <view>价格：<text class="color">210起</text></view>
+ </view>
+</view>
+ <view class="bottom">
+  <view class="itemed">
+    <view class="itemded bc76">
+      <text>通 过</text>
+    </view>
+  </view>
+
+  <view class="itemed">
+
+    <view class="itemded">
+      <navigator url="/pages/cart/index" hover-class="other-navigator-hover">
+        <text>编 辑</text>
+      </navigator>
+    </view>
+  </view>
+</view>

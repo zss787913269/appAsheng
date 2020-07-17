@@ -1,0 +1,135 @@
+<view class="header">
+  <view class="user-header-name">
+    <!-- <text class="fal fa-map-marker-alt"> {{city}}</text> -->
+  </view>
+  <view>
+    <i class="fal fa-search"></i>
+    <view>
+      <!-- <navigator url="/details/search/index?where={{}}" hover-class="other-navigator-hover"> -->
+      <input placeholder="{{inpNmae}}" bindinput="int">
+      </input>
+      <!-- </navigator> -->
+      <text class="findSearch" bindtap="toSearch">搜索</text>
+    </view>
+
+  </view>
+</view>
+<view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">老菜创新
+    </view>
+    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">私厨
+    </view>
+  </view>
+
+</view>
+
+<view wx:if="{{currentTab==2}}">
+
+  <view class="xinchuang" wx:for="{{cookList}}" wx:key="index">
+    <view data-item="{{item}}" bind:tap="goDetail" class="craed">
+      <view class="imged">
+        <text style="background-image:url({{item.avatar}})" class="tex-img"></text>
+      </view>
+      <view class="xuanjie">
+        <text>{{item.name}}</text>
+        <text>{{item.disname}}</text>
+        <text>职位:{{item.proname}}</text>
+        <text>￥{{item.price}} 起</text>
+      </view>
+      <view class="yuyue">
+        <view class="balck" bindtap='show' data-cookid="{{item.id}}" data-userid="{{item.user_id}}">
+          <image src="/images/index/icom1.png" mode="widthFix"></image>
+          <text>预约</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--  -->
+  <!-- <view class="xinchuang">
+    <view class="craed">
+      <view class="imged">
+        <image src="/images/index/zhuchu.png" mode="widthFix"></image>
+      </view>
+      <view class="xuanjie">
+        <text>保罗（主厨）</text>
+        <text>家常菜 、川菜 、法国菜</text>
+        <text>职位：砂锅</text>
+        <text>￥210 起</text>
+      </view>
+      <view class="yuyue">
+        <view class="balck" bindtap='show'>
+          <image src="/images/index/icom1.png" mode="widthFix"></image>
+          <text>预约</text>
+        </view>
+      </view>
+    </view>
+  </view> -->
+
+</view>
+<view wx:if="{{currentTab==1}}">
+  <view class="xinchuang" wx:for="{{disNameList}}" wx:key="index">
+    <view class="craed">
+      <view class="imged">
+        <image src="{{item.img[1]}}"></image>
+      </view>
+      <view class="xuanjied">
+        <view class="shouc">
+          <text>{{item.name}}</text>
+          <text class="shened">{{item.describe}}</text>
+        </view>
+        <view class="shouctwo" bindtap="toFoodInfo" data-id="{{item.id}}">
+          <navigator url="/details/dishname/index?id={{item.id}}" hover-class="other-navigator-hover">
+            <text class="xiang">详情</text>
+          </navigator>
+          <view>
+            <image src="/images/user/pinglun.png"></image>
+            <text class="shened">({{item.comment}})</text>
+            <image src="/images/user/zan.png" bindtap="giveFive" data-index="{{item.id}}"></image>
+            <text class="shened">({{item.fabulous}})</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="absult" bindtap="toFoodPublish">
+  +
+</view>
+</view>
+<!-- 模态框 -->
+<view>
+  <view class='bg' hidden="{{isHidden}}">
+    <view class='modalContent'>
+      <view class='title'>请输入具体的日期, 方便你更准确的预约</view>
+      <view class='contents'>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">用餐时间</label>
+          <view style="margin-left:30rpx;">
+            <picker mode="multiSelector" bindchange="bindStartMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+              <view class="picker">
+                请选择：{{startDate}}
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class='contents'>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">用餐人数 </label>
+          <input type="text" name="sex" id="male" bindinput="haveMeals"/>
+        </view>
+      </view>
+      <view class="cansole">
+        <view class="sole">
+          <!-- <navigator url="/pages/makeanapp/index" hover-class="other-navigator-hover"> -->
+            <view bindtap='sunmitInfo' class="itemd activeed"> 预约</view>
+          <!-- </navigator> -->
+        </view>
+
+        <view bindtap='sunmit' class="sole">
+          <view class="itemd"> 取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

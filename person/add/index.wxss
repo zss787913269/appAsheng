@@ -1,0 +1,137 @@
+
+
+/*操作菜单 */
+
+.user {
+  padding: 0;
+}
+
+
+.user image {
+  width: 100%;
+  display: block;
+}
+ .view_power{
+   margin-bottom: 50rpx;
+ }
+
+.user_tab {
+  background: #eee;
+}
+
+.user_tab view {
+  
+  
+}
+.goUrl{
+  display: flex;
+  align-items: center;
+  line-height: 108rpx;
+  padding: 0 30rpx;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.glable{
+  width: 20%;
+}
+.goUrl input{
+  width: 70%;
+  margin-left:20rpx; 
+}
+.bottom{
+  width: 100%;
+  height: 115rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10rpx;
+  margin-bottom: 13rpx;
+  padding: 10rpx;
+  background: #fff;
+  box-sizing:border-box; 
+ box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+}
+.checked{
+  border: 1px solid #ccc;
+}
+
+/* .input {
+  padding-top: 300rpx;
+  width: 100%;
+} */
+
+.input input {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px #d9d9d9 solid;
+  border-top: 1px #d9d9d9 solid;
+  padding: 20rpx 50rpx;
+}
+
+.section {
+  padding-top: 20rpx;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+.citypickers{
+  position: fixed;
+  height: auto;
+  width: 100%;
+  min-height: 100%;
+}
+
+
+.citybody {
+  position: fixed;
+  bottom: 0px;
+  background: #fff;
+  border-top:2rpx solid #ccc; 
+}
+
+.cityheader {
+  position: absolute;
+  top:0px;
+  width: 100%;
+  z-index: 4;
+}
+
+.city-cancel {
+  float: left;
+  margin: 20rpx;
+  color: #818181;
+}
+
+.city-true {
+  float: right;
+  margin: 20rpx;
+  color: #2FB42E
+}
+
+.section .picker {
+  background-color: #fff;
+  border-bottom: 1px #d9d9d9 solid;
+  border-top: 1px #d9d9d9 solid;
+  padding: 20rpx;
+}
+.bottom_btn{
+  padding: 20rpx 20rpx;
+   background: #fff;
+}
+.btnrtred{
+  background: #ff9000;
+  color: #fff;
+}

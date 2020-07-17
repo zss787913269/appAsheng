@@ -1,0 +1,80 @@
+<view class="title">
+  <view class="header">
+    <text>收货人信息</text>
+    <text>订单日期：{{orderlist.add_time_date}}</text>
+  </view>
+  <view class="content">
+    <view>
+      <text wx:if="{{orderlist.address_data.province_name != ''}}">收货地址：{{orderlist.address_data.province_name}}{{orderlist.address_data.city_name}}{{orderlist.address_data.county_name}}
+ </text>
+      <text wx:else>收货地址：暂无</text>
+    </view>
+    <view class="huo">
+      <text wx:if="{{orderlist.address_data.name != ''}}">收  货 人：{{orderlist.address_data.name}}</text>
+      <text wx:else>收  货 人：暂无</text>
+    </view>
+    <view>
+      <text wx:if="{{orderlist.address_data.tel != ''}}">收货电话：{{orderlist.address_data.tel}}</text>
+      <text wx:else>收货电话：暂无</text>
+    </view>
+
+  </view>
+</view>
+
+<!-- <view class="title" wx:if="{{orderlist.pay_status_name=='已支付'}}">
+  <view class="header">
+    <text>送货人信息</text>
+    <text>订单ID： 200815445632</text>
+  </view>
+  <view class="content">
+    <view class="huo">
+      <text>收  货 人：刘爽</text>
+      <view class="zhong"> 骑手点击配送中出现付款码</view>
+    </view>
+    <view>
+      <text>收货电话：18814245228</text>
+    </view>
+  </view>
+</view> -->
+<view class="wuhua">
+  <view class="meat">
+    <view class="color">
+      <text>订单详情</text>
+    </view>
+  </view>
+  <view>
+
+    <scroll-view scroll-x>
+      <view class="swiper-tab">
+        <view wx:for="{{secondaryClassification}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.category_id?'active':''}}" data-current="{{item.category_id}}" bindtap="clickTab" data-index="{{index}}">{{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="shopatt">
+  <block wx:for="{{secondaryClassShop}}" wx:key="index">
+         <view class="shopatt-left">
+      <view class="shopnum">
+      <view> {{item.title}}</view>
+        <view class="fleft">数量：</view>
+        <view class="fleft numAdd numstor" bindtap="add" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{orderlist.status < 2}}">+</view>
+        <view class="fleft" style="margin-left:30rpx;">{{item.buy_number}}</view>
+        <view class="fleft numstor numcen" bindtap="sub" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{orderlist.status < 2}}">-</view>
+      </view>
+      <view style="margin-top:10rpx;" wx:for="{{item.spec}}" wx:key="index">
+        <text wx:if="{{item.value != ''}}" style="margin-left:10rpx;">{{item.type}}</text>
+        <text wx:if="{{item.value != ''}}" style="margin-left:10rpx;">{{item.value}}</text>
+      </view>
+      <view class="exchange" bindtap="exchange" data-item="{{item}}">退换货</view>
+    </view>
+    <view class="shopatt-right" bindtap="deletShop" wx:if="{{orderlist.status < 2}}" data-id="{{item.id}}">
+      <text>删除商品</text>
+    </view>
+    <view class="addOrder" bindtap="addSelfShop" data-id="{{item.id}}">
+      <text>添加到自购单</text>
+    </view>
+  </block>
+   
+  </view>
+
+</view>
