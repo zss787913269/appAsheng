@@ -1,5 +1,6 @@
+<view class="page">
 <view class="top">
-	<view class="header">
+	<view class="header" id="header">
 		<i class="fal fa-search"></i>
 		<navigator url="/details/search/index?where=shop" hover-class="other-navigator-hover">
 			<input placeholder="请输入商品名">
@@ -32,8 +33,10 @@
 
 	<c style="height:25rpx;"></c>
 </view>
-<view class="scroll_table">
-	<scroll-view scroll-x>
+
+
+<view class="scroll_table" id="main" bindtap="myscorll">
+	<scroll-view scroll-x  >
 		<view class="swiper-tab">
 			<view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
 
@@ -56,66 +59,184 @@
 
 
 
-<view wx:if="{{tableListone!=''}}" style="padding-bottom:180rpx;height:auto;">
 
-	<view class="main">
+
+<!-- <view class="main"> -->
+	<view wx:if="{{tableListone!=''}}"  class="main"   bindtap="myscorll" >
 		<view class="left">
 
-			<scroll-view scroll-y="true" style="height: 1100rpx" scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true"  class="ss"  style="height: 900rpx"   bindscroll="scroll1"   scroll-into-view="true" scroll-with-animation="true">
 
-				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" wx:key="unique">
+				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}"    class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}"    wx:key="unique">
 
-					<view class="{{classfiySelect == item.id ? 'selected':'normal'}}" data-id='{{item.id}}'>
-						<text>{{item.name}}</text>
+					<!-- <view class="{{classfiySelect == item.id ? 'selected':'normal'}}" data-id='{{item.id}}'> -->
+					<view   data-id='{{item.id}}' bindtap="clickLeftItem">
+						<text > {{item.name}} </text>
 					</view>
-
-
+					
 				</view>
 
 			</scroll-view>
-
 		</view>
 
 		<view class='right'>
-			<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" wx:key="unique">
+				<scroll-view scroll-y="true"   style="height: 950rpx"   scroll-with-animation="true"  bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect}}" >
+				<!-- <scroll-view scroll-y="true"  style="height: 1200rpx"  bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true"> -->
 
-				<view class="title">
-			<text>{{item.name}}</text>
-			<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
-		</view>
-				<scroll-view scroll-y="true" bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true">
+			<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
+
+				<view class="title" id="{{'inToview'+item.id}}">
+					<text>{{item.name}}</text>
+					<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
+				</view>
 
 					<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
 
-						<block wx:for="{{item.goods}}" wx:for-list="item">
+					<block wx:for="{{item.goods}}" wx:for-list="item" wx:key="index">
 
-							<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
+						<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
 
-							<view class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" wx:if="{{item.is_adv == 0}}">
-								<view class="cainame">
-									<text>{{item.brand_name}}</text>
+						<view class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" wx:if="{{item.is_adv == 0}}">
+							<view class="cainame">
+								<text>{{item.brand_name}}</text>
+							</view>
+							<view class="caimony">
+								<text class="caimonyf9">￥{{item.price}}元/{{item.inventory_unit}} </text>
+								<view>
+									<view class="textColor" wx:for="{{item.show_keyword}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexS">
+										{{indexS}}:{{itemName}}</view>
 								</view>
-								<view class="caimony">
-									<text class="caimonyf9">￥{{item.price}}元/{{item.inventory_unit}} </text>
-									<view>
-										<view class="textColor" wx:for="{{item.show_keyword}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexS">
-											{{indexS}}:{{itemName}}</view>
-									</view>
-									<text id="book">
+								<text id="book">
                 <text id="book-text" >订</text>
-									</text>
+								</text>
+							</view>
+						</view>
+
+					</block>
+
+			
+			</view>
+				</scroll-view>
+					<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
+						<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
+					<view class="termine shopright" bindtap="clickcancel">
+						<text>关闭</text>
+					</view>
+					<view style='color:red;font-size:34rpx'>{{mylist.title}}</view>
+					<view class="shopPrice">￥{{shopPrice*1000*num/1000}}元</view>
+
+					<view class="gg">
+						<view class="one" wx:for="{{tableid}}" wx:key="key">
+							<text class="jt">{{item.title}}</text>
+							<view class="onebox">
+								<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}" data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
+									<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
 								</view>
 							</view>
 
-						</block>
-			
-				</scroll-view>
+						</view>
+					</view>
+
+
+					<view class="liang">
+						<text class="mycount" >数量 </text>
+						<view class="zhonged borde background add" bindtap="bindPlus">
+							<text> +</text>
+						</view>
+						<view class="zhong corlor  myinput">
+							<input type="number" bindchange="bindManual" value="{{num}}" />
+						</view>
+						<view class="zhonged borde " bindtap="bindMinus">
+							<text>-</text>
+						</view>
+					</view>
+
+					<view class="mybottom">
+
+						<view class="termied" bindtap="determine">
+							<text>公司采购</text>
+						</view>
+
+						<view class="termied" bindtap="clickselet">
+							<text>个人采购</text>
+						</view>
+					</view>
+				</view>
+				<!-- 123 -->
+					<view wx:else class="group">
+			<view wx:for="{{groupShop}}" wx:key="index" class="groupBox {{item.color_type == 1?'groupBack':''}} {{item.color_type == 2?'groupBack2':''}} {{item.color_type == 3?'groupBack3':''}}">
+				<view class="shopName text-wei   {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.name}}</view>
+				<view class="textColor-group text-wei">
+					{{item.start_time}}开始下单{{item.send_time}}点前配送
+				</view>
+
+				<view class="grouostart" bindtap="clickPurchase" data-index="{{index}}">
+					<view class="grouostart-left">
+						<view class="start">
+							<view class="startPrice shopColor text-wei">组团开始价
+								<text class="donwn"> </text>
+							</view>
+							<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
+						</view>
+						<view class="sprice">
+							<text class="startWei">￥</text>
+							<text class="initialPrice">{{item.price}}</text>
+							<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
+						</view>
+					</view>
+					<view class="grouostart-left">
+						<view class="start">
+							<view class="startPrice shopColor text-wei PriceRise">每隔{{item.raise_time}}分钟涨价{{item.raise_price}}
+								<text class="donwn"> </text>
+							</view>
+							<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
+						</view>
+
+						<view class="sprice">
+							<text class="initialPrice nowPrice">当前价格</text>
+							<text class="startWei">￥</text>
+							<text class="initialPrice">{{item.nowPrice}}</text>
+							<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
+						</view>
+					</view>
+				</view>
+				<view class="group-bottom">
+					<view class="group-bottom-left">
+						<text class="shopTitle groupLeft {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.title}}</text>
+						<text class="minimum groupLeft">最低订购量{{item.goods_number}}</text>
+					</view>
+					<view class="group-bottom-left ">
+						<text class="shopTitle groupLeft">总库存：{{item.total_inventory}}</text>
+						<text class="minimum groupLeft">剩：{{item.inventory}}</text>
+					</view>
+				</view>
+				<view class="purchase-group" wx:if="{{item.purchase}}">
+					<view class="liang-group">
+						<text class="liantext-group float">数量 </text>
+						<view class="zhonged-group background-group float" bindtap="bindPlusGroup">
+							<text> +</text>
+						</view>
+						<view class="zhong-group corlor-group float">
+							<input type="number" value="{{numGroup}}" disabled="true" />
+						</view>
+						<view class="zhonged-group borde-group float" bindtap="bindMinusGroup">
+							<text>-</text>
+						</view>
+					</view>
+					<view class="numGroup-num">￥{{item.nowPrice * 100 * numGroup / 100}}</view>
+					<view class="purchase-right">
+						<view class="purchase-btn" bindtap="personalPurchase">个人采购</view>
+						<view class="purchase-btn" bindtap="hotelPurchase" data-price="{{item.nowPrice}}">酒店采购</view>
+					</view>
+
+				</view>
 			</view>
+		</view>
 		</view>
 
 	</view>
 
-</view>
+<!-- </view> -->
 
 
 
@@ -198,7 +319,7 @@
 						</view>
 					</view>
 				</view>
-
+		//123
 			</view>
 			<view>
 
@@ -293,7 +414,8 @@
 			<sup wx:elif="{{cartNum+personNum>99}}" class="total">99+</sup>
 		</view>
 	</view>
-	<!-- <view class="token" bindtap="eliminate">
-    清除token
-  </view> -->
+
+
+</view>
+
 </view>
