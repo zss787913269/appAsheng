@@ -76,13 +76,15 @@ height: 135rpx;
 }
 
 .mukaui {
-  width: 90%;
+  width: 93%;
   height: auto;
   display: inline-block;
   box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.1);
   margin: 0rpx 23rpx 10rpx 10rpx;
   border-radius:20rpx;
   margin-top: 10rpx;
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
 }
 .po{
   position: absolute;
@@ -319,6 +321,7 @@ swiper {
   padding: 10rpx;
   display: flex;
   flex-wrap: wrap;
+  margin-left: 20rpx;
 }
 
 .cainame {
@@ -356,15 +359,35 @@ swiper {
   font-size:26rpx;
   
 }
+.img-book-text{
+  margin:12rpx 10rpx 10rpx 14rpx;
+}
+
+
+.immbook{
+  width:44rpx;
+  height:44rpx;
+  background-color: #ff9000;
+  border-radius:38rpx 10rpx 10rpx 10rpx;
+  color:#fff;
+  position:absolute;
+  bottom:0rpx;
+  right:0rpx;
+  font-size:26rpx;
+
+  
+}
 #book-text{
   margin:12rpx 10rpx 10rpx 14rpx;
 }
+
 .caimony text {
   line-height:42rpx;
   margin-top:5rpx;
 }
   .textColor{
   color: #999999;
+  margin-bottom: 10rpx;
   }
 .caimonyf9 {
   color: #ff9000;
@@ -1027,4 +1050,41 @@ margin: 15rpx auto;
   color: #ff9000
 }
 
-/* zym */
+/* zym  背景图*/
+
+.bgcImg{
+  height: 240rpx;
+  width: 95%;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.bgcicon{
+  height: 240rpx;
+  width: 95%;
+}
+.caiPrice{
+   color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 100rpx;
+    margin-right: 20rpx;
+    align-items: center;
+    font-weight: 600;
+    vertical-align:bottom;
+    background-color: #ff9000;
+    display: inline;
+    
+
+}
+.textTop{
+  font-size: 25rpx;
+  /* margin-top: 20rpx; */
+}
+.textPrice{
+  font-size: 35rpx;
+  letter-spacing:5rpx
+}

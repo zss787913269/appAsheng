@@ -61,6 +61,7 @@
 
 
 
+
 <!-- <view class="main"> -->
 	<view wx:if="{{tableListone!=''}}"  class="main"   bindtap="myscorll" >
 		<view class="left">
@@ -72,6 +73,7 @@
 					<!-- <view class="{{classfiySelect == item.id ? 'selected':'normal'}}" data-id='{{item.id}}'> -->
 					<view   data-id='{{item.id}}' bindtap="clickLeftItem">
 						<text > {{item.name}} </text>
+					
 					</view>
 					
 				</view>
@@ -90,13 +92,34 @@
 					<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
 				</view>
 
+				<!-- <view wx:for={{item}} wx:for-item="imgUrl" wx:key>
+					<image style="height:100rpx;width:100rpx" src="{{item.goods}}">
+							{{item.images}}
+					</image>
+				</view> -->
 					<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
 
 					<block wx:for="{{item.goods}}" wx:for-list="item" wx:key="index">
 
+
+	<!-- zym背景图 -->
+
+						<view  wx:if="{{item.images!=''}}" bindtap="clickse" data-id="{{item}}" data-index="{{index}}"  class="bgcImg"  style="background-image: url({{item.images}});background-size: cover">
+							<!-- <image  src="{{item.images}}"  class="bgcicon" /> -->
+							<view class="caiPrice">
+							<text class="textTop">￥</text>	<text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
+							
+							 </view>
+							 <view>
+							  <text class="immbook">
+                <text class="img-book-text" >订</text>
+								</text>
+							 </view>
+						</view>	
+
 						<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
 
-						<view class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" wx:if="{{item.is_adv == 0}}">
+						<view wx:else class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" >
 							<view class="cainame">
 								<text>{{item.brand_name}}</text>
 							</view>
@@ -115,10 +138,10 @@
 					</block>
 
 			
-			</view>
+			</view >
 				</scroll-view>
 					<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
-						<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
+				<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
 					<view class="termine shopright" bindtap="clickcancel">
 						<text>关闭</text>
 					</view>

@@ -755,7 +755,7 @@ Page({
         itemFor.forEach(item1 => {
           item1.hidden = true
           if (item1.images) {
-            item1.images = 'http://second.chchgg.com/public' + item1.images
+            item1.images = 'http://second.chchgg.com' + item1.images
           }
           // item1.show_keyword = JSON.parse(item1.show_keyword)
         })
@@ -908,26 +908,41 @@ Page({
   },
 
   clickgui: function (e) {
+
     var that = this;
+
+    // 规程的长度 净体 活体 加工
     let tableId = that.data.tableid
+
+// 循环规格
     for (var i = 0; i < tableId.length; i++) {
+      // 如果ajax里面的名字 等于传过来的名字 
       if (tableId[i].title == e.currentTarget.dataset.indx) {
+
         if (tableId[i].value[e.currentTarget.dataset.index] == true) {
+          //  如果等于true 其他的等于false
           tableId[i].value[e.currentTarget.dataset.index] = false
         } else {
           for (let j in tableId[i].value) {
-            console.log(e.currentTarget.dataset.index)
             tableId[i].value[j] = false
             tableId[i].value[e.currentTarget.dataset.index] = true
+            }
           }
-        }
+      }else if(tableId[i].title != "加工" ){
 
+        // console.log(tableId[i])
+        for (let j in tableId[i].value ) {
+
+          // console.log(tableId[i].value["砍块"])
+             
+                tableId[i].value[j] = false
+              
+          }
+          
       }
     }
     that.setData({
       tableid: tableId
-      // tablenormsName: e.currentTarget.dataset.index,    //属性值获取
-      // tablenormsTitle: e.currentTarget.dataset.indx    //属性值获取
     })
     that.getShopPrice()
   },
@@ -1076,6 +1091,8 @@ Page({
     })
   },
   clickselet: function () { //个人采购加入购物车
+    this.hideBuyModal()
+
     var that = this;
     if (app.globalData.token == '') {
       wx.navigateTo({
@@ -1137,7 +1154,7 @@ Page({
   },
   determine() { //加入酒店购物车
     var that = this;
-
+    this.hideBuyModal()
     console.log(that.data.tablenorms)
     if (app.globalData.token == '') {
       wx.navigateTo({
