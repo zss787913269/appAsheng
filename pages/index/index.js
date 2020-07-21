@@ -914,9 +914,13 @@ Page({
     // 规程的长度 净体 活体 加工
     let tableId = that.data.tableid
 
+   
+
 // 循环规格
     for (var i = 0; i < tableId.length; i++) {
       // 如果ajax里面的名字 等于传过来的名字 
+
+
       if (tableId[i].title == e.currentTarget.dataset.indx) {
 
         if (tableId[i].value[e.currentTarget.dataset.index] == true) {
@@ -924,21 +928,35 @@ Page({
           tableId[i].value[e.currentTarget.dataset.index] = false
         } else {
           for (let j in tableId[i].value) {
-            tableId[i].value[j] = false
-            tableId[i].value[e.currentTarget.dataset.index] = true
-            }
-          }
-      }else if(tableId[i].title != "加工" ){
+             tableId[i].value[j] = false
+             tableId[i].value[e.currentTarget.dataset.index] = true
 
-        // console.log(tableId[i])
-        for (let j in tableId[i].value ) {
+            if((tableId[i].title.indexOf("净体")==0 || tableId[i].title.indexOf("活体")==0 ) && tableId.length > 2 ){
 
-          // console.log(tableId[i].value["砍块"])
              
-                tableId[i].value[j] = false
-              
-          }
+              if(tableId[0].value[j] ){
+                for(let z in tableId[1].value){
+                    tableId[1].value[z] = false
+                    tableId[i].value[e.currentTarget.dataset.index] = true
+                }
+
+              }
+              if(tableId[1].value[j]){
+                for(let z in tableId[0].value){
+                    tableId[0].value[z] = false
+                    tableId[i].value[e.currentTarget.dataset.index] = true
+                }
+              }
+            }
+
           
+             }
+
+            }
+
+          
+
+
       }
     }
     that.setData({
@@ -961,17 +979,23 @@ Page({
         }
       }
     }
-    // console.log(spec)
+    
+   
+
     let params = {
       id: that.data.shopingid,
       spec
     }
+    console.log(params)
     let res = await ajax({
       url: '/api/goods/SpecDetail',
       method: 'POST',
       data: params
     })
     if (res.data.code == 0) {
+
+      console.log(res.data.data)
+
       that.setData({
         shopPrice: res.data.data.price
       })
