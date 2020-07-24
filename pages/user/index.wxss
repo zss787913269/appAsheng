@@ -181,7 +181,7 @@ margin-bottom: 8px;
 .chongzhi {
   font-size: 25rpx;
   position: absolute;
-  top: 210rpx;
+  top: 185rpx;
   left: 650rpx;
   z-index: 999;
   background: #ff9000;
@@ -191,6 +191,18 @@ margin-bottom: 8px;
   border-radius: 5rpx 5rpx 5rpx 5rpx;
 }
 
+.chongzhi2 {
+  font-size: 25rpx;
+  position: absolute;
+  top: 185rpx; 
+  left: 475rpx;
+  z-index: 999;
+  background: #ff9000;
+  line-height: 30rpx;
+  padding: 0rpx 5px;
+  color: #fff;
+  border-radius: 5rpx 5rpx 5rpx 5rpx;
+}
 /*操作菜单 */
 
 /* pages/user/index.wxss */

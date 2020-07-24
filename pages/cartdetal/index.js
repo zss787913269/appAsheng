@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    inputBz:"",
     addreslist: '',
     payment_list: [],
     checkedAll: false,
@@ -28,19 +29,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.where)
-  if(options.where != undefined){
-    this.setData({
-      where:options.where
-    })
-    if (options.where == 'group'){
-      this.setData({
-        shopAttribute: JSON.parse(options.shopAttribute)
-      })
-    }
-  }
+    console.log(options)
+
+  // if(options.where != undefined){
+  //   this.setData({
+  //     where:options.where
+  //   })
+    // if (options.where == 'group'){
+
+    //   this.setData({
+    //     shopAttribute: JSON.parse(options.shopAttribute)
+    //   })
+    // }
+  // }
     this.setData({
       dataids: options.ids
+    })
+  },
+  modalInput(e){
+    // console.log(e.detail.value)
+    this.setData({
+      inputBz:e.detail.value
     })
   },
   toDetalInfo() {
@@ -57,7 +66,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   async subdelect(e,mode) {
-    console.log(e)
+    // console.log(e)
+    console.log(mode)
     let that = this
     let params = {
       buy_type: mode,
@@ -91,7 +101,7 @@ Page({
         ids: e,
         actual_price: res.data.data.base //商品价格
       })
-      that.getShopPrice()
+      // that.getShopPrice()
     }else{
       wx.showToast({
         title:res.data.msg,
@@ -104,29 +114,31 @@ Page({
     // console.log(that.data.ids)
 
   }, 
-  async getShopPrice(){    //查询价格
-    var that = this
-   
-    let groupShop = that.data.groupShop
-    let params = {
-      activity_id:that.data.shopAttribute.id,
-      goods_id:that.data.shopAttribute.shopId,
-      spec: that.data.shopAttribute.spec
-    }
-    let res = await ajax({
-      url: 'api/index/getGroupPrice',
-      method: 'POST',
-      data: params
-    })
-    console.log(res.data.code)
-    if (res.data.code == 0) {
-      // groupShop[i].nowPrice = res.data.data
-      that.setData({
-        shopNowPrice:res.data.data
-      })
+  // async getShopPrice(){    //查询价格
+  //   var that = this
 
-    }
-  },
+    // console.log(that.data.shopAttribute)
+   
+    // let groupShop = that.data.groupShop
+    // let params = {
+    //   activity_id:that.data.shopAttribute.id,
+    //   goods_id:that.data.shopAttribute.shopId,
+    //   spec: that.data.shopAttribute.spec
+    // }
+    // let res = await ajax({
+    //   url: 'api/index/getGroupPrice',
+    //   method: 'POST',
+    //   data: params
+    // })
+    // console.log(res.data.code)
+    // if (res.data.code == 0) {
+    //   // groupShop[i].nowPrice = res.data.data
+    //   that.setData({
+    //     shopNowPrice:res.data.data
+    //   })
+
+    // }
+  // },
   // 下单页面
   async paymented(e) {
     let that = this
@@ -143,7 +155,8 @@ Page({
       
       payment_id: that.data.paymentId,
       address_id: that.data.addreslist.id,
-      is_purchase: 0
+      is_purchase: 0,
+      goods_mark:that.data.inputBz,
     }
     if(that.data.where == 'group'){
       params.buy_type = 'goods'
@@ -178,20 +191,23 @@ Page({
     
   },
   // 付款
-  async orderPay(e) {
-    console.log(e)
+  async orderPay() {
+    console.log(this.data.inputBz)
+    
     let that = this
     let res = await ajax({
       url: 'api/order/pay',
       method: 'POST',
       data: {
         id: that.data.orderid,
-        payment_id: that.data.paymentId
+        payment_id: that.data.paymentId,
+        user_note:that.data.inputBz
       }
     })
+    console.log(res.data)
     wx.hideLoading();
     if (res.data.code == 0) {
-      console.log(res)
+      console.log(res.data.data)
       // 是否在线支付,非在线支付则支付成功
       if (res.data.data.is_online_pay == 0) {
         // 数据设置
@@ -228,10 +244,11 @@ Page({
         });
       }
     } else {
-      wx.showToast({
-        title: res.data.msg,
-        duration:3000
-      })
+      console.log(res.data)
+      // wx.showToast({
+      //   title: res.data.msg,
+      //   duration:3000
+      // })
 
     }
     console.log(res)
@@ -245,9 +262,9 @@ Page({
     }
 
   },
-  switch: function(e) {
-    console.log(e)
-  },
+  // switch: function(e) {
+  //   console.log(e)
+  // },
   // fukuan:function(){
 
   //   wx.request({
@@ -330,7 +347,6 @@ Page({
    */
   onShow: function() {
     var that = this
-    console.log(that.data.where)
     if(that.data.where == 'group'){
       that.subdelect(213,'goods') //获取收货地址和支付方式
     }else{

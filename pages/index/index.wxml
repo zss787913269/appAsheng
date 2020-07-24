@@ -1,98 +1,104 @@
-<view class="page">
 <view class="top">
-	<view class="header" id="header">
-		<i class="fal fa-search"></i>
-		<navigator url="/details/search/index?where=shop" hover-class="other-navigator-hover">
-			<input placeholder="请输入商品名">
-			</input>
-		</navigator>
-	</view>
+  <view class="header">
+    <i class="fal fa-search"></i>
+    <navigator url="/details/search/index?where=shop" hover-class="other-navigator-hover">
+      <input placeholder="请输入商品名">
+      </input>
+    </navigator>
+  </view>
+  <!-- <view class="tbody" style="height:{{tbodyHeight}}px;">
+    <view class="user-header-avatar">
+      <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
+    </view>
+    <image src="/images/index/home_top_01.jpg" mode="widthFix"></image>
+    <view class="card" style="background: url('data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABQAAD/4QN/aHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6YWYxMzA5MjAtMjEwNS01MzQ5LThlYTctMmFkMjQ5YzJhM2Q4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjY0MEIxNEE2Mjg1MDExRUE4OEUwRTkzNkQ1MzRGOTQ5IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjY0MEIxNEE1Mjg1MDExRUE4OEUwRTkzNkQ1MzRGOTQ5IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmFmMTMwOTIwLTIxMDUtNTM0OS04ZWE3LTJhZDI0OWMyYTNkOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDphZjEzMDkyMC0yMTA1LTUzNDktOGVhNy0yYWQyNDljMmEzZDgiLz4gPC9yZGY6RGVzY3JpcHRpb24+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');background-size:contain;">
+      <view class="head_tap" data-url="{{url}}" bindtap="gotoikPage">
+        <text>{{commission}}</text>
+        <text>我的佣金</text>
+      </view>
 
+      <view class="head_tap" data-url="{{url1}}" bindtap="gotoikPage" data-index="2">
+        <text>{{integral}}</text>
+        <text>我的积分</text>
+      </view>
+      <view class="head_tap" data-url="{{url2}}" bindtap="gotoikPage">
+        <text class="fal fa-qrcode"></text>
+        <text>邀请码</text>
+      </view>
+
+    </view>
+    <image src="/images/index/home_top_03.jpg" mode="widthFix" style="position:absolute;top:{{initialBottom}}"></image>
+  </view> -->
 </view>
 <view>
-	<swiper autoplay="true">
-		<swiper-item wx:for="{{ads}}" wx:key="key">
-			<image src="{{item.images_url}}" mode="widthFix" />
-		</swiper-item>
-	</swiper>
+  <swiper autoplay="true">
+    <swiper-item wx:for="{{ads}}" wx:key="key">
+      <image src="{{item.images_url}}" mode="widthFix" />
+    </swiper-item>
+  </swiper>
 </view>
 <c style="height:25rpx;"></c>
 <view class="div_div">
-	<view class="advertisement" bindtap="lookAdvertisement">
-		<image src="{{advertisement}}" class="advertisement-img"></image>
-	</view>
-	<swiper class="swiper-one" current="{{currentIndex}}">
-		<swiper-item wx:for="{{pageNumber}}" wx:key="index" wx:for-index="indexName">
-			<view wx:if="{{index<(indexName+1)*6 && indexName*6<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':''}} bannerIm" bindtap="goUrl" data-url="{{item}}">
-				<image wx:if="{{item.icon!=''}}" src="{{item.icon}}" style="height:66rpx;" class="imagesss" />
-				<image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
-				<text>{{item.name}} </text>
-			</view>
-		</swiper-item>
-	</swiper>
+  <view class="advertisement" bindtap="lookAdvertisement">
+    <image src="{{advertisement}}" class="advertisement-img"></image>
+  </view>
+  <swiper class="swiper-one" current="{{currentIndex}}">
+    <swiper-item wx:for="{{pageNumber}}" wx:key="index" wx:for-index="indexName">
+      <view wx:if="{{index<(indexName+1)*6 && indexName*6<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':''}} bannerIm" bindtap="goUrl" data-url="{{item}}">
+        <image wx:if="{{item.icon!=''}}" src="{{item.icon}}" style="height:66rpx;" class="imagesss" />
+        <image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
+        <text>{{item.name}} </text>
+      </view>
+    </swiper-item>
+  </swiper>
 
-	<c style="height:25rpx;"></c>
+  <c style="height:25rpx;"></c>
 </view>
+<view class="scroll_table"  id="main" bindtap="myscorll">
+  <scroll-view scroll-x>
+    <view class="swiper-tab">
+      <view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
 
-
-<view class="scroll_table" id="main" bindtap="myscorll">
-	<scroll-view scroll-x  >
-		<view class="swiper-tab">
-			<view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
-
-			</view>
-		</view>
-	</scroll-view>
+      </view>
+    </view>
+  </scroll-view>
 
 </view>
 <view class="back" wx:if="{{back == true}}" bindtap="backTop">
-	<!-- <i class="fal fa"></i> -->
-	<i class="fal fa-arrow-circle-up" style="font-size:60rpx;color:#fff;background-color:#62a241;border-radius:50%;"></i>
+  <!-- <i class="fal fa"></i> -->
+  <i class="fal fa-arrow-circle-up" style="font-size:60rpx;color:#fff;background-color:#62a241;border-radius:50%;"></i>
 </view>
-<!-- 组团 -->
-<!-- <view class="group">
-  <text wx:if="{{groupWhether}}" bindtap="seeGroup">查看组团 >></text>
-  <text wx:else>当前分类没有组团</text>
-</view> -->
 
-<!-- zym 7.16 -->
-
-
-
-
-
-
-<!-- <view class="main"> -->
-	<view wx:if="{{tableListone!=''}}"  class="main"   bindtap="myscorll" >
+	<view wx:if="{{tableListone!=''}}" class="main" bindtap="myscorll">
 		<view class="left">
 
-			<scroll-view scroll-y="true"  class="ss"  style="height: 900rpx"   bindscroll="scroll1"   scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
 
-				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}"    class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}"    wx:key="unique">
+				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
 
 					<!-- <view class="{{classfiySelect == item.id ? 'selected':'normal'}}" data-id='{{item.id}}'> -->
-					<view   data-id='{{item.id}}' bindtap="clickLeftItem">
+					<view data-id='{{item.id}}' bindtap="clickLeftItem">
 						<text > {{item.name}} </text>
-					
+
 					</view>
-					
+
 				</view>
 
 			</scroll-view>
 		</view>
 
 		<view class='right'>
-				<scroll-view scroll-y="true"   style="height: 950rpx"   scroll-with-animation="true"  bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect}}" >
+			<scroll-view scroll-y="true" style="height: 980rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect}}">
 				<!-- <scroll-view scroll-y="true"  style="height: 1200rpx"  bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true"> -->
 
-			<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
+				<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
 
-				<view class="title" id="{{'inToview'+item.id}}">
-					<text>{{item.name}}</text>
-					<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
-				</view>
+					<view class="title" id="{{'inToview'+item.id}}">
+						<text>{{item.name}}</text>
+						<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
+					</view>
 
-				<!-- <view wx:for={{item}} wx:for-item="imgUrl" wx:key>
+					<!-- <view wx:for={{item}} wx:for-item="imgUrl" wx:key>
 					<image style="height:100rpx;width:100rpx" src="{{item.goods}}">
 							{{item.images}}
 					</image>
@@ -102,24 +108,24 @@
 					<block wx:for="{{item.goods}}" wx:for-list="item" wx:key="index">
 
 
-	<!-- zym背景图 -->
+						<!-- zym背景图 -->
 
-						<view  wx:if="{{item.images!=''}}" bindtap="clickse" data-id="{{item}}" data-index="{{index}}"  class="bgcImg"  style="background-image: url({{item.images}});background-size: cover">
+						<view wx:if="{{item.images!=''}}" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url({{item.images}});background-size: cover">
 							<!-- <image  src="{{item.images}}"  class="bgcicon" /> -->
 							<view class="caiPrice">
-							<text class="textTop">￥</text>	<text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
-							
-							 </view>
-							 <view>
-							  <text class="immbook">
+								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
+
+							</view>
+							<view>
+								<text class="immbook">
                 <text class="img-book-text" >订</text>
 								</text>
-							 </view>
-						</view>	
+							</view>
+						</view>
 
 						<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
 
-						<view wx:else class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" >
+						<view wx:else class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}">
 							<view class="cainame">
 								<text>{{item.brand_name}}</text>
 							</view>
@@ -137,308 +143,150 @@
 
 					</block>
 
-			
-			</view >
-				</scroll-view>
-					<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
-				<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
-					<view class="termine shopright" bindtap="clickcancel">
-						<text>关闭</text>
-					</view>
-					<view style='color:red;font-size:34rpx'>{{mylist.title}}</view>
-					<view class="shopPrice">￥{{shopPrice*1000*num/1000}}元</view>
 
-					<view class="gg">
-						<view class="one" wx:for="{{tableid}}" wx:key="key">
-							<text class="jt">{{item.title}}</text>
-							<view class="onebox">
-								<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}" data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
-									<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
-								</view>
+				</view>
+			</scroll-view>
+			<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
+			<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
+				<view class="termine shopright" bindtap="clickcancel">
+					<text>关闭</text>
+				</view>
+				<view style='color:red;font-size:34rpx'>{{mylist.title}}</view>
+				<view class="shopPrice">￥{{shopPrice*1000*num/1000}}元</view>
+
+				<view class="gg">
+					<view class="one" wx:for="{{tableid}}" wx:key="key">
+						<text class="jt">{{item.title}}</text>
+						<view class="onebox">
+							<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}" data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
+								<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
 							</view>
-
-						</view>
-					</view>
-
-
-					<view class="liang">
-						<text class="mycount" >数量 </text>
-						<view class="zhonged borde background add" bindtap="bindPlus">
-							<text> +</text>
-						</view>
-						<view class="zhong corlor  myinput">
-							<input type="number" bindchange="bindManual" value="{{num}}" />
-						</view>
-						<view class="zhonged borde " bindtap="bindMinus">
-							<text>-</text>
-						</view>
-					</view>
-
-					<view class="mybottom">
-
-						<view class="termied" bindtap="determine">
-							<text>公司采购</text>
 						</view>
 
-						<view class="termied" bindtap="clickselet">
-							<text>个人采购</text>
-						</view>
 					</view>
 				</view>
-				<!-- 123 -->
-					<view wx:else class="group">
-			<view wx:for="{{groupShop}}" wx:key="index" class="groupBox {{item.color_type == 1?'groupBack':''}} {{item.color_type == 2?'groupBack2':''}} {{item.color_type == 3?'groupBack3':''}}">
-				<view class="shopName text-wei   {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.name}}</view>
-				<view class="textColor-group text-wei">
-					{{item.start_time}}开始下单{{item.send_time}}点前配送
+        <view class="bz">
+          <text>备注 ： </text>
+          <input placeholder="请输入备注" bindinput="modalInput" data-name="inputBz"></input>
+        </view>
+
+
+				<view class="liang">
+					<text class="mycount" >数量 </text>
+					<view class="zhonged borde background add" bindtap="bindPlus">
+						<text> +</text>
+					</view>
+					<view class="zhong corlor  myinput">
+						<input type="number" bindchange="bindManual" value="{{num}}" />
+					</view>
+					<view class="zhonged borde " bindtap="bindMinus">
+						<text>-</text>
+					</view>
 				</view>
 
-				<view class="grouostart" bindtap="clickPurchase" data-index="{{index}}">
-					<view class="grouostart-left">
-						<view class="start">
-							<view class="startPrice shopColor text-wei">组团开始价
-								<text class="donwn"> </text>
-							</view>
-							<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
-						</view>
-						<view class="sprice">
-							<text class="startWei">￥</text>
-							<text class="initialPrice">{{item.price}}</text>
-							<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
-						</view>
-					</view>
-					<view class="grouostart-left">
-						<view class="start">
-							<view class="startPrice shopColor text-wei PriceRise">每隔{{item.raise_time}}分钟涨价{{item.raise_price}}
-								<text class="donwn"> </text>
-							</view>
-							<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
-						</view>
+				<view class="mybottom">
 
-						<view class="sprice">
-							<text class="initialPrice nowPrice">当前价格</text>
-							<text class="startWei">￥</text>
-							<text class="initialPrice">{{item.nowPrice}}</text>
-							<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
-						</view>
-					</view>
-				</view>
-				<view class="group-bottom">
-					<view class="group-bottom-left">
-						<text class="shopTitle groupLeft {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.title}}</text>
-						<text class="minimum groupLeft">最低订购量{{item.goods_number}}</text>
-					</view>
-					<view class="group-bottom-left ">
-						<text class="shopTitle groupLeft">总库存：{{item.total_inventory}}</text>
-						<text class="minimum groupLeft">剩：{{item.inventory}}</text>
-					</view>
-				</view>
-				<view class="purchase-group" wx:if="{{item.purchase}}">
-					<view class="liang-group">
-						<text class="liantext-group float">数量 </text>
-						<view class="zhonged-group background-group float" bindtap="bindPlusGroup">
-							<text> +</text>
-						</view>
-						<view class="zhong-group corlor-group float">
-							<input type="number" value="{{numGroup}}" disabled="true" />
-						</view>
-						<view class="zhonged-group borde-group float" bindtap="bindMinusGroup">
-							<text>-</text>
-						</view>
-					</view>
-					<view class="numGroup-num">￥{{item.nowPrice * 100 * numGroup / 100}}</view>
-					<view class="purchase-right">
-						<view class="purchase-btn" bindtap="personalPurchase">个人采购</view>
-						<view class="purchase-btn" bindtap="hotelPurchase" data-price="{{item.nowPrice}}">酒店采购</view>
+					<view class="termied" bindtap="determine">
+						<text>公司采购</text>
 					</view>
 
+					<view class="termied" bindtap="clickselet">
+						<text>个人采购</text>
+					</view>
 				</view>
 			</view>
-		</view>
-		</view>
+			<!-- 123 -->
+			<view wx:else class="group">
+				<view wx:for="{{groupShop}}" wx:key="index" class="groupBox {{item.color_type == 1?'groupBack':''}} {{item.color_type == 2?'groupBack2':''}} {{item.color_type == 3?'groupBack3':''}}">
+					<view class="shopName text-wei   {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.name}}</view>
+					<view class="textColor-group text-wei">
+						{{item.start_time}}开始下单{{item.send_time}}点前配送
+					</view>
 
-	</view>
-
-<!-- </view> -->
-
-
-
-
-<!-- 
-<view wx:if="{{tableListone!=''}}" style="padding-bottom:180rpx;height:auto;">
-	<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" wx:key="unique">
-
-		<view class="title">
-			<text>{{item.name}}</text>
-			<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
-		</view>
-		<view class="caidan" wx:if="{{item.goods!='' && groupStart == true}}">
-			<view class="scroll_box" wx:if="{{select==1}}" data-index="{{item.id}}" bindtap="clickid">
-				<scroll-view scroll-x>
-					<block wx:for="{{item.goods}}" wx:key="unique">
-						<view class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" wx:if="{{item.is_adv == 0}}">
-							<view class="cainame">
-								<text>{{item.brand_name}}</text>
-							</view>
-							<view class="caimony">
-								<text class="caimonyf9">￥{{item.price}}元/{{item.inventory_unit}} </text>
-								<view>
-									<view class="textColor" wx:for="{{item.show_keyword}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexS">
-										{{indexS}}:{{itemName}}</view>
+					<view class="grouostart" bindtap="clickPurchase" data-index="{{index}}">
+						<view class="grouostart-left">
+							<view class="start">
+								<view class="startPrice shopColor text-wei">组团开始价
+									<text class="donwn"> </text>
 								</view>
-								<text id="book">
-                <text id="book-text" >订</text>
-								</text>
+								<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
+							</view>
+							<view class="sprice">
+								<text class="startWei">￥</text>
+								<text class="initialPrice">{{item.price}}</text>
+								<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
 							</view>
 						</view>
-						<view class="mukaui po" bindtap="advertisementAdd" data-type="{{item.adv_type}}" data-value="{{item.adv_value}}" data-id="{{item}}" wx:else>
-							<image style="width:100%" src="{{item.images}}" mode="widthFix"></image>
-						</view>
-					</block>
-				</scroll-view>
-				<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
-
-				<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
-					<view class="termine shopright" bindtap="clickcancel">
-						<text>关闭</text>
-					</view>
-					<view style='color:red;font-size:34rpx'>{{mylist.title}}</view>
-					<view class="shopPrice">￥{{shopPrice*1000*num/1000}}元</view>
-
-					<view class="gg">
-						<view class="one" wx:for="{{tableid}}" wx:key="key">
-							<text class="jt">{{item.title}}</text>
-							<view class="onebox">
-								<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}" data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
-									<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
+						<view class="grouostart-left">
+							<view class="start">
+								<view class="startPrice shopColor text-wei PriceRise">每隔{{item.raise_time}}分钟涨价{{item.raise_price}}
+									<text class="donwn"> </text>
 								</view>
+								<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
 							</view>
 
-						</view>
-					</view>
-
-
-					<view class="liang">
-						<text class="mycount" >数量 </text>
-						<view class="zhonged borde background add" bindtap="bindPlus">
-							<text> +</text>
-						</view>
-						<view class="zhong corlor  myinput">
-							<input type="number" bindchange="bindManual" value="{{num}}" />
-						</view>
-						<view class="zhonged borde " bindtap="bindMinus">
-							<text>-</text>
-						</view>
-					</view>
-
-					<view class="mybottom">
-
-						<view class="termied" bindtap="determine">
-							<text>公司采购</text>
-						</view>
-
-						<view class="termied" bindtap="clickselet">
-							<text>个人采购</text>
-						</view>
-					</view>
-				</view>
-		//123
-			</view>
-			<view>
-
-			</view>
-		</view>
-		<view wx:else class="group">
-			<view wx:for="{{groupShop}}" wx:key="index" class="groupBox {{item.color_type == 1?'groupBack':''}} {{item.color_type == 2?'groupBack2':''}} {{item.color_type == 3?'groupBack3':''}}">
-				<view class="shopName text-wei   {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.name}}</view>
-				<view class="textColor-group text-wei">
-					{{item.start_time}}开始下单{{item.send_time}}点前配送
-				</view>
-
-				<view class="grouostart" bindtap="clickPurchase" data-index="{{index}}">
-					<view class="grouostart-left">
-						<view class="start">
-							<view class="startPrice shopColor text-wei">组团开始价
-								<text class="donwn"> </text>
+							<view class="sprice">
+								<text class="initialPrice nowPrice">当前价格</text>
+								<text class="startWei">￥</text>
+								<text class="initialPrice">{{item.nowPrice}}</text>
+								<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
 							</view>
-							<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
-						</view>
-						<view class="sprice">
-							<text class="startWei">￥</text>
-							<text class="initialPrice">{{item.price}}</text>
-							<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
 						</view>
 					</view>
-					<view class="grouostart-left">
-						<view class="start">
-							<view class="startPrice shopColor text-wei PriceRise">每隔{{item.raise_time}}分钟涨价{{item.raise_price}}
-								<text class="donwn"> </text>
+					<view class="group-bottom">
+						<view class="group-bottom-left">
+							<text class="shopTitle groupLeft {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.title}}</text>
+							<text class="minimum groupLeft">最低订购量{{item.goods_number}}</text>
+						</view>
+						<view class="group-bottom-left ">
+							<text class="shopTitle groupLeft">总库存：{{item.total_inventory}}</text>
+							<text class="minimum groupLeft">剩：{{item.inventory}}</text>
+						</view>
+					</view>
+					<view class="purchase-group" wx:if="{{item.purchase}}">
+						<view class="liang-group">
+							<text class="liantext-group float">数量 </text>
+							<view class="zhonged-group background-group float" bindtap="bindPlusGroup">
+								<text> +</text>
 							</view>
-							<view class="shopSpecifications">{{item.spec[0].title}}:{{item.spec[0].value[0]}}</view>
+							<view class="zhong-group corlor-group float">
+								<input type="number" value="{{numGroup}}" disabled="true" />
+							</view>
+							<view class="zhonged-group borde-group float" bindtap="bindMinusGroup">
+								<text>-</text>
+							</view>
+						</view>
+						<view class="numGroup-num">￥{{item.nowPrice * 100 * numGroup / 100}}</view>
+						<view class="purchase-right">
+							<view class="purchase-btn" bindtap="personalPurchase">个人采购</view>
+							<view class="purchase-btn" bindtap="hotelPurchase" data-price="{{item.nowPrice}}">酒店采购</view>
 						</view>
 
-						<view class="sprice">
-							<text class="initialPrice nowPrice">当前价格</text>
-							<text class="startWei">￥</text>
-							<text class="initialPrice">{{item.nowPrice}}</text>
-							<text class="txtCol-group startWei">/{{item.inventory_unit}}</text>
-						</view>
 					</view>
-				</view>
-				<view class="group-bottom">
-					<view class="group-bottom-left">
-						<text class="shopTitle groupLeft {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.title}}</text>
-						<text class="minimum groupLeft">最低订购量{{item.goods_number}}</text>
-					</view>
-					<view class="group-bottom-left ">
-						<text class="shopTitle groupLeft">总库存：{{item.total_inventory}}</text>
-						<text class="minimum groupLeft">剩：{{item.inventory}}</text>
-					</view>
-				</view>
-				<view class="purchase-group" wx:if="{{item.purchase}}">
-					<view class="liang-group">
-						<text class="liantext-group float">数量 </text>
-						<view class="zhonged-group background-group float" bindtap="bindPlusGroup">
-							<text> +</text>
-						</view>
-						<view class="zhong-group corlor-group float">
-							<input type="number" value="{{numGroup}}" disabled="true" />
-						</view>
-						<view class="zhonged-group borde-group float" bindtap="bindMinusGroup">
-							<text>-</text>
-						</view>
-					</view>
-					<view class="numGroup-num">￥{{item.nowPrice * 100 * numGroup / 100}}</view>
-					<view class="purchase-right">
-						<view class="purchase-btn" bindtap="personalPurchase">个人采购</view>
-						<view class="purchase-btn" bindtap="hotelPurchase" data-price="{{item.nowPrice}}">酒店采购</view>
-					</view>
-
 				</view>
 			</view>
 		</view>
 
 	</view>
-</view> -->
+
 <!-- <view class="scroll_boxed" wx:else>
   <text>暂无数据</text>
 </view> -->
 <view class="bottom">
-	<view class="itemed">
-		<view class="itemded" bindtap="clickHotel">
-			<text>快速下单</text>
-		</view>
-	</view>
-	<view class="itemed">
-		<view class="itemded" bindtap="gouwuche">
-			<text>我的购物车
+  <view class="itemed">
+    <view class="itemded" bindtap="clickHotel">
+      <text>快速下单</text>
+    </view>
+  </view>
+  <view class="itemed">
+    <view class="itemded" bindtap="gouwuche">
+      <text>我的购物车
       </text>
-			<sup wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}" class="total">{{cartNum+personNum}}</sup>
-			<sup wx:elif="{{cartNum+personNum>99}}" class="total">99+</sup>
-		</view>
-	</view>
-
-
-</view>
-
+      <sup wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}" class="total">{{cartNum+personNum}}</sup>
+      <sup wx:elif="{{cartNum+personNum>99}}" class="total">99+</sup>
+    </view>
+  </view>
+  <!-- <view class="token" bindtap="eliminate">
+    清除token
+  </view> -->
 </view>

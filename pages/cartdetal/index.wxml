@@ -21,6 +21,10 @@
   </view>
 
 </view>
+<view class="bz">
+  <text>备注：</text>
+  <input placeholder="请输入备注" bindinput="modalInput" data-name="inputBz" />
+</view>
 <view class="payment">
  <checkbox-group class="weui-flex" bindchange="checkboxChange">
   <view class="paym" wx:for="{{payment_list}}" wx:key="unique" wx:if="{{index<2}}">

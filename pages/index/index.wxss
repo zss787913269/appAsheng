@@ -946,7 +946,7 @@ margin: 15rpx auto;
 }
 
 .item{
-  margin-left: 20rpx;
+  margin-left: 18rpx;
   border-style:solid;
   border-width:1px;
   border-color:orange;
@@ -958,7 +958,7 @@ margin: 15rpx auto;
 }
 .itemActive{
   background-color: #ff9000;
-  margin-left: 20rpx;
+  margin-left: 18rpx;
   border-style:solid;
   border-width:1px;
   border-color:orange;
@@ -1033,6 +1033,7 @@ margin: 15rpx auto;
 }
 .right{
   width: 75%;  
+  margin-bottom: 60rpx;
 }
 .left view{
   text-align: center;
@@ -1055,8 +1056,7 @@ margin: 15rpx auto;
 .bgcImg{
   height: 240rpx;
   width: 95%;
-  margin-left: 20rpx;
-  margin-top: 10rpx;
+  margin-left: 12rpx;
   margin-bottom: 10rpx;
   overflow: hidden;
   position: relative;
@@ -1087,4 +1087,14 @@ margin: 15rpx auto;
 .textPrice{
   font-size: 35rpx;
   letter-spacing:5rpx
+}
+.bz{
+  font-size: 26rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.bz input{
+  border: 1px solid #ccc;
+  height: 35rpx;
 }

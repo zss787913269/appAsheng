@@ -40,13 +40,14 @@
   top: -40rpx;
 }
 
-.submit{
-  width: 90%;
+.share_btn{
+  width: 90vw;
   height: 100rpx;
-  text-align: center;
-  margin: 50rpx auto;
+  /* text-align: center; */
+  margin: 0 auto;
   line-height: 100rpx;
   background: #ffc33d;
   color: #fff;
   border-radius:50rpx;
+  padding: 0;
 }

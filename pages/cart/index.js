@@ -206,6 +206,7 @@ Page({
       })
      var item = that.data.totelid
     var ids = item.toString()
+    // 839
     console.log(ids) //输出商品id
     if (that.data.currentTab == 2) {   //个人订单提交订单
       if (ids != '') {

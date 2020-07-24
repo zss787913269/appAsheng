@@ -217,6 +217,13 @@
 					"id": -1,
 					"name": "details/addshop/index",
 					"pathName": "details/addshop/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "private/invitation/index",
+					"pathName": "private/invitation/index",
 					"scene": null
 				}
 			]

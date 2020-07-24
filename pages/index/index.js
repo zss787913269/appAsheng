@@ -5,12 +5,11 @@ const app = getApp()
 var time = require('../../utils/util.js')
 Page({
   data: {
-    rightHeight:"",
+    jgNumber: false,
+    selectedNumber: 0, //选择的是第一个还是第二个
+    inputBz: "",
+    showModalStatus: false, //遮罩的显示与隐藏
     classfiySelect: "",
-    active: 0,
-    currentTab: 0,
-    mydata: [],
-    mylist: [],
     showModalStatus: false, //遮罩的显示与隐藏
     city: '成都',
     ads: ['/images/temp/ad.jpg', '/images/temp/ad_2.jpg'],
@@ -72,6 +71,12 @@ Page({
       url: '/pages/find/index?value=' + value + '&where=index'
     })
   },
+  modalInput(e) {
+    // console.log(e.detail.value)
+    this.setData({
+      inputBz: e.detail.value
+    })
+  },
   async getBanner() {
     var that = this
     let res = await ajax({
@@ -85,23 +90,19 @@ Page({
     }
 
   },
-  switchNav: function (e) {
-    var page = this;
-    var id = e.target.id;
+  // zym 点击左侧导航栏
+  clickLeftItem(e) {
 
+    // this.length()
+    let id = e.currentTarget.dataset.id;
+    // console.log(id)
 
-    console.log(id)
+    let that = this
 
-    if (this.data.currentTab == id) {
-      return false;
-    } else {
-      page.setData({
-        currentTab: id
-      });
-    }
-    page.setData({
-      active: id
-    });
+    that.setData({
+      classfiySelect: id
+    })
+
   },
   advertisementAdd(e) {
     var that = this
@@ -298,8 +299,6 @@ Page({
 
   },
   getWork() {
-
-    console.log("zym")
     let that = this
     app.globalData.token = wx.getStorageSync('token')
     let url = 'api/staff/getStaffSendOrder'
@@ -438,11 +437,24 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options);
     var that = this
+    if (options.referrer !== undefined) {
+      wx.setStorageSync('referrer', options.referrer);
+    }
+    if (options.q !== undefined) {
+      let newArr = options.q.split("%");
+      wx.setStorageSync('referrer', newArr[newArr.length - 1]);
+    }
 
     // that.getMyCommission()   //获取我的佣金积分
     // 获取导航栏
-    app.globalData.token = wx.getStorageSync('token')
+    app.globalData.token = wx.getStorageSync('token');
+    if (app.globalData.token === "") {
+      wx.navigateTo({
+        url: '../../component/zation/index',
+      })
+    }
     that.getcart()
     // if (app.globalData.token == '') {
     //   wx.navigateTo({
@@ -450,14 +462,7 @@ Page({
     //   })
     // } else {
     //   that.getCookInfo()
-      // }
-
-
-
-
-
-      
-
+    // }
     that.gettableList();
     // 获取详情
     that.getBanner() //获取首页轮播图
@@ -505,21 +510,21 @@ Page({
     console.log(res)
     console.log('daozzzzzzzzzzz')
   },
-  // async getMyCommission() {   //获取佣金
-  //   var that = this
-  //   let res = await ajax({
-  //     url: 'api/user/getUserProperty',
-  //     method: 'get',
-  //   })
-  //   if(res.data.data.Yongj === null){
-  //     res.data.data.Yongj = "0.00"
-  //   }
-  //   that.setData({
-  //     commission: res.data.data.Yongj,
-  //     integral: res.data.data.integral
-  //   })
-  //   console.log(res)
-  // },
+  async getMyCommission() { //获取佣金
+    var that = this
+    let res = await ajax({
+      url: 'api/user/getUserProperty',
+      method: 'get',
+    })
+    if (res.data.data.Yongj === null) {
+      res.data.data.Yongj = "0.00"
+    }
+    that.setData({
+      commission: res.data.data.Yongj,
+      integral: res.data.data.integral
+    })
+    console.log(res)
+  },
   backTop() { //回到顶部
     wx.pageScrollTo({
       scrollTop: 0,
@@ -533,43 +538,9 @@ Page({
     })
   },
   onPageScroll: function (e) { //监听页面滚动距离
-
-
-
-
-    // 如果滑动超过 300 就马上吸附
-
-    // 但是每一次都会滑动
-
-    // 设定一个标志位
-    let flag = false;
-    // 每一次进来的时候 都是false
-    // 当大于300的时候 就等于true
-    // 小于的时候 为false
-
-
-    // if(e.scrollTop > 100 ){
-    //   wx.pageScrollTo({
-    //     selector: "#main",
-    //     duration: 100
-    //   })
-    // }else{
-    //   wx.pageScrollTo({
-    //     selector: "#header",
-    //     duration: 100
-    //   })
-    // }
-
-
-
-
-
-
     var that = this
-
     let distance = that.data.bottom - e.scrollTop + 'px'
     let tobody = that.data.bottom2 - e.scrollTop
-
     if (that.data.scrollTop < e.scrollTop) {
       that.setData({
         readBottom: true,
@@ -599,20 +570,6 @@ Page({
         back: false
       })
     }
-  },
-
-
-  onPullDownRefresh() {
-    console.log(123)
-  },
-
-
-  // zym 点击商品的时候 滑动
-  myscorll() {
-    wx.pageScrollTo({
-      selector: "#main",
-      duration: 100
-    })
   },
   // 获取导航栏
   async gettableList() {
@@ -739,13 +696,8 @@ Page({
         id: id
       }
     })
-  
     if (res.data.code == 0) {
-
-
-     
-
-      // console.log('第三季',res);
+      console.log('第三季', res);
       let arr = res.data.data
       arr.forEach(item => {
         let itemFor = item.goods;
@@ -761,14 +713,10 @@ Page({
         })
       })
 
-      // console.log("zym")
-      console.log(arr)
-
       that.setData({
         tableListone: arr,
         currentTab: id
       })
-      that.length()
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -780,6 +728,26 @@ Page({
       })
     }
 
+  },
+  scroll: function (e) {
+
+    wx.pageScrollTo({
+      selector: "#main",
+      duration: 100
+    })
+  },
+  scroll1: function (e) {
+
+    wx.pageScrollTo({
+      selector: "#main",
+      duration: 100
+    })
+  },
+  myscorll() {
+    wx.pageScrollTo({
+      selector: "#main",
+      duration: 100
+    })
   },
   async getGroup(id) {
     var that = this
@@ -865,19 +833,17 @@ Page({
   //   })
   // },
   // 获取item
-
-  // zym 弹出
   clickse: function (e) {
-
-
     this.showModal()
     var that = this
     let tab = e.currentTarget.dataset.id.spec_base
+
+    // console.log(tab)
+
     let tabCopy = JSON.parse(JSON.stringify(tab))
     for (var i = 0; i < tabCopy.length; i++) {
       tabCopy[i].value = {}
     }
-
     for (var i = 0; i < tab.length; i++) {
       for (var j = 0; j < tab[i].value.length; j++) {
         if (i == 0 && j == 0) {
@@ -892,112 +858,192 @@ Page({
       shopingid: e.currentTarget.dataset.id.id,
       shopingid2: e.currentTarget.dataset.id.id,
       brand_id: e.currentTarget.dataset.id.brand_id,
-      support: false,
-      mylist: e.currentTarget.dataset.id,
-      mydata: e.currentTarget.dataset.id.spec_base
+      support: false
     })
     that.getShopPrice()
-
-    console.log(this.data.mylist)
-    console.log(this.data.mydata)
-
-
-  },
-  myclick(e) {
-    console.log(e.currentTarget.dataset)
   },
 
   clickgui: function (e) {
-
     var that = this;
-
-    // 规程的长度 净体 活体 加工
     let tableId = that.data.tableid
 
-   
-
-// 循环规格
     for (var i = 0; i < tableId.length; i++) {
-      // 如果ajax里面的名字 等于传过来的名字 
+
+
+
+      // console.log(tableId[i].title)
+
+
+
+
 
 
       if (tableId[i].title == e.currentTarget.dataset.indx) {
-
         if (tableId[i].value[e.currentTarget.dataset.index] == true) {
-          //  如果等于true 其他的等于false
           tableId[i].value[e.currentTarget.dataset.index] = false
+          // console.log(tableId[i].title.indexOf("加工"))
+          if (tableId[i].title.indexOf("加工") == 0) {
+            that.setData({
+              jgNumber: false
+            })
+          }
+          if (tableId[i].title.indexOf("净体") == 0) {
+            that.data.selectedNumber = ""
+            that.setData({
+              selectedNumber: ""
+            })
+          } else if (tableId[i].title.indexOf("活体") == 0) {
+            that.setData({
+              selectedNumber: ""
+            })
+          }
+
         } else {
           for (let j in tableId[i].value) {
-             tableId[i].value[j] = false
-             tableId[i].value[e.currentTarget.dataset.index] = true
 
-            if((tableId[i].title.indexOf("净体")==0 || tableId[i].title.indexOf("活体")==0 ) && tableId.length > 2 ){
+            tableId[i].value[j] = false
+            tableId[i].value[e.currentTarget.dataset.index] = true
 
-             
-              if(tableId[0].value[j] ){
-                for(let z in tableId[1].value){
-                    tableId[1].value[z] = false
-                    tableId[i].value[e.currentTarget.dataset.index] = true
+
+            if (tableId[i].title.indexOf("加工") == 0) {
+              that.setData({
+                jgNumber: true
+              })
+            }
+
+
+
+            if ((tableId[i].title.indexOf("净体") == 0 || tableId[i].title.indexOf("活体") == 0) && tableId.length > 2) {
+
+
+              if (tableId[i].title.indexOf("净体") == 0) {
+                that.data.selectedNumber = 0
+              } else if (tableId[i].title.indexOf("活体") == 0) {
+                that.data.selectedNumber = 1
+              }
+
+              if (tableId[0].value[j]) {
+                for (let z in tableId[1].value) {
+                  tableId[1].value[z] = false
+                  tableId[i].value[e.currentTarget.dataset.index] = true
                 }
 
               }
-              if(tableId[1].value[j]){
-                for(let z in tableId[0].value){
-                    tableId[0].value[z] = false
-                    tableId[i].value[e.currentTarget.dataset.index] = true
+              if (tableId[1].value[j]) {
+                for (let z in tableId[0].value) {
+                  tableId[0].value[z] = false
+                  tableId[i].value[e.currentTarget.dataset.index] = true
                 }
               }
             }
 
-          
-             }
 
-            }
-
-          
-
+          }
+        }
 
       }
     }
     that.setData({
       tableid: tableId
+      // tablenormsName: e.currentTarget.dataset.index,    //属性值获取
+      // tablenormsTitle: e.currentTarget.dataset.indx    //属性值获取
     })
     that.getShopPrice()
   },
   async getShopPrice() {
+
     var that = this
     let tableid = that.data.tableid
     let spec = []
+
+
     for (var i = 0; i < tableid.length; i++) {
       let obj = {}
+
       for (let j in tableid[i].value) {
-        // console.log(tableid[i].value[j] )
+
+
+
         if (tableid[i].value[j] == true) {
+
+
           obj.type = tableid[i].title
           obj.value = j
           spec.push(obj)
         }
       }
     }
-    
-   
 
     let params = {
       id: that.data.shopingid,
       spec
     }
-    console.log(params)
     let res = await ajax({
       url: '/api/goods/SpecDetail',
       method: 'POST',
       data: params
     })
     if (res.data.code == 0) {
+      console.log(res.data.data.info)
 
-      console.log(res.data.data)
+      let jgNumber = that.data.jgNumber
+      let number = that.data.selectedNumber
+      let price = ""
+      let dataList = res.data.data.info
+
+      if (dataList.length != 0) {
+        if (dataList.length == 1) {
+          price = dataList[0].price
+
+          if (jgNumber) {
+            price = 0
+          }
+          // console.log(1)
+        } else if (dataList.length == 2) {
+
+          if (number == 0 && jgNumber == false) {
+            price = dataList[0].price
+            console.log("进入到了0")
+          }
+
+          if (number == 1 && jgNumber == false) {
+            price = dataList[1].price
+            console.log("进入到了1")
+          }
+
+          if (number == 0 && jgNumber) {
+            price = Number(dataList[0].price) + Number(dataList[1].price)
+            console.log("进入到了 0 跟2 ")
+          }
+
+
+
+          if (number == 1 && jgNumber) {
+            price = Number(dataList[0].price) + Number(dataList[1].price)
+            console.log("进入到了1 跟2 ")
+          }
+
+
+        } else {
+
+
+          // 判断是 净体还是活体
+
+          if (number == 0) {
+            price = Number(dataList[0].price) + Number(dataList[2].price)
+            console.log("数组长度是3 进入到了0跟2")
+          }
+          if (number == 1) {
+            price = Number(dataList[1].price) + Number(dataList[2].price)
+            console.log("数组长度是3 进入到了1跟2")
+          }
+
+        }
+
+      }
 
       that.setData({
-        shopPrice: res.data.data.price
+        shopPrice: price
       })
     } else {
       wx.showToast({
@@ -1007,33 +1053,6 @@ Page({
       })
     }
   },
-  // 遮罩层
-
-
-  hideBuyModal() {
-
-    // this.changeState()
-    // 隐藏遮罩层
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "ease",
-      delay: 0
-    })
-    this.animation = animation
-    animation.translateY(300).step()
-    this.setData({
-      animationData: animation.export(),
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export(),
-        showModalStatus: false
-      })
-
-    }.bind(this), 200)
-  },
-
   // 遮罩层显示
   showModal() {
     // console.log("点击了订单")
@@ -1056,19 +1075,40 @@ Page({
     }, 200)
   },
 
+  hideBuyModal() {
 
+    // this.changeState()
+    // 隐藏遮罩层
+    this.setData({
+      jgNumber: false
+    })
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+
+    }.bind(this), 200)
+  },
   clickid: function (e) {
-
-    //  this.showBuyModal()
-
-    // console.log(this.data.groupShop)
-
     var that = this;
     that.setData({
       bigid: e.currentTarget.dataset.index,
-      bigid2: e.currentTarget.dataset.index
+      bigid2: e.currentTarget.dataset.index,
+      support: false
     })
-    // console.log(that.data.bigid2 + 'clickid')
+    console.log(that.data.bigid2 + 'clickid')
   },
 
   // tablemachin: '',
@@ -1094,7 +1134,7 @@ Page({
   },
 
   clickcancel: function () { //返回按钮
-    // var that = this
+    var that = this
     // that.changeState()
     this.hideBuyModal()
   },
@@ -1115,16 +1155,38 @@ Page({
     })
   },
   clickselet: function () { //个人采购加入购物车
-    this.hideBuyModal()
+
+    
+
+    console.log("jgNumber------"+this.data.jgNumber)
+    console.log("numbder-------"+this.data.selectedNumber)
+    console.log(this.data.selectedNumber ===  "")
+    
+
 
     var that = this;
+
     if (app.globalData.token == '') {
       wx.navigateTo({
         url: "/component/zation/index"
       })
-    } else {
-      that.clickseleted();
     }
+
+    if(that.data.jgNumber === true && that.data.selectedNumber === ""){
+      wx.showToast({
+        title: '请选择商品',
+        icon:"none"
+      })
+    }else{
+      that.clickseleted();
+      this.hideBuyModal()
+    }
+
+
+    
+    
+
+  
   },
   async clickseleted(id) {
     let that = this
@@ -1139,11 +1201,13 @@ Page({
         }
       }
     }
+    console.log(that.data.inputBz)
     let params = {
       goods_id: that.data.shopingid, //商品id
       stock: that.data.num, //商品数量  
       // 商品规格
-      spec: spex
+      spec: spex,
+      goods_mark: that.data.inputBz
     }
     console.log(params)
     let res = await ajax({
@@ -1290,107 +1354,12 @@ Page({
       url: `/pages/cart/index`
     })
   },
-  // zym 滚动条
-  scroll1: function (e) {
-
-    wx.pageScrollTo({
-      selector: "#main",
-      duration: 100
-    })
-  },
-  scroll: function (e) {
-
-
-    wx.pageScrollTo({
-      selector: "#main",
-      duration: 100
-    })
-
-    
-    // let that = this
-    // let top  = e.detail.scrollTop
-    // let arr = this.data.rightHeight
-    // let t = this.data.tableListone[0].id
-
-    // // console.log(arr)
-
-    // for(var i = arr.length - 1; i >= 0 ;i--){
-    //   if(arr[i] <= top){
-    //       t = that.data.tableListone[i].id
-    //       break
-    //   }
-    // }
-
-    // console.log("t:------"+t)
-    // console.log("classfiySelect"+ this.data.classfiySelect)
-    
-    // if(t !== this.data.classfiySelect){
-    //   that.setData({
-    //     classfiySelect:t
-    //   })
-    // }
-  
-
-    
-    
-    
-
-    
-    
-  
-
-  },
-
-  //求每一栏高度
-  length: function () {
-    var that = this;
-
-
-    wx.createSelectorQuery().selectAll('.leftTitle').boundingClientRect(function (rect) { }).exec(function (res) { 
-
-      // console.log(res[0].map(r=>r.top)
-      // console.log(res[0].map(r=>r.scrollTop))
-      // that.data.rightHeight = res[0].map(r=>r.top)
-
-      that.setData({
-        rightHeight:res[0].map(r=>r.top-457)
-      })
-
-    });
-
-  
-
-  },
-
-  // zym 点击左侧导航栏
-  clickLeftItem(e) {
-
-    // this.length()
-    let id = e.currentTarget.dataset.id;
-    // console.log(id)
-
-    let that = this
-
-    that.setData({
-      classfiySelect: id
-    })
-
-  },
-
-
   onShow: function () { //监听页面显示
-
-   
-    
-
-
     var that = this
-    // if (app.globalData.token != '') {
-    //   that.getMyCommission() //获取我的佣金积分
-    // }
+    if (app.globalData.token != '') {
+      that.getMyCommission() //获取我的佣金积分
+    }
     this.getcart()
-    // this.getWork()
+    this.getWork()
   },
-  
 })
-

@@ -1,13 +1,14 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/pledge/index",
+    "pages/user/index",
     "pages/exchange/index",
     "pages/logs/logs",
     "pages/find/index",
     "pages/cart/index",
     "pages/cartdetal/index",
     "pages/deliver/index",
-    "pages/user/index",
     "pages/workbench/index",
     "pages/examine/examine",
     "pages/makeanapp/index",

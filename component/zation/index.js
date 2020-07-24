@@ -10,12 +10,19 @@ Page({
     openid:"",
     shop: '',    //酒店角色
     indexQR:'',    //首页二维码进入
+    referrer:'',//推荐码
   },
 
   onLoad: function () {
     var that = this;
     let resShop = wx.getStorageSync('shop')
     let resIndex = wx.getStorageSync('Index')
+    let referrer=wx.getStorageSync('referrer');
+    if(referrer!=''){
+      that.setData({
+        referrer
+      })
+    }
     if (resShop != ''){
       that.setData({
         shop: resShop
@@ -88,23 +95,22 @@ Page({
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
       wx.request({
-        url: 'https://second.chchgg.com/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', 
+        url: 'http://second.chchgg.com/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的
           method: 'POST',
           data: {
             encrypted_data:e.detail.encryptedData,
             iv:e.detail.iv,
             openid: that.data.openid,
-            referrer: that.data.indexQR,
+            referrer: that.data.referrer,
             type: that.data.shop,
           },
           dataType: 'json',
           success(res) {
-
-            console.log(res.data.data)
-
             wx.setStorageSync('token', res.data.data.token),
             wx.setStorageSync('QRcode', res.data.data.referrer_url),
+            wx.setStorageSync('enid', res.data.data.enid)
               app.globalData.token = res.data.data.token
+              console.log(res);
 
           }
         })
@@ -112,6 +118,11 @@ Page({
       that.setData({
         isHide: false
       });
+      let referrer=wx.getStorageSync('referrer');
+      if(referrer!==""){
+
+      }
+      console.log(referrer);
       
       console.log(154)
       that.getCategoryList(e.detail)
