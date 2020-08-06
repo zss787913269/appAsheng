@@ -30,7 +30,7 @@
     <image src="/images/index/home_top_03.jpg" mode="widthFix" style="position:absolute;top:{{initialBottom}}"></image>
   </view> -->
 </view>
-<view>
+<view class="mimg">
   <swiper autoplay="true">
     <swiper-item wx:for="{{ads}}" wx:key="key">
       <image src="{{item.images_url}}" mode="widthFix" />
@@ -39,31 +39,43 @@
 </view>
 <c style="height:25rpx;"></c>
 <view class="div_div">
-  <view class="advertisement" bindtap="lookAdvertisement">
+  <!-- <view class="advertisement" bindtap="lookAdvertisement">
     <image src="{{advertisement}}" class="advertisement-img"></image>
-  </view>
+  </view> -->
   <swiper class="swiper-one" current="{{currentIndex}}">
     <swiper-item wx:for="{{pageNumber}}" wx:key="index" wx:for-index="indexName">
-      <view wx:if="{{index<(indexName+1)*6 && indexName*6<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':''}} bannerIm" bindtap="goUrl" data-url="{{item}}">
-        <image wx:if="{{item.icon!=''}}" src="{{item.icon}}" style="height:66rpx;" class="imagesss" />
+
+      <view wx:if="{{index<(indexName+1)*8 && indexName*8<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':''}} bannerIm" bindtap="goUrl" data-url="{{item}}">
+				<!-- <text class="mycarcount"  >{{item.count}}</text> -->
+        <image wx:if="{{item.icon!=''}}" src="{{item.icon}}"  class="imagesss" />
         <image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
-        <text>{{item.name}} </text>
+        <view>{{item.name}}
+					<text  wx:if="{{item.count}}"  class="count">{{item.count}}</text>
+				</view>
+				
+				<view></view>
       </view>
     </swiper-item>
   </swiper>
 
   <c style="height:25rpx;"></c>
 </view>
+
+
+	
 <view class="scroll_table"  id="main" bindtap="myscorll">
   <scroll-view scroll-x>
     <view class="swiper-tab">
       <view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
 
+			<text class="mycarcount" wx:if="{{item.count}}">{{item.count}}</text>
+		
       </view>
     </view>
   </scroll-view>
 
 </view>
+
 <view class="back" wx:if="{{back == true}}" bindtap="backTop">
   <!-- <i class="fal fa"></i> -->
   <i class="fal fa-arrow-circle-up" style="font-size:60rpx;color:#fff;background-color:#62a241;border-radius:50%;"></i>
@@ -79,6 +91,8 @@
 					<!-- <view class="{{classfiySelect == item.id ? 'selected':'normal'}}" data-id='{{item.id}}'> -->
 					<view data-id='{{item.id}}' bindtap="clickLeftItem">
 						<text > {{item.name}} </text>
+						  <!-- <sup wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}" class="total">{{cartNum+personNum}}</sup>
+      				<sup wx:elif="{{cartNum+personNum>99}}" class="total">99+</sup> -->
 
 					</view>
 
@@ -112,9 +126,22 @@
 
 						<view wx:if="{{item.images!=''}}" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url({{item.images}});background-size: cover">
 							<!-- <image  src="{{item.images}}"  class="bgcicon" /> -->
+
 							<view class="caiPrice">
 								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
+							</view>
+							<view>
+								<text class="immbook">
+                <text class="img-book-text" >订</text>
+								</text>
+							</view>
+						</view>
 
+							<view wx:else bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url('http://second.chchgg.com/static/index/default/images/logo.jpg');background-size: cover">
+							<!-- <image  src="{{item.images}}"  class="bgcicon" /> -->
+
+							<view class="caiPrice">
+								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
 							</view>
 							<view>
 								<text class="immbook">
@@ -124,7 +151,7 @@
 						</view>
 
 						<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
-
+<!-- 
 						<view wx:else class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}">
 							<view class="cainame">
 								<text>{{item.brand_name}}</text>
@@ -139,7 +166,7 @@
                 <text id="book-text" >订</text>
 								</text>
 							</view>
-						</view>
+						</view> -->
 
 					</block>
 
@@ -174,13 +201,13 @@
 				<view class="liang">
 					<text class="mycount" >数量 </text>
 					<view class="zhonged borde background add" bindtap="bindPlus">
-						<text> +</text>
+						<text class="myadd"> +</text>
 					</view>
 					<view class="zhong corlor  myinput">
 						<input type="number" bindchange="bindManual" value="{{num}}" />
 					</view>
 					<view class="zhonged borde " bindtap="bindMinus">
-						<text>-</text>
+						<text class="myadd">-</text>
 					</view>
 				</view>
 

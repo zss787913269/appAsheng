@@ -5,6 +5,9 @@ const app = getApp()
 var time = require('../../utils/util.js')
 Page({
   data: {
+    mydata:"",
+    classCount:"",
+    mycarCount:"",
     jgNumber: false,
     selectedNumber: 0, //选择的是第一个还是第二个
     inputBz: "",
@@ -65,24 +68,25 @@ Page({
     groupStart: true,
   },
   toOldFood(e) { //去老菜新菜页面
-    console.log(e.currentTarget.dataset.value)
+    //////console.log(e.currentTarget.dataset.value)
     let value = e.currentTarget.dataset.value
     wx.reLaunch({ //跳转到tab页面
       url: '/pages/find/index?value=' + value + '&where=index'
     })
   },
   modalInput(e) {
-    // console.log(e.detail.value)
+    // //////console.log(e.detail.value)
     this.setData({
       inputBz: e.detail.value
     })
   },
+
   async getBanner() {
     var that = this
     let res = await ajax({
       url: '/api/index/getBanner'
     })
-    console.log(res)
+    //////console.log(res)
     if (res.data.code == 0) {
       that.setData({
         ads: res.data.data.banner_list
@@ -95,7 +99,7 @@ Page({
 
     // this.length()
     let id = e.currentTarget.dataset.id;
-    // console.log(id)
+    // //////console.log(id)
 
     let that = this
 
@@ -223,7 +227,7 @@ Page({
       spec: this.data.spce,
       num: this.data.numGroup
     }
-    console.log(shopAttribute)
+    //////console.log(shopAttribute)
     shopAttribute = JSON.stringify(shopAttribute)
     wx.navigateTo({
       url: `/pages/cartdetal/index?where=group&shopAttribute=${shopAttribute}`,
@@ -249,7 +253,7 @@ Page({
       spec: that.data.spce, //商品规格
       price: e.currentTarget.dataset.price, //当前价格
     }
-    console.log(params)
+    //////console.log(params)
     let res = await ajax({
       url: '/api/buy/add',
       method: 'POST',
@@ -277,12 +281,7 @@ Page({
       currentIndex: this.data.currentIndexInitial,
       firstclass: this.data.groupId
     })
-    // console.log(e.currentTarget.dataset.url)
-    // this.setData({
-    //   firstclass: e.currentTarget.dataset.url.id
-    // })
     this.getsearch(this.data.firstclass)
-    console.log(this.data.firstclass)
   },
 
   // 我的佣金
@@ -306,14 +305,14 @@ Page({
       status: 0
     }
     app.wxRequest('POST', url, data, (res => {
-      console.log(res);
+      //////console.log(res);
       if (res.data.code == 0) {
         that.setData({
           total1: res.data.data.total
         })
       }
     }), (err => {
-      console.log(err);
+      //////console.log(err);
     }))
     let url1 = 'api/store/getStoreOrder'
     let data1 = {
@@ -326,7 +325,7 @@ Page({
         })
       }
     }), (err => {
-      console.log(err);
+      //////console.log(err);
     }))
     app.wxRequest('POST', url1, data, (res => {
       if (res.data.code == 0) {
@@ -335,7 +334,7 @@ Page({
         })
       }
     }), (err => {
-      console.log(err);
+      //////console.log(err);
     }))
     let url2 = 'api/order/index'
     let data2 = {
@@ -348,7 +347,7 @@ Page({
         })
       }
     }), (err => {
-      console.log(err);
+      //////console.log(err);
     }))
     let url3 = 'api/quickorder/MySelfOrder'
     app.wxRequest('POST', url3, data2, (res => {
@@ -358,7 +357,7 @@ Page({
         })
       }
     }), (err => {
-      console.log(err);
+      //////console.log(err);
     }))
     let url4 = '/api/quickorder/HotelList'
     let data3 = {
@@ -371,73 +370,77 @@ Page({
           total6: res.data.data.total
         })
         let total = this.data.total1 + this.data.total2 + this.data.total3 + this.data.total4 + this.data.total5 + this.data.total6
-        if (total === 0) {
-          wx.setTabBarBadge({
-            index: 2,
-            text: '',
-            success: (result) => {
+        // if (total === 0) {
+        //   wx.setTabBarBadge({
+        //     index: 2,
+        //     text: '',
+        //     success: (result) => {
 
-            },
-            fail: () => {},
-            complete: () => {}
-          });
-        } else if (99 >= total > 0) {
-          wx.setTabBarBadge({
-            index: 2,
-            text: '' + total + '',
-            success: (result) => {
+        //     },
+        //     fail: () => {},
+        //     complete: () => {}
+        //   });
+        // } else if (99 >= total > 0) {
+        //   wx.setTabBarBadge({
+        //     index: 2,
+        //     text: '' + total + '',
+        //     success: (result) => {
 
-            },
-            fail: () => {},
-            complete: () => {}
-          });
-        } else if (total > 99) {
-          wx.setTabBarBadge({
-            index: 2,
-            text: '99+',
-            success: (result) => {
+        //     },
+        //     fail: () => {},
+        //     complete: () => {}
+        //   });
+        // } else if (total > 99) {
+        //   wx.setTabBarBadge({
+        //     index: 2,
+        //     text: '99+',
+        //     success: (result) => {
 
-            },
-            fail: () => {},
-            complete: () => {}
-          });
-        }
+        //     },
+        //     fail: () => {},
+        //     complete: () => {}
+        //   });
+        // }
       }
     }), (err => {
-      console.log(err);
+      //////console.log(err);
     }))
   },
 
   //获取购物车数量
   getcart() {
+    let that = this
+    let len1,len2
     let url1 = 'api/cart/index'
     let data = { //酒店购物车需要传参
       is_purchase: 1
     }
     app.wxRequest('POST', url1, data, (res) => {
+
       if (res.data.code === 0) {
         this.setData({
           cartNum: res.data.data.data.length
         })
       }
-    }, (err) => {
-      console.log(err)
     })
     let url2 = 'api/cart/index'
     app.wxRequest('POST', url2, '', (res) => {
       if (res.data.code === 0) {
-        console.log(res);
+        // ////console.log(res.data.data);
         this.setData({
           personNum: res.data.data.data.length
         })
-        console.log(this.data.personNum);
+
       }
-    }, (err) => {
-      console.log(err)
     })
+
+
+    this.getCarCount()
+
+   
   },
   onLoad: function (options) {
-    console.log(options);
+    //////console.log(options);
     var that = this
     if (options.referrer !== undefined) {
       wx.setStorageSync('referrer', options.referrer);
@@ -456,13 +459,7 @@ Page({
       })
     }
     that.getcart()
-    // if (app.globalData.token == '') {
-    //   wx.navigateTo({
-    //     url: "/component/zation/index"
-    //   })
-    // } else {
-    //   that.getCookInfo()
-    // }
+    that.getCarCount()
     that.gettableList();
     // 获取详情
     that.getBanner() //获取首页轮播图
@@ -470,13 +467,13 @@ Page({
       initialBottom: that.data.bottom + 'px',
       tbodyHeight: that.data.bottom2
     })
-    console.log(options)
+    //////console.log(options)
     var scene = decodeURIComponent(options.q)
     //  scene = JSON.parse(scene)
     let res = scene.split("type=")[1] //酒店角色进入
     let resIndex = scene.split("referrer=")[1] //首页二维码进入
-    console.log(scene)
-    console.log(res)
+    //////console.log(scene)
+    //////console.log(res)
     if (res != undefined) {
       wx.setStorage({
         key: "shop",
@@ -498,6 +495,95 @@ Page({
     // this.getQrcode()
   },
 
+  //zym 获取购物车总数量
+  async getMyCarNum(){
+
+    let that  = this
+     let res = await ajax({
+      url: 'api/cart/getCartTotal',
+      method: 'post',
+    })
+    //console.log(res.data.data)
+
+    let erjicarData = that.data.tableListre
+    let yijicarData = that.data.tableList
+
+    if(res.data.data == 0){
+      for(let i of erjicarData){
+        i.count = ""
+      }
+
+      for(let i of yijicarData){
+              i.count = ""
+       }
+      
+      that.setData({
+        tableListre:erjicarData,
+        tableList:yijicarData
+      
+      })
+      
+
+
+    }
+  },
+
+  // zym 分类
+  async getCarCount(){
+       var that = this
+    let res = await ajax({
+      url: 'api/cart/categorygoods',
+      method: 'post',
+      
+    })
+
+       this.setData({
+        mycarCount:res.data.data
+       })
+
+
+       let erjicarData = that.data.tableListre
+       let mycarCount = res.data.data.pcount
+   
+       
+       for(let i of erjicarData){
+       
+          for(let j in mycarCount){
+        
+            if(i.id == j){
+              i.count = mycarCount[j]
+            }
+          }
+       }
+
+      let yijicarData = that.data.tableList
+       let carCount = that.data.mycarCount.topcount
+
+    
+    
+     
+       for(let i of yijicarData){
+          for(let j in carCount){
+            if(i.id == j){
+              i.count = carCount[j]
+            }
+          }
+       }
+   
+    
+
+      
+    
+        that.setData({
+          tableListre:erjicarData,
+          tableList:yijicarData
+        })
+
+    
+    
+       
+  },
+ 
   async getBinDing(role) { //绑定角色
     var that = this
     let res = await ajax({
@@ -507,8 +593,8 @@ Page({
         type: role
       }
     })
-    console.log(res)
-    console.log('daozzzzzzzzzzz')
+    //////console.log(res)
+    //////console.log('daozzzzzzzzzzz')
   },
   async getMyCommission() { //获取佣金
     var that = this
@@ -523,7 +609,7 @@ Page({
       commission: res.data.data.Yongj,
       integral: res.data.data.integral
     })
-    console.log(res)
+    //////console.log(res)
   },
   backTop() { //回到顶部
     wx.pageScrollTo({
@@ -573,11 +659,14 @@ Page({
   },
   // 获取导航栏
   async gettableList() {
+
+    
     let that = this
+    // that.getCarCount()
     let res = await ajax({
       url: 'api/index/getOneCategory'
     })
-    console.log('导航', res);
+    //////console.log('导航', res);
     if (res.data.code == 0) {
       let tableList = res.data.data
       for (var i = 0; i < tableList.length; i++) {
@@ -590,11 +679,25 @@ Page({
           })
         }
       }
-      console.log(that.data.advertisement)
+
+      let mycarCount = that.data.mycarCount.topcount
+      let yijicarData = res.data.data
+    
+      for(let i of yijicarData){
+         for(let j in mycarCount){
+           if(i.id == j){
+             i.count = mycarCount[j]
+           }
+         }
+      }
+      ////console.log("yijicarData",yijicarData)
+
       that.setData({
-        tableList,
-        pageNumber: Math.ceil(res.data.data.length / 6)
+        tableList:yijicarData,
+        pageNumber: Math.ceil(res.data.data.length / 8)
       })
+      // ////console.log("tableList",this.data.tableList)
+
       that.getsearch(res.data.data[0].id)
     } else {
       wx.showToast({
@@ -608,11 +711,14 @@ Page({
 
   // 一级分类
   goUrl: function (e) { //点击一级分类
-    console.log(e.currentTarget.dataset.url)
+    //////console.log(e.currentTarget.dataset.url)
     this.setData({
       firstclass: e.currentTarget.dataset.url.id
     })
     this.getsearch(this.data.firstclass)
+
+   
+
   },
   //点击切换
   clickTab: function (e) { //点击二级分类
@@ -622,7 +728,10 @@ Page({
     })
     that.getsearchtre(that.data.currentTab)
     that.getGroup(that.data.currentTab)
-    console.log(that.data.tableListre)
+    //console.log(that.data.tableListre)
+
+
+
   },
   clickPurchase(e) { //点击组团规格
     let groupShop = this.data.groupShop
@@ -649,8 +758,10 @@ Page({
   },
   // 获取二级分类详情
   async getsearch(id) {
+
+    // //console.log(id)
     let that = this
-    console.log(id)
+    // ////console.log(id)
     let res = await ajax({
       url: 'api/index/getAllInfoByCategoryId',
       method: 'POST',
@@ -658,11 +769,28 @@ Page({
         id: id
       }
     })
+
+
+    let erjicarData = res.data.data
+    let mycarCount = that.data.mycarCount.pcount
+    for(let i of erjicarData){
+    
+       for(let j in mycarCount){
+      
+         if(i.id == j){
+           i.count = mycarCount[j]
+         }
+       }
+    }
+
+
     if (res.data.code == 0) {
       that.setData({
-        tableListre: res.data.data,
+        tableListre: erjicarData,
         firstclass: id
       })
+ 
+
       that.getsearchtre(res.data.data[0].id)
       if (that.data.groupId == id) {
         that.setData({
@@ -696,8 +824,9 @@ Page({
         id: id
       }
     })
+    // ////console.log(res.data.data)
     if (res.data.code == 0) {
-      console.log('第三季', res);
+      //////console.log('第三季', res);
       let arr = res.data.data
       arr.forEach(item => {
         let itemFor = item.goods;
@@ -707,7 +836,7 @@ Page({
         itemFor.forEach(item1 => {
           item1.hidden = true
           if (item1.images) {
-            item1.images = 'http://second.chchgg.com' + item1.images
+            item1.images = 'https://second.chchgg.com' + item1.images
           }
           // item1.show_keyword = JSON.parse(item1.show_keyword)
         })
@@ -758,7 +887,7 @@ Page({
         category_id: id
       }
     })
-    console.log(res)
+    //////console.log(res)
     if (res.data.code == 0) {
       let groupShop = res.data.data
       that.setData({
@@ -774,7 +903,7 @@ Page({
         // if (groupShop[i].)
         that.getNowPrice(groupShop[i].id, groupShop[i].gid, groupShop[i].spec, i)
       }
-      console.log(groupShop)
+      //////console.log(groupShop)
       that.setData({
         groupShop
       })
@@ -802,7 +931,7 @@ Page({
   async getNowPrice(activity_id, goods_id, specTime, i) { //查询组团价格
 
     var that = this
-    console.log(specTime[0])
+    //////console.log(specTime[0])
     let groupShop = that.data.groupShop
     let params = {
       activity_id,
@@ -817,28 +946,23 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log(res.data.code)
+    //////console.log(res.data.code)
     if (res.data.code == 0) {
       groupShop[i].nowPrice = res.data.data
       that.setData({
         groupShop
       })
     }
-    console.log(res)
-    console.log(that.data.groupShop)
+    //////console.log(res)
+    //////console.log(that.data.groupShop)
   },
-  // seeGroup(){
-  //   wx.navigateTo({
-  //     url: `/details/groupAll/index?id=${this.data.currentTab}`,
-  //   })
-  // },
-  // 获取item
+
   clickse: function (e) {
     this.showModal()
     var that = this
     let tab = e.currentTarget.dataset.id.spec_base
 
-    // console.log(tab)
+    // //////console.log(tab)
 
     let tabCopy = JSON.parse(JSON.stringify(tab))
     for (var i = 0; i < tabCopy.length; i++) {
@@ -871,7 +995,7 @@ Page({
 
 
 
-      // console.log(tableId[i].title)
+      // //////console.log(tableId[i].title)
 
 
 
@@ -881,7 +1005,12 @@ Page({
       if (tableId[i].title == e.currentTarget.dataset.indx) {
         if (tableId[i].value[e.currentTarget.dataset.index] == true) {
           tableId[i].value[e.currentTarget.dataset.index] = false
-          // console.log(tableId[i].title.indexOf("加工"))
+
+          that.setData({
+        shopPrice: 0
+      })
+
+          // //////console.log(tableId[i].title.indexOf("加工"))
           if (tableId[i].title.indexOf("加工") == 0) {
             that.setData({
               jgNumber: false
@@ -984,78 +1113,29 @@ Page({
       data: params
     })
     if (res.data.code == 0) {
-      console.log(res.data.data.info)
+      //////console.log(res.data.data.price)
 
       let jgNumber = that.data.jgNumber
       let number = that.data.selectedNumber
-      let price = ""
+      let price = res.data.data.price
       let dataList = res.data.data.info
 
-      if (dataList.length != 0) {
-        if (dataList.length == 1) {
-          price = dataList[0].price
-
-          if (jgNumber) {
-            price = 0
-          }
-          // console.log(1)
-        } else if (dataList.length == 2) {
-
-          if (number == 0 && jgNumber == false) {
-            price = dataList[0].price
-            console.log("进入到了0")
-          }
-
-          if (number == 1 && jgNumber == false) {
-            price = dataList[1].price
-            console.log("进入到了1")
-          }
-
-          if (number == 0 && jgNumber) {
-            price = Number(dataList[0].price) + Number(dataList[1].price)
-            console.log("进入到了 0 跟2 ")
-          }
-
-
-
-          if (number == 1 && jgNumber) {
-            price = Number(dataList[0].price) + Number(dataList[1].price)
-            console.log("进入到了1 跟2 ")
-          }
-
-
-        } else {
-
-
-          // 判断是 净体还是活体
-
-          if (number == 0) {
-            price = Number(dataList[0].price) + Number(dataList[2].price)
-            console.log("数组长度是3 进入到了0跟2")
-          }
-          if (number == 1) {
-            price = Number(dataList[1].price) + Number(dataList[2].price)
-            console.log("数组长度是3 进入到了1跟2")
-          }
-
-        }
-
-      }
+   
 
       that.setData({
         shopPrice: price
       })
     } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
+      // wx.showToast({
+      //   title: res.data.msg,
+      //   icon: 'none',
+      //   duration: 3000
+      // })
     }
   },
   // 遮罩层显示
   showModal() {
-    // console.log("点击了订单")
+    // //////console.log("点击了订单")
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "ease",
@@ -1108,7 +1188,7 @@ Page({
       bigid2: e.currentTarget.dataset.index,
       support: false
     })
-    console.log(that.data.bigid2 + 'clickid')
+    //////console.log(that.data.bigid2 + 'clickid')
   },
 
   // tablemachin: '',
@@ -1158,12 +1238,9 @@ Page({
 
     
 
-    console.log("jgNumber------"+this.data.jgNumber)
-    console.log("numbder-------"+this.data.selectedNumber)
-    console.log(this.data.selectedNumber ===  "")
+    //////console.log("jgNumber------"+this.data.jgNumber)
+    //////console.log("numbder-------"+this.data.selectedNumber)
     
-
-
     var that = this;
 
     if (app.globalData.token == '') {
@@ -1181,11 +1258,6 @@ Page({
       that.clickseleted();
       this.hideBuyModal()
     }
-
-
-    
-    
-
   
   },
   async clickseleted(id) {
@@ -1201,7 +1273,7 @@ Page({
         }
       }
     }
-    console.log(that.data.inputBz)
+  
     let params = {
       goods_id: that.data.shopingid, //商品id
       stock: that.data.num, //商品数量  
@@ -1209,12 +1281,13 @@ Page({
       spec: spex,
       goods_mark: that.data.inputBz
     }
-    console.log(params)
     let res = await ajax({
       url: 'api/cart/save',
       method: 'POST',
       data: params
     })
+    ////console.log("params",params)
+    
     that.setData({
       tableid: '',
       num: 1,
@@ -1224,33 +1297,50 @@ Page({
       tableKg: '',
       bigid2: ''
     })
-    if (res.data.msg == "没有相关规格") {
+    ////console.log(res)
+
+    // if(res.data.code == 0){
+       wx.showToast({
+        title: "加入成功",
+        icon: 'none',
+        duration: 3000
+      })
+      this.getcart()
+    // }
+
+    if (res.data.msg == "商品规格不存在") {
       wx.showToast({
         title: "请选择相关规格",
         icon: 'none',
         duration: 3000
       })
-    } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
-      this.getcart()
-    }
+    } 
 
   },
   determine() { //加入酒店购物车
     var that = this;
-    this.hideBuyModal()
-    console.log(that.data.tablenorms)
+    //////console.log("jgNumber------"+this.data.jgNumber)
+    //////console.log("numbder-------"+this.data.selectedNumber)
+ 
+  
     if (app.globalData.token == '') {
       wx.navigateTo({
         url: "/component/zation/index"
       })
-    } else {
+    } 
+  
+
+    if(that.data.jgNumber === true && that.data.selectedNumber === ""){
+      wx.showToast({
+        title: '请选择商品',
+        icon:"none"
+      })
+    }else{
       that.commodity();
+      that.hideBuyModal()
     }
+
+
   },
   async commodity() {
     let that = this
@@ -1272,7 +1362,8 @@ Page({
         is_purchase: 1,
         goods_id: that.data.shopingid,
         stock: that.data.num,
-        spec: spex
+        spec: spex,
+        goods_mark: that.data.inputBz
       }
     })
     that.setData({
@@ -1285,7 +1376,6 @@ Page({
       tableKg: '',
       bigid2: ''
     })
-    console.log(that.data.bigid2)
     if (res.data.code == 0) {
       wx.showToast({
         title: "加入成功",
@@ -1293,7 +1383,6 @@ Page({
         duration: 3000
       })
       this.getcart()
-      console.log(res)
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -1308,7 +1397,7 @@ Page({
     // } else {
 
     // }
-    console.log(res)
+    //////console.log(res)
 
   },
   gouwuche: function () {
@@ -1340,7 +1429,7 @@ Page({
       url: '/api/Quickorder/QuickOrder',
       method: 'get',
     })
-    console.log(res)
+    //////console.log(res)
     if (res.data.code == -1) {
       wx.showToast({
         title: res.data.msg,
@@ -1359,7 +1448,11 @@ Page({
     if (app.globalData.token != '') {
       that.getMyCommission() //获取我的佣金积分
     }
+
     this.getcart()
-    this.getWork()
+    this.getWork() 
+    this.getMyCarNum()
+     
   },
+ 
 })

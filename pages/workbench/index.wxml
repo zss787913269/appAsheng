@@ -81,6 +81,7 @@
       <!--  -->
       <view class='Mselect'>
         <view wx:for="{{optionList}}" wx:key="unique" data-value='{{item.url}}' bindtap='getOption'>
+           <!-- <view wx:for="{{optionList}}" wx:key="unique" data-value='{{item.url}}'> -->
           {{item.name}}
         </view>
       </view>

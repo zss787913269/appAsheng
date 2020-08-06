@@ -53,6 +53,7 @@
   color: #fff;
   text-align: center;
   border-radius: 10rpx;
+  padding: 9rpx;
 }
 .payment{
   position: absolute;
@@ -70,7 +71,7 @@
   background-color: #96cc79;
 }
 .cancel{
-  margin-top:10rpx;
+  margin-top:30rpx;
   background-color: #ff9000;
 }
 .swiper-tab-item:nth-child(1) {
@@ -86,7 +87,7 @@
   height:400rpx;
   width: 95%;
   margin: 20rpx auto;
-  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1); */
    position: relative;
 }
 .header{
@@ -101,7 +102,7 @@
 }
 .content{
   display: flex;
-  height: 200rpx;
+  height: 275rpx !important;
    padding: 20rpx;
   box-sizing: border-box;
   justify-content: space-between;
@@ -113,7 +114,7 @@
 
 
 .huo{
-  width: 70%;
+  /* width: 70%; */
   line-height: 45rpx;
  display: flex;
   flex-flow: column;

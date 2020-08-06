@@ -1,13 +1,27 @@
 <view class="content">
   <form bindsubmit='submit'>
-    <view class="titleed">
+  
+ 
+  
+
+    <!-- <view class="titleed">
       <label class="glable" for="male">我　是：</label>
       <view class="occupation">
         <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select>
       </view>
-      <!-- <input type="text" placeholder="" name="sex" id="laoban" /> -->
-      <!-- <view class="zhon boss">添加我老板</view> -->
+   
+    </view> -->
+ <view class="picker">
+  
+  <picker bindchange="bindPickerChange" value="{{selectArray[index].id}}" range="{{selectArray}}" range-key="{{'text'}}">
+    <view class="picker">
+      我是：
+      <!-- <text class="pickerIndex">{{selectArray[index].text}}</text> -->
+       <text class="pickerIndex">{{myValue == "" ? "请选择身份"  : selectArray[index].text }}</text>
     </view>
+  </picker>
+    </view>
+    
     <view class="titleed">
       <label class="glable" for="male">姓 名: </label>
       <input type="text" placeholder="请输入" name="fullName" id="male" value="{{fullName}}" />
@@ -16,11 +30,20 @@
       <label class="glable" for="male">酒店名：</label>
       <input type="text" placeholder="请输入" name="hotelName" id="male" value="{{hotelName}}" />
     </view>
-    <view class="titleed location">
+     <view class="titleed location">
       <label class="glable" for="male">区 域：</label>
-      <view>{{province}}-{{city}}-{{county}}-{{street}} </view>
-      <i class="fal fa-angle-right" bindtap="open"></i>
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+      <i class="fal fa-angle-right"  bindchange="bindRegionChange"></i>
     </view>
+    <!-- <view class="titleed location">
+      <label class="glable" for="male">区 域：</label>
+      <view  bindtap="open"> {{city}}-{{county}}-{{street}} </view>
+      
+      <i class="fal fa-angle-right" bindtap="open" ></i>
+    </view> -->
     <view class="titleed">
       <label class="glable" for="male">地　址：</label>
       <input type="text" placeholder="请输入" name="address" id="male" value="{{address}}" />
@@ -32,7 +55,7 @@
     </view>
     <view class="titleed">
       <label class="glable" for="male">验证码</label>
-      <input type="text" placeholder="请输入" name="code" id="male" value="{{code}}" />
+      <input  class="myinpu" type="text" placeholder="请输入验证码" name="code" id="male" value="{{code}}" />
     </view>
     <view  wx:if="{{qrCode}}">
       <view class="titleed" bindtap="sendOut" data-index="1">

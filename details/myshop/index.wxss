@@ -1,6 +1,7 @@
 
 .color{
   color: #96cc79;
+  margin-bottom: 10rpx;
 }
 .colorone{
   color: #ff9d34;
@@ -163,6 +164,11 @@
   height: 3rem;
   margin-top:20rpx; 
   align-items: center;
+  margin-top: 20rpx;
+
+}
+.mytr{
+  margin-top: 60rpx;
 }
 .tr view:nth-child(1){
   width: 60%;

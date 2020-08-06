@@ -128,7 +128,7 @@ Page({
     console.log(url)
     app.globalData.token = wx.getStorageSync('token')
     wx.uploadFile({
-      url: `http://second.chchgg.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, 
+      url: `https://second.chchgg.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, 
       filePath: url,
       name: 'image',
       formData: {

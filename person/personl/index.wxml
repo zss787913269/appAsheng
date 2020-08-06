@@ -1,11 +1,11 @@
 <view class="cardtime">
   <view class="timeyue">
     <view class="iteme matop">
-      <view>姓名：{{myResponsible.data[0].to_user_name}}</view>
+      <view>姓名：{{myResponsible.data[0].nickname}}</view>
       <view>
         <text class="color">押金：{{myResponsible.data[0].money}}元</text> </view>
     </view>
-    <view class="fontsiz">当天：未收50 以收：300</view>
+    <view class="fontsiz">应回收总数：<text class="color">{{myResponsible.count}} </text> <text class="mleft">已回收总数：<text class="color">{{myResponsible.no_recycling}}</text></text></view>
   </view>
 </view>
 
@@ -22,33 +22,17 @@
     <view wx:if="{{currentTab==1}}">
       <view class="iteme" wx:for="{{myResponsible.data}}" wx:key="index">
         <view>{{item.d_name}}</view>
-        <view class="">
-          <input type="number" name="shopName" id="male" bindinput="recoveryNum" value="{{shopName}}" data-index="{{index}}" />
-        </view>
-        <view class="color" wx:if="{{item.status == 1}}">以收</view>
-         <view class="colored" wx:if="{{item.status == 0}}">未收</view>
-        <view class="submit bc76" bindtap="submitNum" data-id="{{item.id}}" data-index="{{index}}">提交</view>
-      </view>
-      <view class="iteme">
-        <view>小云小吃</view>
         <view class="submit bc76">
-          <input type="number" name="shopName" bindinput="recoveryNum" id="male" value="{{shopName}}" data-index="1" />
+          <input type="number" name="shopName" id="male" bindinput="recoveryNum" value="{{item.number}}" data-index="{{index}}" />
+          <text class="tong">桶</text>
         </view>
-        <view class="colored">未收</view>
-        <view class="submit bc76">提交</view>
+      
+        <!-- <view class="color" wx:if="{{item.status == 1}}">以收</view>
+         <view class="colored" wx:if="{{item.status == 0}}">未收</view> -->
+        <view class="submit bc76" bindtap="submitNum" data-id="{{item.id}}" data-index="{{index}}"  data-number="{{item.number}}">提交</view>
       </view>
-      <view class="iteme">
-        <view>小云小吃</view>
-        <view class="submit bc76">2桶</view>
-        <view class="color">以收</view>
-        <view class="submit bc76">提交</view>
-      </view>
-      <view class="iteme">
-        <view>小云小吃</view>
-        <view class="submit bc76">2桶</view>
-        <view class="color">以收</view>
-        <view class="submit bc76">提交</view>
-      </view>
+      
+   
     </view>
 
     <view wx:if="{{currentTab==2}}">

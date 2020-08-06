@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    inputBz:"",
     addreslist: '',
     payment_list: [],
     checkedAll: false,
@@ -53,6 +54,13 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
+  modalInput(e){
+    // console.log(e.detail.value)
+    this.setData({
+      inputBz:e.detail.value
+    })
+  },
+
   async subdelect(e) {
     console.log(e)
     let that = this
@@ -64,7 +72,8 @@ Page({
         ids: 214,
         payment_id: 0,
         coupon_id: 0,
-        site_model: 0
+        site_model: 0,
+        user_note:that.data.inputBz,
       }
     })
     let paymentList = res.data.data.payment_list
@@ -76,7 +85,7 @@ Page({
       payment_list: paymentList, //支付方式
       goods_list: res.data.data.goods_list, //订单商品
       ids: e,
-      actual_price: res.data.data.base //商品价格
+      actual_price: res.data.data.base, //商品价格,
 
     })
     console.log(res.data.data)
@@ -91,37 +100,16 @@ Page({
       method: 'POST',
       data: {
         order_id: that.data.orderId,
-        address_id: that.data.addreslist.id,
+        address_id: that.data.addreslist.id
       }
     })
     console.log(res)
-    // that.setData({    //返回订单id
-    //   orderid: res.data.data.order.id
-    // })
+   
     if(res.data.code == 0){
       that.orderPay()
     }
   },
-  // 下单页面
-  // async paymented(e) {
-  //   let that = this
-  //   let res = await ajax({
-  //     url: 'api/buy/add',
-  //     method: 'POST',
-  //     data: {
-  //       buy_type: "cart",
-  //       ids: that.data.dataids,
-  //       payment_id: that.data.paymentId,
-  //       address_id: that.data.addreslist.id,
-  //       is_purchase: 0
-  //     }
-  //   })
-  //   console.log(res)
-  //   that.setData({    //返回订单id
-  //     orderid: res.data.data.order.id
-  //   })
-  //   that.orderPay()
-  // },
+  
   async orderPay(e) {
     console.log(e)
     let that = this
@@ -135,7 +123,7 @@ Page({
     })
     wx.hideLoading();
     if (res.data.code == 0) {
-      console.log(res)
+      console.log("支付成功",res)
       // 是否在线支付,非在线支付则支付成功
       if (res.data.data.is_online_pay == 0) {
         // 数据设置
@@ -151,6 +139,7 @@ Page({
           package: res.data.data.data.package,
           signType: res.data.data.data.signType,
           paySign: res.data.data.data.paySign,
+          
           success: function(res) {
             // 数据设置
             // self.order_item_pay_success_handle(index);
@@ -160,8 +149,11 @@ Page({
               title: '付款成功',
               duration:3000
             })
-            wx.switchTab({
-              url: "/pages/index/index"
+            // wx.switchTab({
+            //   url: "/pages/index/index"
+            // });
+            wx.reLaunch({
+              url: "/private/hotelpeople/index"
             });
           },
           fail: function(res) {
@@ -171,8 +163,9 @@ Page({
               duration:3000
             })
             wx.reLaunch({
-              url: "/pages/index/index"
+              url: "/private/hotelpeople/index"
             });
+          
           }
         });
       }
@@ -199,59 +192,7 @@ Page({
   switch: function(e) {
     console.log(e)
   },
-  // fukuan:function(){
 
-  //   wx.request({
-  //     url: app.get_request_url("payor", "order"),
-  //     method: "POST",
-  //     data: {
-  //       id: order_id,
-  //       payment_id: this.data.payment_id,
-  //     },
-  //     dataType: "json",
-  //     success: res => {
-  //       wx.hideLoading();
-  //       if (res.data.code == 0) {
-  //         // 是否在线支付,非在线支付则支付成功
-  //         if (res.data.data.is_online_pay == 0) {
-  //           // 数据设置
-  //           self.order_item_pay_success_handle(index);
-
-  //           app.showToast("支付成功", "success");
-  //         } else {
-  //           wx.requestPayment({
-  //             timeStamp: res.data.data.data.timeStamp,
-  //             nonceStr: res.data.data.data.nonceStr,
-  //             package: res.data.data.data.package,
-  //             signType: res.data.data.data.signType,
-  //             paySign: res.data.data.data.paySign,
-  //             success: function (res) {
-  //               // 数据设置
-  //               self.order_item_pay_success_handle(index);
-
-  //               // 跳转支付页面
-  //               wx.navigateTo({
-  //                 url: "/pages/paytips/paytips?code=9000&total_price=" +
-  //                   self.data.data_list[index]['total_price']
-  //               });
-  //             },
-  //             fail: function (res) {
-  //               app.showToast('支付失败');
-  //             }
-  //           });
-  //         }
-  //       } else {
-  //         app.showToast(res.data.msg);
-  //       }
-  //     },
-  //     fail: () => {
-  //       wx.hideLoading();
-  //       app.showToast("服务器请求出错");
-  //     }
-  //   });
-  // },
-
-  // },
 
 
 

@@ -5,6 +5,14 @@
 .user {
   padding: 0;
 }
+.picker{
+  margin-left: 8rpx;
+}
+.selete{
+  display: flex;
+  padding: 0 0rpx !important;
+}
+
 
 .user image {
   width: 100%;

@@ -1,61 +1,69 @@
 <!--操作菜单-->
 <view class="view_power">
-  <view class="user_tab">
-    <form bindsubmit="retrieve">
-      <view class="goUrl" bindtap="goUrl" data-url="profit">
-        <label class="glable" for="male">联系人</label>
-        <input type="text" placeholder="请输入姓名" name="fullName" id="male" value="{{fullName}}"/>
-      </view>
-      <view class="goUrl" bindtap="goUrl" data-url="profit">
-        <label class="glable" for="male">联系电话</label>
-        <input type="text" placeholder="请输入手机号码" name="tel" id="male" />
-      </view>
-      <view class="goUrl pos" bindtap="goUrl" data-url="profit">
+	<view class="user_tab">
+		<form bindsubmit="retrieve">
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">联系人</label>
+				<input type="text" placeholder="请输入姓名" name="fullName" id="male" value="{{fullName}}" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">联系电话</label>
+				<input type="text" placeholder="请输入手机号码" name="tel" id="male" />
+			</view>
+			<!-- <view class="goUrl pos" bindtap="goUrl" data-url="profit">
         <label class="glable" for="male">地址</label>
         <view>{{province}}-{{city}}-{{county}} </view>
         <i class="fal fa-angle-right" bindtap="open"></i>
-      </view>
-      <view class="goUrl" bindtap="goUrl" data-url="profit">
-        <label class="glable" for="male">店名</label>
-        <input type="text" placeholder="请输入店名" name="shopName" id="male" />
-      </view>
-      <view class="goUrl" bindtap="goUrl" data-url="profit">
-        <label class="glable" for="male">数量(桶)</label>
-        <input type="text" placeholder="请输入数量" name="number" id="male" />
-      </view>
-      <view class="goUrl" bindtap="goUrl" data-url="profit">
-        <label class="glable" for="male">详情地址</label>
-        <input type="text" placeholder="如道路，小区，楼栋号，单元式等" name="address" id="male" />
+      </view> -->
+			<view class="section goUrl pos">
+				<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+					<view class="selete"><text>地区选择</text><view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}} </view>
+					</view>
+           <i class="fal fa-angle-right" bindtap="open"></i>
+				</picker>
+			</view>
 
-      </view>
-      <!-- <navigator url="/person/slops/index" hover-class="other-navigator-hover"> -->
-        <view class="bottom">
-          <button size="big" class="checked" form-type="submit">提交</button>
-        </view>
-      <!-- </navigator> -->
-    </form>
-  </view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">店名</label>
+				<input type="text" placeholder="请输入店名" name="shopName" id="male" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">数量(桶)</label>
+				<input type="text" placeholder="请输入数量" name="number" id="male" />
+			</view>
+			<view class="goUrl" bindtap="goUrl" data-url="profit">
+				<label class="glable" for="male">详情地址</label>
+				<input type="text" placeholder="如道路，小区，楼栋号，单元式等" name="address" id="male" />
+
+			</view>
+			<!-- <navigator url="/person/slops/index" hover-class="other-navigator-hover"> -->
+			<view class="bottom">
+				<button size="big" class="checked" form-type="submit">提交</button>
+			</view>
+			<!-- </navigator> -->
+		</form>
+	</view>
 </view>
 
 <!-- 选择地址 -->
 <!-- <view class="container">
 </view> -->
 <view wx:if="{{condition}}" class="citypicker">
-  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" data-citys="{{cityids}}" value="{{value}}" bindchange="bindChange" class="citybody">
-    <view class="cityheader">
-      <view bindtap="open" class="city-cancel">取消</view>
-      <view bindtap="open" class="city-true">确定</view>
-    </view>
+	<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" data-citys="{{cityids}}" value="{{value}}" bindchange="bindChange" class="citybody">
+		<view class="cityheader">
+			<view bindtap="open" class="city-cancel">取消</view>
+			<view bindtap="open" class="city-true">确定</view>
+		</view>
 
-    <picker-view-column>
-      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
-    </picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item.name}}</view>
+		</picker-view-column>
 
-  </picker-view>
+	</picker-view>
 </view>

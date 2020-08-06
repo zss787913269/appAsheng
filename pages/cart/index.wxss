@@ -3,7 +3,7 @@
 }
 .itemed{
   width:720rpx;
-  height:115rpx;
+  height:250rpx;
   background: #fff;
   border-bottom: 1px solid #ccc;
   display: flex; 
@@ -11,11 +11,50 @@
  padding-top: 50rpx;
  box-sizing: border-box;
  justify-content: space-between;
+ align-items: center;
+ position: relative;
+}
+.myimg{
+  width: 150rpx !important;
+  height: 150rpx !important;
+  
+}
+.zymbox{
+  width: 150rpx;
+  height: 150rpx;
+}
+.top-title{
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.mytext1{
+  margin-top: 2rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.single{
+  position: absolute;
+  bottom: 25rpx;
+  right: 40rpx;
+  font-size: 26rpx;
+  
+}
+.mytext2{
+  margin-top: 2rpx;
+  font-size: 24rpx;
+  color: rgb(168, 164, 164);
+}
+.mytext{
+  margin-top: 2rpx;
+  color: red;
+  font-size: 26rpx;
+
 }
 .itemed image{
  width: 35rpx;
  height: 35rpx;
  vertical-align: middle;
+
 }
 .total{
   font-size: 15rpx;
@@ -149,3 +188,10 @@ transform: translate(-50%, -50%) scale(1);
 .active {
   background: #62a241;
 }
+
+.mytitle{
+  display: flex;
+  flex-direction: column;
+  width: 250rpx;
+}
+

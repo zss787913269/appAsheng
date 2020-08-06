@@ -1,194 +1,182 @@
 <view>
-  <view class="swiper-tab">
-    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">待处理
-      <sup wx:if="{{ 99>=total>0 && deliveryList.length>0}}" class="total">{{total}}</sup>
-      <sup wx:elif="{{ total>99 }}" class="total">99+</sup>
-    </view>
-    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">订单状态
-    </view>
-    <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">已处理
-    </view>
-  </view>
+	<view class="swiper-tab">
+		<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">未取货
+			<sup wx:if="{{ 99>=total>0 && deliveryList.length>0}}" class="total">{{total}}</sup>
+			<sup wx:elif="{{ total>99 }}" class="total">99+</sup>
+		</view>
+		<view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">配送中
+    <sup wx:if="{{ 99>=total>0 && PeisongList.length>0}}" class="total">{{total2}}</sup>
+			<sup wx:elif="{{ total>99 }}" class="total">99+</sup>
+		</view>
+		<view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">已完成
+    <sup wx:if="{{ 99>=total>0 && deliveryListYes.length>0}}" class="total">{{total3}}</sup>
+			<sup wx:elif="{{ total>99 }}" class="total">99+</sup>
+		</view>
+	</view>
 
 </view>
 
 <view wx:if="{{currentTab==1}}">
-  <!-- <block wx:for="{{deliveryList}}" wx:key="index"> -->
-    <!-- <view class="cardtime">
-    <view class="timeyue">
-      <view>{{item.hotel_name}}</view>
-      <view>{{item.hotel_address}}</view>
-      <view>
-        <text class="color">查看清单 ></text> {{item.buy_number_count}}个商品</view>
-    </view>
-  </view> -->
 
-    <view class="card">
-      <view class="cardname" wx:for="{{deliveryList}}" wx:key="index">
-        <view>
-          <view wx:if="{{item.hotel_name == ''}}" class="2">收货人：{{item.address.name}}</view>
-          <view wx:if="{{item.hotel_name == ''}}">电话：{{item.address.tel}}</view>
-          <view wx:if="{{item.hotel_name == ''}}">地址：{{item.address.province_name}}{{item.address.city_name}}{{item.address.county_name}}{{item.address.address}}</view>
-          <view class="1">{{item.hotel_name}}</view>
-          <view>{{item.hotel_address}}</view>
-          <view class="iteme">
-            <view>
-              <text class="color" bindtap="look" data-id="{{item.id}}" data-index="{{index}}">查看清单 > </text> {{item.buy_number_count}}个商 品</view>
-            <!-- <view class="itemed" wx:if="{{item.is_printing == 1}}">商家/已接单 </view> -->
-            <view class="zhonged" data-value="{{item}}" bindtap="print">打印</view>
-          </view>
-        </view>
-        <block wx:if="{{item.detailedList}}">
-          <view class="marbot" wx:for="{{shopInfo}}" wx:key="index">
-            <view class="" hover-class="none" hover-stop-propagation="false">
-              <view>{{item.title}}
-                <text> {{item.buy_number}}</text>
-              </view>
-              <view wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName">{{itemName.type}} ：{{itemName.value}}</view>
-              <view class="brand_address">地址：{{item.brand_address}}</view>
-            </view>
-            
-            <view class="btnBox">
-              <view class="itemed" wx:if="{{item.is_ok == 1}}">商家已接单 </view>
-              <view class="itemed" wx:if="{{item.is_ok == 0}}">商家未接单 </view>
-              <view class="itemed" wx:if="{{item.is_pick == 0}}" data-id="{{item.id}}" style="margin-top:20rpx;" bindtap="takeDelivery">取货 </view>
-              <view class="itemed" wx:if="{{item.is_send == 0}}" data-id="{{item.order_id}}" data-item="{{item}}" style="margin-top:20rpx;" bindtap="orderReceiving">接单</view>
+
+	<view class="card">
+		<view class="cardname" wx:for="{{deliveryList}}" wx:key="index">
+			<view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}" class="2">收货人：{{item.address.name}}</view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}">电话：{{item.address.tel}}</view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}">地址：{{item.address.province_name}}{{item.address.city_name}}{{item.address.county_name}}{{item.address.address}}</view>
+
+				<view class="1">{{item.hotel_name}}</view>
+				<view class="item">{{item.hotel_address}}</view>
+				<view class="iteme item">
+					<view><text class="color" bindtap="look" data-id="{{item.id}}" data-index="{{index}}">查看清单 > </text> {{item.buy_number_count}}个商 品</view>
+					<view class="myflex">
+						<view class="zhonged" data-value="{{item}}" bindtap="print">打印</view>
+						<!-- <view class="zhonged myenter"  bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>
+            <view class="zhonged myenter"  bindtap="upload"   data-id="{{item.id}}">上传图片</view> -->
+						<!-- <image src="{{card_img}}" style="width:300rpx;height:200rpx"></image> -->
+					</view>
+
+				</view>
+
+
+				<block wx:if="{{item.is_select}}">
+					<view class="marbot mybox" wx:for="{{shopInfo}}" wx:key="index">
+
+						<view class="" hover-class="none" hover-stop-propagation="false">
+							<view class="brand_address item">商铺名：{{item.brand_name}}</view>
+							<view class="item">商品名：{{item.title}}
+								<text> {{item.buy_number}}</text>
+							</view>
+							<view class="item" wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName">{{itemName.type}} ：{{itemName.value}}</view>
+							<!-- <view class="brand_address item">地址：{{item.brand_address}}</view> -->
+
+						</view>
+
+						<view class="btnBox">
+							<!-- <view class="itemed" wx:if="{{item.is_ok == 1}}">商家已接单 </view> -->
+							<!-- <view class="itemed" wx:if="{{item.is_ok == 0}}">商家未接单 </view> -->
+							<view class="itemed" wx:if="{{item.is_pick == 0}}" data-id="{{item.id}}" style="margin-top:20rpx;" bindtap="takeDelivery">取货 </view>
+							<!-- <view class="itemed" wx:if="{{item.is_send == 0}}" data-id="{{item.order_id}}" data-item="{{item}}" style="margin-top:20rpx;" bindtap="orderReceiving">接单</view>
               <view class="itemed" wx:if="{{item.is_after_type != '' && item.is_after_type != null}}" data-id="{{item.id}}" data-item="{{item}}" style="margin-top:20rpx;" bindtap="returnAndExchange">
-              退换货</view>
-            </view>
-            
-          </view>
-          <view class="lianxi">
+              退换货</view> -->
+						</view>
+
+					</view>
+					<!-- <view class="lianxi">
             <view class="lianx">联系供应商 </view>
             <view class="lianx">联系下单员 </view>
-          </view>
-        </block>
+          </view> -->
+				</block>
+			</view>
 
-      </view>
-    </view>
-  <!-- </block> -->
+		</view>
+
+	</view>
+
 
 </view>
 <view wx:if="{{currentTab==2}}">
-  <view>暂无</view>
-  <!-- <view class="cardtime">
-    <view class="timeyue">
-      <view>某某酒店</view>
-      <view class="iteme marbot">
-        <view>
-          <text class="color">查看清单 > </text> 59个商 品</view>
-        <view class="itemedactive">提醒商家收货</view>
 
-      </view>
+	<view class="card">
+		<view class="cardname" wx:for="{{PeisongList}}" wx:key="index">
+    			<view class="myok" bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>
+			<view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}" class="2">收货人：{{item.address.name}}</view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}">电话：{{item.address.tel}}</view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}">地址：{{item.address.province_name}}{{item.address.city_name}}{{item.address.county_name}}{{item.address.address}}</view>
 
-      <view class="iteme">
-        <view>11-27 入账</view>
-        <view>总金额 ：45元</view>
-      </view>
-    </view>
-  </view>
+				<view class="1">{{item.hotel_name}}</view>
+				<view class="item">{{item.hotel_address}}</view>
+				<view class="iteme item">
+					<view><text class="color" bindtap="look" data-id="{{item.id}}" data-index="{{index}}">查看清单 > </text> {{item.buy_number_count}}个商 品</view>
+					<view class="myflex">
 
-  <view class="card">
-    <view class="cardname">
-      <view>
-        <view class="iteme">
-          <view>某某酒店</view>
-          <view>酒店已验货</view>
-        </view>
-        <view>
-          <view class="matop">
-            <text class="color">查看清单 > </text> 59个商 品</view>
-        </view>
-      </view>
-      <view>
-        <view>
-          <text> 五花肉 </text>
-          <text> 10斤 </text>
-          <text> ￥99元</text>
-        </view>
-        <view>
-          <text> 五花肉 </text>
-          <text> 10斤 </text>
-          <text> ￥99元</text>
-        </view>
-        <view>
-          <text> 五花肉 </text>
-          <text> 10斤 </text>
-          <text> ￥99元</text>
-        </view>
-        <view class="iteme marbot">
-          <view>11-27 入账</view>
-          <view>总金额 ：45元</view>
-        </view>
+			
+						<view class="zhonged myenter" bindtap="upload" data-id="{{item.id}}">上传图片</view>
 
-      </view>
-      <view class="lian matop">
-        <view class="lianx">提醒商家收货 </view>
-      </view>
+                <view wx:for="{{item.imgurl}}" wx:for-item="imgs" class="imgbox" wx:if="{{item.imgurl}}" wx:key="index"> 
+                   		<image src="{{imgs}}" class="myimg"  ></image>
+                     
+            </view>
 
-    </view>
-  </view> -->
+				
+
+					</view>
+
+				</view>
+
+				<block wx:if="{{item.is_select}}">
+					<view class="marbot mybox" wx:for="{{shopInfo}}" wx:key="index">
+						<view class="" hover-class="none" hover-stop-propagation="false">
+							<view class="item">{{item.title}}
+								<text> {{item.buy_number}}</text>
+							</view>
+							<view class="item" wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName">{{itemName.type}} ：{{itemName.value}}</view>
+							<view class="brand_address item">地址：{{item.brand_address}}</view>
+						</view>
+
+
+
+					</view>
+
+				</block>
+			</view>
+
+		</view>
+
+	</view>
 
 </view>
 <view wx:if="{{currentTab==3}}">
-  <view>暂无</view>
-  <!-- 
-  <view class="cardtime">
-    <view class="timeyue">
-      <view class="iteme matop">
-        <view class="colored">已收50/未收60</view>
-        <view>
-          <text class="colored"> 退单总数50</text> </view>
-      </view>
-      <view>某某酒店</view>
-      <view>XX区XX路XX号XX店</view>
-      <view>
-        <text class="color">查看清单 ></text> 59个商品</view>
-    </view>
-  </view>
 
-  <view class="card">
-    <view class="cardname">
-      <view>
 
-        <view class="iteme matop">
-          <view>某某酒店</view>
-          <view>
-            <text class="colored">送到拍照 </text>
-            <text class="colored"> 提醒酒店发货</text> </view>
-        </view>
-        <view>XX区XX路XX号XX店</view>
-        <view class="iteme matop">
-          <view>
-            <text class="color">查看清单 > </text> 59个商 品</view>
-          <view class="itemed">已取20/未取20 </view>
-        </view>
-      </view>
-      <view class="marbot">
-        <view class="iteme matop">
-          <view>
-            <text>五花肉 </text> 10 斤</view>
-          <view class="ittui backf9" bindtap="tuidan">退单 </view>
-        </view>
-        <view></view>
-        <view class="iteme matop">
-          <view>
-            <text>种类 </text> 三层花纹</view>
-          <view class="ittui active" bindtap="shuliang">修改数量 </view>
-        </view>
-        <view class="iteme matop">
-          <view>
-            <text>加工： </text> 切糕</view>
-          <view>待酒店验货</view>
-        </view>
-      </view>
-      <view class="lianxi">
-        <view class="lianx">联系供应商 </view>
-        <view class="lianx">联系下单员 </view>
-      </view>
+	<view class="card">
+		<view class="cardname" wx:for="{{deliveryListYes}}" wx:key="index">
+			<view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}" class="2">收货人：{{item.address.name}}</view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}">电话：{{item.address.tel}}</view>
+				<view class="item" wx:if="{{item.hotel_name == ''}}">地址：{{item.address.province_name}}{{item.address.city_name}}{{item.address.county_name}}{{item.address.address}}</view>
 
-    </view>
-  </view> -->
+				<view class="1">{{item.hotel_name}}</view>
+				<view class="item">{{item.hotel_address}}</view>
+				<view class="iteme item">
+					<view><text class="color" bindtap="look" data-id="{{item.id}}" data-index="{{index}}">查看清单 > </text> {{item.buy_number_count}}个商 品</view>
+					<view class="myflex">
+
+						<!-- <view class="zhonged myenter"  bindtap="upload"   data-id="{{item.id}}">上传图片</view>  -->
+				
+
+					</view>
+
+				</view>
+
+
+				<block wx:if="{{item.is_select}}">
+					<view class="marbot mybox" wx:for="{{shopInfo}}" wx:key="index">
+						<view class="" hover-class="none" hover-stop-propagation="false">
+							<view class="item">{{item.title}}
+								<text> {{item.buy_number}}</text>
+							</view>
+							<view class="item" wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName">{{itemName.type}} ：{{itemName.value}}</view>
+							<view class="brand_address item">地址：{{item.brand_address}}</view>
+						</view>
+
+
+
+					</view>
+
+				</block>
+			</view>
+      		<view class="lianxi">
+							<view class="lianx">联系供应商 </view>
+							<view class="lianx lianx2">联系下单员 </view>
+						</view>
+
+		</view>
+
+	</view>
+
 
 </view>
 <!-- <view class="bottom">
@@ -196,85 +184,85 @@
   <button class="ff9">联系公司</button>
 </view> -->
 <view class="bottom">
-  <view class="itemedel">
-    <!-- <view class="itemdedel" bindtap="showDialogBtn">
+	<view class="itemedel">
+		<!-- <view class="itemdedel" bindtap="showDialogBtn">
         <text>扫一扫</text>
       </view> -->
-  </view>
+	</view>
 
-  <view class="itemedel">
+	<view class="itemedel">
 
-    <view class="itemdedel">
-      <!-- <navigator url="/details/order/index" hover-class="other-navigator-hover"> -->
-      <text>联系公司</text>
-      <!-- </navigator> -->
-    </view>
-  </view>
+		<view class="itemdedel">
+			<!-- <navigator url="/details/order/index" hover-class="other-navigator-hover"> -->
+			<text>联系公司</text>
+			<!-- </navigator> -->
+		</view>
+	</view>
 </view>
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">商品名：{{shopOneInfo.title}}</view>
-  <view class="modal-content">
-    <view class="iteme matop">
-      <view class="colored">
-        <text style="float:left;">数量:</text>
-        <input class="weui-input" type="number" value="{{shopNum}}" bindinput="shopNum"/>
-      </view>
-      <view class="ittui backf9">
-       <text style="float:left;">价格:</text>
-        <input class="weui-input-price" type="number" value="{{shopPrice}}" bindinput="shopPrice"/>
-      </view>
-    </view>
-  </view>
-  <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
-  </view>
+	<view class="modal-title">商品名：{{shopOneInfo.title}}</view>
+	<view class="modal-content">
+		<view class="iteme matop">
+			<view class="colored">
+				<text style="float:left;">数量:</text>
+				<input class="weui-input" type="number" value="{{shopNum}}" bindinput="shopNum" />
+			</view>
+			<view class="ittui backf9">
+				<text style="float:left;">价格:</text>
+				<input class="weui-input-price" type="number" value="{{shopPrice}}" bindinput="shopPrice" />
+			</view>
+		</view>
+	</view>
+	<view class="modal-footer">
+		<view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+		<view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+	</view>
 </view>
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{tuidanModal}}"></view>
 <view class="modal-dialog" wx:if="{{tuidanModal}}">
-  <view class="modal-title">退单</view>
-  <view class="modal-content">
-    <view class="modal-input">
-      <input placeholder-class="input-holder" type="text" maxlength="50" bindinput="inputChangeTui" class="input" placeholder="确认可不用填"></input>
-    </view>
-  </view>
-  <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancelTui" data-status="cancel">确认</view>
-    <view class="btn-confirm" bindtap="onConfirmTui" data-status="confirm">拒绝</view>
-  </view>
+	<view class="modal-title">退单</view>
+	<view class="modal-content">
+		<view class="modal-input">
+			<input placeholder-class="input-holder" type="text" maxlength="50" bindinput="inputChangeTui" class="input" placeholder="确认可不用填"></input>
+		</view>
+	</view>
+	<view class="modal-footer">
+		<view class="btn-cancel" bindtap="onCancelTui" data-status="cancel">确认</view>
+		<view class="btn-confirm" bindtap="onConfirmTui" data-status="confirm">拒绝</view>
+	</view>
 </view>
 
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{shuliangModal}}"></view>
 <view class="modal-dialog" wx:if="{{shuliangModal}}">
-  <view class="modal-title">修改数量</view>
-  <view class="modal-content">
-    <view class="iteme matop">
-      <view>
-        <view class="matop">品名</view>
-        <view>五花肉</view>
-      </view>
-      <view>
-        <view class="matop">规格</view>
-        <view>18斤</view>
-      </view>
-      <view>
-        <view class="matop">原数量</view>
-        <view>12</view>
-      </view>
-      <view>
-        <view class="matop">新数量</view>
-        <view>
-          <input style="width:100rpx;border:1px solid #ccc;" type="number" maxlength="10" bindinput="inputChange" class="input" placeholder=""></input>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">提交</view>
-  </view>
+	<view class="modal-title">修改数量</view>
+	<view class="modal-content">
+		<view class="iteme matop">
+			<view>
+				<view class="matop">品名</view>
+				<view>五花肉</view>
+			</view>
+			<view>
+				<view class="matop">规格</view>
+				<view>18斤</view>
+			</view>
+			<view>
+				<view class="matop">原数量</view>
+				<view>12</view>
+			</view>
+			<view>
+				<view class="matop">新数量</view>
+				<view>
+					<input style="width:100rpx;border:1px solid #ccc;" type="number" maxlength="10" bindinput="inputChange" class="input" placeholder=""></input>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="modal-footer">
+		<view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+		<view class="btn-confirm" bindtap="onConfirm" data-status="confirm">提交</view>
+	</view>
 </view>

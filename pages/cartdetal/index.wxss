@@ -1,5 +1,5 @@
 .title{
-  height: 300rpx;
+  height: 350rpx;
   width: 95%;
   margin: 20rpx auto;
   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
@@ -25,6 +25,10 @@
 .bz input{
   border: 1px solid #ccc;
   font-size: 26rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  width: 400rpx;
+  border-radius: 10rpx;
 }
 
 .toAddress{
@@ -50,12 +54,17 @@
   line-height: 90rpx;
 }
 
-.huo{
-  height: 50rpx;
-  display: flex;
-  justify-content: space-between;
+
+.huo text{
+  margin-top: 20rpx;
   margin-bottom: 30rpx;
 }
+.huo1 text{
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+
 .zhong{
   width: 380rpx;
   height: 60rpx;

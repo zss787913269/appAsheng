@@ -29,7 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    console.log(options,"options")
 
   // if(options.where != undefined){
   //   this.setData({
@@ -156,7 +156,7 @@ Page({
       payment_id: that.data.paymentId,
       address_id: that.data.addreslist.id,
       is_purchase: 0,
-      goods_mark:that.data.inputBz,
+      user_note : that.data.inputBz
     }
     if(that.data.where == 'group'){
       params.buy_type = 'goods'
@@ -165,7 +165,8 @@ Page({
       params.stock = that.data.shopAttribute.num
       params.goods_id = that.data.shopAttribute.shopId
       params.spec = that.data.shopAttribute.spec
-      params.price = that.data.shopNowPrice
+      params.price = that.data.shopNowPrice,
+      params.user_note = that.data.inputBz
     }else{
       params.buy_type = 'cart'
       params.ids = that.data.dataids
@@ -201,7 +202,7 @@ Page({
       data: {
         id: that.data.orderid,
         payment_id: that.data.paymentId,
-        user_note:that.data.inputBz
+        // user_note:that.data.inputBz
       }
     })
     console.log(res.data)
@@ -224,12 +225,9 @@ Page({
           signType: res.data.data.data.signType,
           paySign: res.data.data.data.paySign,
           success: function(res) {
-            // 数据设置
-            // self.order_item_pay_success_handle(index);
-
-            // 跳转支付页面
-            wx.switchTab({
-              url: "/pages/index/index"
+            console.log("付款",res.data)
+            wx.reLaunch({
+              url: "/details/order/index"
             });
           },
           fail: function(res) {
@@ -262,65 +260,7 @@ Page({
     }
 
   },
-  // switch: function(e) {
-  //   console.log(e)
-  // },
-  // fukuan:function(){
-
-  //   wx.request({
-  //     url: app.get_request_url("payor", "order"),
-  //     method: "POST",
-  //     data: {
-  //       id: order_id,
-  //       payment_id: this.data.payment_id,
-  //     },
-  //     dataType: "json",
-  //     success: res => {
-  //       wx.hideLoading();
-  //       if (res.data.code == 0) {
-  //         // 是否在线支付,非在线支付则支付成功
-  //         if (res.data.data.is_online_pay == 0) {
-  //           // 数据设置
-  //           self.order_item_pay_success_handle(index);
-
-  //           app.showToast("支付成功", "success");
-  //         } else {
-  //           wx.requestPayment({
-  //             timeStamp: res.data.data.data.timeStamp,
-  //             nonceStr: res.data.data.data.nonceStr,
-  //             package: res.data.data.data.package,
-  //             signType: res.data.data.data.signType,
-  //             paySign: res.data.data.data.paySign,
-  //             success: function (res) {
-  //               // 数据设置
-  //               self.order_item_pay_success_handle(index);
-
-  //               // 跳转支付页面
-  //               wx.navigateTo({
-  //                 url: "/pages/paytips/paytips?code=9000&total_price=" +
-  //                   self.data.data_list[index]['total_price']
-  //               });
-  //             },
-  //             fail: function (res) {
-  //               app.showToast('支付失败');
-  //             }
-  //           });
-  //         }
-  //       } else {
-  //         app.showToast(res.data.msg);
-  //       }
-  //     },
-  //     fail: () => {
-  //       wx.hideLoading();
-  //       app.showToast("服务器请求出错");
-  //     }
-  //   });
-  // },
-
-  // },
-
-
-
+  
   checkboxChange(e) { //实现单选
     var that = this;
     let checkboxValues = null;

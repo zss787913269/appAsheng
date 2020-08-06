@@ -3,6 +3,17 @@
   padding: 0 40rpx; 
   display: flex;
 }
+.item{
+    margin-top: 25rpx;
+    margin-left: 10rpx;
+    
+}
+page{
+  background-color: #f3f3f3 !important;
+}
+.myaddress{
+  letter-spacing:5rpx;
+}
 .total{
   font-size: 15rpx;
   background-color: #FF9000;
@@ -17,7 +28,7 @@
 .swiper-tab-item{
  height: 66rpx;
  width: 50%;
- font-size: 30rpx;
+ font-size: 36rpx;
  background:#8bc76a;
  color: #fff; 
  margin-top: 20rpx;
@@ -40,17 +51,50 @@ height: auto;
 padding: 20rpx;
 box-sizing: border-box;
 }
+.mybox{
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx;
+}
+.myok{
+  z-index: 111111;
+  position: absolute;
+  right: 35rpx;
+  bottom: 10rpx;
+  width: 170rpx;
+  height: 50rpx;
+  background:#8bc76a;
+  color: #fff; 
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 30rpx;
+
+
+}
+.myflex{
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.myenter{
+  margin-left: 20rpx;
+}
+
 .cardname{
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
   padding: 30rpx 20rpx;
   box-sizing: border-box;
+  /* padding-bottom:  30rpx; */
+  margin-top: 30rpx;
+  background-color: #fff;
+  position: relative;
   
 }
 .cardname image{
-  width: 155rpx;
-  height: 155rpx; 
+  width: 160rpx;
+  height: 160rpx; 
   margin-bottom:15rpx; 
 }
 .xuanjie{
@@ -91,6 +135,7 @@ box-sizing: border-box;
   border-bottom: 1px solid #ccc;
   position: relative;
   display: flex;
+  margin-bottom: 50rpx;
   justify-content: space-between;
 }
 /* .iteme{
@@ -124,6 +169,19 @@ box-sizing: border-box;
   border-radius:5rpx;
   text-align: center;
   line-height: 75rpx;
+}
+.imgbox{
+  display: flex;
+  flex-wrap: wrap;
+}
+.myimg{
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+.lianx2{
+  margin-left: 50rpx;
 }
 
 /* 订单转台 */
@@ -318,14 +376,18 @@ input-holder {
 }
 
 .zhonged{
-  width: 200rpx;
-  height: 60rpx;
+  width: 170rpx;
+  height: 50rpx;
   background:#ff9d34;
   color: #fff; 
   text-align: center;
-  line-height: 60rpx;
+  line-height: 50rpx;
   border-radius: 30rpx;
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
+  position: absolute;
+  right: 15rpx;
+  bottom:40rpx
+
 }
 
 

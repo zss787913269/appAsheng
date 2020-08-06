@@ -68,6 +68,17 @@ box-sizing: border-box;
  .right{
    color: #717171; 
  }
+ .tong{
+   margin-left: 10rpx;
+   margin-right: 10rpx;
+ }
+ .mleft{
+   margin-left: 40rpx;
+ }
+ .color{
+   color: red;
+   font-weight: 500;
+ }
 .submit{
   width: 150rpx;
   height: 45rpx;
@@ -75,6 +86,8 @@ box-sizing: border-box;
   padding-left: 10rpx;
   border-radius:5rpx; 
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 

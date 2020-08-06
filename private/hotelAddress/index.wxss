@@ -92,8 +92,19 @@
   font-size: 30rpx;
   margin-left:80rpx;  
 }
+.pickerIndex{
+  margin-left: 40rpx;
+}
 .color{
   color:#ff9d34; 
+}
+.picker{
+  /* background-color: pink; */
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  height: 40rpx;
+  font-size: 30rpx;
+  
 }
 .occupation{
   position: absolute;
@@ -146,4 +157,15 @@
 }
 .location{
   position: relative;
+  display: flex;
+  align-items: center !important;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-bottom: 20rpx;
+  margin-top: 10rpx;
+}
+.myinpu{
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  height: 100rpx;
 }

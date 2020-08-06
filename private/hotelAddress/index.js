@@ -10,6 +10,8 @@ Page({
    */
   data: {
     // ,type：1下单员，2厨师长，3采购，4仓库，5财务，6店长，7老板
+    region: ['广西壮族自治区', '南宁市', '西乡塘区'],
+    myValue:"",
     selectArray: [{
       "id": "1",
       "text": "下单员"
@@ -32,6 +34,7 @@ Page({
       "id": "7",
       "text": "老板"
     }],
+
     fullName: '', //姓名
     hotelName: '', //酒店名
     address: '', //地址
@@ -105,10 +108,36 @@ Page({
       },
     })
   },
+  bindRegionChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      region: e.detail.value
+    })
+    
+
+    console.log(String(this.data.region))
+  },
   determine() {
     this.setData({
       hotelRole: false
     })
+  },
+  // getDate(e) { //获取下拉选择框的值
+  //   var that = this
+
+  //   that.setData({
+  //     roleId: e.detail.id + 1
+  //   })
+  //   console.log(e.detail)
+  // },
+  bindPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', Number(e.detail.value)+1)
+    this.setData({
+      index: e.detail.value,
+      roleId:Number(e.detail.value) + 1,
+      myValue:"k"
+    })
+
   },
   sendOut(e) { //发送二维码
     var that = this
@@ -169,13 +198,7 @@ Page({
     }
     console.log(res)
   },
-  getDate(e) { //获取下拉选择框的值
-    var that = this
-    that.setData({
-      roleId: e.detail.id + 1
-    })
-    console.log(e.detail)
-  },
+  
   getInputValue(e) { //获取手机号
     var that = this
     that.setData({
@@ -239,7 +262,9 @@ Page({
         name: fullName,
         address: address,
         type: that.data.roleId,
-        region: `${that.data.provinceid},${that.data.cityid},${that.data.countyid},${that.data.streetId}`,
+        // region: `${that.data.provinceid},${that.data.cityid},${that.data.countyid},${that.data.streetId}`,
+        region: String(that.data.region.toString),
+
         //区域id, 省，市，区/县 例： 1,23,34
         tel: tel,
       };
@@ -466,52 +491,5 @@ Page({
 
 
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
+ 
 })

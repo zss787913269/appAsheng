@@ -22,7 +22,12 @@ Page({
     that.setData({
       currentTab: e.target.dataset.current
     })
-    console.log(that.data.currentTab);
+    if( e.target.dataset.current == 2){
+      that.shopConfirm()
+    }else if(e.target.dataset.current == 1){
+      that.getShopList()
+    }
+    //console.log(that.data.currentTab);
     // }
   },
  async noReceiptConfirm(e){    //退换货确认
@@ -37,18 +42,18 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if(res.data.code == 0){
       wx.showToast({
         title: '成功',
         icon:'none',
-        duration:3000
+        duration:300
       })
     }else{
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:3000
+        duration:300
       })
     }
   },
@@ -64,18 +69,18 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '成功',
         icon: 'none',
-        duration:3000
+        duration:300
       })
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:3000
+        duration:300
       })
     }
   },
@@ -93,19 +98,21 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
+  
       wx.showToast({
         title: '接单成功',
         icon: 'none',
-        duration:3000
+        duration:300
       })
+      that.shopConfirm()
       that.getShopList()
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:3000
+        duration:300
       })
     }
   },
@@ -120,22 +127,25 @@ Page({
      method: 'POST',
      data: params
    })
-   console.log(res)
+   //console.log(res)
    if(res.data.code == 0){
+     
      wx.showToast({
        title: '接单成功',
        icon: 'none',
-       duration:3000
+       duration:300
      })
+     that.shopConfirm()
      that.getShopList()
    }else{
      wx.showToast({
        title:res.data.msg,
        icon:'none',
-       duration:3000
+       duration:300
      })
    }
   },
+  // zym
   async getShopInfo(){    //获取店铺状态
     var that = this
     let res = await ajax({
@@ -143,7 +153,7 @@ Page({
       method: 'POST',
       // data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
       that.setData({
         shopInfo:res.data.data
@@ -152,7 +162,7 @@ Page({
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:3000
+        duration:300
       })
     }
   },
@@ -167,19 +177,19 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '操作成功',
         icon: 'none',
-        duration:3000
+        duration:300
       })
       that.getShopList()
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:3000
+        duration:300
       })
     }
   },
@@ -197,8 +207,8 @@ Page({
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
     for (let i = 0; i < this.data.shopOrderList.length; i++) {
-      console.log(i)
-      console.log(y)
+      //console.log(i)
+      //console.log(y)
       lpapi.drawText(`订单号：${this.data.shopOrderList[i].order.order_no}`, 0, y, 4)
       y = y + 5
       lpapi.drawText(`商品名：${this.data.shopOrderList[i].title}`, 0, y, 5)
@@ -207,7 +217,7 @@ Page({
       y = y + 5
       lpapi.drawText(`规格：${this.data.shopOrderList[i].spec[0].value}`, 0, y, 5)
       y = y + 15
-      console.log(y)
+      //console.log(y)
     }
     lpapi.endDrawLabel();
     this.setData({
@@ -252,10 +262,10 @@ Page({
         method: 'POST',
         data: params
       })
-      console.log('获取商家订单',res)
+      //console.log('获取商家订单',res)
       if(res.data.code == 0){
         if(res.data.data.data.length === 0){
-          console.log(res.data.data.msg);
+          //console.log(res.data.data.msg);
           wx.showToast({
             title: res.data.msg,
             icon: 'none',
@@ -263,11 +273,12 @@ Page({
           })
         }
         let resInfo1 = res.data.data.data
-        console.log(resInfo1)
+        //console.log(resInfo1)
         for (let i = 0; i < resInfo1.length; i++) {
-          // console.log(i)
+          // //console.log(i)
           resInfo1[i].spec = JSON.parse(resInfo1[i].spec)
         }
+        console.log("订单号",resInfo1)
         that.setData({
           shopOrderList: resInfo1
         })
@@ -275,9 +286,11 @@ Page({
           SOtotal:res.data.data.total
         })
       }
-      console.log(res)
-      console.log(that.data.shopOrderList)
+      //console.log(res)
+      //console.log(that.data.shopOrderList)
     },
+  
+    //zym 
   async shopConfirm() {   //获取商家订单已接单
     var that = this
     let params = {
@@ -288,7 +301,7 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log('获取商家订单已接单',res);
+    // //console.log('获取商家订单已接单',res);
     if(res.data.code == 0 ){
       let resInfo = res.data.data.data
       for (let i = 0; i < resInfo.length; i++) {
@@ -298,8 +311,10 @@ Page({
         shopReceiptList: resInfo,
         ALtotla:res.data.data.total
       })
+      console.log("获取商家订单已接单",resInfo)
     }
-    console.log(res)
+  
+
   },
   async shopConfirmComplete() {   //获取商家订单已完成
     var that = this
@@ -311,7 +326,7 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log('获取商家订单已完成',res);
+    //console.log('获取商家订单已完成',res);
     if (res.data.code == 0) {
       let resInfo = res.data.data.data
       for (let i = 0; i < resInfo.length; i++) {
@@ -321,54 +336,7 @@ Page({
         shopCompleteList: resInfo
       })
     }
-    console.log(res)
+    //console.log(res)
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
 })

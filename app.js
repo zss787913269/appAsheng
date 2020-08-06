@@ -74,7 +74,7 @@ App({
   },
   wxRequest(method, url, data, callback, errFun, token) {
     wx.request({
-      url: `http://second.chchgg.com/index.php?s=${url}&application=app&application_client_type=weixin&token=${this.globalData.token}&ajax=ajax`,
+      url: `https://second.chchgg.com/index.php?s=${url}&application=app&application_client_type=weixin&token=${this.globalData.token}&ajax=ajax`,
       method: method,
       data: data,
       header: {

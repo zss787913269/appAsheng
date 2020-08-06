@@ -6,7 +6,7 @@ const app = getApp()
 
 Page({
   data: {
-    city:'成都',
+    pledge:"",
     url:'/person/commis/index',
     url1:'/person/integral/index',
     url2:'/person/balance/index',
@@ -20,15 +20,18 @@ Page({
     },
     optionList: [
       // { id: 2, name: '我的银行卡', url: '', clas: 'fa-sack-dollar', color: '#fa7aff' },
-      { id: 2, name: '预约列表', url: '/details/preAbout/index', clas: 'fa-sack-dollar', color: '#fa7aff' },
-      { id: 3, name: '我发布的新菜', url: '/private/myFood/index', clas: 'fa-shopping-basket', color: '#f30' },
-      { id: 4, name: '泔水回收-酒店端', url: '/person/recovery/index', clas: 'fa-trash', color: '#68e28b' },
-      { id: 5, name: '泔水回收-员工端', url: '/person/personl/index', clas: 'fa-trash', color: '#68e28b' },
-      { id: 6, name: '我的收藏', url: '/person/lection/index', clas: 'fa-tags', color: '#63dcff' },
-      { id: 7, name: '我的收货地址', url: '/person/map/index', clas: 'fa-id-badge', color: '#ffa461' }, 
+      { id: 11, name: '个人订单列表', url: '/details/order/index', clas: 'fa-id-badge', color: '#63dcff' },
       // { id: 8, name: '订单处理', url: '/details/handle/index', clas: 'fa-id-badge', color: '#63dcff' },
-      { id: 8, name: '成为商家', url: '/details/becomeShop/index', clas: 'fa-id-badge', color: '#63dcff' },
-      // { id: 9, name: '订单列表', url: '/details/orderlist/index', clas: 'fa-id-badge', color: '#63dcff' },
+      { id: 10, name: '酒店订单列表', url: '/private/hotelpeople/index', clas: 'fa-id-badge', color: '#63dcff' },
+      // { id: 2, name: '预约列表', url: '/details/preAbout/index', clas: 'fa-sack-dollar', color: '#fa7aff' },
+      // { id: 3, name: '我发布的新菜', url: '/private/myFood/index', clas: 'fa-shopping-basket', color: '#f30' },
+      //  { id: 4, name: '泔水回收-酒店端', url: '/person/recovery/index', clas: 'fa-trash', color: '#68e28b' },
+      // { id: 4, name: '泔水回收-酒店端', url: '/person/slops/index', clas: 'fa-trash', color: '#68e28b' },
+      // { id: 5, name: '泔水回收-员工端', url: '/person/personl/index', clas: 'fa-trash', color: '#68e28b' },
+      // { id: 6, name: '我的收藏', url: '/person/lection/index', clas: 'fa-tags', color: '#63dcff' },
+      { id: 7, name: '我的收货地址', url: '/person/map/index', clas: 'fa-id-badge', color: '#ffa461' }, 
+     
+      // { id: 9, name: '成为商家', url: '/details/becomeShop/index', clas: 'fa-id-badge', color: '#63dcff' },
       // { id: 10, name: '供应商管理端', url: '/details/supplier/index', clas: 'fa-id-badge', color: '#63dcff' },
       // { id: 11, name: '成为私厨填写信息', url: '/details/information/index', clas: 'fa-id-badge', color: '#63dcff' },
       // { id: 12, name: '成为配送员填写信息', url: '/details/peinformation/index', clas: 'fa-id-badge', color: '#63dcff' },
@@ -39,8 +42,36 @@ Page({
       // { id: 17, name: '酒店人员', url: '/private/hotelpeople/index', clas: 'fa-id-badge', color: '#63dcff'  },
       // { id: 18, name: '人员-自购单', url: '/private/staff/index', clas: 'fa-id-badge', color: '#63dcff'  },
       // { id: 19, name: '员工超级端-信息审核', url: '/private/superStaff/index', clas: 'fa-id-badge', color: '#63dcff'  },
-      { id: 20, name: '菜品回复', url: '/private/Reply/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      // { id: 20, name: '菜品回复', url: '/private/Reply/index', clas: 'fa-id-badge', color: '#63dcff'  },
       { id: 21, name: '添加/编辑酒店', url: '/private/hotelAddress/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      // { id: 22, name: '关于菜小二', url: '/pages/about/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      //   // { id: 2, name: '我的银行卡', url: '', clas: 'fa-sack-dollar', color: '#fa7aff' },
+      //   // zym
+      //   { id: 11, name: '我的订单', url: '', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 8, name: '订单处理', url: '/details/handle/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   { id: 10, name: '酒店订单列表', url: '', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 2, name: '预约列表', url: '/details/preAbout/index', clas: 'fa-sack-dollar', color: '#fa7aff' },
+      //   // { id: 3, name: '我发布的新菜', url: '/private/myFood/index', clas: 'fa-shopping-basket', color: '#f30' },
+      //   //  { id: 4, name: '泔水回收-酒店端', url: '/person/recovery/index', clas: 'fa-trash', color: '#68e28b' },
+      //   { id: 4, name: '泔水回收-酒店端', url: '/person/slops/index', clas: 'fa-trash', color: '#68e28b' },
+      //   { id: 5, name: '泔水回收-员工端', url: '/person/personl/index', clas: 'fa-trash', color: '#68e28b' },
+      //   // { id: 6, name: '我的收藏', url: '/person/lection/index', clas: 'fa-tags', color: '#63dcff' },
+      //   { id: 7, name: '我的收货地址', url: '', clas: 'fa-id-badge', color: '#ffa461' }, 
+       
+      //   // { id: 9, name: '成为商家', url: '/details/becomeShop/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 10, name: '供应商管理端', url: '/details/supplier/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 11, name: '成为私厨填写信息', url: '/details/information/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 12, name: '成为配送员填写信息', url: '/details/peinformation/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 13, name: '付款成功', url: '/details/payment/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 14, name: '发布菜品', url: '/details/dishes/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 15, name: '发布私厨', url: '/details/release/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 16, name: '核销二维码', url: '/details/writeoff/index', clas: 'fa-id-badge', color: '#63dcff' },
+      //   // { id: 17, name: '酒店人员', url: '/private/hotelpeople/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      //   // { id: 18, name: '人员-自购单', url: '/private/staff/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      //   // { id: 19, name: '员工超级端-信息审核', url: '/private/superStaff/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      //   // { id: 20, name: '菜品回复', url: '/private/Reply/index', clas: 'fa-id-badge', color: '#63dcff'  },
+      //   // { id: 21, name: '添加/编辑酒店', url: '', clas: 'fa-id-badge', color: '#63dcff'  },
+      //   // { id: 22, name: '关于菜小二', url: '', clas: 'fa-id-badge', color: '#63dcff'  },
     ] ,
     modality:false,   //模态窗开关 
     commission: '',   //我的佣金   
@@ -54,6 +85,8 @@ Page({
     that.getMyCommission()
   },
   onShow:function(){
+
+    this.getMyCommission()
     this.setData({
       modality: false
     })
@@ -102,6 +135,13 @@ Page({
     })
   },
   // 接单
+
+  golyj(){
+      wx.navigateTo({
+        url: '/pages/pledge/index',
+      })
+  },
+
   waiting:function(e){
     if (app.globalData.token == '') {
       wx.navigateTo({
@@ -140,6 +180,7 @@ Page({
       commission: res.data.data.Yongj,
       integral: res.data.data.integral,
       balance: res.data.data.normal_money,
+      pledge: res.data.data.pledge
     })
     console.log(res)
   },

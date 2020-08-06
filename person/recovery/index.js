@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     fullName: '', //名字
     address: '', //详细地址地址
     tel: '', //联系方式
@@ -23,7 +24,12 @@ Page({
     // provinceid:'',   //城市id
   },
 
-
+  bindRegionChange: function (e) {
+    this.setData({
+      region:e.detail.value
+    })
+    console.log(this.data.region)
+  },
   retrieve(e){    //提交回收需求
     var that = this
     var formData = e.detail.value;
@@ -46,7 +52,8 @@ Page({
         number: number,
         d_name: d_name,
         xq_address: xq_address,
-        address: `${that.data.provinceid},${that.data.citysid},${that.data.countysid}`,  //区域id, 省，市，区/县 例： 1,23,34
+        // address: `${that.data.provinceid},${that.data.citysid},${that.data.countysid}`,  //区域id, 省，市，区/县 例： 1,23,34
+        address:that.data.region.toString(),
         tel: tel,
       };
       console.log(params.address + '成功' + params.tel)
@@ -241,52 +248,5 @@ Page({
       })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

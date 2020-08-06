@@ -113,6 +113,7 @@ Page({
         // shopAttribute: res.data.data.data.items[0],
         // currentTab: res.data.data.data.items[0].id
       })
+      console.log(this.data.orderlist)
     }else{
       wx.showToast({
         title:res.data.msg,

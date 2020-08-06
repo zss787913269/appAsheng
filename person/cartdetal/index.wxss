@@ -24,11 +24,14 @@
 }
 .content{
   display: flex;
-  height: 180rpx;
+  display: block;
+  height: 250rpx;
   flex-flow: column;
    padding: 20rpx;
   box-sizing: border-box;
   position: relative;
+  margin-bottom: 40rpx;
+  
 }
 .content view{
   margin:10rpx 0; 
@@ -37,12 +40,24 @@
   color: #96cc79;
   line-height: 90rpx;
 }
-
-.huo{
-  height: 50rpx;
+.bz{
+  margin-left: 20rpx;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  height: 50rpx;
+}
+.bz input{
+  border: 1px solid #ccc;
+  font-size: 26rpx;
+  width: 340rpx;
+  border-radius: 10rpx;
+  height: 60prx;
+  line-height: 60rpx;
+}
+.huo{
+
   margin-bottom: 30rpx;
+  margin-top: 10rpx;
 }
 .zhong{
   width: 380rpx;

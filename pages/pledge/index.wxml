@@ -1,0 +1,42 @@
+<!-- 
+<view class="section">
+  <picker bindchange="bindPickerChange" value="{{value}}" range="{{array}}">
+    <view class="picker">
+      请选择充值金额：{{value}}
+    </view>
+  </picker>
+</view>
+
+<view class="button"  bindtap="getPlugins">
+  <text class="">确认充值</text>
+</view> -->
+<!-- <view class="header">
+   <view class="yue">
+       <text>我的余额</text>
+       <text class="font">{{balance}}元</text>
+    </view>
+</view> -->
+
+<view class="content">
+ <view class="title"><text>履约金套餐</text></view>
+<view class="price">
+ <view class="shuru" wx:for="{{list}}" wx:key="index" bindtap="selecetd" data-pricelist="{{item}}">
+    <view class="{{item.isSelected ? 'active' : 's'}}" ><text>{{item.title}}元</text></view>
+
+ </view>
+</view>
+</view>
+
+<view class="title"><text>履约金服务内容说明</text></view>
+  <view  class="tbody">
+  
+      
+            <rich-text  nodes="{{mynode}}"></rich-text>
+           <!-- <text>最终解释权归菜小二所有</text> -->
+        
+  </view>
+
+
+    <view class="tixain" bindtap="getPlugins">
+    <text>立即充值</text>
+    </view>

@@ -39,7 +39,7 @@ Page({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId api/user/wechatuserinfo
         var that = this
         wx.request({
-          url: 'http://second.chchgg.com/index.php?s=/api/user/wechatuserauth?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的接口地址
+          url: 'https://second.chchgg.com/index.php?s=/api/user/wechatuserauth?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的接口地址
           method: 'POST',
           data: {
             authcode: res.code,
@@ -95,7 +95,7 @@ Page({
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
       wx.request({
-        url: 'http://second.chchgg.com/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的
+        url: 'https://second.chchgg.com/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的
           method: 'POST',
           data: {
             encrypted_data:e.detail.encryptedData,

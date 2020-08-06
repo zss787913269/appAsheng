@@ -108,30 +108,42 @@ Page({
   
     console.log(res)
   },
-  async deleteS(e) {    //删除店铺商品
+  deleteS(e) {    //删除店铺商品
     var that = this
-    let res = await ajax({
-      url: 'api/store/delete',
-      method: 'post',
-      data:{
-        id:e.currentTarget.dataset.id
+
+   
+    wx.showModal({
+      title: '提示',
+      content: '确认删除吗',
+      async success (ss) {
+        if (ss.confirm) {
+          let res = await ajax({
+            url: 'api/store/delete',
+            method: 'post',
+            data:{
+              id:e.currentTarget.dataset.id
+            }
+          })
+          if(res.data.code == 0){
+            wx.showToast({
+              title: '删除成功',
+              icon:'none',
+              duration:3000
+            })
+            that.getShopGoodsList()
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon:'none',
+              duration:3000
+            })
+          }
+        } else if (ss.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
-    if(res.data.code == 0){
-      wx.showToast({
-        title: '删除成功',
-        icon:'none',
-        duration:3000
-      })
-      that.getShopGoodsList()
-    }else{
-      wx.showToast({
-        title: res.data.msg,
-        icon:'none',
-        duration:3000
-      })
-    }
-    console.log(res)
+
   },
   editS(e){
     let a=e.currentTarget.dataset.item;

@@ -1,5 +1,5 @@
 .title{
-  height: 300rpx;
+  height: 320rpx;
   width: 95%;
   margin: 20rpx auto;
   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
@@ -71,10 +71,8 @@
   line-height: 90rpx;
 }
 
-.huo{
-  height: 50rpx;
-  display: flex;
-  justify-content: space-between;
+.huo text{
+  margin-top: 20rpx;
   margin-bottom: 30rpx;
 }
 .zhong{

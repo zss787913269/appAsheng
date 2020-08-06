@@ -1,26 +1,41 @@
- <view>
+ 
+ <view class="nodd" wx:if="{{orderlist.length==0}}">
 
+	<text>
+	暂无订单
+	</text>
 
- 	<view class="title" wx:for="{{orderlist}}" wx:key="unique">
+</view>
+
+ <view wx:else>
+ 	<view   class="title" wx:for="{{orderlist}}" wx:key="unique">
  		<view class="header">
  			<text>收货人信息</text>
- 			<text>订单ID： {{item.order_no}}</text>
+ 			<text>下单时间： {{item.confirm_time}}</text>
  		</view>
  		<view class="content">
- 			<view>
- 				<text>收货地址：{{item.address_data.province_name}} {{item.address_data.city_name}} {{item.address_data.county_name}} {{item.address_data.address}}
-      </text>
- 			</view>
- 			<view>
+ 		
+ 			<view >
  				<text>收  货 人：{{item.address_data.name}}</text>
  			</view>
- 			<view class="huo">
- 				<text>收货电话：{{item.address_data.tel}}</text>
+			 	<text>收货电话：{{item.address_data.tel}}</text>
+ 			<view class="huod">
+ 			
  				<view class="zhong" wx:if="{{item.status == 2}}"> 待发货</view>
  				<view class="zhong" wx:if="{{item.status == 3}}" bindtap="confirmReceipt" data-id="{{item.id}}"> 确认收货</view>
  				<view class="zhong" wx:if="{{item.status == 4}}"> 已完成</view>
  				<view class="zhong" wx:if="{{item.status == 5 || item.status == 6}}">已失效</view>
  			</view>
+
+			<view>
+				<text>备注要求：</text><text> {{item.user_note == null ? "" :item.user_note}}</text>
+			</view>
+
+
+			<view>
+				<text>{{item.describe}}</text>
+			</view>
+
  			<view class="color" bindtap="detalis" data-id="{{item.id}}">
  				<text>点击查看订单详情</text>
  			</view>

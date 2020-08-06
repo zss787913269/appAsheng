@@ -94,10 +94,17 @@ Page({
       if (res.data.data.is_online_pay == 0) {
         // 数据设置
         // self.order_item_pay_success_handle(index);
+
+
         wx.showToast({
           title: '支付成功',
           duration:3000
         })
+
+        wx.redirectTo({
+          url: "/details/order/index"
+        });
+
       } else {
         wx.requestPayment({
           timeStamp: res.data.data.data.timeStamp,
@@ -110,9 +117,7 @@ Page({
             // self.order_item_pay_success_handle(index);
 
             // 跳转支付页面
-            wx.redirectTo({
-              url: "/details/order/index"
-            });
+           
           },
           fail: function (res) {
             wx.showToast({

@@ -19,7 +19,7 @@ function ajax(options) {
   return new Promise((resolve, reject) => {
     wx.request({
       // url: `https://locally.uieee.com/${options.url}`,
-      url: `http://second.chchgg.com/index.php?s=${options.url}&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
+      url: `https://second.chchgg.com/index.php?s=${options.url}&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
       data:options.data,
       method: options.method,
       dataType: options.dataType,

@@ -19,9 +19,17 @@ Page({
 
   onLoad: function(options) {
     this.getlist(1)
+    this.getlist(2)
+    this.getFirstList()
   },
   onShow:function(){
     this.getlist(this.data.currentTab)
+  },
+  mysubmit(){
+    wx.showToast({
+      title: '此功能未开放，8月4号正式上线',
+      icon:"none"
+    })
   },
   async paymented(e) {   //个人采购提交订单
     console.log(e)
@@ -40,6 +48,45 @@ Page({
     })
     that.orderPay()
   },
+
+
+  // 获取首次进入购物车的数据
+  async getFirstList(){
+      let that = this
+
+      let params = {   //酒店购物车需要传参
+        is_purchase: 1
+      }
+
+      let res = await ajax({
+        url: 'api/cart/index',
+        method: 'POST',
+        data: params
+      })
+      if(res.data.data.data.length == 0){
+        // 个人订单
+        let res2 = await ajax({
+          url: 'api/cart/index',
+          method: 'POST',
+        })
+
+       that.setData({
+          currentTab: 2
+        })
+        that.setData({
+          currentTab: 2,
+          tableList: res2.data.data.data,
+          
+        })
+      }else{
+        that.setData({
+          hotelList: res.data.data.data
+        })
+      }
+
+
+  },
+
   async getlist(index) {
     let that = this
     let params = {   //酒店购物车需要传参
@@ -51,21 +98,25 @@ Page({
         method: 'POST',
         data: params
       })
+
+      console.log("公司订单",res.data.data.data)
+
       that.setData({
         tableList: res.data.data.data,
         hotelList: res.data.data.data
       })
-      console.log(res)
+      // console.log(res)
     }else if(index == 2){
       let res = await ajax({
         url: 'api/cart/index',
         method: 'POST',
       })
+      console.log("个人订单",res.data.data.data)
       that.setData({
         tableList: res.data.data.data,
         personList: res.data.data.data
       })
-      console.log(res)
+      // console.log(res)
     }
     that.getTotalPrice()
   },
@@ -106,6 +157,12 @@ Page({
 
   //事件处理函数
   sub(e) {
+
+
+
+    console.log(e)
+
+
     const index = e.currentTarget.dataset.index;
     let tableList = this.data.tableList;
     let num = tableList[index].stock;
@@ -139,10 +196,19 @@ Page({
   // 计算商品价格
   getTotalPrice(e) {
     let tableList = this.data.tableList;
+
+
+
+    // console.log("tableList",tableList)
+
     let sum = 0;
     for (let i = 0; i < tableList.length; i++) {
       sum += tableList[i].stock * tableList[i].price;
+      tableList[i].single = (tableList[i].stock * tableList[i].price).toFixed(2);
     }
+
+    // console.log("single",this.data.tableList)
+
     this.setData({
       totalPrice: sum.toFixed(2),
       tableList: tableList

@@ -8,6 +8,44 @@
 }
 .page{
   padding-bottom: 75rpx;
+  
+}
+page{
+  background-color: #f1f1f1 !important;
+}
+.mycarcount{
+  z-index:10000;
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #ff9d34;
+  border: 1px solid #ff9d34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20rpx;
+  color: #fff;
+  line-height: 30rpx;
+  /* left: 10rpx; */
+  top:10rpx;
+}
+.count{
+  background-color: #ff9d34;
+  border-radius: 50%;
+  position: relative;
+  /* top: 10rpx; */
+  /* top:-50%; */
+  margin-top: -84%;
+  line-height: 32rpx;
+  left: 20rpx;
+  display: block;
+  height: 32rpx;
+  width: 32rpx;
+  color: #fff;
+  font-size: 22rpx;
+
 }
 
 .scroll_boxed {
@@ -24,9 +62,13 @@
 }
 .bannerIm{
 float: left;
-width: 33%;
+/* width: 100%;
+display: flex; */
+/* display: flex; */
+width: 25%;
 text-align: center;
-height: 135rpx;
+height: 150rpx;
+margin-top: 35rpx;
 }
 .groupBack{
   background: linear-gradient(40deg, #fe3267 30%, #f9b850);
@@ -195,7 +237,7 @@ swiper image {
 }
 
 .div_div {
-  margin: 20rpx 4%;
+  margin: 30rpx 4%;
   background: #fff;
   overflow: hidden;
   color: #999;
@@ -203,6 +245,7 @@ swiper image {
   padding: 10rpx;
   box-sizing: border-box;
   box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.1);
+
 }
 
 /* .div_div view {
@@ -228,8 +271,10 @@ swiper image {
   /* background-color: #000; */
 }
 .swiper-one{
-  width:60%;
+  width:100%;
   float: left;
+  height: 400rpx;
+
 }
 .swiper-tab {
   width: 100%;
@@ -579,8 +624,10 @@ swiper {
 }
 .imagesss{
   display: block;
-width: 50%;
-margin: 15rpx auto;
+  /* width: 50%; */
+  margin: 15rpx auto;
+  height: 80rpx;
+  width: 80rpx;
 }
 /* pages/questions/questions.wxss */
 
@@ -1023,13 +1070,17 @@ margin: 15rpx auto;
     border-radius:8rpx;
 }
 
+
 .main{
   display: flex;
 }
 .left{
   width: 25%;
   font-size: 30rpx;
-  background-color: #f4f4f4;
+  /* background-color: #f5f5f5 !important; */
+  
+  background-color: #fff !important;
+  
 }
 .right{
   width: 75%;  
@@ -1096,5 +1147,12 @@ margin: 15rpx auto;
 }
 .bz input{
   border: 1px solid #ccc;
-  height: 35rpx;
+  height: 45rpx;
+  width: 400rpx;
+  line-height: 45rpx;
+  border-radius: 10rpx;
+
+}
+.myadd {
+  font-size: 50rpx;
 }

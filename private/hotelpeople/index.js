@@ -25,7 +25,7 @@ Page({
     that.setData({
       currentTab: e.target.dataset.current
     })
-    console.log(that.data.currentTab);
+    //console.log(that.data.currentTab);
     if (e.target.dataset.current == 2){
       that.getSelfShop(that.data.pages)
     }
@@ -95,10 +95,24 @@ Page({
   },
   payment(e){   //去支付页面
   // let item = JSON.stringify(e.currentTarget.dataset.id)
+
+  // console.log(e.currentTarget)
+
   let items = e.currentTarget.dataset
-      wx.navigateTo({
-        url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
-      })
+
+    for(let i in this.data.hoteList){
+      
+        if(this.data.hoteList[i].price == 0.00){
+          return 
+        }else{
+          wx.navigateTo({
+            url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
+          })
+        }
+    }
+   
+       
+     
   },
   async addPlatform(e){   //添加到平台
     var that = this
@@ -123,7 +137,7 @@ Page({
         duration:3000
       })
     }
-    console.log(res)
+    //console.log(res)
   },
   async getSelfShop(pages){   //获取自购订单
     var that = this
@@ -133,7 +147,7 @@ Page({
     let res = await ajax({
       url: 'api/quickorder/MySelfOrder', method: 'POST', data: params
     })
-    console.log(res)
+    //console.log(res)
     if(res.data.code == 0){
       that.setData({
         myShop:res.data.data.data,
@@ -148,7 +162,7 @@ Page({
     }
   },
   async getHoteOrder(num){   //获取酒店订单列表
-  console.log('diaoyongl')
+  //console.log('diaoyongl')
       var that = this
       let params = {
         type:1,
@@ -157,7 +171,7 @@ Page({
     let res = await ajax({
       url: '/api/quickorder/HotelList', method: 'POST', data: params
     })
-    console.log(res)
+    //console.log(res)
     if(res.data.code == 0){
       if (num == 1){
         that.setData({
@@ -191,7 +205,7 @@ Page({
         that.setData({
           hoteList
         })
-        console.log(hoteList);
+        //console.log(hoteList);
         that.getHoteRole()
       }
     }else{
@@ -253,7 +267,7 @@ Page({
     let res = await ajax({
       url: 'api/order/cancel', method: 'POST', data: { id: e.currentTarget.dataset.id }
     })
-    console.log(res)
+    //console.log(res)
     if(res.data.code == 0){
       wx.showToast({
         title: '取消成功',
@@ -275,7 +289,7 @@ Page({
     let res = await ajax({
       url: '/api/quickorder/getHotel', method: 'get'
     })
-    console.log(res)
+    //console.log(res)
     that.setData({
       hoteInfo:res.data.data 
     })
@@ -303,7 +317,7 @@ Page({
           for (let j in hoteList[i].other_role) {
             if (hoteList[i].user_id == j) {
               hoteList[i].nowRole = false
-              console.log(hoteList[i].nowRole)
+              //console.log(hoteList[i].nowRole)
             } else {
               hoteList[i].nowRole = true
             }
@@ -316,13 +330,13 @@ Page({
       }
 
     }
-    console.log(hoteList[0].nowRole)
+    //console.log(hoteList[0].nowRole)
     // that.setData({
     //   hoteList
     // })
     
     // let isOk = that.data.hoteList
-    // console.log(quickorder)
+    // //console.log(quickorder)
     // for (let key in quickorder){
     //   if (quickorder[key][0] == that.data.hoteRoleNow){
     //     that.setData({
@@ -331,7 +345,7 @@ Page({
     //   }
     // }
     for (let key in quickorder){
-      console.log(quickorder[key][0])
+      //console.log(quickorder[key][0])
       for (let i = 0; i < hoteList.length;i++)
         if (hoteList[i].role_user_id != null){
           if (quickorder[key][0] == hoteList[i].role_user_id){
@@ -350,16 +364,16 @@ Page({
       })
      
     }
-    console.log(that.data.hoteList)
+    //console.log(that.data.hoteList)
     // let hoteList = that.data.hoteList
     // for (var i = 0; i < hoteList.length; i++) {
     //   if (hoteList[i].is_role_ok == 0) {
     //     if (hoteList[i].other_role != null) {
     //       for (let j in hoteList[i].other_role) {
-    //         console.log(j)
+    //         //console.log(j)
     //         if (hoteList[i].user_id == j) {
     //           hoteList[i].nowRole = false
-    //           console.log(hoteList[i].nowRole)
+    //           //console.log(hoteList[i].nowRole)
     //         } else {
     //           hoteList[i].nowRole = true
     //         }
@@ -373,15 +387,15 @@ Page({
     // that.setData({
     //   hoteList
     // })
-    // console.log(that.data.nowUserId)
-    // console.log(that.data.hoteList)
+    // //console.log(that.data.nowUserId)
+    // //console.log(that.data.hoteList)
     // quickorder.forEach(function (item,index){
-    //   console.log(item)
+    //   //console.log(item)
     // })
   },
   //打印
   print(index){
-    console.log(index);
+    //console.log(index);
     let myData=index.currentTarget.dataset.value;
     let shop_name="";
     myData.items.forEach(item=>{
@@ -397,7 +411,7 @@ Page({
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
-      console.log(y)
+      //console.log(y)
       lpapi.drawText(`订单号：${myData.order_no}`, 0, y, 4)
       y = y + 5
       lpapi.drawText(`商品名：${shop_name}`, 0, y, 5)
@@ -453,7 +467,7 @@ Page({
       that.setData({
         page:that.data.page + 1
       })
-    console.log(that.data.total)
+    //console.log(that.data.total)
     that.getHoteOrder(that.data.page)  
   },  
 

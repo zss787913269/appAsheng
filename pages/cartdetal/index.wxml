@@ -9,7 +9,7 @@
     <view class="huo">
       <text>收  货 人：{{addreslist.name}}</text>
     </view>
-    <view class="huo">
+    <view class="huo1">
       <text>收货电话：{{addreslist.tel}}</text>
     </view>
     <view class="toAddress" bindtap="addresd">
