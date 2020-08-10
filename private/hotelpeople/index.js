@@ -18,6 +18,12 @@ Page({
     hoteRoleNow:'',   //当前登录的用户id
     pages:1,
     myShop:[],
+    unconfirmed:[],//未确认
+    unpaid:[],//未付款
+    paid:[],//已付款
+    unaccepted:[],//待验收
+    completed:[],//已经完成
+
   },
   //点击切换
   clickTab: function (e) {
@@ -65,29 +71,29 @@ Page({
   //     })
   //   }
   // },
-  async receivingGoods(e){    //确认收货
-    var that = this
-    let params = {
-      id:e.currentTarget.dataset.id
-    }
-    let res = await ajax({
-      url: 'api/order/collect', method: 'POST', data: params
-    })
-    if(res.data.code == 0){
-      wx.showToast({
-        title: '收货成功',
-        icon:'none',
-        duration:3000
-      })
-      that.getHoteOrder(1)
-    }else{
-      wx.showToast({
-        title:res.data.msg,
-        icon:'none',
-        duration:3000
-      })
-    }
-  },
+  // async receivingGoods(e){    //确认收货
+  //   var that = this
+  //   let params = {
+  //     id:e.currentTarget.dataset.id
+  //   }
+  //   let res = await ajax({
+  //     url: 'api/order/collect', method: 'POST', data: params
+  //   })
+  //   if(res.data.code == 0){
+  //     wx.showToast({
+  //       title: '收货成功',
+  //       icon:'none',
+  //       duration:3000
+  //     })
+  //     that.getHoteOrder(1)
+  //   }else{
+  //     wx.showToast({
+  //       title:res.data.msg,
+  //       icon:'none',
+  //       duration:3000
+  //     })
+  //   }
+  // },
   detalis(e){    //跳转去详情页
     wx.navigateTo({
       url: `/details/detail/index?id=${e.currentTarget.dataset.id}`,
@@ -164,14 +170,56 @@ Page({
   async getHoteOrder(num){   //获取酒店订单列表
   //console.log('diaoyongl')
       var that = this
+
+
+      if(num == undefined){
+        num = 1
+      }
+
       let params = {
         type:1,
-        page:num
+        page:2
       }
+      console.log(params)
     let res = await ajax({
       url: '/api/quickorder/HotelList', method: 'POST', data: params
     })
-    //console.log(res)
+    console.log("获取酒店订单列表",res)
+
+    let shoplist = res.data.data.data
+
+    // Unconfirmed:[],//未确认
+    // Unpaid:[],//未付款
+    // paid:[],//已付款
+    // unaccepted:[],//待验收
+    // completed:[],//已经完成
+
+    let unconfirmed=[],unpaid=[],paid=[],unaccepted=[],completed=[]
+
+    for(let i of shoplist){
+      if(i.status == 0){
+        unconfirmed.push(i)
+      }else if(i.status == 1){
+        unpaid.push(i)
+      }else if(i.status == 2){
+        paid.push(i)
+      }else if(i.status == 3){
+        unaccepted.push(i)
+      }else if(i.status == 4){
+        completed.push(i)
+      }
+    }
+
+    console.log("未确认",unconfirmed)
+    console.log("未付款",unpaid)
+    console.log("已付款",paid)
+    console.log("待验收",unaccepted)
+    console.log("已完成",completed)
+
+
+
+
+
     if(res.data.code == 0){
       if (num == 1){
         that.setData({
@@ -214,9 +262,9 @@ Page({
         icon:'none',
         duration:3000
       })
-      wx.navigateTo({
-        url: '/private/hotelAddress/index'
-      })
+      // wx.navigateTo({
+      //   url: '/private/hotelAddress/index'
+      // })
     }
   }, 
 
@@ -227,6 +275,7 @@ Page({
       let res = await ajax({
         url: 'api/quickorder/OtherRoleIsOk', method: 'POST', data: { id: e.currentTarget.dataset.id }
       })
+      
       if (res.data.code == 0) {
         wx.showToast({
           title: '确认成功',
@@ -289,13 +338,11 @@ Page({
     let res = await ajax({
       url: '/api/quickorder/getHotel', method: 'get'
     })
-    //console.log(res)
+  
     that.setData({
       hoteInfo:res.data.data 
     })
-    // that.getHoteOrder(1)
-    // that.getHoteRole()
-    // that.getroleIsOk()
+   
   },
 
   async getHoteRole() {   //获取酒店角色

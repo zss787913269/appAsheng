@@ -1,7 +1,7 @@
 
 
 .swiper-tab {
-  padding: 0 40rpx;
+  padding: 5rpx 40rpx;
   display: flex;
 }
 .total{
@@ -17,7 +17,7 @@
 }
 .swiper-tab-item {
   height: 66rpx;
-  width: 50%;
+  width: 20%;
   font-size: 30rpx;
   background: #8bc76a;
   color: #fff;
@@ -25,6 +25,7 @@
   margin-bottom: 20rpx;
   text-align: center;
   line-height: 66rpx;
+  /* margin-left: 10rpx; */
 }
 .btn{
   background-color: #ff9d34;
@@ -78,7 +79,7 @@
   border-radius: 10rpx 0rpx 0rpx 10rpx;
 }
 
-.swiper-tab-item:nth-child(3) {
+.swiper-tab-item:nth-child(5) {
   border-radius: 0rpx 10rpx 10rpx 0rpx;
 }
 

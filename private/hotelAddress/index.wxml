@@ -14,26 +14,23 @@
  <view class="picker">
   
   <picker bindchange="bindPickerChange" value="{{selectArray[index].id}}" range="{{selectArray}}" range-key="{{'text'}}">
-    <view class="picker">
-      我是：
-      <!-- <text class="pickerIndex">{{selectArray[index].text}}</text> -->
-       <text class="pickerIndex">{{myValue == "" ? "请选择身份"  : selectArray[index].text }}</text>
+    <view class="picker"><text>我　是：</text><text class="pickerIndex">{{myValue == "" ? "请选择身份"  : selectArray[index].text }}</text>
     </view>
   </picker>
     </view>
     
     <view class="titleed">
-      <label class="glable" for="male">姓 名: </label>
-      <input type="text" placeholder="请输入" name="fullName" id="male" value="{{fullName}}" />
+      <label class="" for="male"><text>姓　名：</text></label>
+      <input type="text" placeholder="请输入" class="pickerIndex" name="fullName" id="male" value="{{fullName}}" />
     </view>
     <view class="titleed">
-      <label class="glable" for="male">酒店名：</label>
-      <input type="text" placeholder="请输入" name="hotelName" id="male" value="{{hotelName}}" />
+      <label class="" for="male">酒店名：</label>
+      <input type="text" placeholder="请输入" class="pickerIndex1" name="hotelName" id="male" value="{{hotelName}}" />
     </view>
      <view class="titleed location">
-      <label class="glable" for="male">区 域：</label>
+      <label class="glable" for="male"><text>区　域：</text></label>
       <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-      <view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}}
+      <view class="picker2">{{region[0]}}，{{region[1]}}，{{region[2]}}
       </view>
     </picker>
       <i class="fal fa-angle-right"  bindchange="bindRegionChange"></i>
@@ -45,12 +42,12 @@
       <i class="fal fa-angle-right" bindtap="open" ></i>
     </view> -->
     <view class="titleed">
-      <label class="glable" for="male">地　址：</label>
-      <input type="text" placeholder="请输入" name="address" id="male" value="{{address}}" />
+      <label class="" for="male">地　址：</label>
+      <input type="text" placeholder="请输入" class="pickerIndex1" name="address" id="male" value="{{address}}" />
     </view>
     <view class="titleed">
-      <label class="glable" for="male">电　话:</label>
-      <input type="text" placeholder="请输入" name="tel" id="laoban" value="{{tel}}" bindinput='getInputValue'/>
+      <label class="" for="male">电　话:</label>
+      <input type="text" placeholder="请输入" class="pickerIndex2" name="tel" id="laoban" value="{{tel}}" bindinput='getInputValue'/>
       <view class="zhon" bindtap="sendCode">发送验证码</view>
     </view>
     <view class="titleed">

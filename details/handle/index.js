@@ -9,22 +9,33 @@ Page({
    * 页面的初始数据
    */
   data: {
+    page:1,
     currentTab: 1,
     shopInfo:'',
     shopOrderList:[],    //商家订单
     canvasWidth: 30,
     canvasHeight: 30,
-    printingBtn:false
+    printingBtn:false,
+    shopReceiptList:[],
+    shopCompleteList:[]
   },
   //点击切换
   clickTab: function (e) {
     var that = this;
+
     that.setData({
-      currentTab: e.target.dataset.current
+      currentTab: e.target.dataset.current,
+     
     })
     if( e.target.dataset.current == 2){
+      that.setData({
+        page:1
+      })
       that.shopConfirm()
     }else if(e.target.dataset.current == 1){
+      that.setData({
+        page:1
+      })
       that.getShopList()
     }
     //console.log(that.data.currentTab);
@@ -87,6 +98,7 @@ Page({
   async onekey(){   //一键接单
     var that = this
     let arr = []
+
     for (let i = 0; i < that.data.shopOrderList.length;i++){
       arr.push(that.data.shopOrderList[i].order_id)
     }
@@ -116,6 +128,16 @@ Page({
       })
     }
   },
+  // url="/details/detail/index"
+
+  godetails(e){
+      let id =e.currentTarget.dataset.id
+      console.log(id)
+      wx.navigateTo({
+        url: '/details/detail/index?id='+id,
+      })
+  },
+
  async receipt(e){   //接单
       var that = this
       let params ={
@@ -247,72 +269,102 @@ Page({
       canvasWidth:30,
       canvasHeight:30,
     })
-    that.getShopList()
     that.getShopInfo()
+    that.getShopList()
     that.shopConfirm()
     that.shopConfirmComplete()
   },
     async getShopList(){   //获取商家订单
         var that = this
         let params = {
-          status:0
+          status:0,
+          page:that.data.page
         }
       let res = await ajax({
         url: 'api/store/getStoreOrder',
         method: 'POST',
         data: params
       })
-      //console.log('获取商家订单',res)
+     
       if(res.data.code == 0){
-        if(res.data.data.data.length === 0){
-          //console.log(res.data.data.msg);
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration:3000
-          })
-        }
+  
         let resInfo1 = res.data.data.data
-        //console.log(resInfo1)
+       
         for (let i = 0; i < resInfo1.length; i++) {
-          // //console.log(i)
+         
           resInfo1[i].spec = JSON.parse(resInfo1[i].spec)
         }
-        console.log("订单号",resInfo1)
+  
         that.setData({
-          shopOrderList: resInfo1
-        })
-        that.setData({
+          shopOrderList: resInfo1,
           SOtotal:res.data.data.total
         })
+      
       }
-      //console.log(res)
-      //console.log(that.data.shopOrderList)
+
     },
   
     //zym 
-  async shopConfirm() {   //获取商家订单已接单
+  onReachBottom: function() {
+    let that = this
+      this.setData({
+        page:that.data.page + 1
+      })
+    //console.log(that.data.total
+     this.shopConfirm(that.data.page)  
+     this.getShopList(that.data.page)
+     this.shopConfirmComplete(that.data.page)
+    },
+  async shopConfirm(num) {   //获取商家订单已接单
     var that = this
-    let params = {
-      status: 1,     
+
+    if(num == undefined){
+      num = 1
     }
+
+    let params = {
+      status: 1,
+      page:num
+    }
+    console.log(params)
     let res = await ajax({
       url: 'api/store/getStoreOrder',
       method: 'POST',
       data: params
     })
-    // //console.log('获取商家订单已接单',res);
+
+    
+ 
     if(res.data.code == 0 ){
-      let resInfo = res.data.data.data
-      for (let i = 0; i < resInfo.length; i++) {
-        resInfo[i].spec = JSON.parse(resInfo[i].spec)
+      // let resInfo = that.data.shopReceiptList.concat(res.data.data.data)
+     
+        let resInfo = res.data.data.data
+        for (let i = 0; i < resInfo.length; i++) {
+          resInfo[i].spec = JSON.parse(resInfo[i].spec)
+        }
+          
+    
+        if(num != 1){
+          that.setData({
+            shopReceiptList: that.data.shopReceiptList.concat(resInfo),
+            ALtotla:res.data.data.total
+          })
+        }else{
+          that.setData({
+            shopReceiptList: resInfo,
+            ALtotla:res.data.data.total
+          })
+        }
+
+
+
+
+     
+
+
       }
-      that.setData({
-        shopReceiptList: resInfo,
-        ALtotla:res.data.data.total
-      })
-      console.log("获取商家订单已接单",resInfo)
-    }
+   
+  
   
 
   },
@@ -332,6 +384,7 @@ Page({
       for (let i = 0; i < resInfo.length; i++) {
         resInfo[i].spec = JSON.parse(resInfo[i].spec)
       }
+      // resInfo = that.data.shopCompleteList.concat(resInfo)
       that.setData({
         shopCompleteList: resInfo
       })

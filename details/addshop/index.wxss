@@ -86,6 +86,7 @@
 }
 .other{
   line-height: 98rpx;
+  
 }
 .citypickers{
   position: fixed;
@@ -158,4 +159,24 @@
  border-bottom: 1px solid #efefef;
  padding: 10rpx;
  width: 170rpx;
+}
+.mypicker{
+  /* background-color: #62a241; */
+  width: 100% !important;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  /* justify-content: space-evenly; */
+  align-items: center !important;
+  position: relative;
+}
+.picker{
+  margin-left: 40rpx;
+  width: 500rpx !important;
+}
+.shopa{
+  /* margin-top: 10rpx; */
+  left: 150rpx;
+  position: absolute;
+  top: 5rpx;
 }

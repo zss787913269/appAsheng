@@ -12,6 +12,7 @@ Page({
       "id": "0",
       "name": "暂无数据"
     }],
+    array: ['猪牛羊', '中国', '巴西', '日本'],
     selectArrayIndex:0,
     twoSelectArray:[{
       "id": "0",
@@ -60,7 +61,7 @@ Page({
     that.getOneCategory()
     if(options.id != undefined){
       let optionsData=wx.getStorageSync('shopInfo');
-      console.log(optionsData);
+      //console.log(optionsData);
       that.setData({
         listData:optionsData,
         shopName:options.name,
@@ -68,8 +69,20 @@ Page({
       })
     }
   },
+  bindPickerChange: function(e) {
+   
+    let index = e.detail.value   // 获取点击的下拉列表的下标
+    let id = this.data.selectArray[index].id
+    this.setData({
+      selectArrayIndex: index,
+      one:id,
+      showSelectArray: !this.data.showSelectArray
+    });
+    this.getTwoCategory(this.data.one)
+  
+  },
   optionTap(e){
-    console.log(e);
+    //console.log(e);
       let index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
         selectArrayIndex: index,
@@ -90,7 +103,7 @@ Page({
         method: 'get',
       })
       if(res.data.code == 0){
-        console.log(res)
+        //console.log(res)
         that.setData({
           selectArray: res.data.data,
           // oneSpecId:res.data.data[0].spec_id
@@ -109,7 +122,7 @@ Page({
   },
   submit(){   //提交
       var that = this
-      console.log(that.data.shopId)
+      //console.log(that.data.shopId)
       if(that.data.shopId != ''){
         that.setAddCommodity(that.data.shopId)
       }else{
@@ -117,7 +130,7 @@ Page({
       }
   },
   intChang(e){
-      console.log(e)
+      //console.log(e)
       this.setData({
         shopCompany:e.detail.value
       })
@@ -131,7 +144,7 @@ Page({
     let quotationLineCopy = that.data.quotationLine
     let quotationLineCopySall = that.data.quotationLineCopy
     let obj = that.data.obj
-    console.log(idx)
+    //console.log(idx)
     for (let k in that.data.quotationLine){
       if (k == that.data.specificationsNum){
         for (let j in that.data.quotationLine[k]) {
@@ -139,10 +152,10 @@ Page({
             for (let i in that.data.quotationLine[k][j]) {
               for (let g in that.data.quotationLine[k][j][i]){
                if(idx == g){
-                 console.log(g)
+                 //console.log(g)
                  quotationLineCopy[k][j][i][g] = value 
                  quotationLineCopySall[k][j] = that.data.obj
-                 console.log(quotationLineCopySall[k][j])
+                 //console.log(quotationLineCopySall[k][j])
                  quotationLineCopySall[k][j][g] = value
                     that.setData({
                       shopPrice: quotationLineCopySall
@@ -166,10 +179,10 @@ Page({
     that.setData({
       quotationLine: quotationLineCopy
     })
-    console.log(quotationLineCopySall)
-    // console.log(that.data.shopPrice)
-    // console.log(that.data.sHOPNAME)
-    console.log(that.data.quotationLine)
+    //console.log(quotationLineCopySall)
+    // //console.log(that.data.shopPrice)
+    // //console.log(that.data.sHOPNAME)
+    //console.log(that.data.quotationLine)
   },
     // text(){
     //   var test = [
@@ -194,10 +207,10 @@ Page({
     //       ]
     //     }
     //   ]
-    //   console.log(test)
+    //   //console.log(test)
     // },
   async setAddCommodity(id){
-    console.log(id)
+    //console.log(id)
       var that = this
     let shopPrice = that.data.shopPrice
     if (shopPrice == undefined){
@@ -215,7 +228,7 @@ Page({
             }
           }
       }
-    console.log(shopPrice)
+    //console.log(shopPrice)
    
       let params = {
         title: that.data.threeClassification,
@@ -227,11 +240,11 @@ Page({
         show_name: that.data.exhibition,
         inventory_unit:that.data.shopCompany
       }
-      console.log(params);
+      //console.log(params);
       if(id != undefined){
         params.id = id
       }
-      console.log(params)
+      //console.log(params)
     let res = await ajax({
       url: 'api/store/goodsAdd',
       method: 'POST',
@@ -253,11 +266,11 @@ Page({
         duration:3000
       })
     }
-    console.log(res)
+    //console.log(res)
   },
   getDate: function (e) { //获取下拉选择的内容   用户选择的类型
     var that = this
-    console.log('下拉获取',e);
+    //console.log('下拉获取',e);
     that.getTwoCategory(e.detail.id)
     that.setData({
       one: e.detail.id,
@@ -269,17 +282,16 @@ Page({
     let params = {
       id
     }
-    console.log(params)
+    //console.log(params)
     let res = await ajax({
       url: 'api/store/getTwoCategoryAndSpec',
       method: 'POST',
       data:params
     })
-    console.log('id',res)
+    //console.log('id',res)
     if(res.data.code == 0){
-      // that.setData({
-      //   spec_id: res.data.data[0].three[0].spec_id,
-      // })
+        
+      console.log("获取二级分类和绑定的属性分类",res.data.data)
       that.setData({
         provinces: res.data.data,
         spec_id: res.data.data[0].spec_id,
@@ -312,12 +324,12 @@ Page({
     
   },
   bindChange(e){   //选择二，三级类别
-  console.log(e)
+  //console.log(e)
     var that = this
     var val = e.detail.value
     let index = val[0]
     let idx = val[1]
-    console.log(that.data.provinces[index].items)
+    //console.log(that.data.provinces[index].items)
     that.setData({
       spec_id: that.data.provinces[index].spec_id,
       citys:that.data.provinces[index].three,
@@ -328,7 +340,7 @@ Page({
       attribute: that.data.provinces[index].items,
       shipId: that.data.provinces[index].three[idx].spec_id
     })
-    console.log(that.data.twoId,that.data.threeId)
+    //console.log(that.data.twoId,that.data.threeId)
     if (that.data.shipId != 0 && that.data.shipId != null) {
       that.getAttribute(that.data.shipId)
     } else {
@@ -350,7 +362,7 @@ Page({
   },
   async getAttribute(id){
     var that = this
-    console.log(id)
+    //console.log(id)
     let params = {
       id
     }
@@ -359,7 +371,7 @@ Page({
       method: 'POST',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     let resJson = {
       'msg':"succes",
       code:0,
@@ -388,7 +400,7 @@ Page({
         }
       }
     }
-    console.log()
+    //console.log()
     if(res.data.code == 0){
       if(res.data.data == ''){
         wx.showToast({
@@ -398,7 +410,7 @@ Page({
         })
         return
       }
-      console.log(res)
+      //console.log(res)
       let quotationLineCopy = JSON.parse(JSON.stringify(res.data.data.spec))
       for (let i in quotationLineCopy){
         for (let j in quotationLineCopy[i]){
@@ -424,7 +436,7 @@ Page({
     }
   },
   toQuot(e){   //用户点击了规格
-  console.log(e)
+  //console.log(e)
     this.setData({
       specificationsNum:e.currentTarget.dataset.index
     })
@@ -434,24 +446,24 @@ Page({
         numTwo:e.currentTarget.dataset.index,
         sHOPNAME:''
       })
-      // console.log(this.data.sHOPNAME)
+      // //console.log(this.data.sHOPNAME)
       
   },
   intExhibition(e){   //获取展示行
     let index = e.currentTarget.dataset.index
     let exhibition = this.data.exhibition
       exhibition[index] = e.detail.value
-    console.log(this.data.exhibition)   //展示数据
+    //console.log(this.data.exhibition)   //展示数据
   },
   // getDatecategory(e) { //用户选择的类别
-  //   console.log(e.detail.index)
+  //   //console.log(e.detail.index)
   //   let index = e.detail.index
   //   var that= this
   //   let arr = that.data.twoSelectArray
   //   that.setData({
   //     attribute:arr[index].items
   //   })
-  //   console.log(that.data.attribute)
+  //   //console.log(that.data.attribute)
   // },
   /**
    * 生命周期函数--监听页面初次渲染完成

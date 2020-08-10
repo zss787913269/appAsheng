@@ -115,9 +115,10 @@ height: 30px;
 
 }
 .tbody{
-  height: 140px;
+  height: 280rpx;
 overflow: hidden;
 margin-bottom: 8px;
+
 }
 .tbody image {
   width: 100%;
