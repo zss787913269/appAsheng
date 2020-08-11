@@ -38,9 +38,9 @@
           <view class="zhong"  bindtap="noReceiptRefuse" data-id="{{item}}">拒绝</view> -->
       </view>
       <!-- <navigator url="/details/detail/index" hover-class="other-navigator-hover"> -->
-        <view class="color" bindtap="godetails"  data-id="{{item.id}}">
+        <!-- <view class="color" bindtap="godetails"  data-id="{{item.id}}">
           <text>点击查看订单详情</text>
-        </view>
+        </view> -->
       <!-- </navigator> -->
     </view>
     <!-- <view class="buttom">
@@ -105,9 +105,9 @@
         <view class="zhong active">已接单</view>
       </view>
       <!-- <navigator url="/details/detail/index" hover-class="other-navigator-hover"> -->
-        <view class="color" bindtap="godetails"  data-id="{{item.id}}">
+        <!-- <view class="color" bindtap="godetails"  data-id="{{item.id}}">
           <text>点击查看订单详情</text>
-        </view>
+        </view> -->
       <!-- </navigator> -->
     </view>
     <view class="buttom">

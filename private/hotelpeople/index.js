@@ -23,6 +23,10 @@ Page({
     paid:[],//已付款
     unaccepted:[],//待验收
     completed:[],//已经完成
+    wqr:"",
+    wfk:"",
+    yfk:"",
+    dys:""
 
   },
   //点击切换
@@ -31,20 +35,54 @@ Page({
     that.setData({
       currentTab: e.target.dataset.current
     })
-    //console.log(that.data.currentTab);
-    if (e.target.dataset.current == 2){
-      that.getSelfShop(that.data.pages)
-    }
-    // }
+
+      that.getHoteOrder()
+ 
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (option) {
     var that = this
-    that.getHoteInfo()
+    if(option.idx == 2){
+      that.setData({
+        currentTab:3
+      })
+    }
+
+
+       that.getHoteInfo()
+       that.getmyHotelList()
+
     
   },  
+  async getmyHotelList(){
+    let params = {
+      type:1,
+      status:-1
+    }
+  
+      let res = await ajax({
+        url: '/api/quickorder/HotelList', method: 'POST', data: params
+      })
+
+      let wqr,wfk,yfk,dys
+
+      for(let i of res.data.data.data){
+        
+      }
+
+      // wqr:"",
+      // wfk:"",
+      // yfk:"",
+      // dys:""
+
+      
+
+
+      console.log("getmyHotelList",res.data.data.data)
+
+  },
   // exchange(){    //退换货申请
 
   // },
@@ -104,6 +142,8 @@ Page({
 
   // console.log(e.currentTarget)
 
+ 
+
   let items = e.currentTarget.dataset
 
     for(let i in this.data.hoteList){
@@ -114,6 +154,9 @@ Page({
           wx.navigateTo({
             url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
           })
+          // this.setData({
+          //   currentTab:Number(this.data.currentTab) + 1
+          // })
         }
     }
    
@@ -168,58 +211,36 @@ Page({
     }
   },
   async getHoteOrder(num){   //获取酒店订单列表
-  //console.log('diaoyongl')
+  
       var that = this
-
-
-      if(num == undefined){
-        num = 1
-      }
 
       let params = {
         type:1,
-        page:2
+        status:that.data.currentTab - 1
       }
       console.log(params)
     let res = await ajax({
       url: '/api/quickorder/HotelList', method: 'POST', data: params
     })
-    console.log("获取酒店订单列表",res)
-
-    let shoplist = res.data.data.data
-
-    // Unconfirmed:[],//未确认
-    // Unpaid:[],//未付款
-    // paid:[],//已付款
-    // unaccepted:[],//待验收
-    // completed:[],//已经完成
 
     let unconfirmed=[],unpaid=[],paid=[],unaccepted=[],completed=[]
-
-    for(let i of shoplist){
-      if(i.status == 0){
-        unconfirmed.push(i)
-      }else if(i.status == 1){
-        unpaid.push(i)
-      }else if(i.status == 2){
-        paid.push(i)
-      }else if(i.status == 3){
-        unaccepted.push(i)
-      }else if(i.status == 4){
-        completed.push(i)
-      }
+    let shoplist = res.data.data.data
+    if(params.status == 0){
+      unconfirmed = shoplist
+    }else if(params.status == 1){
+      unpaid = shoplist
+    }else if(params.status == 2){
+      paid = shoplist
+    }else if(params.status == 3){
+      unaccepted = shoplist
+    }else if(params.status == 4){
+      completed = shoplist
     }
 
-    console.log("未确认",unconfirmed)
-    console.log("未付款",unpaid)
-    console.log("已付款",paid)
-    console.log("待验收",unaccepted)
-    console.log("已完成",completed)
-
-
-
-
-
+    this.setData({
+      unconfirmed,unpaid,paid,unaccepted,completed
+    })
+    
     if(res.data.code == 0){
       if (num == 1){
         that.setData({
@@ -227,22 +248,23 @@ Page({
           hotelOrder:res.data.data.total
         })
         if(res.data.data.data.length === 0){
-          wx.showToast({
-            title: '暂无酒店订单',
-            icon:'none',
-            duration:3000
-          })
+          // wx.showToast({
+          //   title: '暂无酒店订单',
+          //   icon:'none',
+          //   duration:3000
+          // })
         }
       }else{
-        wx.showToast({
-          title: '到底了，已无其他订单信息',
-          icon:'none',
-          duration:3000
-        })
+        // wx.showToast({
+        //   title: '到底了，已无其他订单信息',
+        //   icon:'none',
+        //   duration:3000
+        // })
       }
       if(res.data.data.data.length !== 0){
         that.setData({
-          hoteList: that.data.hoteList.concat(res.data.data.data),
+          // hoteList: that.data.hoteList.concat(res.data.data.data),
+          hoteList:res.data.data.data,
           hoteRoleNow: res.data.data.data[0].user_id,  
           total: res.data.data.page_total == res.data.data.total,
         })
@@ -270,6 +292,13 @@ Page({
 
   async confirmOrder(e){   //确认订单
       var that = this
+
+   
+      this.setData({
+        currentTab:Number(that.data.currentTab) + 1
+      })
+    
+
     if (that.data.nowUserId != 7 && that.data.nowUserId != 5){
         // 其他角色确认订单
       let res = await ajax({
@@ -277,12 +306,13 @@ Page({
       })
       
       if (res.data.code == 0) {
+        that.getHoteOrder()
         wx.showToast({
           title: '确认成功',
           icon:'none',
           duration:3000
         })
-        that.getHoteOrder(1)
+     
       } else {
         wx.showToast({
           title: res.data.msg,
@@ -300,7 +330,7 @@ Page({
           icon:'none',
           duration:3000
         })
-        that.getHoteOrder(1)
+        that.getHoteOrder()
       } else {
         wx.showToast({
           title: res.data.msg,
@@ -515,7 +545,7 @@ Page({
         page:that.data.page + 1
       })
     //console.log(that.data.total)
-    that.getHoteOrder(that.data.page)  
+    // that.getHoteOrder(that.data.page)  
   },  
 
   /**

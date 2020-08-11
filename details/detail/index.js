@@ -24,10 +24,11 @@ Page({
     let that = this
     let res = await ajax({
       url: 'api/order/getCategoryById',
+      // url:'api/order/BrandOrderDetail',
       method: 'POST',
       data: { id }
     })
-    console.log(res)
+    console.log(res.data.data)
     if(res.data.code == 0){
       that.setData({
         secondaryClassification:res.data.data,
@@ -114,7 +115,7 @@ Page({
         // shopAttribute: res.data.data.data.items[0],
         // currentTab: res.data.data.data.items[0].id
       })
-      console.log(this.data.orderlist)
+      console.log("orderlist",this.data.orderlist)
     }else{
       wx.showToast({
         title:res.data.msg,

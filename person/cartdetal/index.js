@@ -29,7 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    //console.log(options)
   if(options.id != undefined){
     this.setData({
       price: options.price,
@@ -55,14 +55,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   modalInput(e){
-    // console.log(e.detail.value)
+    // //console.log(e.detail.value)
     this.setData({
       inputBz:e.detail.value
     })
   },
 
   async subdelect(e) {
-    console.log(e)
+    //console.log(e)
     let that = this
     let res = await ajax({
       url: 'api/buy/index',
@@ -77,6 +77,7 @@ Page({
       }
     })
     let paymentList = res.data.data.payment_list
+    //console.log("paymentList",paymentList)
     for (var i = 0; i < paymentList.length; i++) {
       paymentList[i].checked = false
     }
@@ -88,8 +89,8 @@ Page({
       actual_price: res.data.data.base, //商品价格,
 
     })
-    console.log(res.data.data)
-    console.log(that.data.ids)
+    //console.log(res.data.data)
+    //console.log(that.data.ids)
 
   },
   // 在支付前先提交地址
@@ -103,7 +104,7 @@ Page({
         address_id: that.data.addreslist.id
       }
     })
-    console.log(res)
+    //console.log(res)
    
     if(res.data.code == 0){
       that.orderPay()
@@ -111,8 +112,11 @@ Page({
   },
   
   async orderPay(e) {
-    console.log(e)
+    //console.log(e)
     let that = this
+
+    //console.log("orderPay",that.data.paymentId)
+
     let res = await ajax({
       url: 'api/order/payor',
       method: 'POST',
@@ -123,7 +127,7 @@ Page({
     })
     wx.hideLoading();
     if (res.data.code == 0) {
-      console.log("支付成功",res)
+      //console.log("支付成功",res)
       // 是否在线支付,非在线支付则支付成功
       if (res.data.data.is_online_pay == 0) {
         // 数据设置
@@ -153,7 +157,7 @@ Page({
             //   url: "/pages/index/index"
             // });
             wx.reLaunch({
-              url: "/private/hotelpeople/index"
+              url: "/private/hotelpeople/index?idx=2"
             });
           },
           fail: function(res) {
@@ -163,13 +167,14 @@ Page({
               duration:3000
             })
             wx.reLaunch({
-              url: "/private/hotelpeople/index"
+              url: "/private/hotelpeople/index?idx=2"
             });
           
           }
         });
       }
     } else {
+      //console.log(res)
       wx.showToast({
         title: res.data.msg,
         icon:'none',
@@ -177,7 +182,7 @@ Page({
       })
 
     }
-    console.log(res)
+    //console.log(res)
     fail: () => {
       wx.hideLoading();
       //   app.showToast("");
@@ -190,7 +195,7 @@ Page({
 
   },
   switch: function(e) {
-    console.log(e)
+    //console.log(e)
   },
 
 
@@ -209,6 +214,7 @@ Page({
         checkboxItems[i].checked = false;
       }
     }
+    //console.log("checkboxValues",checkboxValues)
     that.setData({
       payment_list:checkboxItems,
       paymentId: checkboxValues
@@ -229,35 +235,5 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

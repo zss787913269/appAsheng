@@ -18,9 +18,7 @@ Page({
   },
 
   onLoad: function(options) {
-    this.getlist(1)
-    this.getlist(2)
-    this.getFirstList()
+      this.getFirstList()
   },
   onShow:function(){
     this.getlist(this.data.currentTab)
@@ -48,8 +46,6 @@ Page({
     })
     that.orderPay()
   },
-
-
   // 获取首次进入购物车的数据
   async getFirstList(){
       let that = this
@@ -69,14 +65,10 @@ Page({
           url: 'api/cart/index',
           method: 'POST',
         })
-
-       that.setData({
-          currentTab: 2
-        })
+          console.log("个人订单",res2.data.data.data)
         that.setData({
           currentTab: 2,
           tableList: res2.data.data.data,
-          
         })
       }else{
         that.setData({
@@ -84,7 +76,7 @@ Page({
         })
       }
 
-
+      this.getTotalPrice()
   },
 
   async getlist(index) {
@@ -99,7 +91,7 @@ Page({
         data: params
       })
 
-      console.log("公司订单",res.data.data.data)
+      // console.log("公司订单",res.data.data.data)
 
       that.setData({
         tableList: res.data.data.data,
@@ -116,9 +108,11 @@ Page({
         tableList: res.data.data.data,
         personList: res.data.data.data
       })
-      // console.log(res)
+     
+      // console.log(res) 
     }
     that.getTotalPrice()
+  
   },
   // 加减商品
   async subadd(id, goods, stock) {
@@ -160,9 +154,6 @@ Page({
 
 
 
-    console.log(e)
-
-
     const index = e.currentTarget.dataset.index;
     let tableList = this.data.tableList;
     let num = tableList[index].stock;
@@ -199,7 +190,7 @@ Page({
 
 
 
-    // console.log("tableList",tableList)
+    console.log("tableList",tableList)
 
     let sum = 0;
     for (let i = 0; i < tableList.length; i++) {

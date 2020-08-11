@@ -4,6 +4,9 @@
   padding: 5rpx 40rpx;
   display: flex;
 }
+.nodd{
+  margin-left: 40rpx;
+}
 .total{
   font-size: 15rpx;
   background-color: #FF9000;

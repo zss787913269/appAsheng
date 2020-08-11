@@ -49,10 +49,11 @@
 .bz input{
   border: 1px solid #ccc;
   font-size: 26rpx;
-  width: 340rpx;
+  width: 580rpx;
   border-radius: 10rpx;
   height: 60prx;
   line-height: 60rpx;
+  padding-left: 20rpx;
 }
 .huo{
 

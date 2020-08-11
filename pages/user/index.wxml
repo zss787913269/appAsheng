@@ -40,8 +40,8 @@
         <text>履约金</text>
       </view>
 
-      <!-- <view class="head_tap" data-url="{{url2}}" bindtap="gotoikPage"> -->
-       <view class="head_tap" data-url="{{url2}}" >
+      <view class="head_tap" data-url="{{url2}}" bindtap="gotoikPage">
+       <!-- <view class="head_tap" data-url="{{url2}}" > -->
         <text>{{balance}}</text>
         <text>余额</text>
       </view>

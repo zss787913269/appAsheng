@@ -1,4 +1,4 @@
-
+<wxs src='./index.wxs' module="utils"></wxs>
 <!--操作菜单-->
 <view class="item">
    <view class="swiper-tab">
@@ -35,9 +35,11 @@
     </view>
 
     <view class="single">
-      <text> 总计：{{item.single}} 元</text>
+    
+      <text> 总计：{{utils.tomyfix(item.stock,item.price)}} 元</text>
     </view>
 
+    
 
     <view class="bujin">
       <view data-index="{{index}}" bindtap='sub'>

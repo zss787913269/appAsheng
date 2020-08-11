@@ -75,6 +75,7 @@ box-sizing: border-box;
   position: relative;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-top: 70rpx;
 }
 .myenter{
   margin-left: 20rpx;

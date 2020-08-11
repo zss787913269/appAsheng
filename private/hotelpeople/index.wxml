@@ -27,8 +27,107 @@
 
 <view wx:if="{{currentTab==1}}">
 
+	<view class="nodd" wx:if="{{unconfirmed.length == 0}}">
+		<text>没有订单</text>
+	</view>
 	<!-- 下面 -->
-	<view class="title" wx:for="{{hoteList}}" wx:key="unique" wx:for-index="idx">
+	<view class="title" wx:for="{{unconfirmed}}" wx:key="unique" wx:for-index="idx">
+		<view>
+			<view class="title1">
+				<view class="content">
+				
+					<view class="huo">
+						<text style="display:flex">订单号：{{item.order_no}}</text>
+						<text>{{item.describe}}</text>
+					
+					</view>
+					<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">
+						<text>点击查看订单详情</text>
+					</view>
+					<view class="confirmCancel">
+						<view >
+							<view class="confirm text" bindtap="confirmOrder" data-id="{{item.id}}">确认订单</view>
+							<view class="cancel text" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</view>
+						</view>
+					</view>
+			
+					
+				
+					<view class="invalid">
+						<text wx:if="{{item.status == 5}}">已取消</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	
+	</view>
+	<view class="bottom">
+		<view class="itemed">
+			<view class="itemded">
+				<button open-type="contact" class="btn">联 系 我 们</button>
+			</view>
+		</view>
+	</view>
+</view>
+<view wx:if="{{currentTab==2}}">
+	<view class="nodd"  wx:if="{{unpaid.length == 0}}">
+			<text>没有订单</text>
+		</view>
+	<!-- 下面 -->
+	<view class="title" wx:for="{{unpaid}}" wx:key="unique" wx:for-index="idx">
+		<view>
+			<view class="title1">
+				<view class="content">
+				
+					<view class="huo">
+						<text style="display:flex">订单号：{{item.order_no}}</text>
+						<text>{{item.describe}}</text>
+						<view class="zhong" wx:if="{{item.pay_status_name !='待支付'}}" style="position:absolute;top:62rpx;right:10rpx;">
+							<text wx:if="{{item.is_send_ok == 0}}">配送中</text>
+							<text wx:if="{{item.is_send_ok == 1}}" bindtap="receivingGoods" data-id="{{item.id}}">确认收货</text>
+							<!-- <text wx:if="{{item.is_send_ok == 1}}" bindtap="exchange" data-id="{{item.id}}">退换货</text> -->
+							<text wx:if="{{item.is_send_ok == 2}}">完成</text>
+						</view>
+					</view>
+					<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">
+						<text>点击查看订单详情</text>
+					</view>
+					<view class="confirmCancel" wx:if="{{item.nowRole == true}}">
+						<view wx:if="{{item.status != 5}}">
+							<view class="confirm text" bindtap="confirmOrder" data-id="{{item.id}}">确认订单</view>
+							<view class="cancel text" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</view>
+						</view>
+
+					</view>
+					<!-- <view>{{item.price}}</view> -->
+					<view wx:if="{{!item.nowRole && item.status != 5}}" bindtap="payment" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.price}}">
+						<text class="payment" wx:if="{{item.pay_status_name == '待支付'}}">支付</text>
+					</view>
+					<view>
+						<!-- <text class="payment" wx:if="{{item.status == '4'||item.status == '3'||item.status == '2'}}" data-value="{{item}}" bindtap="print">打印</text> -->
+					</view>
+					<view class="invalid">
+						<text wx:if="{{item.status == 5}}">已取消</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	
+	</view>
+	<view class="bottom">
+		<view class="itemed">
+			<view class="itemded">
+				<button open-type="contact" class="btn">联 系 我 们</button>
+			</view>
+		</view>
+	</view>
+</view>
+<view wx:if="{{currentTab==3}}">
+	<view  class="nodd" wx:if="{{paid.length == 0}}">
+		<text>没有订单</text>
+	</view>
+	<!-- 下面 -->
+	<view class="title" wx:for="{{paid}}" wx:key="unique" wx:for-index="idx">
 		<view>
 			<view class="title1">
 				<view class="content">
@@ -66,66 +165,119 @@
 				</view>
 			</view>
 		</view>
-		<!-- <view class="zhigou">
-      <text>添加到自购分单</text>
-    </view> -->
+	
 	</view>
 	<view class="bottom">
-		<!-- <view class="itemed">
-      <view class="itemded">
-        <text>扫一扫</text>
-      </view>
-    </view> -->
-
 		<view class="itemed">
-
 			<view class="itemded">
 				<button open-type="contact" class="btn">联 系 我 们</button>
 			</view>
 		</view>
 	</view>
 </view>
-<view wx:if="{{currentTab==2}}">
-	<!-- <view class="hotelone">
-    <view class="ruzhang">
-      <text>南宁国际大酒店</text>
-      <text>下单员陈东</text>
-    </view>
-    <view class="ruzhang">
-      <text>下单总数:30</text>
-      <text>总金额:1568</text>
-    </view>
-    <view class="hotelposone">
-      <view class="zhon active">
-        <text>确认订单</text>
-      </view>
-      <view class="zhon">
-        <text>联系下单员</text>
-      </view>
-    </view>
-  </view> -->
-
+<view wx:if="{{currentTab==4}}">
+	<view class="nodd" wx:if="{{unaccepted.length == 0}}">
+		<text>没有订单</text>
+	</view>
 	<!-- 下面 -->
-	<view class="titleLe" wx:for="{{myShop}}" wx:key="index">
-		<view>商品名：{{item.title}}</view>
-		<view>商品价格：{{item.price}}</view>
-		<view class="zhigou" bindtap="addPlatform" data-orderdetid="{{item.id}}" data-orderid="{{item.order_id}}">
-			<text class="colorone">添加至平台</text>
+	<view class="title" wx:for="{{unaccepted}}" wx:key="unique" wx:for-index="idx">
+		<view>
+			<view class="title1">
+				<view class="content">
+				
+					<view class="huo">
+						<text style="display:flex">{{idx}}订单号：{{item.order_no}}</text>
+						<text>{{item.describe}}</text>
+						<view class="zhong" wx:if="{{item.pay_status_name !='待支付'}}" style="position:absolute;top:62rpx;right:10rpx;">
+							<text wx:if="{{item.is_send_ok == 0}}">配送中</text>
+							<text wx:if="{{item.is_send_ok == 1}}" bindtap="receivingGoods" data-id="{{item.id}}">确认收货</text>
+							<!-- <text wx:if="{{item.is_send_ok == 1}}" bindtap="exchange" data-id="{{item.id}}">退换货</text> -->
+							<text wx:if="{{item.is_send_ok == 2}}">完成</text>
+						</view>
+					</view>
+					<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">
+						<text>点击查看订单详情</text>
+					</view>
+					<view class="confirmCancel" wx:if="{{item.nowRole == true}}">
+						<view wx:if="{{item.status != 5}}">
+							<view class="confirm text" bindtap="confirmOrder" data-id="{{item.id}}">确认订单</view>
+							<view class="cancel text" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</view>
+						</view>
+
+					</view>
+					<!-- <view>{{item.price}}</view> -->
+					<view wx:if="{{!item.nowRole && item.status != 5}}" bindtap="payment" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.price}}">
+						<text class="payment" wx:if="{{item.pay_status_name == '待支付'}}">支付</text>
+					</view>
+					<view>
+						<!-- <text class="payment" wx:if="{{item.status == '4'||item.status == '3'||item.status == '2'}}" data-value="{{item}}" bindtap="print">打印</text> -->
+					</view>
+					<view class="invalid">
+						<text wx:if="{{item.status == 5}}">已取消</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	
+	</view>
+	<view class="bottom">
+		<view class="itemed">
+			<view class="itemded">
+				<button open-type="contact" class="btn">联 系 我 们</button>
+			</view>
 		</view>
 	</view>
-	<!-- <view class="bottom">
-    <view class="itemed">
-      <view class="itemded">
-        <text>确认订单</text>
-      </view>
-    </view>
-    <view class="itemed">
+</view>
+<view wx:if="{{currentTab==5}}">
+		<view class="nodd" wx:if="{{completed.length == 0}}">
+		<text>没有订单</text>
+	</view>
+	<!-- 下面 -->	
+	<view class="title" wx:for="{{completed}}" wx:key="unique" wx:for-index="idx">
+		<view>
+			<view class="title1">
+				<view class="content">
+				
+					<view class="huo">
+						<text style="display:flex">{{idx}}订单号：{{item.order_no}}</text>
+						<text>{{item.describe}}</text>
+						<view class="zhong" wx:if="{{item.pay_status_name !='待支付'}}" style="position:absolute;top:62rpx;right:10rpx;">
+							<text wx:if="{{item.is_send_ok == 0}}">配送中</text>
+							<text wx:if="{{item.is_send_ok == 1}}" bindtap="receivingGoods" data-id="{{item.id}}">确认收货</text>
+							<!-- <text wx:if="{{item.is_send_ok == 1}}" bindtap="exchange" data-id="{{item.id}}">退换货</text> -->
+							<text wx:if="{{item.is_send_ok == 2}}">完成</text>
+						</view>
+					</view>
+					<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">
+						<text>点击查看订单详情</text>
+					</view>
+					<view class="confirmCancel" wx:if="{{item.nowRole == true}}">
+						<view wx:if="{{item.status != 5}}">
+							<view class="confirm text" bindtap="confirmOrder" data-id="{{item.id}}">确认订单</view>
+							<view class="cancel text" bindtap="cancelOrder" data-id="{{item.id}}">取消订单</view>
+						</view>
 
-      <view class="itemded">
-        <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
-          <text>联系我们</text>
-        </navigator>
-      </view>
-    </view>
-  </view> -->
+					</view>
+					<!-- <view>{{item.price}}</view> -->
+					<view wx:if="{{!item.nowRole && item.status != 5}}" bindtap="payment" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.price}}">
+						<text class="payment" wx:if="{{item.pay_status_name == '待支付'}}">支付</text>
+					</view>
+					<view>
+						<!-- <text class="payment" wx:if="{{item.status == '4'||item.status == '3'||item.status == '2'}}" data-value="{{item}}" bindtap="print">打印</text> -->
+					</view>
+					<view class="invalid">
+						<text wx:if="{{item.status == 5}}">已取消</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	
+	</view>
+	<view class="bottom">
+		<view class="itemed">
+			<view class="itemded">
+				<button open-type="contact" class="btn">联 系 我 们</button>
+			</view>
+		</view>
+	</view>
 </view>

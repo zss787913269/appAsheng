@@ -1,10 +1,10 @@
 {
   "pages": [
     
+    "pages/index/index",
     "private/hotelpeople/index",
     "details/handle/index",
     "pages/user/index",
-    "pages/index/index",
     "private/hotelAddress/index",
     "pages/deliver/index",
     "pages/cart/index",

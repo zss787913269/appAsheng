@@ -159,6 +159,7 @@ Page({
      })
      that.shopConfirm()
      that.getShopList()
+     that.getShopInfo()
    }else{
      wx.showToast({
        title:res.data.msg,
@@ -175,7 +176,7 @@ Page({
       method: 'POST',
       // data: params
     })
-    //console.log(res)
+    console.log("获取店铺",res.data.data)
     if (res.data.code == 0) {
       that.setData({
         shopInfo:res.data.data
@@ -274,18 +275,24 @@ Page({
     that.shopConfirm()
     that.shopConfirmComplete()
   },
-    async getShopList(){   //获取商家订单
+
+  //zym
+    async getShopList(num){   //获取商家订单
+      console.log("num",num)
         var that = this
         let params = {
           status:0,
           page:that.data.page
         }
+        console.log("params",params)
       let res = await ajax({
         url: 'api/store/getStoreOrder',
         method: 'POST',
         data: params
       })
-     
+      
+      console.log("getStoreOrder",res.data.data)
+
       if(res.data.code == 0){
   
         let resInfo1 = res.data.data.data
@@ -294,6 +301,7 @@ Page({
          
           resInfo1[i].spec = JSON.parse(resInfo1[i].spec)
         }
+
   
         that.setData({
           shopOrderList: resInfo1,
@@ -305,35 +313,35 @@ Page({
     },
   
     //zym 
-  onReachBottom: function() {
-    let that = this
-      this.setData({
-        page:that.data.page + 1
-      })
-    //console.log(that.data.total
-     this.shopConfirm(that.data.page)  
-     this.getShopList(that.data.page)
-     this.shopConfirmComplete(that.data.page)
-    },
+  // onReachBottom: function() {
+  //   let that = this
+  //     this.setData({
+  //       page:that.data.page + 1
+  //     })
+  //   //console.log(that.data.total
+  //    this.shopConfirm(that.data.page)  
+  //    this.getShopList(that.data.page)
+  //    this.shopConfirmComplete(that.data.page)
+  //   },
   async shopConfirm(num) {   //获取商家订单已接单
     var that = this
 
-    if(num == undefined){
-      num = 1
-    }
+    // if(num == undefined){
+    //   num = 1
+    // }
 
     let params = {
       status: 1,
-      page:num
+      // page:num
     }
-    console.log(params)
+
     let res = await ajax({
       url: 'api/store/getStoreOrder',
       method: 'POST',
       data: params
     })
 
-    
+   
  
     if(res.data.code == 0 ){
       // let resInfo = that.data.shopReceiptList.concat(res.data.data.data)
@@ -342,14 +350,15 @@ Page({
         for (let i = 0; i < resInfo.length; i++) {
           resInfo[i].spec = JSON.parse(resInfo[i].spec)
         }
-          
-    
+
         if(num != 1){
           that.setData({
-            shopReceiptList: that.data.shopReceiptList.concat(resInfo),
+            // shopReceiptList: that.data.shopReceiptList.concat(resInfo),
+            shopReceiptList: resInfo,
             ALtotla:res.data.data.total
           })
         }else{
+          console.log("resInfo",resInfo)
           that.setData({
             shopReceiptList: resInfo,
             ALtotla:res.data.data.total

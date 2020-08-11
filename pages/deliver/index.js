@@ -38,6 +38,8 @@ Page({
     this.getDistributorClerkList()
     this.getPeisongList()
     // that.look()
+
+
   },
   onShow: function () {
     this.getDeliveryClerkList()
@@ -410,6 +412,7 @@ Page({
       detailedId: e.currentTarget.dataset.id,
       detailedIndex: e.currentTarget.dataset.index,
     })
+    console.log(e.currentTarget.dataset)
     that.lookApi()
   },
 
@@ -419,11 +422,14 @@ Page({
     let params = {
       id: that.data.detailedId
     }
+    console.log("params",params)
     let res = await ajax({
       url: 'api/staff/getOrderDetail',
       method: 'post',
       data: params
     })
+
+    console.log("lookApi",res.data.data)
 
     if (res.data.code == 0) {
       let shopInfo = res.data.data
