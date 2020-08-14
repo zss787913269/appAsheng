@@ -21,30 +21,68 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(options)
+ 
 
     let that = this
 
-    // this.setData({
-    //   shopId:options.id
-    // })
-
     this.setData({
-      shopId: 13,
-      show: true
+      shopId:options.id
     })
 
-    // if(options.enter == 4){
-    //   that.setData({
-    //     show:true
-    //   })
-    // }
+    if(options.enter == 4){
+      that.setData({
+        show:true
+      })
+    }
 
 
     this.getlist(this.data.shopId)
     this.getOrderShop(this.data.shopId)
     this.getHotelOrderDetail(this.data.shopId)
   },
+  // 确认收货
+  async completeOrderDetail(e){
+    let that = this
+    let id = e.currentTarget.dataset.id
+    let res = await ajax({
+      url: 'api/staff/HotelCompleteOrderDetail',
+      method: 'POST',
+      data: {
+        id
+      }
+    })
+    that.getHotelOrderDetail(that.data.shopId)
+ 
+  },
+
+  // 一键收货
+  async getAllHotel(){
+    let that = this
+    let id = this.data.shopId
+    console.log(id)
+    let res = await ajax({
+      url: 'api/staff/HotelCompleteOrder',
+      
+      method: 'POST',
+      data: {
+        id
+      }
+    })
+    console.log(res.data)
+
+    if(res.data.code == 0){
+      wx.showToast({
+        title: '收货成功',
+        icon:"none"
+      })
+      that.getHotelOrderDetail(that.data.shopId)
+    }
+
+  
+
+  },
+
+
   toggleDialog(e) {
 
     let that = this

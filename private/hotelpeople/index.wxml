@@ -91,7 +91,9 @@
 							</view>
 				
 					</view>
-				
+				<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">
+						<text>点击查看订单详情</text>
+					</view>
 			
 					<!-- <view>{{item.price}}</view> -->
 					<view  bindtap="payment" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.price}}">
@@ -134,7 +136,7 @@
 									<text >{{item.describe}}</text>
 							</view>
 						<view class="zhong" style="position:absolute;top:62rpx;right:10rpx;">
-							<text >待取货</text>
+							<text >待处理</text>
 						</view>
 					</view>
 					<view class="color" bindtap="detalis" data-id="{{item.id}}" style="margin-top:20rpx;">

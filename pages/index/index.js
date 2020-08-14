@@ -415,8 +415,10 @@ Page({
     let data = { //酒店购物车需要传参
       is_purchase: 1
     }
+    
     app.wxRequest('POST', url1, data, (res) => {
 
+      console.log(res.data)
       if (res.data.code === 0) {
         this.setData({
           cartNum: res.data.data.data.length
@@ -424,7 +426,9 @@ Page({
       }
     })
     let url2 = 'api/cart/index'
-    app.wxRequest('POST', url2, '', (res) => {
+    app.wxRequest('POST', url2, '', (res) =>    {
+
+      console.log(res.data)
       if (res.data.code === 0) {
         // ////console.log(res.data.data);
         this.setData({
@@ -995,21 +999,12 @@ Page({
 
     for (var i = 0; i < tableId.length; i++) {
 
-
-
-      // //////console.log(tableId[i].title)
-
-
-
-
-
-
       if (tableId[i].title == e.currentTarget.dataset.indx) {
         if (tableId[i].value[e.currentTarget.dataset.index] == true) {
           tableId[i].value[e.currentTarget.dataset.index] = false
 
           that.setData({
-        shopPrice: 0
+         shopPrice: 0
       })
 
           // //////console.log(tableId[i].title.indexOf("加工"))
@@ -1122,7 +1117,7 @@ Page({
       let price = res.data.data.price
       let dataList = res.data.data.info
 
-   
+      console.log(res.data.data)
 
       that.setData({
         shopPrice: price
@@ -1162,7 +1157,7 @@ Page({
     // this.changeState()
     // 隐藏遮罩层
     this.setData({
-      jgNumber: false
+      jgNumber: false,num:1
     })
     var animation = wx.createAnimation({
       duration: 200,
@@ -1378,6 +1373,7 @@ Page({
       tableKg: '',
       bigid2: ''
     })
+    console.log(res.data)
     if (res.data.code == 0) {
       wx.showToast({
         title: "加入成功",

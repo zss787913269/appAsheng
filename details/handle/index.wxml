@@ -83,7 +83,7 @@
       </view>
 </view>
 <view wx:if="{{currentTab==2}}">
-  <!-- <view class="tuidaned">
+  <view class="tuidaned">
     <view>
       <text>订单总额：</text>
       <text class="colored">{{shopInfo.money}}元</text>
@@ -116,18 +116,16 @@
     <view class="buttom">
       <text>待结算</text>
     </view>
-  </view> -->
+  </view>
 
-  <view class="main">
+  <!-- <view class="main">
     <view class="left">
 
-      <!-- <scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true"> -->
       <scroll-view scroll-y="true" class="ss" style="height: 798rpx" scroll-into-view="true" scroll-with-animation="true">
-        <!-- <view wx:for="{{secondaryClassification}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique"> -->
-        <view  wx:for="{{hotelOrderDetail}}" wx:key="unique" class="{{classfiySelect === item.id ? 'leftActive':'leftbox'}}">
+        <view  wx:for="{{shopReceiptList}}" wx:key="unique" class="{{classfiySelect === item.id ? 'leftActive':'leftbox'}}">
         
           <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}">
-            <text > {{item.name}}</text>
+            <text > {{index}}{{item.title}}</text>
             <text class="mycount">{{item.goods.length}}</text>
           </view>
         </view>
@@ -156,7 +154,7 @@
 
     </view>
 
-  </view>
+  </view> -->
 </view>
 
 <view wx:if="{{currentTab==3}}">

@@ -28,14 +28,18 @@ Page({
     yfk:"",
     dys:"",
     ywc:"",
+    first:true
 
   },
   //点击切换
   clickTab: function (e) {
     var that = this;
     that.setData({
-      currentTab: e.target.dataset.current
+      currentTab: e.target.dataset.current,
+      first:false
     })
+
+    
 
       that.getHoteOrder()
  
@@ -49,46 +53,11 @@ Page({
       that.setData({
         currentTab:3
       })
-    }
-
-
+    } 
+      this.getHoteOrder()
        that.getHoteInfo()
-       that.getmyHotelList()
-
-    
   },  
-  async getmyHotelList(){
-    let params = {
-      type:1,
-      status:-1
-    }
-  
-      let res = await ajax({
-        url: '/api/quickorder/HotelList', method: 'POST', data: params
-      })
 
-      let wqr=[],wfk=[],yfk=[],dys=[],ywc=[]
-
-      for(let i of res.data.data.data){
-        if(i.status == 0){
-          wqr.push(i)
-        }else if (i.status == 1){
-          wfk.push(i)
-        }else if (i.status == 2){
-          yfk.push(i)
-        }else if (i.status == 3){
-          dys.push(i)
-        }else if (i.status == 4){
-          ywc.push(i)
-        }
-      }
-
-      this.setData({
-         wqr,wfk, yfk, dys,ywc
-      })
-
-
-  },
 
   async exchange(e){    //退换货请求
     var that = this
@@ -164,9 +133,7 @@ Page({
           wx.navigateTo({
             url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
           })
-          // this.setData({
-          //   currentTab:Number(this.data.currentTab) + 1
-          // })
+         
         }
     }
    
@@ -226,18 +193,67 @@ Page({
   
       var that = this
 
-      this.getmyHotelList()
+      let param = {
+        type:1,
+        status:-1
+      }
+        let res1 = await ajax({
+          url: '/api/quickorder/HotelList', method: 'POST', data: param
+        })
+  
+        let wqr=[],wfk=[],yfk=[],dys=[],ywc=[]
+  
+        for(let i of res1.data.data.data){
+          if(i.status == 0){
+            wqr.push(i)
+          }else if (i.status == 1){
+            wfk.push(i)
+          }else if (i.status == 2){
+            yfk.push(i)
+          }else if (i.status == 3){
+            dys.push(i)
+          }else if (i.status == 4){
+            ywc.push(i)
+          }
+        }
+
+        let currentTab
+
+        if(that.data.first){
+         if(wqr.length != 0 ){
+           currentTab = 1
+         }else if(wfk.length != 0){
+           currentTab = 2
+         }else if(yfk.length != 0){
+           currentTab = 3
+         }else if(dys.length != 0){
+           currentTab = 4 
+         }else if(ywc.length != 0){
+           currentTab = 5
+         }
+        }
+
+        if(currentTab == undefined){
+          currentTab = that.data.currentTab
+        }
+
+       this.setData({
+          wqr,wfk, yfk, dys,ywc,currentTab
+       })
+
+      
+
 
       let params = {
         type:1,
         status:that.data.currentTab - 1
       }
-      console.log(params)
+      
     let res = await ajax({
       url: '/api/quickorder/HotelList', method: 'POST', data: params
     })
 
-    console.log("商品",res.data.data)
+    // console.log("商品",res.data.data)
 
     let unconfirmed=[],unpaid=[],paid=[],unaccepted=[],completed=[]
     let shoplist = res.data.data.data
@@ -256,6 +272,8 @@ Page({
     this.setData({
       unconfirmed,unpaid,paid,unaccepted,completed
     })
+
+  
     
     if(res.data.code == 0){
       if (num == 1){
@@ -304,6 +322,7 @@ Page({
       //   url: '/private/hotelAddress/index'
       // })
     }
+   
   }, 
 
   async confirmOrder(e){   //确认订单
@@ -529,6 +548,9 @@ Page({
   onShow: function () {
       var that = this
     that.getHoteOrder(that.data.page)
+
+ 
+   
   },
 
   /**

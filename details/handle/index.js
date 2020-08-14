@@ -12,10 +12,10 @@ Page({
     page:1,
     currentTab: 1,
     shopInfo:'',
-    shopOrderList:[],    //商家订单
     canvasWidth: 30,
     canvasHeight: 30,
     printingBtn:false,
+    shopOrderList:[],    //商家订单
     shopReceiptList:[],
     shopCompleteList:[]
   },
@@ -27,16 +27,15 @@ Page({
       currentTab: e.target.dataset.current,
      
     })
-    if( e.target.dataset.current == 2){
-      that.setData({
-        page:1
-      })
-      that.shopConfirm()
-    }else if(e.target.dataset.current == 1){
-      that.setData({
-        page:1
-      })
+    if( e.target.dataset.current == 1){
       that.getShopList()
+    
+    }else if(e.target.dataset.current == 1){
+    
+      that.shopConfirm()
+    }else if(e.target.dataset.current == 3){
+    
+      that.shopConfirmComplete()
     }
     //////console..log.log(that.data.currentTab);
     // }
@@ -110,7 +109,7 @@ Page({
       method: 'POST',
       data: params
     })
-    ////////console.log..log.log(res)
+    console.log(res.data)
     if (res.data.code == 0) {
   
       wx.showToast({
@@ -269,12 +268,14 @@ Page({
     that.setData({
       canvasWidth:30,
       canvasHeight:30,
-      currentTab:2
     })
     that.getShopInfo()
     that.getShopList()
     that.shopConfirm()
     that.shopConfirmComplete()
+
+    
+
   },
 
   //zym
@@ -291,9 +292,7 @@ Page({
         method: 'POST',
         data: params
       })
-      
-      ////console..log.log("getStoreOrder",res.data.data)
-
+  
       if(res.data.code == 0){
   
         let resInfo1 = res.data.data.data
@@ -308,22 +307,34 @@ Page({
           shopOrderList: resInfo1,
           SOtotal:res.data.data.total
         })
+
+        that.getcurrentTab()
       
       }
 
+
+
+    },
+
+    getcurrentTab(){
+      let that = this
+      let currentTab
+
+      if(that.data.shopOrderList.length != 0){
+        currentTab = 1
+      }else if(that.data.shopReceiptList.length != 0){
+        currentTab = 2
+      }else if(that.data.shopCompleteList.length != 0){
+        currentTab = 3
+      }
+  
+      console.log(currentTab)
+  
+      this.setData({
+        currentTab:currentTab
+      })
     },
   
-    //zym 
-  // onReachBottom: function() {
-  //   let that = this
-  //     this.setData({
-  //       page:that.data.page + 1
-  //     })
-  //   //////console..log.log(that.data.total
-  //    this.shopConfirm(that.data.page)  
-  //    this.getShopList(that.data.page)
-  //    this.shopConfirmComplete(that.data.page)
-  //   },
   async shopConfirm(num) {   //获取商家订单已接单
     var that = this
 
@@ -338,35 +349,43 @@ Page({
       data: params
     })
 
-    console.log(res.data.data)
+    // console.log(res.data.data)
+
+    let mydata = res.data.data.data
+
+    let obj = {}
+
+
+    for(let i of mydata){
+      console.log(i)
+
+      if(obj[i.user_id]){
+        obj[i.user_id]++
+      }else{
+        obj[i.user_id] = 1
+      }
+
+    }
+
+    console.log(obj)
 
    
  
     if(res.data.code == 0 ){
     
         let resInfo = res.data.data.data
+
         for (let i = 0; i < resInfo.length; i++) {
+         
           resInfo[i].spec = JSON.parse(resInfo[i].spec)
         }
 
-        if(num != 1){
-          that.setData({
-            // shopReceiptList: that.data.shopReceiptList.concat(resInfo),
-            shopReceiptList: resInfo,
-            ALtotla:res.data.data.total
-          })
-        }else{
-          ////console..log.log("resInfo",resInfo)
           that.setData({
             shopReceiptList: resInfo,
             ALtotla:res.data.data.total
           })
-        }
 
-
-
-
-     
+          that.getcurrentTab()
 
 
       }
@@ -385,18 +404,21 @@ Page({
       method: 'POST',
       data: params
     })
-    //////console..log.log('获取商家订单已完成',res);
+
     if (res.data.code == 0) {
       let resInfo = res.data.data.data
       for (let i = 0; i < resInfo.length; i++) {
         resInfo[i].spec = JSON.parse(resInfo[i].spec)
       }
-      // resInfo = that.data.shopCompleteList.concat(resInfo)
+
+     
       that.setData({
         shopCompleteList: resInfo
       })
+
+      that.getcurrentTab()
     }
-    //////console..log.log(res)
+ 
   },
  
 })

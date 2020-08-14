@@ -204,11 +204,11 @@ Page({
       // 行行超甜
 
     } else {
-      // wx.showToast({
-      //   title: res.data.msg,
-      //   icon: 'none',
-      //   duration: 3000
-      // })
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 3000
+      })
     }
   },
   returnAndExchange(e) { //退换货
@@ -218,9 +218,6 @@ Page({
       shopExch: e.currentTarget.dataset.item
     })
   },
-
-
-
   //打印
   print(value) {
     console.log(value.currentTarget.dataset.value);
@@ -228,9 +225,7 @@ Page({
     lpapi.openPrinter('') //连接打印机    为空就是列表第一个
     var width = 100;
     var height = 40;
-
     lpapi.startDrawLabel('test', this, width, height, 0);
-
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     let y = 5

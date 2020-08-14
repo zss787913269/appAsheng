@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/index/index",  
     "details/handle/index",
-    "pages/index/index",
-    "details/detail/index",
     "private/hotelpeople/index",
+    "details/detail/index",
     "pages/user/index",
     "private/hotelAddress/index",
     "pages/deliver/index",

@@ -24,10 +24,10 @@
 
 	</view>
 
-	<view class="mysh">
-		<text >一键收货</text>
-	</view>
-</view>
+		<view class="mysh" bindtap="getAllHotel" wx:if="{{show}}">
+			<text >一键收货</text>
+		</view>
+	</view>	
 
 
 <view class="main">
@@ -59,17 +59,23 @@
 						<text class="mytext">￥{{items.price}} 元 </text>
 					</view>
 					<view class="myright" wx:if="{{show}}">
-						<view class="th" wx:if="{{items.returned_quantity == 0}}" bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
-						<view wx:else>
-								<view class="yth" wx:if="{{ items.buy_number - items.returned_quantity == 0 }}"><text>已退货</text></view>
-								<view class="yth" wx:else ><text>已退{{ items.buy_number - items.returned_quantity}}</text></view>
+					
+					<!-- 退货数量为0 -->
+					<view wx:if="{{items.returned_quantity == 0}}">
+						<view class="sh" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail" data-id="{{items.id}}"><text>确认收货</text></view>
+						<view class="sh" wx:else> 已收货 </view>
+						<view wx:if="{{items.is_order_ok == 0}}" style="margin-top:10rpx">
+							<view class="th"  bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
+						</view>
+					</view>
+
+					<view wx:else style="margin-top:10rpx">
+								<view class="yth" wx:if="{{items.returned_quantity == 0 }}"><text>退货处理中</text></view>
+								<view class="yth" wx:else ><text>已退 {{items.returned_quantity}}</text></view>
 
 						</view>
 					
-					<!-- EA6F5A -->
-
-						<view class="sh" wx:if="{{items.returned_quantity == 0}}"><text>确认收货</text></view>
-						<!-- 如果购买数量 - 退货数量 等于0 那么就显示 已经退货  如果不等于0 那么就显示 退了多少件 -->
+				
 					</view>
 				</view>
 			</block>
