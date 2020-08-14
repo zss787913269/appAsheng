@@ -23,7 +23,7 @@
       <text class="mytext1">{{item.spec[0].type}}</text>
       <text class="mytext2">{{item.spec[0].value}}</text>
     
-    <text class="mytext">￥{{item.price}} 元 / {{item.inventory_unit}}</text>
+       <text class="mytext">￥{{item.price}} 元 / {{item.inventory_unit}}</text>
 
     </view>
 

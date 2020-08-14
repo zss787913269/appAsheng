@@ -1,9 +1,9 @@
 {
   "pages": [
-    
-    "pages/index/index",
-    "private/hotelpeople/index",
     "details/handle/index",
+    "pages/index/index",
+    "details/detail/index",
+    "private/hotelpeople/index",
     "pages/user/index",
     "private/hotelAddress/index",
     "pages/deliver/index",
@@ -37,7 +37,6 @@
     "person/cartdetal/index",
     "details/dishname/index",
     "details/order/index",
-    "details/detail/index",
     "details/preAbout/index",
     "details/handled/index",
     "details/orderlist/index",

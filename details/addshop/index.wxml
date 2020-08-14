@@ -12,7 +12,8 @@
 	<label class="glable" for="male">商品类型</label>
 	<view class="mypicker">
 		<picker  mode = "selector" bindchange="bindPickerChange" value="{{index}}" range="{{selectArray}}" range-key="name"  data-id="index">
-		 <view class="picker" >{{selectArray[selectArrayIndex].name ? selectArray[selectArrayIndex].name : selectArray[0].name}}</view>
+		 <!-- <view class="picker" >{{selectArray[selectArrayIndex].name ? selectArray[selectArrayIndex].name : selectArray[0].name}}</view> -->
+		  <view class="picker" >{{selectArray[selectArrayIndex].name ? selectArray[selectArrayIndex].name : '请选择'}}</view>
 		</picker>
    <i class="fal fa-angle-down light shopa"></i>
 	</view>

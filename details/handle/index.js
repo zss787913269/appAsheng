@@ -38,7 +38,7 @@ Page({
       })
       that.getShopList()
     }
-    //console.log(that.data.currentTab);
+    //////console..log.log(that.data.currentTab);
     // }
   },
  async noReceiptConfirm(e){    //退换货确认
@@ -53,7 +53,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log(res)
+    ////////console.log..log.log(res)
     if(res.data.code == 0){
       wx.showToast({
         title: '成功',
@@ -80,7 +80,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log(res)
+    ////////console.log..log.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '成功',
@@ -110,7 +110,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log(res)
+    ////////console.log..log.log(res)
     if (res.data.code == 0) {
   
       wx.showToast({
@@ -132,7 +132,7 @@ Page({
 
   godetails(e){
       let id =e.currentTarget.dataset.id
-      console.log(id)
+      //////console.log..log.log(id)
       wx.navigateTo({
         url: '/details/detail/index?id='+id,
       })
@@ -149,7 +149,7 @@ Page({
      method: 'POST',
      data: params
    })
-   //console.log(res)
+   //////console..log.log(res)
    if(res.data.code == 0){
      
      wx.showToast({
@@ -176,7 +176,7 @@ Page({
       method: 'POST',
       // data: params
     })
-    console.log("获取店铺",res.data.data)
+    ////console..log.log("获取店铺",res.data.data)
     if (res.data.code == 0) {
       that.setData({
         shopInfo:res.data.data
@@ -200,7 +200,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log(res)
+    //////console..log.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '操作成功',
@@ -230,8 +230,8 @@ Page({
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
     for (let i = 0; i < this.data.shopOrderList.length; i++) {
-      //console.log(i)
-      //console.log(y)
+      //////console..log.log(i)
+      //////console..log.log(y)
       lpapi.drawText(`订单号：${this.data.shopOrderList[i].order.order_no}`, 0, y, 4)
       y = y + 5
       lpapi.drawText(`商品名：${this.data.shopOrderList[i].title}`, 0, y, 5)
@@ -240,7 +240,7 @@ Page({
       y = y + 5
       lpapi.drawText(`规格：${this.data.shopOrderList[i].spec[0].value}`, 0, y, 5)
       y = y + 15
-      //console.log(y)
+      //////console..log.log(y)
     }
     lpapi.endDrawLabel();
     this.setData({
@@ -269,6 +269,7 @@ Page({
     that.setData({
       canvasWidth:30,
       canvasHeight:30,
+      currentTab:2
     })
     that.getShopInfo()
     that.getShopList()
@@ -278,20 +279,20 @@ Page({
 
   //zym
     async getShopList(num){   //获取商家订单
-      console.log("num",num)
+      ////console..log.log("num",num)
         var that = this
         let params = {
           status:0,
           page:that.data.page
         }
-        console.log("params",params)
+        ////console..log.log("params",params)
       let res = await ajax({
         url: 'api/store/getStoreOrder',
         method: 'POST',
         data: params
       })
       
-      console.log("getStoreOrder",res.data.data)
+      ////console..log.log("getStoreOrder",res.data.data)
 
       if(res.data.code == 0){
   
@@ -318,7 +319,7 @@ Page({
   //     this.setData({
   //       page:that.data.page + 1
   //     })
-  //   //console.log(that.data.total
+  //   //////console..log.log(that.data.total
   //    this.shopConfirm(that.data.page)  
   //    this.getShopList(that.data.page)
   //    this.shopConfirmComplete(that.data.page)
@@ -326,13 +327,9 @@ Page({
   async shopConfirm(num) {   //获取商家订单已接单
     var that = this
 
-    // if(num == undefined){
-    //   num = 1
-    // }
-
     let params = {
       status: 1,
-      // page:num
+   
     }
 
     let res = await ajax({
@@ -341,11 +338,12 @@ Page({
       data: params
     })
 
+    console.log(res.data.data)
+
    
  
     if(res.data.code == 0 ){
-      // let resInfo = that.data.shopReceiptList.concat(res.data.data.data)
-     
+    
         let resInfo = res.data.data.data
         for (let i = 0; i < resInfo.length; i++) {
           resInfo[i].spec = JSON.parse(resInfo[i].spec)
@@ -358,7 +356,7 @@ Page({
             ALtotla:res.data.data.total
           })
         }else{
-          console.log("resInfo",resInfo)
+          ////console..log.log("resInfo",resInfo)
           that.setData({
             shopReceiptList: resInfo,
             ALtotla:res.data.data.total
@@ -387,7 +385,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log('获取商家订单已完成',res);
+    //////console..log.log('获取商家订单已完成',res);
     if (res.data.code == 0) {
       let resInfo = res.data.data.data
       for (let i = 0; i < resInfo.length; i++) {
@@ -398,7 +396,7 @@ Page({
         shopCompleteList: resInfo
       })
     }
-    //console.log(res)
+    //////console..log.log(res)
   },
  
 })

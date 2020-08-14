@@ -13,7 +13,7 @@ Page({
       "name": "暂无数据"
     }],
     array: ['猪牛羊', '中国', '巴西', '日本'],
-    selectArrayIndex:0,
+    selectArrayIndex:"",
     twoSelectArray:[{
       "id": "0",
       "name": "请先选择类型" 

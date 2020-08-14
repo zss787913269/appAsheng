@@ -88,12 +88,9 @@
 
 				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
 
-					<!-- <view class="{{classfiySelect == item.id ? 'selected':'normal'}}" data-id='{{item.id}}'> -->
 					<view data-id='{{item.id}}' bindtap="clickLeftItem">
 						<text > {{item.name}} </text>
-						  <!-- <sup wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}" class="total">{{cartNum+personNum}}</sup>
-      				<sup wx:elif="{{cartNum+personNum>99}}" class="total">99+</sup> -->
-
+					
 					</view>
 
 				</view>
@@ -103,8 +100,7 @@
 
 		<view class='right'>
 			<scroll-view scroll-y="true" style="height: 980rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect}}">
-				<!-- <scroll-view scroll-y="true"  style="height: 1200rpx"  bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true"> -->
-
+		
 				<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
 
 					<view class="title" id="{{'inToview'+item.id}}">
@@ -112,21 +108,14 @@
 						<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
 					</view>
 
-					<!-- <view wx:for={{item}} wx:for-item="imgUrl" wx:key>
-					<image style="height:100rpx;width:100rpx" src="{{item.goods}}">
-							{{item.images}}
-					</image>
-				</view> -->
-					<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
-
+			
 					<block wx:for="{{item.goods}}" wx:for-list="item" wx:key="index">
 
 
 						<!-- zym背景图 -->
 
 						<view wx:if="{{item.images!=''}}" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url({{item.images}});background-size: cover">
-							<!-- <image  src="{{item.images}}"  class="bgcicon" /> -->
-
+	
 							<view class="caiPrice">
 								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
 							</view>
@@ -138,8 +127,7 @@
 						</view>
 
 							<view wx:else bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url('http://second.chchgg.com/static/index/default/images/logo.jpg');background-size: cover">
-							<!-- <image  src="{{item.images}}"  class="bgcicon" /> -->
-
+					
 							<view class="caiPrice">
 								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
 							</view>
@@ -150,23 +138,6 @@
 							</view>
 						</view>
 
-						<!-- <view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}} -->
-<!-- 
-						<view wx:else class="mukaui" bindtap="clickse" data-id="{{item}}" data-index="{{index}}">
-							<view class="cainame">
-								<text>{{item.brand_name}}</text>
-							</view>
-							<view class="caimony">
-								<text class="caimonyf9">￥{{item.price}}元/{{item.inventory_unit}} </text>
-								<view>
-									<view class="textColor" wx:for="{{item.show_keyword}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexS">
-										{{indexS}}:{{itemName}}</view>
-								</view>
-								<text id="book">
-                <text id="book-text" >订</text>
-								</text>
-							</view>
-						</view> -->
 
 					</block>
 
@@ -296,9 +267,7 @@
 
 	</view>
 
-<!-- <view class="scroll_boxed" wx:else>
-  <text>暂无数据</text>
-</view> -->
+>
 <view class="bottom">
   <view class="itemed">
     <view class="itemded" bindtap="clickHotel">

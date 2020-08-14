@@ -26,7 +26,8 @@ Page({
     wqr:"",
     wfk:"",
     yfk:"",
-    dys:""
+    dys:"",
+    ywc:"",
 
   },
   //点击切换
@@ -66,75 +67,84 @@ Page({
         url: '/api/quickorder/HotelList', method: 'POST', data: params
       })
 
-      let wqr,wfk,yfk,dys
+      let wqr=[],wfk=[],yfk=[],dys=[],ywc=[]
 
       for(let i of res.data.data.data){
-        
+        if(i.status == 0){
+          wqr.push(i)
+        }else if (i.status == 1){
+          wfk.push(i)
+        }else if (i.status == 2){
+          yfk.push(i)
+        }else if (i.status == 3){
+          dys.push(i)
+        }else if (i.status == 4){
+          ywc.push(i)
+        }
       }
 
-      // wqr:"",
-      // wfk:"",
-      // yfk:"",
-      // dys:""
+      this.setData({
+         wqr,wfk, yfk, dys,ywc
+      })
 
-      
-
-
-      console.log("getmyHotelList",res.data.data.data)
 
   },
-  // exchange(){    //退换货申请
 
-  // },
-  // async exchange(e){    //退换货请求
-  //   var that = this
-  //   // order_id = 订单id, title = 退货理由 order_detail_id = 商品详情id, price = 价格, number = 数量
-  //   // type = 1退货退款, 2换货
-  //   let params = {
-  //     id: e.currentTarget.dataset.id
-  //   }
-  //   let res = await ajax({
-  //     url: 'api/quickorder/delivery', method: 'POST', data: params
-  //   })
-  //   if (res.data.code == 0) {
-  //     wx.showToast({
-  //       title: '申请成功',
-  //       icon: 'none'
-  //     })
-  //     that.getHoteOrder(1)
-  //   } else {
-  //     wx.showToast({
-  //       title: res.data.msg,
-  //       icon: 'none'
-  //     })
-  //   }
-  // },
-  // async receivingGoods(e){    //确认收货
-  //   var that = this
-  //   let params = {
-  //     id:e.currentTarget.dataset.id
-  //   }
-  //   let res = await ajax({
-  //     url: 'api/order/collect', method: 'POST', data: params
-  //   })
-  //   if(res.data.code == 0){
-  //     wx.showToast({
-  //       title: '收货成功',
-  //       icon:'none',
-  //       duration:3000
-  //     })
-  //     that.getHoteOrder(1)
-  //   }else{
-  //     wx.showToast({
-  //       title:res.data.msg,
-  //       icon:'none',
-  //       duration:3000
-  //     })
-  //   }
-  // },
+  async exchange(e){    //退换货请求
+    var that = this
+    // order_id = 订单id, title = 退货理由 order_detail_id = 商品详情id, price = 价格, number = 数量
+    // type = 1退货退款, 2换货
+    let params = {
+      order_id: e.currentTarget.dataset.id,
+      title:"不想要",
+      number:"100",
+      order_detail_id:955,
+      price:38.50,
+      number:1,
+      type:1
+    }
+    console.log(params)
+    let res = await ajax({
+      url: 'api/quickorder/delivery', method: 'POST', data: params
+    })
+    console.log(res.data)
+
+  },
+  async receivingGoods(e){    //确认收货
+    var that = this
+    let params = {
+      id:e.currentTarget.dataset.id
+    }
+
+  
+
+    let res = await ajax({
+      url: 'api/order/collect', method: 'POST', data: params
+    })
+
+    console.log(res)
+
+    if(res.data.code == 0){
+      wx.showToast({
+        title: '收货成功',
+        icon:'none',
+        duration:3000
+      })
+      that.getHoteOrder()
+    }else{
+      wx.showToast({
+        title:res.data.msg,
+        icon:'none',
+        duration:3000
+      })
+    }
+  },
   detalis(e){    //跳转去详情页
+
+    console.log(e.currentTarget.dataset.shouhuo)
+    
     wx.navigateTo({
-      url: `/details/detail/index?id=${e.currentTarget.dataset.id}`,
+      url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
     })
   },
   payment(e){   //去支付页面
@@ -210,9 +220,13 @@ Page({
       })
     }
   },
+
+  //zym
   async getHoteOrder(num){   //获取酒店订单列表
   
       var that = this
+
+      this.getmyHotelList()
 
       let params = {
         type:1,
@@ -222,6 +236,8 @@ Page({
     let res = await ajax({
       url: '/api/quickorder/HotelList', method: 'POST', data: params
     })
+
+    console.log("商品",res.data.data)
 
     let unconfirmed=[],unpaid=[],paid=[],unaccepted=[],completed=[]
     let shoplist = res.data.data.data

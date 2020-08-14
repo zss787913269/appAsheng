@@ -190,7 +190,7 @@ Page({
       data: params
     })
 
-    console.log("取货", res.data)
+    console.log("取货", res)
 
     if (res.data.msg == "success") {
 
@@ -204,11 +204,11 @@ Page({
       // 行行超甜
 
     } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
+      // wx.showToast({
+      //   title: res.data.msg,
+      //   icon: 'none',
+      //   duration: 3000
+      // })
     }
   },
   returnAndExchange(e) { //退换货
@@ -283,11 +283,11 @@ Page({
         tuidanModal: false
       })
     } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
+      // wx.showToast({
+      //   title: res.data.msg,
+      //   icon: 'none',
+      //   duration: 3000
+      // })
     }
   },
   async onCancelTui() { //确认退单
@@ -491,6 +491,8 @@ Page({
       this.getDistributorClerkList()
     } else if (e.currentTarget.dataset.current == 2) {
       that.getPeisongList()
+    }else if (e.currentTarget.dataset.current == 1) {
+      that.getDeliveryClerkList()
     }
   },
   async getDeliveryClerkList() { //获取配送员未处理订单
@@ -503,8 +505,9 @@ Page({
       method: 'post',
       data: params
     })
+    console.log("获取配送员未处理订单", res)
     if (res.data.code == 0) {
-      console.log("获取配送员未处理订单", res.data.data.data)
+     
       let deliveryListOne = res.data.data.data
       for (var i = 0; i < deliveryListOne.length; i++) {
         deliveryListOne[i].is_select = false

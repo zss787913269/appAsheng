@@ -7,6 +7,9 @@
 .nodd{
   margin-left: 40rpx;
 }
+.mydescr{
+  letter-spacing:3rpx
+}
 .total{
   font-size: 15rpx;
   background-color: #FF9000;
@@ -120,7 +123,7 @@
 .huo{
   /* width: 70%; */
   line-height: 45rpx;
- display: flex;
+  display: flex;
   flex-flow: column;
 }
 .zhong{
@@ -131,7 +134,7 @@
   text-align: center;
   line-height: 50rpx;
   border-radius: 10rpx;
-  margin-top: 50rpx 
+  margin-top: 100rpx 
 }
 .shenhe{
   width: 150rpx;
