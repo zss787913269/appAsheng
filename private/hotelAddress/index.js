@@ -2,6 +2,8 @@ import ajax from '../../utils/ajax'
 import regeneratorRuntime from '../../utils/runtime.js'
 var app = getApp()
 
+app.globalData.token = wx.getStorageSync('token')
+
 // private/hotelAddress/index.js
 Page({
 
@@ -12,6 +14,7 @@ Page({
     // ,type：1下单员，2厨师长，3采购，4仓库，5财务，6店长，7老板
     region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     myValue:"",
+    mytoken:"",
     selectArray: [{
       "id": "1",
       "text": "下单员"
@@ -52,9 +55,11 @@ Page({
     hotelId: '', //酒店id
     hotelQR: '',
     hotelRole: false,
-    streets: '', //街道列表
+    streets: '', //街道列表 
     street: '', //当前选择的街道
     streetId: '', //当前选择的街道id   
+    type:"",
+    show:true
   },
 
   /**
@@ -62,6 +67,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this
+    that.getToekn()
     that.getHotel()
     that.getprovince(2, 0),
       that.getcitys(1, 0),
@@ -108,6 +114,17 @@ Page({
       },
     })
   },
+  async getToekn(){
+    let res = await ajax({
+      url: 'api/order/getWeixinToken',
+      method: 'POST',
+    })
+
+    console.log(res.data)
+    this.setData({
+      mytoken:res.data
+    })
+  },
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -145,30 +162,59 @@ Page({
   },
   async sendQRCode(e) {
     var that = this
-    console.log(e.currentTarget.dataset.index)
-    let params = {
-      id: that.data.hotelId,
-      type: e.currentTarget.dataset.index
-    }
-    let res = await ajax({
-      url: 'api/Quickorder/addCode',
-      method: 'POST',
-      data: params
-    })
-    console.log(res)
-    if(res.data.code == 0){
-      console.log('cehngl ')
-      that.setData({ //角色二维码
-        hotelQR: res.data.data.img_url,
-        hotelRole: true
-      })
-    }else{
-      wx.showToast({
-        title: res.data.msg,
-        icon:'none',
-        duration:3000
-      })
-    }
+        var that = this
+    console.log(e.currentTarget.dataset.index)
+    let params = {
+      id: that.data.hotelId,
+      type: e.currentTarget.dataset.index
+    }
+    let res = await ajax({
+      url: 'api/Quickorder/addCode',
+      method: 'POST',
+      data: params
+    })
+    console.log(res)
+   
+    // let params = {
+    //   page: 'pages/index',
+    //   scene: "1,101,291",
+    //   width:100
+    // }
+    // let res = await ajax({
+    //   url: 'api/order/addcode',
+    //   method: 'POST',
+    //   data: params
+    // })
+    // console.log(res)
+    
+    // wx.request({
+    //   url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${this.data.mytoken}`,
+    //   method:"post",
+    //   data:{
+    //     page:"pages/index",
+    //     width:100,
+    //     scene:"1",
+    //   },
+    //   success(res){
+    //     console.log(res.data)
+    //   }
+    // })
+
+    if(res.data.code == 0){
+            console.log('cehngl ')
+            that.setData({ //角色二维码
+              hotelQR: res.data.data.img_url,
+              hotelRole: true
+            })
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon:'none',
+              duration:3000
+            })
+          }
+
+
     
   },
   async getHotel() { //获取酒店
@@ -179,7 +225,9 @@ Page({
     })
     let hotelInfo = res.data.data
     if (res.data.data != null) {
+  
       that.setData({
+        show:false,
         qrCode: true,
         fullName: hotelInfo.name, //姓名
         hotelName: hotelInfo.h_name, //酒店名
@@ -194,9 +242,10 @@ Page({
         county: hotelInfo.hotel_address[2].name,
         streetId: hotelInfo.hotel_address[3].id,
         street: hotelInfo.hotel_address[3].name,
+        type:Number(hotelInfo.type) - 1
       })
     }
-    console.log(res)
+    console.log("getHotel",res.data.data)
   },
   
   getInputValue(e) { //获取手机号

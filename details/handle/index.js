@@ -9,15 +9,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    page:1,
-    currentTab: 1,
-    shopInfo:'',
+    countList: [],
+    listindex: 1,
+    classfiySelect: "",
+    page: 1,
+    currentTab: 2,
+    shopInfo: '',
     canvasWidth: 30,
-    canvasHeight: 30,
-    printingBtn:false,
-    shopOrderList:[],    //商家订单
-    shopReceiptList:[],
-    shopCompleteList:[]
+    canvasHeight: 10,
+    shopOrderList: [], //未接单
+    shopCompleteList: [], //已完成
+    first: true,
+    dayTime:"",
+    showDialog: false,
+  },
+  toggleDialog() {
+    this.setData({
+      showDialog: !this.data.showDialog
+    });
+
+  },
+  onLoad: function (options) {
+    var that = this
+  
+    this.getShopList(this.data.currentTab) //未接订单
+
+  },
+  //点击切换列表
+  clickList(e) {
+    let index = e.currentTarget.dataset.index
+    // this.getShopInfo()
+
+    this.setData({
+      listindex: index
+    })
+    this.getShopList(this.data.currentTab)
+
   },
   //点击切换
   clickTab: function (e) {
@@ -25,49 +52,46 @@ Page({
 
     that.setData({
       currentTab: e.target.dataset.current,
-     
     })
-    if( e.target.dataset.current == 1){
-      that.getShopList()
-    
-    }else if(e.target.dataset.current == 1){
-    
-      that.shopConfirm()
-    }else if(e.target.dataset.current == 3){
-    
-      that.shopConfirmComplete()
+
+    let currentTab = this.data.currentTab
+
+    if(currentTab != 3){
+      that.getShopList(currentTab)
+    }else{
+      that.getOkList()
     }
-    //////console..log.log(that.data.currentTab);
-    // }
+
+ 
+
   },
- async noReceiptConfirm(e){    //退换货确认
-      var that = this
-      let params = {
-        order_detail_id:e.currentTarget.dataset.id.id,
-        order_id: e.currentTarget.dataset.id.order_id,
-        status:1
-      }
+  async noReceiptConfirm(e) { //退换货确认
+    var that = this
+    let params = {
+      order_detail_id: e.currentTarget.dataset.id.id,
+      order_id: e.currentTarget.dataset.id.order_id,
+      status: 1
+    }
     let res = await ajax({
       url: 'api/store/confirm',
       method: 'POST',
       data: params
     })
-    ////////console.log..log.log(res)
-    if(res.data.code == 0){
+    if (res.data.code == 0) {
       wx.showToast({
         title: '成功',
-        icon:'none',
-        duration:300
+        icon: 'none',
+        duration: 300
       })
-    }else{
+    } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:300
+        duration: 300
       })
     }
   },
-  async noReceiptRefuse(e) {    //退换货拒接
+  async noReceiptRefuse(e) { //退换货拒接
     var that = this
     let params = {
       order_detail_id: e.currentTarget.dataset.id.id,
@@ -84,111 +108,136 @@ Page({
       wx.showToast({
         title: '成功',
         icon: 'none',
-        duration:300
+        duration: 300
       })
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:300
+        duration: 300
       })
     }
   },
-  async onekey(){   //一键接单
+  async onekey(e) { // 按照订单 一键接单
     var that = this
-    let arr = []
+    let id = e.currentTarget.dataset.id
 
-    for (let i = 0; i < that.data.shopOrderList.length;i++){
-      arr.push(that.data.shopOrderList[i].order_id)
-    }
+
     let params = {
-      id: arr
+      id: id
     }
     let res = await ajax({
       url: 'api/store/OneClickReceipt',
       method: 'POST',
       data: params
     })
-    console.log(res.data)
+    // console.log(res.data)
     if (res.data.code == 0) {
-  
+
       wx.showToast({
         title: '接单成功',
         icon: 'none',
-        duration:300
+        duration: 1000
       })
-      that.shopConfirm()
-      that.getShopList()
+
+      that.getShopList(that.data.currentTab)
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:300
+        duration: 1000
       })
     }
   },
-  // url="/details/detail/index"
+  async onekeyAll() { // 全部商品 一键接单
+    var that = this
 
-  godetails(e){
-      let id =e.currentTarget.dataset.id
-      //////console.log..log.log(id)
-      wx.navigateTo({
-        url: '/details/detail/index?id='+id,
+    let res = await ajax({
+      url: 'api/store/AllReceipt',
+      method: 'POST',
+    })
+    console.log(res.data)
+    if (res.data.code == 0) {
+
+      wx.showToast({
+        title: '接单成功',
+        icon: 'none',
+        duration: 1000
       })
+
+      that.setData({
+        currentTab: 2,
+      })
+      that.getShopList(2)
+
+
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
 
- async receipt(e){   //接单
-      var that = this
-      let params ={
-        status:1,
-        id:e.currentTarget.dataset.id
-      }
-   let res = await ajax({
-     url: 'api/store/updateStatus',
-     method: 'POST',
-     data: params
-   })
-   //////console..log.log(res)
-   if(res.data.code == 0){
-     
-     wx.showToast({
-       title: '接单成功',
-       icon: 'none',
-       duration:300
-     })
-     that.shopConfirm()
-     that.getShopList()
-     that.getShopInfo()
-   }else{
-     wx.showToast({
-       title:res.data.msg,
-       icon:'none',
-       duration:300
-     })
-   }
+  godetails(e) {
+    let id = e.currentTarget.dataset.id
+    //////console.log..log.log(id)
+    wx.navigateTo({
+      url: '/details/detail/index?id=' + id,
+    })
+  },
+
+  async receipt(e) { //接单
+    var that = this
+    let params = {
+      status: 1,
+      id: e.currentTarget.dataset.id
+    }
+    let res = await ajax({
+      url: 'api/store/updateStatus',
+      method: 'POST',
+      data: params
+    })
+
+    if (res.data.code == 0) {
+
+      wx.showToast({
+        title: '接单成功',
+        icon: 'none',
+        duration: 300
+      })
+      that.getShopList(that.data.currentTab)
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 300
+      })
+    }
   },
   // zym
-  async getShopInfo(){    //获取店铺状态
+  async getShopInfo() { //获取店铺状态
     var that = this
     let res = await ajax({
       url: 'api/store/StoreStatus',
       method: 'POST',
       // data: params
     })
-    ////console..log.log("获取店铺",res.data.data)
+    // console.log("获取店铺", res.data)
     if (res.data.code == 0) {
       that.setData({
-        shopInfo:res.data.data
+        shopInfo: res.data.data
       })
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:300
+        duration: 300
       })
     }
   },
-  async noReceipt(e){   //不接
+  async noReceipt(e) { //不接
     var that = this
     let params = {
       status: 2,
@@ -199,226 +248,226 @@ Page({
       method: 'POST',
       data: params
     })
-    //////console..log.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '操作成功',
         icon: 'none',
-        duration:300
+        duration: 300
       })
-      that.getShopList()
+      that.getShopList(that.data.currentTab)
     } else {
       wx.showToast({
         title: res.data.msg,
         icon: 'none',
-        duration:300
+        duration: 300
       })
     }
   },
-  // 先连接打印机  lpapi.openPrinter('')    //连接打印机    为空就是列表第一个
-// 生成打印图片
-//
-  printing: function () {    //生成打印数据
-    lpapi.openPrinter('')    //连接打印机    为空就是列表第一个
+ 
+
+  printing: function (e) { //生成打印数据
+
+    let print = e.currentTarget.dataset.print
+   
+    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
     var width = 100;
-    var height = 30 * this.data.shopOrderList.length;
+    var height = 30* print.length ;
+    // let height2 = 200* print.length;
+
+    console.log(height)
 
     lpapi.startDrawLabel('test', this, width, height, 0);
 
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
-    for (let i = 0; i < this.data.shopOrderList.length; i++) {
-      //////console..log.log(i)
-      //////console..log.log(y)
-      lpapi.drawText(`订单号：${this.data.shopOrderList[i].order.order_no}`, 0, y, 4)
+    for (let i = 0; i <print.length; i++) {
+  
+      lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`商品名：${this.data.shopOrderList[i].title}`, 0, y, 5)
+      lpapi.drawText(`总价：${print[i].total_price}`, 0, y,5)
       y = y + 5
-      lpapi.drawText(`数量：${this.data.shopOrderList[i].buy_number}`, 0, y, 5)
+      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`规格：${this.data.shopOrderList[i].spec[0].value}`, 0, y, 5)
+      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
       y = y + 15
-      //////console..log.log(y)
     }
+
+   
     lpapi.endDrawLabel();
-    this.setData({
-      printingBtn:true
-    })
+    this.toggleDialog()
+    // this.setData({
+    //   canvasHeight: height2,
+    // })
   },
-  draw: function () {
+  printing2: function (e) { //生成打印数据
+
+    let print = e.currentTarget.dataset.print
+
+    console.log(print)
+   
+    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
     var width = 100;
-    var height = 30 * this.data.shopOrderList.length;
-    
+    var height = 30* print.details.length ;
+   
     lpapi.startDrawLabel('test', this, width, height, 0);
 
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
+    let y = 5
+    lpapi.drawText(`订单号：${print.order_no}`, 0, y, 2)
+    y = y + 5
+    lpapi.drawText(`商品名：${print.add_time}`, 0, y, 2)
+    y = y + 5
+    for (let i = 0; i <print.details.length; i++) {
+  
+      lpapi.drawText(`商品名：${print.details[i].title}`, 0, y, 3)
+      y = y + 5
+      lpapi.drawText(`总价：${print.details[i].total_price}`, 0, y,3)
+      y = y + 5
+      lpapi.drawText(`数量：${print.details[i].buy_number}`, 0, y, 3)
+      y = y + 5
+      lpapi.drawText(`规格：${print.details[i].specvalue}`, 0, y, 3)
+      y = y + 15
+    }
 
+   
+    lpapi.endDrawLabel();
+    this.toggleDialog()
+    
   },
   print: function () {
-    // lpapi.setPrintPageGapType(0)
-    lpapi.print()
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this
-    that.setData({
-      canvasWidth:30,
-      canvasHeight:30,
-    })
-    that.getShopInfo()
-    that.getShopList()
-    that.shopConfirm()
-    that.shopConfirmComplete()
-
-    
-
-  },
-
-  //zym
-    async getShopList(num){   //获取商家订单
-      ////console..log.log("num",num)
-        var that = this
-        let params = {
-          status:0,
-          page:that.data.page
-        }
-        ////console..log.log("params",params)
-      let res = await ajax({
-        url: 'api/store/getStoreOrder',
-        method: 'POST',
-        data: params
+    lpapi.print(function () {
+      wx.showToast({
+        title: '打印成功',
       })
-  
-      if(res.data.code == 0){
-  
-        let resInfo1 = res.data.data.data
-       
-        for (let i = 0; i < resInfo1.length; i++) {
-         
-          resInfo1[i].spec = JSON.parse(resInfo1[i].spec)
-        }
+    })
+  },
+  //zym
+  async getShopList(num) { //获取商家订单
+    wx.showLoading({
+      title: '加载中',
+    })
+    // console.log(num)
+    // type = 2  按照订单 isok = 0 是未接单
+    // type = 3  商品汇总 isok = 1 已接单
+    //  type = 3   isok = 2 已完成
+    // 
+    let that = this
+    let params, listindex = this.data.listindex,currentTab
 
-  
-        that.setData({
-          shopOrderList: resInfo1,
-          SOtotal:res.data.data.total
-        })
+    let res2 = await ajax({
+      url: 'api/store/OrderCount',
+    })
+    let countList = res2.data.data
 
-        that.getcurrentTab()
-      
-      }
+    if(this.data.first){
 
-
-
-    },
-
-    getcurrentTab(){
-      let that = this
-      let currentTab
-
-      if(that.data.shopOrderList.length != 0){
+      if(countList[0] != 0){
         currentTab = 1
-      }else if(that.data.shopReceiptList.length != 0){
+      }else if(countList[1] != 0){
         currentTab = 2
-      }else if(that.data.shopCompleteList.length != 0){
+      }else if (countList[2] != 0){
         currentTab = 3
       }
-  
-      console.log(currentTab)
-  
-      this.setData({
-        currentTab:currentTab
+      num = currentTab
+
+      that.setData({
+        first:false
       })
-    },
-  
-  async shopConfirm(num) {   //获取商家订单已接单
-    var that = this
-
-    let params = {
-      status: 1,
-   
     }
 
-    let res = await ajax({
-      url: 'api/store/getStoreOrder',
-      method: 'POST',
-      data: params
-    })
-
-    // console.log(res.data.data)
-
-    let mydata = res.data.data.data
-
-    let obj = {}
-
-
-    for(let i of mydata){
-      console.log(i)
-
-      if(obj[i.user_id]){
-        obj[i.user_id]++
-      }else{
-        obj[i.user_id] = 1
+      if(currentTab == undefined){
+        currentTab = that.data.currentTab
       }
 
-    }
 
-    console.log(obj)
 
-   
- 
-    if(res.data.code == 0 ){
-    
-        let resInfo = res.data.data.data
+    this.setData({
+      count1: countList[0],
+      count2: countList[1],
+      count3: countList[2],
+      currentTab:currentTab
+    })
 
-        for (let i = 0; i < resInfo.length; i++) {
-         
-          resInfo[i].spec = JSON.parse(resInfo[i].spec)
+
+
+
+
+
+
+
+    if (num == 1) {
+      params = {
+        type: 2,
+        isok: num - 1,
+      }
+    } else if (num == 2) {
+
+      if (listindex == 1) {
+        params = {
+          type: 3,
+          isok: num - 1,
         }
-
-          that.setData({
-            shopReceiptList: resInfo,
-            ALtotla:res.data.data.total
-          })
-
-          that.getcurrentTab()
-
-
+      } else {
+        params = {
+          type: 2,
+          isok: num - 1,
+        }
       }
-   
-  
-  
-
-  },
-  async shopConfirmComplete() {   //获取商家订单已完成
-    var that = this
-    let params = {
-      status: 2,     
     }
+
     let res = await ajax({
-      url: 'api/store/getStoreOrder',
+      url: "api/order/ShopOrderPrint",
       method: 'POST',
       data: params
     })
+    console.log("获取商家订单",res.data.data)
 
     if (res.data.code == 0) {
-      let resInfo = res.data.data.data
-      for (let i = 0; i < resInfo.length; i++) {
-        resInfo[i].spec = JSON.parse(resInfo[i].spec)
-      }
-
-     
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 100)
       that.setData({
-        shopCompleteList: resInfo
+        shopOrderList: res.data.data,
       })
-
-      that.getcurrentTab()
     }
- 
+
+
   },
- 
+  getTime(){
+     var day2 = new Date();
+     day2.setTime(day2.getTime());
+    var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+    this.setData({
+      dayTime:s2
+    })
+  },
+  async getOkList(){
+    let that = this
+
+    let res = await ajax({
+      url: 'api/order/ShopOrderOK',
+      method:"POST"
+    })
+    this.setData({
+      shopCompleteList:res.data.data
+    })
+  
+    if(res.data.code == 0){
+      that.getShopInfo()
+      that.getTime()
+    }
+
+
+  },
+  // 点击左侧
+  clickLeftItem(e) {
+    let that = this
+    let id = e.currentTarget.dataset.id;
+    // console.log(id)
+    that.setData({
+      classfiySelect: id
+    })
+  },
 })

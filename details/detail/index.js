@@ -60,14 +60,16 @@ Page({
     let that = this
     let id = this.data.shopId
     console.log(id)
+
+    let params = {
+      id
+    }
+
     let res = await ajax({
-      url: 'api/staff/HotelCompleteOrder',
-      
-      method: 'POST',
-      data: {
-        id
-      }
+      url: 'api/order/collect', method: 'POST', data: params
     })
+
+   
     console.log(res.data)
 
     if(res.data.code == 0){

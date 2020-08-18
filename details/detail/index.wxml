@@ -50,7 +50,7 @@
 		<scroll-view scroll-y="true" style="height: 798rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
 			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
 				<view class="shopatt-left" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
-					<view class="mytitle" id="{{'inToview'+item.id}}">
+					<view class="mytitle" id="{{'inToview'+items.id}}">
 						<view class="top-title"><text class="stitle">{{items.title}}</text> <text class="mynumber"> 数量: {{items.buy_number}}</text> </view>
 						<view class="myf">
 							<view class="mytext1">{{items.spectype}}</view>

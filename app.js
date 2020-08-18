@@ -69,7 +69,7 @@ App({
       softVersion: '',    // 打印机软件版本号
       hardVersion: '',    // 打印机硬件版本号
       seriesName: '',     // 产品系列名称，如 DT20
-      devIntName: '',     // 内部型号名称，如 DT20S
+      // devIntName: '',     // 内部型号名称，如 DT20S
     },
   },
   wxRequest(method, url, data, callback, errFun, token) {

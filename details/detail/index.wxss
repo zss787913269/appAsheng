@@ -262,7 +262,7 @@ align-items:flex-end;
   display: block;
    font-size: 28rpx;
    /* color:#ea6f5a */
-   width: 100rpx;
+   width: 200rpx;
   
 }
 .mytext1{

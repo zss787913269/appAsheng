@@ -23,6 +23,7 @@ Page({
       method: 'POST',
       data: { id: e.currentTarget.dataset.id }
     })
+    console.log(res.data)
     if(res.data.code == 0){
       wx.showToast({
         title: '收货成功',

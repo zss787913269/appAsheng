@@ -418,7 +418,7 @@ Page({
     
     app.wxRequest('POST', url1, data, (res) => {
 
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data.code === 0) {
         this.setData({
           cartNum: res.data.data.data.length
@@ -428,7 +428,7 @@ Page({
     let url2 = 'api/cart/index'
     app.wxRequest('POST', url2, '', (res) =>    {
 
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data.code === 0) {
         // ////console.log(res.data.data);
         this.setData({

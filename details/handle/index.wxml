@@ -1,178 +1,184 @@
 <wxs src='./index.wxs' module='utils' />
 <view>
-  <view class="swiper-tab">
+  <view class="swiper-tab"  wx:key = "index">
     <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">未接单
-      <sup wx:if="{{ 99>=SOtotal>0 && shopOrderList.length>0 }}" class="total">{{SOtotal}}</sup>
-      <sup wx:elif="{{ SOtotal>99 }}" class="total">99+</sup>
+      <sup wx:if="{{ count1 != 0 }}" class="total">{{count1}}</sup>
+      <sup wx:elif="{{ count1>99 }}" class="total">99+</sup>
     </view>
     <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">已接单
-      <sup wx:if="{{ 99>=ALtotla>0 && shopReceiptList.length>0 }}" class="total">{{ALtotla}}</sup>
+      <sup wx:if="{{ count2 != 0 }}" class="total">{{count2}}</sup>
       <!-- <text>{{ALtotla}}</text> -->
-      <sup wx:elif="{{ ALtotla>99 }}" class="total">99+</sup>
+      <sup wx:elif="{{ count2>99 }}" class="total">99+</sup>
     </view>
     <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">已处理
+     <sup wx:if="{{ count3 != 0 }}" class="total">{{count3}}</sup>
+      <!-- <text>{{ALtotla}}</text> -->
+      <sup wx:elif="{{ count3>99 }}" class="total">99+</sup>
     </view>
   </view>
 
 </view>
 
 <view wx:if="{{currentTab==1}}">
-  <view class="title" wx:for="{{shopOrderList}}" wx:key="index">
-    <view class="header">
-      <text>订单ID：{{item.order.order_no}}</text>
-    </view>
-    <view class="content">
-      <view class="huo">
-    
-        <view class="huoleft">
-        <view>
-         <text>总价：{{utils.getAllPrice(item.buy_number,item.price)}} 元</text>
-       </view>
-          <text>{{item.title}} : {{item.buy_number}}</text>
-        </view>
-        <view class="zhong active" bindtap="receipt" data-id="{{item.id}}"> 接单</view>
-      </view>
-      <view class="huo">
-        <view class="huoleft">
-          <text>规格： 
-            <text wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName" style="margin-left:10rpx;">{{itemName.value}}</text>
-            <text>  {{item.price}}元</text>
-          </text>
-          
-        </view>
-        <view class="zhong"  bindtap="noReceipt" data-id="{{item.id}}">不接</view>
-         <!-- <view class="zhong"  bindtap="noReceiptConfirm" data-id="{{item}}">确认</view>
-          <view class="zhong"  bindtap="noReceiptRefuse" data-id="{{item}}">拒绝</view> -->
-      </view>
-      <!-- <navigator url="/details/detail/index" hover-class="other-navigator-hover"> -->
-        <!-- <view class="color" bindtap="godetails"  data-id="{{item.id}}">
-          <text>点击查看订单详情</text>
-        </view> -->
-      <!-- </navigator> -->
-    </view>
-    <!-- <view class="buttom">
-      <text wx:if="{{item.order.is_purchase == 1}}">已付30%,剩余70%尾款</text>
-      <text wx:if="{{item.order.is_purchase == 0}}">已付全款</text>
-    </view> -->
-  </view>
+ 
+ 
+          <view  wx:for="{{shopOrderList}}" wx:key="index" class="mymain" >
+            <view class="shopborder">
+              <view class="title_box">
+                <view class="mytitle_box">
+                  <view class="title_no">订单号：{{item.order_no}} </view>
+                  <view class="title_no2">时　间：{{item.add_time}} </view>
+                </view>
+                 <view class="bj1"   bindtap="onekey" data-id = "{{item.id}}"><text>一键接单</text></view>
+              </view>
 
-  <!-- 一键打印-->
+            <view class="shopatt-left1" wx:for="{{item.details}}" wx:key="index" wx:for-item = "items">
+              <view>
+                 <view class="mytitle" id="{{'inToview'+items.id}}">
+                  <view class="top-title"><text class="stitle">{{items.title}}</text> <text class="mynumber"> 数量: {{items.buy_number}}</text> </view>
+                  <view class="myf">
+                    <view class="mytext1">{{items.spectype}}</view>
+                    <view class="mytext2">{{items.specvalue}}</view>
+                  </view>
+                  <text class="mytext">总价格：￥{{items.total_price}} 元 </text>
+              </view>
+              </view>
+              <view class="flex_right">
+                    <view  wx:if="{{items.is_ok != 2}}">
+                       <view class="jd" bindtap="receipt" data-id="{{items.id}}" wx:if="{{items.is_ok == 0}}"><text>接单</text></view>
+                    <view class="jd"  wx:if="{{items.is_ok == 1}}"><text>已接单</text></view>
+
+                    </view>
+
+                      <view wx:if="{{items.is_ok != 1}}">
+            
+                        <view class="bj"  wx:if="{{items.is_ok == 2}}" ><text>已拒绝</text></view>
+                          <view class="bj"  wx:else bindtap="noReceipt" data-id="{{items.id}}" ><text>不接</text></view>
+                      </view>
+              </view>
+            </view>
+            
+            </view>
+
+      
+          </view>
+   
   <view class="bottom">
-    <view class="itemed">
-      <view class="item" bindtap="onekey">
-        <text>一键接单</text>
-      </view>
+            <view class="itemed">
+              <view class="item" bindtap="onekeyAll">
+                <text>一键接单</text>
+              </view>
+            </view>
     </view>
+ </view>
 
-    <view class="itemed">
 
-      <view class="item" bindtap="printing">
-        <!-- <navigator url="/person/confirm/index" hover-class="other-navigator-hover"> -->
-        <text>连接打印机</text>
-        <!-- </navigator> -->
-      </view>
-      <!-- <view bindtap="draw" class="generate">生成打印数据</view> -->
-      <view bindtap="print" class="printingNow" wx:if="{{printingBtn}}">打印</view>
-    </view>
+  
+ 
 
-  </view>
-  <view class="show{{''}}">
-        <!-- <canvas type="2d" id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" /> -->
-        <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
-        <!-- <canvas type="2d" id="test" style="width:100px;height:100px;" /> -->
-      </view>
-</view>
 <view wx:if="{{currentTab==2}}">
-  <view class="tuidaned">
-    <view>
-      <text>订单总额：</text>
-      <text class="colored">{{shopInfo.money}}元</text>
-    </view>
-    <view>
-      <text>退单总数：</text>
-      <text class="color">{{shopInfo.not_order_number}}单</text>
-    </view>
-  </view>
-  <view class="title" wx:for="{{shopReceiptList}}" wx:key="index">
-    <view class="header">
-      <text>订单号： {{item.order.order_no}}</text> 
-    </view>
-    <view class="content">
-      <view class="huo">
-        <view class="huoleft">
-          <text>{{item.title}}:{{item.buy_number}}</text>
-        </view>
-      </view>
-      <view class="huo">
-        <view class="huoleft">
-          <text>规格： 
-            <text wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName" style="margin-left:10rpx;">{{itemName.value}}</text>
-          </text>
-        </view>
-        <view class="zhong active">已接单</view>
-      </view>
-     
-    </view>
-    <view class="buttom">
-      <text>待结算</text>
-    </view>
+  <view class="mylist">
+    <text  bindtap="clickList"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
+    <text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
   </view>
 
-  <!-- <view class="main">
+  <view class="main" wx:if="{{listindex == 1}}">
     <view class="left">
-
-      <scroll-view scroll-y="true" class="ss" style="height: 798rpx" scroll-into-view="true" scroll-with-animation="true">
-        <view  wx:for="{{shopReceiptList}}" wx:key="unique" class="{{classfiySelect === item.id ? 'leftActive':'leftbox'}}">
+      <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true" scroll-with-animation="true">
+        <view  wx:for="{{shopOrderList}}" wx:key="unique" class="{{classfiySelect === item.category_id ? 'leftActive':'leftbox'}}">
         
-          <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}">
-            <text > {{index}}{{item.title}}</text>
-            <text class="mycount">{{item.goods.length}}</text>
+          <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.category_id}}">
+            <text > {{item.name}}</text>
+            <text class="mycount">{{item.goodcount}}</text>
           </view>
         </view>
       </scroll-view>
     </view>
 
     <view class='right'>
-      <scroll-view scroll-y="true" style="height: 798rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
-        <block wx:for="{{hotelOrderDetail}}" wx:key="index">
-          <view class="shopatt-left" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
-            <view class="mytitle" id="{{'inToview'+item.id}}">
-              <view class="top-title"><text class="stitle">{{items.title}}</text> <text class="mynumber"> 数量: {{items.buy_number}}</text> </view>
-              <view class="myf">
-                <view class="mytext1">{{items.spectype}}</view>
-                <view class="mytext2">{{items.specvalue}}</view>
+      <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+      
+          <view  wx:for="{{shopOrderList}}" wx:key="index" >
+        <view class="mytoptitle">
+            <view class="listTitle">{{item.name}}</view>
+
+              <view class="bj2 listTitle2"   bindtap="printing"  data-print="{{item.details}}"   ><text>去打印</text></view>
+              <!-- <view class="bj2 listTitle2"    bindtap="toggleDialog" ><text>打印</text></view> -->
+        </view>
+
+         <view class="flex">
+      
+          <view  class="shopatt-left3" id="{{'inToview'+item.category_id}}" wx:for="{{item.details}}" wx:for-item="items" wx:key = "index">
+            
+
+                 <view class="mytitle"   id="{{'inToview'+items.id}}">
+                  <view class="myf"><text class="mynumber2"> 数量: {{items.buy_number}}</text> </view>
+                  <view class="myf">
+                    <view class="mytext1">{{items.spectype}}</view>
+                    <view class="mytext2">{{items.specvalue}}</view>
+                  </view>
+                  <text class="mytext11">总：￥{{items.total_price}} 元 </text>
+            
+            </view>
               </view>
-              <text class="mytext">￥{{items.price}} 元 </text>
-            </view>
-            <view class="myright" wx:if="{{show}}">
-              <view class="th" bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
-              <view class="sh"><text>确认收货</text></view>
-            </view>
+             
+             </view>
+            
           </view>
-        </block>
+        
       </scroll-view>
 
     </view>
 
-  </view> -->
+  </view>
+
+   <view wx:if="{{listindex == 2}}" class="{{showDialog ? 'preventTouchMove' : ' '}}">
+   
+    <view  wx:for="{{shopOrderList}}" wx:key="index" class="mymain" >
+            <view class="shopborder">
+              <view class="title_box">
+                <view class="mytitle_box">
+                  <view class="title_no">订单号：{{item.order_no}} </view>
+                  <view class="title_no2">时　间：{{item.add_time}} </view>
+                </view>
+                 <view class="bj1"  bindtap="printing2" data-print="{{item}}"><text>去打印</text></view>
+              </view>
+
+            <view class="flex">
+              <view class="shopatt-left2" wx:for="{{item.details}}" wx:key="index" wx:for-item = "items">
+              <view>
+                 <view class="mytitle" id="{{'inToview'+items.id}}">
+                  <view class="top-title11"><text class="stitle11">{{items.title}}</text> <text class="mynumber11"> 数量: {{items.buy_number}}</text> </view>
+                  <view class="myf">
+                    <view class="mytext1">{{items.spectype}}</view>
+                    <view class="mytext2">{{items.specvalue}}</view>
+                  </view>
+                  <text class="mytext">总价格：￥{{items.total_price}} 元 </text>
+              </view>
+              </view>
+           
+            </view>
+            </view>
+            
+            </view>
+
+  </view>
+
+</view>
+
 </view>
 
 <view wx:if="{{currentTab==3}}">
   <view class="tuidan">
     <view class="danshu boder">
       <view>
-        <text>2019-11-27</text>
+        <text>{{dayTime}}</text>
       </view>
       <view>
         <text>订单数：</text>
         <text class="colored">{{shopInfo.number}}</text>
         <text>单</text>
       </view>
-      <!-- <view>
-        <text>总金额</text>
-        <text class="colored">1000</text>
-        <text>元</text>
-      </view> -->
     </view>
     <view class="danshu boder">
       <view>
@@ -183,35 +189,60 @@
         <text class="colored">总未入账：{{shopInfo.not_money}}</text>
       </view>
     </view>
-    <view class="danshu">
-      <view>
-        <text class="colored">预计2019年12月30全部入账</text>
-      </view>
-
-    </view>
-    <view>
-    </view>
+   
   </view>
-  <view class="title" wx:for="{{shopCompleteList}}" wx:key="index">
-    <view class="header">
-      <text>订单ID： {{item.order.order_no}} </text>
-    </view>
-    <view class="contented">
-      <view class="contfl">
-         <text>{{item.title}}:{{item.buy_number}}</text>
-        <!-- <text>备注要求：{{}}</text> -->
-        <text>金额： {{item.price}}元</text>
-        <!-- <text>店名:老菜新创</text>
-        <text>地址：XX路XX号XX店</text> -->
-      </view>
-       <view class="huoleft">
-          <text>规格： 
-            <text wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName" style="margin-left:10rpx;">{{itemName.value}}</text>
-          </text>
-        </view>
-    </view>
-    <view class="buttom">
-      <text>交易完成</text>
-    </view>
+ <view >
+   
+    <view  wx:for="{{shopCompleteList}}" wx:key="index" class="mymain" >
+            <view class="shopborder">
+              <view class="title_box">
+                <view class="mytitle_box">
+                  <view class="title_no">订单号：{{item.order_no}} </view>
+                  <view class="title_no2">时　间：{{item.add_time}} </view>
+                </view>
+                 <view class="bj1"  ><text>已完成</text></view>
+              </view>
+
+            <view class="flex">
+              <view class="shopatt-left2" wx:for="{{item.details}}" wx:key="index" wx:for-item = "items">
+              <view>
+                 <view class="mytitle" id="{{'inToview'+items.id}}">
+                  <view class="top-title"><text class="stitle">{{items.title}}</text> <text class="mynumber"> 数量: {{items.buy_number}}</text> </view>
+                  <view class="myf">
+                    <view class="mytext1">{{items.spectype}}</view>
+                    <view class="mytext2">{{items.specvalue}}</view>
+                  </view>
+                  <text class="mytext">总价格：￥{{items.total_price}} 元 </text>
+              </view>
+              </view>
+           
+            </view>
+            </view>
+            
+            </view>
+
   </view>
 </view>
+</view>
+
+
+
+      <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" >
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+          <view class="zan-dialog__mask" bindtap="toggleDialog" />
+          <view class="zan-dialog__container">
+            
+          
+          
+                <view class="printdata">打印数据</view>
+          
+                 <scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
+                 <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+               </scroll-view>
+            
+               <view class="bj2 listTitle2"    bindtap="print" ><text>打印</text></view>
+        
+            
+          </view>
+        </view>
+     
