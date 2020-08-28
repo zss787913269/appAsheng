@@ -29,11 +29,14 @@
 				<label class="glable" for="male">店铺名称</label>
 				<input type="text" name="shopName" placeholder="请输入" id="male" value="{{shopName}}" />
 			</view>
-			<view class="goUrl">
+			<view class="goUrl" >
 				<label class="glable" for="male">选择区域</label>
-				<!-- <input type="text" name="background" placeholder="请输入" id="male" value="{{background}}" /> -->
-				<view>{{province}}-{{city}}-{{county}} </view>
-				<i class="fal fa-angle-right" bindtap="open"></i>
+				<!-- <view>{{province}}-{{city}}-{{county}} </view> -->
+				<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+				<view class="picker2">{{region[0]}}，{{region[1]}}，{{region[2]}}
+				</view>
+			</picker>
+				<i class="fal fa-angle-right" bindchange="bindRegionChange"></i>
 			</view>
 			<view class="goUrl">
 				<label class="glable" for="male">详细地址</label>

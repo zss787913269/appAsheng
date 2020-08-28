@@ -1,52 +1,23 @@
-<wxs	src="./index.wxs"  module="utils" />
+<wxs src="./index.wxs" module="utils" />
 <view class="top">
-  <view class="header">
-    <i class="fal fa-search"></i>
-    <navigator url="/details/search/index?where=shop" hover-class="other-navigator-hover">
-      <input placeholder="请输入商品名">
-      </input>
-    </navigator>
-  </view>
-  <!-- <view class="tbody" style="height:{{tbodyHeight}}px;">
-    <view class="user-header-avatar">
-      <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
-    </view>
-    <image src="/images/index/home_top_01.jpg" mode="widthFix"></image>
-    <view class="card" style="background: url('data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABQAAD/4QN/aHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6YWYxMzA5MjAtMjEwNS01MzQ5LThlYTctMmFkMjQ5YzJhM2Q4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjY0MEIxNEE2Mjg1MDExRUE4OEUwRTkzNkQ1MzRGOTQ5IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjY0MEIxNEE1Mjg1MDExRUE4OEUwRTkzNkQ1MzRGOTQ5IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmFmMTMwOTIwLTIxMDUtNTM0OS04ZWE3LTJhZDI0OWMyYTNkOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDphZjEzMDkyMC0yMTA1LTUzNDktOGVhNy0yYWQyNDljMmEzZDgiLz4gPC9yZGY6RGVzY3JpcHRpb24+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');background-size:contain;">
-      <view class="head_tap" data-url="{{url}}" bindtap="gotoikPage">
-        <text>{{commission}}</text>
-        <text>我的佣金</text>
-      </view>
-
-      <view class="head_tap" data-url="{{url1}}" bindtap="gotoikPage" data-index="2">
-        <text>{{integral}}</text>
-        <text>我的积分</text>
-      </view>
-      <view class="head_tap" data-url="{{url2}}" bindtap="gotoikPage">
-        <text class="fal fa-qrcode"></text>
-        <text>邀请码</text>
-      </view>
-
-    </view>
-    <image src="/images/index/home_top_03.jpg" mode="widthFix" style="position:absolute;top:{{initialBottom}}"></image>
-  </view> -->
 </view>
+  <view class="header" bindtap="goSearchPage">
+    <i class="fal fa-search myi"></i>
+		<view class="mysear">搜索商品</view>
+  </view>
 <view class="mimg">
-  <swiper autoplay="true">
+  <swiper autoplay="true"  class="swiper-box" indicator-dots="true">
     <swiper-item wx:for="{{ads}}" wx:key="key">
-      <image src="{{item.images_url}}" mode="widthFix" />
+      <image class="mimgimg" src="{{item.images_url}}" mode="" />
     </swiper-item>
   </swiper>
 </view>
-<c style="height:25rpx;"></c>
 <view class="div_div">
-  <!-- <view class="advertisement" bindtap="lookAdvertisement">
-    <image src="{{advertisement}}" class="advertisement-img"></image>
-  </view> -->
+  
   <swiper class="swiper-one" current="{{currentIndex}}">
     <swiper-item wx:for="{{pageNumber}}" wx:key="index" wx:for-index="indexName">
 
-      <view wx:if="{{index<(indexName+1)*8 && indexName*8<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':''}} bannerIm" bindtap="goUrl" data-url="{{item}}">
+      <view wx:if="{{index<(indexName+1)*10 && indexName*8<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':'xxboxshow'}} bannerIm" bindtap="goUrl" data-url="{{item}}">
 				<!-- <text class="mycarcount"  >{{item.count}}</text> -->
         <image wx:if="{{item.icon!=''}}" src="{{item.icon}}"  class="imagesss" />
         <image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
@@ -61,31 +32,25 @@
 
   <c style="height:25rpx;"></c>
 </view>
-
-
-	
+<view class="allshop">
+	<image  src="http://second.chchgg.com/static/banner/sy-banner-2.png" mode="heightFix"></image>
+</view>
 <view class="scroll_table"  id="main" bindtap="myscorll">
   <scroll-view scroll-x>
     <view class="swiper-tab">
       <view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
-
 			<text class="mycarcount" wx:if="{{item.count}}">{{item.count}}</text>
-		
       </view>
     </view>
   </scroll-view>
-
 </view>
-
-<view class="back" wx:if="{{back == true}}" bindtap="backTop">
-  <!-- <i class="fal fa"></i> -->
-  <i class="fal fa-arrow-circle-up" style="font-size:60rpx;color:#fff;background-color:#62a241;border-radius:50%;"></i>
+<view class="back"  wx:if="{{back == true}}" bindtap="backTop">
+	<view>返回</view>
+	<view>顶部</view>
 </view>
-
 	<view wx:if="{{tableListone!=''}}" class="main" bindtap="myscorll">
 		<view class="left">
-
-			<scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
 
 				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
 
@@ -98,61 +63,53 @@
 
 			</scroll-view>
 		</view>
-
 		<view class='right'>
-			<scroll-view scroll-y="true" style="height: 980rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect}}">
-		
-				<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
-
-					<view class="title" id="{{'inToview'+item.id}}">
-						<text>{{item.name}}</text>
-						<text bindtap="toOldFood" data-value="{{item.name}}" wx:if="{{groupStart}}">新菜推荐: >></text>
+			<scroll-view scroll-y="true" style="height:1000rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect2}}">
+			<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
+					<view id="{{'inToview'+item.id}}" >
+					<block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index" >
+				<view bindtap="clickse" data-id="{{items}}" data-index="{{index}}">
+					<view class="topimg">
+						<image  wx:if="{{items.images}}" src="{{items.images}}"></image>
+						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 					</view>
-
-			
-					<block wx:for="{{item.goods}}" wx:for-list="item" wx:key="index">
-
-
-						<!-- zym背景图 -->
-
-						<view wx:if="{{item.images!=''}}" bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url({{item.images}});background-size: cover">
-	
-							<view class="caiPrice">
-								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
-							</view>
-							<view>
-								<text class="immbook">
-                <text class="img-book-text" >订</text>
-								</text>
-							</view>
+					<view class="centername">
+					<view class="carlogo">
+						<image src="../../images/index/car.png"></image>
+					</view>
+						<view class="leftname">
+							<!-- <view class="nametitle">{{items.title}}</view> -->
+								<view class="{{classfiySelect == item.id ? 'nametitle_active' : 'nametitle' }}">{{items.title}}</view>
+							<view class="nameprice"><text class="my1">￥</text><text class="my2">{{items.price}}</text><text class="my3">/{{items.inventory_unit}}</text></view>
 						</view>
-
-							<view wx:else bindtap="clickse" data-id="{{item}}" data-index="{{index}}" class="bgcImg" style="background-image: url('http://second.chchgg.com/static/index/default/images/logo.jpg');background-size: cover">
-					
-							<view class="caiPrice">
-								<text class="textTop">￥</text> <text class="textPrice">{{item.price}}元/{{item.inventory_unit}}</text>
-							</view>
-							<view>
-								<text class="immbook">
-                <text class="img-book-text" >订</text>
-								</text>
-							</view>
+						<view class="rightname"><text>{{items.brand_name}}</text>
 						</view>
-
-
+					</view>
+					<view class="bottomName" bindtap="toOldFood" data-value="{{item.name}}">
+					<i class="fal fa-angle-double-right myri"></i>
+					<text class="r2" >点击查看新菜推荐</text></view>
+				</view>
 					</block>
-
-
+					</view>
 				</view>
 			</scroll-view>
 			<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
 			<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
-				<view class="termine shopright" bindtap="clickcancel">
-					<text>关闭</text>
+	
+				
+				
+	
+				
+			<view class="myb">
+			<view class="mflex">
+				<view class="imgb"><image class="imgurl" src="{{imgurl}}"></image></view>
+				<view>
+					<view class="mname">{{shopName}}</view>
+					<view class="shopPrice"><text>￥</text>{{utils.getPrice(shopPrice,num)}}</view>
 				</view>
-				<view style='color:red;font-size:34rpx'>{{mylist.title}}</view>
-				<view class="shopPrice">￥{{utils.getPrice(shopPrice,num)}}元</view>
-
+			</view>
+				<view>	<image bindtap="clickcancel" class="myclose" src="../../images/index/gwc-gb@2x.png"></image></view>
+			</view>
 				<view class="gg">
 					<view class="one" wx:for="{{tableid}}" wx:key="key">
 						<text class="jt">{{item.title}}</text>
@@ -161,47 +118,45 @@
 								<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
 							</view>
 						</view>
-
 					</view>
 				</view>
         <view class="bz">
-          <text>备注 ： </text>
-          <input placeholder="请输入备注" bindinput="modalInput" data-name="inputBz"></input>
+          <text>备注： </text>
+          <input placeholder="请输入备注" placeholder-style="color:rgba(170,170,170,1);font-size:24rpx;" bindinput="modalInput" data-name="inputBz"></input>
         </view>
-
-
 				<view class="liang">
-					<text class="mycount" >数量 </text>
-					<view class="zhonged borde background add" bindtap="bindPlus">
-						<text class="myadd"> +</text>
-					</view>
-					<view class="zhong corlor  myinput">
-						<input type="number" bindchange="bindManual" value="{{num}}" />
-					</view>
-					<view class="zhonged borde " bindtap="bindMinus">
-						<text class="myadd">-</text>
-					</view>
+					<view class="mycount" >购买数量 </view>
+						<view class="addbox">
+							<view  class="jiabox" bindtap="bindPlus">
+							<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
+						</view>
+						<view class="numbercount">
+							<input type="number" bindchange="bindManual" value="{{num}}" />
+						</view>
+						<view  class="jiabox" bindtap="bindMinus">
+						<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
+						</view>
+						</view>
 				</view>
 
 				<view class="mybottom">
-
-					<view class="termied" bindtap="determine">
-						<text>公司采购</text>
+					<view class="btn1" bindtap="determine">
+						<image class="gscg1" src="../../images/index/gwc-gscg@2x.png"></image>
+						<text>酒店采购</text>
 					</view>
-
-					<view class="termied" bindtap="clickselet">
+					<view class="btn2" bindtap="clickselet">
+					<image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
 						<text>个人采购</text>
 					</view>
 				</view>
 			</view>
-			<!-- 123 -->
+
 			<view wx:else class="group">
 				<view wx:for="{{groupShop}}" wx:key="index" class="groupBox {{item.color_type == 1?'groupBack':''}} {{item.color_type == 2?'groupBack2':''}} {{item.color_type == 3?'groupBack3':''}}">
 					<view class="shopName text-wei   {{item.color_type == 1?'shopColor':''}} {{item.color_type == 2?'shopColor2':''}} {{item.color_type == 3?'shopColor3':''}}">{{item.name}}</view>
 					<view class="textColor-group text-wei">
 						{{item.start_time}}开始下单{{item.send_time}}点前配送
 					</view>
-
 					<view class="grouostart" bindtap="clickPurchase" data-index="{{index}}">
 						<view class="grouostart-left">
 							<view class="start">
@@ -266,10 +221,18 @@
 			</view>
 		</view>
 
+		<view class="fix">
+			<view class="fast" bindtap="clickHotel"><text>快速下单</text></view>
+			<view class="fiximgbox" bindtap="gouwuche">
+				<image  class="fiximg" src="../../images/index/car.png"></image>
+				<text class="carnub"  wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}">{{cartNum+personNum}}</text>
+			</view>
+		</view>
+
 	</view>
 
 
-<view class="bottom">
+<view class="bottom" wx:if="{{false}}">
   <view class="itemed">
     <view class="itemded" bindtap="clickHotel">
       <text>快速下单</text>

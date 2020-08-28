@@ -5,6 +5,10 @@ const app = getApp()
 var time = require('../../utils/util.js')
 Page({
   data: {
+    shopName:"",
+    imgurl:"",
+    topArr:[],
+    conTop:0,
     mydata:"",
     classCount:"",
     mycarCount:"",
@@ -13,6 +17,7 @@ Page({
     inputBz: "",
     showModalStatus: false, //遮罩的显示与隐藏
     classfiySelect: "",
+    classfiySelect2: "",
     showModalStatus: false, //遮罩的显示与隐藏
     city: '成都',
     ads: ['/images/temp/ad.jpg', '/images/temp/ad_2.jpg'],
@@ -81,6 +86,12 @@ Page({
     })
   },
 
+  // 去搜索页面
+  goSearchPage(){
+      wx.navigateTo({
+        url: '/details/search/index?where=shop',
+      })
+  },
   async getBanner() {
     var that = this
     let res = await ajax({
@@ -104,7 +115,8 @@ Page({
     let that = this
 
     that.setData({
-      classfiySelect: id
+      classfiySelect: id,
+      classfiySelect2:id
     })
 
   },
@@ -476,8 +488,7 @@ Page({
     //  scene = JSON.parse(scene)
     let res = scene.split("type=")[1] //酒店角色进入
     let resIndex = scene.split("referrer=")[1] //首页二维码进入
-    //////console.log(scene)
-    //////console.log(res)
+   
     if (res != undefined) {
       wx.setStorage({
         key: "shop",
@@ -496,7 +507,7 @@ Page({
         that.getBinDing(resIndex)
       }
     }
-    // this.getQrcode()
+  
   },
 
   //zym 获取购物车总数量
@@ -527,6 +538,7 @@ Page({
       
       })
       
+      // console.log("yiji",this.data.tableList)
 
 
     }
@@ -672,7 +684,7 @@ Page({
     let res = await ajax({
       url: 'api/index/getOneCategory'
     })
-    //////console.log('导航', res);
+    // console.log('导航', res.data.data);
     if (res.data.code == 0) {
       let tableList = res.data.data
       for (var i = 0; i < tableList.length; i++) {
@@ -700,7 +712,7 @@ Page({
 
       that.setData({
         tableList:yijicarData,
-        pageNumber: Math.ceil(res.data.data.length / 8)
+        pageNumber: Math.ceil(res.data.data.length / 10)
       })
       // ////console.log("tableList",this.data.tableList)
 
@@ -830,9 +842,12 @@ Page({
         id: id
       }
     })
-    // ////console.log(res.data.data)
+
+
+
+    // console.log('第三', res.data.data);
     if (res.data.code == 0) {
-      //////console.log('第三季', res);
+    
       let arr = res.data.data
       arr.forEach(item => {
         let itemFor = item.goods;
@@ -850,6 +865,7 @@ Page({
 
       that.setData({
         tableListone: arr,
+       
         currentTab: id
       })
     } else {
@@ -864,13 +880,68 @@ Page({
     }
 
   },
+  // zym123
   scroll: function (e) {
+
+
+    
 
     wx.pageScrollTo({
       selector: "#main",
       duration: 100
     })
+      let that = this
+
+      let q = wx.createSelectorQuery()
+      q.selectAll(".leftTitle").boundingClientRect(res=>{
+        // console.log("leftTitle",res.map(r=>r.top))
+  
+          that.data.topArr  = res.map(r=>r.top)
+       
+  
+        
+      })
+      q.selectAll(".right").boundingClientRect(res=>{
+        // console.log("right",res)
+        if(res.length != 0){
+          that.data.conTop  = res[0].top
+        }
+          
+       
+      })
+      q.exec()
+    let  scrollHeight  = e.detail.scrollTop
+    
+   
+
+    let arr = this.data.topArr.map(r=> r - 30)
+
+    // console.log(arr,e.detail.scrollTop)
+
+
+      let t = this.data.tableListone[0].id
+
+      for(let i = arr.length-1;i>=0;i--){
+        if(arr[i] <= e.detail.scrollTop){
+            t = that.data.tableListone[i].id
+            break
+          }
+        }
+        
+      if(t !== this.data.classfiySelect){
+        that.setData({
+          classfiySelect:t,
+        })
+      }
+    
+
+
+
+    
+    // console.log(this.data.classfiySelect)
+  
   },
+  
   scroll1: function (e) {
 
     wx.pageScrollTo({
@@ -879,6 +950,9 @@ Page({
     })
   },
   myscorll() {
+    // this.setData({
+    //   classfiySelect:this.data.tableListone[0].id
+    // })
     wx.pageScrollTo({
       selector: "#main",
       duration: 100
@@ -1109,18 +1183,22 @@ Page({
       method: 'POST',
       data: params
     })
+
+    console.log(res.data.data)
     if (res.data.code == 0) {
       //////console.log(res.data.data.price)
 
-      let jgNumber = that.data.jgNumber
-      let number = that.data.selectedNumber
+  
       let price = res.data.data.price
+      let imgurl = 'http://second.chchgg.com'+res.data.data.goods.images
+      let shopName = res.data.data.goods.title
       let dataList = res.data.data.info
 
       console.log(res.data.data)
 
       that.setData({
-        shopPrice: price
+        shopPrice: price,
+        imgurl,shopName
       })
     } else {
       // wx.showToast({
@@ -1211,8 +1289,7 @@ Page({
   },
 
   clickcancel: function () { //返回按钮
-    var that = this
-    // that.changeState()
+
     this.hideBuyModal()
   },
   async changeState() {
@@ -1314,17 +1391,28 @@ Page({
     } 
 
   },
-  determine() { //加入酒店购物车
+
+  async determine() { //加入酒店购物车
     var that = this;
-    //////console.log("jgNumber------"+this.data.jgNumber)
-    //////console.log("numbder-------"+this.data.selectedNumber)
- 
-  
     if (app.globalData.token == '') {
       wx.navigateTo({
         url: "/component/zation/index"
       })
     } 
+
+    let res = await ajax({
+      url: '/api/quickorder/getHotel',
+      method: 'get'
+    })
+    let hotelInfo = res.data.data
+
+    if(hotelInfo == null){
+      wx.showToast({
+        title: '请先添加酒店',
+        icon:"none"
+      })
+      return 
+    }
   
 
     if(that.data.jgNumber === true && that.data.selectedNumber === ""){
@@ -1405,7 +1493,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: "/pages/cart/index"
+        url: "/pages/cart/index?type=1"
       })
     }
   },
@@ -1417,7 +1505,10 @@ Page({
       })
       return
     }
-    that.getOrder()
+    // that.getOrder()
+      wx.navigateTo({
+        url: "/pages/quickly/quickly",
+      })
 
 
   },
@@ -1427,7 +1518,7 @@ Page({
       url: '/api/Quickorder/QuickOrder',
       method: 'get',
     })
-    //////console.log(res)
+    console.log("快速下单",res.data)
     if (res.data.code == -1) {
       wx.showToast({
         title: res.data.msg,
@@ -1438,7 +1529,7 @@ Page({
     }
     let data = JSON.stringify(res.data)
     wx.navigateTo({
-      url: `/pages/cart/index`
+      url: `/pages/cart/index?type=2`
     })
   },
   onShow: function () { //监听页面显示

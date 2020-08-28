@@ -82,7 +82,7 @@
 }
 
 .active {
-  background: #62a241;
+  background: #40B15D;
 }
 .actived {
   background: #ff9d34;

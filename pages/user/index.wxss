@@ -1,5 +1,5 @@
 .header {
-  background: #62a241;
+  background: #40B15D;
   padding: 10rpx;
   position: relative;
   padding-bottom: 80rpx;
@@ -118,6 +118,7 @@ height: 30px;
   height: 280rpx;
 overflow: hidden;
 margin-bottom: 8px;
+
 
 }
 .tbody image {

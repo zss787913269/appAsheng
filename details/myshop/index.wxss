@@ -1,7 +1,7 @@
 
 .color{
   color: #96cc79;
-  margin-bottom: 10rpx;
+  /* margin-bottom: 10rpx; */
 }
 .colorone{
   color: #ff9d34;
@@ -36,20 +36,31 @@
 
 
 .title{
-  height: 350rpx;
+  height: 100rpx;
   width: 95%;
   margin: 20rpx auto;
   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
-  
+  display: flex;
+  align-items: center;
+}
+.title1{
+  margin-left: 20rpx;
+  font-weight: 500;
+  font-size: 30rpx;
+}
+.title2{
+  margin-left: 40rpx;
+  font-weight: 500;
+  font-size: 30rpx;
+  color: red;
 }
 .header{
   width: 100%;
   height: 80rpx;
-  line-height: 50rpx;
-  padding: 20rpx;
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
   border-bottom:1px solid #ccc; 
 }
 .content{
@@ -99,7 +110,7 @@
 }
 
 .active {
-  background: #62a241;
+  background: #40B15D;
 }
 .actived {
   background: #ff9d34;
@@ -127,21 +138,22 @@
 }
 
 .zhon{
-  width: 150rpx;
-  height: 40rpx;
+  width: 160rpx;
+  height: 50rpx;
   background:#ff9d34;
   color: #fff; 
   text-align: center;
   line-height: 40rpx;
   border-radius: 10rpx;
+  margin-right: 40rpx;
+  line-height: 50rpx;
   
 }
 .buttom{
-   height: auto;
+  height: auto;
   width: 95%;
   margin: 20rpx auto;
- padding-top: 30rpx;
- padding-bottom: 30rpx;
+  padding-bottom: 30rpx;
   box-sizing: border-box;
   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1)
 }
@@ -165,21 +177,29 @@
   margin-top:20rpx; 
   align-items: center;
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
 
 }
 .mytr{
   margin-top: 60rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 20rpx;
+  height: 170rpx;
+  width: 710;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .tr view:nth-child(1){
   width: 60%;
   line-height: 50rpx;
- display: flex;
- flex-flow:column; 
+  display: flex;
+  flex-flow:column; 
 }
 .tr view:nth-child(2){
   width: 20%;
   justify-content: center;
-    text-align: center;
+  text-align: center;
 }
 .tr view:nth-child(3){
   width: 20%;
@@ -188,11 +208,12 @@
  flex-flow:column; 
 align-items: center;
 }
-/* .td {
-    width:40%;
-    justify-content: center;
-    text-align: center;
-} */
+.td {
+  
+  margin-left: 10rpx;
+
+}
+
 .bg-w{
   background: snow;
 }
@@ -207,4 +228,18 @@ align-items: center;
   align-items: center;
 
 
+}
+
+.mylist{
+  display: flex;
+  justify-content: space-evenly;
+  width: 750rpx;
+  margin-bottom: 10rpx;
+  height: 50rpx;
+  margin-top: 20rpx;
+}
+
+.shoplist{
+  border-bottom: 4rpx solid green;
+  color: #40B15D;
 }

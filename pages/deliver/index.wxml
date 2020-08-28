@@ -1,4 +1,20 @@
-<view>
+
+	<view  wx:if="{{false}}">
+	
+    <map
+      id="myMap"
+      style="width: 100%; height: 300px; border-radius: 20px;"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      markers="{{markers}}"
+      bindtap="getLoc"
+      show-location
+    ></map>
+	</view>
+ 
+
+
+<view >
 	<view class="swiper-tab">
 		<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">未取货
 			<sup wx:if="{{ 99>=total>0 && deliveryList.length>0}}" class="total">{{total}}</sup>
@@ -15,6 +31,7 @@
 	</view>
 
 </view>
+<view>
 
 <view wx:if="{{currentTab==1}}">
 
@@ -179,10 +196,7 @@
 
 
 </view>
-<!-- <view class="bottom">
-  <button class="ff9" bindtap="showDialogBtn">扫一扫</button>
-  <button class="ff9">联系公司</button>
-</view> -->
+
 <view class="bottom">
 	<view class="itemedel">
 		<!-- <view class="itemdedel" bindtap="showDialogBtn">
@@ -198,6 +212,7 @@
 			<!-- </navigator> -->
 		</view>
 	</view>
+</view>
 </view>
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>

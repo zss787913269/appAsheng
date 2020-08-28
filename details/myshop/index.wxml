@@ -1,88 +1,39 @@
-<!-- <view>
-  <view class="swiper-tab">
-    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">我的店铺
-    </view>
-    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">一级市场人脉
-    </view>
-    <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">二级市场人脉
-    </view>
-  </view>
 
-</view> -->
-<view>
-  <view class="swiper-tab">
-    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">我的店铺
-    </view>
-    <!-- <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">一级市场人脉
-    </view>
-    <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">二级市场人脉
-    </view> -->
-  </view>
-
-</view>
-
-
-<view wx:if="{{currentTab==1}}">
+<view >
   <view class="title">
-    <view class="content">
-      <view class="huo">
-        <text>{{shopInfo.name}}</text>
-        <!-- <view>
-          <text> 供应商：陈东</text>
-          <text>　一级20</text>
-          <text>　二级30</text>
-        </view> -->
-        <view>
-          <text> 产品总量：50</text> 
-          <text>　类别量：9</text>
-        </view>
-      </view>
-      <!-- <view class="item">
-        <view class="zhong actived"> 联系他</view>
-        <view class="zhong"> 查看</view>
-      </view> -->
-    </view>
-    <view class="ruzhang">
-      <!-- <text>未入账：2000元</text> -->
-      <text>账期：{{shopInfo.number}}天</text>
-      <!-- <text>入账日：10日</text> -->
-    </view>
-    <view class="select" bindtap="select" data-name="1" wx:if="{{select==2}}">
-      <text>︿</text>
-    </view>
-    <view class="select" bindtap="select" data-name="2" wx:if="{{select==1}}">
-      <text>﹀</text>
-    </view>
+        <text class="title1" >店铺名：{{shopInfo.name}}</text>
+         <text class="title2">账期：{{shopInfo.number}}天</text>
   </view>
-  <!-- 下面 -->
-  <view class="buttom" wx:if="{{select==2}}">
+
+  <view class="buttom" >
     <view class="header">
-      <text> </text>
-      <text> </text>
-      <text> </text>
       <view class="zhon" bindtap="addClass">
         <text>添加商品</text>
       </view>
     </view>
-    <view class="tbody">
+
+  <view class="mylist">
+    <text  bindtap="clickList"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">在售商品</text>
+    <text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">下架商品</text>
+  </view>
+
+
+   <view class="tbody">
+
+    <text >数量：{{listData.length}}</text>
       <view class="table">
-        <view class="tr bg-w">
-          <view class="th">产品量：{{listData.length}}</view>
-          <!-- <view class="th colorone">添加</view> -->
-          <view class="th"></view>
-        </view>
         <block wx:for="{{listData}}" wx:key="index">
          <view class="mytr">
           <view class="tr">
             <view class="td">
               <text>{{item.title}}</text>
               <text>产品描述：<text wx:for="{{item.show_keyword}}" wx:for-item="itemName" wx:key="index">{{itemName}}</text></text>
-
             </view>
             <view class="td">{{item.price}}元</view>
             <view class="td">
               <text class="color" bindtap="deleteS" data-id="{{item.id}}">删除</text>
               <text class="colortwo" bindtap="editS" data-item="{{item}}" data-id="{{item.id}}" data-name="{{item.title}}">编辑</text>
+              <text class="color" bindtap="xiajia" data-id="{{item.id}}" wx:if="{{listindex == 1}}">下架</text>
             </view>
           </view>
          </view>
@@ -92,86 +43,4 @@
 
   </view>
 
-</view>
-<view wx:if="{{currentTab==2}}">
-  <view class="title" wx:for="{{shopConnections}}" wx:key="index">
-    <view class="content">
-      <view class="huo">
-        <text>{{item.name}}</text>
-        <!-- <view>
-          <text> 供应商：陈东</text>
-          <text>　一级20</text>
-          <text>　二级30</text>
-        </view>
-        <view>
-          <text> 产品总量：50</text>
-          <text>　类别量：9</text>
-        </view> -->
-      </view>
-      <!-- <view class="item">
-        <view class="zhong actived"> 联系他</view>
-        <view class="zhong"> 查看</view>
-        <view class="shenhe"> 陈东审核</view>
-      </view> -->
-    </view>
-    <!-- <view class="ruzhang">
-      <text>未入账：2000元</text>
-      <text>账期：30天</text>
-      <text>入账日：10日</text>
-
-    </view> -->
-    <!-- <view class="select" bindtap="selected" data-name="1" wx:if="{{selected==2}}">
-      <text>︿</text>
-    </view>  -->
-    <!-- <view class="select" bindtap="selected" data-name="2" wx:if="{{selected==1}}">
-      <text>﹀</text>
-    </view>  -->
-  </view>
-  <!-- 下面 -->
-  <!-- <view class="buttom"  wx:if="{{selected==2}}">
-    <view class="header">
-      <text>猪肉</text>
-      <text>牛肉</text>
-      <text>鸡肉</text>
-      <view class="zhon">
-        <text>添加类别</text>
-      </view>
-    </view>
-    <view class="tbody">
-      <view class="table">
-        <view class="tr bg-w">
-          <view class="th">产品量：10</view>
-          <view class="th colorone">添加</view>
-          <view class="th "></view>
-        </view>
-        <block wx:for="{{listData}}" wx:key="index">
-          <view class="tr">
-            <view class="td">
-              <text>五花肉</text>
-              <text>产品描述：深山里长大的猪</text>
-            </view>
-            <view class="td">15元</view>
-            <view class="td">
-              <text class="color">编辑</text>
-              <text class="colorone">审核</text>
-            </view>
-          </view>
-        </block>
-      </view>
-    </view>
-
-  </view> -->
-</view>
-<view wx:if="{{currentTab==3}}">
-  <view class="title" wx:for="{{shopConnections}}" wx:key="index">
-    <block wx:for="{{item.two}}" wx:for-item="itemName" wx:key="index">
-      <block wx:for="{{itemName}}" wx:for-item="itemBlock" wx:key="index">
-        <view class="content">
-          <view class="huo">
-            <text>{{itemBlock.name}}</text>
-          </view>
-        </view>
-      </block>
-    </block>
-  </view>
 </view>

@@ -345,9 +345,9 @@ Page({
   },
   //zym
   async getShopList(num) { //获取商家订单
-    wx.showLoading({
-      title: '加载中',
-    })
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     // console.log(num)
     // type = 2  按照订单 isok = 0 是未接单
     // type = 3  商品汇总 isok = 1 已接单
@@ -425,9 +425,9 @@ Page({
     console.log("获取商家订单",res.data.data)
 
     if (res.data.code == 0) {
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 100)
+      // setTimeout(function () {
+      //   wx.hideLoading()
+      // }, 100)
       that.setData({
         shopOrderList: res.data.data,
       })

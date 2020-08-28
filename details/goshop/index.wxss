@@ -1,5 +1,5 @@
 .color{
-  color: #62a241;
+  color: #40B15D;
 }
 .colord{
   color: #717171;
@@ -25,7 +25,7 @@
   width: 150rpx;
   height: 60rpx;
   line-height: 60rpx;
-  background:#62a241;
+  background:#40B15D;
   color: #fff;
   text-align: center;
   margin-top:20rpx;
@@ -86,7 +86,7 @@
 }
 
 .active {
-  background: #62a241;
+  background: #40B15D;
 }
 .tuidan{
   height: 300rpx;

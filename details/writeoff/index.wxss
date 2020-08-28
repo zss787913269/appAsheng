@@ -7,7 +7,7 @@
   /* align-items:center; */
 }
 .QRcode-box{
-  border-top:10px solid #62A241; 
+  border-top:10px solid #40B15D; 
   height:700rpx;
   width:70%;
   background:#ffffff;

@@ -49,13 +49,15 @@
 		<label class="jin" for="male" wx:if="{{specificationsNum == index}}" bindtap="toQuotTwo" data-index="{{indexName}}">{{indexName}}</label>
 	</block>
 	<block wx:if="{{specificationsNum == index}}">
-		<view class="titleed" wx:for="{{quotationLine[specificationsNum][numTwo]}}" wx:key="index" wx:for-index="indexName">
-			<label class="glableShop" for="male">{{numTwo}}:
+		<view class="titleed" wx:for="{{quotationLine[specificationsNum][numTwo]}}" wx:key="index" wx:for-index="indexName"  >
+	
+				<label class="glableShop" for="male">{{numTwo}}:
 				<text wx:for="{{item}}" wx:key="index" wx:for-index="idxName" wx:for-item="iteName">{{idxName}}</text>
 			</label>
 			<block wx:for="{{item}}" wx:key="index" wx:for-index="idxName" wx:for-item="iteName">
-				<input type="text" placeholder="请输入价格" bindinput="sendPrice" data-index="{{indexName}}" data-item="{{item}}" value="{{iteName}}" name="sHOPNAME" data-idx="{{idxName}}" style="width:24%;" />
+				<input type="text"  placeholder="请输入价格" bindinput="sendPrice" data-index="{{indexName}}" data-item="{{item}}" value="{{iteName}}" name="sHOPNAME" data-idx="{{idxName}}" style="width:24%;" />
 			</block>
+		
 		</view>
 	</block>
 </block>

@@ -1,5 +1,5 @@
 .header {
-  background: #62a241;
+  background: #40B15D;
   padding: 10rpx;
   display: flex;
   justify-content: flex-end;
@@ -14,7 +14,7 @@
  line-height: 65rpx;
 }
 .active{
-  background:#62a241;
+  background:#40B15D;
 }
 .xinchuang{
   width: 100%;

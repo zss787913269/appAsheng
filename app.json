@@ -1,14 +1,18 @@
 {
   "pages": [
     
-    "details/handle/index",
-    "pages/user/index",
-    "pages/index/index", 
-    "private/hotelpeople/index",
+    "pages/index/index",
     "details/detail/index",
-    "private/hotelAddress/index",
-    "pages/deliver/index",
     "pages/cart/index",
+    "pages/quickly/quickly",
+    "details/myshop/index",
+    "pages/user/index",
+    "details/becomeShop/index",
+    "details/addshop/index",
+    "private/hotelpeople/index",
+    "pages/deliver/index",
+    "details/handle/index",
+    "private/hotelAddress/index",
     "person/personl/index",
     "person/slops/index",
     "pages/pledge/index",
@@ -43,10 +47,8 @@
     "details/orderlist/index",
     "details/groupAll/index",
     "details/comment/index",
-    "details/becomeShop/index",
     "details/search/index",
     "details/goshop/index",
-    "details/addshop/index",
     "details/supplier/index",
     "details/peinformation/index",
     "details/information/index",
@@ -67,13 +69,13 @@
     "private/find/index",
     "private/findone/index",
     "component/zation/index",
-    "details/myshop/index",
     "private/superman/index"
+  
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#62a241",
+    "navigationBarBackgroundColor": "#40B15D",
     "navigationBarTitleText": "名厨菜小二",
     "backgroundColor": "#ffffff"
   },
@@ -82,8 +84,7 @@
     "selectedColor": "#333",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "images/tabar/10.png",
@@ -115,6 +116,11 @@
       }
     ],
     "position": "bottom"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

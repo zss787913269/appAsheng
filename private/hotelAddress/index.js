@@ -131,8 +131,6 @@ Page({
       region: e.detail.value
     })
     
-
-    console.log(String(this.data.region))
   },
   determine() {
     this.setData({
@@ -233,19 +231,13 @@ Page({
         hotelName: hotelInfo.h_name, //酒店名
         address: hotelInfo.address, //地址
         tel: hotelInfo.tel, //联系方式
-        hotelId: hotelInfo.id,
-        provinceid: hotelInfo.hotel_address[0].id,
-        province: hotelInfo.hotel_address[0].name,
-        cityid: hotelInfo.hotel_address[1].id,
-        city: hotelInfo.hotel_address[1].name,
-        countyid: hotelInfo.hotel_address[2].id,
-        county: hotelInfo.hotel_address[2].name,
-        streetId: hotelInfo.hotel_address[3].id,
-        street: hotelInfo.hotel_address[3].name,
-        type:Number(hotelInfo.type) - 1
+        hotelId: hotelInfo.id,      
+        type:Number(hotelInfo.type) - 1,
+        roleId:Number(hotelInfo.type),
+        region:hotelInfo.region.split(",")
       })
     }
-    console.log("getHotel",res.data.data)
+
   },
   
   getInputValue(e) { //获取手机号
@@ -290,8 +282,27 @@ Page({
   },
 
   submit(e) {
+
     var that = this
     var formData = e.detail.value;
+
+    var fullName = formData.fullName;
+      var tel = formData.tel;
+      var address = formData.address;
+      var hotelName = formData.hotelName;
+      var code = formData.code;
+      var params = {
+        code: code,
+        h_name: hotelName,
+        name: fullName,
+        address: address,
+        type: that.data.roleId,
+        // region: `${that.data.provinceid},${that.data.cityid},${that.data.countyid},${that.data.streetId}`,
+        region: `${that.data.region}`,
+        tel: tel,
+      };
+      console.log("region",that.data.region)
+         console.log("params",params)
     if (!this.WxValidate.checkForm(e)) {
       const error = this.WxValidate.errorList[0]
       wx.showToast({
@@ -312,11 +323,11 @@ Page({
         address: address,
         type: that.data.roleId,
         // region: `${that.data.provinceid},${that.data.cityid},${that.data.countyid},${that.data.streetId}`,
-        region: String(that.data.region.toString),
-
-        //区域id, 省，市，区/县 例： 1,23,34
+        region: `${that.data.region}`,
         tel: tel,
       };
+      console.log("params",params)
+
     
       if(params.type == ''){
         wx.showToast({
@@ -329,6 +340,7 @@ Page({
     }
 
   },
+
   async getSubmit(e) { //提交信息
     var that = this
     if (that.data.hotelId != '') {
@@ -339,6 +351,7 @@ Page({
         method: 'POST',
         data: e
       })
+      console.log(res)
       if (res.data.code == 0) {
         wx.showToast({
           title: '提交成功',

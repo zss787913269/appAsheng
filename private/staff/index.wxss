@@ -21,7 +21,7 @@
   background-color: #ff9000;
 }
 .alreadyex{
-  background-color: #62a241;
+  background-color: #40B15D;
 }
 .scroll_box{
 width: 100%;
@@ -269,7 +269,7 @@ white-space: nowrap;
 }
 
 .active {
-  background: #62a241;
+  background: #40B15D;
 }
 .actived {
   background: #ff9d34;

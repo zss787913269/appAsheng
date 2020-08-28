@@ -150,14 +150,23 @@ Page({
       })
       return
     }
+    if (that.data.addreslist == null){
+      wx.showToast({
+        title: '请填写收货地址',
+        icon:'none',
+        duration:3000
+      })
+      return
+    }
+    console.log("that.data.addreslist",that.data.addreslist.id)
     let params = {
       // buy_type: that.data.where,
-      
       payment_id: that.data.paymentId,
       address_id: that.data.addreslist.id,
       is_purchase: 0,
       user_note : that.data.inputBz
     }
+   
     if(that.data.where == 'group'){
       params.buy_type = 'goods'
       params.is_group_buy = 1
@@ -243,10 +252,10 @@ Page({
       }
     } else {
       console.log(res.data)
-      // wx.showToast({
-      //   title: res.data.msg,
-      //   duration:3000
-      // })
+      wx.showToast({
+        title: res.data.msg,
+        duration:3000
+      })
 
     }
     console.log(res)

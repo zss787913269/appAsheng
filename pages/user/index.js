@@ -98,7 +98,7 @@ Page({
         })
       }
     },(err=>{
-      console.log(err);
+      //console.log(err);
     }))
     let url1 = 'api/dishes/getMyAllComment'
     app.wxRequest('POST', url1, '', (res)=>{
@@ -108,18 +108,18 @@ Page({
         })
       }
     },(err=>{
-      console.log(err);
+      //console.log(err);
     }))
     let url2 = '/api/user/makelisttoseft'
     app.wxRequest('GET', url2, '', (res)=>{
-      console.log('预约我的',res);
+      //console.log('预约我的',res);
       // if(res.data.code == 0){
       //   this.setData({
       //     reply:res.data.data.total
       //   })
       // }
     },(err=>{
-      console.log(err);
+      //console.log(err);
     }))
   },
   gotoikPageS(){
@@ -128,7 +128,7 @@ Page({
     })
   },
   gotoikPage: function (e) {
-    console.log(e)
+    //console.log(e)
     wx.navigateTo({
       url: e.currentTarget.dataset.url
 
@@ -156,7 +156,7 @@ Page({
   },
   privateKitchen(){
     var that = this
-    console.log(111);
+    //console.log(111);
     if (app.globalData.token == '') {
       wx.navigateTo({
         url: "/component/zation/index"
@@ -167,7 +167,7 @@ Page({
    
   },
   async getMyCommission() {   //获取佣金
-    console.log('yongjing')
+    //console.log('yongjing')
     var that = this
     let res = await ajax({
       url: 'api/user/getUserProperty',
@@ -182,7 +182,7 @@ Page({
       balance: res.data.data.normal_money,
       pledge: res.data.data.pledge
     })
-    console.log(res)
+    //console.log(res)
   },
   async getCookInfo(){
     var that = this
@@ -190,7 +190,7 @@ Page({
       url: '/api/dishes/getSelfCookInfo',
       method: 'get',
     }) 
-    console.log(res)
+    //console.log(res)
     
     if(res.data.code == -1){
       that.setData({
@@ -233,7 +233,7 @@ Page({
         url: "/component/zation/index"
       })
     }else{
-      console.log('点击了')
+      //console.log('点击了')
       wx.navigateTo({
         url: e.currentTarget.dataset.url
 

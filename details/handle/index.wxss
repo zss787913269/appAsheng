@@ -156,7 +156,7 @@ page{
 }
 
 .active {
-  background: #62a241;
+  background: #40B15D;
 }
 .tuidan{
   /* height: 300rpx; */
@@ -399,7 +399,7 @@ page{
   padding-bottom: 15rpx;
   border-radius: 15rpx;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
   
 }
 .th{
@@ -445,7 +445,7 @@ page{
   padding-bottom: 10rpx;
   border-radius: 10rpx;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
 }
 
 
@@ -585,13 +585,11 @@ page{
   width: 750rpx;
   margin-bottom: 20rpx;
   height: 50rpx;
-  
-  
 }
 
 .shoplist{
   border-bottom: 4rpx solid green;
-  color: #62a241;
+  color: #40B15D;
 }
 
 .title_box{
@@ -636,7 +634,7 @@ page{
   
   text-align: center;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
   width: 150rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -662,7 +660,7 @@ page{
   margin-top: 40rpx;
   text-align: center;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
   margin-right: 20rpx;
   border-radius: 10rpx;
   
@@ -673,7 +671,7 @@ page{
   line-height: 50rpx;
   text-align: center;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
   margin-right: 20rpx;
   border-radius: 10rpx;
   

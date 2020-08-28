@@ -8,12 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    listindex: 1,
     currentTab: 1,
     select: 1,
     selected: 1,
     listData: [],
     shopInfo:"",
     shopConnections:'',   //商铺下级人脉
+    lineList:[],
+    xiajiaList:[]
 
   },
   //点击切换
@@ -22,10 +25,21 @@ Page({
     that.setData({
       currentTab: e.target.dataset.current
     })
-    console.log(that.data.currentTab)
+    ////console.log(that.data.currentTab)
     if (that.data.currentTab == 2){
       that.getShopOneClass()
     }
+  },
+  clickList(e) {
+    let index = e.currentTarget.dataset.index
+
+    this.setData({
+      listindex: index
+    })
+
+    
+
+    this.getShopGoodsList()
   },
   select: function (e) {
     var that = this;
@@ -48,7 +62,7 @@ Page({
     that.setData({
       shopConnections: res.data.data.data
     })
-    console.log(res)
+    ////console.log(res)
   },
   async getShopInfo(){    //获取店铺信息
       var that = this
@@ -56,12 +70,12 @@ Page({
       url: 'api/store/getMyStoreInfo',
       method: 'post',
     })
-    console.log(res);
+    ////console.log("getShopInfo",res.data.data);
     if(res.data.code == 0){
       that.setData({
         shopInfo: res.data.data.data
       })
-      console.log('shopInfo',res);
+      ////console.log('shopInfo',res);
     } else if (res.data.code == -2){
       wx.showToast({
         title:'没有申请店铺，请去我的页面申请',
@@ -81,20 +95,57 @@ Page({
       })
     }
     
-    // console.log(res)
+    // ////console.log(res)
   },
   async getShopGoodsList() {    //获取店铺商品
     var that = this
+
+    let index = that.data.listindex
+    let params 
+    if(index == 1){
+      params= {
+        shelves:1
+      }
+    }else{
+      params= {
+        shelves:0
+      }
+    }
+    
+    
+    console.log("params",params)
     let res = await ajax({
       url: 'api/store/StoreGoodsList',
       method: 'post',
+      data: params
     })
+    // is_shelves
+    console.log("获取店铺商品",res.data.data.data)
     let listData = res.data.data.data.data
+    // let lineList = [],xiajiaList = []
+    // for(let i of listData){
+    //     if(i.is_shelves == 0){
+    //       xiajiaList.push(i)
+    //     }else{
+    //       lineList.push(i)
+    //     }
+    // }
+
+    // this.setData({
+    //   lineList,xiajiaList
+    // })
+
+    // console.log("lineList",lineList)
+    // console.log("xiajiaList",xiajiaList)
+
+
+
+
     for(var i = 0; i<listData.length;i++){
       listData[i].show_keyword = JSON.parse(listData[i].show_keyword)
     }
     if(res.data.code == 0){
-      console.log(listData)
+      ////console.log(listData)
       that.setData({
         listData
       })
@@ -105,8 +156,7 @@ Page({
         duration: 3000,
       })
     }
-  
-    console.log(res)
+
   },
   deleteS(e) {    //删除店铺商品
     var that = this
@@ -139,7 +189,47 @@ Page({
             })
           }
         } else if (ss.cancel) {
-          console.log('用户点击取消')
+          ////console.log('用户点击取消')
+        }
+      }
+    })
+
+  },
+  xiajia(e) {    //删除店铺商品
+    var that = this
+
+    ////console.log(e.currentTarget.dataset.id)
+   
+    wx.showModal({
+      title: '提示',
+      content: '确认下架吗',
+      async success (ss) {
+        if (ss.confirm) {
+          let res = await ajax({
+            url: 'api/store/goodsxiajia',
+            method: 'post',
+            data:{
+              id:e.currentTarget.dataset.id
+            }
+          })
+          ////console.log("dataset",e.currentTarget.dataset.id)
+          ////console.log(res.data)
+          if(res.data.code == 0){
+            wx.showToast({
+              title: '下架成功',
+              icon:'none',
+              duration:3000
+            })
+            that.getShopGoodsList()
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon:'none',
+              duration:3000
+            })
+          }
+        } else if (ss.cancel) {
+          ////console.log('用户点击取消')
         }
       }
     })

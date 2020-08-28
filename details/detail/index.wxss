@@ -104,19 +104,30 @@
  float: left;
 }
 .shopatt-left{
-  width:95%;
+  /* width:95%;
   display: block;
   margin-left:15rpx;
-  /* background-color: pink; */
   border: 1px solid #ccc;
   border-radius: 10rpx;
   margin-top: 10rpx;
   height: 200rpx;
-  position: relative;
+  position: relative; */
+  height: 132rpx;
+  margin-left: 45rpx;
+  border-bottom: 1rpx solid #EBEEF5;
 }
-.shopatt-left:first-child{
-  margin-top: 8rpx !important;
+.right-img{
+  height: 110rpx;
+  width: 110rpx;
 }
+.right-img image{
+  height: 110rpx;
+  width: 110rpx;
+}
+.right-title{
+  margin-left: 20rpx;
+}
+
 .zymtitle{
   font-size: 34rpx;
   color:#000;
@@ -204,8 +215,8 @@ align-items:flex-end;
 
 .main{
   display: flex;
-  /* background-color: pink; */
-  border-top: 1px solid #ccc;
+  height: 600rpx;
+  background-color: #FFFFFF;
 }
 .right{
   width: 74%;  
@@ -219,14 +230,14 @@ align-items:flex-end;
   line-height: 90rpx;
 }
 
-.leftbox{
-  border-bottom: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+.myNmae{
+  border-bottom: 1px solid #F0F0F0;
+  border-right: 1px solid #F0F0F0;
 }
 
 .leftActive{
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
   background-color: #fff;
   color: #ff9000
 }
@@ -235,34 +246,41 @@ align-items:flex-end;
   font-size: 30rpx;
   /* background-color: #f5f5f5 !important; */
   background-color: #fff !important;
+  border-top: 1rpx solid #F0F0F0;
   
 }
 
 
 .mytitle{
   display: flex;
-  flex-direction: column;
-  width: 250rpx;
+  margin-top: 15rpx;
+  position: relative;
 }
 .top-title{
-  width: 400rpx;
-  font-size: 32rpx;
-  font-weight: 600;
-  margin-left: 30rpx;
-  margin-top: 10rpx;
-  display: flex;
-  align-items: center;
+
+
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
 }
-.stitle{
-  display: block;
-  width: 160rpx;
+.nPrice{
+  position: absolute;
+  bottom: 0rpx;
+  right: 30rpx;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #979797;
 }
+
 .mynumber{
-  margin-left: 15rpx;
-  display: block;
-   font-size: 28rpx;
-   /* color:#ea6f5a */
-   width: 200rpx;
+
+  margin-top: 20rpx;
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #868686;
   
 }
 .mytext1{
@@ -287,10 +305,13 @@ align-items:flex-end;
   
 }
 .mytext2{
-  margin-top: 10rpx;
-  font-size: 24rpx;
-  color: rgb(168, 164, 164);
-  margin-left: 10rpx;
+  
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #868686;
+  margin-top: 4rpx;
+
 }
 .mytext{
   margin-top: 10rpx;
@@ -318,7 +339,7 @@ align-items:flex-end;
   padding-bottom: 15rpx;
   border-radius: 15rpx;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
   
 }
 .th{
@@ -364,7 +385,7 @@ align-items:flex-end;
   padding-bottom: 10rpx;
   border-radius: 10rpx;
   color: #fff;
-  background-color: #62a241;
+  background-color: #40B15D;
 }
 
 .zan-dialog__mask {
@@ -430,19 +451,33 @@ align-items:flex-end;
 }
 .myNmae{
   position: relative;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 38px;
+  color: #979797;
 }
 .mycount{
   display: block;
-  width: 30rpx;
-  height: 30rpx;
+  width: 27rpx;
+  height: 27rpx;
   border-radius: 50%;
   color: #fff;
-  background-color: #EA6F5A;
+ 
+  
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: 29px;
+  color: #FFFFFF;
   position: absolute;
   top: 10rpx;
   right: 10rpx;
-  line-height: 30rpx;
+  line-height: 27rpx;
   font-size: 22rpx;
+  background: #FF963F;
+  border-radius: 50%;
+  opacity: 1;
 }
 .myfirst{
   display: block;
@@ -461,5 +496,162 @@ align-items:flex-end;
   font-size: 34rpx;
   color:#ec7259;
 }
+page{
+  background-color: #F2F2F2;
+}
+.titlebox{
+  margin-top: 20rpx;
+  height:227rpx;
+  background:rgba(255,255,255,1);
+  opacity:1;
+}
+.addtop{
+  height: 58rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #EBEEF5;
 
+}
+.addimg{
+    width: 28rpx;
+    height: 34rpx;
+    margin-left: 42rpx;
+}
+.peis{
+  
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+  margin-left: 8rpx;
+
+}
+.add_main{
+  margin-left: 72rpx;
+  margin-top: 31rpx;
+}
+.myaddress{
+
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
+  opacity: 1;
+}
+.call{
+    
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+  margin-top: 23rpx;
+}
+.maintop{
+  height: 80rpx;
+  margin-top: 20rpx;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hotelname{
+    
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
+  margin-left: 35rpx;
+}
+.peibox{
+  margin-right: 60rpx;
+  display: flex;
+  align-items: center;
+
+}
+.peibox image{
+    height: 27rpx;
+    width: 27rpx;
+}
+.peibox text{
+  margin-left: 5rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+}
+
+.leftActive{
+ 
+  background:rgba(250,229,211,1);
+  color: #ff9000;
+  font-size:28rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(92,92,92,1);
+  position: relative;
+}
+.bottom{
+  margin-top: 20rpx;
+  background-color: #FFFFFF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 250rpx;
+  width: 750rpx;
+}
+.bo-top{
+  margin-left: 59rpx;
+  margin-top: 25rpx;
+  
+}
+.ddnumber{
+  
+font-size: 26rpx;
+font-family: Source Han Sans CN;
+font-weight: 500;
+color: #868686;
+}
+.xnum{
+  margin-left: 40rpx;
+  color: #585858;
+  
+}
+.ddtime{
+  margin-top: 10rpx;
+}
+.bo-bo{
+  margin-top: 20rpx;
+  display: flex;
+  border-top: 1rpx solid #EBEEF5;
+  align-items: center;
+}
+
+.heji2{
+  
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
+  margin-top: 30rpx;
+  margin-left: 57rpx;
+
+}
+.zymbox{
+  margin-top: 30rpx;
+  margin-left: 70rpx;
+}
+.zym1{
+  
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FF963F;
+}
+.zym2{
+  
+  font-size: 36rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF963F;
+}
 

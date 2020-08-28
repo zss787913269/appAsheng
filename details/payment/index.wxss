@@ -3,7 +3,7 @@
   height: 350rpx;
   box-shadow:0 0 15rpx rgba(0, 0, 0, 0.2);
   display: flex;
-  background: #62a241;
+  background: #40B15D;
   color: #fff;
   justify-content: center;
   align-items: center; 

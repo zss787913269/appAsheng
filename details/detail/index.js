@@ -27,7 +27,10 @@ Page({
 
     this.setData({
       shopId:options.id
+      // shopId:151
     })
+
+    console.log(options.id)
 
     if(options.enter == 4){
       that.setData({
@@ -111,7 +114,6 @@ Page({
 
     let id = e.currentTarget.dataset.id;
 
-    console.log(id)
     that.setData({
       classfiySelect: id
     })
@@ -329,7 +331,7 @@ Page({
     // wx.showToast({
     //   title: res.data.msg,
     // })
-    //console.log(res)
+    console.log(res)
   },
   async addSelfShop() {
     var that = this

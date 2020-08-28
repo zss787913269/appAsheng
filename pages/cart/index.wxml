@@ -1,65 +1,99 @@
 <wxs src='./index.wxs' module="utils"></wxs>
 <!--操作菜单-->
 <view class="item">
-   <view class="swiper-tab">
-    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">酒店订单
-      <sup wx:if="{{ hotelList.length>0 && hotelList.length<99}}" class="total">{{hotelList.length}}</sup>
-      <sup wx:elif="{{ hotelList.length>99 }}" class="total">99+</sup>
-    </view>
-    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">个人订单
-      <sup wx:if="{{ personList.length>0 && personList.length<99}}" class="total">{{personList.length}}</sup>
-      <sup wx:elif="{{ personList.length>99 }}" class="total">99+</sup>
-    </view>
-  </view>
-<checkbox-group bindchange="checkboxChange" style="padding-bottom:187rpx;">
-  <view class="itemed" wx:for="{{tableList}}" wx:key="unique">
-    <checkbox class="checked"   value="{{item.id}}" checked="{{checkedAll}}"  color='#3B9EF5'/>
-    <view class="zymbox">
-      <image class="myimg"  wx:if="{{item.images}}" src="{{item.images}}"  mode='widthFix'/>
-       <image class="myimg"  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"  mode='widthFix'/>
-    </view>
-    <view class="mytitle">
-      <text class="top-title">{{item.title}} </text>
-      <text class="mytext1">{{item.spec[0].type}}</text>
-      <text class="mytext2">{{item.spec[0].value}}</text>
-    
-       <text class="mytext">￥{{item.price}} 元 / {{item.inventory_unit}}</text>
 
-    </view>
+	<view>
+		<view class="swiper-tab">
+		
+			<view class="{{currentTab==1?'hotel_active':'hotel'}}" data-current="1" bindtap="clickTab">
+				<text>酒店订单</text>
+				<text class="hotelcount" wx:if="{{ hotelList.length>0}}">{{hotelList.length}}</text>
+			</view>
+			<view class="{{currentTab==2?'hotel_active':'hotel'}}" data-current="2" bindtap="clickTab">
+				<text>个人订单</text>
+				<text class="hotelcount" wx:if="{{ personList.length>0 }}" >{{personList.length}}</text>
+			</view>
 
-    
+		</view>
+
+		<view class="main">
+			<view class="left">
+				<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true" scroll-with-animation="true">
+					<!-- <view  wx:for="{{tableList}}" wx:key="unique" class="{{classfiySelect === item.category_id ? 'leftActive':'leftbox'}}"> -->
+					<view wx:for="{{tableList}}" wx:key="unique" class="leftbox">
+						<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+							<text > {{item.title}}</text>
+							<!-- <text> {{item.stock}}</text> -->
+							<text class="mycount" >{{item.stock}}</text>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		
+			<view class='right'>
+			<view class="tbox">
+				<view class="timg" bindtap="allChecked">	<checkbox   checked="{{checkedAll}}" color='#3B9EF5' /><text class="xz">全选</text></view>
+				<view class="detele_car" bindtap="deleteAll">清空购物车</view>
+			</view>
+				<scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
 
 
-    <view class="red" data-index="{{item.id}}" bindtap='remove'>
-     移除
-    </view>
+					<checkbox-group bindchange="checkboxChange" style="padding-bottom:187rpx;">
+		
+						<view class="itemed" wx:for="{{tableList}}" wx:key="unique" id="{{'inToview'+item.id}}" >
+							<checkbox class="checked" value="{{item.id}}" checked="{{item.isSelected}}" color='#3B9EF5' />
+							<view class="zymbox">
+								<image class="myimg" wx:if="{{item.images}}" src="{{item.images}}" mode='widthFix' />
+								<image class="myimg" wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" mode='widthFix' />
+							</view>
+							<view class="mytitle">
+								<text  class="{{classfiySelect == item.id ? 'top-title_active' : 'top-title' }}">{{item.title}} </text>
+								<!-- <text class="mytext1">{{item.spec[0].type}}</text> -->
+								<text class="mytext2">{{item.spec[0].value}}</text>
 
-    <view class="single">
-    
-      <text> 总计：{{utils.tomyfix(item.stock,item.price)}} 元</text>
-    </view>
+								<view class="mytext"><text class="micon">￥</text><text class="mprice">{{item.price}}</text></view>
+								<view class="zj">
+									<text> 总计：{{utils.tomyfix(item.stock,item.price)}} 元</text>
+								</view>
 
-    
+							</view>
 
-    <view class="bujin">
-      <view data-index="{{index}}" bindtap='sub'>
-         <image class="marri" src="/images/nav/jian.png"></image>
-      </view>
-      <view class="num">
-        <text>{{item.stock}}</text>
-      </view>
-      <view data-index="{{index}}" bindtap='add'>
-          <image class="marle" src="/images/nav/jia.png" ></image>
-      </view>
-    </view>
-  </view>
-</checkbox-group>
-  <view class="bottom">
-    <text>共{{tableList.length}}件,合计</text>
-    <text class="color">￥{{totalPrice}}元</text>
-    <view class="but" bindtap='submit'> 提交订单</view>
-     <!-- <view class="but" bindtap='mysubmit'> 提交订单</view> -->
-  </view>
+							<view class="red" data-index="{{item.id}}" bindtap='remove'>
+								<image class="delimg" src="../../images/index/gwc-ljt@2x.png"></image>
+							</view>
+
+							<view class="bujin">
+								<view data-index="{{index}}" bindtap='sub'>
+									<image class="marri" src="../../images/nav/gwc-jian.png"></image>
+								</view>
+								<view class="num">
+									<text>{{item.stock}}</text>
+								</view>
+								<view data-index="{{index}}" bindtap='add'>
+									<image class="marle" src="../../images/nav/gwc-jia.png"></image>
+								</view>
+							</view>
+						</view>
+					</checkbox-group>
+
+				</scroll-view>
+
+			</view>
+
+		</view>
+
+	</view>
+
+
+	<view class="bottom" >
+		<view class="bbox"></view>
+		<view class="btno">
+			<!-- <text>共{{tableList.length}}件,合计</text> -->
+			<view class="color"><text class="heji">合计</text> ￥{{totalPrice}}元</view>
+			<view class="but" bindtap='submit'> 提交订单（{{ids.length}}）</view>
+		</view>
+		<!-- <view class="but" bindtap='mysubmit'> 提交订单</view> -->
+	</view>
+
+
 </view>
- 
-

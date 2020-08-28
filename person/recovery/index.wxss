@@ -58,7 +58,7 @@
 }
 .checked{
   width: 60%;
-  background: #62a241;
+  background: #40B15D;
   color: #fff;
 }
 

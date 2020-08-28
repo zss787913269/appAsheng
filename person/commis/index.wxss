@@ -21,7 +21,7 @@
    border-radius:0rpx 10rpx 10rpx 0rpx 
 }
 .active{
-  background:#62a241;
+  background:#40B15D;
 }
 .xinchuang{
   width: 100%;

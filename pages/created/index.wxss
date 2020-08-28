@@ -157,7 +157,7 @@ swiper image {
    width: 250rpx;
    height: 50rpx;
    line-height: 50rpx;
-   background: #62a241;
+   background: #40B15D;
    color: #fff;
     text-align: center;
     border-radius:10rpx 

@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     shopName: '', //店铺名称
     account: '', //帐期
     category: [{
@@ -42,12 +43,7 @@ Page({
   onLoad: function(options) {
     var that = this
     that.getFoodMarket()
-    that.getprovince(2, 0),
-      that.getcitys(1, 0),
-      that.getcountys(37, 0)
-
-      that.getExistingData();
-
+ 
     //表单验证规则
     this.WxValidate = app.wxValidate({
       shopName: {
@@ -95,7 +91,6 @@ Page({
       url: 'api/user/storeInfo',
       method: 'get',
     })
-    console.log(res);
     if(res.data.code!==-1){
       let allData=res.data.data;
       let city=allData.region.split(",");
@@ -147,33 +142,12 @@ Page({
       })
     }
   },
-  //获取市
-  async getCity(e){
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
+  bindRegionChange: function (e) {
     this.setData({
-      citys: res.data.data,
+      region: e.detail.value
     })
   },
-  //获取县
-  async getCounty(e){
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
-    that.setData({
-      countys: res.data.data,
-    })
-  },
+
   getInputValue(e) {   //获取手机号
     var that = this
     that.setData({
@@ -210,140 +184,7 @@ Page({
       })
     }
   },
-  open: function() { //打开选择地址页面
-    this.setData({
-      condition: !this.data.condition
-    })
-  },
-  async getprovince(e, y) {
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: 0
-    })
-    if(res.data.code == 0){
-      that.setData({
-        provinces: res.data.data,
-      })
-    }else{
-      wx.showToast({
-        title:res.data.msg,
-        duration:3000
-      })
-    }
-   
-    console.log(e)
-    if (e == 2) {
-      that.setData({
-        province: that.data.provinces[0].name,
-        provinceid: that.data.provinces[0].id,
-      })
-    }
-  },
-  async getcitys(e, y) {
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
-    that.setData({
-      citys: res.data.data,
-    })
-    if (that.data.citys.length > 0) {
-      if (y == 0) {
-        that.setData({
-          city: that.data.citys[0].name,
-          cityid: that.data.citys[0].id
-        })
-      } else {
-        that.setData({
-          city: that.data.citys[that.data.citysid].name,
-          cityid: that.data.citys[that.data.citysid].id
-        })
-      }
-    }
-    console.log(that.data.city);
-    console.log(that.data.cityid);
-
-  },
-  async getcountys(e, y) {
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
-    that.setData({
-      countys: res.data.data,
-    })
-    if (that.data.countys.length > 0) {
-      if (y == 0) {
-        that.setData({
-          county: that.data.countys[0].name,
-          countyid: that.data.countys[0].id
-        })
-      } else {
-        that.setData({
-          county: that.data.countys[that.data.countysid].name,
-          countyid: that.data.countys[that.data.countysid].id,
-        })
-      }
-    }
-    console.log(that.data.county);
-    console.log(that.data.countyid);
-  },
-  bindChange: function(e) {
-
-    var val = e.detail.value
-    var t = this.data.values;
-    // 省分
-
-    for (let i = 0; i < this.data.provinces.length; i++) {
-      if (i == val[0]) {
-        // {{province}}-{{city}}-{{county}}
-        this.getcitys(this.data.provinces[i].id)
-        this.setData({
-          province: this.data.provinces[i].name,
-          provinceid: this.data.provinces[i].id
-
-        })
-
-      }
-      console.log(this.data.province)
-    }
-
-    // 城市
-    if (this.data.citys.length > 0) {
-      for (let i = 0; i < this.data.citys.length; i++) {
-        if (i == val[1]) {
-          this.getcountys(this.data.citys[i].id)
-          this.setData({
-            citysid: i,
-
-          })
-        }
-      }
-    }
-
-    // 区域
-    if (this.data.countys.length > 0) {
-      for (let i = 0; i < this.data.countys.length; i++) {
-        if (i == val[2]) {
-          this.setData({
-            countysid: i
-          })
-        }
-      }
-    }
-
-
-  },
+  
   async getFoodMarket() { //获取菜市场
     var that = this
     let res = await ajax({
@@ -376,6 +217,7 @@ Page({
   changeClass(e){//用户选择类别
     let valueNum=Number(e.detail.value)
     let market_id=this.data.category[valueNum].id;
+    console.log("market_id",market_id)
     this.setData({
       classMarket:market_id,
       classMarketNum:valueNum
@@ -417,7 +259,7 @@ Page({
         tel: tel,
         market_id: that.data.foodMarket,
         category_id: that.data.classMarket,
-        region: `${that.data.provinceid},${that.data.cityid},${that.data.countyid}`   //省市区id
+        region: `${that.data.region}`   //省市区id
       };
       console.log(params)
       if (that.data.foodMarket == null) {

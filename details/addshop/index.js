@@ -8,11 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    focus:false,
     selectArray: [{
       "id": "0",
       "name": "暂无数据"
     }],
-    array: ['猪牛羊', '中国', '巴西', '日本'],
     selectArrayIndex:"",
     twoSelectArray:[{
       "id": "0",
@@ -69,6 +69,7 @@ Page({
       })
     }
   },
+
   bindPickerChange: function(e) {
    
     let index = e.detail.value   // 获取点击的下拉列表的下标
@@ -163,13 +164,7 @@ Page({
                }
               }
               
-                // if(i==index){
-                //   quotationLineCopy[k][j] = 
-                //   quotationLineCopy[k][j][that.data.quotationLine[k][j][i]] = value
-                //   that.setData({
-                //     shopPrice: quotationLineCopy
-                //   })
-                // }
+         
             }
           }
           
@@ -179,36 +174,9 @@ Page({
     that.setData({
       quotationLine: quotationLineCopy
     })
-    //console.log(quotationLineCopySall)
-    // //console.log(that.data.shopPrice)
-    // //console.log(that.data.sHOPNAME)
-    //console.log(that.data.quotationLine)
+   
   },
-    // text(){
-    //   var test = [
-    //     {
-    //       title: '规格',
-    //       name: [{
-    //         type: '活鸡',
-    //         typeArr: ['1斤', '5斤', '杀好']
-    //       }]
-    //     },
-    //     {
-    //       title: '规格-1',
-    //       name: [
-    //         {
-    //           type: '土鸡',
-    //           typeArr: ['公鸡', '母鸡', '鸡蛋']
-    //         },
-    //         {
-    //           type: '野山鸡',
-    //           typeArr: ['2.5-3.5', '母鸡', '鸡蛋']
-    //         }
-    //       ]
-    //     }
-    //   ]
-    //   //console.log(test)
-    // },
+
   async setAddCommodity(id){
     //console.log(id)
       var that = this
@@ -240,7 +208,7 @@ Page({
         show_name: that.data.exhibition,
         inventory_unit:that.data.shopCompany
       }
-      //console.log(params);
+      console.log("params",params);
       if(id != undefined){
         params.id = id
       }
@@ -256,8 +224,9 @@ Page({
         icon:'none',
         duration:3000
       })
+      // zym
       wx.navigateBack({
-        
+        delta: 1
       })
     }else{
       wx.showToast({
@@ -291,7 +260,7 @@ Page({
     //console.log('id',res)
     if(res.data.code == 0){
         
-      console.log("获取二级分类和绑定的属性分类",res.data.data)
+      // console.log("获取二级分类和绑定的属性分类",res.data.data)
       that.setData({
         provinces: res.data.data,
         spec_id: res.data.data[0].spec_id,
@@ -304,6 +273,7 @@ Page({
         shipId: res.data.data[0].three[0].spec_id
       })
     }
+ 
     if (that.data.shipId != 0 && that.data.shipId != null){
       that.getAttribute(that.data.shipId)
     } else{
@@ -329,9 +299,12 @@ Page({
     var val = e.detail.value
     let index = val[0]
     let idx = val[1]
-    //console.log(that.data.provinces[index].items)
+    // console.log(val)
+    console.log("spec_id",that.data.provinces[index].three[idx])
+    console.log("spec_id",that.data.provinces[index].three[idx].spec_id)
+   
     that.setData({
-      spec_id: that.data.provinces[index].spec_id,
+      spec_id: that.data.provinces[index].three[idx].spec_id,
       citys:that.data.provinces[index].three,
       twoClassification: that.data.provinces[index].name,
       threeClassification: that.data.provinces[index].three[idx].name,
@@ -340,7 +313,7 @@ Page({
       attribute: that.data.provinces[index].items,
       shipId: that.data.provinces[index].three[idx].spec_id
     })
-    //console.log(that.data.twoId,that.data.threeId)
+    // console.log("spec_id",that.data.provinces)
     if (that.data.shipId != 0 && that.data.shipId != null) {
       that.getAttribute(that.data.shipId)
     } else {
@@ -371,36 +344,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log(res)
-    let resJson = {
-      'msg':"succes",
-      code:0,
-      data:{
-        "spec":{
-          "规格": {
-            "活鸡": [
-              "1斤",
-              "5斤",
-              "1斤+杀好+切块"
-            ]
-          },
-          "规格-1": {
-            "土鸡": [
-              "公鸡+3斤",
-              "母鸡+送5个鸡蛋"
-            ],
-            "野山鸡": [
-              "2斤+杀好"
-            ]
-          }
-        },
-        "show": {
-          "产地": "成都跑山鸡",
-          "加工": "切块"
-        }
-      }
-    }
-    //console.log()
+  
     if(res.data.code == 0){
       if(res.data.data == ''){
         wx.showToast({
@@ -410,7 +354,7 @@ Page({
         })
         return
       }
-      //console.log(res)
+      // console.log("getSpec",res.data.data)
       let quotationLineCopy = JSON.parse(JSON.stringify(res.data.data.spec))
       for (let i in quotationLineCopy){
         for (let j in quotationLineCopy[i]){
@@ -453,64 +397,7 @@ Page({
     let index = e.currentTarget.dataset.index
     let exhibition = this.data.exhibition
       exhibition[index] = e.detail.value
-    //console.log(this.data.exhibition)   //展示数据
   },
-  // getDatecategory(e) { //用户选择的类别
-  //   //console.log(e.detail.index)
-  //   let index = e.detail.index
-  //   var that= this
-  //   let arr = that.data.twoSelectArray
-  //   that.setData({
-  //     attribute:arr[index].items
-  //   })
-  //   //console.log(that.data.attribute)
-  // },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
+ 
 })

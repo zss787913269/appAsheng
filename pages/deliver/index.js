@@ -1,4 +1,6 @@
-var lpapi = require('../../utils/LPAPI/LPAPI.js');
+let lpapi = require('../../utils/LPAPI/LPAPI.js');
+let QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+let qqmapsdk;
 import ajax from '../../utils/ajax'
 import regeneratorRuntime from '../../utils/runtime.js'
 //index.js
@@ -11,9 +13,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    myimgid:"",
-    total2:"",
-    total3:"",
+    location: "南宁站",
+    latitude: "22.827021497126506",
+    longitude: "108.31493788391113",
+    // 图标定位
+    markers: [{
+      latitude: "22.827021497126506",
+      longitude: "108.31493788391113",
+    }],
+    myimgid: "",
+    total2: "",
+    total3: "",
     ads: ['/images/temp/ad.jpg', '/images/temp/caipin.png'],
     deliveryList: [], //派送订单
     deliveryListYes: [], //已完成订单
@@ -32,20 +42,109 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  // 地图
+  onReady: function (e) {
+    this.mapCtx = wx.createMapContext('myMap')
+  },
+  // 地图导航
+  getLoc: function (e) {
+    // console.log(e.currentTarget.id);  // 获取当前点击的数组下标
+    var that = this;
+    wx.getLocation({
+      type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+        //使用微信内置地图查看位置接口
+        console.log(res.data)
+        wx.openLocation({
+          latitude: parseFloat(that.data.latitude),  // 要去的地址经度，浮点数
+          longitude: parseFloat(that.data.longitude),  // 要去的地址纬度，浮点数
+          name: '终点位置',  // 位置名
+          address: that.data.location,  // 要去的地址详情说明
+          scale: 18,   // 地图缩放级别,整形值,范围从1~28。默认为最大
+          
+        });
+      },
+      cancel: function (res) {
+        console.log('地图定位失败');
+      }
+    })
+  },
   onLoad: function (options) {
+
+    let that  = this
 
     this.getDeliveryClerkList()
     this.getDistributorClerkList()
     this.getPeisongList()
     // that.look()
 
+    // qqmapsdk = new QQMapWX({
+    //   key: 'JQEBZ-3GE65-UN5I5-QE5IV-Z7WEO-EAF37'
+    // });
+
+
+    // wx.getLocation({
+
+    //   type: 'wgs84',
+
+    //   success(res) {
+    //     //使用腾讯地图的reverseGeocoder方法获取地址信息
+
+    //     // console.log(res)
+       
+    //     qqmapsdk.reverseGeocoder({
+
+    //       location: {
+
+    //         latitude: res.latitude, //纬度
+
+    //         longitude: res.longitude //经度
+    //       },
+      
+
+    //       success: function (addressRes) {
+
+    //         // console.log(addressRes)
+
+    //         // const address = addressRes.result.formatted_addresses.recommend; //当前位置信息
+
+    //         // console.log(address)
+
+    //       }
+    //     });
+    //   }
+
+    // })
 
   },
   onShow: function () {
     this.getDeliveryClerkList()
+
+   
   },
 
   // zym
+  getLoc: function (e) {
+    // console.log(e.currentTarget.id);  // 获取当前点击的数组下标
+    var that = this;
+    wx.getLocation({
+      type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+      success: function (res) {
+        //使用微信内置地图查看位置接口
+        wx.openLocation({
+          latitude: parseFloat(108.35090248706055), // 要去的地址经度，浮点数
+          longitude: parseFloat(22.797464226614665), // 要去的地址纬度，浮点数
+          name: '行行超甜酒店', // 位置名
+          address: "要去的地址详情说明", // 要去的地址详情说明
+          scale: 18, // 地图缩放级别,整形值,范围从1~28。默认为最大
+        });
+      },
+      cancel: function (res) {
+        console.log('地图定位失败');
+      }
+    })
+  },
+
 
   upload: function (e) { //上传图片
     var that = this
@@ -94,7 +193,7 @@ Page({
           })
         }
 
-    
+
       },
       fail(res) {
         const data = res.data
@@ -105,7 +204,7 @@ Page({
   getImg: function (e, id) {
     var _this = this
 
-    console.log("e",id)
+    console.log("e", id)
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -116,14 +215,14 @@ Page({
         tempFilePaths.push(res.tempFilePaths[0])
         console.log(tempFilePaths)
 
-        
+
 
         let peisongList = _this.data.PeisongList
         for (var i = 0; i < peisongList.length; i++) {
-          if(peisongList[i].id == id){
+          if (peisongList[i].id == id) {
             peisongList[i].imgurl = tempFilePaths
           }
-         
+
         }
 
         console.log(_this.data.PeisongList)
@@ -131,7 +230,7 @@ Page({
 
         _this.setData({
           card_img: tempFilePaths,
-          PeisongList:peisongList
+          PeisongList: peisongList
         })
 
         _this.upImg(res.tempFilePaths[0], id)
@@ -142,17 +241,18 @@ Page({
 
   async enterSend(e) {
     let that = this
-    let shopid = e.currentTarget.dataset.id ,params,imgid = that.data.card_imgid
+    let shopid = e.currentTarget.dataset.id,
+      params, imgid = that.data.card_imgid
 
-    if(imgid.length != 0){
-       params = {
-        id: shopid,
-        images_id:imgid
-      }
-    }else{
+    if (imgid.length != 0) {
       params = {
         id: shopid,
-        images_id:1
+        images_id: imgid
+      }
+    } else {
+      params = {
+        id: shopid,
+        images_id: 1
       }
     }
 
@@ -170,7 +270,7 @@ Page({
       wx.showToast({
         title: '已确认送达',
       })
-      
+
       this.getDistributorClerkList()
       this.getPeisongList()
     }
@@ -417,14 +517,14 @@ Page({
     let params = {
       id: that.data.detailedId
     }
-    console.log("params",params)
+    console.log("params", params)
     let res = await ajax({
       url: 'api/staff/getOrderDetail',
       method: 'post',
       data: params
     })
 
-    console.log("lookApi",res.data.data)
+    console.log("lookApi", res.data.data)
 
     if (res.data.code == 0) {
       let shopInfo = res.data.data
@@ -486,7 +586,7 @@ Page({
       this.getDistributorClerkList()
     } else if (e.currentTarget.dataset.current == 2) {
       that.getPeisongList()
-    }else if (e.currentTarget.dataset.current == 1) {
+    } else if (e.currentTarget.dataset.current == 1) {
       that.getDeliveryClerkList()
     }
   },
@@ -502,7 +602,7 @@ Page({
     })
     console.log("获取配送员未处理订单", res)
     if (res.data.code == 0) {
-     
+
       let deliveryListOne = res.data.data.data
       for (var i = 0; i < deliveryListOne.length; i++) {
         deliveryListOne[i].is_select = false
@@ -540,7 +640,7 @@ Page({
       PeisongList: peisongList,
       total2: res.data.data.total,
     })
-    console.log("total2",this.data.total2)
+    console.log("total2", this.data.total2)
   },
 
   async getDistributorClerkList() { //获取配送员已处理订单

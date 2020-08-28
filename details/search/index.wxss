@@ -32,7 +32,7 @@
   }
 
   .header {
-  background: #62a241;
+  background: #40B15D;
   padding: 10rpx 0 10rpx 50rpx;
   display: flex;
   position: relative;
@@ -42,7 +42,7 @@
 .absult {
   width: 100rpx;
   height: 100rpx;
-  background: #62a241;
+  background: #40B15D;
   color: #fff;
   font-size: 120rpx;
   display: flex;

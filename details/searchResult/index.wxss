@@ -108,7 +108,7 @@
   width:300rpx;
   text-align:center;
   height: 50rpx;
-  background: #62a241;
+  background: #40B15D;
   color: #fff;
   line-height: 50rpx;
   border-radius: 20rpx 20rpx 0rpx 0rpx;
@@ -182,7 +182,7 @@
   border-radius: 5rpx;
   margin-top: 50rpx;
   margin-right: 0rpx;
-  background: #62a241;
+  background: #40B15D;
   color: #fff;
 }
 .termine {

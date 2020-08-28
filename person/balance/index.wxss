@@ -2,7 +2,7 @@
 .header{
   width: 100%;
   height: 750rpx;
-  background: #62a241;
+  background: #40B15D;
 }
 .fr{
   height: 50rpx;

@@ -67,7 +67,7 @@
   text-align: center;
   margin: 0 auto;
   line-height: 80rpx;
-  background: #62a241;
+  background: #40B15D;
   color: #fff;
   border-radius:10rpx;
   margin-top:100rpx;  
@@ -161,7 +161,7 @@
  width: 170rpx;
 }
 .mypicker{
-  /* background-color: #62a241; */
+  /* background-color: #40B15D; */
   width: 100% !important;
   height: 100rpx;
   line-height: 100rpx;

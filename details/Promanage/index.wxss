@@ -26,7 +26,7 @@
 }
 
 .active {
-    background: #62a241;
+    background: #40B15D;
 }
 
 .title {
@@ -78,7 +78,7 @@
 }
 
 .edit {
-    color: #62a241;
+    color: #40B15D;
 }
 
 .delete {

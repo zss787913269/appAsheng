@@ -77,7 +77,7 @@ Page({
       }
     })
     let paymentList = res.data.data.payment_list
-    //console.log("paymentList",paymentList)
+    console.log("paymentList",res.data.data)
     for (var i = 0; i < paymentList.length; i++) {
       paymentList[i].checked = false
     }
@@ -96,26 +96,36 @@ Page({
   // 在支付前先提交地址
   async paymented(e) {
     let that = this
-    let res = await ajax({
-      url: 'api/quickorder/address',
-      method: 'POST',
-      data: {
-        order_id: that.data.orderId,
-        address_id: that.data.addreslist.id
+
+    // if(that.data.addreslist.id)
+    if(that.data.addreslist == null){
+      wx.showToast({
+        title: '请填写地址',
+        icon:"none"
+      })
+    }else{
+      let res = await ajax({
+        url: 'api/quickorder/address',
+        method: 'POST',
+        data: {
+          order_id: that.data.orderId,
+          address_id: that.data.addreslist.id
+        }
+      })
+      //console.log(res)
+     
+      if(res.data.code == 0){
+        that.orderPay()
       }
-    })
-    //console.log(res)
-   
-    if(res.data.code == 0){
-      that.orderPay()
     }
+
+  
   },
   
   async orderPay(e) {
     //console.log(e)
     let that = this
 
-    //console.log("orderPay",that.data.paymentId)
 
     let res = await ajax({
       url: 'api/order/payor',
