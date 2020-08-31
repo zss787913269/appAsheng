@@ -22,6 +22,7 @@ Page({
     first: true,
     dayTime:"",
     showDialog: false,
+    shouhuo:""
   },
   toggleDialog() {
     this.setData({
@@ -29,17 +30,33 @@ Page({
     });
 
   },
-  onLoad: function (options) {
-    var that = this
-  
-    this.getShopList(this.data.currentTab) //未接订单
+  // onLoad: function (options) {
+  //   var that = this
+  //   this.getShopList(this.data.currentTab) //未接订单
 
+  // },
+  onShow(){
+    this.getShopList(this.data.currentTab) //未接订单
+  },
+  goDetail(e){
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: "/details/detail/index?id="+id,
+    })
+
+  },
+  detalis(e){    //跳转去详情页
+
+    console.log(e.currentTarget.dataset.shouhuo)
+    
+    wx.navigateTo({
+      url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
+    })
   },
   //点击切换列表
   clickList(e) {
     let index = e.currentTarget.dataset.index
-    // this.getShopInfo()
-
+    
     this.setData({
       listindex: index
     })
@@ -417,12 +434,13 @@ Page({
       }
     }
 
+    console.log(params)
     let res = await ajax({
       url: "api/order/ShopOrderPrint",
       method: 'POST',
       data: params
     })
-    console.log("获取商家订单",res.data.data)
+    console.log("获取商家订单",res)
 
     if (res.data.code == 0) {
       // setTimeout(function () {
@@ -450,6 +468,7 @@ Page({
       url: 'api/order/ShopOrderOK',
       method:"POST"
     })
+    console.log("shopCompleteList",res)
     this.setData({
       shopCompleteList:res.data.data
     })

@@ -47,6 +47,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+
+  goDetail(e){
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: "/details/detail/index?id="+id,
+    })
+
+  },
   onLoad: function (option) {
     var that = this
     if(option.idx == 2){
@@ -55,7 +63,7 @@ Page({
       })
     } 
       this.getHoteOrder()
-       that.getHoteInfo()
+      that.getHoteInfo()
   },  
 
 
@@ -200,6 +208,8 @@ Page({
         let res1 = await ajax({
           url: '/api/quickorder/HotelList', method: 'POST', data: param
         })
+
+  
   
         let wqr=[],wfk=[],yfk=[],dys=[],ywc=[]
   
@@ -268,6 +278,8 @@ Page({
     }else if(params.status == 4){
       completed = shoplist
     }
+
+    console.log("unconfirmed",unconfirmed)
 
     this.setData({
       unconfirmed,unpaid,paid,unaccepted,completed

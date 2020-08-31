@@ -70,7 +70,7 @@
 					<block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index" >
 				<view bindtap="clickse" data-id="{{items}}" data-index="{{index}}">
 					<view class="topimg">
-						<image  wx:if="{{items.images}}" src="{{items.images}}"></image>
+						<image  wx:if="{{items.images}}" lazy-load="true" src="{{items.images}}"></image>
 						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 					</view>
 					<view class="centername">

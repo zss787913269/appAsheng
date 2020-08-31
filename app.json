@@ -1,17 +1,17 @@
 {
   "pages": [
     
+    "pages/user/index",
     "pages/index/index",
+    "details/handle/index",
+    "private/hotelpeople/index",  
     "details/detail/index",
     "pages/cart/index",
     "pages/quickly/quickly",
     "details/myshop/index",
-    "pages/user/index",
     "details/becomeShop/index",
     "details/addshop/index",
-    "private/hotelpeople/index",
     "pages/deliver/index",
-    "details/handle/index",
     "private/hotelAddress/index",
     "person/personl/index",
     "person/slops/index",

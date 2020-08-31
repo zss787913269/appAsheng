@@ -1,14 +1,17 @@
-
-<view class="titlebox">	
+<view class="titlebox">
 	<view class="addinfo">
-			<view class="addtop">
-				<image class="addimg" src="../../images/details/ddxq-psxx@2x.png"></image>
-				<view class="peis">配送信息</view>
-			</view>
-			<view class="add_main">
-					<view class="myaddress">{{orderlist.address_data.province_name}} {{orderlist.address_data.city_name}} {{orderlist.address_data.county_name}}</view>
-					<view class="call">电话号码 {{orderlist.address_data.tel}}</view>
-			</view>
+		<view class="addtop">
+			<image class="addimg" src="../../images/details/ddxq-psxx@2x.png"></image>
+			<view class="peis">配送信息</view>
+		</view>
+		<view class="add_main">
+			<view class="myaddress">{{orderlist.address_data.province_name}} {{orderlist.address_data.city_name}} {{orderlist.address_data.county_name}}</view>
+			<view class="call">电话号码 {{orderlist.address_data.tel}}</view>
+		</view>
+	</view>
+
+	<view class="mysh" bindtap="getAllHotel" wx:if="{{show}}">
+		<text >一键收货</text>
 	</view>
 
 </view>
@@ -37,79 +40,99 @@
 			<text wx:else>收货电话：暂无</text>
 		</view>
 
-		</view>
-
-		<view class="mysh" bindtap="getAllHotel" wx:if="{{show}}">
-			<text >一键收货</text>
-		</view>
-</view>	
-
-	<view class="maintop">
-		<view class="hotelname"> </view>
-		<view class="peibox"><image  src="../../images/details/ddxq-lx@2x.png"></image><text>联系配送员</text></view>
 	</view>
-	
+
+	<view class="mysh" bindtap="getAllHotel" wx:if="{{show}}">
+		<text >一键收货</text>
+	</view>
+</view>
+
+<view class="maintop">
+	<view class="hotelname"> </view>
+	<view class="peibox">
+		<image src="../../images/details/ddxq-lx@2x.png"></image><text>联系配送员</text>
+	</view>
+</view>
+
 <view class="main">
 	<view class="left">
 
-			<!-- <scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true"> -->
-			<scroll-view scroll-y="true" class="ss" style="height: 600rpx" scroll-into-view="true" scroll-with-animation="true">
-				<!-- <view wx:for="{{secondaryClassification}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique"> -->
-				<view  wx:for="{{hotelOrderDetail}}" wx:key="unique" >
-				
-					<!-- <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"> -->
-						<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
-						<text > {{item.name}}</text>
-						<text class="mycount">{{item.goods.length}}</text>
-					</view>
+		<!-- <scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true"> -->
+		<scroll-view scroll-y="true" class="ss" style="height: 600rpx" scroll-into-view="true" scroll-with-animation="true">
+			<!-- <view wx:for="{{secondaryClassification}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique"> -->
+			<view wx:for="{{hotelOrderDetail}}" wx:key="unique">
+
+				<!-- <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"> -->
+				<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+					<text > {{item.name}}</text>
+					<text class="mycount">{{item.goods.length}}</text>
 				</view>
-			</scroll-view>
-		</view>
+			</view>
+		</scroll-view>
+	</view>
 
-		<view class='right'>
-			<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
-				<block wx:for="{{hotelOrderDetail}}" wx:key="index">
-					<view class="shopatt-left" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
-						<view class="mytitle" id="{{'inToview'+items.id}}">
-							<view class="right-img">
-								<image src="http://second.chchgg.com{{items.images}}"></image>
-							</view>
-							<view class="right-title">
-								<view class="top-title">{{items.title}}</view>
-								<view class="mytext2">{{items.specvalue}}</view>
-								<view class="mynumber"> X {{items.buy_number}}</view>
-							</view>
-
-							<view class="nPrice">￥{{items.price}}</view>
-
+	<view class='right'>
+		<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
+				<view class="{{show || showjd ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
+					<view class="mytitle" id="{{'inToview'+item.id}}">
+						<view class="right-img">
+							<image src="http://second.chchgg.com{{items.images}}"></image>
 						</view>
-						
-						<view class="myright" wx:if="{{show}}">
-
-						<view wx:if="{{items.returned_quantity == 0}}">
-							<view class="sh" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail" data-id="{{items.id}}"><text>确认收货</text></view>
-							<view class="sh" wx:else> 已收货 </view>
-							<view wx:if="{{items.is_order_ok == 0}}" style="margin-top:10rpx">
-								<view class="th"  bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
-							</view>
+						<view class="right-title">
+							<!-- <view class="top-title">{{items.title}}</view> -->
+							<view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
+							<view class="mytext2">{{items.specvalue}}</view>
+							<view class="mytext2">单价：{{items.price}}</view>
+							<view class="mynumber"> X {{items.buy_number}}</view>
 						</view>
 
-						<view wx:else style="margin-top:10rpx">
-									<view class="yth" wx:if="{{items.returned_quantity == 0 }}"><text>退货处理中</text></view>
-									<view class="yth" wx:else ><text>已退 {{items.returned_quantity}}</text></view>
+						<view class="nPrice">总价：￥{{items.total_price}}</view>
 
-							</view>
-						
-					
-						</view>
 					</view>
-				</block>
-			</scroll-view>
 
-		</view>
 
+					<view class="sbox" wx:if="{{show}}">
+
+						<view wx:if="{{items.returned_quantity == 0}}" class="shouhuobox">
+							<view class="queren" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail" data-id="{{items.id}}"><text>确认收货</text></view>
+							<view class="queren" wx:else> 已收货 </view>
+							<view wx:if="{{items.is_order_ok == 0}}">
+								<view class="quxiao" bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
+							</view>
+						</view>
+
+						<view wx:else>
+							<view class="queren" wx:if="{{items.returned_quantity == 0 }}"><text>退货处理中</text></view>
+							<!-- <view class="quxiao" wx:else><text>已退 {{items.returned_quantity}}</text></view> -->
+							<view class="quxiao" wx:else><text>退货处理中</text></view>
+						</view>
+
+
+					</view>
+
+					<view class="sbox" wx:if="{{showjd}}">
+
+						<!-- <view class="quxiao" ><text>不接</text></view>
+									<view class="queren" ><text>接单</text></view> -->
+						<view wx:if="{{items.is_ok != 1}}">
+							<view class="quxiao" wx:if="{{items.is_ok == 2}}"><text>已拒绝</text></view>
+							<view class="quxiao" wx:else bindtap="noReceipt" data-id="{{items.id}}"><text>不接</text></view>
+						</view>
+						<view wx:if="{{items.is_ok != 2}}">
+							<view class="queren" bindtap="receipt" data-id="{{items.id}}" wx:if="{{items.is_ok == 0}}"><text>接单</text></view>
+							<view class="queren" wx:if="{{items.is_ok == 1}}"><text>已接单</text></view>
+						</view>
+
+
+					</view>
+
+				</view>
+			</block>
+		</scroll-view>
 
 	</view>
+</view>
 
 
 <view class="bottom">
@@ -120,8 +143,8 @@
 	</view>
 
 	<view class="bo-bo">
-			<view class="heji2">合计</view>
-			<view class="zymbox"><text class="zym1">￥</text><text class="zym2">{{orderlist.total_price}}</text></view>
+		<view class="heji2">合计</view>
+		<view class="zymbox"><text class="zym1">￥</text><text class="zym2">{{orderlist.total_price}}</text></view>
 	</view>
 
 </view>

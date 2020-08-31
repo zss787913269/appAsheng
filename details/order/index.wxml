@@ -1,4 +1,4 @@
- 
+<!--  
  <view class="nodd" wx:if="{{orderlist.length==0}}">
 
 	<text>
@@ -49,4 +49,37 @@
 
  		</view>
  	</view>
- </view>
+ </view> -->
+
+ 	<view wx:for="{{orderlist}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+
+		<view class="main">
+
+			<view class="top_box">
+
+				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
+				<view class="imgbox">
+					<image wx:if="{{list.images}}" wx:for="{{item.items}}" wx:for-item="list" src="{{list.images}}" wx:key="index" class="img"></image>
+				
+					<!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
+					<view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">...</view>
+				</view>
+				<view class="all">
+					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
+				</view>
+
+			</view>
+			<view class="bottom">
+					<view class="queren" data-payid="{{item}}" wx:if="{{item.pay_status_name=='待支付'}}" bindtap="payment">支付</view>
+					<view class="queren" wx:if="{{item.status == 2}}"> 待发货</view>
+					<view class="queren" wx:if="{{item.status == 3}}" bindtap="confirmReceipt" data-id="{{item.id}}"> 确认收货</view>
+					<view class="queren" wx:if="{{item.status == 4}}"> 已完成</view>
+					<view class="queren" wx:if="{{item.status == 5 || item.status == 6}}">已失效</view>
+		
+		</view>
+			</view>
+
+
+
+	</view>

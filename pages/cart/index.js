@@ -232,20 +232,35 @@ Page({
       method: 'POST',
       data: params
     })
+    let list = res.data.data.data
+    let ids  = []
+
+    for(let i of list){
+      i.isSelected = true
+      ids.push(i.id)
+    }
     if (res.data.data.data.length == 0) {
       // 个人订单
       let res2 = await ajax({
         url: 'api/cart/index',
         method: 'POST',
       })
+      let list = res2.data.data.data
+      let id  = []
+
+      for(let i of list){
+        i.isSelected = true
+        id.push(i.id)
+      }
       // console.log("个人订单",res2.data.data.data)
       that.setData({
         currentTab: 2,
         tableList: res2.data.data.data,
+        ids:id
       })
     } else {
       that.setData({
-        hotelList: res.data.data.data
+        hotelList: res.data.data.data,ids
       })
     }
 
@@ -278,7 +293,7 @@ Page({
         tableList: res.data.data.data,
         hotelList: res.data.data.data,
         ids,
-        classfiySelect:res.data.data.data[0].id
+        
       })
     
       // console.log(res)
@@ -298,8 +313,7 @@ Page({
 
       that.setData({
         tableList: res.data.data.data,
-        personList: res.data.data.data,ids,
-      
+        personList: res.data.data.data,ids
       })
 
       // console.log(res) 

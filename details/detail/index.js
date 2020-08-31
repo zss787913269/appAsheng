@@ -17,6 +17,7 @@ Page({
     hotelOrderDetail: [], //商品
     title: "",
     id: "",
+    showjd:false,
     count: "" //商品原本的数量
   },
 
@@ -27,14 +28,18 @@ Page({
 
     this.setData({
       shopId:options.id
-      // shopId:151
+      // shopId:160
     })
 
-    console.log(options.id)
+    console.log(options)
 
     if(options.enter == 4){
       that.setData({
         show:true
+      })
+    }else if(options.enter == 5){
+      that.setData({
+        showjd:true
       })
     }
 
@@ -44,6 +49,34 @@ Page({
     this.getHotelOrderDetail(this.data.shopId)
   },
   // 确认收货
+  async noReceipt(e) { //不接
+    var that = this
+    let params = {
+      status: 2,
+      id: e.currentTarget.dataset.id
+    }
+    let res = await ajax({
+      url: 'api/store/updateStatus',
+      method: 'POST',
+      data: params
+    })
+    if (res.data.code == 0) {
+      wx.showToast({
+        title: '操作成功',
+        icon: 'none',
+        duration: 300
+      })
+      
+    this.getHotelOrderDetail(this.data.shopId)
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 300
+      })
+    }
+  },
+ 
   async completeOrderDetail(e){
     let that = this
     let id = e.currentTarget.dataset.id
@@ -56,6 +89,34 @@ Page({
     })
     that.getHotelOrderDetail(that.data.shopId)
  
+  },
+  async receipt(e) { //接单
+    var that = this
+    let params = {
+      status: 1,
+      id: e.currentTarget.dataset.id
+    }
+    let res = await ajax({
+      url: 'api/store/updateStatus',
+      method: 'POST',
+      data: params
+    })
+
+    if (res.data.code == 0) {
+
+      wx.showToast({
+        title: '接单成功',
+        icon: 'none',
+        duration: 300
+      })
+    this.getHotelOrderDetail(this.data.shopId)
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 300
+      })
+    }
   },
 
   // 一键收货
@@ -131,7 +192,7 @@ Page({
       }
     })
 
-    console.log("getHotelOrderDetail", res.data.data)
+    console.log("getHotelOrderDetail", res)
 
     let hotelOrderDetail = that.data.hotelOrderDetail
 
@@ -140,7 +201,8 @@ Page({
     }
 
     this.setData({
-      hotelOrderDetail
+      hotelOrderDetail,
+      classfiySelect:hotelOrderDetail[0].id
     })
 
   },
