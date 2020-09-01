@@ -1,247 +1,155 @@
-.header {
-  background: #40B15D;
-  padding: 10rpx;
+page{
+  background-color: #F2F2F2;
+}
+.top{
+  height: 263rpx;
+  width: 750rpx;
+  background-color: #40B15D;
   position: relative;
-  padding-bottom: 80rpx;
 }
-.quanbu{
-  color: #ccc;
-  font-size: 25rpx;
-}
-.header i {
+.top-right{
+  width: 212rpx;
+  height: 50rpx;
+  background: #FF963F;
+  opacity: 1;
+  border-radius: 25rpx; 
+  font-size: 28rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #FFFFFF;
   position: absolute;
-  left: 50rpx;
-  top: 30rpx;
-  color: #ccc;
-}
-.total{
-  font-size: 15rpx !important;
-  background-color: red;
-  border-radius: 50%;
-  position: absolute;
-  width: 35rpx;
-  height: 35rpx;
-  line-height: 35rpx;
-  color: white;
+  right: 40rpx;
+  top: 50rpx;
   text-align: center;
-  /* z-index: 999; */
+  line-height: 50rpx;
+
 }
-.become{
-  width:600rpx;
-  height:300rpx;
-  background-color:#fff;
-  position: absolute;
-  border-radius:20rpx;
-  top:265rpx;
-  left:79rpx;
-  z-index:20;
+
+.avtor{
+  height: 128rpx;
+  width: 128rpx;
+  border-radius: 69rpx;
+  margin-left: 60rpx;
+  overflow:hidden
 }
-.become-top{
-  width:100%;
-  height:150rpx;
+.imgbox{
+  display: flex; 
+  position: relative;
+  align-items: center;
 }
-.become-img{
-  width:152rpx;
-  height:114rpx;
-  margin-top:20rpx;
-  margin-left:150rpx;
-  float: left;
+.name{
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-left: 25rpx;
 }
-.become-cook{
-  float: left;
-  margin-left:30rpx;
-  margin-top:55rpx;
-}
-.become-bottom{
+.top-bottom{
   display: flex;
-  margin-top:54rpx;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20rpx;
 }
-.btn{
-  width:150rpx;
-  height:65rpx;
-  border-radius:15rpx;
-  text-align: center;
-  line-height: 65rpx;
-}
-.determine{
-  background-color: #ff9000;
-  color: #fff;
-}
-.cancel{
-  border:2rpx solid #ff9000;
-  color: #ff9000;  
-}
-.header input {
-  background: #fff;
-  width: 85%;
-  height: 65rpx;
-  border-radius: 50rpx;
-  margin: 0 auto;
-  padding-left: 60rpx;
-}
-.peisiong{
-  width: 90%;
-  height: 100px;
-  margin: 0 auto;
-  /* background: pink; */
-  padding: 10rpx;
-  margin-bottom: 10rpx;
-  border-radius:10rpx; 
-  box-sizing: border-box;
-   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
-}
-.chakn{
- width: 100%;
- display: flex;
- justify-content: space-between;
-}
-.dinglist{
-display: flex;
-justify-content: space-between;
-margin-top: 20rpx;
-}
-.dinglist view{
-  width: 30%;
-  text-align: center;
+.item{
+  width: 25%;
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1rpx solid #ccc;
+}
+.item2{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.dinglist image{
-width: 30px;
-height: 30px;
-
+.price{
+  font-size: 36rpx;
+  font-family: PingFang-SC-Medium;
+  color: #FFFFFF;
 }
-.tbody{
-  height: 280rpx;
-overflow: hidden;
-margin-bottom: 8px;
-
-
+.text{
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
 }
-.tbody image {
-  width: 100%;
-  display: block;
-}
-
-.tbody .card {
-  height: 160rpx;
-  padding: 0 55rpx;
+.address{
   display: flex;
-  padding-top: 50rpx;
-  position: relative;
-}
-
-.card .head_tap {
-  width: 33.3%;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-evenly;
+  height: 202rpx;
+  background-color: #FFFFFF;
+  margin-top: 22rpx;
 }
-
-.card .head_tap text:nth-child(1) {
-  font-size: 30rpx;
-  line-height: 66rpx;
-}
-
-.user-header-avatar {
-  position: absolute;
-  top: 0rpx;
-  left: 45rpx;
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-  border: 10rpx solid #fff;
-  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 999;
-}
-
-.user-header-name {
-  width: 500rpx;
-  padding: 0 10rpx;
+.item-box{
   display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 78rpx;
-  left: 190rpx;
-  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.item-box image{
+  width: 86rpx;
+  height: 86rpx;
+}
+.item-box text{
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #666666;
+}
+.shop{
+  margin-top:20rpx ;
+  height: 220rpx;
+  background: #FFFFFF;
+  opacity: 1;
+  border-radius: 20rpx;
+}
+.shop-title{
+  height: 64rpx;
+  line-height: 64rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+}
+.shop-title text{
+  margin-left: 77rpx;
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #666666;
+}
+.shop-item-box{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 156rpx;
+}
+.hotel-item-box{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 156rpx;
+}
+.shop-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+.shop-box view{
+    width: 50rpx;
+    height: 50rpx;
+    margin-bottom: 5rpx;
 }
 
-.daxiao {
-  font-size: 25rpx;
-  background: #ff9000;
-  color: #fff;
-  line-height: 40rpx;
-  padding: 0rpx 20px;
-  border-radius: 30rpx 10rpx 10rpx 30rpx;
-}
-
-.chongzhi {
-  font-size: 25rpx;
-  position: absolute;
-  top: 185rpx;
-  left: 650rpx;
-  z-index: 999;
-  background: #ff9000;
-  line-height: 30rpx;
-  padding: 0rpx 5px;
-  color: #fff;
-  border-radius: 5rpx 5rpx 5rpx 5rpx;
-}
-
-.chongzhi2 {
-  font-size: 25rpx;
-  position: absolute;
-  top: 185rpx; 
-  left: 475rpx;
-  z-index: 999;
-  background: #ff9000;
-  line-height: 30rpx;
-  padding: 0rpx 5px;
-  color: #fff;
-  border-radius: 5rpx 5rpx 5rpx 5rpx;
-}
-/*操作菜单 */
-
-/* pages/user/index.wxss */
-
-.user {
-  padding: 0;
-}
-
-.user image {
-  width: 100%;
-  display: block;
-}
- .view_power{
-   margin-bottom: 50rpx;
- }
-.user_item {
-  background-size: contain;
-  padding: 0 45rpx;
-}
-
-.user_tab {
-  background: #eee;
-}
-
-.user_tab view {
-  border-bottom: 1rpx solid #eee;
-  line-height: 65rpx;
-  padding: 20rpx 30rpx;
-  background: #fff;
-}
-
-.user_tab view text {
-  display: inline-block;
-  width: 55rpx;
-}
-
-.user_tab view i {
-  float: right;
-  color: #999;
+.shop-box text{
+ 
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
 }

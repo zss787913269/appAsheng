@@ -122,6 +122,80 @@ Page({
       //console.log(err);
     }))
   },
+  goToPage(e){
+     let index =  e.currentTarget.dataset.index
+      console.log(index)
+      
+
+   
+
+      switch (index) {
+        case "1":
+         wx.showToast({
+           title: '功能开发中，敬请期待',
+           icon:"none"
+         })
+        break;
+        case "2":
+          wx.navigateTo({ url: '/details/order/index'})//个人订单
+        break;
+        case "3":
+          wx.navigateTo({ url: '/person/map/index'})//收货地址
+        break;
+        case "4":
+          //商铺信息
+          wx.showToast({
+            title: '功能开发中，敬请期待',
+            icon:"none"
+          })
+        break;
+        case "5":
+          //我的商品
+          wx.showToast({
+            title: '功能开发中，敬请期待',
+            icon:"none"
+          })
+        break;
+        case "6":
+          wx.navigateTo({ url: '/details/myshop/index'})//商品列表
+        break;
+        case '7':
+          wx.navigateTo({ url: '/details/becomeShop/index'})//成为商家
+        break;
+        case "8":
+          //酒店信息
+          wx.showToast({
+            title: '功能开发中，敬请期待',
+            icon:"none"
+          })
+        break;
+        case "9":
+          wx.navigateTo({ url: '/private/hotelpeople/index'})//酒店订单
+        break;
+        case "10":
+          wx.navigateTo({ url: '/private/hotelAddress/index'})//注册酒店
+        break;
+        case "11":
+          wx.navigateTo({ url: '/person/recovery/index'}) //泔水回收-酒店
+        break;
+        case "12":
+          wx.navigateTo({ url: '/person/personl/index'})//泔水回收-员工
+        break;
+        case '13'://配送员
+        wx.showToast({
+          title: '功能开发中，敬请期待',
+          icon:"none"
+        })
+        break;
+        case '14':
+          wx.navigateTo({ url: '/pages/deliver/index'})//配送列表
+        break;
+        case '15':
+          wx.navigateTo({ url: '/details/peinformation/index', })//成为配送员
+        break;
+      }
+
+  },
   gotoikPageS(){
     wx.navigateTo({
       url: `/person/integral/index?integral=${this.data.integral}`,

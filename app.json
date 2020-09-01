@@ -1,8 +1,9 @@
 {
   "pages": [
     
-    "pages/user/index",
+    "pages/deliver/index",
     "pages/index/index",
+    "pages/user/index",
     "details/handle/index",
     "private/hotelpeople/index",  
     "details/detail/index",
@@ -11,7 +12,6 @@
     "details/myshop/index",
     "details/becomeShop/index",
     "details/addshop/index",
-    "pages/deliver/index",
     "private/hotelAddress/index",
     "person/personl/index",
     "person/slops/index",
@@ -96,18 +96,7 @@
         "iconPath": "images/tabar/20.png",
         "selectedIconPath": "images/tabar/2.png"
       },
-      {
-        "pagePath": "pages/workbench/index",
-        "text": "公司工作台",
-        "iconPath": "images/tabar/40.png",
-        "selectedIconPath": "images/tabar/4.png"
-      },
-      {
-        "pagePath": "details/myshop/index",
-        "text": "我的店铺",
-        "iconPath": "images/tabar/3.png",
-        "selectedIconPath": "images/tabar/30.png"
-      },
+     
       {
         "pagePath": "pages/user/index",
         "text": "我的",
