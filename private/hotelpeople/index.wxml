@@ -35,9 +35,9 @@
 
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-				<view class="imgbox" bindtap="goDetail"  data-id="{{item.id}}">
+				<view class="imgbox" bindtap="goDetail" data-id="{{item.id}}">
 					<image wx:for="{{item.items}}" wx:for-item="list" src="{{list.images}}" wx:key="index" class="img"></image>
-					<view class="more"  >. . .</view>
+					<view class="more">. . .</view>
 				</view>
 				<view class="all">
 					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
@@ -71,9 +71,9 @@
 
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-				<view class="imgbox"  bindtap="goDetail"  data-id="{{item.id}}">
+				<view class="imgbox" bindtap="goDetail" data-id="{{item.id}}">
 					<image wx:for="{{item.items}}" wx:for-item="list" src="{{list.images}}" wx:key="index" class="img"></image>
-					<view class="more" >. . .</view>
+					<view class="more">. . .</view>
 				</view>
 				<view class="all">
 					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
@@ -93,7 +93,7 @@
 </view>
 <view wx:if="{{currentTab==3}}">
 
-	
+
 
 	<view wx:for="{{paid}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
@@ -127,7 +127,7 @@
 </view>
 <view wx:if="{{currentTab==4}}">
 
-		<view wx:for="{{unaccepted}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+	<view wx:for="{{unaccepted}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 		<view class="main">
 
@@ -137,7 +137,7 @@
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
 					<image wx:if="{{list.images}}" wx:for="{{item.items}}" wx:for-item="list" src="{{list.images}}" wx:key="index" class="img"></image>
-				
+
 					<!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
 					<view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">...</view>
 				</view>
@@ -155,7 +155,7 @@
 
 
 	</view>
-	
+
 </view>
 <view wx:if="{{currentTab==5}}">
 

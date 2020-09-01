@@ -142,11 +142,11 @@
     <view>
         <image src="../../images/user/wd-wdsp.png" style="width:37rpx;height:39rpx"></image>
     </view>
-      <text>我的商品</text>
+      <text>订单列表</text>
     </view>
     <view class="shop-box" data-index="6" bindtap="goToPage">
       <view>
-        <image src="../../images/user/wd-spxx.png" style="width:39rpx;height:39rpx"></image>
+        <image src="../../images/user/wd-splb.png" style="width:39rpx;height:39rpx"></image>
       </view>
       <text>商品列表</text>
     </view>
@@ -191,13 +191,13 @@
   <view class="shop-item-box">
     <view class="shop-box" data-index="11" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
+      <image src="../../images/user/wd-jdrk.png" style="width:31rpx;height:39rpx"></image>
      </view>
       <text>酒店入口</text>
     </view>
     <view class="shop-box" data-index="12" bindtap="goToPage">
     <view>
-        <image src="../../images/user/wd-jddd.png" style="width:37rpx;height:39rpx"></image>
+        <image src="../../images/user/wd-ygrk.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>员工入口</text>
     </view>
@@ -214,19 +214,19 @@
   <view class="shop-item-box">
     <view class="shop-box" data-index="13" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
+      <image src="../../images/user/wd-psyxx.png" style="width:31rpx;height:39rpx"></image>
      </view>
       <text>配送员</text>
     </view>
     <view class="shop-box" data-index="14" bindtap="goToPage">
     <view>
-        <image src="../../images/user/wd-jddd.png" style="width:37rpx;height:39rpx"></image>
+        <image src="../../images/user/wd-pslb.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>配送列表</text>
     </view>
     <view class="shop-box" data-index="15" bindtap="goToPage">
         <view>
-        <image src="../../images/user/wd-jddd.png" style="width:37rpx;height:39rpx"></image>
+        <image src="../../images/user/wd-cwpey.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>成为配送员</text>
     </view>

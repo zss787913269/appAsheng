@@ -20,7 +20,7 @@ Page({
     // 下单id
     orderid: "",
     actual_price:'',
-    paymentId:'',   //支付方式id
+    paymentId:3,   //支付方式id
     where:'',   //从哪里来
     hoteItem:'',   //酒店订单传的数据
   },
@@ -29,17 +29,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //console.log(options)
+    console.log(options)
   if(options.id != undefined){
     this.setData({
       price: options.price,
       orderId: options.id,
       num:options.num
     })
-  }
     // this.setData({
-    //   dataids: options.ids
+    //   price: 216.15,
+    //   orderId: 186,
+    //   num:5
     // })
+  }
+   
   },
   toDetalInfo() {
     wx: wx.navigateTo({
@@ -135,17 +138,24 @@ Page({
         payment_id: that.data.paymentId
       }
     })
+    console.log(res.data.data)
     wx.hideLoading();
     if (res.data.code == 0) {
       //console.log("支付成功",res)
       // 是否在线支付,非在线支付则支付成功
-      if (res.data.data.is_online_pay == 0) {
+      if (res.data.data.data.is_online_pay == 0) {
         // 数据设置
         // self.order_item_pay_success_handle(index);
         wx.showToast({
           title: '支付成功',
+          icon:"none",
           duration:3000
         })
+        wx.reLaunch({
+          url: "/private/hotelpeople/index?idx=2"
+        });
+        
+
       } else {
         wx.requestPayment({
           timeStamp: res.data.data.data.timeStamp,
@@ -176,9 +186,9 @@ Page({
               icon:'none',
               duration:3000
             })
-            wx.reLaunch({
-              url: "/private/hotelpeople/index?idx=2"
-            });
+            // wx.reLaunch({
+            //   url: "/private/hotelpeople/index?idx=2"
+            // });
           
           }
         });
@@ -208,7 +218,14 @@ Page({
     //console.log(e)
   },
 
+  select(e){
+    let id = e.currentTarget.dataset.id
 
+    this.setData({
+      paymentId:id
+    })
+    
+  },
 
 
   checkboxChange(e) { //实现单选

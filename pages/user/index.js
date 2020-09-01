@@ -151,10 +151,7 @@ Page({
         break;
         case "5":
           //我的商品
-          wx.showToast({
-            title: '功能开发中，敬请期待',
-            icon:"none"
-          })
+          wx.navigateTo({ url: '/details/handle/index'})//订单列表
         break;
         case "6":
           wx.navigateTo({ url: '/details/myshop/index'})//商品列表

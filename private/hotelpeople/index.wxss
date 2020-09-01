@@ -21,7 +21,6 @@
   /* margin-left: 10rpx; */
 }
 .active {
- 
   font-size: 28rpx;
   font-family: Source Han Sans CN;
   font-weight: 400;
@@ -37,15 +36,6 @@
   letter-spacing:3rpx
 }
 .total{
-  /* font-size: 15rpx;
-  background-color: #FF9000;
-  border-radius: 50%;
-  position: absolute;
-  width: 35rpx;
-  height: 35rpx;
-  line-height: 35rpx;
-  top: 25rpx; */
-  
   width: 26rpx;
   height: 26rpx;
   background: #FF963F;

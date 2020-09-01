@@ -1,196 +1,214 @@
+page{
+  background-color: #F2F2F2;
+}
 .title{
-  height: 300rpx;
-  width: 95%;
-  margin: 20rpx auto;
-  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
-  
-}
-.header{
-  width: 100%;
-  height: 80rpx;
-  line-height: 50rpx;
-  padding: 20rpx;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  border-bottom:1px solid #ccc; 
-}
-.toAddress{
-  position: absolute;
-  right:25rpx;
-  top:65rpx;
-  font-size: 70rpx;
-  color: #999;
-}
-.content{
-  display: flex;
-  display: block;
-  height: 250rpx;
-  flex-flow: column;
-   padding: 20rpx;
-  box-sizing: border-box;
+  height: 220rpx;
+  width: 750rpx;
+  margin-top: 20rpx;
+  background: #FFFFFF;
   position: relative;
-  margin-bottom: 40rpx;
-  
 }
-.content view{
-  margin:10rpx 0; 
-}
-.color{
-  color: #96cc79;
-  line-height: 90rpx;
-}
-.bz{
-  margin-left: 20rpx;
+.title-top{
+  height: 64rpx;
+  margin-left: 50rpx;
   display: flex;
   align-items: center;
-  height: 50rpx;
+  margin-right: 31rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+
+}
+.title-top image{
+  width: 27rpx;
+  height: 27rpx;
+}
+.title-top text{
+  
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+  opacity: 1;
+  margin-left: 5rpx;
+}
+.title-address{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  margin-left: 50rpx;
+  margin-top: 15rpx;
+
+}
+.address{
+  
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: 34px;
+  color: #585858;
+}
+.tel{
+  
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+  /* margin-top: 23rpx; */
+}
+
+.edit{
+  position: absolute;
+  right: 31rpx;
+  bottom: 80rpx;
+}
+.edit image{
+  width: 28rpx;
+  height: 30rpx;
+}
+.bz{
+  height: 100rpx;
+  background: #FFFFFF;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.bz text{
+  
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
+  margin-left: 51rpx;
 }
 .bz input{
-  border: 1px solid #ccc;
+  outline: none;border: none;list-style: none;
+  margin-top: 5rpx;
+}
+.placeholder{
+  
   font-size: 26rpx;
-  width: 580rpx;
-  border-radius: 10rpx;
-  height: 60prx;
-  line-height: 60rpx;
-  padding-left: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #868686;
 }
-.huo{
-
-  margin-bottom: 30rpx;
-  margin-top: 10rpx;
+.pay{
+  height: 272rpx;
+  background: #FFFFFF;
+  opacity: 1;
+  margin-top: 20rpx;
 }
-.zhong{
-  width: 380rpx;
-  height: 60rpx;
-  background:#ff9d34;
-  color: #fff; 
-  text-align: center;
-  line-height: 60rpx;
-  border-radius: 30rpx 0 0 30rpx; 
+.pay-top{
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
+ 
+  height: 69rpx;
+  line-height: 69rpx;
+  border-bottom: 1rpx solid #B2B2B2;
 }
-.wuhua{
-   width: 95%;
-  margin: 20rpx auto;
-   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
+.pay-top text{
+  margin-left: 21rpx;
 }
-.meat{
-  width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
-  padding-left:30rpx; 
-  padding-right:30rpx; 
-  margin-bottom:2rpx; 
-  box-sizing: border-box;
+.wx{
+  height: 101rpx;
+  border-bottom: 1rpx solid #B2B2B2;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
-.active{
-  background: #eee;
-}
-.buttom{
- height: 200rpx;
- width: 100%;
- padding-right:30rpx;
-margin-top:30rpx; 
-display: flex;
-flex-flow: column;
-align-items:flex-end;
- padding: 20rpx;
-  box-sizing: border-box;
-}
-.buttom view{
- height: 60rpx;
-}
-.ccc{
-  color: #ccc;
-}
-.ff9{
-  color: #ff9d34;
-}
-.heji{
-  height: 100rpx;
-  width: 100%;
-  box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
-  margin-top:60rpx; 
+.wx-left{
   display: flex;
-  padding: 30rpx;
-  box-sizing: border-box;
-  justify-content: flex-end;
+  align-items: center;
+  margin-left: 21rpx;
+}
+.wx-left image{
+  height: 60rpx;
+  width: 60rpx;
+}
+.wx-left text{
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
+  margin-left: 20rpx;
+}
+.ye{
+  height: 101rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ye-left{
+  display: flex;
+  align-items: center;
+  margin-left: 21rpx;
+}
+.ye-left image{
+  height: 60rpx;
+  width: 60rpx;
+}
+.ye-left text{
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
+  margin-left: 20rpx;
+}
+.wx-right{
+  margin-right: 64rpx;
+
+}
+.wx-right image{
+  height: 57rpx;
+  width: 57rpx;
+}
+
+.bottom{
   position: fixed;
   bottom: 0;
-  left: 0
+  left: 0;
+  height: 100rpx;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  width: 750rpx;
+  background-color: #FFFFFF;
 }
-.zhonged{
-  width: 150rpx;
-  height: 60rpx;
-  background:#ff9d34;
-  color: #fff; 
+.b-left{
+  margin-left: 20rpx;
+}
+.fk{
+    
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #8C8C8C;
+}
+.fk1{
+    
+  color: #585858;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+}
+.price{
+  
+  font-size: 44rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FF963F;
+}
+.b-right{
+  width: 260rpx;
+  height: 100rpx;
+  background: #40B15D;
+  opacity: 1;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
   text-align: center;
-  line-height: 60rpx;
-  border-radius: 30rpx; 
-  margin-left:50rpx; 
-}
-.payment{
-   width: 95%;
-   height: auto;
-  margin: 20rpx auto;
-   box-shadow: 0 0 15rpx rgba(0, 0, 0, 0.1);
-}
-checkbox {
-
-width: 35rpx;
-
-height: 35rpx;
-border-radius:50%;
-}
-
-
-
-checkbox .wx-checkbox-input {
-
-width: 35rpx;
-
-height: 35rpx;
-border-radius:50%;
-}
-
-
-
-checkbox .wx-checkbox-input.wx-checkbox-input-checked {
-
-background: #96cc79;
-
-}
-
-
-
-checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
-
-width: 34rpx;
-
-height: 34rpx;
-
-line-height: 32rpx;
-
-text-align: center;
-
-font-size: 22rpx;
-
-color: #fff;
- 
-background: transparent;
-
-transform: translate(-50%, -50%) scale(1);
-
--webkit-transform: translate(-50%, -50%) scale(1);
-
-}
-.paym{
- width: 100%;
- height: 100rpx;
- padding:20rpx;
- box-sizing: border-box; 
- display: flex;
- justify-content: space-between
+  line-height: 100rpx;
 }

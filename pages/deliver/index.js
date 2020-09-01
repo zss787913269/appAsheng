@@ -48,13 +48,13 @@ Page({
   },
   // 地图导航
   getLoc: function (e) {
-    // console.log(e.currentTarget.id);  // 获取当前点击的数组下标
+    // //console.log(e.currentTarget.id);  // 获取当前点击的数组下标
     var that = this;
     wx.getLocation({
       type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
       success: function (res) {
         //使用微信内置地图查看位置接口
-        console.log(res.data)
+        //console.log(res.data)
         wx.openLocation({
           latitude: parseFloat(that.data.latitude),  // 要去的地址经度，浮点数
           longitude: parseFloat(that.data.longitude),  // 要去的地址纬度，浮点数
@@ -65,9 +65,16 @@ Page({
         });
       },
       cancel: function (res) {
-        console.log('地图定位失败');
+        //console.log('地图定位失败');
       }
     })
+  },
+  goDetail(e){
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: "/details/detail/index?id="+id,
+    })
+
   },
   onLoad: function (options) {
 
@@ -90,7 +97,7 @@ Page({
     //   success(res) {
     //     //使用腾讯地图的reverseGeocoder方法获取地址信息
 
-    //     // console.log(res)
+    //     // //console.log(res)
        
     //     qqmapsdk.reverseGeocoder({
 
@@ -104,11 +111,11 @@ Page({
 
     //       success: function (addressRes) {
 
-    //         // console.log(addressRes)
+    //         // //console.log(addressRes)
 
     //         // const address = addressRes.result.formatted_addresses.recommend; //当前位置信息
 
-    //         // console.log(address)
+    //         // //console.log(address)
 
     //       }
     //     });
@@ -125,7 +132,7 @@ Page({
 
   // zym
   getLoc: function (e) {
-    // console.log(e.currentTarget.id);  // 获取当前点击的数组下标
+    // //console.log(e.currentTarget.id);  // 获取当前点击的数组下标
     var that = this;
     wx.getLocation({
       type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
@@ -140,7 +147,7 @@ Page({
         });
       },
       cancel: function (res) {
-        console.log('地图定位失败');
+        //console.log('地图定位失败');
       }
     })
   },
@@ -158,20 +165,20 @@ Page({
     }
     var id = e.currentTarget.dataset.id
 
-    console.log("currentTarget", e.currentTarget.dataset)
+    //console.log("currentTarget", e.currentTarget.dataset)
     wx.showActionSheet({
       itemList: ['拍照'],
       success: function (res) {
         that.getImg(res.tapIndex, id)
       },
       fail: function (res) {
-        console.log(res.errMsg)
+        //console.log(res.errMsg)
       }
     })
   },
   upImg(url, shopid) { //上传图片
     let _this = this
-    console.log(url)
+    //console.log(url)
     app.globalData.token = wx.getStorageSync('token')
     wx.uploadFile({
       url: `https://second.chchgg.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
@@ -197,14 +204,14 @@ Page({
       },
       fail(res) {
         const data = res.data
-        console.log(data + '失败')
+        //console.log(data + '失败')
       }
     })
   },
   getImg: function (e, id) {
     var _this = this
 
-    console.log("e", id)
+    //console.log("e", id)
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -213,7 +220,7 @@ Page({
         // tempFilePath可以作为img标签的src属性显示图片
         let tempFilePaths = _this.data.card_img
         tempFilePaths.push(res.tempFilePaths[0])
-        console.log(tempFilePaths)
+        //console.log(tempFilePaths)
 
 
 
@@ -225,7 +232,7 @@ Page({
 
         }
 
-        console.log(_this.data.PeisongList)
+        //console.log(_this.data.PeisongList)
 
 
         _this.setData({
@@ -256,7 +263,7 @@ Page({
       }
     }
 
-    console.log(params)
+    //console.log(params)
 
     let res = await ajax({
       url: 'api/staff/completeOrder',
@@ -264,7 +271,7 @@ Page({
       data: params
     })
 
-    console.log("确认送达", res)
+    //console.log("确认送达", res)
 
     if (res.data.code == 0) {
       wx.showToast({
@@ -279,6 +286,32 @@ Page({
 
   },
 
+  // 一键取货
+  async pickOrder(e){
+    var that = this
+    let params = {
+      id: e.currentTarget.dataset.id
+    }
+    let res = await ajax({
+      url: 'api/staff/pickOrder',
+      method: 'post',
+      data: params
+    })
+    
+    if(res.data.data.detailcount == res.data.data.pickcount){
+      that.getDeliveryClerkList()
+    }else{
+      wx.showToast({
+        title: '供应商未接单',
+        icon:"none"
+      })
+    }
+
+    console.log("pickOrder",res.data.data)
+
+    
+  },
+
   async takeDelivery(e) { //取货
     var that = this
     let params = {
@@ -290,7 +323,7 @@ Page({
       data: params
     })
 
-    console.log("取货", res)
+    //console.log("取货", res)
 
     if (res.data.msg == "success") {
 
@@ -312,7 +345,7 @@ Page({
     }
   },
   returnAndExchange(e) { //退换货
-    console.log(e);
+    //console.log(e);
     this.setData({
       tuidanModal: true,
       shopExch: e.currentTarget.dataset.item
@@ -320,7 +353,7 @@ Page({
   },
   //打印
   print(value) {
-    console.log(value.currentTarget.dataset.value);
+    //console.log(value.currentTarget.dataset.value);
     let myData = value.currentTarget.dataset.value;
     lpapi.openPrinter('') //连接打印机    为空就是列表第一个
     var width = 100;
@@ -368,7 +401,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '成功',
@@ -399,7 +432,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '成功',
@@ -456,7 +489,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log(res)
+    //console.log(res)
     if (res.data.code == 0) {
       wx.showToast({
         title: '修改成功',
@@ -478,7 +511,7 @@ Page({
     let params = {
       id: e.currentTarget.dataset.id
     }
-    console.log('object', params);
+    //console.log('object', params);
     let res = await ajax({
       url: 'api/staff/sendture',
       method: 'post',
@@ -507,7 +540,7 @@ Page({
       detailedId: e.currentTarget.dataset.id,
       detailedIndex: e.currentTarget.dataset.index,
     })
-    console.log(e.currentTarget.dataset)
+    //console.log(e.currentTarget.dataset)
     that.lookApi()
   },
 
@@ -517,14 +550,14 @@ Page({
     let params = {
       id: that.data.detailedId
     }
-    console.log("params", params)
+    //console.log("params", params)
     let res = await ajax({
       url: 'api/staff/getOrderDetail',
       method: 'post',
       data: params
     })
 
-    console.log("lookApi", res.data.data)
+    //console.log("lookApi", res.data.data)
 
     if (res.data.code == 0) {
       let shopInfo = res.data.data
@@ -607,7 +640,7 @@ Page({
       for (var i = 0; i < deliveryListOne.length; i++) {
         deliveryListOne[i].is_select = false
       }
-      console.log("deliveryListOne", deliveryListOne)
+      //console.log("deliveryListOne", deliveryListOne)
       that.setData({
         deliveryList: deliveryListOne,
         total: res.data.data.total,
@@ -619,6 +652,14 @@ Page({
         duration: 3000
       })
     }
+  },
+  detalis(e){    //跳转去详情页
+
+    console.log(e.currentTarget.dataset.shouhuo)
+    
+    wx.navigateTo({
+      url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
+    })
   },
   // 配送中的数据
   async getPeisongList() {
@@ -640,7 +681,7 @@ Page({
       PeisongList: peisongList,
       total2: res.data.data.total,
     })
-    console.log("total2", this.data.total2)
+    //console.log("total2", this.data.total2)
   },
 
   async getDistributorClerkList() { //获取配送员已处理订单
@@ -654,7 +695,7 @@ Page({
       data: params
     })
     if (res.data.code == 0) {
-      console.log('获取配送员已完成订单', res)
+      //console.log('获取配送员已完成订单', res)
 
       let deliveryListYes = res.data.data.data
       for (var i = 0; i < deliveryListYes.length; i++) {

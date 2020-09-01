@@ -1,11 +1,11 @@
 {
   "pages": [
-    
-    "pages/deliver/index",
     "pages/index/index",
     "pages/user/index",
-    "details/handle/index",
-    "private/hotelpeople/index",  
+    "private/hotelpeople/index", 
+    "person/cartdetal/index",
+    "pages/deliver/index",
+    "details/handle/index", 
     "details/detail/index",
     "pages/cart/index",
     "pages/quickly/quickly",
@@ -39,7 +39,6 @@
     "person/rawalsre/index",
     "person/recharge/index",
     "person/crecord/index",
-    "person/cartdetal/index",
     "details/dishname/index",
     "details/order/index",
     "details/preAbout/index",

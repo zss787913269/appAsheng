@@ -18,7 +18,9 @@ Page({
     title: "",
     id: "",
     showjd:false,
-    count: "" //商品原本的数量
+    count: "" ,//商品原本的数量
+    showqh:""
+
   },
 
   onLoad: function (options) {
@@ -31,7 +33,7 @@ Page({
       // shopId:160
     })
 
-    console.log(options)
+    //console.log(options)
 
     if(options.enter == 4){
       that.setData({
@@ -41,12 +43,46 @@ Page({
       that.setData({
         showjd:true
       })
+    }else if(options.enter == 6){
+      that.setData({
+        showqh:true
+      })
     }
-
 
     this.getlist(this.data.shopId)
     this.getOrderShop(this.data.shopId)
     this.getHotelOrderDetail(this.data.shopId)
+  },
+  async onekey(e) { // 按照订单 一键接单
+    var that = this
+    let id = this.data.shopId
+
+
+    let params = {
+      id: id
+    }
+    let res = await ajax({
+      url: 'api/store/OneClickReceipt',
+      method: 'POST',
+      data: params
+    })
+    // console.log(res.data)
+    if (res.data.code == 0) {
+
+      wx.showToast({
+        title: '接单成功',
+        icon: 'none',
+        duration: 1000
+      })
+      this.getHotelOrderDetail(this.data.shopId)
+     
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
   // 确认收货
   async noReceipt(e) { //不接
@@ -73,6 +109,36 @@ Page({
         title: res.data.msg,
         icon: 'none',
         duration: 300
+      })
+    }
+  },
+  async takeDelivery(e) { //取货
+    var that = this
+    let params = {
+      id: e.currentTarget.dataset.id
+    }
+   
+    let res = await ajax({
+      url: 'api/staff/pick',
+      method: 'post',
+      data: params
+    })
+
+    console.log("res",res.data)
+    this.getHotelOrderDetail(this.data.shopId)
+
+    if (res.data.msg == "success") {
+
+      wx.showToast({
+        title: '取货成功',
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 3000
       })
     }
   },
@@ -123,7 +189,7 @@ Page({
   async getAllHotel(){
     let that = this
     let id = this.data.shopId
-    console.log(id)
+    //console.log(id)
 
     let params = {
       id
@@ -134,7 +200,6 @@ Page({
     })
 
    
-    console.log(res.data)
 
     if(res.data.code == 0){
       wx.showToast({
@@ -180,6 +245,30 @@ Page({
     })
 
   },
+  // 一键取货
+  async pickOrder(e){
+
+    let that = this
+    let id = this.data.shopId
+    let params = {
+      id
+    }
+    let res = await ajax({
+      url: 'api/staff/pickOrder',
+      method: 'post',
+      data: params
+    })
+
+    if(res.data.data.detailcount == res.data.data.pickcount){
+      that.getHotelOrderDetail(that.data.shopId)
+    }else{
+      wx.showToast({
+        title: '供应商未接单',
+        icon:"none"
+      })
+    }
+    
+  },
   async getHotelOrderDetail(id) {
 
     let that = this
@@ -192,7 +281,7 @@ Page({
       }
     })
 
-    console.log("getHotelOrderDetail", res)
+    console.log("getHotelOrderDetail", res.data.data)
 
     let hotelOrderDetail = that.data.hotelOrderDetail
 
@@ -257,7 +346,7 @@ Page({
         method: 'POST',
         data: params
       })
-      console.log(res.data)
+      //console.log(res.data)
 
       if (res.data.code == 0) {
         wx.showToast({
@@ -292,7 +381,7 @@ Page({
         id
       }
     })
-    //console.log("secondaryClassification",res.data.data)
+    ////console.log("secondaryClassification",res.data.data)
     if (res.data.code == 0) {
       that.setData({
         secondaryClassification: res.data.data,
@@ -318,7 +407,7 @@ Page({
       method: 'POST',
       data: params
     })
-    //console.log(res)
+    ////console.log(res)
     if (res.data.code == 0) {
       let secondaryClassShop = res.data.data
       for (var i = 0; i < secondaryClassShop.length; i++) {
@@ -327,7 +416,7 @@ Page({
       that.setData({
         secondaryClassShop
       })
-      //console.log(that.data.secondaryClassShop)
+      ////console.log(that.data.secondaryClassShop)
       // that.getsecondaryClassShop(this.data.secondaryClassification[0].category_id)
     } else {
       wx.showToast({
@@ -338,7 +427,7 @@ Page({
     }
   },
   exchange(e) { //退换货
-    // //console.log(this.data.shopAttribute)
+    // ////console.log(this.data.shopAttribute)
     // order_id = 订单id, title = 退货理由 order_detail_id = 商品详情id, price = 价格, number = 数量
     // type = 1退货退款, 2换货
     // let shopAttribute = this.data.shopAttribute
@@ -355,7 +444,7 @@ Page({
     })
   },
   clickTab(e) { //
-    // //console.log(e.currentTarget.datascurrentTarget.datasetet.index)
+    // ////console.log(e.currentTarget.datascurrentTarget.datasetet.index)
     var that = this
     let currentTab = e.currentTarget.dataset.current //当前二级分类id
     let index = e.currentTarget.dataset.index
@@ -365,23 +454,24 @@ Page({
     })
     that.getsecondaryClassShop(currentTab)
   },
-  async getlist(id) {
 
+  async getlist(id){
     let that = this
+
+    console.log(id)
+
     let res = await ajax({
-      url: 'api/order/Detail',
+      url: 'api/Order/OrderInfo',
       method: 'POST',
       data: {
         id: id
       }
     })
+
     if (res.data.code == 0) {
       this.setData({
-        orderlist: res.data.data.data,
-        // shopAttribute: res.data.data.data.items[0],
-        // currentTab: res.data.data.data.items[0].id
+        orderlist: res.data.data[0],
       })
-      //console.log("orderlist",this.data.orderlist)
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -390,11 +480,10 @@ Page({
       })
     }
 
-    // wx.showToast({
-    //   title: res.data.msg,
-    // })
-    console.log(res)
+ 
   },
+
+  
   async addSelfShop() {
     var that = this
     let params = {
@@ -425,7 +514,7 @@ Page({
   },
   async deletShop(e) { //删除商品
     var that = this
-    //console.log(e)
+    ////console.log(e)
     let params = {
       id: e.currentTarget.dataset.id
     }

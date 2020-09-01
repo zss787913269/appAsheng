@@ -5,8 +5,8 @@
 			<view class="peis">配送信息</view>
 		</view>
 		<view class="add_main">
-			<view class="myaddress">{{orderlist.address_data.province_name}} {{orderlist.address_data.city_name}} {{orderlist.address_data.county_name}}</view>
-			<view class="call">电话号码 {{orderlist.address_data.tel}}</view>
+			<view class="myaddress">{{orderlist.address.province_name}} {{orderlist.address.city_name}} {{orderlist.address.county_name}}</view>
+			<view class="call">电话号码 {{orderlist.address.tel}}</view>
 		</view>
 	</view>
 
@@ -14,38 +14,15 @@
 		<text >一键收货</text>
 	</view>
 
-</view>
-
-<view class="title" wx:if="{{false}}">
-	<!-- <view class="header">
-    <text>收货人信息</text>
-    <text>订单日期：{{orderlist.add_time_date}}</text>
-  </view> -->
-	<view class="content">
-		<view>
-			<text> 订单号： {{orderlist.order_no}}</text>
-		</view>
-
-		<view>
-			<text wx:if="{{orderlist.address_data.province_name != ''}}">收货地址：{{orderlist.address_data.province_name}}{{orderlist.address_data.city_name}}{{orderlist.address_data.county_name}}
- 		</text>
-			<text wx:else>收货地址：暂无</text>
-		</view>
-		<view class="huo">
-			<text wx:if="{{orderlist.address_data.name != ''}}">收  货 人：{{orderlist.address_data.name}}</text>
-			<text wx:else>收  货 人：暂无</text>
-		</view>
-		<view>
-			<text wx:if="{{orderlist.address_data.tel != ''}}">收货电话：{{orderlist.address_data.tel}}</text>
-			<text wx:else>收货电话：暂无</text>
-		</view>
-
+	<view class="mysh" bindtap="pickOrder" wx:if="{{showqh}}">
+		<text >一键取货</text>
 	</view>
 
-	<view class="mysh" bindtap="getAllHotel" wx:if="{{show}}">
-		<text >一键收货</text>
+		<view class="mysh" bindtap="onekey" wx:if="{{showjd}}">
+		<text >一键接单</text>
 	</view>
 </view>
+
 
 <view class="maintop">
 	<view class="hotelname"> </view>
@@ -74,7 +51,7 @@
 	<view class='right'>
 		<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
 			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
-				<view class="{{show || showjd ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
+				<view class="{{show || showjd || showqh ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
 					<view class="mytitle" id="{{'inToview'+item.id}}">
 						<view class="right-img">
 							<image src="http://second.chchgg.com{{items.images}}"></image>
@@ -125,6 +102,14 @@
 						</view>
 
 
+					</view>
+
+					<view class="sbox" wx:if="{{showqh}}">
+
+				
+							<view class="queren" wx:if="{{item.goods[0].is_pick == 0}}" bindtap="takeDelivery" data-id="{{item.goods[0].id}}"><text>取货</text></view>
+							<view class="quxiao"  wx:if="{{item.goods[0].is_pick == 1}}" ><text>已取货</text></view>
+			
 					</view>
 
 				</view>
