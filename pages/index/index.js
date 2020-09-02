@@ -18,7 +18,6 @@ Page({
     showModalStatus: false, //遮罩的显示与隐藏
     classfiySelect: "",
     classfiySelect2: "",
-    showModalStatus: false, //遮罩的显示与隐藏
     city: '成都',
     ads: ['/images/temp/ad.jpg', '/images/temp/ad_2.jpg'],
     currentTab: 0,

@@ -20,7 +20,7 @@ Page({
     // 下单id
     orderid: "",
     actual_price:'',
-    paymentId:'',   //支付方式id
+    paymentId:3,   //支付方式id
     where:'',   //从哪里来
     shopNowPrice:'',    //当前的商品价格
   },
@@ -45,6 +45,14 @@ Page({
     this.setData({
       dataids: options.ids
     })
+  },
+  select(e){
+    let id = e.currentTarget.dataset.id
+
+    this.setData({
+      paymentId:id
+    })
+    
   },
   modalInput(e){
     // console.log(e.detail.value)

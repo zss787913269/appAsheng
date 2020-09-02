@@ -13,7 +13,8 @@ page{
 }
 .itemed{
   /* width:540rpx; */
-  height:320rpx;
+  /* height:320rpx; */
+  height: 250rpx;
   background: #fff;
   border-bottom: 1px solid rgba(240,240,240,1);
   display: flex; 
@@ -103,13 +104,13 @@ page{
 }
 .marri{
  margin-right: 10rpx;
- width: 54rpx;
- height: 54rpx;
+ width: 44rpx;
+ height: 44rpx;
 }
 .marle{
  margin-left: 10rpx;
- width: 54rpx;
- height: 54rpx;
+ width: 44rpx;
+ height: 44rpx;
 }
 .bbox{
   height: 30rpx;
@@ -421,6 +422,15 @@ transform: translate(-50%, -50%) scale(1);
 .shoplist{
   border-bottom: 4rpx solid green;
   color: #40B15D;
+}
+.shop-name{
+ 
+  font-size:34rpx;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color:rgba(90,90,90,1);
+  margin-left: 50rpx;
+  margin-top: 20rpx;
 }
 
 

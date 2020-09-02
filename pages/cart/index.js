@@ -6,7 +6,7 @@ const app = getApp()
 
 Page({
   data: {
-    classfiySelect:"",
+    classfiySelect: "",
     listindex: 1,
     tableList: [],
     num: 1,
@@ -14,25 +14,31 @@ Page({
     minusStatus: 'disabled',
     text: "nihao",
     checkedAll: true,
-    checkedAll2:true,
+    checkedAll2: true,
     totalPrice: 0,
     totelid: [],
     currentTab: 1,
-    type:1,
-    hisList:[],
-    hisTotalPrice:'',
-    ids:[]
+    type: 1,
+    hisList: [],
+    hisTotalPrice: '',
+    ids: [],
+    showqx: false,
+    leftList: [],
+    hotelCount: "",
+    pcount: ""
   },
 
   onLoad: function (options) {
-    this.getlist(1)
-    this.getlist(2)
-    this.getFirstList()
- 
+    // this.getlist(1)
+    // this.getlist(2)
+    // this.getFirstList()
+    this.getCount()
+    this.getTopCount()
+
 
   },
   onShow: function () {
-    this.getlist(this.data.currentTab)
+    // this.getlist(this.data.currentTab)
   },
   //点击切换列表
   clickList(e) {
@@ -42,170 +48,202 @@ Page({
     })
 
   },
-  // 全选
-  allChecked(){
-  
-    let that = this
-    let list = this.data.tableList
-    let ids = []
-
-    for(let i of list){
-      i.isSelected = !i.isSelected
-
-      if(this.data.checkedAll == false){
-        i.isSelected = true
-      }
-      
-      if(i.isSelected == true){
-        ids.push(i.id)
+  async getTopCount() {
+    let res = await ajax({
+      url: "api/cart/carttypecount",
+      method: "post"
+    })
+    let hotelCount, pcount
+    for (let i of res.data.data) {
+      if (i.is_purchase == 1) {
+        hotelCount = i.num
+      } else {
+        pcount = i.num
       }
     }
-    // 点击全选的时候 把所有的id获取
+    this.setData({
+      hotelCount,
+      pcount
+    })
+    // console.log(hotelCount,pcount)
+  },
+  async getCount(e) {
+    let that = this
 
-    let num = 0
+    console.log(e)
+    if (e == undefined) {
+      e = that.data.currentTab
+    }
+    let params = {
+      is_purchase: e
+    }
+    let res = await ajax({
+      url: "api/cart/categorygoodscount",
+      method: "post",
+      data: params
+    })
 
-    if(this.data.checkedAll == true){
+
+
+    if (res.data.data.length == 0) {
+      wx.showToast({
+        title: '购物车没有商品',
+        icon: "none"
+      })
+      that.setData({
+        showqx: false
+      })
+    } else {
+      let list = res.data.data
+
+      let ids = []
+      let data
+
+      for (let i of list) {
+        // console.log(i)
+        for (let j of i.goods) {
+          j.isSelected = true,
+            ids.push(j.id)
+          j.spec = JSON.parse(j.spec)
+
+        }
+      }
+      console.log(ids)
+
+      that.setData({
+        leftList: list,
+        showqx: true,
+        ids
+      })
+    }
+    this.getTotalPrice()
+
+
+    // console.log("getCount",res.data.data)
+
+  },
+  // 全选
+  allChecked() {
+
+    let that = this
+    let list = this.data.leftList
+    let ids = []
+
+    for (let i of list) {
+      for (let j of i.goods) {
+        j.isSelected = !j.isSelected
+
+        if (this.data.checkedAll == false) {
+          j.isSelected = true
+        }
+        if (j.isSelected == true) {
+          ids.push(j.id)
+        }
+      }
+    }
+    console.log(list)
+
+    if (this.data.checkedAll == true) {
       that.setData({
         totalPrice: 0
       })
-    }else{
-
-      console.log("checkedAll=true")
+    } else {
       if (ids <= 0) {
         that.setData({
           totalPrice: 0
         })
       } else {
-
-        console.log("ids大于0",ids)
-     
-        for (let i = 0; i < that.data.tableList.length; i++) {
-
-        
-          for (let j = 0; j <= ids.length; j++) {
-      
-            if (ids[j] == that.data.tableList[i].id) {
-              // console.log(that.data.tableList[i].stock * that.data.tableList[i].price)
-         
-              num += that.data.tableList[i].stock * that.data.tableList[i].price;
-              that.setData({
-                totalPrice: num.toFixed(2)
-              })
-            }
-          }
-        }
+        that.getTotalPrice()
       }
-      
+
     }
-   
+
     this.setData({
-      checkedAll:!that.data.checkedAll,
-      tableList:list,
+      checkedAll: !that.data.checkedAll,
+      leftList: list,
       ids
     })
- 
-   
+
+
 
   },
   checkboxChange: function (e) {
     var that = this
-
-    let list = this.data.tableList
+    let list = this.data.leftList
     let checkedAll
-
-  
-    
-    // for(let i of this.data.tableList){
-    //   if(i.isSelected == true){
-    //     checkedAll = true
-    //   }
-    // }
 
     that.setData({
       ids: e.detail.value,
-      
     })
 
-    console.log("ids",this.data.ids.length)
-    console.log("value",e.detail.value.length)
-
-    if(this.data.ids.length != this.data.tableList.length){
+    let goods = []
+    for (let i of list) {
+      for (let j of i.goods) {
+        goods.push(j)
+      }
+    }
+    if (that.data.ids.length != goods.length) {
       checkedAll = false
-    }else {
+    } else {
       checkedAll = true
     }
     this.setData({
       checkedAll
     })
-  
-  
-
-    let num = 0;
     if (e.detail.value.length <= 0) {
       that.setData({
         totalPrice: 0
       })
     } else {
-      for (let i = 0; i < that.data.tableList.length; i++) {
-        for (let j = 0; j <= e.detail.value.length; j++) {
-          if (e.detail.value[j] == that.data.tableList[i].id) {
-            num += that.data.tableList[i].stock * that.data.tableList[i].price;
-            that.setData({
-              totalPrice: num.toFixed(2)
-            })
+      // console.log("2132")
+     let  num = 0
+      for (let i of list) {
+        for (let j of i.goods) {
+          for(let k of e.detail.value){
+            if(j.id == k){
+                num += j.stock * j.price;
+                that.setData({
+                 totalPrice: num.toFixed(2)
+                })
+           }
           }
         }
       }
     }
-
-
   },
-    // zym 点击左侧导航栏
-    clickLeftItem(e) {
-      let id = e.currentTarget.dataset.id;
-      this.setData({
-        classfiySelect: id,
-      })
-
-    
-  
-    },
-  // 获取快速下单数据
-  async getCartHisOrder() {
-
-    let res = await ajax({
-      url: 'api/cart/cartHisOrder',
-      method: "POST",
-
-    })
+  // zym 点击左侧导航栏
+  clickLeftItem(e) {
+    let id = e.currentTarget.dataset.id;
     this.setData({
-      hisList:res.data
+      classfiySelect: id,
     })
- 
+
+
 
   },
-  async deleteAll(){
+ 
+  // 清空
+  async deleteAll() {
 
     let that = this
 
     wx.showModal({
       title: '提示',
       content: '是否清空购物车',
-      async success (res) {
+      async success(res) {
         if (res.confirm) {
           let res = await ajax({
             url: 'api/cart/DeleteAll',
             method: 'POST'
           })
 
-          console.log(res.data)
-      
-          if(res.data.code == 0){
-            that.getlist(1)
-            that.getlist(2)
+
+          if (res.data.code == 0) {
+            that.getCount(1)
+            that.getCount(0)
             wx.showToast({
               title: '清空成功',
-              icon:"none"
+              icon: "none"
             })
           }
         } else if (res.cancel) {
@@ -213,115 +251,10 @@ Page({
         }
       }
     })
-   
+
 
   },
 
-
-
-  // 获取首次进入购物车的数据
-  async getFirstList() {
-    let that = this
-
-    let params = { //酒店购物车需要传参
-      is_purchase: 1
-    }
-
-    let res = await ajax({
-      url: 'api/cart/index',
-      method: 'POST',
-      data: params
-    })
-    let list = res.data.data.data
-    let ids  = []
-
-    for(let i of list){
-      i.isSelected = true
-      ids.push(i.id)
-    }
-    if (res.data.data.data.length == 0) {
-      // 个人订单
-      let res2 = await ajax({
-        url: 'api/cart/index',
-        method: 'POST',
-      })
-      let list = res2.data.data.data
-      let id  = []
-
-      for(let i of list){
-        i.isSelected = true
-        id.push(i.id)
-      }
-      // console.log("个人订单",res2.data.data.data)
-      that.setData({
-        currentTab: 2,
-        tableList: res2.data.data.data,
-        ids:id
-      })
-    } else {
-      that.setData({
-        hotelList: res.data.data.data,ids
-      })
-    }
-
-    this.getTotalPrice()
-  },
-
-  async getlist(index) {
-    let that = this
-    let params = { //酒店购物车需要传参
-      is_purchase: 1
-    }
-    if (index == 1) {
-      let res = await ajax({
-        url: 'api/cart/index',
-        method: 'POST',
-        data: params
-      })
-
-      // console.log("公司订单",res.data.data.data)
-
-      let list = res.data.data.data
-      let ids  = []
-
-      for(let i of list){
-        i.isSelected = true
-        ids.push(i.id)
-      }
-
-      that.setData({
-        tableList: res.data.data.data,
-        hotelList: res.data.data.data,
-        ids,
-        
-      })
-    
-      // console.log(res)
-    } else if (index == 2) {
-      let res = await ajax({
-        url: 'api/cart/index',
-        method: 'POST',
-      })
-      // console.log("个人订单", res.data.data.data)
-      let list = res.data.data.data
-      let ids  = []
-
-      for(let i of list){
-        i.isSelected = true
-        ids.push(i.id)
-      }
-
-      that.setData({
-        tableList: res.data.data.data,
-        personList: res.data.data.data,ids
-      })
-
-      // console.log(res) 
-    }
-    that.getTotalPrice()
-    that.getHisTotalPrice()
-
-  },
   // 加减商品
   async subadd(id, goods, stock) {
     let that = this
@@ -342,12 +275,10 @@ Page({
   // 移除商品
   async subdelect(e) {
     let that = this
-
-
-     wx.showModal({
+    wx.showModal({
       title: '提示',
       content: '确认删除吗',
-      async success (res) {
+      async success(res) {
         if (res.confirm) {
           let res = await ajax({
             url: 'api/cart/delete',
@@ -360,85 +291,102 @@ Page({
             title: '删除成功',
             duration: 3000
           })
-          that.getlist(that.data.currentTab)
+          that.getCount(that.data.currentTab)
         } else if (res.cancel) {
-         
+
         }
       }
     })
-  
 
-  
+
+
   },
 
 
   //事件处理函数
   sub(e) {
 
-
-
     const index = e.currentTarget.dataset.index;
-    let tableList = this.data.tableList;
-    let num = tableList[index].stock;
-    if (num <= 0) {
-      return false;
+    let item = e.currentTarget.dataset.item
+    let list = this.data.leftList;
+    let tableList = []
+
+
+    for(let i of list){
+      for(let j of i.goods){
+        if(j.id == item){
+          let num = j.stock;
+          if (num <= 0) {
+            return false;
+          }
+          num = num - 1;
+          if (num == 0) {
+            num = 1
+          }
+          j.stock = num;
+        }
+
+        tableList.push(j)
+      }
     }
-    num = num - 1;
-    if (num == 0) {
-      num = 1
-    }
-    tableList[index].stock = num;
+
+
+   
     this.setData({
-      tableList: tableList
+      leftList: list
     })
     this.subadd(tableList[index].id, tableList[index].goods_id, tableList[index].stock)
     this.getTotalPrice()
-    this.getHisTotalPrice()
   },
   add(e) {
     const index = e.currentTarget.dataset.index;
-    let tableList = this.data.tableList;
-    let num = parseInt(tableList[index].stock);
-    num = num + 1;
-    tableList[index].stock = num;
+    let item = e.currentTarget.dataset.item
+    // let tableList = this.data.tableList;
+    let list = this.data.leftList
+
+
+    let tableList = []
+    for(let i of list){
+      for(let j of i.goods){
+        tableList.push(j)
+        if(j.id == item){
+          let num = parseInt(j.stock);
+          num = num + 1;
+          j.stock = num;
+        }
+      }
+    }
+
+
+
+
     this.setData({
-      tableList: tableList
+      leftList: list
     })
     this.subadd(tableList[index].id, tableList[index].goods_id, tableList[index].stock)
     this.getTotalPrice()
-    this.getHisTotalPrice()
   },
 
   // 计算购物车商品价格
   getTotalPrice(e) {
-    let tableList = this.data.tableList;
+
+    let tableList = this.data.leftList;
     let sum = 0;
-    for (let i = 0; i < tableList.length; i++) {
-      sum += tableList[i].stock * tableList[i].price;
-      tableList[i].single = (tableList[i].stock * tableList[i].price).toFixed(2);
+
+    for (let i of tableList) {
+      
+      for (let j of i.goods) {
+        if(j.isSelected == true){
+          sum += j.stock * j.price
+        }
+     
+      }
     }
+
     this.setData({
       totalPrice: sum.toFixed(2),
-      tableList: tableList
     })
   },
-  
-  // 计算历史商品价格
-  getHisTotalPrice(e) {
-    let hisList = this.data.hisList;
-    let sum = 0;
-    for (let i = 0; i < hisList.length; i++) {
-
-      sum += hisList[i].buy_number * hisList[i].price;
-      // tableList[i].single = (tableList[i].buy_number * tableList[i].price).toFixed(2);
-    }
-    this.setData({
-      hisTotalPrice: sum.toFixed(2)
-    })
-  },
-
-
- 
 
 
   clickTab: function (e) { //点击切换
@@ -447,21 +395,20 @@ Page({
     console.log(e)
 
     if (e.currentTarget.dataset.current == 1) {
-      that.getlist(1)
+      that.getCount(1)
     } else if (e.currentTarget.dataset.current == 2) {
-      that.getlist(2)
+      that.getCount(0)
     }
     that.setData({
       currentTab: e.currentTarget.dataset.current
     })
-    console.log(that.data.currentTab);
-    // }
+
   },
   submit: function () { //提交订单
     var that = this
     var item = that.data.ids
     var ids = item.toString()
-  
+
     if (that.data.currentTab == 2) { //个人订单提交订单
       if (ids != '') {
         wx.navigateTo({

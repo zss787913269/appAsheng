@@ -90,12 +90,25 @@ Page({
       url: 'api/staff/recovery',
       method: 'get'
     })
+   
+    
+
+
     if (res.data.code == 0) {
       console.log("回收员",res)
-      that.setData({
-        myResponsible: res.data.data,
-        name: res.data.data.data[0].nickname
-      })
+
+      if(res.data.data == ""){
+        wx.showToast({
+          title: '不是回收员',
+        })
+      }else{
+        that.setData({
+          myResponsible: res.data.data,
+          name: res.data.data.data[0].nickname
+        })
+      }
+
+     
     } else {
       wx.showToast({
         title: res.data.msg,

@@ -990,7 +990,6 @@ swiper {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 .numbercount input{
   text-align: center;

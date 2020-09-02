@@ -96,10 +96,6 @@
 			<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
 			<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
 	
-				
-				
-	
-				
 			<view class="myb">
 			<view class="mflex">
 				<view class="imgb"><image class="imgurl" src="{{imgurl}}"></image></view>

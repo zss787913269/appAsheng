@@ -1,13 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+    "details/search/index",
+   
+    "pages/cart/index",
     "pages/user/index",
     "private/hotelpeople/index", 
     "person/cartdetal/index",
     "pages/deliver/index",
     "details/handle/index", 
     "details/detail/index",
-    "pages/cart/index",
     "pages/quickly/quickly",
     "details/myshop/index",
     "details/becomeShop/index",
@@ -46,7 +48,6 @@
     "details/orderlist/index",
     "details/groupAll/index",
     "details/comment/index",
-    "details/search/index",
     "details/goshop/index",
     "details/supplier/index",
     "details/peinformation/index",

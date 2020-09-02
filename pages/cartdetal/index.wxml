@@ -1,4 +1,93 @@
+<!-- <view class="title">
+  <view class="header">
+    <text>收货人信息</text>
+  </view>
+  <view class="content" wx:if="{{addreslist!=null}}">
+    <view>
+      <text>收货地址：{{addreslist.province_name}} {{addreslist.city_name}} {{addreslist.county_name}} {{addreslist.address}}</text>
+    </view>
+    <view class="huo">
+      <text>收  货 人：{{addreslist.name}}</text>
+    </view>
+    <view class="huo">
+      <text>收货电话：{{addreslist.tel}}</text>
+    </view>
+    <view class="toAddress" bindtap="addresd">
+      <i class="fal fa-angle-right"></i>
+    </view>
+  </view>
+  <view class="content" wx:else bindtap="addresd">
+     <view class="color">暂无地址信息请选择地址>></view>
+  </view>
+
+</view> -->
+
 <view class="title">
+  <view class="title-top">
+    <image src="../../images/user/tjdd-shrxx.png"></image>
+    <text>收货人信息</text>
+  </view>
+  <view class="title-address">
+    <view class="address">{{addreslist.province_name}} {{addreslist.city_name}} {{addreslist.county_name}} {{addreslist.address}}</view>
+    <view class="tel">{{addreslist.name}}  {{addreslist.tel}}</view>
+  </view>
+
+  <view class="edit" bindtap="addresd">
+    <image src="../../images/user/a.png"></image>
+  </view>
+
+</view>
+
+<view class="bz"> 
+  <text>备注：</text> <input placeholder="请填写备注" bindinput="modalInput" data-name="inputBz" placeholder-class="placeholder"></input>
+</view>
+
+<view class="pay">
+    <view class="pay-top"><text>支付方式</text></view>
+    <view class="pay-box">
+   
+          <view class="wx" bindtap="select" data-id="3">
+            <view class="wx-left">
+              <image src="../../images/user/wxzf.png"></image>
+              <text>微信支付</text>
+            </view>
+
+            <view class="wx-right" >
+              <image   wx:if="{{paymentId == 3}}" src="../../images/user/tjdd-gou1.png"></image>
+               <image  wx:if="{{paymentId == 6}}" src="../../images/user/tjdd-gou.png"></image>
+            </view>
+
+          </view>
+
+           <view class="ye" bindtap="select" data-id="6">
+
+            <view class="ye-left">
+              <image src="../../images/user/yezf.png"></image>
+              <text>余额支付</text>
+            </view>
+
+            <view class="wx-right">
+              <image wx:if="{{paymentId == 6}}" src="../../images/user/tjdd-gou1.png"></image>
+               <image  wx:if="{{paymentId == 3}}" src="../../images/user/tjdd-gou.png"></image>
+            </view>
+          </view>
+  
+
+    </view>
+</view>
+
+<view class="bottom">
+    <view class="b-left">
+      <text class="fk">实付款：</text><text class="price">￥ {{actual_price.actual_price}}</text>
+      
+    </view>
+    <view class="b-right" bindtap="payment">支付({{actual_price.buy_count}})</view>
+</view>
+
+
+
+
+<!-- <view class="title">
   <view class="header">
     <text>收货人信息</text>
   </view>
@@ -36,19 +125,7 @@
   </checkbox-group>
 </view>
 <view class="wuhua">
-  <!-- <view class="meat">
-    <view class="color" bindtap="toDetalInfo">
-      <text>订单详情</text>
-    </view>
-  </view> -->
-  <!-- <view wx:for="{{goods_list}}" wx:key="unique">
-    <view class="meat active">
-      <text>{{item.title}}</text>
-      <text>{{item.stock}}/{{item.inventory_unit}}</text>
-      <text>￥{{item.total_price}}元</text>
-    </view>
-  </view> -->
- 
+
 </view>
 <view class="heji">
   <view>
@@ -57,4 +134,4 @@
     <text class="ff9" wx:else>￥ {{shopNowPrice *100 * shopAttribute.num/100}}元</text>
   </view>
     <view class="zhonged" bindtap="payment">支付</view>
-</view>
+</view> -->

@@ -1,10 +1,10 @@
 <view class="header">
   
   <view>
-    <input placeholder="请输入" bindinput="int">
+    <input placeholder="请输入" bindinput="int" value="{{value}}">
     </input>
   </view>
-  <view class="user-header-name" bindtap="toSearchResult">
+  <view class="user-header-name" bindtap="searchResult">
      <text class="with">搜索</text>
   </view>
 </view>
@@ -18,3 +18,102 @@
     <text class="texts2"  wx:for="{{meSearch}}" wx:key="idnex">{{item}}</text>
   </view>
 </view>
+
+
+	<view class="mainbox">
+	
+		
+			<!-- <view wx:for="{{tableListone}}" class="leftTitle"  wx:key="unique"> -->
+			<view  class="leftTitle" >
+					
+			<!-- <block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index" > -->
+				<block   >
+					<!-- <view bindtap="clickse" data-id="{{items}}" data-index="{{index}}"> -->
+				<view bindtap="clickse">
+					<view class="topimg">
+						<!-- <image  wx:if="{{items.images}}" lazy-load="true" src="{{items.images}}"></image> -->
+						<image  src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+					</view>
+					<view class="centername">
+					<view class="carlogo">
+						<image src="../../images/index/car.png"></image>
+					</view>
+						<view class="leftname">
+							<!-- <view class="nametitle">{{items.title}}</view> -->
+								<!-- <view class="{{classfiySelect == item.id ? 'nametitle_active' : 'nametitle' }}">{{items.title}}</view> -->
+										<view class="nametitle">排骨</view>
+							<!-- <view class="nameprice"><text class="my1">￥</text><text class="my2">{{items.price}}</text><text class="my3">/{{items.inventory_unit}}</text></view> -->
+								<view class="nameprice"><text class="my1">￥</text><text class="my2">198</text><text class="my3">/斤</text></view>
+						</view>
+						<!-- <view class="rightname"><text>{{items.brand_name}}</text> -->
+								<view class="rightname"><text>菜小二自营</text>
+						</view>
+					</view>
+					<!-- <view class="bottomName" bindtap="toOldFood" data-value="{{item.name}}"> -->
+						<view class="bottomName" >
+					<i class="fal fa-angle-double-right myri"></i>
+					<text class="r2" >点击查看新菜推荐</text></view>
+				</view>
+					</block>
+				
+				</view>
+
+
+	
+	</view>
+
+
+	<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
+			<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
+	
+			<view class="myb">
+			<view class="mflex">
+				<view class="imgb"><image class="imgurl" src="{{imgurl}}"></image></view>
+				<view>
+					<view class="mname">{{shopName}}</view>
+					<view class="shopPrice"><text>￥</text>{{utils.getPrice(shopPrice,num)}}</view>
+				</view>
+			</view>
+				<view>	<image bindtap="clickcancel" class="myclose" src="../../images/index/gwc-gb@2x.png"></image></view>
+			</view>
+				<view class="gg">
+					<view class="one" wx:for="{{tableid}}" wx:key="key">
+						<text class="jt">{{item.title}}</text>
+						<view class="onebox">
+							<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}" data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
+								<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
+							</view>
+						</view>
+					</view>
+				</view>
+        <view class="bz">
+          <text>备注： </text>
+          <input placeholder="请输入备注" placeholder-style="color:rgba(170,170,170,1);font-size:24rpx;" bindinput="modalInput" data-name="inputBz"></input>
+        </view>
+				<view class="liang">
+					<view class="mycount" >购买数量 </view>
+						<view class="addbox">
+							<view  class="jiabox" bindtap="bindPlus">
+							<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
+						</view>
+						<view class="numbercount">
+							<input type="number" bindchange="bindManual" value="{{num}}" />
+						</view>
+						<view  class="jiabox" bindtap="bindMinus">
+						<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
+						</view>
+						</view>
+				</view>
+
+				<view class="mybottom">
+					<view class="btn1" bindtap="determine">
+						<image class="gscg1" src="../../images/index/gwc-gscg@2x.png"></image>
+						<text>酒店采购</text>
+					</view>
+					<view class="btn2" bindtap="clickselet">
+					<image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
+						<text>个人采购</text>
+					</view>
+				</view>
+			</view>
+
