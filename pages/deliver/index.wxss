@@ -515,6 +515,64 @@ page{
   margin-right: 20rpx;
 
 }
+.zan-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  /* background: rgba(0, 0, 0, 0); */
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index:99999
+}
+
+.listTitle2{
+
+ 
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  
+}
+.bj2{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #40B15D;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  
+}
+
+
+.zan-dialog__container {
+  position: fixed;
+  bottom:150rpx;
+  width: 650rpx;
+  /* height: 450rpx; */
+  margin-left: 50rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+  z-index:999999
+}
+.zan-dialog--show .zan-dialog__container {
+  transform: translateY(0);
+}
+
+.zan-dialog--show .zan-dialog__mask {
+  display: block;
+}
 
 
 

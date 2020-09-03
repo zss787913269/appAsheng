@@ -32,7 +32,7 @@
 				</view>
 				<view class="bottom">
 					<view  class="quxiao" bindtap="pickOrder" data-id="{{item.id}}">一键取货</view>
-					<view  class="queren" >打印订单</view>
+					<view  class="queren" bindtap="printing" data-details="{{item}}">打印订单</view>
 				</view>
 			</view>
 
@@ -66,61 +66,6 @@
 		</view>
 	</view>
 
-	<!-- <view wx:if="{{currentTab==2}}">
-
-		<view class="card">
-			<view class="cardname" wx:for="{{PeisongList}}" wx:key="index">
-				<view class="myok" bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>
-				<view>
-					<view class="item" wx:if="{{item.hotel_name == ''}}" class="2">收货人：{{item.address.name}}</view>
-					<view class="item" wx:if="{{item.hotel_name == ''}}">电话：{{item.address.tel}}</view>
-					<view class="item" wx:if="{{item.hotel_name == ''}}">地址：{{item.address.province_name}}{{item.address.city_name}}{{item.address.county_name}}{{item.address.address}}</view>
-
-					<view class="1">{{item.hotel_name}}</view>
-					<view class="item">{{item.hotel_address}}</view>
-					<view class="iteme item">
-						<view><text class="color" bindtap="look" data-id="{{item.id}}" data-index="{{index}}">查看清单 > </text> {{item.buy_number_count}}个商 品</view>
-						<view class="myflex">
-
-
-							<view class="zhonged myenter" bindtap="upload" data-id="{{item.id}}">上传图片</view>
-
-							<view wx:for="{{item.imgurl}}" wx:for-item="imgs" class="imgbox" wx:if="{{item.imgurl}}" wx:key="index">
-								<image src="{{imgs}}" class="myimg"></image>
-
-							</view>
-
-
-
-						</view>
-
-					</view>
-
-					<block wx:if="{{item.is_select}}">
-						<view class="marbot mybox" wx:for="{{shopInfo}}" wx:key="index">
-							<view class="" hover-class="none" hover-stop-propagation="false">
-								<view class="item">{{item.title}}
-									<text> {{item.buy_number}}</text>
-								</view>
-								<view class="item" wx:for="{{item.spec}}" wx:key="index" wx:for-item="itemName">{{itemName.type}} ：{{itemName.value}}</view>
-								<view class="brand_address item">地址：{{item.brand_address}}</view>
-							</view>
-
-
-
-						</view>
-
-					</block>
-				</view>
-
-			</view>
-
-		</view>
-
-	</view> -->
-
-
-
 	<view wx:if="{{currentTab==3}}">
 		<view wx:for="{{deliveryListYes}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
@@ -148,3 +93,22 @@
 		</view>
 	</view>
 </view>
+
+ 
+      <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" >
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+          <view class="zan-dialog__mask" bindtap="toggleDialog" />
+          <view class="zan-dialog__container">
+            
+          
+          
+                <!-- <view class="printdata">打印数据</view> -->
+          
+                 <scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
+                 <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+               </scroll-view>
+            
+               <view class="listTitle2"    bindtap="print" ><text class="bj2">打印</text></view>
+
+          </view>
+        </view>

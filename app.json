@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/index/index",
-    "details/search/index",
-   
     "pages/cart/index",
+   
+    "details/handle/index", 
+   
     "pages/user/index",
     "private/hotelpeople/index", 
     "person/cartdetal/index",
     "pages/deliver/index",
-    "details/handle/index", 
     "details/detail/index",
     "pages/quickly/quickly",
     "details/myshop/index",
@@ -55,7 +55,6 @@
     "details/payment/index",
     "details/dishes/index",
     "details/dishesone/index",
-    "details/searchResult/index",
     "details/release/index",
     "details/reviews/index",
     "details/Promanage/index",

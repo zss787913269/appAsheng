@@ -37,6 +37,9 @@ Page({
     card_img: [],
     card_imgid: [], //图片id
     PeisongList: [],
+    canvasWidth: 30,
+    canvasHeight: 10,
+    showDialog: false,
   },
 
   /**
@@ -130,6 +133,49 @@ Page({
    
   },
 
+  printing: function (e) { //生成打印数据
+
+    let print = e.currentTarget.dataset.details.details
+
+    console.log(print)
+   
+    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
+    var width = 100;
+    var height = 30* print.length ;
+    // let height2 = 200* print.length;
+
+
+
+    lpapi.startDrawLabel('test', this, width, height, 0);
+
+    lpapi.setItemOrientation(0)
+    lpapi.setItemHorizontalAlignment(0);
+    let y = 5
+    for (let i = 0; i <print.length; i++) {
+  
+      lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`总价：${print[i].total_price}`, 0, y,5)
+      y = y + 5
+      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
+      y = y + 15
+    }
+
+   
+    lpapi.endDrawLabel();
+    this.toggleDialog()
+    // this.setData({
+    //   canvasHeight: height2,
+    // })
+  },
+   toggleDialog() {
+    this.setData({
+      showDialog: !this.data.showDialog
+    });
+
+  },
   // zym
   getLoc: function (e) {
     // //console.log(e.currentTarget.id);  // 获取当前点击的数组下标
@@ -352,6 +398,7 @@ Page({
     })
   },
   //打印
+  
   print(value) {
     //console.log(value.currentTarget.dataset.value);
     let myData = value.currentTarget.dataset.value;

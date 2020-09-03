@@ -44,6 +44,11 @@ Page({
   }
    
   },
+  pushAddress(){
+    wx.navigateTo({
+      url: '/person/map/index',
+    })
+  },
   toDetalInfo() {
     wx: wx.navigateTo({
       url: '/details/detail/index',

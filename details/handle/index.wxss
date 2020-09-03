@@ -1133,7 +1133,7 @@ page{
   position: fixed;
   bottom: 500rpx;
   width: 650rpx;
-  height: 450rpx;
+  /* height: 450rpx; */
   margin-left: 50rpx;
   background: #f8f8f8;
   transform: translateY(300%);

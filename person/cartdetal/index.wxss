@@ -39,6 +39,7 @@ page{
   margin-top: 15rpx;
 
 }
+
 .address{
   
   font-size: 30rpx;
@@ -46,6 +47,14 @@ page{
   font-weight: 500;
   line-height: 34px;
   color: #585858;
+}
+.address1{
+  
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: 34px;
+  color: #40B15D
 }
 .tel{
   
@@ -81,9 +90,11 @@ page{
   color: #5C5C5C;
   margin-left: 51rpx;
 }
+
 .bz input{
   outline: none;border: none;list-style: none;
   margin-top: 5rpx;
+  width: 500rpx;
 }
 .placeholder{
   

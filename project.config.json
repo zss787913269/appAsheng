@@ -27,14 +27,14 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false,
 		"packNpmManually": false,
 		"packNpmRelationList": []
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
-	"appid": "wx73fd0c6b65fcc3a1",
+	"appid": "wx54a37bbc4b23f907",
 	"projectname": "AppSheng",
 	"debugOptions": {
 		"hidedInDevtools": []

@@ -19,6 +19,7 @@ Page({
     totelid: [],
     currentTab: 1,
     type: 1,
+    listindex:"",
     hisList: [],
     hisTotalPrice: '',
     ids: [],
@@ -29,26 +30,26 @@ Page({
   },
 
   onLoad: function (options) {
-    // this.getlist(1)
-    // this.getlist(2)
-    // this.getFirstList()
-    this.getCount()
+
     this.getTopCount()
 
 
   },
   onShow: function () {
-    // this.getlist(this.data.currentTab)
+    this.getCount()
   },
   //点击切换列表
   clickList(e) {
-    let index = e.currentTarget.dataset.index
+    let index = e.currentTarget.dataset.current
+    console.log(index)
     this.setData({
-      listindex: index
+      currentTab: index
     })
+   this.getCount()
 
   },
   async getTopCount() {
+    let that = this
     let res = await ajax({
       url: "api/cart/carttypecount",
       method: "post"
@@ -61,21 +62,37 @@ Page({
         pcount = i.num
       }
     }
+    console.log(hotelCount,pcount)
+
+    if(hotelCount == undefined){
+      that.setData({
+        currentTab:0
+      })
+    
+    }else if(pcount == undefined){
+      that.setData({
+        currentTab:1
+      })
+    
+    }
+
+    that.getCount()
+   
     this.setData({
       hotelCount,
       pcount
     })
     // console.log(hotelCount,pcount)
   },
-  async getCount(e) {
+  async getCount() {
     let that = this
 
-    console.log(e)
-    if (e == undefined) {
-      e = that.data.currentTab
-    }
+    // console.log(e)
+    // if (e == undefined) {
+    //   e = that.data.currentTab
+    // }
     let params = {
-      is_purchase: e
+      is_purchase: that.data.currentTab
     }
     let res = await ajax({
       url: "api/cart/categorygoodscount",
@@ -83,7 +100,7 @@ Page({
       data: params
     })
 
-
+    console.log(res.data.data)
 
     if (res.data.data.length == 0) {
       wx.showToast({
@@ -91,7 +108,8 @@ Page({
         icon: "none"
       })
       that.setData({
-        showqx: false
+        showqx: false,
+        leftList:[]
       })
     } else {
       let list = res.data.data

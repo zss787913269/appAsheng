@@ -10,12 +10,23 @@ Page({
    * 页面的初始数据
    */
   data: {
+    jgNumber: false,
+    inputBz: "",
     showModalStatus: false, //遮罩的显示与隐藏
-    value:'排骨',   //用户输入的值
+    value:'鸡',   //用户输入的值
     hotSearch:'',   //热门搜索
     meSearch:'',    //个人搜索历史
     where:'',   //从哪里来  
     historicalRecord:true,    //搜索商品就显示历史记录，菜品就不显示
+    searchList:[],
+    shopid:"",
+    detailList:[],
+    tableid:[],
+    shopPrice:"",
+    imgurl:"",
+    shopName:"",
+    selectedNumber: 0,
+    num:1,//商品数量
   },
 
   /**
@@ -25,6 +36,7 @@ Page({
     var that = this
     that.getHotSearch()
     that.getMeSearch()
+    // that.getSpecDetail()
     console.log(options.where)
     if (options.where == 'food' && options.where == 'cook'){
       that.setData({
@@ -35,9 +47,250 @@ Page({
       where:options.where
     })
   },
+  modalInput(e) {
+    // //////console.log(e.detail.value)
+    this.setData({
+      inputBz: e.detail.value
+    })
+  },
+
+  async determine() { //加入酒店购物车
+    var that = this;
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    } 
+
+    let res = await ajax({
+      url: '/api/quickorder/getHotel',
+      method: 'get'
+    })
+    let hotelInfo = res.data.data
+
+    if(hotelInfo == null){
+      wx.showToast({
+        title: '请先添加酒店',
+        icon:"none"
+      })
+      return 
+    }
+  
+
+    if(that.data.jgNumber === true && that.data.selectedNumber === ""){
+      wx.showToast({
+        title: '请选择商品',
+        icon:"none"
+      })
+    }else{
+      that.commodity();
+      that.hideBuyModal()
+    }
+
+
+  },
+  async commodity() {
+    let that = this
+    let spex = []
+    for (var i = 0; i < that.data.tableid.length; i++) {
+      for (let j in that.data.tableid[i].value) {
+        if (that.data.tableid[i].value[j] == true) {
+          let obj = {}
+          obj.type = that.data.tableid[i].title
+          obj.value = j
+          spex.push(obj)
+        }
+      }
+    }
+    let res = await ajax({
+      url: 'api/cart/save',
+      method: 'POST',
+      data: {
+        is_purchase: 1,
+        goods_id: that.data.shopid,
+        stock: that.data.num,
+        spec: spex,
+        goods_mark: that.data.inputBz
+      }
+    })
+    that.setData({
+      tableid: '',
+      num: 1,
+      tablenorms: '',
+      tabletype: '',
+      tablemachin: '',
+      brand_id: '',
+      tableKg: '',
+      bigid2: ''
+    })
+    console.log(res.data)
+    if (res.data.code == 0) {
+      wx.showToast({
+        title: "加入成功",
+        icon: 'none',
+        duration: 3000
+      })
+   
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 3000
+      })
+    }
+    // if (res.data.msg == "没有相关规格") {
+    //   wx.showToast({
+    //     title: "请选择相关规格",
+    //   })
+    // } else {
+
+    // }
+    //////console.log(res)
+
+  },
+  clickselet: function () { //个人采购加入购物车
+
+    var that = this;
+
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    }
+
+    if(that.data.jgNumber === true && that.data.selectedNumber === ""){
+      wx.showToast({
+        title: '请选择商品',
+        icon:"none"
+      })
+    }else{
+      that.clickseleted();
+      this.hideBuyModal()
+    }
+  
+  },
+  async clickseleted(id) {
+    let that = this
+    let spex = []
+    for (var i = 0; i < that.data.tableid.length; i++) {
+      for (let j in that.data.tableid[i].value) {
+        if (that.data.tableid[i].value[j] == true) {
+          let obj = {}
+          obj.type = that.data.tableid[i].title
+          obj.value = j
+          spex.push(obj)
+        }
+      }
+    }
+  
+    let params = {
+      goods_id: that.data.shopid, //商品id
+      stock: that.data.num, //商品数量  
+      // 商品规格
+      spec: spex,
+      goods_mark: that.data.inputBz
+    }
+    let res = await ajax({
+      url: 'api/cart/save',
+      method: 'POST',
+      data: params
+    })
+    ////console.log("params",params)
+    
+    that.setData({
+      tableid: '',
+      num: 1,
+      tablenorms: '',
+      tabletype: '',
+      tablemachin: '',
+      tableKg: '',
+      bigid2: ''
+    })
+    ////console.log(res)
+
+    // if(res.data.code == 0){
+       wx.showToast({
+        title: "加入成功",
+        icon: 'none',
+        duration: 3000
+      })
+ 
+    // }
+
+    if (res.data.msg == "商品规格不存在") {
+      wx.showToast({
+        title: "请选择相关规格",
+        icon: 'none',
+        duration: 3000
+      })
+    } 
+
+  },
+  clickcancel: function () { //返回按钮
+
+    this.hideBuyModal()
+  },
+  bindMinus: function () {
+    var num = this.data.num;
+    // 如果大于1时，才可以减  
+    if (num > 1) {
+      num--;
+    }
+    // 只有大于一件的时候，才能normal状态，否则disable状态  
+    var minusStatus = num <= 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回  
+    this.setData({
+      num: num,
+      minusStatus: minusStatus
+    });
+  },
+  bindPlus: function () {
+    var num = this.data.num;
+    // 不作过多考虑自增1  
+    num++;
+    // 只有大于一件的时候，才能normal状态，否则disable状态
+    if (num >= 999) {
+      num = 999
+    }
+    var minusStatus = num < 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回  
+    this.setData({
+      num: num,
+      minusStatus: minusStatus
+    });
+  },
+  bindPlusGroup() { //商品数量加
+    let numGroup = this.data.numGroup
+    numGroup++
+    this.setData({
+      numGroup
+    })
+  },
+  bindMinusGroup() { //商品数量减
+    let numGroup = this.data.numGroup
+    if (numGroup > 1) {
+      numGroup--
+    }
+    this.setData({
+      numGroup
+    })
+  },
+  /* 输入框事件 */
+  bindManual: function (e) {
+    var num = e.detail.value;
+    if (num >= 999) {
+      num = 999
+    } else if (num < 1) {
+      num = 1
+    }
+    // 将数值与状态写回  
+    this.setData({
+      num: num
+    });
+  },
 
   showModal() {
-    // //////console.log("点击了订单")
+ 
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "ease",
@@ -56,37 +309,120 @@ Page({
       })
     }, 200)
   },
+  clickgui: function (e) {
+    var that = this;
+    let tableId = that.data.tableid
 
-  // id: "955"
+    for (var i = 0; i < tableId.length; i++) {
+
+      if (tableId[i].title == e.currentTarget.dataset.indx) {
+        if (tableId[i].value[e.currentTarget.dataset.index] == true) {
+          tableId[i].value[e.currentTarget.dataset.index] = false
+
+          that.setData({
+         shopPrice: 0
+      })
+
+          // //////console.log(tableId[i].title.indexOf("加工"))
+          if (tableId[i].title.indexOf("加工") == 0) {
+            that.setData({
+              jgNumber: false
+            })
+          }
+          if (tableId[i].title.indexOf("净体") == 0) {
+            that.data.selectedNumber = ""
+            that.setData({
+              selectedNumber: ""
+            })
+          } else if (tableId[i].title.indexOf("活体") == 0) {
+            that.setData({
+              selectedNumber: ""
+            })
+          }
+
+        } else {
+          for (let j in tableId[i].value) {
+
+            tableId[i].value[j] = false
+            tableId[i].value[e.currentTarget.dataset.index] = true
+
+
+            if (tableId[i].title.indexOf("加工") == 0) {
+              that.setData({
+                jgNumber: true
+              })
+            }
+
+
+
+            if ((tableId[i].title.indexOf("净体") == 0 || tableId[i].title.indexOf("活体") == 0) && tableId.length > 2) {
+
+
+              if (tableId[i].title.indexOf("净体") == 0) {
+                that.data.selectedNumber = 0
+              } else if (tableId[i].title.indexOf("活体") == 0) {
+                that.data.selectedNumber = 1
+              }
+
+              if (tableId[0].value[j]) {
+                for (let z in tableId[1].value) {
+                  tableId[1].value[z] = false
+                  tableId[i].value[e.currentTarget.dataset.index] = true
+                }
+
+              }
+              if (tableId[1].value[j]) {
+                for (let z in tableId[0].value) {
+                  tableId[0].value[z] = false
+                  tableId[i].value[e.currentTarget.dataset.index] = true
+                }
+              }
+            }
+
+
+          }
+        }
+
+      }
+    }
+    that.setData({
+      tableid: tableId
+    })
+    that.getShopPrice()
+
+  },
   clickse: function (e) {
     console.log(e)
+    let that = this
+    let id = e.currentTarget.dataset.id
+    let tab = e.currentTarget.dataset.item
+
+
+    let tabCopy = JSON.parse(JSON.stringify(tab))
+    for (var i = 0; i < tabCopy.length; i++) {
+      tabCopy[i].value = {}
+    }
+    for (var i = 0; i < tab.length; i++) {
+      for (var j = 0; j < tab[i].value.length; j++) {
+        if (i == 0 && j == 0) {
+          tabCopy[i].value[tab[i].value[j]] = true
+        } else {
+          tabCopy[i].value[tab[i].value[j]] = false
+        }
+      }
+    }
+    console.log("tabCopy",tabCopy)
+    that.setData({
+      tableid: tabCopy,
+ 
+    })
+
     this.showModal()
-    // var that = this
-    // let tab = e.currentTarget.dataset.id.spec_base
 
-    // // //////console.log(tab)
-
-    // let tabCopy = JSON.parse(JSON.stringify(tab))
-    // for (var i = 0; i < tabCopy.length; i++) {
-    //   tabCopy[i].value = {}
-    // }
-    // for (var i = 0; i < tab.length; i++) {
-    //   for (var j = 0; j < tab[i].value.length; j++) {
-    //     if (i == 0 && j == 0) {
-    //       tabCopy[i].value[tab[i].value[j]] = true
-    //     } else {
-    //       tabCopy[i].value[tab[i].value[j]] = false
-    //     }
-    //   }
-    // }
-    // that.setData({
-    //   tableid: tabCopy,
-    //   shopingid: e.currentTarget.dataset.id.id,
-    //   shopingid2: e.currentTarget.dataset.id.id,
-    //   brand_id: e.currentTarget.dataset.id.brand_id,
-    //   support: false
-    // })
-    // that.getShopPrice()
+    this.setData({
+      shopid:id,detailList: tabCopy
+    })
+    this.getShopPrice()
   },
   hideBuyModal() {
 
@@ -149,67 +485,71 @@ Page({
 
     
   },
-  async searchResult(){   //去搜索结果页
+  async searchResult(){   //
     let that = this
     let parmes = {
       keywords:that.data.value,
-      page:1
     }
 
     console.log(parmes)
 
-    let res = await ajax({ url: 'api/search/index', method: 'post', data:parmes})
+    let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
 
-
-    console.log("搜索结果",res.data)
-
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+      this.setData({
+        searchList:res.data.data
+      })
+    console.log("搜索结果",res.data.data)
 
   },
+ 
+  async getShopPrice() {
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+    var that = this
+    let tableid = that.data.tableid
+    let spec = []
 
+    for (var i = 0; i < tableid.length; i++) {
+      let obj = {}
+      for (let j in tableid[i].value) {
+        if (tableid[i].value[j] == true) {
+
+          obj.type = tableid[i].title
+          obj.value = j
+          spec.push(obj)
+        }
+      }
+    }
+
+    let params = {
+      id: that.data.shopid,
+      spec
+    }
+    console.log("params",params)
+    let res = await ajax({
+      url: '/api/goods/SpecDetail',
+      method: 'POST',
+      data: params
+    })
+
+    console.log("SpecDetail",res.data.data)
+    if (res.data.code == 0) {
+    
+      let price = res.data.data.price
+      let imgurl = 'http://second.chchgg.com'+res.data.data.goods.images
+      let shopName = res.data.data.goods.title
+      console.log(res.data.data)
+
+      that.setData({
+        shopPrice: price,
+        imgurl,shopName
+      })
+    } else {
+      // wx.showToast({
+      //   title: res.data.msg,
+      //   icon: 'none',
+      //   duration: 3000
+      // })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
 })

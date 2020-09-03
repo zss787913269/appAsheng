@@ -1041,7 +1041,7 @@ Page({
     var that = this
     let tab = e.currentTarget.dataset.id.spec_base
 
-    // //////console.log(tab)
+    console.log("clickse",tab)
 
     let tabCopy = JSON.parse(JSON.stringify(tab))
     for (var i = 0; i < tabCopy.length; i++) {
@@ -1056,6 +1056,7 @@ Page({
         }
       }
     }
+    console.log("tabCopy",tabCopy)
     that.setData({
       tableid: tabCopy,
       shopingid: e.currentTarget.dataset.id.id,
@@ -1144,8 +1145,6 @@ Page({
     }
     that.setData({
       tableid: tableId
-      // tablenormsName: e.currentTarget.dataset.index,    //属性值获取
-      // tablenormsTitle: e.currentTarget.dataset.indx    //属性值获取
     })
     that.getShopPrice()
   },
@@ -1155,16 +1154,10 @@ Page({
     let tableid = that.data.tableid
     let spec = []
 
-
     for (var i = 0; i < tableid.length; i++) {
       let obj = {}
-
       for (let j in tableid[i].value) {
-
-
-
         if (tableid[i].value[j] == true) {
-
 
           obj.type = tableid[i].title
           obj.value = j
@@ -1177,6 +1170,7 @@ Page({
       id: that.data.shopingid,
       spec
     }
+    console.log("params",params)
     let res = await ajax({
       url: '/api/goods/SpecDetail',
       method: 'POST',
@@ -1185,9 +1179,7 @@ Page({
 
     console.log(res.data.data)
     if (res.data.code == 0) {
-      //////console.log(res.data.data.price)
-
-  
+    
       let price = res.data.data.price
       let imgurl = 'http://second.chchgg.com'+res.data.data.goods.images
       let shopName = res.data.data.goods.title
@@ -1309,11 +1301,6 @@ Page({
   },
   clickselet: function () { //个人采购加入购物车
 
-    
-
-    //////console.log("jgNumber------"+this.data.jgNumber)
-    //////console.log("numbder-------"+this.data.selectedNumber)
-    
     var that = this;
 
     if (app.globalData.token == '') {

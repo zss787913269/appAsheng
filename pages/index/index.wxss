@@ -1266,16 +1266,24 @@ swiper {
 }
 .left view{
   text-align: center;
-  height: 90rpx;
-  line-height: 90rpx;
+  /* height: 90rpx;
+  line-height: 90rpx; */
 }
 
 .leftbox{
   border-bottom: 1px solid rgba(248,248,248,1);
 }
 
+.my-left-flex{
+  display: flex;
+  flex-wrap: wrap;
+  height: 90rpx;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
 .leftActive{
- 
   background:rgba(250,229,211,1);
   color: #ff9000;
   font-size:28rpx;

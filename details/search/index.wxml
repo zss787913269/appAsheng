@@ -1,4 +1,5 @@
-<view class="header">
+<wxs src="./index.wxs" module="utils" />
+<view class="header" >
   
   <view>
     <input placeholder="请输入" bindinput="int" value="{{value}}">
@@ -8,7 +9,8 @@
      <text class="with">搜索</text>
   </view>
 </view>
-<view class="hotSearch" wx:if="{{historicalRecord}}">
+<view class="hotSearch" wx:if="{{false}}" >
+<!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
   <view class="hotSearch-title">热门搜索</view>
   <view class="hotSearch-conter" >
     <text class="texts" wx:for="{{hotSearch}}" wx:key="idnex" bindtap="searchPage" data-text="{{item}}">{{item}}</text>
@@ -23,16 +25,13 @@
 	<view class="mainbox">
 	
 		
-			<!-- <view wx:for="{{tableListone}}" class="leftTitle"  wx:key="unique"> -->
-			<view  class="leftTitle" >
+			<view wx:for="{{searchList}}" class="leftTitle"  wx:key="unique">
 					
-			<!-- <block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index" > -->
-				<block   >
-					<!-- <view bindtap="clickse" data-id="{{items}}" data-index="{{index}}"> -->
-				<view bindtap="clickse">
+		
+					<view bindtap="clickse" data-id="{{item.id}}" data-item="{{item.spec_base}}" data-index="{{index}}">
 					<view class="topimg">
-						<!-- <image  wx:if="{{items.images}}" lazy-load="true" src="{{items.images}}"></image> -->
-						<image  src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+						<image  wx:if="{{item.images}}" lazy-load="true" src="https://second.chchgg.com/{{item.images}}"></image>
+						<image  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 					</view>
 					<view class="centername">
 					<view class="carlogo">
@@ -40,13 +39,12 @@
 					</view>
 						<view class="leftname">
 							<!-- <view class="nametitle">{{items.title}}</view> -->
-								<!-- <view class="{{classfiySelect == item.id ? 'nametitle_active' : 'nametitle' }}">{{items.title}}</view> -->
-										<view class="nametitle">排骨</view>
-							<!-- <view class="nameprice"><text class="my1">￥</text><text class="my2">{{items.price}}</text><text class="my3">/{{items.inventory_unit}}</text></view> -->
-								<view class="nameprice"><text class="my1">￥</text><text class="my2">198</text><text class="my3">/斤</text></view>
+								<view class="nametitle">{{item.title}}</view>
+							<view class="nameprice"><text class="my1">￥</text><text class="my2">{{item.price}}</text><text class="my3">/{{item.inventory_unit}}</text></view>
+						
 						</view>
-						<!-- <view class="rightname"><text>{{items.brand_name}}</text> -->
-								<view class="rightname"><text>菜小二自营</text>
+						<view class="rightname"><text>{{item.brand_name}}</text>
+						
 						</view>
 					</view>
 					<!-- <view class="bottomName" bindtap="toOldFood" data-value="{{item.name}}"> -->
@@ -54,10 +52,10 @@
 					<i class="fal fa-angle-double-right myri"></i>
 					<text class="r2" >点击查看新菜推荐</text></view>
 				</view>
-					</block>
-				
+					
+	
+			
 				</view>
-
 
 	
 	</view>

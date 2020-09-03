@@ -468,6 +468,9 @@ Page({
       }
     })
 
+
+    console.log(res.data.data)
+
     if (res.data.code == 0) {
       this.setData({
         orderlist: res.data.data[0],

@@ -54,7 +54,7 @@
 
 				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
 
-					<view data-id='{{item.id}}' bindtap="clickLeftItem">
+					<view data-id='{{item.id}}' bindtap="clickLeftItem" class="my-left-flex">
 						<text > {{item.name}} </text>
 					
 					</view>

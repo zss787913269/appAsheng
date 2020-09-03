@@ -5,7 +5,7 @@
 			<view class="peis">配送信息</view>
 		</view>
 		<view class="add_main">
-			<view class="myaddress">{{orderlist.address.province_name}} {{orderlist.address.city_name}} {{orderlist.address.county_name}}</view>
+			<view class="myaddress">{{orderlist.address.province_name}} {{orderlist.address.city_name}} {{orderlist.address.county_name}} {{orderlist.address.address}}</view>
 			<view class="call">电话号码 {{orderlist.address.tel}}</view>
 		</view>
 	</view>
@@ -27,7 +27,7 @@
 <view class="maintop">
 	<view class="hotelname"> </view>
 	<view class="peibox">
-		<image src="../../images/details/ddxq-lx@2x.png"></image><text>联系配送员</text>
+		<!-- <image src="../../images/details/ddxq-lx@2x.png"></image><text>联系配送员</text> -->
 	</view>
 </view>
 

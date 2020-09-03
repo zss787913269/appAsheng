@@ -127,7 +127,7 @@
 
             </view>
             <view class="bottom2">
-                <view class="queren"  bindtap="onekeyAll"> 一键打印 </view>
+                <view class="queren" bindtap="printing" data-print="{{item}}"> 去打印 </view>
               
           </view>
             </view>
@@ -194,8 +194,7 @@
                </scroll-view>
             
                <view class="bj2 listTitle2"    bindtap="print" ><text>打印</text></view>
-        
-            
+
           </view>
         </view>
      
