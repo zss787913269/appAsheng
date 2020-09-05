@@ -17,7 +17,7 @@
         <view >
           <text>{{item.name}} </text>
           <text class="ipone">{{item.tel}}</text> </view>  
-        <text class="dizhi">{{item.province_name}} {{item.city_name}} {{item.county_name}} {{item.address}}</text>
+        <text class="dizhi">{{item.region}}  {{item.address}}</text>
       </view>
       <view class="yuyue">
           <view class="ipone shenhe" data-id="{{item.id}}" bindtap="editor">

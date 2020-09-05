@@ -57,15 +57,17 @@
 								<text class="mytext2">{{items.spec[0].value}}</text>
 
 								<view class="mytext"><text class="micon">￥</text><text class="mprice">{{items.price}}</text></view>
-								<view class="zj">
-									<text> 总计：{{utils.tomyfix(items.stock,items.price)}} 元</text>
-								</view>
+							
 
 							</view>
 
 							<view class="red" data-index="{{items.id}}" bindtap='remove'>
 								<image class="delimg" src="../../images/index/gwc-ljt@2x.png"></image>
 							</view>
+
+								<view class="zj">
+									<text> 总：{{utils.tomyfix(items.stock,items.price)}} 元</text>
+								</view>
 
 							<view class="bujin">
 								<view data-index="{{index}}" data-item="{{items.id}}" bindtap='sub'>

@@ -281,7 +281,7 @@ Page({
       }
     })
 
-    console.log("getHotelOrderDetail", res.data.data)
+    console.log("getHotelOrderDetail", res.data)
 
     let hotelOrderDetail = that.data.hotelOrderDetail
 

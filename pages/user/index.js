@@ -11,6 +11,7 @@ Page({
     url1:'/person/integral/index',
     url2:'/person/balance/index',
     ads: ['/images/temp/ad.jpg', '/images/temp/ad_2.jpg'],
+    imgulr:"https://second.chchgg.com/static/banner/wxapp/common/",
     optionList2:{
        id: 1, 
        name: '私厨', 
@@ -76,7 +77,8 @@ Page({
     modality:false,   //模态窗开关 
     commission: '',   //我的佣金   
     integral: '',   //我的积分   
-    balance:'',   //我的余额  
+    balance:'',   //我的余额 ,
+    show:false
    
   },
   onLoad: function () {
@@ -85,7 +87,10 @@ Page({
     that.getMyCommission()
   },
   onShow:function(){
-
+    if (app.globalData.token != '') {
+      this.setData({
+        show:true
+      })}
     this.getMyCommission()
     this.setData({
       modality: false
@@ -122,7 +127,30 @@ Page({
       //console.log(err);
     }))
   },
+  sq(){
+    if (app.globalData.token == '') {
+      this.setData({
+        show:false
+      })
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      
+    } else {
+      this.setData({
+        show:true
+      })
+    }
+  },
   goToPage(e){
+
+
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    }
+    
      let index =  e.currentTarget.dataset.index
       console.log(index)
       
@@ -160,11 +188,7 @@ Page({
           wx.navigateTo({ url: '/details/becomeShop/index'})//成为商家
         break;
         case "8":
-          //酒店信息
-          wx.showToast({
-            title: '功能开发中，敬请期待',
-            icon:"none"
-          })
+          wx.navigateTo({ url: "/private/hotelinfo/index"})//酒店信息
         break;
         case "9":
           wx.navigateTo({ url: '/private/hotelpeople/index'})//酒店订单

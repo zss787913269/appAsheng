@@ -10,10 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showDialog: true,
     jgNumber: false,
     inputBz: "",
     showModalStatus: false, //遮罩的显示与隐藏
-    value:'鸡',   //用户输入的值
+    value:'',   //用户输入的值
     hotSearch:'',   //热门搜索
     meSearch:'',    //个人搜索历史
     where:'',   //从哪里来  
@@ -27,6 +28,10 @@ Page({
     shopName:"",
     selectedNumber: 0,
     num:1,//商品数量
+    showbtn:false,
+    title:"记牌就",
+    num:"20",
+    spec:"大的"
   },
 
   /**
@@ -47,13 +52,80 @@ Page({
       where:options.where
     })
   },
+  inputname(e){
+    let value = e.detail.value;
+ 
+    this.setData({
+      title:value
+    })
+  },
+  inputnum(e){
+    let value = e.detail.value;
+
+    this.setData({
+      num:value
+    })
+  },
+  inputspec(e){
+    let value = e.detail.value;
+      this.setData({
+        spec:value
+      })
+  },
+  async queren(){
+
+    let that = this
+
+    let params = {
+      title:this.data.title,
+      spec:this.data.spec
+      
+    }
+
+      let res = await ajax({
+        url: '/api/goods/addgoods',
+        method: 'post',
+        data:params
+      })
+      // console.log(res.data)
+
+     
+      
+      if(res.data.code == 0){
+        let res2 = await ajax({
+          url: 'api/cart/save',
+          method: 'POST',
+          data: {
+            is_purchase: 1,
+            goods_id: 1284,
+            stock: that.data.num,
+            spec: [{type:"种类",value:that.data.spec}],
+            goods_mark: ""
+          }
+        })
+
+         console.log(res2.data)
+  }
+
+
+
+    
+
+   
+
+  },
   modalInput(e) {
     // //////console.log(e.detail.value)
     this.setData({
       inputBz: e.detail.value
     })
   },
+  toggleDialog() {
+    this.setData({
+      showDialog: !this.data.showDialog
+    });
 
+  },
   async determine() { //加入酒店购物车
     var that = this;
     if (app.globalData.token == '') {
@@ -495,10 +567,19 @@ Page({
 
     let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
 
+    if(res.data.data.length != 0){
+    
       this.setData({
-        searchList:res.data.data
+        searchList:res.data.data, showbtn:false
       })
-    console.log("搜索结果",res.data.data)
+    }else{
+      this.setData({
+        showbtn:true
+      })
+    }
+
+     
+    console.log("搜索结果",res.data)
 
   },
  

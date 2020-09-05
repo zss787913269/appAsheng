@@ -28,7 +28,7 @@
     <text>收货人信息</text>
   </view>
   <view class="title-address" wx:if="{{addreslist}}">
-    <view class="address">{{addreslist.province_name}} {{addreslist.city_name}} {{addreslist.county_name}} {{addreslist.address}}</view>
+    <view class="address">{{addreslist.region}} {{addreslist.address}}</view>
     <view class="tel">{{addreslist.name}}  {{addreslist.tel}}</view>
   </view>
   <view wx:else class="title-address" bindtap="pushAddress">

@@ -109,8 +109,10 @@ Page({
             wx.setStorageSync('token', res.data.data.token),
             wx.setStorageSync('QRcode', res.data.data.referrer_url),
             wx.setStorageSync('enid', res.data.data.enid)
+            wx.setStorageSync('userid', res.data.data.id)
+            wx.setStorageSync('hotel_juese', res.data.data.hotel_juese)
               app.globalData.token = res.data.data.token
-              console.log(res);
+              // console.log("用户id",res);
 
           }
         })

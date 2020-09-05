@@ -5,6 +5,7 @@ const app = getApp()
 var time = require('../../utils/util.js')
 Page({
   data: {
+    myshopname:"",
     shopName:"",
     imgurl:"",
     topArr:[],
@@ -223,6 +224,12 @@ Page({
   },
   personalPurchase() { //个人购买
     // pages/cartdetal/index
+
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    } 
     if (this.data.numGroup < this.data.groupShop[this.data.groupShopIndex].goods_number) {
       wx.showToast({
         title: '最低购买数量' + this.data.groupShop[this.data.groupShopIndex].goods_number,
@@ -419,7 +426,7 @@ Page({
   },
 
   //获取购物车数量
-  getcart() {
+  async getcart() {
     let that = this
     let len1,len2
     let url1 = 'api/cart/index'
@@ -436,6 +443,9 @@ Page({
         })
       }
     })
+
+
+
     let url2 = 'api/cart/index'
     app.wxRequest('POST', url2, '', (res) =>    {
 
@@ -449,8 +459,44 @@ Page({
       }
     })
 
+   
+
+    let res3 = await ajax({
+      url: "api/cart/carttypecount",
+      method: "post"
+    })
+    let hotelCount, pcount
+    for (let i of res3.data.data) {
+      
+      if (i.is_purchase == 1) {
+        hotelCount = i.num
+      } else {
+        pcount = i.num
+      }
+    }
+
+    if(hotelCount == undefined){
+      hotelCount = 0
+    }
+
+    if(pcount == undefined){
+      pcount = 0
+    }
+    
+    let mycarnum = Number(hotelCount) + Number(pcount)
+
+
+    console.log("数量",mycarnum)
+
+        wx.setTabBarBadge({
+        index: 1,
+        text: mycarnum.toString()
+      })
+ 
+
 
     this.getCarCount()
+
 
    
   },
@@ -468,11 +514,11 @@ Page({
     // that.getMyCommission()   //获取我的佣金积分
     // 获取导航栏
     app.globalData.token = wx.getStorageSync('token');
-    if (app.globalData.token === "") {
-      wx.navigateTo({
-        url: '../../component/zation/index',
-      })
-    }
+    // if (app.globalData.token === "") {
+    //   wx.navigateTo({
+    //     url: '../../component/zation/index',
+    //   })
+    // }
     that.getcart()
     that.getCarCount()
     that.gettableList();
@@ -667,6 +713,7 @@ Page({
       that.setData({
         back: true
       })
+      console.log("全部商品")
     }
     if (e.scrollTop < 100) {
       that.setData({
@@ -728,9 +775,12 @@ Page({
 
   // 一级分类
   goUrl: function (e) { //点击一级分类
-    //////console.log(e.currentTarget.dataset.url)
+    // console.log(e.currentTarget.dataset.url)
+    let name = e.currentTarget.dataset.name
     this.setData({
-      firstclass: e.currentTarget.dataset.url.id
+      firstclass: e.currentTarget.dataset.url.id,
+      myshopname:name,
+      back:true
     })
     this.getsearch(this.data.firstclass)
 
@@ -956,6 +1006,10 @@ Page({
       selector: "#main",
       duration: 100
     })
+    this.setData({
+      back:true
+    })
+    console.log("全部商品")
   },
   async getGroup(id) {
     var that = this
@@ -1341,12 +1395,13 @@ Page({
       spec: spex,
       goods_mark: that.data.inputBz
     }
+   
     let res = await ajax({
       url: 'api/cart/save',
       method: 'POST',
       data: params
     })
-    ////console.log("params",params)
+    
     
     that.setData({
       tableid: '',
@@ -1426,6 +1481,13 @@ Page({
         }
       }
     }
+    // console.log("spec",spex)
+
+    console.log("goods_id",that.data.shopingid)
+     console.log("stock",that.data.num)
+      console.log("spec",spex)
+        console.log("goods_mark",that.data.inputBz)
+    
     let res = await ajax({
       url: 'api/cart/save',
       method: 'POST',
@@ -1437,6 +1499,7 @@ Page({
         goods_mark: that.data.inputBz
       }
     })
+    
     that.setData({
       tableid: '',
       num: 1,

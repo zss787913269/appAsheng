@@ -75,13 +75,25 @@
 <view class="top">
 
 	<view class="top-top">
-		<view class="imgbox">
-			<view class="avtor">
-				<open-data lang="zh_CN" type="userAvatarUrl"></open-data>
-			</view>
-			<view class="name">
-				<open-data type="userNickName"></open-data>
-			</view>
+		<view class="imgbox" bindtap="sq">
+    <view wx:if="{{show}}" class="myav">
+      <view class="avtor">
+          <open-data lang="zh_CN" type="userAvatarUrl"></open-data>
+        </view>
+        <view class="name">
+          <open-data type="userNickName"></open-data>
+        </view>
+    </view>
+
+    <view wx:else class="myav">
+      <view class="avtor">
+          <image  src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+        </view>
+        <view class="name">
+          <text>点击登录账号</text>
+        </view>
+    </view>
+
 		</view>
 	</view>
 
@@ -115,15 +127,15 @@
 <view class="address">
 
 	<view class="item-box">
-		<image src="../../images/user/wd-wdsc.png" data-index="1" bindtap="goToPage"></image>
+		<image src="{{imgulr}}wd-wdsc.png" data-index="1" bindtap="goToPage"></image>
 		<text>我的私厨</text>
 	</view>
 	<view class="item-box" data-index="2" bindtap="goToPage">
-	<image src="../../images/user/wd-grdd.png"></image>
+	<image src="{{imgulr}}wd-grdd.png"></image>
 		<text>个人订单</text>
 	</view>
 	<view class="item-box" data-index="3" bindtap="goToPage">
-			<image src="../../images/user/wd-shdz.png"></image>
+			<image src="{{imgulr}}wd-shdz.png"></image>
 		<text>收货地址</text>
 	</view>
 
@@ -134,25 +146,25 @@
   <view class="shop-item-box">
     <view class="shop-box" data-index="4" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-spxx.png" style="width:31rpx;height:39rpx"></image>
+      <image src="{{imgulr}}wd-spxx.png" style="width:31rpx;height:39rpx"></image>
      </view>
       <text>商铺信息</text>
     </view>
     <view class="shop-box" data-index="5" bindtap="goToPage">
     <view>
-        <image src="../../images/user/wd-wdsp.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-wdsp.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>订单列表</text>
     </view>
     <view class="shop-box" data-index="6" bindtap="goToPage">
       <view>
-        <image src="../../images/user/wd-splb.png" style="width:39rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-splb.png" style="width:39rpx;height:39rpx"></image>
       </view>
       <text>商品列表</text>
     </view>
     <view class="shop-box" data-index="7" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-cwsj.png" style="width:38rpx;height:45rpx"></image>
+      <image src="{{imgulr}}wd-cwsj.png" style="width:38rpx;height:45rpx"></image>
      </view>
       <text>成为商家</text>
     </view>
@@ -164,19 +176,19 @@
   <view class="shop-item-box">
     <view class="shop-box" data-index="8" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
+      <image src="{{imgulr}}wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
      </view>
       <text>酒店信息</text>
     </view>
     <view class="shop-box" data-index="9" bindtap="goToPage">
     <view>
-        <image src="../../images/user/wd-jddd.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-jddd.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>酒店订单</text>
     </view>
     <view class="shop-box" data-index="10" bindtap="goToPage">
       <view>
-        <image src="../../images/user/wd-tjbj.png" style="width:39rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-tjbj.png" style="width:39rpx;height:39rpx"></image>
       </view>
       <text>注册/编辑</text>
     </view>
@@ -191,13 +203,13 @@
   <view class="shop-item-box">
     <view class="shop-box" data-index="11" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-jdrk.png" style="width:31rpx;height:39rpx"></image>
+      <image src="{{imgulr}}wd-jdrk.png" style="width:31rpx;height:39rpx"></image>
      </view>
       <text>酒店入口</text>
     </view>
     <view class="shop-box" data-index="12" bindtap="goToPage">
     <view>
-        <image src="../../images/user/wd-ygrk.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-ygrk.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>员工入口</text>
     </view>
@@ -214,19 +226,19 @@
   <view class="shop-item-box">
     <view class="shop-box" data-index="13" bindtap="goToPage">
      <view>
-      <image src="../../images/user/wd-psyxx.png" style="width:31rpx;height:39rpx"></image>
+      <image src="{{imgulr}}wd-psyxx.png" style="width:31rpx;height:39rpx"></image>
      </view>
       <text>配送员</text>
     </view>
     <view class="shop-box" data-index="14" bindtap="goToPage">
     <view>
-        <image src="../../images/user/wd-pslb.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-pslb.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>配送列表</text>
     </view>
     <view class="shop-box" data-index="15" bindtap="goToPage">
         <view>
-        <image src="../../images/user/wd-cwpey.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-cwpey.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>成为配送员</text>
     </view>

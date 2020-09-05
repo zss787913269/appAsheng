@@ -1,12 +1,15 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/cart/index",
+    "details/search/index",
    
-    "details/handle/index", 
-   
-    "pages/user/index",
     "private/hotelpeople/index", 
+    "pages/user/index",
+    "person/map/index",
+    "private/hotelinfo/index",
+    "person/recharge/index",
+    "pages/cart/index",
+    "details/handle/index", 
     "person/cartdetal/index",
     "pages/deliver/index",
     "details/detail/index",
@@ -27,7 +30,7 @@
     "pages/examine/examine",
     "pages/makeanapp/index",
     "pages/created/index",
-    "person/map/index",
+    
     "person/add/index",
     "person/lection/index",
     "person/commis/index",
@@ -39,7 +42,6 @@
     "person/balance/index",
     "person/confirm/index",
     "person/rawalsre/index",
-    "person/recharge/index",
     "person/crecord/index",
     "details/dishname/index",
     "details/order/index",
@@ -61,7 +63,6 @@
     "details/writeoff/index",
     "private/kitchen/index",
     "private/staff/index",
-    "private/superStaff/index",
     "private/Reply/index",
     "private/placeOrder/index",
     "private/invitation/index",
@@ -90,6 +91,12 @@
         "selectedIconPath": "images/tabar/1.png"
       },
       {
+        "pagePath": "pages/cart/index",
+        "text": "购物车",
+        "iconPath": "images/tabar/car.png",
+        "selectedIconPath": "images/tabar/car1.png"
+      },
+      {
         "pagePath": "pages/find/index",
         "text": "发现",
         "iconPath": "images/tabar/20.png",
@@ -102,6 +109,7 @@
         "iconPath": "images/tabar/50.png",
         "selectedIconPath": "images/tabar/5.png"
       }
+     
     ],
     "position": "bottom"
   },

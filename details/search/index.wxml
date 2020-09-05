@@ -9,6 +9,10 @@
      <text class="with">搜索</text>
   </view>
 </view>
+
+
+	<view class="sebtn" wx:if="{{true}}" bindtap="toggleDialog">添加商品</view>
+
 <view class="hotSearch" wx:if="{{false}}" >
 <!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
   <view class="hotSearch-title">热门搜索</view>
@@ -115,3 +119,28 @@
 				</view>
 			</view>
 
+
+
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+    <view  class="mybbox">
+			<view class="dbox">
+					<view>商品名：</view>
+					<input placeholder="请输入商品名" bindinput="inputname"  value="{{title}}" placeholder-class="placeholder"></input>
+			</view>
+			<view class="dbox">
+					<view>数量：</view>
+					<input placeholder="请输入商品数量" bindinput="inputnum" value="{{num}}"  placeholder-class="placeholder"></input>
+			
+			</view>
+			<view class="dbox">
+					<view>规格：</view>
+					<input placeholder="请输入规格"  bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input>
+			</view> 
+
+		</view>
+		  <view class="ebox" ><text class="quxiao"  bindtap="toggleDialog">取消</text><text class="queren" bindtap="queren">确认</text></view>
+  </view>
+</view>

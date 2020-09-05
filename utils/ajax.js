@@ -27,9 +27,9 @@ function ajax(options) {
       success: function (res) {
         resolve(res)
         if(res.data.code == -400){
-          wx.navigateTo({
-            url: '/component/zation/index',
-          })
+          // wx.navigateTo({
+          //   url: '/component/zation/index',
+          // })
         }
       },
       fail: function (err) {

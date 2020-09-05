@@ -4,6 +4,7 @@ var app = getApp()
 
 Page({
   data: {
+    region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     provinces: [],
     province: "",
     // 省分id
@@ -75,6 +76,13 @@ Page({
 
   },
   // 
+  bindRegionChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      region: e.detail.value
+    })
+    
+  },
   async getprovince(e,y) {     //获取省份
     let that = this
    
@@ -260,7 +268,8 @@ Page({
            countyid: res.data.data[i].county,
            address: res.data.data[i].address,
            is_default: res.data.data[i].is_default,
-           id: res.data.data[i].id
+           id: res.data.data[i].id,
+           region:res.data.data[i].region.split(",")
         })
       }
     }
@@ -326,9 +335,10 @@ Page({
         address: address,
         is_default: is_default,
         id:id,
-        quarters:that.data.streetId
+        quarters:that.data.streetId,
+        region:that.data.region.toString()
       };
-      console.log(params)
+      console.log("params",params)
       that.getCategoryList(params)
     }
     

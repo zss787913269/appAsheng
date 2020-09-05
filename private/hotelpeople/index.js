@@ -28,7 +28,9 @@ Page({
     yfk:"",
     dys:"",
     ywc:"",
-    first:true
+    first:true,
+    hotel_role:""
+    
 
   },
   //点击切换
@@ -200,6 +202,13 @@ Page({
   async getHoteOrder(num){   //获取酒店订单列表
   
       var that = this
+      let userid = wx.getStorageSync("userid")
+      let hotel_role = wx.getStorageSync("hotel_juese")
+
+      this.setData({
+        hotel_role:hotel_role
+      })
+     
 
       let param = {
         type:1,
@@ -209,11 +218,32 @@ Page({
           url: '/api/quickorder/HotelList', method: 'POST', data: param
         })
 
+         console.log("商品",res1.data.data.data)
   
   
         let wqr=[],wfk=[],yfk=[],dys=[],ywc=[]
   
-        for(let i of res1.data.data.data){
+     
+
+
+      
+      for(let i of res1.data.data.data){
+        if(i.juese == 1){
+          if(userid == i.user_id){
+        if(i.status == 0){
+          wqr.push(i)
+        }else if (i.status == 1){
+          wfk.push(i)
+        }else if (i.status == 2){
+          yfk.push(i)
+        }else if (i.status == 3){
+          dys.push(i)
+        }else if (i.status == 4){
+          ywc.push(i)
+        } }
+      }else{
+      
+          // console.log("22222222222",i)
           if(i.status == 0){
             wqr.push(i)
           }else if (i.status == 1){
@@ -225,7 +255,9 @@ Page({
           }else if (i.status == 4){
             ywc.push(i)
           }
-        }
+        
+      }
+    }
 
         let currentTab
 
@@ -263,24 +295,57 @@ Page({
       url: '/api/quickorder/HotelList', method: 'POST', data: params
     })
 
-    // console.log("商品",res.data.data)
+      
+   
 
     let unconfirmed=[],unpaid=[],paid=[],unaccepted=[],completed=[]
     let shoplist = res.data.data.data
-    if(params.status == 0){
-      unconfirmed = shoplist
-    }else if(params.status == 1){
-      unpaid = shoplist
-    }else if(params.status == 2){
-      paid = shoplist
-    }else if(params.status == 3){
-      unaccepted = shoplist
-    }else if(params.status == 4){
-      completed = shoplist
+
+    
+    
+
+    console.log(userid)
+
+
+    for(let i of shoplist){
+   
+      // 如果 角色是7  全部列表都能看到
+      // 如果角色不是7 只能看到userid相同的
+      if(i.juese == 1){
+        if(userid == i.user_id){
+          if(params.status == 0){
+            unconfirmed.push(i)
+          }else if(params.status == 1){
+            unpaid.push(i)
+          }else if(params.status == 2){
+            paid.push(i)
+          }else if(params.status == 3){
+            unaccepted.push(i)
+          }else if(params.status == 4){
+            completed.push(i)
+          } }
+      }else{
+       
+
+          if(params.status == 0){
+            unconfirmed.push(i)
+          }else if(params.status == 1){
+            unpaid.push(i)
+          }else if(params.status == 2){
+            paid.push(i)
+          }else if(params.status == 3){
+            unaccepted.push(i)
+          }else if(params.status == 4){
+            completed.push(i)
+          }
+        }
+      
     }
 
-    console.log("unconfirmed",unconfirmed)
 
+
+    // console.log("unconfirmed",unconfirmed)
+    // console.log("paid",paid)
     this.setData({
       unconfirmed,unpaid,paid,unaccepted,completed
     })
@@ -558,6 +623,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    
+
       var that = this
     that.getHoteOrder(that.data.page)
 

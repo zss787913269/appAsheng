@@ -31,7 +31,7 @@
 
 <view class="bottom">
   <view class="itemed">
-  <view class="item active">
+  <view class="item active" bindtap="chongzhi1">
   <text>充 值</text>
   </view>
   </view>

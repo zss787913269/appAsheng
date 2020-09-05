@@ -6,7 +6,9 @@
   padding: 0;
 }
 
-
+.myza{
+  margin-left: 20rpx;
+}
 .user image {
   width: 100%;
   display: block;

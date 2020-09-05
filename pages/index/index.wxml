@@ -17,7 +17,7 @@
   <swiper class="swiper-one" current="{{currentIndex}}">
     <swiper-item wx:for="{{pageNumber}}" wx:key="index" wx:for-index="indexName">
 
-      <view wx:if="{{index<(indexName+1)*10 && indexName*8<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':'xxboxshow'}} bannerIm" bindtap="goUrl" data-url="{{item}}">
+      <view wx:if="{{index<(indexName+1)*10 && indexName*8<=index}}" wx:for="{{tableList}}" wx:key="unique" class="{{firstclass==item.id?'boxshow':'xxboxshow'}} bannerIm" data-name="{{item.name}}" bindtap="goUrl" data-url="{{item}}">
 				<!-- <text class="mycarcount"  >{{item.count}}</text> -->
         <image wx:if="{{item.icon!=''}}" src="{{item.icon}}"  class="imagesss" />
         <image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
@@ -32,10 +32,29 @@
 
   <c style="height:25rpx;"></c>
 </view>
-<view class="allshop">
-	<image  src="http://second.chchgg.com/static/banner/sy-banner-2.png" mode="heightFix"></image>
+<view class="allshop" id="main">
+	<image  wx:if="{{!back}}" src="http://second.chchgg.com/static/banner/sy-banner-2.png" mode="heightFix"></image>
+		<view wx:else class="scroll_table1">
+		
+		<scroll-view scroll-x>
+				<view class="swiper-tab1">
+					<view wx:for="{{tableList}}" wx:key="unique" class="swiper-tab-item2" data-name="{{item.name}}" bindtap="goUrl" data-url="{{item}}">
+						
+						<text class="mycarcount1" wx:if="{{item.count}}">{{item.count}}</text>
+						<image wx:if="{{item.icon!=''}}" src="{{item.icon}}"  class="imagesss" />
+     		    <image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
+						 <text class="{{firstclass==item.id?'mnanamm2':'mnanamm'}}" >{{item.name}}</text>
+					</view>
+				</view>
+			</scroll-view>
+		
+		</view>
+	
 </view>
-<view class="scroll_table"  id="main" bindtap="myscorll">
+
+
+
+<view class="scroll_table"   bindtap="myscorll">
   <scroll-view scroll-x>
     <view class="swiper-tab">
       <view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
@@ -50,7 +69,7 @@
 </view>
 	<view wx:if="{{tableListone!=''}}" class="main" bindtap="myscorll">
 		<view class="left">
-			<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
 
 				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
 
@@ -64,7 +83,7 @@
 			</scroll-view>
 		</view>
 		<view class='right'>
-			<scroll-view scroll-y="true" style="height:1000rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect2}}">
+			<scroll-view scroll-y="true" style="height:900rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect2}}">
 			<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
 					<view id="{{'inToview'+item.id}}" >
 					<block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index" >
@@ -219,10 +238,11 @@
 
 		<view class="fix">
 			<view class="fast" bindtap="clickHotel"><text>快速下单</text></view>
-			<view class="fiximgbox" bindtap="gouwuche">
+			<!-- <view class="fiximgbox" bindtap="gouwuche">
 				<image  class="fiximg" src="../../images/index/car.png"></image>
 				<text class="carnub"  wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}">{{cartNum+personNum}}</text>
-			</view>
+			</view> -->
+			
 		</view>
 
 	</view>

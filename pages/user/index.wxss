@@ -24,12 +24,22 @@ page{
   line-height: 50rpx;
 
 }
+.myav{
+  display: flex;
+  align-items: center;
+}
 
 .avtor{
   height: 128rpx;
   width: 128rpx;
   border-radius: 69rpx;
   margin-left: 60rpx;
+  overflow:hidden
+}
+.avtor image{
+  height: 128rpx;
+  width: 128rpx;
+  border-radius: 69rpx;
   overflow:hidden
 }
 .imgbox{

@@ -14,7 +14,6 @@ Page({
     // ,type：1下单员，2厨师长，3采购，4仓库，5财务，6店长，7老板
     region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     myValue:"",
-    mytoken:"",
     selectArray: [{
       "id": "1",
       "text": "下单员"
@@ -67,12 +66,9 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    that.getToekn()
+    // that.getToekn()
     that.getHotel()
-    that.getprovince(2, 0),
-      that.getcitys(1, 0),
-      that.getcountys(37, 0)
-    that.getStreet(567, 0)
+   
     this.WxValidate = app.wxValidate({
       fullName: {
         required: true,
@@ -114,17 +110,7 @@ Page({
       },
     })
   },
-  async getToekn(){
-    let res = await ajax({
-      url: 'api/order/getWeixinToken',
-      method: 'POST',
-    })
-
-    console.log(res.data)
-    this.setData({
-      mytoken:res.data
-    })
-  },
+ 
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -137,14 +123,7 @@ Page({
       hotelRole: false
     })
   },
-  // getDate(e) { //获取下拉选择框的值
-  //   var that = this
-
-  //   that.setData({
-  //     roleId: e.detail.id + 1
-  //   })
-  //   console.log(e.detail)
-  // },
+ 
   bindPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', Number(e.detail.value)+1)
     this.setData({
@@ -173,31 +152,6 @@ Page({
     })
     console.log(res)
    
-    // let params = {
-    //   page: 'pages/index',
-    //   scene: "1,101,291",
-    //   width:100
-    // }
-    // let res = await ajax({
-    //   url: 'api/order/addcode',
-    //   method: 'POST',
-    //   data: params
-    // })
-    // console.log(res)
-    
-    // wx.request({
-    //   url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${this.data.mytoken}`,
-    //   method:"post",
-    //   data:{
-    //     page:"pages/index",
-    //     width:100,
-    //     scene:"1",
-    //   },
-    //   success(res){
-    //     console.log(res.data)
-    //   }
-    // })
-
     if(res.data.code == 0){
             console.log('cehngl ')
             that.setData({ //角色二维码
@@ -222,18 +176,43 @@ Page({
       method: 'get'
     })
     let hotelInfo = res.data.data
+
+    console.log(hotelInfo)
+   
+    let userid = wx.getStorageSync('userid')
+    let htype,roleId
+
+    console.log("hotelInfo.userid",hotelInfo.user_id)
+     console.log("userid",userid)
+
+    if(hotelInfo.user_id != userid){
+        htype = Number(hotelInfo.usertype)
+        roleId = Number(hotelInfo.usertype)
+        this.setData({
+          show:false
+        })
+    }else{
+       htype = Number(hotelInfo.type) - 1
+       roleId = Number(hotelInfo.type)
+       this.setData({
+        show:true
+      })
+    }
+    console.log("htype",htype)
+    console.log("roleId",roleId)
+
     if (res.data.data != null) {
   
       that.setData({
-        show:false,
+      
         qrCode: true,
         fullName: hotelInfo.name, //姓名
         hotelName: hotelInfo.h_name, //酒店名
         address: hotelInfo.address, //地址
         tel: hotelInfo.tel, //联系方式
         hotelId: hotelInfo.id,      
-        type:Number(hotelInfo.type) - 1,
-        roleId:Number(hotelInfo.type),
+        type:htype,
+        roleId:roleId,
         region:hotelInfo.region.split(",")
       })
     }
@@ -394,109 +373,7 @@ Page({
     }
 
   },
-  async getprovince(e, y) {
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: 0
-    })
-    that.setData({
-      provinces: res.data.data,
-    })
-    console.log(e)
-    if (e == 2) {
-      that.setData({
-        province: that.data.provinces[0].name,
-        provinceid: that.data.provinces[0].id,
-      })
-    }
-  },
-  async getcitys(e, y) {
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
-    that.setData({
-      citys: res.data.data,
-    })
-    if (that.data.citys.length > 0) {
-      if (y == 0) {
-        that.setData({
-          city: that.data.citys[0].name,
-          cityid: that.data.citys[0].id
-        })
-      } else {
-        that.setData({
-          city: that.data.citys[that.data.citysid].name,
-          cityid: that.data.citys[that.data.citysid].id
-        })
-      }
-    }
-
-  },
-  async getcountys(e, y) {
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
-    that.setData({
-      countys: res.data.data,
-    })
-    if (that.data.countys.length > 0) {
-      if (y == 0) {
-        that.setData({
-          county: that.data.countys[0].name,
-          countyid: that.data.countys[0].id
-        })
-      } else {
-        that.setData({
-          county: that.data.countys[that.data.countysid].name,
-          countyid: that.data.countys[that.data.countysid].id,
-        })
-      }
-    }
-  },
-  async getStreet(e, y) { //获取街道
-    let that = this
-    let res = await ajax({
-      url: 'api/region/index',
-      method: 'post',
-      data: {
-        pid: e
-      }
-    })
-    that.setData({
-      streets: res.data.data,
-    })
-    console.log(res)
-    if (that.data.streets.length > 0) {
-      console.log(y)
-      if (y == 0) {
-        that.setData({
-          street: that.data.streets[0].name,
-          streetId: that.data.streets[0].id
-        })
-      } else {
-        that.setData({
-          street: that.data.streets[that.data.streetId].name,
-          streetId: that.data.streets[that.data.streetId].id,
-        })
-      }
-    } else {
-      that.setData({
-        street: ''
-      })
-    }
-  },
+  
   bindChange: function(e) {
 
     var val = e.detail.value

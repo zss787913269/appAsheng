@@ -5,11 +5,14 @@ page{
   background-color: #F2F2F2;
 }
 .zj{
-  font-size:20rpx;
+  font-size:22rpx;
   font-family:Source Han Sans CN;
   font-weight:400;
   color:rgba(122,122,122,1);
   margin-top: -10rpx;
+  position: absolute;
+  right: 25rpx;
+  top: 150rpx;
 }
 .itemed{
   /* width:540rpx; */
@@ -104,13 +107,13 @@ page{
 }
 .marri{
  margin-right: 10rpx;
- width: 34rpx;
- height: 34rpx;
+ width: 54rpx;
+ height: 54rpx;
 }
 .marle{
  margin-left: 10rpx;
- width: 34rpx;
- height: 34rpx;
+ width: 54rpx;
+ height: 54rpx;
 }
 .bbox{
   height: 30rpx;
@@ -225,13 +228,13 @@ transform: translate(-50%, -50%) scale(1);
   
 }
 .num{
-  width: 30rpx;
+  width: 40rpx;
   text-align: center;
-  /* font-size:32rpx; */
+  font-size:32rpx;
   font-family:Source Han Sans CN;
   /* font-weight:500; */
   color:rgba(81,81,81,1);
-  /* margin-top: 5rpx; */
+  margin-top: 5rpx;
 }
 .delimg{
   height: 42rpx;
@@ -320,6 +323,8 @@ transform: translate(-50%, -50%) scale(1);
   display: flex;
   flex-direction: column;
   margin-left: 20rpx;
+  position: relative;
+  
 }
 .main{
   display: flex;

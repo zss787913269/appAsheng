@@ -50,13 +50,14 @@
 		<view class="titleed">
 			<label class="" for="male">电　话:</label>
 			<input type="text" placeholder="请输入" class="pickerIndex2" name="tel" id="laoban" value="{{tel}}" bindinput='getInputValue' />
-			<view class="zhon" bindtap="sendCode" >发送验证码</view>
+			<view class="zhon" wx:if="{{show}}" bindtap="sendCode" >发送验证码</view>
 		</view>
-		<view class="titleed">
+		<view class="titleed" wx:if="{{show}}">
 			<label class="glable" for="male">验证码</label>
 			<input class="myinpu" type="text" placeholder="请输入验证码" name="code" id="male" value="{{code}}" />
 		</view>
-		<view wx:if="{{qrCode}}">
+		<view wx:if="{{show}}">
+			<view wx:if="{{qrCode}}">
 			<view class="titleed" bindtap="sendOut" data-index="1">
 				<text>下单员：</text>
 				<text class="color">发送二维码给他</text>
@@ -92,6 +93,8 @@
 				<text class="determine" bindtap="determine">确定</text>
 				<text class="cancel" bindtap="determine">取消</text>
 			</view>
+		</view>
+		
 		</view>
 
 		<view class="submit">

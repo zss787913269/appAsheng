@@ -32,11 +32,19 @@ Page({
   onLoad: function (options) {
 
     this.getTopCount()
-
+    this.getCount()
+    
 
   },
   onShow: function () {
+    console.log("ids",this.data.ids)
+    console.log("leftList",this.data.leftList)
+ 
     this.getCount()
+    this.getTopCount()
+
+  
+
   },
   //点击切换列表
   clickList(e) {
@@ -82,7 +90,7 @@ Page({
       hotelCount,
       pcount
     })
-    // console.log(hotelCount,pcount)
+    console.log("hotelCount",this.data.hotelCount)
   },
   async getCount() {
     let that = this
@@ -100,18 +108,9 @@ Page({
       data: params
     })
 
-    console.log(res.data.data)
+    console.log(res)
 
-    if (res.data.data.length == 0) {
-      wx.showToast({
-        title: '购物车没有商品',
-        icon: "none"
-      })
-      that.setData({
-        showqx: false,
-        leftList:[]
-      })
-    } else {
+    if(res.data.code == 0){
       let list = res.data.data
 
       let ids = []
@@ -133,11 +132,39 @@ Page({
         showqx: true,
         ids
       })
+    }else{
+
+      that.setData({
+        showqx: false,
+        leftList:[],
+        ids:[],pcount:0,hotelCount:0
+      })
+
+         wx.setTabBarBadge({
+            index: 1,
+            text: "0"
+          })
+
+      wx.showToast({
+        title: '购物车没有商品',
+        icon: "none"
+      })
     }
+
+    // if (res.data.data.length == 0) {
+    //   // wx.showToast({
+    //   //   title: '购物车没有商品',
+    //   //   icon: "none"
+    //   // })
+    //   that.setData({
+    //     showqx: false,
+    //     leftList:[]
+    //   })
+    // } else {
+     
+    // }
     this.getTotalPrice()
 
-
-    // console.log("getCount",res.data.data)
 
   },
   // 全选
@@ -427,7 +454,7 @@ Page({
     var item = that.data.ids
     var ids = item.toString()
 
-    if (that.data.currentTab == 2) { //个人订单提交订单
+    if (that.data.currentTab == 0) { //个人订单提交订单
       if (ids != '') {
         wx.navigateTo({
           url: `/pages/cartdetal/index?ids=${ids}`

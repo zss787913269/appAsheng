@@ -20,6 +20,11 @@ Page({
   onLoad: function (options) {
       this.getMyCommission()
   },
+  chongzhi1(){
+    wx.navigateTo({
+      url: "/person/recharge/index",
+    })
+  },
 
   async getMyCommission() {   //获取佣金
     console.log('yongjing')

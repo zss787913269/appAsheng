@@ -42,7 +42,7 @@ Page({
     that.setData({
       categoryList: res.data.data
     })
-    console.log(that.data.categoryList)
+    console.log("useraddress",that.data.categoryList)
   },
   //点击切换
   checkboxChange(e){
