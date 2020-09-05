@@ -49,7 +49,7 @@
 					<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 					<view class="imgbox" bindtap="goDetail" data-id="{{item.id}}">
-						<image wx:for="{{item.items}}" wx:for-item="list" src="{{list.images}}" wx:key="index" class="img"></image>
+						<image wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
 						<view class="more">. . .</view>
 					</view>
 					<view class="all">

@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "details/handle/index", 
+   
     "details/search/index",
    
     "private/hotelpeople/index", 
@@ -9,7 +11,6 @@
     "private/hotelinfo/index",
     "person/recharge/index",
     "pages/cart/index",
-    "details/handle/index", 
     "person/cartdetal/index",
     "pages/deliver/index",
     "details/detail/index",
@@ -97,12 +98,12 @@
         "selectedIconPath": "images/tabar/car1.png"
       },
       {
-        "pagePath": "pages/find/index",
-        "text": "发现",
-        "iconPath": "images/tabar/20.png",
-        "selectedIconPath": "images/tabar/2.png"
+        "pagePath": "pages/quickly/quickly",
+        "text": "快速下单",
+        "iconPath": "images/tabar/car.png",
+        "selectedIconPath": "images/tabar/car1.png"
       },
-     
+
       {
         "pagePath": "pages/user/index",
         "text": "我的",

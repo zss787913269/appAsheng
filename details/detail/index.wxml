@@ -54,7 +54,8 @@
 				<view class="{{show || showjd || showqh ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
 					<view class="mytitle" id="{{'inToview'+item.id}}">
 						<view class="right-img">
-							<image src="http://second.chchgg.com{{items.images}}"></image>
+							<image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
+								<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 						</view>
 						<view class="right-title">
 							<!-- <view class="top-title">{{items.title}}</view> -->

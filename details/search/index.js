@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showDialog: true,
+    showDialog: false,
     jgNumber: false,
     inputBz: "",
     showModalStatus: false, //遮罩的显示与隐藏

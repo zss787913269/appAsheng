@@ -129,7 +129,7 @@
     font-size: 28rpx;
     line-height: 40rpx;
     color: #333;
-    padding: 20rpx 0;
+    padding : 20rpx 0;
 }
 .buy_box .num {
     font-size: 28rpx;
@@ -160,7 +160,7 @@
 }
 .sebtn{
   margin-top: 25rpx;
-  width: 152rpx;
+  width: 230rpx;
   height: 48rpx;
   border: 1px solid #FF963F;
   opacity: 1;
@@ -568,7 +568,7 @@
   position: fixed;
   bottom: 500rpx;
   width: 650rpx;
-  height: 510rpx;
+  height: 534rpx;
   margin-left: 50rpx;
   background: #f8f8f8;
   transform: translateY(300%);
@@ -611,6 +611,11 @@
   font-size: 24rpx;
   color: #666666;
   margin-left: 10rpx;
+}
+.color{
+  margin-top: 10rpx;
+  color: red;
+  font-size: 22rpx;
 }
 
 .ebox{

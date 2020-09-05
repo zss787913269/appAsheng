@@ -278,7 +278,7 @@ Page({
 
         }
 
-        //console.log(_this.data.PeisongList)
+        console.log("PeisongList",_this.data.PeisongList)
 
 
         _this.setData({
@@ -719,6 +719,7 @@ Page({
       data: params
     })
 
+    console.log("peisongList",res)
     let peisongList = res.data.data.data
     for (var i = 0; i < peisongList.length; i++) {
       peisongList[i].is_select = false

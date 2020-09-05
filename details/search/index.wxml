@@ -11,7 +11,7 @@
 </view>
 
 
-	<view class="sebtn" wx:if="{{true}}" bindtap="toggleDialog">添加商品</view>
+	<view class="sebtn" wx:if="{{true}}" bindtap="toggleDialog">添加你需要的商品</view>
 
 <view class="hotSearch" wx:if="{{false}}" >
 <!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
@@ -140,7 +140,13 @@
 					<input placeholder="请输入规格"  bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input>
 			</view> 
 
+			<view>
+				<text class="color">此商品：临时划价为6.00元，后期结算，多还少补</text>
+			</view>
+
 		</view>
 		  <view class="ebox" ><text class="quxiao"  bindtap="toggleDialog">取消</text><text class="queren" bindtap="queren">确认</text></view>
+
+
   </view>
 </view>

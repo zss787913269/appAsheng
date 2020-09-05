@@ -290,7 +290,7 @@ Page({
    
     lpapi.openPrinter('') //连接打印机    为空就是列表第一个
     var width = 100;
-    var height = 30* print.length ;
+    var height = 70* print.length ;
     // let height2 = 200* print.length;
 
 
@@ -303,17 +303,20 @@ Page({
     for (let i = 0; i <print.length; i++) {
   
       lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
-      y = y + 5
-      lpapi.drawText(`总价：${print[i].total_price}`, 0, y,5)
-      y = y + 5
-      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
-      y = y + 5
-      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
       y = y + 15
+      lpapi.drawText(`总价：${print[i].total_price}`, 0, y,5)
+      y = y + 15
+      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
+      y = y + 10
+      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
+      y = y + 10
+      lpapi.drawText(`备注：`, 0, y, 5)
+      y = y + 25
+  
     }
 
-   
-    lpapi.endDrawLabel();
+       lpapi.endDrawLabel();
+  
     this.toggleDialog()
     // this.setData({
     //   canvasHeight: height2,
