@@ -26,13 +26,19 @@ Page({
     showqx: false,
     leftList: [],
     hotelCount: "",
-    pcount: ""
+    pcount: "",
+    title:"",
+    num2:"",
+    spec:"",
+    listindex:1,
+    hotelOrderDetail:[]
   },
 
   onLoad: function (options) {
 
     this.getTopCount()
     this.getCount()
+    this.getHotelOrderDetail()
     
 
   },
@@ -42,9 +48,161 @@ Page({
  
     this.getCount()
     this.getTopCount()
+  
+    // let len = this.data.ids.length.toString()
+
+    // wx.setTabBarBadge({
+    //   index: 1,
+    //   // text: len
+    // })
 
   
 
+  },
+
+    //点击切换列表
+    clickindex(e) {
+      let index = e.currentTarget.dataset.index
+      
+      this.setData({
+        listindex: index
+      })
+     
+  
+    },
+  inputname(e){
+    let value = e.detail.value;
+ 
+    this.setData({
+      title:value
+    })
+  },
+  inputnum(e){
+    let value = e.detail.value;
+
+    this.setData({
+      num2:value
+    })
+  },
+  inputspec(e){
+    let value = e.detail.value;
+      this.setData({
+        spec:value
+      })
+  },
+  toggleDialog() {
+    this.setData({
+      showDialog: !this.data.showDialog
+    });
+
+  },
+  
+  subTap: function() {
+        let that = this;
+        wx.requestSubscribeMessage({
+          tmplIds: ['XS420zSr_wjra7YzoaZhAR9gWuHvmjrblK2eYYGP-2A','vYVFNRkK5EBsPGROgCXmIJJRUIIlZWrkS7hRQT4KibE'],
+          success(res) {
+            that.setData({
+              textcontent: '提示：授权成功'
+            })
+          that.getmsg()
+          },
+          fail(res) {
+            that.setData({
+              textcontent: '提示：授权失败'
+            })
+          }
+        })
+      },
+  async getmsg(){
+    
+    let res = await ajax({
+      url:"api/test/sendwxappinfo",
+      method:"post"
+    })
+    console.log("小程序消息",res)
+ },
+  async getHotelOrderDetail(id) {
+
+    let that = this
+
+    let res = await ajax({
+      url: 'api/order/TodayOrderGoods',
+      method: 'POST',
+    })
+
+    console.log("getHotelOrderDetail", res.data)
+
+    let hotelOrderDetail = res.data.data
+    this.setData({
+      hotelOrderDetail
+
+    })
+  },
+  async queren(){
+
+    let that = this
+
+    let params = {
+      title:this.data.title,
+      spec:this.data.spec
+      
+    }
+
+      let res = await ajax({
+        url: '/api/goods/addgoods',
+        method: 'post',
+        data:params
+      })
+ 
+      if(res.data.code == 0){
+        let res2 = await ajax({
+          url: 'api/cart/save',
+          method: 'POST',
+          data: {
+            is_purchase: 1,
+            goods_id: res.data.data.goods_id,
+            stock: that.data.num2,
+            spec: [res.data.data.spec],
+            goods_mark: that.data.spec
+          }
+        })
+
+        if (res2.data.code == 0) {
+          wx.showToast({
+            title: "加入购物车成功",
+            icon: 'none',
+            duration: 3000
+          })
+          this.getCount()
+          this.getTopCount()
+          that.toggleDialog()
+         
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 3000
+          })
+          that.toggleDialog()
+        }
+
+      }
+    
+
+   
+
+  },
+  // 订阅消息
+  dy(){
+    wx.requestSubscribeMessage({
+      tmplIds: ['vYVFNRkK5EBsPGROgCXmIJJRUIIlZWrkS7hRQT4KibE'],
+      success (res) { 
+
+        console.log("模板信息",res)
+
+      }
+    })
   },
   //点击切换列表
   clickList(e) {
@@ -54,6 +212,7 @@ Page({
       currentTab: index
     })
    this.getCount()
+   this.getHotelOrderDetail()
 
   },
   async getTopCount() {
@@ -70,19 +229,9 @@ Page({
         pcount = i.num
       }
     }
-    console.log(hotelCount,pcount)
+    // console.log(hotelCount,pcount)
 
-    if(hotelCount == undefined){
-      that.setData({
-        currentTab:0
-      })
-    
-    }else if(pcount == undefined){
-      that.setData({
-        currentTab:1
-      })
-    
-    }
+  
 
     that.getCount()
    
@@ -108,7 +257,7 @@ Page({
       data: params
     })
 
-    console.log(res)
+    // console.log(res)
 
     if(res.data.code == 0){
       let list = res.data.data
@@ -125,7 +274,7 @@ Page({
 
         }
       }
-      console.log(ids)
+      // console.log(ids)
 
       that.setData({
         leftList: list,
@@ -145,24 +294,24 @@ Page({
             text: "0"
           })
 
-      wx.showToast({
-        title: '购物车没有商品',
-        icon: "none"
-      })
+      // wx.showToast({
+      //   title: '购物车没有商品',
+      //   icon: "none"
+      // })
     }
 
-    // if (res.data.data.length == 0) {
-    //   // wx.showToast({
-    //   //   title: '购物车没有商品',
-    //   //   icon: "none"
-    //   // })
-    //   that.setData({
-    //     showqx: false,
-    //     leftList:[]
-    //   })
-    // } else {
+    if (res.data.data.length == 0) {
+      // wx.showToast({
+      //   title: '购物车没有商品',
+      //   icon: "none"
+      // })
+      // that.setData({
+      //   showqx: false,
+      //   leftList:[]
+      // })
+    } else {
      
-    // }
+    }
     this.getTotalPrice()
 
 
@@ -437,12 +586,13 @@ Page({
   clickTab: function (e) { //点击切换
     var that = this;
 
-    console.log(e)
+    // console.log(e)
 
     if (e.currentTarget.dataset.current == 1) {
       that.getCount(1)
     } else if (e.currentTarget.dataset.current == 2) {
-      that.getCount(0)
+      that.getHotelOrderDetail()
+      that.getCount(1)
     }
     that.setData({
       currentTab: e.currentTarget.dataset.current
@@ -498,9 +648,14 @@ Page({
         icon: 'none',
         duration: 3000
       })
-      wx.navigateTo({
-        url: '/private/hotelpeople/index',
+      that.getHotelOrderDetail()
+      that.getCount()
+      this.setData({
+        currentTab:2
       })
+      // wx.navigateTo({
+      //   url: '/private/hotelpeople/index',
+      // })
     } else {
       wx.showToast({
         title: res.data.msg,

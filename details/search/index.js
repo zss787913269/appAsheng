@@ -29,9 +29,9 @@ Page({
     selectedNumber: 0,
     num:1,//商品数量
     showbtn:false,
-    title:"记牌就",
-    num:"20",
-    spec:"大的"
+    title:"",
+    num:"",
+    spec:""
   },
 
   /**
@@ -87,28 +87,38 @@ Page({
         method: 'post',
         data:params
       })
-      // console.log(res.data)
-
-     
-      
+ 
       if(res.data.code == 0){
         let res2 = await ajax({
           url: 'api/cart/save',
           method: 'POST',
           data: {
             is_purchase: 1,
-            goods_id: 1284,
+            goods_id: res.data.data.goods_id,
             stock: that.data.num,
-            spec: [{type:"种类",value:that.data.spec}],
-            goods_mark: ""
+            spec: [res.data.data.spec],
+            goods_mark: that.data.spec
           }
         })
 
-         console.log(res2.data)
-  }
+        if (res2.data.code == 0) {
+          wx.showToast({
+            title: "加入购物车成功",
+            icon: 'none',
+            duration: 3000
+          })
+          that.toggleDialog()
+         
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 3000
+          })
+          that.toggleDialog()
+        }
 
-
-
+      }
     
 
    

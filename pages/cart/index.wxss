@@ -88,7 +88,7 @@ page{
   color:rgba(255,150,63,1);
 }
 .mprice{
-  font-size:36rpx;
+  font-size:26rpx;
   font-family:Source Han Sans CN;
   font-weight:500;
   line-height:45px;
@@ -422,7 +422,7 @@ transform: translate(-50%, -50%) scale(1);
 }
 
 .shoplist{
-  border-bottom: 4rpx solid green;
+  /* border-bottom: 4rpx solid green; */
   color: #40B15D;
 }
 .shop-name{
@@ -435,4 +435,351 @@ transform: translate(-50%, -50%) scale(1);
   margin-top: 20rpx;
 }
 
+.zan-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+}
 
+.zan-dialog__container {
+  position: fixed;
+  bottom: 300rpx;
+  width: 650rpx;
+  height: 584rpx;
+  margin-left: 50rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+}
+
+.zan-dialog--show .zan-dialog__container {
+  transform: translateY(0);
+}
+
+.zan-dialog--show .zan-dialog__mask {
+  display: block;
+}
+.mybbox{
+    margin-left: 100rpx;
+}
+.dbox{
+  margin-top: 20rpx;
+}
+.dbox view{
+    
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: 33px;
+  color: #666666;
+}
+.dbox input{
+  margin-top: 5rpx;
+  width: 420rpx;
+  border: 1rpx solid #333333;
+  border-radius: 10rpx;
+  height: 50rpx;
+  font-size: 24rpx;
+}
+.placeholder{
+  font-size: 24rpx;
+  color: #666666;
+  margin-left: 10rpx;
+}
+.color{
+  margin-top: 10rpx;
+  color: red;
+  font-size: 22rpx;
+}
+
+.ebox{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-evenly;
+  height: 90rpx;
+  width: 650rpx;
+  border-top: 1px solid #F0F0F0;
+}
+.quxiao{
+  display: block;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #6B6B6B;
+}
+.queren{
+  display: block;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #40B15D;
+}
+
+.sebtn{
+  margin-top: 25rpx;
+  width: 230rpx;
+  height: 48rpx;
+  border: 1px solid #FF963F;
+  opacity: 1;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF963F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-right: 20rpx; */
+  margin-left: 20rpx;
+  /* margin:20rpx auto; */
+}
+
+.mylist{
+  display: flex;
+  justify-content: space-evenly;
+  width: 750rpx;
+  margin-bottom: 20rpx;
+  height: 50rpx;
+  margin-top: 10rpx;
+}
+.titlebox{
+  margin-top: 20rpx;
+  height:227rpx;
+  background:rgba(255,255,255,1);
+  opacity:1;
+  position: relative;
+}
+.addtop{
+  height: 58rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #EBEEF5;
+
+}
+.addimg{
+    width: 28rpx;
+    height: 34rpx;
+    margin-left: 42rpx;
+}
+.peis{
+  
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+  margin-left: 8rpx;
+
+}
+.add_main{
+  margin-left: 72rpx;
+  margin-top: 31rpx;
+}
+.myaddress{
+
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
+  opacity: 1;
+}
+.call{
+    
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+  margin-top: 23rpx;
+}
+.maintop{
+  height: 80rpx;
+  margin-top: 20rpx;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hotelname{
+    
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
+  margin-left: 35rpx;
+}
+.peibox{
+  margin-right: 60rpx;
+  display: flex;
+  align-items: center;
+
+}
+.peibox image{
+    height: 27rpx;
+    width: 27rpx;
+}
+.peibox text{
+  margin-left: 5rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: #585858;
+}
+.mysh{
+  position: absolute;
+  right: 20rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  font-size: 30rpx;
+  padding-top: 10rpx;
+  padding-bottom: 15rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  background-color: #40B15D;
+  top: 115rpx;
+  
+}
+.main2{
+  display: flex;
+  height: 800rpx;
+  background-color: #FFFFFF;
+}
+.left2{
+  width: 25%;
+  font-size: 30rpx;
+  /* background-color: #f5f5f5 !important; */
+  background-color: #fff !important;
+  border-top: 1rpx solid #F0F0F0;
+}
+
+.shopatt-left_show{
+  height: 210rpx;
+  margin-left: 45rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+}
+.shopatt-left{
+  height: 132rpx;
+  margin-left: 45rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+}
+
+.right-img{
+  height: 110rpx;
+  width: 110rpx;
+}
+.right-img image{
+  height: 110rpx;
+  width: 110rpx;
+}
+.right-title{
+  margin-left: 20rpx;
+}
+
+.left2 view{
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.right2{
+  width: 74%;  
+  margin-bottom: 60rpx;
+  position: relative;
+  
+}
+
+
+.mytitle2{
+  display: flex;
+  margin-top: 15rpx;
+  position: relative;
+}
+.quxiao{
+  width: 152rpx;
+  height: 48rpx;
+  border: 1px solid #868686;
+  opacity: 1;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #868686;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  margin-top: 18rpx;
+}
+
+.queren{
+  margin-top: 18rpx;
+  width: 152rpx;
+  height: 48rpx;
+  border: 1px solid #FF963F;
+  opacity: 1;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF963F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+
+}
+.sbox{
+  border-top: 1rpx solid #EBEEF5;
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.top-title2{
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #585858;
+}
+.top-title_active2{
+
+
+  font-size: 30rpx;
+  font-weight: 500;
+  color:rgba(255,117,2,1);
+  font-family:Source Han Sans CN;
+}
+.mynumber{
+
+  /* margin-top: 20rpx; */
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #868686;
+  margin-bottom: 10rpx;
+  
+}
+.shouhuobox{
+  display: flex;
+  align-items: center;
+}

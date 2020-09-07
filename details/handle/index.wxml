@@ -51,7 +51,7 @@
 
   
 
-<view wx:if="{{currentTab==2}}">
+     <view wx:if="{{currentTab==2}}">
         <view class="mylist">
           <text  bindtap="clickList"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
           <text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
@@ -127,7 +127,7 @@
 
             </view>
             <view class="bottom2">
-                <view class="queren" bindtap="printing" data-print="{{item}}"> 去打印 </view>
+                <view class="queren" bindtap="printing"  data-print="{{item}}"> 去打印 </view>
               
           </view>
             </view>
@@ -189,8 +189,8 @@
           
                 <!-- <view class="printdata">打印数据</view> -->
           
-                 <scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
-                 <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+              <scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
+                 <canvas  canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
                </scroll-view>
             
                <view class="bj2 listTitle2"    bindtap="print" ><text>打印</text></view>

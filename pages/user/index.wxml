@@ -238,7 +238,7 @@
     </view>
     <view class="shop-box" data-index="15" bindtap="goToPage">
         <view>
-        <image src="{{imgulr}}wd-cwpey.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-pslb.png" style="width:37rpx;height:39rpx"></image>
     </view>
       <text>成为配送员</text>
     </view>

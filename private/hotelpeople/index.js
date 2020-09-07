@@ -23,7 +23,6 @@ Page({
     paid:[],//已付款
     unaccepted:[],//待验收
     completed:[],//已经完成
-    wqr:"",
     wfk:"",
     yfk:"",
     dys:"",
@@ -135,17 +134,23 @@ Page({
 
   let items = e.currentTarget.dataset
 
-    for(let i in this.data.hoteList){
+  console.log("支付Id",items.id)
+
+  wx.navigateTo({
+    url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
+  })
+
+    // for(let i in this.data.hoteList){
       
-        if(this.data.hoteList[i].price == 0.00){
-          return 
-        }else{
-          wx.navigateTo({
-            url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
-          })
+    //     if(this.data.hoteList[i].price == 0.00){
+    //       return 
+    //     }else{
+    //       wx.navigateTo({
+    //         url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
+    //       })
          
-        }
-    }
+    //     }
+    // }
    
        
      
@@ -221,7 +226,7 @@ Page({
          console.log("商品",res1.data.data.data)
   
   
-        let wqr=[],wfk=[],yfk=[],dys=[],ywc=[]
+        let wfk=[],yfk=[],dys=[],ywc=[]
   
      
 
@@ -230,9 +235,7 @@ Page({
       for(let i of res1.data.data.data){
         if(i.juese == 1){
           if(userid == i.user_id){
-        if(i.status == 0){
-          wqr.push(i)
-        }else if (i.status == 1){
+         if (i.status == 1 || i.status == 0){
           wfk.push(i)
         }else if (i.status == 2){
           yfk.push(i)
@@ -244,9 +247,7 @@ Page({
       }else{
       
           // console.log("22222222222",i)
-          if(i.status == 0){
-            wqr.push(i)
-          }else if (i.status == 1){
+          if (i.status == 1 || i.status == 0){
             wfk.push(i)
           }else if (i.status == 2){
             yfk.push(i)
@@ -259,19 +260,19 @@ Page({
       }
     }
 
+    console.log("未付款",wfk)
+
         let currentTab
 
         if(that.data.first){
-         if(wqr.length != 0 ){
+         if(wfk.length != 0){
            currentTab = 1
-         }else if(wfk.length != 0){
-           currentTab = 2
          }else if(yfk.length != 0){
-           currentTab = 3
+           currentTab = 2
          }else if(dys.length != 0){
-           currentTab = 4 
+           currentTab = 3
          }else if(ywc.length != 0){
-           currentTab = 5
+           currentTab = 4
          }
         }
 
@@ -280,7 +281,7 @@ Page({
         }
 
        this.setData({
-          wqr,wfk, yfk, dys,ywc,currentTab
+          wfk, yfk, dys,ywc,currentTab
        })
 
       
@@ -288,7 +289,7 @@ Page({
 
       let params = {
         type:1,
-        status:that.data.currentTab - 1
+        status:that.data.currentTab
       }
       
     let res = await ajax({
@@ -313,9 +314,7 @@ Page({
       // 如果角色不是7 只能看到userid相同的
       if(i.juese == 1){
         if(userid == i.user_id){
-          if(params.status == 0){
-            unconfirmed.push(i)
-          }else if(params.status == 1){
+          if(params.status == 1 || params.status == 0){
             unpaid.push(i)
           }else if(params.status == 2){
             paid.push(i)
@@ -327,9 +326,7 @@ Page({
       }else{
        
 
-          if(params.status == 0){
-            unconfirmed.push(i)
-          }else if(params.status == 1){
+          if(params.status == 1 || params.status == 0){
             unpaid.push(i)
           }else if(params.status == 2){
             paid.push(i)
@@ -344,7 +341,7 @@ Page({
 
 
 
-    // console.log("unconfirmed",unconfirmed)
+    console.log("unpaid",unpaid)
     // console.log("paid",paid)
     this.setData({
       unconfirmed,unpaid,paid,unaccepted,completed

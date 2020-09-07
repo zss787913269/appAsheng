@@ -136,7 +136,7 @@
 			
 			</view>
 			<view class="dbox">
-					<view>规格：</view>
+					<view>备注：</view>
 					<input placeholder="请输入规格"  bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input>
 			</view> 
 

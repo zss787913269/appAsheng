@@ -280,54 +280,52 @@ Page({
       })
     }
   },
- 
 
   printing: function (e) { //生成打印数据
-
     let print = e.currentTarget.dataset.print.details
-
-    console.log(print)
-   
+    let item = e.currentTarget.dataset.print
+    let p = e.currentTarget.dataset.print.total_price
     lpapi.openPrinter('') //连接打印机    为空就是列表第一个
-    var width = 100;
-    var height = 70* print.length ;
-    // let height2 = 200* print.length;
-
-
-
+    var width = 70;
+    // var height = 80 ;
+    var height = 40* print.length ;
     lpapi.startDrawLabel('test', this, width, height, 0);
-
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
+    y = y + 5
+      lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 3)
+      y = y + 5
     for (let i = 0; i <print.length; i++) {
-  
-      lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
-      y = y + 15
-      lpapi.drawText(`总价：${print[i].total_price}`, 0, y,5)
-      y = y + 15
-      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
-      y = y + 10
-      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
-      y = y + 10
+      y = y + 5
+      lpapi.drawText(`商品名：${print[0].title}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`单价：${print[0].price}`, 0, y,5)
+      y = y + 5
+      lpapi.drawText(`总价：${print[0].total_price}`, 0, y,5)
+      y = y + 5
+      lpapi.drawText(`数量：${print[0].buy_number}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`规格：${print[0].specvalue}`, 0, y, 5)
+      y = y + 5
       lpapi.drawText(`备注：`, 0, y, 5)
-      y = y + 25
-  
+      y = y + 5
     }
-
+      y = y + 15
+      lpapi.drawText(`总价：${p}`, 0, y, 5)
+      y = y + 15
        lpapi.endDrawLabel();
-  
     this.toggleDialog()
-    // this.setData({
-    //   canvasHeight: height2,
-    // })
   },
+
+ 
   
-  print: function () {
+  print: function () {//点击打印按钮
     lpapi.print(function () {
-      wx.showToast({
-        title: '打印成功',
-      })
+        wx.showToast({
+          title: '打印成功',
+          icon:"none"
+        })
     })
   },
   //zym

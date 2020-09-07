@@ -34,6 +34,8 @@ Page({
     })
 
     //console.log(options)
+    // 青秀区 名族大道131号航洋国际5楼潮牛海记
+    // 电话好吗 15078377841
 
     if(options.enter == 4){
       that.setData({
@@ -269,6 +271,8 @@ Page({
     }
     
   },
+
+  
   async getHotelOrderDetail(id) {
 
     let that = this

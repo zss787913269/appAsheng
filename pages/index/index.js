@@ -894,7 +894,7 @@ Page({
 
 
 
-    // console.log('第三', res.data.data);
+    console.log('第三', res.data.data);
     if (res.data.code == 0) {
     
       let arr = res.data.data
@@ -1471,6 +1471,7 @@ Page({
   async commodity() {
     let that = this
     let spex = []
+    
     for (var i = 0; i < that.data.tableid.length; i++) {
       for (let j in that.data.tableid[i].value) {
         if (that.data.tableid[i].value[j] == true) {

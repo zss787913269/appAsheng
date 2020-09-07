@@ -247,7 +247,6 @@ align-items:flex-end;
   /* background-color: #f5f5f5 !important; */
   background-color: #fff !important;
   border-top: 1rpx solid #F0F0F0;
-  
 }
 
 
