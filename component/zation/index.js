@@ -112,7 +112,7 @@ Page({
             wx.setStorageSync('userid', res.data.data.id)
             wx.setStorageSync('hotel_juese', res.data.data.hotel_juese)
               app.globalData.token = res.data.data.token
-              // console.log("用户id",res);
+              console.log("用户信息",res);
 
           }
         })
