@@ -177,34 +177,33 @@ Page({
     })
     let hotelInfo = res.data.data
 
-    console.log(hotelInfo)
    
-    let userid = wx.getStorageSync('userid')
-    let htype,roleId
-
-    console.log("hotelInfo.userid",hotelInfo.user_id)
-     console.log("userid",userid)
-
-    if(hotelInfo.user_id != userid){
-        htype = Number(hotelInfo.usertype)
-        roleId = Number(hotelInfo.usertype)
-        this.setData({
-          show:false
-        })
-    }else{
-       htype = Number(hotelInfo.type) - 1
-       roleId = Number(hotelInfo.type)
-       this.setData({
-        show:true
-      })
-    }
-    console.log("htype",htype)
-    console.log("roleId",roleId)
 
     if (res.data.data != null) {
+
+      console.log(hotelInfo)
+   
+      let userid = wx.getStorageSync('userid')
+      let htype,roleId
+  
+   
+  
+      if(hotelInfo.user_id != userid){
+          htype = Number(hotelInfo.usertype)
+          roleId = Number(hotelInfo.usertype)
+          this.setData({
+            show:false
+          })
+      }else{
+         htype = Number(hotelInfo.type) - 1
+         roleId = Number(hotelInfo.type)
+         this.setData({
+          show:true
+        })
+      }
+   
   
       that.setData({
-      
         qrCode: true,
         fullName: hotelInfo.name, //姓名
         hotelName: hotelInfo.h_name, //酒店名

@@ -1,46 +1,87 @@
+<view wx:if="{{false}}">
+	<view class="title">
+		<text class="title1" >店铺名：{{shopInfo.name}}</text>
+		<text class="title2">账期：{{shopInfo.number}}天</text>
+	</view>
 
-<view >
-  <view class="title">
-        <text class="title1" >店铺名：{{shopInfo.name}}</text>
-         <text class="title2">账期：{{shopInfo.number}}天</text>
-  </view>
+	<view class="buttom">
+		<view class="header">
+			<view class="zhon" bindtap="addClass">
+				<text>添加商品</text>
+			</view>
+		</view>
 
-  <view class="buttom" >
-    <view class="header">
-      <view class="zhon" bindtap="addClass">
-        <text>添加商品</text>
-      </view>
-    </view>
-
-  <view class="mylist">
-    <text  bindtap="clickList"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">在售商品</text>
-    <text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">下架商品</text>
-  </view>
+		<view class="mylist">
+			<text  bindtap="clickList"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">在售商品</text>
+			<text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">下架商品</text>
+		</view>
 
 
-   <view class="tbody">
+		<view class="tbody">
 
-    <text >数量：{{listData.length}}</text>
-      <view class="table">
-        <block wx:for="{{listData}}" wx:key="index">
-         <view class="mytr">
-          <view class="tr">
-            <view class="td">
-              <text>{{item.title}}</text>
-              <text>产品描述：<text wx:for="{{item.show_keyword}}" wx:for-item="itemName" wx:key="index">{{itemName}}</text></text>
-            </view>
-            <view class="td">{{item.price}}元</view>
-            <view class="td">
-              <text class="color" bindtap="deleteS" data-id="{{item.id}}">删除</text>
-              <text class="colortwo" bindtap="editS" data-item="{{item}}" data-id="{{item.id}}" data-name="{{item.title}}">编辑</text>
-              <text class="color" bindtap="xiajia" data-id="{{item.id}}" wx:if="{{listindex == 1}}">下架</text>
-            </view>
-          </view>
-         </view>
-        </block>
-      </view>
-    </view>
+			<text >数量：{{listData.length}}</text>
+			<view class="table">
+				<block wx:for="{{listData}}" wx:key="index">
+					<view class="mytr">
+						<view class="tr">
+							<view class="td">
+								<text>{{item.title}}</text>
+								<text>产品描述：<text wx:for="{{item.show_keyword}}" wx:for-item="itemName" wx:key="index">{{itemName}}</text></text>
+							</view>
+							<view class="td">{{item.price}}元</view>
+							<view class="td">
+								<text class="color" bindtap="deleteS" data-id="{{item.id}}">删除</text>
+								<text class="colortwo" bindtap="editS" data-item="{{item}}" data-id="{{item.id}}" data-name="{{item.title}}">编辑</text>
+								<text class="color" bindtap="xiajia" data-id="{{item.id}}" wx:if="{{listindex == 1}}">下架</text>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
 
-  </view>
+	</view>
+
+</view>
+
+<view class="shop-top">
+	<view class="top-title">
+		<view class="title-img">
+			<image src="../../images/user/splb-sptb.png"></image>
+			<text>{{shopInfo.name}}</text>
+		</view>
+		<view class="day"><text>账期：{{shopInfo.number}}天</text></view>
+	</view>
+</view>
+
+<view class="shop-center">
+	<view class="shopadd" bindtap="addClass"><text>添加商品</text></view>
+	<view class="mylist">
+		<text  bindtap="clickList"  data-index="1" class="{{listindex == 1 ? 'shoplist_active' : 'shoplist'}}" >在售商品</text>
+		<text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist_active' : 'shoplist'}}" >下架商品</text>
+	</view>
+</view>
+
+<view class="shop-main">
+	<view class="shop-box" wx:for="{{listData}}" wx:key="index">
+		<view class="item">
+			<view class="item-top">
+				<text class="item-title">{{item.title}}</text>
+				<text class="ms">产品描述：<text wx:for="{{item.show_keyword}}" wx:for-item="itemName" wx:key="index">{{itemName}}</text></text>
+				<!-- <text class="ms">商品描述：默认默认</text> -->
+			</view>
+			<view class="item-price">
+				<text>￥{{item.price}}元</text>
+			</view>
+		</view>
+
+		<view class="item-box">
+			<view class="del" bindtap="deleteS" data-id="{{item.id}}"><text>删除</text></view>
+			<view class="del edit" bindtap="editS" data-item="{{item}}" data-id="{{item.id}}" data-name="{{item.title}}"><text>编辑</text></view>
+			<view class="del" bindtap="xiajia" data-id="{{item.id}}" wx:if="{{listindex == 1}}"><text>下架</text></view>
+		</view>
+
+
+	</view>
 
 </view>

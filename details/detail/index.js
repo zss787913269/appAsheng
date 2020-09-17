@@ -149,13 +149,21 @@ Page({
     let that = this
     let id = e.currentTarget.dataset.id
     let res = await ajax({
-      url: 'api/staff/HotelCompleteOrderDetail',
+      url: 'api/order/HotelCompleteOrderDetail',
       method: 'POST',
       data: {
         id
       }
     })
-    that.getHotelOrderDetail(that.data.shopId)
+    if(res.data.code == 0){
+      that.getHotelOrderDetail(that.data.shopId)
+    }else{
+      wx.showToast({
+        title: res.data.msg,
+        icon:"none"
+      })
+    }
+   
  
   },
   async receipt(e) { //接单

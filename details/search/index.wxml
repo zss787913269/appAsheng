@@ -1,17 +1,31 @@
 <wxs src="./index.wxs" module="utils" />
 <view class="header" >
   
-  <view>
-    <input placeholder="请输入" bindinput="int" value="{{value}}">
+  <view class="myinputbox">
+		<image src="../../images/user/rmss-fdj.png"></image>
+    <input placeholder="搜索商品" placeholder-class="placeholder" bindinput="int" value="{{value}}">
     </input>
+		<view class="user-header-name" bindtap="searchResult" wx:if="{{showsearch}}">
+     <text class="with">搜索</text>	
+ 	 </view>
+			<view class="user-header-name" bindtap="clearseach" wx:else>
+      <text class="with">清空</text>	
+ 	 </view>
   </view>
-  <view class="user-header-name" bindtap="searchResult">
-     <text class="with">搜索</text>
-  </view>
+ 
 </view>
 
 
-	<view class="sebtn" wx:if="{{true}}" bindtap="toggleDialog">添加你需要的商品</view>
+	<view class="nolist" wx:if="{{showbtn}}">
+
+		<view class="yuan">
+			<image  src="../../images/user/rmss-qs.png"></image>
+		</view>
+		
+		<view class="want"><text>没有找到想要的商品？</text></view>
+		<view class="addshop"  bindtap="showModal2"><text>添加您需要的商品</text></view>
+	</view>
+
 
 <view class="hotSearch" wx:if="{{false}}" >
 <!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
@@ -52,9 +66,10 @@
 						</view>
 					</view>
 					<!-- <view class="bottomName" bindtap="toOldFood" data-value="{{item.name}}"> -->
-						<view class="bottomName" >
+				<!-- <view class="bottomName" >
 					<i class="fal fa-angle-double-right myri"></i>
-					<text class="r2" >点击查看新菜推荐</text></view>
+					<text class="r2" >点击查看新菜推荐</text>
+					</view> -->
 				</view>
 					
 	
@@ -93,7 +108,7 @@
           <input placeholder="请输入备注" placeholder-style="color:rgba(170,170,170,1);font-size:24rpx;" bindinput="modalInput" data-name="inputBz"></input>
         </view>
 				<view class="liang">
-					<view class="mycount" >购买数量 </view>
+					<!-- <view class="mycount" >购买数量 </view>
 						<view class="addbox">
 							<view  class="jiabox" bindtap="bindPlus">
 							<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
@@ -104,49 +119,71 @@
 						<view  class="jiabox" bindtap="bindMinus">
 						<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
 						</view>
-						</view>
+						</view> -->
 				</view>
 
 				<view class="mybottom">
-					<view class="btn1" bindtap="determine">
+					<view class="btn2" >
+					<!-- <image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
+						<text>个人采购</text> -->
+					
+						
+								<view class="addbox">
+									<view  class="jiabox" bindtap="bindPlus">
+										<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
+									</view>
+									<view class="numbercount">
+										<input type="number" bindchange="bindManual" value="{{num}}" />
+									</view>
+									<view  class="jiabox" bindtap="bindMinus">
+										<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
+									</view>
+								</view>
+		
+
+					</view>
+						<view class="btn1" bindtap="determine">
 						<image class="gscg1" src="../../images/index/gwc-gscg@2x.png"></image>
-						<text>酒店采购</text>
+						<text>加入购物车</text>
 					</view>
-					<view class="btn2" bindtap="clickselet">
-					<image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
-						<text>个人采购</text>
-					</view>
+					
 				</view>
 			</view>
 
 
 
-<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
-  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
-  <view class="zan-dialog__mask" bindtap="toggleDialog" />
-  <view class="zan-dialog__container">
-    <view  class="mybbox">
-			<view class="dbox">
-					<view>商品名：</view>
-					<input placeholder="请输入商品名" bindinput="inputname"  value="{{title}}" placeholder-class="placeholder"></input>
-			</view>
-			<view class="dbox">
-					<view>数量：</view>
-					<input placeholder="请输入商品数量" bindinput="inputnum" value="{{num}}"  placeholder-class="placeholder"></input>
-			
-			</view>
-			<view class="dbox">
-					<view>备注：</view>
-					<input placeholder="请输入规格"  bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input>
-			</view> 
 
-			<view>
-				<text class="color">此商品：临时划价为6.00元，后期结算，多还少补</text>
+
+<view class="cover_screen1" bindtap="hideBuyModal2" wx:if="{{showModalStatus2}}"></view>
+<view animation="{{animationData}}" class="buy_box1" wx:if="{{showModalStatus2}}">
+	<view class="myb1">
+
+		<view class="mybbox1">
+			<view class="dbox1">
+				<view class="text-box1"><text>商品名：</text></view>
+				<view class="input-box1"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}" placeholder-class="placeholder"></input></view>
+			</view>
+			<view class="dbox1">
+				<view class="text-box1"><text>数    量：</text></view>
+				<view class="input-box1"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}" placeholder-class="placeholder"></input></view>
+
+			</view>
+			<view class="dbox1">
+				<view class="text-box1"><text>备    注：</text></view>
+				<view class="input-box1"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input></view>
+			</view>
+
+			<view class="tip1">
+				<text >此商品：临时划价为10.00元，后期结算，多还少补</text>
 			</view>
 
 		</view>
-		  <view class="ebox" ><text class="quxiao"  bindtap="toggleDialog">取消</text><text class="queren" bindtap="queren">确认</text></view>
+		<view class="ebox1">
+			<text class="green"  bindtap="hideBuyModal2">取消</text>
+			<text class="yellow" bindtap="queren">确认</text>
+		</view>
 
 
-  </view>
+
+	</view>
 </view>

@@ -119,44 +119,31 @@ Page({
       method: 'post',
       data: params
     })
-    // is_shelves
-    console.log("获取店铺商品",res.data.data.data)
-    let listData = res.data.data.data.data
-    // let lineList = [],xiajiaList = []
-    // for(let i of listData){
-    //     if(i.is_shelves == 0){
-    //       xiajiaList.push(i)
-    //     }else{
-    //       lineList.push(i)
-    //     }
-    // }
 
-    // this.setData({
-    //   lineList,xiajiaList
-    // })
-
-    // console.log("lineList",lineList)
-    // console.log("xiajiaList",xiajiaList)
-
-
-
-
-    for(var i = 0; i<listData.length;i++){
-      listData[i].show_keyword = JSON.parse(listData[i].show_keyword)
-    }
     if(res.data.code == 0){
-      ////console.log(listData)
-      that.setData({
-        listData
-      })
-    }else{
-      wx.showToast({
-        title:res.data.msg,
-        icon: 'none',
-        duration: 3000,
-      })
+      console.log("获取店铺商品",res.data.data.data)
+      let listData = res.data.data.data.data
+   
+  
+      for(var i = 0; i<listData.length;i++){
+        listData[i].show_keyword = JSON.parse(listData[i].show_keyword)
+      }
+      if(res.data.code == 0){
+        ////console.log(listData)
+        that.setData({
+          listData
+        })
+      }else{
+        wx.showToast({
+          title:res.data.msg,
+          icon: 'none',
+          duration: 3000,
+        })
+      }
+  
     }
 
+    
   },
   deleteS(e) {    //删除店铺商品
     var that = this

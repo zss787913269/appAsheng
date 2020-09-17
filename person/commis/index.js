@@ -90,7 +90,7 @@ Page({
       wx:wx.navigateTo({
         url: `/person/details/index?grade=${index}&id=${id}`,
       })
-    }else if(index == 2){   //二级人脉
+    }else if(index == 2){   //二级人脉 
       wx: wx.navigateTo({
         url: `/person/details/index?grade=${index}&id=${item.id}&pid=${item.pid}`,
       })

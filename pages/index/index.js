@@ -283,7 +283,7 @@ Page({
         duration: 3000
       })
       this.getcart()
-      wx.navigateTo({
+      wx.switchTab({
         url: '/private/hotelpeople/index',
       })
     } else {
@@ -466,6 +466,7 @@ Page({
       method: "post"
     })
     let hotelCount, pcount
+    console.log(res3.data)
     for (let i of res3.data.data) {
       
       if (i.is_purchase == 1) {
@@ -483,8 +484,9 @@ Page({
       pcount = 0
     }
     
-    let mycarnum = Number(hotelCount) + Number(pcount)
+    let mycarnum = Number(hotelCount)
 
+      
 
     console.log("数量",mycarnum)
 
@@ -501,7 +503,10 @@ Page({
    
   },
   onLoad: function (options) {
-    //////console.log(options);
+    console.log(options);
+
+    
+   
     var that = this
     if (options.referrer !== undefined) {
       wx.setStorageSync('referrer', options.referrer);

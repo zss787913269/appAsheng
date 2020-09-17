@@ -20,9 +20,9 @@ Page({
     shopOrderList: [], //未接单
     shopCompleteList: [], //已完成
     first: true,
-    dayTime:"",
+    dayTime: "",
     showDialog: false,
-    shouhuo:""
+    shouhuo: ""
   },
   toggleDialog() {
     this.setData({
@@ -35,20 +35,20 @@ Page({
   //   this.getShopList(this.data.currentTab) //未接订单
 
   // },
-  onShow(){
+  onShow() {
     this.getShopList(this.data.currentTab) //未接订单
   },
-  goDetail(e){
+  goDetail(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: "/details/detail/index?id="+id,
+      url: "/details/detail/index?id=" + id,
     })
 
   },
-  detalis(e){    //跳转去详情页
+  detalis(e) { //跳转去详情页
 
     console.log(e.currentTarget.dataset.shouhuo)
-    
+
     wx.navigateTo({
       url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
     })
@@ -56,7 +56,7 @@ Page({
   //点击切换列表
   clickList(e) {
     let index = e.currentTarget.dataset.index
-    
+
     this.setData({
       listindex: index
     })
@@ -73,13 +73,13 @@ Page({
 
     let currentTab = this.data.currentTab
 
-    if(currentTab != 3){
+    if (currentTab != 3) {
       that.getShopList(currentTab)
-    }else{
+    } else {
       that.getOkList()
     }
 
- 
+
 
   },
   async noReceiptConfirm(e) { //退换货确认
@@ -135,6 +135,7 @@ Page({
       })
     }
   },
+
   async onekey(e) { // 按照订单 一键接单
     var that = this
     let id = e.currentTarget.dataset.id
@@ -280,29 +281,65 @@ Page({
       })
     }
   },
+  allprint() { //生成打印数据
+    // 全部商品打印
+    this.toggleDialog()
+    let item = this.data.shopOrderList[0]
+    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
+    var width = 70;
+    var height = 40 * item.length;
+    lpapi.startDrawLabel('test', this, width, height, 0);
+    lpapi.setItemOrientation(0)
+    lpapi.setItemHorizontalAlignment(0);
+    let y = 5
+    // y = y + 5
+    for (let i of item) {
+      y = y + 5
+      lpapi.drawText(`类别：${i.name}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`类别数量：${i.goods.length}`, 0, y, 5)
+      y = y + 5
+      for (let j of i.goods) {
+        y = y + 5
+        lpapi.drawText(`商品名：${j.title}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`单价：${j.price}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`总价：${j.total_price}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`数量：${j.buy_number}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`规格：${j.specvalue}`, 0, y, 5)
+        y = y + 5
+      }
+    }
+    lpapi.endDrawLabel();
 
+
+  },
   printing: function (e) { //生成打印数据
+    this.toggleDialog()
     let print = e.currentTarget.dataset.print.details
     let item = e.currentTarget.dataset.print
     let p = e.currentTarget.dataset.print.total_price
     lpapi.openPrinter('') //连接打印机    为空就是列表第一个
     var width = 70;
     // var height = 80 ;
-    var height = 40* print.length ;
+    var height = 40 * print.length;
     lpapi.startDrawLabel('test', this, width, height, 0);
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
     y = y + 5
-      lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 3)
-      y = y + 5
-    for (let i = 0; i <print.length; i++) {
+    lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 3)
+    y = y + 5
+    for (let i = 0; i < print.length; i++) {
       y = y + 5
       lpapi.drawText(`商品名：${print[0].title}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`单价：${print[0].price}`, 0, y,5)
+      lpapi.drawText(`单价：${print[0].price}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`总价：${print[0].total_price}`, 0, y,5)
+      lpapi.drawText(`总价：${print[0].total_price}`, 0, y, 5)
       y = y + 5
       lpapi.drawText(`数量：${print[0].buy_number}`, 0, y, 5)
       y = y + 5
@@ -311,21 +348,21 @@ Page({
       lpapi.drawText(`备注：`, 0, y, 5)
       y = y + 5
     }
-      y = y + 15
-      lpapi.drawText(`总价：${p}`, 0, y, 5)
-      y = y + 15
-       lpapi.endDrawLabel();
-    this.toggleDialog()
+    y = y + 15
+    lpapi.drawText(`总价：${p}`, 0, y, 5)
+    y = y + 15
+    lpapi.endDrawLabel();
+
   },
 
- 
-  
-  print: function () {//点击打印按钮
+
+
+  print: function () { //点击打印按钮
     lpapi.print(function () {
-        wx.showToast({
-          title: '打印成功',
-          icon:"none"
-        })
+      wx.showToast({
+        title: '打印成功',
+        icon: "none"
+      })
     })
   },
   //zym
@@ -339,41 +376,46 @@ Page({
     //  type = 3   isok = 2 已完成
     // 
     let that = this
-    let params, listindex = this.data.listindex,currentTab
+    let params, listindex = this.data.listindex,
+      currentTab
 
     let res2 = await ajax({
       url: 'api/store/OrderCount',
     })
-    let countList = res2.data.data
 
-    if(this.data.first){
+    console.log("商家订单", res2.data)
+    if (res2.data.code == 0) {
 
-      if(countList[0] != 0){
-        currentTab = 1
-      }else if(countList[1] != 0){
-        currentTab = 2
-      }else if (countList[2] != 0){
-        currentTab = 3
+      let countList = res2.data.data
+
+      if (this.data.first) {
+
+        if (countList[0] != 0) {
+          currentTab = 1
+        } else if (countList[1] != 0) {
+          currentTab = 2
+        } else if (countList[2] != 0) {
+          currentTab = 3
+        }
+        num = currentTab
+
+        that.setData({
+          first: false
+        })
       }
-      num = currentTab
 
-      that.setData({
-        first:false
-      })
-    }
-
-      if(currentTab == undefined){
+      if (currentTab == undefined) {
         currentTab = that.data.currentTab
       }
 
 
 
-    this.setData({
-      count1: countList[0],
-      count2: countList[1],
-      count3: countList[2],
-      currentTab:currentTab
-    })
+      this.setData({
+        count1: countList[0],
+        count2: countList[1],
+        count3: countList[2],
+        currentTab: currentTab
+      })
 
 
 
@@ -382,66 +424,74 @@ Page({
 
 
 
-    if (num == 1) {
-      params = {
-        type: 2,
-        isok: num - 1,
-      }
-    } else if (num == 2) {
-
-      if (listindex == 1) {
+      if (num == 1) {
         params = {
-          type: 3,
+          type: 4,
           isok: num - 1,
         }
-      } else {
-        params = {
-          type: 2,
-          isok: num - 1,
+      } else if (num == 2) {
+
+        if (listindex == 1) {
+          params = {
+            type: 2,
+            isok: 1,
+          }
+        } else {
+          params = {
+            type: 4,
+            isok: 1,
+          }
         }
       }
-    }
 
-    console.log(params)
-    let res = await ajax({
-      url: "api/order/ShopOrderPrint",
-      method: 'POST',
-      data: params
-    })
-    console.log("获取商家订单",res)
 
-    if (res.data.code == 0) {
-      // setTimeout(function () {
-      //   wx.hideLoading()
-      // }, 100)
-      that.setData({
-        shopOrderList: res.data.data,
+      console.log(params)
+      let res = await ajax({
+        url: "api/order/ShopOrderPrint",
+        method: 'POST',
+        data: params
+      })
+      console.log("获取商家订单", res.data.data)
+
+      if (res.data.code == 0) {
+        // setTimeout(function () {
+        //   wx.hideLoading()
+        // }, 100)
+        that.setData({
+          shopOrderList: res.data.data,
+        })
+      }
+
+    }else{
+      wx.showToast({
+        title: res2.data.msg,
+        icon:"none"
       })
     }
 
 
   },
-  getTime(){
-     var day2 = new Date();
-     day2.setTime(day2.getTime());
-    var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+  getTime() {
+    var day2 = new Date();
+    day2.setTime(day2.getTime());
+    var s2 = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate();
     this.setData({
-      dayTime:s2
+      dayTime: s2
     })
   },
-  async getOkList(){
+  async getOkList() {
     let that = this
 
     let res = await ajax({
       url: 'api/order/ShopOrderOK',
-      method:"POST"
+      method: "POST"
     })
-    console.log("shopCompleteList",res)
+    console.log("shopCompleteList", res)
     this.setData({
-      shopCompleteList:res.data.data
+      shopCompleteList: res.data.data
     })
-  
-    if(res.data.code == 0){
+
+    if (res.data.code == 0) {
       that.getShopInfo()
       that.getTime()
     }

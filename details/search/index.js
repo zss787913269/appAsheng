@@ -10,6 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showsearch:true,
+    showModalStatus2: false, //遮罩的显示与隐藏
     showDialog: false,
     jgNumber: false,
     inputBz: "",
@@ -30,8 +32,8 @@ Page({
     num:1,//商品数量
     showbtn:false,
     title:"",
-    num:"",
-    spec:""
+    spec:"",
+    num2:""
   },
 
   /**
@@ -42,7 +44,7 @@ Page({
     that.getHotSearch()
     that.getMeSearch()
     // that.getSpecDetail()
-    console.log(options.where)
+    //console.log(options.where)
     if (options.where == 'food' && options.where == 'cook'){
       that.setData({
         historicalRecord:false
@@ -51,6 +53,54 @@ Page({
     that.setData({
       where:options.where
     })
+  },
+
+  hideBuyModal2() {
+
+    // this.changeState()
+    // 隐藏遮罩层
+    this.setData({
+      title:"",num2:"",spec:""
+    })
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus2: false
+      })
+
+    }.bind(this), 200)
+  },
+    // 遮罩层显示
+  showModal2() {
+    // ////////console.log("点击了订单")
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus2: true
+    })
+    setTimeout(() => {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export() // export 方法每次调用后会清掉之前的动画操作。
+      })
+    }, 200)
   },
   inputname(e){
     let value = e.detail.value;
@@ -63,7 +113,7 @@ Page({
     let value = e.detail.value;
 
     this.setData({
-      num:value
+      num2:value
     })
   },
   inputspec(e){
@@ -76,56 +126,72 @@ Page({
 
     let that = this
 
-    let params = {
-      title:this.data.title,
-      spec:this.data.spec
-      
+
+    if(this.data.title == ""){
+      wx.showToast({
+        title: '请输入商品名字',
+        icon:'none'
+      })
+    }else if(this.data.num2 == ""){
+      wx.showToast({
+        title: '请输入商品数量',
+        icon:'none'
+      })
+    }else{
+
+      let params = {
+        title:this.data.title,
+        spec:this.data.spec
+        
+      }
+  
+        let res = await ajax({
+          url: '/api/goods/addgoods',
+          method: 'post',
+          data:params
+        })
+          //console.log("购买数量",that.data.num)
+        if(res.data.code == 0){
+          let res2 = await ajax({
+            url: 'api/cart/save',
+            method: 'POST',
+            data: {
+              is_purchase: 1,
+              goods_id: res.data.data.goods_id,
+              stock: that.data.num,
+              spec: [res.data.data.spec],
+              goods_mark: that.data.spec
+            }
+          })
+  
+          if (res2.data.code == 0) {
+            wx.showToast({
+              title: "加入购物车成功",
+              icon: 'none',
+              duration: 3000
+            })
+            that.hideBuyModal2()
+           
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 3000
+            })
+            that.hideBuyModal2()
+          }
+  
+        }
     }
 
-      let res = await ajax({
-        url: '/api/goods/addgoods',
-        method: 'post',
-        data:params
-      })
- 
-      if(res.data.code == 0){
-        let res2 = await ajax({
-          url: 'api/cart/save',
-          method: 'POST',
-          data: {
-            is_purchase: 1,
-            goods_id: res.data.data.goods_id,
-            stock: that.data.num,
-            spec: [res.data.data.spec],
-            goods_mark: that.data.spec
-          }
-        })
 
-        if (res2.data.code == 0) {
-          wx.showToast({
-            title: "加入购物车成功",
-            icon: 'none',
-            duration: 3000
-          })
-          that.toggleDialog()
-         
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 3000
-          })
-          that.toggleDialog()
-        }
-
-      }
     
 
    
 
   },
   modalInput(e) {
-    // //////console.log(e.detail.value)
+    // ////////console.log(e.detail.value)
     this.setData({
       inputBz: e.detail.value
     })
@@ -184,6 +250,7 @@ Page({
         }
       }
     }
+    console.log("购买数量",this.data.num)
     let res = await ajax({
       url: 'api/cart/save',
       method: 'POST',
@@ -205,10 +272,10 @@ Page({
       tableKg: '',
       bigid2: ''
     })
-    console.log(res.data)
+    //console.log(res.data)
     if (res.data.code == 0) {
       wx.showToast({
-        title: "加入成功",
+        title: "加入购物车成功",
         icon: 'none',
         duration: 3000
       })
@@ -227,7 +294,7 @@ Page({
     // } else {
 
     // }
-    //////console.log(res)
+    ////////console.log(res)
 
   },
   clickselet: function () { //个人采购加入购物车
@@ -277,7 +344,7 @@ Page({
       method: 'POST',
       data: params
     })
-    ////console.log("params",params)
+    //console.log("params",params)
     
     that.setData({
       tableid: '',
@@ -288,7 +355,7 @@ Page({
       tableKg: '',
       bigid2: ''
     })
-    ////console.log(res)
+    //////console.log(res)
 
     // if(res.data.code == 0){
        wx.showToast({
@@ -365,6 +432,7 @@ Page({
     } else if (num < 1) {
       num = 1
     }
+    console.log(e.detail.value)
     // 将数值与状态写回  
     this.setData({
       num: num
@@ -405,7 +473,7 @@ Page({
          shopPrice: 0
       })
 
-          // //////console.log(tableId[i].title.indexOf("加工"))
+          // ////////console.log(tableId[i].title.indexOf("加工"))
           if (tableId[i].title.indexOf("加工") == 0) {
             that.setData({
               jgNumber: false
@@ -474,7 +542,8 @@ Page({
 
   },
   clickse: function (e) {
-    console.log(e)
+    //console.log(e)
+    this.showModal()
     let that = this
     let id = e.currentTarget.dataset.id
     let tab = e.currentTarget.dataset.item
@@ -493,13 +562,13 @@ Page({
         }
       }
     }
-    console.log("tabCopy",tabCopy)
+    //console.log("tabCopy",tabCopy)
     that.setData({
       tableid: tabCopy,
  
     })
 
-    this.showModal()
+   
 
     this.setData({
       shopid:id,detailList: tabCopy
@@ -540,7 +609,7 @@ Page({
       that.setData({
         hotSearch:res.data.data
       })
-      console.log(that.data.hotSearch)
+      //console.log(that.data.hotSearch)
     },
   async  getMeSearch() {    //获取个人搜索历史
     var that = this
@@ -556,7 +625,7 @@ Page({
      that.setData({
        value:e.currentTarget.dataset.text
      })
-     console.log(that.data.value)
+     //console.log(that.data.value)
     that.toSearchResult()
   },
   int(e){   //获取用户输入的搜索值
@@ -565,31 +634,58 @@ Page({
       value:e.detail.value
     })
 
+    if(e.detail.value == ""){
+      this.setData({
+        searchList:[]
+      })
+    }
+
     
+  },
+  clearseach(){
+    
+    this.setData({
+      value:"",
+      searchList:[],
+      showsearch:!this.data.showsearch
+    })
   },
   async searchResult(){   //
     let that = this
+
+ 
+
     let parmes = {
       keywords:that.data.value,
     }
 
-    console.log(parmes)
+    //console.log(parmes)
 
     let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
 
-    if(res.data.data.length != 0){
+    if(res.data.code == 0){
+      if(res.data.data.length != 0){
     
-      this.setData({
-        searchList:res.data.data, showbtn:false
-      })
+        this.setData({
+          searchList:res.data.data, showbtn:false,showsearch:!this.data.showsearch
+        })
+      }else{
+        this.setData({
+          showbtn:true,
+          showsearch:!this.data.showsearch
+        })
+      }
     }else{
-      this.setData({
-        showbtn:true
+      wx.showToast({
+        title: res.data.msg,
+        icon:"none"
       })
     }
 
+
+
      
-    console.log("搜索结果",res.data)
+    //console.log("搜索结果",res.data)
 
   },
  
@@ -615,20 +711,20 @@ Page({
       id: that.data.shopid,
       spec
     }
-    console.log("params",params)
+    //console.log("params",params)
     let res = await ajax({
       url: '/api/goods/SpecDetail',
       method: 'POST',
       data: params
     })
 
-    console.log("SpecDetail",res.data.data)
+    //console.log("SpecDetail",res.data.data)
     if (res.data.code == 0) {
     
       let price = res.data.data.price
       let imgurl = 'http://second.chchgg.com'+res.data.data.goods.images
       let shopName = res.data.data.goods.title
-      console.log(res.data.data)
+      //console.log(res.data.data)
 
       that.setData({
         shopPrice: price,

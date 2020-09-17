@@ -74,14 +74,7 @@
   color: #ccc;
 }
 .submit{
-  width: 75%;
-  height: 80rpx;
-  text-align: center;
-  margin: 0 auto;
-  line-height: 80rpx;
-  background: #ff9000;
-  color: #fff;
-  border-radius:10rpx;
+
   margin-top:100rpx;  
   margin-bottom:100rpx;  
   

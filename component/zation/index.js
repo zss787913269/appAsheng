@@ -87,12 +87,15 @@ Page({
       }
     });
   },
+
  
   bindGetUserInfo: function (e) {
     console.log(e);
+    let that = this
+  
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
-      var that = this;
+      
       // 获取到用户的信息了，打印到控制台上看下
       wx.request({
         url: 'https://second.chchgg.com/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的
@@ -106,6 +109,7 @@ Page({
           },
           dataType: 'json',
           success(res) {
+            wx.setStorageSync('openid', that.data.openid),
             wx.setStorageSync('token', res.data.data.token),
             wx.setStorageSync('QRcode', res.data.data.referrer_url),
             wx.setStorageSync('enid', res.data.data.enid)
@@ -156,8 +160,11 @@ Page({
     console.log("用户的信息如下：");
     console.log(item)
     setTimeout(function(){
-      wx.switchTab({
-        url: '/pages/index/index'
+      // wx.switchTab({
+      //   url: '/pages/index/index'
+      // })
+      wx.navigateTo({
+        url: "/component/subscribe/index",
       })
     },1000)
      

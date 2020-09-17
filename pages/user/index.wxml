@@ -99,20 +99,21 @@
 
 	<view class="top-bottom">
 		<view class="item">
-			<text class="price">0</text>
-			<text class="text">佣金</text>
-		</view>
-		<view class="item">
-			<text  class="price">{{integral}}</text>
+			<text class="price">0.00</text>
 			<text class="text">积分</text>
 		</view>
-		<view class="item" bindtap="golyj">
-			<text  class="price">{{pledge}}</text>
+    	<view class="item" bindtap="golyj">
+			<text  class="price">0.00</text>
 			<text class="text">履约金</text>
 		</view>
+		<view class="item">
+			<text  class="price">0.00</text>
+			<text class="text">未付款金额</text>
+		</view>
+	
 		<view class="item2" bindtap="gotoikPage" data-url="{{url2}}">
 			<text  class="price">{{balance}}</text>
-			<text class="text">余额(元)</text>
+			<text class="text">余额</text>
 		</view>
 
 	</view>
@@ -141,7 +142,7 @@
 
 </view>
 
-<view class="shop">
+<view class="shop" wx:if="{{showshop}}">
   <view class="shop-title"><text>商铺</text></view>
   <view class="shop-item-box">
     <view class="shop-box" data-index="4" bindtap="goToPage">
@@ -197,7 +198,7 @@
     </view>
   </view>
 </view>
-
+<!-- 
 <view class="shop">
   <view class="shop-title"><text>泔水回收</text></view>
   <view class="shop-item-box">
@@ -213,15 +214,18 @@
     </view>
       <text>员工入口</text>
     </view>
-    <view class="shop-box">
-     
+    <view class="shop-box" data-index="20" bindtap="goToPage">
+     <view>
+        <image src="{{imgulr}}wd-ygrk.png" style="width:37rpx;height:39rpx"></image>
+    </view>
+      <text>分享二维码</text>
     </view>
      <view class="shop-box">
     </view>
   </view>
-</view>
+</view> -->
 
-<view class="shop">
+<view class="shop" wx:if="{{showpeisong}}">
   <view class="shop-title"><text>配送</text></view>
   <view class="shop-item-box">
     <view class="shop-box" data-index="13" bindtap="goToPage">

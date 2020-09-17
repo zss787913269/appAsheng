@@ -15,19 +15,15 @@ page{
   top: 150rpx;
 }
 .itemed{
-  /* width:540rpx; */
-  /* height:320rpx; */
   height: 250rpx;
   background: #fff;
   border-bottom: 1px solid rgba(240,240,240,1);
   display: flex; 
-  margin: 0 auto;
- /* padding-top: 50rpx; */
- box-sizing: border-box;
- /* justify-content: space-between; */
- align-items: center;
- position: relative;
- margin-left: 10rpx;
+  box-sizing: border-box;
+  /* align-items: center; */
+  position: relative;
+  margin-left: 10rpx;
+  margin-top: 50rpx;
 }
 .myimg{
   width: 200rpx !important;
@@ -63,7 +59,7 @@ page{
 .top-title_active2{
   font-size: 26rpx;
   font-weight: 500;
-  margin-top: -40rpx;
+  /* margin-top: -40rpx; */
   color:rgba(255,117,2,1);
   font-family:Source Han Sans CN;
 }
@@ -87,8 +83,18 @@ page{
   display: block;
   text-align: center;
   line-height: 28rpx;
-  margin-top: 14rpx;
+  margin-top: 20rpx;
 
+}
+.cg{
+  font-size: 20rpx;
+}
+.carno{
+  margin-top: 30rpx;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color:rgba(81,81,81,1);
+  font-size: 32rpx;
 }
 .mytext{
   /* margin-top: 14rpx; */
@@ -134,9 +140,10 @@ page{
   background-color: #F2F2F2;
   width: 750rpx;
 }
+
 .bottom{
   width: 100%;
-  height: 130rpx;
+  height: 120rpx;
   text-align: center;
   line-height: 100rpx;
   display: flex;
@@ -144,17 +151,36 @@ page{
   /* justify-content: center;
   align-items: center; */
   position: fixed;
+  
   bottom: 0;
   left: 0;
   background-color: #fff;
 }
 .btno{
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-end;
+}
+.psf{
+  font-size: 26rpx !important;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #6B6B6B;
+  margin-left: 30rpx !important;
+}
+.btno text{
+  
+  font-size: 18rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #6B6B6B;
+  margin-left: 20rpx;
 }
 .btno2{
   display: flex;
   justify-content: flex-end;
+}
+.mybt{
+  display: flex;
 }
 .color{
   color:#ff9000; 
@@ -189,11 +215,24 @@ page{
 }
 .but{
   height: 100rpx;
-  width: 260rpx;
+  width: 230rpx;
   background:rgba(64,177,93,1);
   font-size:30rpx;
   font-family:Source Han Sans CN;
   font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height: 100rpx;
+  margin-bottom: 20rpx;
+}
+.but3{
+  height: 100rpx;
+  width: 230rpx;
+  background: #FF963F;
+  font-size:30rpx;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  line-height: 100rpx;
+  margin-bottom: 20rpx;
   color:rgba(255,255,255,1);
 }
 .but2{
@@ -281,12 +320,17 @@ transform: translate(-50%, -50%) scale(1);
   color: red;
   font-size: 22rpx;
   position: absolute;
-  top:46rpx;
   right:44rpx
+}
+.sstitle{
+  
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
 }
 
 .swiper-tab {
- 
   display: flex;
   height: 81rpx;
   margin-bottom: 20rpx;
@@ -309,6 +353,8 @@ transform: translate(-50%, -50%) scale(1);
 }
 .hotelcount{
   display: block;
+  text-align: center;
+  line-height: 28rpx;
   width:28rpx;
   height:28rpx;
   background:rgba(255,150,63,1);
@@ -361,6 +407,7 @@ transform: translate(-50%, -50%) scale(1);
   flex-direction: column;
   margin-left: 20rpx;
   position: relative;
+ 
   
 }
 .main{
@@ -447,14 +494,20 @@ transform: translate(-50%, -50%) scale(1);
   display: flex;
   justify-content: space-evenly;
   width: 750rpx;
-  margin-bottom: 20rpx;
-  height: 50rpx;
-  margin-top: 20rpx;
+  /* margin-bottom: 20rpx; */
+  height: 80rpx;
+  /* margin-top: 20rpx; */
 }
 
 .shoplist{
   /* border-bottom: 4rpx solid green; */
   color: #40B15D;
+  background-color:#fff;
+  display: block;
+  width: 375rpx;
+  height: 50rpx;
+  opacity: 1;
+
 }
 .shop-name{
  
@@ -499,26 +552,41 @@ transform: translate(-50%, -50%) scale(1);
   display: block;
 }
 .mybbox{
-    margin-left: 100rpx;
+    margin-left: 35rpx;
+    margin-top: 120rpx;
 }
 .dbox{
-  margin-top: 20rpx;
+  margin-top: 34rpx;
+  display: flex;
+  align-items: center;
 }
-.dbox view{
+.text-box{
     
-  font-size: 28rpx;
+  
+  font-size: 32rpx;
   font-family: Source Han Sans CN;
   font-weight: 500;
-  line-height: 33px;
-  color: #666666;
+  color: #323232;
+  width: 128rpx;
 }
 .dbox input{
-  margin-top: 5rpx;
-  width: 420rpx;
-  border: 1rpx solid #333333;
-  border-radius: 10rpx;
-  height: 50rpx;
+  margin-left: 22rpx;
   font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #AAAAAA;
+  width: 500rpx;
+ 
+}
+.input-box{
+  width: 565rpx;
+  height: 64rpx;
+  background: #FFFFFF;
+  border: 1rpx solid #707070;
+  opacity: 1;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
 }
 .placeholder{
   font-size: 24rpx;
@@ -534,10 +602,41 @@ transform: translate(-50%, -50%) scale(1);
 .ebox{
   margin-top: 20rpx;
   display: flex;
-  justify-content: space-evenly;
-  height: 90rpx;
-  width: 650rpx;
-  border-top: 1px solid #F0F0F0;
+  /* justify-content: space-evenly; */
+  height: 100rpx;
+  width: 750rpx;
+  /* border-top: 1px solid #F0F0F0; */
+  position: absolute;
+  bottom:0 ;
+}
+.green{
+  display: block;
+  width: 375rpx;
+  height: 100rpx;
+  background: #40B15D;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
+
+}
+.yellow{
+  display: block;
+  width: 375rpx;
+  height: 100rpx;
+  background: #FF963F;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
 }
 .quxiao{
   display: block;
@@ -579,7 +678,7 @@ transform: translate(-50%, -50%) scale(1);
   align-items: center;
   justify-content: center;
   /* margin-right: 20rpx; */
-  margin-left: 20rpx;
+  margin-left: 50rpx;
   /* margin:20rpx auto; */
 }
 
@@ -587,9 +686,7 @@ transform: translate(-50%, -50%) scale(1);
   display: flex;
   justify-content: space-evenly;
   width: 750rpx;
-  margin-bottom: 20rpx;
-  height: 50rpx;
-  margin-top: 10rpx;
+  
 }
 .titlebox{
   margin-top: 20rpx;
@@ -693,7 +790,7 @@ transform: translate(-50%, -50%) scale(1);
 }
 .main2{
   display: flex;
-  height: 800rpx;
+  height: 900rpx;
   background-color: #FFFFFF;
 }
 .left2{
@@ -711,7 +808,7 @@ transform: translate(-50%, -50%) scale(1);
   border-bottom: 1rpx solid #EBEEF5;
 }
 .shopatt-left{
-  height: 132rpx;
+  height: 140rpx;
   margin-left: 45rpx;
   border-bottom: 1rpx solid #EBEEF5;
 }
@@ -785,11 +882,11 @@ transform: translate(-50%, -50%) scale(1);
   border-top: 1rpx solid #EBEEF5;
   display: flex;
   justify-content: flex-end;
-  
+
 }
 
 .top-title2{
-  font-size: 30rpx;
+  font-size: 26rpx;
   font-family: Source Han Sans CN;
   font-weight: 500;
   color: #585858;
@@ -971,4 +1068,258 @@ transform: translate(-50%, -50%) scale(1);
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: #656565; 
+}
+
+.maina{
+  height: 400rpx;
+  margin-top: 20rpx;
+  background:rgba(255,255,255,1);
+  overflow: hidden;
+  
+}
+.mytitlea{
+  margin-top: 22rpx;
+  margin-left: 48rpx;
+  font-size:22rpx;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color:#868686;
+  opacity:1;
+}
+.top_boxa{
+    height: 300rpx;
+    border-bottom:1rpx solid rgba(235,238,245,1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.imgboxa{
+  margin-top: 30rpx;
+  margin-left:30rpx;
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 650rpx;
+  height: 150rpx;
+}
+.flex-titlea{
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  margin-top: 5rpx;
+  color: #666666;
+}
+.boxfelxa{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.imga{
+  height: 130rpx;
+  width: 120rpx;
+  margin-left: 10rpx;
+  border-radius: 10rpx ;
+
+}
+.flexboxa{
+  float: left;
+  width: 500rpx;
+}
+.morea{
+  position: absolute;
+  right: 33rpx;
+  top: 30rpx;
+  width: 114rpx;
+  height: 46rpx;
+  /* border: 1px solid #40B15D; */
+  opacity: 1;
+  border-radius: 50rpx;
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #fff;
+  background-color: #40B15D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+.timeboxa{
+  margin-left: 48rpx;
+  margin-top: 12rpx;
+  display: flex;
+  justify-content: space-between;
+
+}
+.timea{
+  font-size:22rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(134,134,134,1);
+}
+.oka{
+  margin-right: 23rpx;
+  font-size:26rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(134,134,134,1);
+  opacity:1;
+}
+.alla{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 23rpx;
+  margin-top: 10rpx;
+
+}
+.counta{
+  font-size:22rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(134,134,134,1);
+  opacity:1;
+}
+.pricea{
+  font-size:26rpx;
+  font-family:Source Han Sans CN;
+  font-weight:bold;
+  color:#979797;
+  opacity:1;
+}
+.bottoma{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18rpx;
+  position: relative;
+}
+
+.quxiaoa{
+  width: 172rpx;
+  height: 58rpx;
+  border: 1px solid #868686;
+  opacity: 1;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #868686;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+
+}
+.querena{
+  width: 172rpx;
+  height: 58rpx;
+  border: 1px solid #FF963F;
+  opacity: 1;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF963F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+
+}
+.myaba{
+  position: absolute;
+  left: 14rpx;
+  top: 11rpx;
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #6B6B6B;
+
+}
+.shopbz{
+  margin-left: 20rpx;
+  font-size: 22rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+
+}
+.center-box{
+  position: relative;
+  display: flex;
+}
+.list-box{
+  display: block;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 60rpx;
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+
+}
+.list-box_active{
+  display: block;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 70rpx;
+  background-color: #FFFFFF;
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 34px;
+  color: #40B15D;
+}
+
+
+.cover_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background:rgba(0,0,0,1);
+  opacity:0.57;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+.buy_box {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+  /* padding: 20rpx; */
+  overflow: hidden;
+  height: 688rpx;
+}
+.myb{
+  /* display: flex; */
+  align-items: center;
+  position: relative;
+  height: 568rpx;
+  /* background-color: #FF9000; */
+  /* justify-content: space-between; */
+}
+.tip{
+    
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF7502;
+  margin-top: 57rpx;
+  text-align: center;
 }

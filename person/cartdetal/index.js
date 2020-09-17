@@ -23,6 +23,7 @@ Page({
     paymentId:3,   //支付方式id
     where:'',   //从哪里来
     hoteItem:'',   //酒店订单传的数据
+    addreslistName:""
   },
 
   /**
@@ -85,15 +86,40 @@ Page({
       }
     })
     let paymentList = res.data.data.payment_list
+
+
     console.log("paymentList",res.data.data)
     for (var i = 0; i < paymentList.length; i++) {
       paymentList[i].checked = false
     }
+    let addreslist 
+    let addreslistName
+    let addressMsg = res.data.data.base.address
+      if(res.data.data.base.address == null){
+        let res2 = await ajax({
+          url: '/api/quickorder/getHotel',
+          method: 'get'
+        })
+        console.log("默认地址",res2.data.data)
+        addreslist = `${res2.data.data.region} ${res2.data.data.address}`
+        addreslistName = `${res2.data.data.name} ${res2.data.data.tel}`
+       
+      }else{
+        addreslist = `${addressMsg.region} ${addressMsg.address}`
+        addreslistName = `${addressMsg.name} ${addressMsg.tel}`
+      }
+  
+     
+     
+  
+ 
+
     that.setData({
-      addreslist: res.data.data.base.address, //收货地址信息
+      addreslist: addreslist, //收货地址信息
       payment_list: paymentList, //支付方式
       goods_list: res.data.data.goods_list, //订单商品
       ids: e,
+      addreslistName:addreslistName,
       actual_price: res.data.data.base, //商品价格,
 
     })
@@ -117,7 +143,7 @@ Page({
         method: 'POST',
         data: {
           order_id: that.data.orderId,
-          address_id: that.data.addreslist.id
+          address_id: 85
         }
       })
       //console.log(res)
@@ -152,13 +178,15 @@ Page({
         // 数据设置
         // self.order_item_pay_success_handle(index);
         wx.showToast({
-          title: '支付成功',
+          title: '付款成功,正在跳转页面',
           icon:"none",
           duration:3000
         })
-        wx.reLaunch({
-          url: "/private/hotelpeople/index?idx=2"
-        });
+        setTimeout(function(){
+          wx.switchTab({
+            url: "/private/hotelpeople/index?idx=2"
+          });
+        },2000)
         
 
       } else {
@@ -175,21 +203,27 @@ Page({
 
             // 跳转支付页面
             wx.showToast({
-              title: '付款成功',
-              duration:3000
+              title: '付款成功,正在跳转页面',
+              duration:2000
             })
+
+
+            setTimeout(function(){
+              wx.switchTab({
+                url: "/private/hotelpeople/index?idx=2"
+              });
+            },2000)
+
             // wx.switchTab({
             //   url: "/pages/index/index"
             // });
-            wx.reLaunch({
-              url: "/private/hotelpeople/index?idx=2"
-            });
+       
           },
           fail: function(res) {
             wx.showToast({
-              title: '支付失败',
+              title: '付款失败,正在跳转页面',
               icon:'none',
-              duration:3000
+              duration:2000
             })
             // wx.reLaunch({
             //   url: "/private/hotelpeople/index?idx=2"
@@ -203,7 +237,7 @@ Page({
       wx.showToast({
         title: res.data.msg,
         icon:'none',
-        duration:3000
+        duration:2000
       })
 
     }

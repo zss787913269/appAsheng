@@ -22,14 +22,14 @@
       <view class="main3">
 
         <view class="top_box">
-
+         <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">查看详情</view>
           <view class="mytitle">订单编号：{{item.order_no}}</view>
           <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
           <view class="imgbox">
             <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
           
             <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
-            <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">...</view>
+          
           </view>
           <view class="all">
             <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
@@ -37,7 +37,8 @@
 
         </view>
         <view class="bottom2">
-            <view class="queren"  bindtap="onekeyAll"> 一键接单</view>
+          <view class="hotel_name" >酒店名：{{item.hotelname.h_name}}</view>
+            <view class="queren"  bindtap="onekey" data-id="{{item.id}}"> 一键接单</view>
           
       </view>
         </view>
@@ -60,24 +61,29 @@
 
 
     <view class="main2" wx:if="{{listindex == 1}}">
+    
       <view class="left">
 
         <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true" scroll-with-animation="true">
-          <view wx:for="{{shopOrderList}}" wx:key="unique">
+          <view wx:for="{{shopOrderList[0]}}" wx:key="unique">
+          
             <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
               <text > {{item.name}}</text>
-              <text class="mycount">{{item.goodcount}}</text>
+              <text class="mycount">{{item.goods.length}}</text>
             </view>
           </view>
         </scroll-view>
       </view>
-
+   
       <view class='right'>
+       
         <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
-          <block wx:for="{{shopOrderList}}" wx:key="index">
-            <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
-            
-              <view class="mytitle2" id="{{'inToview'+item.id}}">
+        <view class="goprint" bindtap="allprint"> 去打印 </view>
+          <block wx:for="{{shopOrderList[0]}}" wx:key="index">
+         
+            <view id="{{'inToview'+item.id}}"  class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">{{item.name}}</view>  
+            <view class="shopatt-left" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
+              <view class="mytitle2" >
                 <view class="right-img">
                   <image src="http://second.chchgg.com{{items.images}}"></image>
                 </view>
@@ -112,14 +118,14 @@
           <view class="main">
 
             <view class="top_box">
-
+             <view class="more"  bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
               <view class="mytitle">订单编号：{{item.order_no}}</view>
               <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
               <view class="imgbox">
                 <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
               
           
-                <view class="more"  bindtap="goDetail" data-id="{{item.id}}">...</view>
+               
               </view>
               <view class="all">
                 <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
@@ -127,6 +133,7 @@
 
             </view>
             <view class="bottom2">
+                 <view class="hotel_name" >酒店名：{{item.hotelname.h_name}}</view>
                 <view class="queren" bindtap="printing"  data-print="{{item}}"> 去打印 </view>
               
           </view>
@@ -151,14 +158,14 @@
       <view class="main3">
 
         <view class="top_box">
-
+       <view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
           <view class="mytitle">订单编号：{{item.order_no}}</view>
           <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
           <view class="imgbox">
             <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
           
             <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
-            <view class="more" bindtap="goDetail" data-id="{{item.id}}">...</view>
+           
           </view>
           <view class="all">
             <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
@@ -166,7 +173,8 @@
 
         </view>
         <view class="bottom2">
-            <view class="queren"  bindtap="onekeyAll"> 已完成</view>
+            <view class="hotel_name" >酒店名：{{item.hotelname.h_name}}</view>
+            <view class="queren" > 已完成</view>
           
       </view>
         </view>

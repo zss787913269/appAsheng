@@ -27,13 +27,13 @@
     <image src="../../images/user/tjdd-shrxx.png"></image>
     <text>收货人信息</text>
   </view>
-  <view class="title-address" wx:if="{{addreslist}}">
-    <view class="address">{{addreslist.region}} {{addreslist.address}}</view>
-    <view class="tel">{{addreslist.name}}  {{addreslist.tel}}</view>
+  <view class="title-address" >
+    <view class="address">{{addreslist}}</view>
+    <view class="tel">{{addreslistName}}</view>
   </view>
-  <view wx:else class="title-address" bindtap="pushAddress">
+  <!-- <view wx:else class="title-address" bindtap="pushAddress">
      <view class="address1">添加地址</view>
-  </view>
+  </view> -->
 
   <view class="edit" bindtap="addresd">
     <image src="../../images/user/a.png"></image>

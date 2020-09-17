@@ -36,9 +36,9 @@ Page({
         console.log("getHotel",res)
 
          if(res.data.data == null){
-            wx.navigateTo({
-              url: '/person/recovery/index',
-            })
+            // wx.navigateTo({
+            //   url: '/person/recovery/index',
+            // })
           }else{
             that.setData({
               hotelList:res.data.data,

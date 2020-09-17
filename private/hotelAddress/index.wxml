@@ -56,46 +56,9 @@
 			<label class="glable" for="male">验证码</label>
 			<input class="myinpu" type="text" placeholder="请输入验证码" name="code" id="male" value="{{code}}" />
 		</view>
-		<view wx:if="{{show}}">
-			<view wx:if="{{qrCode}}">
-			<view class="titleed" bindtap="sendOut" data-index="1">
-				<text>下单员：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-			<view class="titleed" bindtap="sendOut" data-index="2">
-				<text>厨师长：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-			<view class="titleed" bindtap="sendOut" data-index="3">
-				<text>采　购：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-			<view class="titleed" bindtap="sendOut" data-index="4">
-				<text>仓　库：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-			<view class="titleed" bindtap="sendOut" data-index="5">
-				<text>财　务：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-			<view class="titleed" bindtap="sendOut" data-index="6">
-				<text>店　长：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-			<view class="titleed" bindtap="sendOut" data-index="7">
-				<text>老　板：</text>
-				<text class="color">发送二维码给他</text>
-			</view>
-		</view>
-		<view wx:if="{{hotelRole}}" class="qrcode">
-			<image src="{{hotelQR}}" style="width:190px;height:190px;"></image>
-			<view class="code-back">
-				<text class="determine" bindtap="determine">确定</text>
-				<text class="cancel" bindtap="determine">取消</text>
-			</view>
-		</view>
+	
 		
-		</view>
+		
 
 		<view class="submit">
 			<button formType="submit" style="background:#ff9000;color:#fff;">提 交</button>

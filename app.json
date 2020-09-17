@@ -1,11 +1,20 @@
 {
   "pages": [
-    "pages/cart/index",
+    
     "pages/index/index",
-    "private/hotelpeople/index", 
-    "pages/user/index",
-    "details/handle/index", 
     "details/search/index",
+    "pages/user/index",
+    "pages/cart/index",
+    "details/confirm/index",
+    "pages/yongjin/index",
+    "person/slops/index",
+    "person/recovery/index",
+    "details/myshop/index",
+    "private/shopinfo/index",
+    "details/handle/index", 
+    "component/subscribe/index",
+    "private/invitation/index",
+    "private/hotelpeople/index", 
     "person/map/index",
     "private/hotelinfo/index",
     "person/recharge/index",
@@ -13,12 +22,10 @@
     "pages/deliver/index",
     "details/detail/index",
     "pages/quickly/quickly",
-    "details/myshop/index",
     "details/becomeShop/index",
     "details/addshop/index",
     "private/hotelAddress/index",
     "person/personl/index",
-    "person/slops/index",
     "pages/pledge/index",
     "pages/about/index",
     "pages/exchange/index",
@@ -29,7 +36,6 @@
     "pages/examine/examine",
     "pages/makeanapp/index",
     "pages/created/index",
-    
     "person/add/index",
     "person/lection/index",
     "person/commis/index",
@@ -64,7 +70,6 @@
     "private/staff/index",
     "private/Reply/index",
     "private/placeOrder/index",
-    "private/invitation/index",
     "private/find/index",
     "private/findone/index",
     "component/zation/index",
@@ -86,8 +91,8 @@
     "list": [{
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/tabar/10.png",
-        "selectedIconPath": "images/tabar/1.png"
+        "iconPath": "images/tabar/sy-sy.png",
+        "selectedIconPath": "images/tabar/sy-sy1.png"
       },
       {
         "pagePath": "pages/cart/index",
@@ -96,17 +101,17 @@
         "selectedIconPath": "images/tabar/car1.png"
       },
       {
-        "pagePath": "pages/quickly/quickly",
-        "text": "快速下单",
-        "iconPath": "images/tabar/car.png",
-        "selectedIconPath": "images/tabar/car1.png"
+        "pagePath": "private/hotelpeople/index",
+        "text": "订单列表",
+        "iconPath": "images/tabar/ksxd.png",
+        "selectedIconPath": "images/tabar/ksxd1.png"
       },
 
       {
         "pagePath": "pages/user/index",
         "text": "我的",
-        "iconPath": "images/tabar/50.png",
-        "selectedIconPath": "images/tabar/5.png"
+        "iconPath": "images/tabar/sy-wd.png",
+        "selectedIconPath": "images/tabar/sy-wd1.png"
       }
      
     ],

@@ -116,6 +116,7 @@
 			<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
 	
 			<view class="myb">
+			
 			<view class="mflex">
 				<view class="imgb"><image class="imgurl" src="{{imgurl}}"></image></view>
 				<view>
@@ -139,7 +140,7 @@
           <text>备注： </text>
           <input placeholder="请输入备注" placeholder-style="color:rgba(170,170,170,1);font-size:24rpx;" bindinput="modalInput" data-name="inputBz"></input>
         </view>
-				<view class="liang">
+				<!-- <view class="liang">
 					<view class="mycount" >购买数量 </view>
 						<view class="addbox">
 							<view  class="jiabox" bindtap="bindPlus">
@@ -152,17 +153,34 @@
 						<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
 						</view>
 						</view>
-				</view>
+				</view> -->
 
 				<view class="mybottom">
-					<view class="btn1" bindtap="determine">
+				
+					<view class="btn2" >
+					<!-- <image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
+						<text>个人采购</text> -->
+					
+						
+								<view class="addbox">
+									<view  class="jiabox" bindtap="bindPlus">
+										<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
+									</view>
+									<view class="numbercount">
+										<input type="number" bindchange="bindManual" value="{{num}}" />
+									</view>
+									<view  class="jiabox" bindtap="bindMinus">
+										<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
+									</view>
+								</view>
+		
+
+					</view>
+						<view class="btn1" bindtap="determine">
 						<image class="gscg1" src="../../images/index/gwc-gscg@2x.png"></image>
 						<text>加入购物车</text>
 					</view>
-					<!-- <view class="btn2" bindtap="clickselet">
-					<image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
-						<text>个人采购</text>
-					</view> -->
+					
 				</view>
 			</view>
 

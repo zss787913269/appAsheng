@@ -68,9 +68,9 @@ Page({
         icon: 'none',
         duration: 3000
       })
-      wx.navigateTo({
-        url: '/person/slops/index',
-      })
+      // wx.navigateTo({
+      //   url: '/person/slops/index',
+      // })
     }else{
       wx.showToast({
         title:res.data.msg,

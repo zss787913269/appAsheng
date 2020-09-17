@@ -60,13 +60,15 @@ Page({
       data: params
     })
 
+    console.log(res.data)
+
     let data = res.data
-    data[0].isSelected = true
-    data[1].isSelected = false
-    data[2].isSelected = false
-    data[3].isSelected = false
-    data[4].isSelected = false
-    data[5].isSelected = false
+    // data[0].isSelected = true
+    // data[1].isSelected = false
+    // data[2].isSelected = false
+    // data[3].isSelected = false
+    // data[4].isSelected = false
+    // data[5].isSelected = false
 
     this.setData({
       list: data,

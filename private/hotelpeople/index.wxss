@@ -458,8 +458,6 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
-
-
 }
 .timebox{
   margin-left: 48rpx;
@@ -511,7 +509,7 @@ page{
 }
 
 .quxiao{
-  width: 172rpx;
+  width: 182rpx;
   height: 58rpx;
   border: 1px solid #868686;
   opacity: 1;

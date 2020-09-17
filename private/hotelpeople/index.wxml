@@ -59,27 +59,27 @@
 
 	<view wx:for="{{wfk}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
-		<view class="main" >
+		<view class="main">
 
 			<view class="top_box">
-				<view class="more"  bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-			<view class="imgbox">
-					<view  wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
-						<image  wx:if="{{list.images}}" src="{{list.images}}"  class="img"></image>
+				<view class="imgbox">
+					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
+						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
 						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
-				</view>
+					</view>
 				</view>
 				<view class="all">
-					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
+					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
 				</view>
 
 			</view>
 			<view class="bottom">
-	<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="queren" wx:if="{{hotel_role != 1}}" bindtap="payment" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.price}}">支付</view>
+				<view class="myab">下单员：{{item.user.nickname}}</view>
+				<view class="queren" wx:if="{{hotel_role != 1}}" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
 			</view>
 		</view>
 
@@ -97,23 +97,23 @@
 		<view class="main">
 
 			<view class="top_box">
-			<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-			<view class="imgbox">
-					<view  wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
-						<image  wx:if="{{list.images}}" src="{{list.images}}"  class="img"></image>
+				<view class="imgbox">
+					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
+						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
 						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
-				</view>
+					</view>
 				</view>
 				<view class="all">
-					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
+					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
 				</view>
 
 			</view>
 			<view class="bottom">
-	<view class="myab">下单员：{{item.user.nickname}}</view>
+				<view class="myab">下单员：{{item.user.nickname}}</view>
 				<view class="queren">已付款</view>
 			</view>
 		</view>
@@ -132,24 +132,24 @@
 		<view class="main">
 
 			<view class="top_box">
-			<view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">查看详情</view>
+				<view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">查看详情</view>
 
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
-					<view  wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
-						<image  wx:if="{{list.images}}" src="{{list.images}}"  class="img"></image>
+					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
+						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
 						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
-				</view>
+					</view>
 				</view>
 				<view class="all">
-					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
+					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
 				</view>
 
 			</view>
 			<view class="bottom">
-	<view class="myab">下单员：{{item.user.nickname}}</view>
+				<view class="myab">下单员：{{item.user.nickname}}</view>
 				<view class="queren" bindtap="receivingGoods" data-id="{{item.id}}">确认收货</view>
 			</view>
 		</view>
@@ -166,24 +166,31 @@
 		<view class="main">
 
 			<view class="top_box">
-			<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
-					<view  wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
-						<image  wx:if="{{list.images}}" src="{{list.images}}"  class="img"></image>
+					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
+						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
 						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
-				</view>
+					</view>
 				</view>
 				<view class="all">
-					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
+					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
 				</view>
 
 			</view>
 			<view class="bottom">
-	<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="quxiao">已完成</view>
+				<view class="myab">下单员：{{item.user.nickname}}</view>
+				<view class="queren" wx:if="{{ hotel_role != 1 && item.pay_status == 0  }}" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
+
+
+				<view wx:else>
+					<view class="quxiao" wx:if="{{item.pay_status == 0}}">已完成(未支付)</view>
+					<view class="quxiao" wx:else>已完成</view>
+				</view>
+
 			</view>
 		</view>
 

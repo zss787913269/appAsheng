@@ -25,8 +25,8 @@
   font-size: 20rpx;
   color: #fff;
   line-height: 20rpx;
-  left: 54rpx;
-  top:22rpx;
+  left: -12rpx;
+  top:15rpx;
   font-size:19rpx;
   font-family:Source Han Sans CN;
   font-weight:500;
@@ -389,7 +389,7 @@ swiper image {
 }
 
 .swiper-tab-item {
-  /* width: 200rpx; */
+  width: 200rpx;
   margin-right: 50rpx;
   color: #6F6F6F;
   font-size:28rpx;
@@ -397,6 +397,7 @@ swiper image {
   font-weight:500;
   position: relative;
   height: 70rpx;
+  margin-left: 10rpx;
 }
 .swiper-tab-item2 {
   /* width: 200rpx; */
@@ -622,7 +623,7 @@ swiper {
 .mybottom{
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex: 1;
   position: fixed;
   bottom: 0;
@@ -637,17 +638,18 @@ swiper {
   height: 100rpx;
   /* width: 357rpx; */
   background:rgba(64,177,93,1);
-  width: 50%;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 
 }
 .btn2{
   height: 100rpx;
   /* width: 357rpx; */
   width: 50%;
-  background:rgba(255,150,63,1);
+  /* background:rgba(255,150,63,1); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1413,7 +1415,8 @@ swiper {
   font-size:32rpx;
   font-family:Source Han Sans CN;
   font-weight:500;
-  color:rgba(50,50,50,1)
+  color:rgba(50,50,50,1);
+  margin-bottom: 120rpx;
 }
 .bz input{
 

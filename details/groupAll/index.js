@@ -81,7 +81,7 @@ Page({
         icon: 'none',
         duration:3000
       })
-      wx.navigateTo({
+      wx.switchTab({
         url: '/private/hotelpeople/index',
       })
     } else {
