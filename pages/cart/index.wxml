@@ -23,17 +23,19 @@
 			<view class="center-box">
 				<text  bindtap="clickindex"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">常买清单({{commonList.length == 0 ? 0 : commonList.length}})</text>
 			</view> -->
-			<view bindtap="clickindex" data-index="1" class="{{listindex == 1 ? 'list-box_active' : 'list-box'}}"><text>购物车清单 ({{hotelCount == 0 ? 0 :hotelCount}})</text></view>
-			<view bindtap="clickindex" data-index="2" class="{{listindex == 2 ? 'list-box_active' : 'list-box'}}"><text>常买清单 ({{commonList.length == 0 ? 0 : commonList.length}})</text></view>
+			<view bindtap="clickindex" data-index="1" class="{{listindex == 1 ? 'list-box_active' : 'list-box'}}"><text>购物车清单({{hotelCount == 0 ? 0 :hotelCount}})</text></view>
+			<view bindtap="clickindex" data-index="2" class="{{listindex == 2 ? 'list-box_active' : 'list-box'}}"><text>常买清单({{commonList.length == 0 ? 0 : commonList.length}})</text></view>
 		</view>
 		<view wx:if="{{listindex == 1}}">
 			<view class="main" wx:if="{{leftList.length != 0}}">
 				<view class="left">
-					<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true" scroll-with-animation="true">
+					<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true"
+						scroll-with-animation="true">
 						<view wx:for="{{leftList}}" wx:key="unique" class="leftbox">
-							<view bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
-								<text > {{item.name}}</text>
-								<text class="mycount" >{{item.goods.length}}</text>
+							<view bindtap="clickLeftItem" data-id="{{item.id}}"
+								class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+								<text> {{item.name}}</text>
+								<text class="mycount">{{item.goods.length}}</text>
 							</view>
 						</view>
 					</scroll-view>
@@ -44,22 +46,30 @@
 							<checkbox checked="{{checkedAll}}" color='#3B9EF5' /><text class="xz">全选</text></view>
 						<view class="detele_car" bindtap="deleteAll">清空购物车</view>
 					</view>
-					<scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+					<scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true"
+						scroll-into-view="{{'inToview'+classfiySelect}}">
 						<checkbox-group bindchange="checkboxChange" style="padding-bottom:187rpx;">
 							<view wx:for="{{leftList}}" wx:key="unique">
 								<view class="shop-name">
-									<text id="{{'inToview'+item.id}}" class="{{classfiySelect == item.id ? 'top-title_active' : 'top-title' }}" >类别：{{item.name}}类</text>
+									<text id="{{'inToview'+item.id}}"
+										class="{{classfiySelect == item.id ? 'top-title_active' : 'top-title' }}">类别：{{item.name}}类</text>
 								</view>
 								<view class="itemed" wx:for="{{item.goods}}" wx:key="unique" wx:for-item="items">
 									<checkbox class="checked" value="{{items.id}}" checked="{{items.isSelected}}" color='#3B9EF5' />
 									<view class="zymbox">
-										<image class="myimg" wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}" mode='widthFix' />
-										<image class="myimg" wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" mode='widthFix' />
+										<image class="myimg" wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"
+											mode='widthFix' />
+										<image class="myimg" wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"
+											mode='widthFix' />
 									</view>
 									<view class="mytitle">
-										<text class="sstitle" >{{items.title}} </text>
+										<text class="sstitle">{{items.title}} </text>
 										<text class="mytext2">{{items.spec[0].value}}</text>
 										<text class="mytext2" wx:if="{{items.goods_mark}}">备注：{{items.goods_mark}}</text>
+										<text class="mypri">单价：￥{{items.price}} </text>
+										<text class="mypri" wx:if="{{utils.tomyfix(items.price,items.stock) != items.price}}">总价：￥{{utils.tomyfix(items.price,items.stock)}} </text>
+										
+								
 									</view>
 									<view class="red" data-index="{{items.id}}" bindtap='remove'>
 										<image class="delimg" src="../../images/index/gwc-ljt@2x.png"></image>
@@ -89,26 +99,32 @@
 		<view wx:if="{{listindex == 2}}">
 			<view class="main">
 				<view class="left">
-					<scroll-view scroll-y="true" class="ss" style="height: 900rpx" scroll-into-view="true" scroll-with-animation="true">
+					<scroll-view scroll-y="true" class="ss" style="height: 900rpx" scroll-into-view="true"
+						scroll-with-animation="true">
 						<view wx:for="{{commonList}}" wx:key="unique" class="leftbox2">
-							<view bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
-								<text > {{item.name}}</text>
-								<text class="mycount" >{{item.goods.length}}</text>
+							<view bindtap="clickLeftItem" data-id="{{item.id}}"
+								class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+								<text> {{item.name}}</text>
+								<text class="mycount">{{item.goods.length}}</text>
 							</view>
 						</view>
 					</scroll-view>
 				</view>
 				<view class="right">
-					<scroll-view scroll-y="true" style="height: 800rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+					<scroll-view scroll-y="true" style="height: 800rpx" scroll-with-animation="true"
+						scroll-into-view="{{'inToview'+classfiySelect}}">
 						<checkbox-group bindchange="checkboxChange2">
 							<view wx:for="{{commonList}}" wx:key="unique">
 								<view class="shop-name">
-									<text id="{{'inToview'+item.id}}" class="{{classfiySelect == item.id ? 'top-title_active2' : 'top-title2' }}" >类别：{{item.name}}类</text>
+									<text id="{{'inToview'+item.id}}"
+										class="{{classfiySelect == item.id ? 'top-title_active2' : 'top-title2' }}">类别：{{item.name}}类</text>
 								</view>
 								<view wx:for="{{item.goods}}" wx:key="unique" wx:for-item="items">
 									<view class="right-item">
 										<view class="right-select">
-											<checkbox class="checked" value="{{items.goods_id}}#{{items.buy_number}}#{{items.spec[0].type}}#{{items.spec[0].value}}" checked="{{items.isSelected}}" color='#3B9EF5' />
+											<checkbox class="checked"
+												value="{{items.goods_id}}#{{items.buy_number}}#{{items.spec[0].type}}#{{items.spec[0].value}}"
+												checked="{{items.isSelected}}" color='#3B9EF5' />
 										</view>
 										<view class="right-item-name">
 											<text>{{items.title}}</text>
@@ -154,17 +170,20 @@
 
 		<view class="main2">
 			<view class="left2">
-				<scroll-view scroll-y="true" class="ss" style="height: 800rpx" scroll-into-view="true" scroll-with-animation="true">
+				<scroll-view scroll-y="true" class="ss" style="height: 800rpx" scroll-into-view="true"
+					scroll-with-animation="true">
 					<view wx:for="{{hotelOrderDetail}}" wx:key="unique">
-						<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae2'}}">
-							<text > {{item.name}}</text>
+						<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
+							class="{{classfiySelect === item.id ? 'leftActive':'myNmae2'}}">
+							<text> {{item.name}}</text>
 							<text class="mycount">{{item.goods.length}}</text>
 						</view>
 					</view>
 				</scroll-view>
 			</view>
 			<view class='right2'>
-				<scroll-view scroll-y="true" style="height: 800rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+				<scroll-view scroll-y="true" style="height: 800rpx" scroll-with-animation="true"
+					scroll-into-view="{{'inToview'+classfiySelect}}">
 					<block wx:for="{{hotelOrderDetail}}" wx:key="index">
 						<!-- <view class="{{ items.is_pick==0 ?'shopatt-left':'shopatt-left_show'}}" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items"> -->
 						<view class="shopatt-left_show" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
@@ -184,19 +203,22 @@
 							</view>
 
 							<view class="sbox" wx:if="{{items.is_pick == 0}}">
-								<view class="quxiao" bindtap="sqth" data-index="2" data-id="{{items.id}}" data-shopid="{{items.order_id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
+								<view class="quxiao" bindtap="sqth" data-index="2" data-id="{{items.id}}"
+									data-shopid="{{items.order_id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
 								<view class="queren" wx:if="{{items.returned_quantity != 0  }}"><text>退货成功</text></view>
 							</view>
 							<view class="sbox" wx:else>
 								<view wx:if="{{items.is_order_ok == 0}}">
 									<!-- 如果没收货 -->
-									<view class="quxiao" bindtap="sqth" data-index="1" data-id="{{items.id}}" data-shopid="{{items.order_id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
+									<view class="quxiao" bindtap="sqth" data-index="1" data-id="{{items.id}}"
+										data-shopid="{{items.order_id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
 									<view class="queren" wx:if="{{items.returned_quantity != 0  }}"><text>退货处理中</text></view>
 								</view>
 								<view wx:if="{{items.is_pick != 0}}">
 									<!-- 配送员已送达 -->
 									<view wx:if="{{items.returned_quantity == 0}}" class="shouhuobox">
-										<view class="queren" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail" data-id="{{items.id}}"><text>确认收货</text></view>
+										<view class="queren" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail"
+											data-id="{{items.id}}"><text>确认收货</text></view>
 										<view class="queren" wx:else> 已收货 </view>
 									</view>
 								</view>
@@ -264,14 +286,27 @@
 		<view class="bbox"></view>
 		<view class="btno">
 			<!-- <text>共{{tableList.length}}件,合计</text> -->
-			<!-- <view class="color"><text class="heji">合计</text> ￥{{totalPrice}}元</view> -->
-			<!-- <text wx:if="{{totalPrice < 300}}">采购额未满¥300，另收配送费¥30</text>
-			<text class="psf" wx:if="{{totalPrice > 300}}">免配送费</text> -->
+			<!-- <view class="zssflex">
 
+				<view class="color"><text class="heji">合计</text> ￥{{totalPrice}}元</view>
+			<view> 
+				<text wx:if="{{totalPrice < 300}}">采购额未满¥300，另收配送费¥30</text>
+				<text  wx:if="{{totalPrice > 300}}">免配送费</text>
+			</view>
+
+			</view> -->
+			<view class="myposi">
+				<text class="p1"> 总价：￥{{totalPrice}}元</text>
+				<!-- <text class="p2" wx:if="{{totalPrice < 300}}">采购额未满¥300，另收配送费¥30</text>
+				<text class="p3" wx:if="{{totalPrice > 300}}">免配送费</text> -->
+			</view>
+				
+		
 			<view class="mybt">
 				<!-- <view class="but3"  wx:if="{{true}}" bindtap="toggleDialog">添加需要的商品</view> -->
 				<view class="but3" wx:if="{{true}}" bindtap="showModal">添加需要的商品</view>
-				<view class="but" bindtap='submit'> 提交订单（{{ids.length}}）</view>
+				<!-- <view class="but" bindtap='submit'> 提交订单（{{ids.length}}）</view> -->
+				<view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view>
 
 			</view>
 			<!-- <view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view> -->
@@ -319,7 +354,8 @@
 			</view>
 
 		</view>
-		<view class="ebox"><text class="quxiao"  bindtap="toggleDialog">取消</text><text class="queren" bindtap="queren">确认</text></view>
+		<view class="ebox"><text class="quxiao" bindtap="toggleDialog">取消</text><text class="queren"
+				bindtap="queren">确认</text></view>
 
 
 	</view>
@@ -336,8 +372,8 @@
 			<view class="count">退货的数量</view>
 			<input bindinput="inputedit" value='{{countNumber}}' type="number"></input>
 			<view class="mybox">
-				<text class="myfirst" bindtap="toggleDialog2" >取消</text>
-				<text class="myfirst2" bindtap="config" >确认</text>
+				<text class="myfirst" bindtap="toggleDialog2">取消</text>
+				<text class="myfirst2" bindtap="config">确认</text>
 			</view>
 
 		</view>
@@ -352,25 +388,28 @@
 		<view class="mybbox">
 			<view class="dbox">
 				<view class="text-box"><text>商品名：</text></view>
-				<view class="input-box"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}" placeholder-class="placeholder"></input></view>
+				<view class="input-box"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}"
+						placeholder-class="placeholder"></input></view>
 			</view>
 			<view class="dbox">
-				<view class="text-box"><text>数    量：</text></view>
-				<view class="input-box"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}" placeholder-class="placeholder"></input></view>
+				<view class="text-box"><text>数 量：</text></view>
+				<view class="input-box"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}"
+						placeholder-class="placeholder"></input></view>
 
 			</view>
 			<view class="dbox">
-				<view class="text-box"><text>备    注：</text></view>
-				<view class="input-box"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input></view>
+				<view class="text-box"><text>备 注：</text></view>
+				<view class="input-box"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}"
+						placeholder-class="placeholder"></input></view>
 			</view>
 
 			<view class="tip">
-				<text >此商品：临时划价为10.00元，后期结算，多还少补</text>
+				<text>此商品：临时划价为10.00元，后期结算，多还少补</text>
 			</view>
 
 		</view>
 		<view class="ebox">
-			<text class="green"  bindtap="hideBuyModal">取消</text>
+			<text class="green" bindtap="hideBuyModal">取消</text>
 			<text class="yellow" bindtap="queren">确认</text>
 		</view>
 

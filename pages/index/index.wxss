@@ -798,6 +798,7 @@ swiper {
   margin: 15rpx auto;
   height: 100rpx !important;
   width: 96rpx !important;
+  border-radius: 40rpx;
 }
 /* pages/questions/questions.wxss */
 

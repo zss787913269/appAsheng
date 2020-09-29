@@ -1,8 +1,11 @@
 //index.js
+var lpapi = require('../../utils/LPAPI/LPAPI.js');
 import ajax from '../../utils/ajax'
 import regeneratorRuntime from '../../utils/runtime.js'
+
 //获取应用实例
-const app = getApp()
+var app = getApp()
+
 
 Page({
   data: {
@@ -12,6 +15,7 @@ Page({
     currentTab: '',
     shopId: '', //商品id
     showDialog: false,
+    showDialog2: false,
     countNumber: "", //输入框数量
     show: false,
     hotelOrderDetail: [], //商品
@@ -19,7 +23,11 @@ Page({
     id: "",
     showjd:false,
     count: "" ,//商品原本的数量
-    showqh:""
+    showqh:"",
+    showdy:"",//打印按钮
+    canvasWidth: 30,
+    canvasHeight: 10,
+
 
   },
 
@@ -49,11 +57,88 @@ Page({
       that.setData({
         showqh:true
       })
+    }else if(options.enter == 'dy'){
+      that.setData({
+        showdy:true
+      })
     }
+
+    console.log(options.enter)
 
     this.getlist(this.data.shopId)
     this.getOrderShop(this.data.shopId)
     this.getHotelOrderDetail(this.data.shopId)
+  },
+  openPrinter: function () {
+    // lpapi.scanedPrinters((didGetScanedPrinters) => {
+    //   console.log(didGetScanedPrinters)
+    //   })
+
+    lpapi.openPrinter('', function () {
+      wx.showToast({
+        title: '连接打印机成功',
+        icon: '',
+      })
+    }, function () {
+      wx.showToast({
+        title: '打印机连接断开',
+        icon: '',
+      })
+    })
+  },
+  printing: function () { //生成打印数据
+
+    // let print = e.currentTarget.dataset.print.details
+    let print = this.data.orderlist.details
+    
+    let item = this.data.orderlist
+    let p = this.data.orderlist.total_price
+    this.openPrinter()
+    var width = 70;
+    var height = 40 * print.length;
+    lpapi.startDrawLabel('test', this, width, height, 0);
+    lpapi.setItemOrientation(0)
+    lpapi.setItemHorizontalAlignment(0);
+  
+    let y = 5
+    y = y + 5
+    lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 3)
+    y = y + 5
+    for (let i = 0; i < print.length; i++) {
+      y = y + 5
+      lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`单价：${print[i].price}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`总价：${print[i].total_price}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`备注：`, 0, y, 5)
+      y = y + 5
+    }
+    y = y + 15
+    lpapi.drawText(`地址：${item.hotel_address}`, 0, y, 2)
+    y = y + 5
+    lpapi.drawText(`总价：${p}`, 0, y, 5)
+    y = y + 15
+    lpapi.endDrawLabel();
+    console.log("订单打印",print)
+    this.toggleDialog2()
+  },
+
+
+
+  print: function () { //点击打印按钮
+    lpapi.print(function () {
+     
+      wx.showToast({
+        title: '打印成功',
+        icon: "none"
+      })
+    })
   },
   async onekey(e) { // 按照订单 一键接单
     var that = this
@@ -223,7 +308,15 @@ Page({
 
   },
 
+  toggleDialog2() {
+    this.setData({
+      showDialog2: !this.data.showDialog2
+    });
 
+    // console.log(1232)
+    lpapi.closePrinter()
+
+  },
   toggleDialog(e) {
 
     let that = this
@@ -240,7 +333,7 @@ Page({
     }
 
     this.setData({
-      showDialog: !this.data.showDialog
+      showDialog: !this.data.showDialog,
     });
 
   },
@@ -292,7 +385,7 @@ Page({
         id
       }
     })
-
+    // zym
     console.log("getHotelOrderDetail", res.data)
 
     let hotelOrderDetail = that.data.hotelOrderDetail
@@ -367,7 +460,7 @@ Page({
         })
         
         that.setData({
-          showDialog: !that.data.showDialog
+          showDialog: !that.data.showDialog,
         });
         
          that.getHotelOrderDetail(that.data.shopId)
@@ -481,7 +574,7 @@ Page({
     })
 
 
-    console.log(res.data.data)
+    console.log('酒店订单信息',res.data.data)
 
     if (res.data.code == 0) {
       this.setData({

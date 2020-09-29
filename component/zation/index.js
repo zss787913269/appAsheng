@@ -118,6 +118,18 @@ Page({
               app.globalData.token = res.data.data.token
               console.log("用户信息",res);
 
+              if(res.data.code == 0){
+                wx.showToast({
+                  title: '授权成功',
+                  duration:3000
+                })
+              }else{
+                wx.showToast({
+                  title: '授权失败',
+                  duration:3000
+                })
+              }
+
           }
         })
       //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
@@ -132,10 +144,7 @@ Page({
       
       console.log(154)
       that.getCategoryList(e.detail)
-      wx.showToast({
-        title: '授权成功',
-        duration:3000
-      })
+      
     } else {
       //用户按了拒绝按钮
       wx.showModal({
@@ -160,12 +169,12 @@ Page({
     console.log("用户的信息如下：");
     console.log(item)
     setTimeout(function(){
-      // wx.switchTab({
-      //   url: '/pages/index/index'
-      // })
-      wx.navigateTo({
-        url: "/component/subscribe/index",
+      wx.switchTab({
+        url: '/pages/index/index'
       })
+      // wx.navigateTo({
+      //   url: "/component/subscribe/index",
+      // })
     },1000)
      
     // let res = await ajax({ url: 'api/user/wechatuserinfo', method: 'POST', data: { encrypted_data, iv, openid, referrer} token: app.globalData.token })

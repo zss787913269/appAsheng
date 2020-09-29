@@ -100,7 +100,7 @@
           <view class="zan-dialog__mask" bindtap="toggleDialog" />
           <view class="zan-dialog__container">
             
-          
+						<view class="listTitle2"    bindtap="toggleDialog" ><text class="bj3">关闭</text></view>
           
                 <!-- <view class="printdata">打印数据</view> -->
           

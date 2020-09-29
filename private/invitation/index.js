@@ -69,6 +69,7 @@ Page({
    */
   onShareAppMessage: function () {
     let referrer=wx.getStorageSync('enid');
+    console.log("referrer",referrer)
     return {
       path: "/pages/index/index?referrer="+referrer
     }

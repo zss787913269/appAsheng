@@ -5,7 +5,7 @@
 <view class="code">
 
 	<view class="getcode">
-		<text>邀请好友并购买可获得礼品</text>
+		<text>邀请酒店并购买可获得佣金</text>
 	</view>
 	<view class="codene">
 		<image src="{{code}}" mode="widthFix"></image>

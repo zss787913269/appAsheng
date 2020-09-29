@@ -1,25 +1,30 @@
 {
   "pages": [
-    
     "pages/index/index",
-    "details/search/index",
+    "details/handle/index", 
+    "pages/deliver/index",
     "pages/user/index",
-    "pages/cart/index",
-    "details/confirm/index",
+  
+   
+    "private/personaldata/index",
+    "private/hotelinfo/index",
     "pages/yongjin/index",
+    "component/getphone/index",
+    "pages/cart/index",
+    "person/map/index",
+    "person/add/index",
+    "details/search/index",
+    "details/confirm/index",
     "person/slops/index",
     "person/recovery/index",
     "details/myshop/index",
     "private/shopinfo/index",
-    "details/handle/index", 
     "component/subscribe/index",
     "private/invitation/index",
     "private/hotelpeople/index", 
-    "person/map/index",
-    "private/hotelinfo/index",
     "person/recharge/index",
     "person/cartdetal/index",
-    "pages/deliver/index",
+   
     "details/detail/index",
     "pages/quickly/quickly",
     "details/becomeShop/index",
@@ -36,7 +41,7 @@
     "pages/examine/examine",
     "pages/makeanapp/index",
     "pages/created/index",
-    "person/add/index",
+
     "person/lection/index",
     "person/commis/index",
     "person/details/index",

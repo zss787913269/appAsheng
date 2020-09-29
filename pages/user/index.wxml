@@ -1,125 +1,54 @@
-<!-- <view class="top">
-  <view class="tbody">
-    <view class="user-header-avatar">
-      <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
-    </view>
-    <view class="user-header-name">
-      <open-data type="userNickName"></open-data>
-      <view class="daxiao">
-        可提现积分
-      </view>
-    </view>
-    <view class="chongzhi">
-      <navigator url="/person/recharge/index" hover-class="other-navigator-hover">
-        <text>充值</text>
-      </navigator>
-     
-    </view>
-
-   <view class="chongzhi2">
-      <navigator url="/pages/pledge/index" hover-class="other-navigator-hover">
-        <text>充值</text>
-      </navigator>
-    </view>
-
-    <image src="/images/index/home_top_01.jpg" mode="widthFix"></image>
-    <view class="card" style="background: url('data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABQAAD/4QN/aHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6YWYxMzA5MjAtMjEwNS01MzQ5LThlYTctMmFkMjQ5YzJhM2Q4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjY0MEIxNEE2Mjg1MDExRUE4OEUwRTkzNkQ1MzRGOTQ5IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjY0MEIxNEE1Mjg1MDExRUE4OEUwRTkzNkQ1MzRGOTQ5IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmFmMTMwOTIwLTIxMDUtNTM0OS04ZWE3LTJhZDI0OWMyYTNkOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDphZjEzMDkyMC0yMTA1LTUzNDktOGVhNy0yYWQyNDljMmEzZDgiLz4gPC9yZGY6RGVzY3JpcHRpb24+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');background-size:contain;">
-     <view class="head_tap" data-url="{{url}}">
-      <view class="head_tap" data-url="{{url}}" bindtap="gotoikPage">
-       
-        <text>佣金</text>
-      </view>
-      <view class="head_tap" data-url="{{url1}}" bindtap="gotoikPageS">
-     
-        <text>{{integral}}</text>
-        <text>积分</text>
-      </view>
-
-       <view class="head_tap" bindtap="golyj">
-        <text>{{pledge}}</text>
-        <text>履约金</text>
-      </view>
-
-      <view class="head_tap" data-url="{{url2}}" bindtap="gotoikPage">
-      
-        <text>{{balance}}</text>
-        <text>余额</text>
-      </view>
-    </view>
-  </view>
-</view>
-
-
-<view class="view_power">
-
-  <c style="height:20rpx;background:#eee;"></c>
-  <view class="user_tab">
-    <view bindtap='privateKitchen'>
-      <text class="fal {{optionList2.clas}}" style="color:{{optionList2.color}}"></text>{{optionList2.name}}
-      <i class="fal fa-angle-right"></i>
-    </view>
-  </view>
-  <view class="user_tab">
-    
-    <view wx:for="{{optionList}}" wx:key="unique" data-url='{{item.url}}' bindtap='getOption' data-index="{{index}}">
-      <text class="fal {{item.clas}}" style="color:{{item.color}}"></text>{{item.name}}
-      <sup wx:if="{{99>=pre && pre !==0 && index === 0}}" class="total">{{pre}}</sup>
-      <sup wx:elif="{{pre>99&& index === 0}}" class="total">99+</sup>
-      <sup wx:if="{{99>=reply && reply !==0 && index === 7}}" class="total">{{reply}}</sup>
-      <sup wx:elif="{{reply>99&& index === 7}}" class="total">99+</sup>
-      <i class="fal fa-angle-right"></i>
-    </view>
-  </view>
-</view> -->
 
 <view class="top">
 
-	<view class="top-top">
-		<view class="imgbox" bindtap="sq">
-    <view wx:if="{{show}}" class="myav">
-      <view class="avtor">
-          <open-data lang="zh_CN" type="userAvatarUrl"></open-data>
+  <view class="top-top">
+    <view class="imgbox" bindtap="sq">
+      <view wx:if="{{show}}" class="myav">
+        <view class="avtor">
+       
+          <image src="{{avtor}}"></image>
         </view>
         <view class="name">
-          <open-data type="userNickName"></open-data>
+         
+          <text>{{nickname}}</text>
         </view>
-    </view>
+      </view>
 
-    <view wx:else class="myav">
-      <view class="avtor">
-          <image  src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+      <view wx:else class="myav">
+        <view class="avtor">
+          <image src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
         </view>
         <view class="name">
           <text>点击登录账号</text>
         </view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="top-bottom">
+    <view class="item">
+      <text class="price">0.00</text>
+      <text class="text">积分</text>
+    </view>
+    <view class="item" bindtap="golyj">
+      <text class="price">0.00</text>
+      <text class="text">履约金</text>
+    </view>
+    <view class="item">
+      <text class="price">0.00</text>
+      <text class="text">未付款金额</text>
     </view>
 
-		</view>
-	</view>
+    <view class="item2" bindtap="gotoikPage" data-url="{{url2}}">
+      <text class="price">{{balance}}</text>
+      <text class="text">余额</text>
+    </view>
 
-	<view class="top-bottom">
-		<view class="item">
-			<text class="price">0.00</text>
-			<text class="text">积分</text>
-		</view>
-    	<view class="item" bindtap="golyj">
-			<text  class="price">0.00</text>
-			<text class="text">履约金</text>
-		</view>
-		<view class="item">
-			<text  class="price">0.00</text>
-			<text class="text">未付款金额</text>
-		</view>
-	
-		<view class="item2" bindtap="gotoikPage" data-url="{{url2}}">
-			<text  class="price">{{balance}}</text>
-			<text class="text">余额</text>
-		</view>
-
-	</view>
+  </view>
 
 
-	<view class="top-right">可提现积分</view>
+  <view class="top-right">可提现积分</view>
 
 
 
@@ -127,18 +56,18 @@
 
 <view class="address">
 
-	<view class="item-box">
-		<image src="{{imgulr}}wd-wdsc.png" data-index="1" bindtap="goToPage"></image>
-		<text>我的私厨</text>
-	</view>
-	<view class="item-box" data-index="2" bindtap="goToPage">
-	<image src="{{imgulr}}wd-grdd.png"></image>
-		<text>个人订单</text>
-	</view>
-	<view class="item-box" data-index="3" bindtap="goToPage">
-			<image src="{{imgulr}}wd-shdz.png"></image>
-		<text>收货地址</text>
-	</view>
+  <view class="item-box">
+    <image src="{{imgulr}}wd-wdsc.png" data-index="1" bindtap="goToPage"></image>
+    <text>个人资料</text>
+  </view>
+  <view class="item-box" data-index="2" bindtap="goToPage">
+    <image src="{{imgulr}}wd-grdd.png"></image>
+    <text>个人订单</text>
+  </view>
+  <view class="item-box" data-index="3" bindtap="goToPage">
+    <image src="{{imgulr}}wd-shdz.png"></image>
+    <text>收货地址</text>
+  </view>
 
 </view>
 
@@ -146,15 +75,15 @@
   <view class="shop-title"><text>商铺</text></view>
   <view class="shop-item-box">
     <view class="shop-box" data-index="4" bindtap="goToPage">
-     <view>
-      <image src="{{imgulr}}wd-spxx.png" style="width:31rpx;height:39rpx"></image>
-     </view>
+      <view>
+        <image src="{{imgulr}}wd-spxx.png" style="width:31rpx;height:39rpx"></image>
+      </view>
       <text>商铺信息</text>
     </view>
     <view class="shop-box" data-index="5" bindtap="goToPage">
-    <view>
+      <view>
         <image src="{{imgulr}}wd-wdsp.png" style="width:37rpx;height:39rpx"></image>
-    </view>
+      </view>
       <text>订单列表</text>
     </view>
     <view class="shop-box" data-index="6" bindtap="goToPage">
@@ -164,9 +93,9 @@
       <text>商品列表</text>
     </view>
     <view class="shop-box" data-index="7" bindtap="goToPage">
-     <view>
-      <image src="{{imgulr}}wd-cwsj.png" style="width:38rpx;height:45rpx"></image>
-     </view>
+      <view>
+        <image src="{{imgulr}}wd-cwsj.png" style="width:38rpx;height:45rpx"></image>
+      </view>
       <text>成为商家</text>
     </view>
   </view>
@@ -176,15 +105,15 @@
   <view class="shop-title"><text>酒店</text></view>
   <view class="shop-item-box">
     <view class="shop-box" data-index="8" bindtap="goToPage">
-     <view>
-      <image src="{{imgulr}}wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
-     </view>
+      <view>
+        <image src="{{imgulr}}wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
+      </view>
       <text>酒店信息</text>
     </view>
     <view class="shop-box" data-index="9" bindtap="goToPage">
-    <view>
+      <view>
         <image src="{{imgulr}}wd-jddd.png" style="width:37rpx;height:39rpx"></image>
-    </view>
+      </view>
       <text>酒店订单</text>
     </view>
     <view class="shop-box" data-index="10" bindtap="goToPage">
@@ -193,8 +122,11 @@
       </view>
       <text>注册/编辑</text>
     </view>
-     <view class="shop-box">
-
+    <view class="shop-box" data-index="bd" bindtap="goToPage">
+      <view>
+        <image src="{{imgulr}}wd-pslb.png" style="width:37rpx;height:39rpx"></image>
+      </view>
+      <text>绑定手机号码</text>
     </view>
   </view>
 </view>
@@ -225,30 +157,49 @@
   </view>
 </view> -->
 
+<view class="shop">
+  <view class="shop-title"><text>分享赚佣金</text></view>
+  <view class="shop-item-box">
+    <view class="shop-box" data-index="yj" bindtap="goToPage">
+      <view>
+        <image src="../../images/user/yj.png" style="width:31rpx;height:39rpx"></image>
+      </view>
+      <text>我的推荐金</text>
+    </view>
+
+    <view class="shop-box" data-index="20" bindtap="goToPage">
+      <view>
+        <image src="../../images/user/ewm.png" style="width:31rpx;height:39rpx"></image>
+      </view>
+      <text>分享二维码</text>
+    </view>
+    <view class="shop-box">
+    </view>
+  </view>
+</view>
 <view class="shop" wx:if="{{showpeisong}}">
   <view class="shop-title"><text>配送</text></view>
   <view class="shop-item-box">
     <view class="shop-box" data-index="13" bindtap="goToPage">
-     <view>
-      <image src="{{imgulr}}wd-psyxx.png" style="width:31rpx;height:39rpx"></image>
-     </view>
+      <view>
+        <image src="{{imgulr}}wd-psyxx.png" style="width:31rpx;height:39rpx"></image>
+      </view>
       <text>配送员</text>
     </view>
     <view class="shop-box" data-index="14" bindtap="goToPage">
-    <view>
+      <view>
         <image src="{{imgulr}}wd-pslb.png" style="width:37rpx;height:39rpx"></image>
-    </view>
+      </view>
       <text>配送列表</text>
     </view>
     <view class="shop-box" data-index="15" bindtap="goToPage">
-        <view>
+      <view>
         <image src="{{imgulr}}wd-pslb.png" style="width:37rpx;height:39rpx"></image>
-    </view>
+      </view>
       <text>成为配送员</text>
     </view>
-     <view class="shop-box">
+    <view class="shop-box">
 
     </view>
   </view>
 </view>
-

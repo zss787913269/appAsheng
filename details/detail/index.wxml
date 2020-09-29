@@ -5,21 +5,26 @@
 			<view class="peis">配送信息</view>
 		</view>
 		<view class="add_main">
-			<view class="myaddress">{{orderlist.address.province_name}} {{orderlist.address.city_name}} {{orderlist.address.county_name}} {{orderlist.address.address}}</view>
+			<view class="myaddress">{{orderlist.address.province_name}} {{orderlist.address.city_name}}
+				{{orderlist.address.county_name}} {{orderlist.address.address}}</view>
 			<view class="call">电话号码 {{orderlist.address.tel}}</view>
 		</view>
 	</view>
 
 	<view class="mysh" bindtap="getAllHotel" wx:if="{{show}}">
-		<text >一键收货</text>
+		<text>一键收货</text>
 	</view>
 
 	<view class="mysh" bindtap="pickOrder" wx:if="{{showqh}}">
-		<text >一键取货</text>
+		<text>一键取货</text>
 	</view>
 
-		<view class="mysh" bindtap="onekey" wx:if="{{showjd}}">
-		<text >一键接单</text>
+	<view class="mysh" bindtap="onekey" wx:if="{{showjd}}">
+		<text>一键接单</text>
+	</view>
+
+	<view class="mysh" bindtap="printing" wx:if="{{showdy}}">
+		<text>一键打印</text>
 	</view>
 </view>
 
@@ -40,8 +45,9 @@
 			<view wx:for="{{hotelOrderDetail}}" wx:key="unique">
 
 				<!-- <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"> -->
-				<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
-					<text > {{item.name}}</text>
+				<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
+					class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+					<text> {{item.name}}</text>
 					<text class="mycount">{{item.goods.length}}</text>
 				</view>
 			</view>
@@ -49,13 +55,15 @@
 	</view>
 
 	<view class='right'>
-		<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+		<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true"
+			scroll-into-view="{{'inToview'+classfiySelect}}">
 			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
-				<view class="{{show || showjd || showqh ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
+				<view class="{{show || showjd || showqh ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}"
+					wx:key="index" wx:for-item="items">
 					<view class="mytitle" id="{{'inToview'+item.id}}">
 						<view class="right-img">
 							<image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
-								<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+							<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 						</view>
 						<view class="right-title">
 							<!-- <view class="top-title">{{items.title}}</view> -->
@@ -73,10 +81,12 @@
 					<view class="sbox" wx:if="{{show}}">
 
 						<view wx:if="{{items.returned_quantity == 0}}" class="shouhuobox">
-							<view class="queren" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail" data-id="{{items.id}}"><text>确认收货</text></view>
+							<view class="queren" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail"
+								data-id="{{items.id}}"><text>确认收货</text></view>
 							<view class="queren" wx:else> 已收货 </view>
 							<view wx:if="{{items.is_order_ok == 0}}">
-								<view class="quxiao" bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
+								<view class="quxiao" bindtap="toggleDialog" data-id="{{items.id}}" data-count="{{items.buy_number}}">
+									<text>申请退货</text></view>
 							</view>
 						</view>
 
@@ -98,7 +108,8 @@
 							<view class="quxiao" wx:else bindtap="noReceipt" data-id="{{items.id}}"><text>不接</text></view>
 						</view>
 						<view wx:if="{{items.is_ok != 2}}">
-							<view class="queren" bindtap="receipt" data-id="{{items.id}}" wx:if="{{items.is_ok == 0}}"><text>接单</text></view>
+							<view class="queren" bindtap="receipt" data-id="{{items.id}}" wx:if="{{items.is_ok == 0}}"><text>接单</text>
+							</view>
 							<view class="queren" wx:if="{{items.is_ok == 1}}"><text>已接单</text></view>
 						</view>
 
@@ -107,10 +118,11 @@
 
 					<view class="sbox" wx:if="{{showqh}}">
 
-				
-							<view class="queren" wx:if="{{item.goods[0].is_pick == 0}}" bindtap="takeDelivery" data-id="{{item.goods[0].id}}"><text>取货</text></view>
-							<view class="quxiao"  wx:if="{{item.goods[0].is_pick == 1}}" ><text>已取货</text></view>
-			
+
+						<view class="queren" wx:if="{{item.goods[0].is_pick == 0}}" bindtap="takeDelivery"
+							data-id="{{item.goods[0].id}}"><text>取货</text></view>
+						<view class="quxiao" wx:if="{{item.goods[0].is_pick == 1}}"><text>已取货</text></view>
+
 					</view>
 
 				</view>
@@ -146,10 +158,28 @@
 			<view class="count">退货的数量</view>
 			<input bindinput="inputedit" value='{{countNumber}}' type="number"></input>
 			<view class="mybox">
-				<text class="myfirst" bindtap="toggleDialog" >取消</text>
-				<text class="myfirst2" bindtap="config" >确认</text>
+				<text class="myfirst" bindtap="toggleDialog">取消</text>
+				<text class="myfirst2" bindtap="config">确认</text>
 			</view>
 
 		</view>
+	</view>
+</view>
+
+
+
+<view class="zan-dialog2 {{ showDialog2 ? 'zan-dialog--show2' : '' }}">
+
+	<view class="zan-dialog__mask2" bindtap="toggleDialog2" />
+	<view class="zan-dialog__container2">
+
+		<view class="colose" bindtap="toggleDialog2"><text>关闭</text></view>
+		<scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
+			<canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+		</scroll-view>
+
+		<view class="bj2 listTitle2" bindtap="print"><text>打印</text></view>
+		<!-- <text class="myfirst" bindtap="toggleDialog">取消</text> -->
+
 	</view>
 </view>

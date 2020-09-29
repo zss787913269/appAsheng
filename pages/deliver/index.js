@@ -132,16 +132,31 @@ Page({
 
    
   },
+  openPrinter: function () {
+  
+
+    lpapi.openPrinter('', function () {
+      wx.showToast({
+        title: '连接打印机成功',
+        icon: '',
+      })
+    }, function () {
+      wx.showToast({
+        title: '打印机连接断开',
+        icon: '',
+      })
+    })
+  },
 
   printing: function (e) { //生成打印数据
 
+    this.openPrinter() //连接打印机    为空就是列表第一个
     let print = e.currentTarget.dataset.details.details
-
-    console.log(print)
+    let item = e.currentTarget.dataset.details
    
-    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
-    var width = 100;
-    var height = 30* print.length ;
+
+    var width = 80;
+    var height = 29* print.length ;
     // let height2 = 200* print.length;
 
 
@@ -151,17 +166,57 @@ Page({
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     let y = 5
-    for (let i = 0; i <print.length; i++) {
+    let x = 0
+    y = y + 5
+    lpapi.drawText(`酒店验货单`, 20, y, 5)
+    y = y + 10
+    lpapi.drawText(`酒店名称：${item.hotel_name}`, 0, y, 4)
+    y = y + 5
+    lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 4)
+    y = y + 5
+    lpapi.drawText(`配送地址：${item.address.address}`, 0, y, 3)
+    y = y + 10
+
   
-      lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
+    lpapi.drawText(`商品名`, x, y, 4)
+    x = x + 20
+    lpapi.drawText(`数量 `, x, y, 4)
+    x = x + 20
+    lpapi.drawText(`单价`, x, y, 4)
+    x = x + 20
+    lpapi.drawText(`总价`, x, y, 4)
+    x = x + 5
+    y = y + 2
+    for (let i = 0; i <print.length; i++) {
+      if(print[i].goods_mark == ''){
+        print[i].goods_mark = "无"
+      }
+      x = 0
       y = y + 5
-      lpapi.drawText(`总价：${print[i].total_price}`, 0, y,5)
+      lpapi.drawText(`${print[i].title}`, x, y,4)
+      x = x + 20
+      lpapi.drawText(`${print[i].buy_number}  `, x, y,4)
+      x = x + 20
+      lpapi.drawText(`${print[i].price} `, x, y,4)
+      x = x + 20
+      lpapi.drawText(`${print[i].total_price} `, x, y,4)
+      x = x + 10
       y = y + 5
-      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
+      x = 0
+      lpapi.drawText(`规格：${print[i].specvalue}`, x, y, 3)
+      x = x + 30
+      lpapi.drawText(`备注：${print[i].goods_mark}`, x, y, 3)
       y = y + 5
-      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
-      y = y + 15
     }
+    y = y + 5
+    lpapi.drawText(`共计：${print.length}件商品`, 0, y, 4)
+    y = y + 5
+    lpapi.drawText(`商家总价：${item.total_price}元`, 0, y, 4)
+    y = y + 10
+    lpapi.drawText(`验收员签名：`, 0, y, 4)
+ 
+    y = y + 20
+
 
    
     lpapi.endDrawLabel();
@@ -174,6 +229,7 @@ Page({
     this.setData({
       showDialog: !this.data.showDialog
     });
+
 
   },
   // zym
@@ -399,27 +455,13 @@ Page({
   },
   //打印
   
-  print(value) {
-    //console.log(value.currentTarget.dataset.value);
-    let myData = value.currentTarget.dataset.value;
-    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
-    var width = 100;
-    var height = 40;
-    lpapi.startDrawLabel('test', this, width, height, 0);
-    lpapi.setItemOrientation(0)
-    lpapi.setItemHorizontalAlignment(0);
-    let y = 5
-    lpapi.drawText(`订单号：${myData.order_no}`, 0, y, 4)
-    y = y + 5
-    lpapi.drawText(`收货人：${myData.address.name}`, 0, y, 4)
-    y = y + 5
-    lpapi.drawText(`电话：${myData.address.tel}`, 0, y, 5)
-    y = y + 5
-    let myAddress = myData.address.province_name + myData.address.city_name + myData.address.county_name + myData.address.address;
-    lpapi.drawText(`地址：${myAddress}`, 0, y, 5)
-    y = y + 15
-    lpapi.endDrawLabel();
-    lpapi.print();
+  print() {
+    
+    lpapi.print(function(){
+      wx.showToast({
+        title: '打印成功',
+      })
+    });
   },
   hideModal() {
     this.setData({

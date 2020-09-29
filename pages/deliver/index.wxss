@@ -550,6 +550,19 @@ page{
   margin-bottom: 20rpx;
   
 }
+.bj3{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  background-color: red;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  
+}
 
 
 .zan-dialog__container {

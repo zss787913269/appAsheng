@@ -6,7 +6,7 @@
 }
 .code{
   width: 90%;
-  height: 680;
+  height: 600rpx;
   margin: 40rpx auto;
   border: 1px solid #98cfff;
   border-radius:20rpx; 
@@ -16,7 +16,7 @@
 }
 .codene{
   width: 70%;
-  height: 480rpx;
+  height: 460rpx;
   margin: 100rpx auto;
   border: 1px solid #98cfff;
   border-radius:20rpx; 
@@ -43,11 +43,12 @@
 .share_btn{
   width: 90vw;
   height: 100rpx;
-  /* text-align: center; */
-  margin: 0 auto;
   line-height: 100rpx;
   background: #ffc33d;
   color: #fff;
   border-radius:50rpx;
   padding: 0;
+  position: absolute;
+  bottom: 20rpx;
+  left: 25%;
 }

@@ -30,7 +30,7 @@
     </swiper-item>
   </swiper>
 
-  <c style="height:25rpx;"></c>
+
 </view>
 <view class="allshop" id="main">
 	<image  wx:if="{{!back}}" src="http://second.chchgg.com/static/banner/sy-banner-2.png" mode="heightFix"></image>
@@ -69,7 +69,7 @@
 </view>
 	<view wx:if="{{tableListone!=''}}" class="main" bindtap="myscorll">
 		<view class="left">
-			<scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
 
 				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
 
@@ -83,7 +83,7 @@
 			</scroll-view>
 		</view>
 		<view class='right'>
-			<scroll-view scroll-y="true" style="height:900rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect2}}">
+			<scroll-view scroll-y="true" style="height:1000rpx" scroll-with-animation="true" bindscroll="scroll" scroll-into-view="{{'inToview'+classfiySelect2}}">
 			<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
 					<view id="{{'inToview'+item.id}}" >
 					<block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index" >
@@ -255,7 +255,7 @@
 		</view>
 
 		<view class="fix">
-			<view class="fast" bindtap="clickHotel"><text>快速下单</text></view>
+			<!-- <view class="fast" bindtap="clickHotel"><text>快速下单</text></view> -->
 			<!-- <view class="fiximgbox" bindtap="gouwuche">
 				<image  class="fiximg" src="../../images/index/car.png"></image>
 				<text class="carnub"  wx:if="{{99>=cartNum+personNum && cartNum+personNum !==0}}">{{cartNum+personNum}}</text>

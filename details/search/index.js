@@ -158,7 +158,7 @@ Page({
             data: {
               is_purchase: 1,
               goods_id: res.data.data.goods_id,
-              stock: that.data.num,
+              stock: that.data.num2,
               spec: [res.data.data.spec],
               goods_mark: that.data.spec
             }
@@ -650,10 +650,16 @@ Page({
       showsearch:!this.data.showsearch
     })
   },
-  async searchResult(){   //
+  async searchResult(){   
     let that = this
 
- 
+
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      return 
+    }
 
     let parmes = {
       keywords:that.data.value,

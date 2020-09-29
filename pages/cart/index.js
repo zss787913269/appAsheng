@@ -107,6 +107,13 @@ Page({
     // 遮罩层显示
   showModal() {
     // //////console.log("点击了订单")
+
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      return 
+    }
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "ease",
@@ -526,6 +533,8 @@ Page({
             method: "post"
           })
 
+          
+
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -684,7 +693,7 @@ Page({
       data: params
     })
 
-    // console.log("酒店购物车", res.data)
+    console.log("酒店购物车", res.data)
 
     if (res.data.code == 0) {
       let list = res.data.data
@@ -1134,6 +1143,13 @@ Page({
   },
 
   submit: function () { //提交订单
+
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      return 
+    }
     var that = this
     var item = that.data.ids
     var ids = item.toString()

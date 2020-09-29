@@ -6,8 +6,8 @@ const app = getApp()
 
 Page({
   data: {
-    showshop:false,
-    showpeisong:false,
+    showshop: false,
+    showpeisong: false,
     pledge: "",
     url: '/person/commis/index',
     url1: '/person/integral/index',
@@ -104,7 +104,11 @@ Page({
     commission: '', //我的佣金   
     integral: '', //我的积分   
     balance: '', //我的余额 ,
-    show: false
+    show: false,
+    role:"",
+    avtor:"",
+    nickname:"",
+    name:""
 
   },
   onLoad: function () {
@@ -112,7 +116,9 @@ Page({
     var that = this
     that.getMyCommission()
 
+
   },
+  
 
   getUserInfo() {
     let that = this
@@ -140,17 +146,17 @@ Page({
             }
           })
 
-          console.log("用户资料",res.data)
+          console.log("用户资料", res.data)
 
-          if(res.data.data.brand){
+          if (res.data.data.brand) {
             that.setData({
-              showshop:true
+              showshop: true
             })
           }
 
-          if(res.data.data.is_staff == 2){
+          if (res.data.data.is_staff == 2) {
             that.setData({
-              showpeisong:true
+              showpeisong: true
             })
           }
 
@@ -158,6 +164,14 @@ Page({
           if (res.data.code == 0) {
             let sendMsg = res.data.data.is_sendmsg[1]
             let role = res.data.data.hotel_juese
+            let avtor = res.data.data.avatar
+            let nickname = res.data.data.nickname
+            let name = res.data.data.name
+         
+
+            that.setData({
+              role,avtor,nickname,name
+            })
 
             if (role) {
               if (sendMsg != 1) {
@@ -246,20 +260,27 @@ Page({
       wx.navigateTo({
         url: "/component/zation/index"
       })
+      return 
     }
 
     let index = e.currentTarget.dataset.index
     console.log(index)
 
+ 
 
-
+    let that = this 
 
     switch (index) {
+   
       case "1":
-        wx.showToast({
-          title: '功能开发中，敬请期待',
-          icon: "none"
+        // wx.showToast({
+        //   title: '功能开发中，敬请期待',
+        //   icon: "none"
+        // })
+        wx.navigateTo({
+          url: `/private/personaldata/index?name=${that.data.name}&nickname=${that.data.nickname}`,
         })
+      
         break;
       case "2":
         wx.showToast({
@@ -278,8 +299,8 @@ Page({
       case "4":
         //商铺信息
         wx.navigateTo({
-          url:"/private/shopinfo/index",
-        }) 
+          url: "/private/shopinfo/index",
+        })
         break;
       case "5":
         //我的商品
@@ -318,8 +339,8 @@ Page({
         }) //分享二维码
         break;
 
-          case "21":
-      wx.navigateTo({
+      case "21":
+        wx.navigateTo({
           url: "/person/details/index"
         }) //分享二维码
         break;
@@ -349,6 +370,16 @@ Page({
           url: '/details/peinformation/index',
         }) //成为配送员
         break;
+      case 'yj':
+        wx.navigateTo({
+          url: `/pages/yongjin/index?role=${that.data.role}&avtor=${that.data.avtor}&nickname=${that.data.nickname}`,
+        }) //佣金页面
+        break;
+        case 'bd':
+          wx.navigateTo({
+            url: "/component/getphone/index",
+          }) //佣金页面
+          break;
     }
 
   },
@@ -359,6 +390,12 @@ Page({
   },
   gotoikPage: function (e) {
     //console.log(e)
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      return
+    }
     wx.navigateTo({
       url: e.currentTarget.dataset.url
 
@@ -367,6 +404,12 @@ Page({
   // 接单
 
   golyj() {
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      return
+    }
     wx.navigateTo({
       url: '/pages/pledge/index',
     })
@@ -403,7 +446,7 @@ Page({
       url: 'api/user/getUserProperty',
       method: 'get',
     })
-   
+
     console.log(res.data)
     if (res.data.data.Yongj === null) {
       res.data.data.Yongj = "0.00"

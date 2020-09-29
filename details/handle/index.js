@@ -24,10 +24,77 @@ Page({
     showDialog: false,
     shouhuo: ""
   },
+  openPrinter: function () {
+    // lpapi.scanedPrinters((didGetScanedPrinters) => {
+    //   console.log(didGetScanedPrinters)
+    //   })
+
+    lpapi.openPrinter('', function () {
+      wx.showToast({
+        title: '连接打印机成功',
+        icon: '',
+      })
+    }, function () {
+      wx.showToast({
+        title: '打印机连接断开',
+        icon: '',
+      })
+    })
+  },
+   
+  allprint() { //生成打印数据
+    // 全部商品打印
+    let item = this.data.shopOrderList[0]
+    var width = 70;
+    var height = 46 * item.length;
+    this.toggleDialog()
+    console.log("打印数据",item)
+    
+    this.openPrinter()
+   
+    lpapi.startDrawLabel('test', this, width, height, 0);
+    lpapi.setItemOrientation(0)
+    lpapi.setItemHorizontalAlignment(0);
+    
+    let y = 5
+    for (let i of item) {
+      y = y + 5
+      lpapi.drawText(`类别：${i.name}`, 0, y, 5)
+      y = y + 5
+      lpapi.drawText(`类别数量：${i.goods.length}`, 0, y, 5)
+      y = y + 5
+      for (let j of i.goods) {
+        y = y + 5
+        lpapi.drawText(`商品名：${j.title}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`单价：${j.price}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`总价：${j.total_price}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`数量：${j.buy_number}`, 0, y, 5)
+        y = y + 5
+        lpapi.drawText(`规格：${j.specvalue}`, 0, y, 5)
+        y = y + 5
+      }
+    }
+    lpapi.endDrawLabel();
+
+
+  },
+  print: function () { //点击打印按钮
+    lpapi.print(function () {
+      wx.showToast({
+        title: '打印成功',
+        icon: "none"
+      })
+    })
+  },
   toggleDialog() {
+
     this.setData({
       showDialog: !this.data.showDialog
     });
+    lpapi.closePrinter()
 
   },
   // onLoad: function (options) {
@@ -48,6 +115,7 @@ Page({
   detalis(e) { //跳转去详情页
 
     console.log(e.currentTarget.dataset.shouhuo)
+
 
     wx.navigateTo({
       url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
@@ -281,44 +349,9 @@ Page({
       })
     }
   },
-  allprint() { //生成打印数据
-    // 全部商品打印
-    this.toggleDialog()
-    let item = this.data.shopOrderList[0]
-    lpapi.openPrinter('') //连接打印机    为空就是列表第一个
-    var width = 70;
-    var height = 40 * item.length;
-    lpapi.startDrawLabel('test', this, width, height, 0);
-    lpapi.setItemOrientation(0)
-    lpapi.setItemHorizontalAlignment(0);
-    let y = 5
-    // y = y + 5
-    for (let i of item) {
-      y = y + 5
-      lpapi.drawText(`类别：${i.name}`, 0, y, 5)
-      y = y + 5
-      lpapi.drawText(`类别数量：${i.goods.length}`, 0, y, 5)
-      y = y + 5
-      for (let j of i.goods) {
-        y = y + 5
-        lpapi.drawText(`商品名：${j.title}`, 0, y, 5)
-        y = y + 5
-        lpapi.drawText(`单价：${j.price}`, 0, y, 5)
-        y = y + 5
-        lpapi.drawText(`总价：${j.total_price}`, 0, y, 5)
-        y = y + 5
-        lpapi.drawText(`数量：${j.buy_number}`, 0, y, 5)
-        y = y + 5
-        lpapi.drawText(`规格：${j.specvalue}`, 0, y, 5)
-        y = y + 5
-      }
-    }
-    lpapi.endDrawLabel();
-
-
-  },
+ 
   printing: function (e) { //生成打印数据
-    this.toggleDialog()
+   
     let print = e.currentTarget.dataset.print.details
     let item = e.currentTarget.dataset.print
     let p = e.currentTarget.dataset.print.total_price
@@ -329,42 +362,40 @@ Page({
     lpapi.startDrawLabel('test', this, width, height, 0);
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
+    console.log("订单打印",item)
     let y = 5
     y = y + 5
     lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 3)
     y = y + 5
     for (let i = 0; i < print.length; i++) {
       y = y + 5
-      lpapi.drawText(`商品名：${print[0].title}`, 0, y, 5)
+      lpapi.drawText(`商品名：${print[i].title}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`单价：${print[0].price}`, 0, y, 5)
+      lpapi.drawText(`单价：${print[i].price}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`总价：${print[0].total_price}`, 0, y, 5)
+      lpapi.drawText(`总价：${print[i].total_price}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`数量：${print[0].buy_number}`, 0, y, 5)
+      lpapi.drawText(`数量：${print[i].buy_number}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`规格：${print[0].specvalue}`, 0, y, 5)
+      lpapi.drawText(`规格：${print[i].specvalue}`, 0, y, 5)
       y = y + 5
       lpapi.drawText(`备注：`, 0, y, 5)
       y = y + 5
     }
     y = y + 15
+    lpapi.drawText(`地址：${item.hotel.address}`, 0, y, 2)
+    y = y + 5
     lpapi.drawText(`总价：${p}`, 0, y, 5)
     y = y + 15
     lpapi.endDrawLabel();
+    this.toggleDialog()
+
 
   },
 
 
 
-  print: function () { //点击打印按钮
-    lpapi.print(function () {
-      wx.showToast({
-        title: '打印成功',
-        icon: "none"
-      })
-    })
-  },
+
   //zym
   async getShopList(num) { //获取商家订单
     // wx.showLoading({

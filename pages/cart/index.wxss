@@ -27,7 +27,7 @@ page{
 }
 .myimg{
   width: 200rpx !important;
-  height: 200rpx !important;
+  height: 210rpx !important;
   
 }
 .zymbox{
@@ -83,7 +83,7 @@ page{
   display: block;
   text-align: center;
   line-height: 28rpx;
-  margin-top: 20rpx;
+  margin-top: 5rpx;
 
 }
 .cg{
@@ -159,6 +159,7 @@ page{
 .btno{
   display: flex;
   justify-content:flex-end;
+  position: relative;
 }
 .psf{
   font-size: 26rpx !important;
@@ -167,14 +168,58 @@ page{
   color: #6B6B6B;
   margin-left: 30rpx !important;
 }
-.btno text{
+.zssflex{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 100rpx;
+}
+.myposi{
+  position: absolute;
+  top: -20rpx;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  width: 40%;
+}
+.p1{
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #ff9000;
+}
+.p3{
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+}
+.p2{
+  font-size: 18rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #6B6B6B;
+}
+.myposi text{
+  height: 50rpx;
+
+}
+.zssflex view{
+  font-size: 26rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .btno text{
   
   font-size: 18rpx;
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: #6B6B6B;
   margin-left: 20rpx;
-}
+} */
 .btno2{
   display: flex;
   justify-content: flex-end;
@@ -329,7 +374,13 @@ transform: translate(-50%, -50%) scale(1);
   font-weight: 500;
   color: #5C5C5C;
 }
-
+.mypri{
+  margin-top: 5rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
+}
 .swiper-tab {
   display: flex;
   height: 81rpx;
@@ -803,7 +854,7 @@ transform: translate(-50%, -50%) scale(1);
 }
 
 .shopatt-left_show{
-  height: 210rpx;
+  height: 230rpx;
   margin-left: 45rpx;
   border-bottom: 1rpx solid #EBEEF5;
 }

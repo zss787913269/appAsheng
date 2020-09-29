@@ -787,6 +787,10 @@ Page({
       myshopname:name,
       back:true
     })
+    				wx.pageScrollTo({
+      selector: "#main",
+      duration: 100
+    })
     this.getsearch(this.data.firstclass)
 
    

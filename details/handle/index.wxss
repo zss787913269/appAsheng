@@ -918,6 +918,17 @@ page{
   position: relative;
 }
 
+.clol2{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  background-color: red;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+}
+
 .quxiao{
   width: 172rpx;
   height: 58rpx;

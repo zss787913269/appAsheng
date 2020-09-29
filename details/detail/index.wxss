@@ -6,6 +6,23 @@
   position: relative;
   
 }
+.listTitle2{
+
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  
+}
+.bj2{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #40B15D;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+  
+}
 .header{
   width: 100%;
   height: 80rpx;
@@ -706,4 +723,54 @@ color: #868686;
   justify-content: center;
   margin-right: 20rpx;
 
+}
+
+.zan-dialog__mask2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  /* background: rgba(0, 0, 0, 0); */
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index:99999
+}
+
+.zan-dialog__container2 {
+  position: fixed;
+  /* bottom: 500rpx; */
+  width: 650rpx;
+  height: 1000rpx;
+  margin-left: 50rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+  z-index:999999;
+  top: 100rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.zan-dialog--show2 .zan-dialog__container2 {
+  transform: translateY(0);
+}
+
+.zan-dialog--show2 .zan-dialog__mask2 {
+  display: block;
+}
+.colose{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  background-color: red;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
 }

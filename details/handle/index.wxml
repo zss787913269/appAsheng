@@ -78,6 +78,7 @@
       <view class='right'>
        
         <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
+          
         <view class="goprint" bindtap="allprint"> 去打印 </view>
           <block wx:for="{{shopOrderList[0]}}" wx:key="index">
          
@@ -118,7 +119,7 @@
           <view class="main">
 
             <view class="top_box">
-             <view class="more"  bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+             <view class="more"  bindtap="detalis" data-id="{{item.id}}" data-shouhuo="dy" >查看详情</view>
               <view class="mytitle">订单编号：{{item.order_no}}</view>
               <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
               <view class="imgbox">
@@ -133,8 +134,8 @@
 
             </view>
             <view class="bottom2">
-                 <view class="hotel_name" >酒店名：{{item.hotelname.h_name}}</view>
-                <view class="queren" bindtap="printing"  data-print="{{item}}"> 去打印 </view>
+                 <view class="hotel_name" >酒店名：{{item.hotel.h_name}}</view>
+                <view class="queren" > 已接单 </view>
               
           </view>
             </view>
@@ -190,9 +191,10 @@
 
       <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" >
   <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+ 
           <view class="zan-dialog__mask" bindtap="toggleDialog" />
           <view class="zan-dialog__container">
-            
+            <view class="clol2"    bindtap="toggleDialog" ><text>关闭</text></view>
           
           
                 <!-- <view class="printdata">打印数据</view> -->

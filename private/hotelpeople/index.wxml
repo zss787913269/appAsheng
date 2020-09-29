@@ -185,7 +185,6 @@
 				<view class="myab">下单员：{{item.user.nickname}}</view>
 				<view class="queren" wx:if="{{ hotel_role != 1 && item.pay_status == 0  }}" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
 
-
 				<view wx:else>
 					<view class="quxiao" wx:if="{{item.pay_status == 0}}">已完成(未支付)</view>
 					<view class="quxiao" wx:else>已完成</view>

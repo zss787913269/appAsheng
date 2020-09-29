@@ -33,10 +33,10 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    that.getprovince(2, 0),
-      that.getcitys(1, 0),
-      that.getcountys(37, 0)
-    that.getStreet(567,0)
+    that.getprovince(20, 0),
+      that.getcitys(310, 0),
+      that.getcountys(3166,0)
+    that.getStreet(30646,0)
     if (options.id) {
       that.getCateList(options)
     }
@@ -90,7 +90,7 @@ Page({
        that.setData({
          provinces: res.data.data,
        })
-    console.log(e)
+    console.log("获取省份",res.data)
        if(e==2){
          that.setData({
            province: that.data.provinces[0].name,
@@ -287,15 +287,15 @@ Page({
   
 
   async getuseraddress(e) {
-    console.log(e)
+    console.log("地址",e)
     let res = await ajax({ url: 'api/useraddress/save', method: 'POST', data: e })
     wx.showToast({
       title: '操作成功',
       duration:3000
     })
-    wx.redirectTo({
-      url: '/person/map/index',
-    })
+    // wx.redirectTo({
+    //   url: '/person/map/index',
+    // })
 
   },
   onShow() {
@@ -329,9 +329,9 @@ Page({
       var params = {
         name: name,
         tel: tel,
-        province: province,
-        city: city,
-        county: county,
+        province: 20,
+        city: 310,
+        county: 3166,
         address: address,
         is_default: is_default,
         id:id,
@@ -346,7 +346,7 @@ Page({
   },
 
   async getCategoryList(e) {
-    
+    console.log("地址",e)
     let res = await ajax({ url: 'api/useraddress/save', method: 'POST',data:e })
     wx.showToast({
       title: '新增成功',

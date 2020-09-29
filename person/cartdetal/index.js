@@ -23,7 +23,8 @@ Page({
     paymentId:3,   //支付方式id
     where:'',   //从哪里来
     hoteItem:'',   //酒店订单传的数据
-    addreslistName:""
+    addreslistName:"",
+    addressid:0
   },
 
   /**
@@ -100,15 +101,22 @@ Page({
           url: '/api/quickorder/getHotel',
           method: 'get'
         })
-        console.log("默认地址",res2.data.data)
+   
         addreslist = `${res2.data.data.region} ${res2.data.data.address}`
         addreslistName = `${res2.data.data.name} ${res2.data.data.tel}`
+        that.setData({
+          addressid:0
+        })
        
       }else{
         addreslist = `${addressMsg.region} ${addressMsg.address}`
         addreslistName = `${addressMsg.name} ${addressMsg.tel}`
+        that.setData({
+          addressid:addressMsg.id
+        })
       }
   
+      // console.log("默认地址",res2.data.data)
      
      
   
@@ -132,6 +140,8 @@ Page({
     let that = this
 
     // if(that.data.addreslist.id)
+    console.log("地址id",that.data.addressid)
+     console.log("订单id",that.data.orderId)
     if(that.data.addreslist == null){
       wx.showToast({
         title: '请填写地址',
@@ -143,10 +153,10 @@ Page({
         method: 'POST',
         data: {
           order_id: that.data.orderId,
-          address_id: 85
+          address_id: that.data.addressid
         }
       })
-      //console.log(res)
+      console.log("地址",res.data)
      
       if(res.data.code == 0){
         that.orderPay()
