@@ -36,14 +36,14 @@
 	<image  wx:if="{{!back}}" src="http://second.chchgg.com/static/banner/sy-banner-2.png" mode="heightFix"></image>
 		<view wx:else class="scroll_table1">
 		
-		<scroll-view scroll-x>
+		<scroll-view scroll-x  style="width: 100%"  bindscroll="scrollMove" scroll-left='{{scrollLeft}}' scroll-with-animation="true">
 				<view class="swiper-tab1">
-					<view wx:for="{{tableList}}" wx:key="unique" class="swiper-tab-item2" data-name="{{item.name}}" bindtap="goUrl" data-url="{{item}}">
+					<view wx:for="{{tableList}}" wx:key="unique" id="scroll-item-{{index}}" data-index="{{index}}" class="swiper-tab-item2" data-name="{{item.name}}" bindtap="goUrl" data-url="{{item}}">
 						
 						<text class="mycarcount1" wx:if="{{item.count}}">{{item.count}}</text>
 						<image wx:if="{{item.icon!=''}}" src="{{item.icon}}"  class="imagesss" />
      		    <image wx:else src="/images/index/rk_6.jpg" style="height:66rpx;" class="imagesss" />
-						 <text class="{{firstclass==item.id?'mnanamm2':'mnanamm'}}" >{{item.name}}</text>
+						 <text class="{{firstclass==item.id?'mnanamm2':'mnanamm'}}"  >{{item.name}}</text>
 					</view>
 				</view>
 			</scroll-view>
@@ -55,9 +55,11 @@
 
 
 <view class="scroll_table"   bindtap="myscorll">
-  <scroll-view scroll-x>
-    <view class="swiper-tab">
-      <view wx:for="{{tableListre}}" wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
+  <scroll-view scroll-x scroll-x="true" style="width: 100%" bindscroll="scrollMove2" scroll-left='{{scrollLeft2}}' scroll-with-animation="true">
+    <view class="swiper-tab"  >
+			<view wx:for="{{tableListre}}" id="scroll-item2-{{item.id}}"
+			 wx:key="unique" class="swiper-tab-item {{currentTab==item.id?'active':''}}"   data-index="{{item.id}}"
+			 data-current="{{item.id}}" bindtap="clickTab">{{item.name}}
 			<text class="mycarcount" wx:if="{{item.count}}">{{item.count}}</text>
       </view>
     </view>
@@ -69,15 +71,12 @@
 </view>
 	<view wx:if="{{tableListone!=''}}" class="main" bindtap="myscorll">
 		<view class="left">
-			<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true" class="ss" style="height: 1000rpx" bindscroll="scroll1" scroll-top='{{scrollTop2}}'  scroll-into-view="true" scroll-with-animation="true">
 
 				<view wx:for="{{tableListone}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique">
-
-					<view data-id='{{item.id}}' bindtap="clickLeftItem" class="my-left-flex">
+					<view data-id='{{item.id}}' id="scroll-item4-{{index}}"  bindtap="clickLeftItem" data-index="{{index}}" class="my-left-flex">
 						<text > {{item.name}} </text>
-					
 					</view>
-
 				</view>
 
 			</scroll-view>

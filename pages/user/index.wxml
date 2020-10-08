@@ -14,7 +14,7 @@
         </view>
       </view>
 
-      <view wx:else class="myav">
+      <view wx:else class="myav" bindtap="sq">
         <view class="avtor">
           <image src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
         </view>

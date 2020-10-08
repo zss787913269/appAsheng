@@ -5,6 +5,15 @@ const app = getApp()
 var time = require('../../utils/util.js')
 Page({
   data: {
+    moveParams: {
+      scrollLeft: 0
+    },
+    moveParams2: {
+      scrollLeft2: 0
+    },
+    moveParams3: {
+      scrollTop: 0
+    },
     myshopname:"",
     shopName:"",
     imgurl:"",
@@ -49,6 +58,7 @@ Page({
     readBottom: true,
     scrollTop: '', //上次滑动的距离
     // 规格
+    scrollTop2:"",
     tablenorms: '',
     // 种类
     tabletype: '',
@@ -79,6 +89,92 @@ Page({
       url: '/pages/find/index?value=' + value + '&where=index'
     })
   },
+  scrollMove2(e) {
+    let moveParams2 = this.data.moveParams2;
+    console.log("hhh",e)
+    moveParams2.scrollLeft2 = e.detail.scrollLeft;
+    this.setData({
+      moveParams2: moveParams2
+    })
+  },
+  getRect2(ele) { 
+    //获取点击元素的信息,ele为传入的id
+        var that = this;
+        //节点查询
+        wx.createSelectorQuery().select(ele).boundingClientRect(function (rect) {
+          console.log("rect",rect)
+          let moveParams = that.data.moveParams2;
+          moveParams.subLeft = rect.left;
+          moveParams.subHalfWidth = rect.width / 2;
+       
+          that.moveTo2();
+        }).exec()
+      },
+      moveTo2: function () {
+        let subLeft = this.data.moveParams2.subLeft;
+        console.log("subLeft",subLeft)
+        console.log(this.data.moveParams2)
+        // let screenHalfWidth = this.data.moveParams.screenHalfWidth;
+        // console.log("subHalfWidth",screenHalfWidth)
+        let subHalfWidth = this.data.moveParams2.subHalfWidth;
+        console.log("subHalfWidth",subHalfWidth)
+        let scrollLeft = this.data.moveParams2.scrollLeft2;
+        console.log("scrollLeft",scrollLeft)
+     
+        let distance = subLeft  + subHalfWidth;
+        // console.log(distance)
+     
+        scrollLeft = scrollLeft + distance - 70;
+
+        console.log(scrollLeft)
+     
+        this.setData({
+          scrollLeft2: scrollLeft
+        })
+      },
+  scrollMove(e) {
+    let moveParams = this.data.moveParams;
+    console.log("zym",e)
+    moveParams.scrollLeft = e.detail.scrollLeft;
+    this.setData({
+      moveParams: moveParams
+    })
+  },
+  getRect(ele) { 
+    //获取点击元素的信息,ele为传入的id
+        var that = this;
+        //节点查询
+        wx.createSelectorQuery().select(ele).boundingClientRect(function (rect) {
+          console.log(rect)
+          let moveParams = that.data.moveParams;
+          moveParams.subLeft = rect.left;
+          moveParams.subHalfWidth = rect.width / 2;
+       
+          that.moveTo();
+        }).exec()
+      },
+      moveTo: function () {
+        let subLeft = this.data.moveParams.subLeft;
+        console.log("subLeft",subLeft)
+        console.log(this.data.moveParams)
+        // let screenHalfWidth = this.data.moveParams.screenHalfWidth;
+        // console.log("subHalfWidth",screenHalfWidth)
+        let subHalfWidth = this.data.moveParams.subHalfWidth;
+        console.log("subHalfWidth",subHalfWidth)
+        let scrollLeft = this.data.moveParams.scrollLeft;
+        console.log("scrollLeft",scrollLeft)
+     
+        let distance = subLeft  + subHalfWidth;
+        // console.log(distance)
+     
+        scrollLeft = scrollLeft + distance - 40;
+
+        console.log(scrollLeft)
+     
+        this.setData({
+          scrollLeft: scrollLeft
+        })
+      },
   modalInput(e) {
     // //////console.log(e.detail.value)
     this.setData({
@@ -105,12 +201,45 @@ Page({
     }
 
   },
+  
+getRect4(ele) { 
+  //获取点击元素的信息,ele为传入的id
+      var that = this;
+      //节点查询
+      wx.createSelectorQuery().select(ele).boundingClientRect(function (rect) {
+        // console.log('rect',rect)
+        let moveParams = that.data.moveParams3;
+        moveParams.top = rect.top;
+        moveParams.subHalfWidth = rect.height ;
+        that.moveTo3();
+      }).exec()
+    },
+    moveTo3: function () {
+      let top = this.data.moveParams3.top;
+      let subHalfWidth = this.data.moveParams3.subHalfWidth;
+      let scrollTop = this.data.moveParams3.scrollTop;
+   
+      let distance = top  + subHalfWidth;
+
+   
+      scrollTop = scrollTop + distance - 400 ;
+
+      console.log('scrollTop',scrollTop)
+
+
+   
+      this.setData({
+        scrollTop2: scrollTop
+      })
+    },
   // zym 点击左侧导航栏
   clickLeftItem(e) {
 
     // this.length()
     let id = e.currentTarget.dataset.id;
-    // //////console.log(id)
+
+    let ele = 'scroll-item4-' + e.currentTarget.dataset.index
+    this.getRect4('#' + ele);
 
     let that = this
 
@@ -778,9 +907,13 @@ Page({
 
   },
 
-  // 一级分类
+
   goUrl: function (e) { //点击一级分类
     // console.log(e.currentTarget.dataset.url)
+
+    let ele = 'scroll-item-' + e.currentTarget.dataset.index
+    this.getRect('#' + ele);
+    console.log("嘻嘻嘻")
     let name = e.currentTarget.dataset.name
     this.setData({
       firstclass: e.currentTarget.dataset.url.id,
@@ -798,12 +931,19 @@ Page({
   },
   //点击切换
   clickTab: function (e) { //点击二级分类
+
+    let ele = 'scroll-item2-' + e.currentTarget.dataset.index
+    
+    this.getRect2('#' + ele);
+
+  
+    console.log("ele",ele)
     var that = this;
     that.setData({
       currentTab: e.target.dataset.current
     })
     that.getsearchtre(that.data.currentTab)
-    that.getGroup(that.data.currentTab)
+    // that.getGroup(that.data.currentTab)
     //console.log(that.data.tableListre)
 
 
@@ -948,49 +1088,49 @@ Page({
       selector: "#main",
       duration: 100
     })
-      let that = this
+    //   let that = this
 
-      let q = wx.createSelectorQuery()
-      q.selectAll(".leftTitle").boundingClientRect(res=>{
-        // console.log("leftTitle",res.map(r=>r.top))
+    //   let q = wx.createSelectorQuery()
+    //   q.selectAll(".leftTitle").boundingClientRect(res=>{
+    //     // console.log("leftTitle",res.map(r=>r.top))
   
-          that.data.topArr  = res.map(r=>r.top)
+    //       that.data.topArr  = res.map(r=>r.top)
        
   
         
-      })
-      q.selectAll(".right").boundingClientRect(res=>{
-        // console.log("right",res)
-        if(res.length != 0){
-          that.data.conTop  = res[0].top
-        }
+    //   })
+    //   q.selectAll(".right").boundingClientRect(res=>{
+    //     // console.log("right",res)
+    //     if(res.length != 0){
+    //       that.data.conTop  = res[0].top
+    //     }
           
        
-      })
-      q.exec()
-    let  scrollHeight  = e.detail.scrollTop
+    //   })
+    //   q.exec()
+    // let  scrollHeight  = e.detail.scrollTop
     
    
 
-    let arr = this.data.topArr.map(r=> r - 30)
+    // let arr = this.data.topArr.map(r=> r - 30)
 
-    // console.log(arr,e.detail.scrollTop)
+    // // console.log(arr,e.detail.scrollTop)
 
 
-      let t = this.data.tableListone[0].id
+    //   let t = this.data.tableListone[0].id
 
-      for(let i = arr.length-1;i>=0;i--){
-        if(arr[i] <= e.detail.scrollTop){
-            t = that.data.tableListone[i].id
-            break
-          }
-        }
+    //   for(let i = arr.length-1;i>=0;i--){
+    //     if(arr[i] <= e.detail.scrollTop){
+    //         t = that.data.tableListone[i].id
+    //         break
+    //       }
+    //     }
         
-      if(t !== this.data.classfiySelect){
-        that.setData({
-          classfiySelect:t,
-        })
-      }
+    //   if(t !== this.data.classfiySelect){
+    //     that.setData({
+    //       classfiySelect:t,
+    //     })
+    //   }
     
 
 
@@ -1001,7 +1141,16 @@ Page({
   },
   
   scroll1: function (e) {
+    console.log(e.detail.scrollTop)
 
+
+    let moveParams = this.data.moveParams3;
+    moveParams.scrollTop = e.detail.scrollTop;
+    this.setData({
+      moveParams: moveParams
+    })
+
+  
     wx.pageScrollTo({
       selector: "#main",
       duration: 100
@@ -1018,7 +1167,7 @@ Page({
     this.setData({
       back:true
     })
-    console.log("全部商品")
+    // console.log("全部商品")
   },
   async getGroup(id) {
     var that = this

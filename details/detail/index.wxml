@@ -48,7 +48,7 @@
 				<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
 					class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
 					<text> {{item.name}}</text>
-					<text class="mycount">{{item.goods.length}}</text>
+					<!-- <text class="mycount">{{item.goods.length}}</text> -->
 				</view>
 			</view>
 		</scroll-view>
@@ -58,6 +58,7 @@
 		<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true"
 			scroll-into-view="{{'inToview'+classfiySelect}}">
 			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
+				<!-- <block  wx:key="index"> -->
 				<view class="{{show || showjd || showqh ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}"
 					wx:key="index" wx:for-item="items">
 					<view class="mytitle" id="{{'inToview'+item.id}}">
@@ -183,3 +184,4 @@
 
 	</view>
 </view>
+

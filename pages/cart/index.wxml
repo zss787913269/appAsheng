@@ -162,7 +162,7 @@
 					<view class="peis">配送信息</view>
 				</view>
 				<view class="add_main">
-					<view class="myaddress">酒店地址：{{hotelMsg.region}} {{hotelMsg.address}}</view>
+					<view class="myaddress">酒店地址：{{hotelMsg.address}}</view>
 					<view class="call">电话号码 {{hotelMsg.tel}}</view>
 				</view>
 			</view>

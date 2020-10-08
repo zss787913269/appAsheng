@@ -737,11 +737,10 @@ transform: translate(-50%, -50%) scale(1);
   display: flex;
   justify-content: space-evenly;
   width: 750rpx;
-  
 }
 .titlebox{
   margin-top: 20rpx;
-  height:227rpx;
+  height:240rpx;
   background:rgba(255,255,255,1);
   opacity:1;
   position: relative;

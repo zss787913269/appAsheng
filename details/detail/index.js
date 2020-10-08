@@ -33,6 +33,7 @@ Page({
 
   onLoad: function (options) {
  
+    console.log(options)
 
     let that = this
 
@@ -392,12 +393,14 @@ Page({
 
     if (res.data.code == 0) {
       hotelOrderDetail = res.data.data
+      
+      this.setData({
+        hotelOrderDetail,
+        classfiySelect:hotelOrderDetail[0].id
+      })
     }
 
-    this.setData({
-      hotelOrderDetail,
-      classfiySelect:hotelOrderDetail[0].id
-    })
+   
 
   },
 

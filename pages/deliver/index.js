@@ -149,7 +149,7 @@ Page({
   },
 
   printing: function (e) { //生成打印数据
-
+    this.toggleDialog()
     this.openPrinter() //连接打印机    为空就是列表第一个
     let print = e.currentTarget.dataset.details.details
     let item = e.currentTarget.dataset.details
@@ -157,7 +157,15 @@ Page({
 
     var width = 80;
     var height = 29* print.length ;
+
+    if(print.length == 1){
+      height = 100
+    }
     // let height2 = 200* print.length;
+
+
+    console.log(print)
+    
 
 
 
@@ -174,7 +182,7 @@ Page({
     y = y + 5
     lpapi.drawText(`下单时间：${item.add_time}`, 0, y, 4)
     y = y + 5
-    lpapi.drawText(`配送地址：${item.address.address}`, 0, y, 3)
+    lpapi.drawText(`配送地址：${item.hotel_address}`, 0, y, 3)
     y = y + 10
 
   
@@ -187,7 +195,8 @@ Page({
     lpapi.drawText(`总价`, x, y, 4)
     x = x + 5
     y = y + 2
-    for (let i = 0; i <print.length; i++) {
+    for (let i = 0; i < print.length; i++) {
+      console.log(i)
       if(print[i].goods_mark == ''){
         print[i].goods_mark = "无"
       }
@@ -220,7 +229,7 @@ Page({
 
    
     lpapi.endDrawLabel();
-    this.toggleDialog()
+  
     // this.setData({
     //   canvasHeight: height2,
     // })
