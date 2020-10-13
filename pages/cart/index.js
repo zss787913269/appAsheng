@@ -20,6 +20,7 @@ Page({
     totalPrice: 0,
     totelid: [],
     currentTab: 1,
+    currentTab1:1,
     type: 1,
     hisList: [],
     hisTotalPrice: '',
@@ -47,10 +48,16 @@ Page({
     checkboxNum: true,
     hotelMsg: [],
     hotel: true,
-    index: ""
+    index: "",
+    wfk: "",
+    yfk: "",
+    dys: "",
+    ywc: "",
   },
 
   onLoad: function (options) {
+
+    console.log("options",options)
 
     this.getHotel()
     this.getTopCount()
@@ -59,6 +66,11 @@ Page({
     this.getCommon()
     this.getOK()
 
+      if(options.page == 2){
+        this.setData({
+          listindex:2
+        })
+      }
 
   },
   onShow: function () {
@@ -68,6 +80,67 @@ Page({
 
     this.getCount()
     this.getTopCount()
+    this.getHotelOrderDetail()
+
+  },
+  detalis(e) { //跳转去详情页
+
+    console.log(e.currentTarget.dataset.shouhuo)
+
+    wx.navigateTo({
+      url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
+    })
+  },
+  async receivingGoods(e) { //确认收货
+    var that = this
+    let params = {
+      id: e.currentTarget.dataset.id
+    }
+
+  
+
+
+
+    let res = await ajax({
+      url: 'api/order/collect',
+      method: 'POST',
+      data: params
+    })
+
+    console.log(res)
+
+    if (res.data.code == 0) {
+      wx.showToast({
+        title: '收货成功',
+        icon: 'none',
+        duration: 3000
+      })
+      that.getHotelOrderDetail()
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  payment(e) { //去支付页面
+
+
+    let items = e.currentTarget.dataset
+
+    console.log(items)
+    if (items.docat == 1) {
+      wx.showToast({
+        title: "此订单中有商品未划价，等待划价",
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      wx.navigateTo({
+        url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
+      })
+    }
 
 
   },
@@ -360,6 +433,8 @@ Page({
 
     if (index == 2) {
       this.getCommon()
+    }else if(index ==3){
+      this.getHotelOrderDetail()
     }
 
 
@@ -421,30 +496,61 @@ Page({
     let len = []
 
     let res = await ajax({
-      url: 'api/order/TodayOrderGoods',
+      url: 'api/order/TodayHotelOrderGoods',
       method: 'POST',
     })
 
-    console.log("getHotelOrderDetail", res.data)
+    console.log("getHotelOrderDetail1", res.data)
 
     let hotelOrderDetail = res.data.data
 
-    if (hotelOrderDetail.length != 0) {
-      for (let i of hotelOrderDetail) {
+    let wfk = [],
+    yfk = [],
+    dys = [],
+    ywc = []
 
-        for (let j of i.goods) {
-          len.push(j)
+
+
+
+
+  for (let i of hotelOrderDetail) {
+    if (i.juese == 1) {
+      if (userid == i.user_id) {
+        if (i.status == 1 || i.status == 0) {
+          wfk.push(i)
+        } else if (i.status == 2) {
+          yfk.push(i)
+        } else if (i.status == 3) {
+          dys.push(i)
+        } else if (i.status == 4) {
+          ywc.push(i)
         }
       }
+    } else {
+
+      // console.log("22222222222",i)
+      if (i.status == 1 || i.status == 0) {
+        wfk.push(i)
+      } else if (i.status == 2) {
+        yfk.push(i)
+      } else if (i.status == 3) {
+        dys.push(i)
+      } else if (i.status == 4) {
+        ywc.push(i)
+      }
+
     }
+  }
 
-    // console.log(len)
-
+  // console.log("ywc", ywc)
+  // console.log("wfk", wfk)
+  // console.log("yfk", yfk)
+  // console.log("dys", dys)
 
 
     this.setData({
       hotelOrderDetail,
-      jrdd: len
+      wfk,yfk,dys,ywc
 
     })
   },
@@ -553,24 +659,27 @@ Page({
 
 
     this.setData({
-      currentTab: index
+      currentTab1: index
     })
 
-    if (!this.data.hotel) {
-      wx.showToast({
-        title: '还未注册酒店,请先注册',
-        icon: "none"
-      })
-    } else {
-      if (index == 1) {
-        this.getCount()
-      } else if (index == 2) {
-        this.getHotelOrderDetail()
-      } else if (index == 3) {
-        this.getOK()
-      }
-    }
+    this.getHotelOrderDetail()
 
+    // if (!this.data.hotel) {
+    //   wx.showToast({
+    //     title: '还未注册酒店,请先注册',
+    //     icon: "none"
+    //   })
+    // } else {
+    //   if (index == 1) {
+    //     this.getCount()
+    //   } else if (index == 2) {
+    //     this.getHotelOrderDetail()
+    //   } else if (index == 3) {
+    //     this.getOK()
+    //   }
+    // }
+
+     
 
 
 
@@ -1142,6 +1251,7 @@ Page({
 
   },
 
+  
   submit: function () { //提交订单
 
     if (app.globalData.token == '') {
@@ -1227,8 +1337,11 @@ Page({
           currentTab: 2
         })
       } else {
-        wx.switchTab({
-          url: '/private/hotelpeople/index',
+        // wx.switchTab({
+        //   url: '/private/hotelpeople/index',
+        // })
+        that.setData({
+          listindex:3
         })
       }
 

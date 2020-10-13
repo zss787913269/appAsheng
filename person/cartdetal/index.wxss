@@ -45,8 +45,8 @@ page{
   font-size: 30rpx;
   font-family: Source Han Sans CN;
   font-weight: 500;
-  line-height: 34px;
   color: #585858;
+  margin-right: 20rpx;
 }
 .address1{
   

@@ -1479,6 +1479,7 @@ swiper{
   justify-content: center;
   margin-right: 20rpx;
 }
+
 /* .allshop view{
   
   font-size: 36rpx;
@@ -1493,7 +1494,7 @@ swiper{
 
 .leftTitle{
   width:524rpx;
-  height:434rpx;
+  /* height:434rpx; */
   background:rgba(255,255,255,1);
   box-shadow:0px 0px 12rpx rgba(144,144,144,1);
   opacity:1;
@@ -1660,4 +1661,31 @@ swiper{
 .addbox{
   display: flex;
   align-items: center;
+}
+.cmqd{
+  width: 710rpx;
+  height: 98rpx;
+  background: #FFFFFF;
+  box-shadow: 0px 3rpx 12rpx rgba(0, 0, 0, 0.16);
+  opacity: 1;
+  border-radius: 49rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+.cmqd image{
+  width: 56rpx;
+  height: 56rpx;
+  margin-right: 14rpx;
+}
+.ofen{
+  
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #424242;
+}
+.zymitem{
+  display: flex;
+  flex-direction: column;
 }

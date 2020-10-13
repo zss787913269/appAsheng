@@ -28,8 +28,8 @@
     <text>收货人信息</text>
   </view>
   <view class="title-address" >
-    <view class="address">{{addreslist}}</view>
-    <view class="tel">{{addreslistName}}</view>
+    <view class="address"><text>地址：{{addreslist}}</text></view>
+    <view class="tel"><text>{{addreslistName}}</text></view>
   </view>
   <!-- <view wx:else class="title-address" bindtap="pushAddress">
      <view class="address1">添加地址</view>

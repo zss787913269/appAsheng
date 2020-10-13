@@ -1,172 +1,147 @@
 <wxs src='./index.wxs' module='utils' />
 
 
-<view class="swiper-tab">
-		<view class=" {{currentTab==1?'active':'swiper-tab-item'}}" data-current="1" bindtap="clickTab">未接单
-			<view wx:if="{{ count1!==0}}" class="total">{{count1}}</view>
-		</view>
-		<view class=" {{currentTab==2?'active':'swiper-tab-item'}}" data-current="2" bindtap="clickTab">已接单
-			<view wx:if="{{  count2!==0}}" class="total">{{count2}}</view>
-		</view>
-		<view class=" {{currentTab==3?'active':'swiper-tab-item'}}" data-current="3" bindtap="clickTab">已处理
-			<view wx:if="{{ count3!==0}}" class="total">{{count3}}</view>
-		</view>
-	
-</view>
-
- <view wx:if="{{currentTab==1}}">
- 
- 
-    <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-
-      <view class="main3">
-
-        <view class="top_box">
-         <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">查看详情</view>
-          <view class="mytitle">订单编号：{{item.order_no}}</view>
-          <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-          <view class="imgbox">
-            <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-          
-            <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
-          
-          </view>
-          <view class="all">
-            <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
-          </view>
-
-        </view>
-        <view class="bottom2">
-          <view class="hotel_name" >酒店名：{{item.hotelname.h_name}}</view>
-            <view class="queren"  bindtap="onekey" data-id="{{item.id}}"> 一键接单</view>
-          
-      </view>
-        </view>
-
-
-
-	</view>
- </view>
-
-
-
-  
-
-     <view wx:if="{{currentTab==2}}">
-        <view class="mylist">
-          <text  bindtap="clickList"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
-          <text  bindtap="clickList"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
-        </view>
-
-
-
-    <view class="main2" wx:if="{{listindex == 1}}">
-    
-      <view class="left">
-
-        <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true" scroll-with-animation="true">
-          <view wx:for="{{shopOrderList[0]}}" wx:key="unique">
-          
-            <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}" class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
-              <text > {{item.name}}</text>
-              <text class="mycount">{{item.goods.length}}</text>
-            </view>
-          </view>
-        </scroll-view>
-      </view>
-   
-      <view class='right'>
-       
-        <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true" scroll-into-view="{{'inToview'+classfiySelect}}">
-          
-        <view class="goprint" bindtap="allprint"> 去打印 </view>
-          <block wx:for="{{shopOrderList[0]}}" wx:key="index">
-         
-            <view id="{{'inToview'+item.id}}"  class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">{{item.name}}</view>  
-            <view class="shopatt-left" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
-              <view class="mytitle2" >
-                <view class="right-img">
-                  <image src="http://second.chchgg.com{{items.images}}"></image>
-                </view>
-                <view class="right-title">
-                  <!-- <view class="top-title">{{items.title}}</view> -->
-                  <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
-                  <view class="mytext2">{{items.specvalue}}</view>
-                    <view class="mytext2">单价：{{items.price}}</view>
-                  <view class="mynumber"> X {{items.buy_number}}</view>
-                </view>
-
-                <view class="nPrice">总价：￥{{items.total_price}}</view>
-
-              </view>
-              
-
-          </view>
-          </block>
-        </scroll-view>
-
-	</view>
-
-  
-
+ <!-- <view class="swiper-tab">
+  <view class=" {{currentTab==1?'active':'swiper-tab-item'}}" data-current="1" bindtap="clickTab">未接单
+    <view wx:if="{{ count1!==0}}" class="total">{{count1}}</view>
+  </view>
+  <view class=" {{currentTab==2?'active':'swiper-tab-item'}}" data-current="2" bindtap="clickTab">已接单
+    <view wx:if="{{  count2!==0}}" class="total">{{count2}}</view>
+  </view>
+  <view class=" {{currentTab==3?'active':'swiper-tab-item'}}" data-current="3" bindtap="clickTab">已处理
+    <view wx:if="{{ count3!==0}}" class="total">{{count3}}</view>
+  </view>
 
 </view>
-
-  <view wx:if="{{listindex == 2}}">
-    
-      <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-
-          <view class="main">
-
-            <view class="top_box">
-             <view class="more"  bindtap="detalis" data-id="{{item.id}}" data-shouhuo="dy" >查看详情</view>
-              <view class="mytitle">订单编号：{{item.order_no}}</view>
-              <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-              <view class="imgbox">
-                <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-              
-          
-               
-              </view>
-              <view class="all">
-                <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
-              </view>
-
-            </view>
-            <view class="bottom2">
-                 <view class="hotel_name" >酒店名：{{item.hotel.h_name}}</view>
-                <view class="queren" > 已接单 </view>
-              
-          </view>
-            </view>
+-->
 
 
+<view wx:if="{{false}}">
+
+
+  <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+
+    <view class="main3">
+
+      <view class="top_box">
+        <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">查看详情</view>
+        <view class="mytitle">订单编号：{{item.order_no}}</view>
+        <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
+        <view class="imgbox">
+          <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list"
+            src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
+
+          <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
+
+        </view>
+        <view class="all">
+          <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
+        </view>
+
+      </view>
+      <view class="bottom2">
+        <view class="hotel_name">酒店名：{{item.hotelname.h_name}}</view>
+        <view class="queren" bindtap="onekey" data-id="{{item.id}}"> 一键接单</view>
 
       </view>
     </view>
 
+
+
+  </view>
 </view>
 
 
 
 
 
- <view wx:if="{{currentTab==3}}">
- 
- 
-    <view wx:for="{{shopCompleteList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+<view >
+  <view class="mylist">
+    <text bindtap="clickList" data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
+    <text bindtap="clickList" data-index="2" class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
+  </view>
 
-      <view class="main3">
+
+
+  <view class="main2" wx:if="{{listindex == 1}}">
+
+    <view class="left">
+
+      <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true"
+        scroll-with-animation="true">
+        <view wx:for="{{shopOrderList}}" wx:key="unique">
+
+          <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
+            class="{{classfiySelect === id ? 'leftActive':'myNmae'}}">
+            <text> {{item.name}}</text>
+            <text class="mycount">{{item.details.length}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class='right'>
+
+      <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true"
+        scroll-into-view="{{'inToview'+classfiySelect}}">
+
+       <view class="goprint" bindtap="allprint" > 去打印 </view>
+        <block wx:for="{{shopOrderList}}" wx:key="index">
+
+          <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">{{item.name}}</view>
+          <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
+            <view class="mytitle2"  bindtap="opendig" data-item="{{items}}">
+              <view class="right-img">
+                <image src="http://second.chchgg.com{{items.images}}"></image>
+              </view>
+              <view class="right-title" >
+                <!-- <view class="top-title">{{items.title}}</view> -->
+                <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
+                <view class="mytext2">{{items.specvalue}}</view>
+                <view class="mytext2">单价：{{items.price}}</view>
+                <view class="mynumber"> 数量： {{utils.round(items.buy_number)}}</view>
+              </view>
+
+              <!-- <view class="nPrice">总价：￥{{items.total_price}}</view> -->
+
+              <view class="config">
+                <view class="queren" > <text>确认价格</text></view>
+             <!--   <view class="quxiao"><text>修改价格</text></view> -->
+
+              </view>
+
+
+
+            </view>
+
+
+          </view>
+        </block>
+      </scroll-view>
+
+    </view>
+
+
+
+
+  </view>
+
+  <view wx:if="{{listindex == 2}}">
+
+    <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+
+      <view class="main">
 
         <view class="top_box">
-       <view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+          <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="dy">查看详情</view>
           <view class="mytitle">订单编号：{{item.order_no}}</view>
           <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
           <view class="imgbox">
-            <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-          
-            <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
-           
+            <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list"
+              src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
+
+
+
           </view>
           <view class="all">
             <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
@@ -174,37 +149,113 @@
 
         </view>
         <view class="bottom2">
-            <view class="hotel_name" >酒店名：{{item.hotelname.h_name}}</view>
-            <view class="queren" > 已完成</view>
-          
+          <view class="hotel_name">酒店名：{{item.hotel.h_name}}</view>
+          <view class="queren"> 已接单 </view>
+
+        </view>
       </view>
+
+
+
+    </view>
+  </view>
+
+</view>
+
+
+
+
+
+<view wx:if="{{false}}">
+
+
+  <view wx:for="{{shopCompleteList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+
+    <view class="main3">
+
+      <view class="top_box">
+        <view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+        <view class="mytitle">订单编号：{{item.order_no}}</view>
+        <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
+        <view class="imgbox">
+          <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list"
+            src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
+
+          <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
+
+        </view>
+        <view class="all">
+          <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
         </view>
 
+      </view>
+      <view class="bottom2">
+        <view class="hotel_name">酒店名：{{item.hotelname.h_name}}</view>
+        <view class="queren"> 已完成</view>
+
+      </view>
+    </view>
 
 
-	</view>
- </view>
+
+  </view>
+</view>
 
 
 
 
 
-      <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" >
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
   <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
- 
-          <view class="zan-dialog__mask" bindtap="toggleDialog" />
-          <view class="zan-dialog__container">
-            <view class="clol2"    bindtap="toggleDialog" ><text>关闭</text></view>
-          
-          
-                <!-- <view class="printdata">打印数据</view> -->
-          
-              <scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
-                 <canvas  canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
-               </scroll-view>
-            
-               <view class="bj2 listTitle2"    bindtap="print" ><text>打印</text></view>
 
-          </view>
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+   
+    <scroll-view scroll-y="true" style="height:0rpx;margin-bottom:10rpx;">
+      <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+    </scroll-view>
+
+    <view>
+
+      <view class="ztmtext"> 
+        
+      <view><text>商品名字：{{shopname}}</text></view>
+      <view><text>规格：{{shopgg}}</text></view>
+      <view><text>价格：</text><input type="text" bindinput="getprice" value="{{shopprice}}" /></view>
+      <view><text>成本价：</text><input type="text" bindinput="getoprice" value="{{original_price}}" /></view>
+      <view><text>数量：</text><input type="text" bindinput="getcount" value="{{shopcount}}" /></view>
         </view>
+      <view class="zymitem">
+        <view class="bj2 listTitle2" bindtap="print"><text>确认</text></view>
+       <view class="clol2" bindtap="toggleDialog"><text>关闭</text></view>        
+        </view>
+
+    </view>
+
+  </view>
+</view>
+
+<view class="zan-dialog {{ showDialog2 ? 'zan-dialog--show' : '' }}">
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+
+  <view class="zan-dialog__mask" bindtap="toggleDialog2" />
+  <view class="zan-dialog__container1">
+   
+    <scroll-view scroll-y="true" style="height:650rpx;margin-bottom:10rpx;">
+      <canvas canvas-id="test1" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+    </scroll-view>
+
+
+
      
+       <view class="zymitem1">
+          <view class="bj2 listTitle2"  bindtap="print2"><text>确认</text></view>
+          <view class="clol2" bindtap="toggleDialog2"><text>关闭</text></view>        
+        </view>
+
+
+
+   
+
+  </view>
+</view>

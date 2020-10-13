@@ -7,6 +7,7 @@ Page({
 
   /**
    * 页面的初始数据
+   * 
    */
   data: {
     countList: [],
@@ -22,7 +23,16 @@ Page({
     first: true,
     dayTime: "",
     showDialog: false,
-    shouhuo: ""
+    shouhuo: "",
+    shopname:"",
+    shopgg:"",
+    shopprice:"",
+    shopcount:"",
+    shopid:"",
+    original_price:"",
+    zymid:"",
+    shoplen:"",
+    showDialog2:false
   },
   openPrinter: function () {
     // lpapi.scanedPrinters((didGetScanedPrinters) => {
@@ -41,18 +51,20 @@ Page({
       })
     })
   },
-   
+
   allprint() { //生成打印数据
     // 全部商品打印
-    let item = this.data.shopOrderList[0]
-    var width = 70;
-    var height = 46 * item.length;
-    this.toggleDialog()
+    let item = this.data.shopOrderList
+    var width = 100;
     console.log("打印数据",item)
-    
+    var height = 38 * this.data.shoplen;
     this.openPrinter()
+    this.toggleDialog2()
+  
+    
+  
    
-    lpapi.startDrawLabel('test', this, width, height, 0);
+    lpapi.startDrawLabel('test1', this, width, height, 0);
     lpapi.setItemOrientation(0)
     lpapi.setItemHorizontalAlignment(0);
     
@@ -61,9 +73,9 @@ Page({
       y = y + 5
       lpapi.drawText(`类别：${i.name}`, 0, y, 5)
       y = y + 5
-      lpapi.drawText(`类别数量：${i.goods.length}`, 0, y, 5)
+      lpapi.drawText(`类别数量：${i.details.length}`, 0, y, 5)
       y = y + 5
-      for (let j of i.goods) {
+      for (let j of i.details) {
         y = y + 5
         lpapi.drawText(`商品名：${j.title}`, 0, y, 5)
         y = y + 5
@@ -81,19 +93,138 @@ Page({
 
 
   },
-  print: function () { //点击打印按钮
+
+  getoprice(e){
+    var value = e.detail.value
+    console.log(value)
+    this.setData({
+      original_price:value
+    })
+    this.enterPrint()
+  },
+
+  getprice(e){
+    var value = e.detail.value
+    this.setData({
+      shopprice:value
+    })
+    this.enterPrint()
+  },
+  getcount(e){
+    var value = e.detail.value
+    this.setData({
+      shopcount:value
+    })
+    this.enterPrint()
+  },
+  // 打开弹出框,设置弹出框的值
+  opendig(e){
+    this.toggleDialog()
+    this.openPrinter()
+    let shop = e.currentTarget.dataset.item
+    // console.log("商品",shop)
+    this.setData({
+      zymid:shop.id,
+      shopname:shop.title,
+      shopgg:shop.specvalue,
+      shopcount:Math.round(shop.buy_number),
+      shopprice:shop.price,
+      shopid:shop.goods_id,
+      original_price:shop.original_price
+    })
+    this.enterPrint()
+  },
+
+  enterPrint() { //点击确认的时候 生成打印数据并打印
+   
+
+    var width = 80;
+    var height = 30
+ 
+    lpapi.startDrawLabel('test', this, width, height, 0);
+    lpapi.setItemOrientation(0)
+    lpapi.setItemHorizontalAlignment(0);
+    
+    let y = 5
+        y = y + 5
+        lpapi.drawText(`商品名：${this.data.shopname}`, 22, y, 5)
+        y = y + 5
+        lpapi.drawText(`规格：${this.data.shopgg}`, 22, y, 5)
+        y = y + 5
+        lpapi.drawText(`单价：${this.data.shopprice}元`, 22, y, 5)
+        // y = y + 5
+        // lpapi.drawText(`成本价：${this.data.original_price}元`, 25, y, 5)
+        y = y + 5
+        lpapi.drawText(`数量：${this.data.shopcount}`, 22, y, 5)
+      
+        y = y + 10
+
+    lpapi.endDrawLabel();
+
+
+
+  },
+  print2(){
+  
     lpapi.print(function () {
       wx.showToast({
         title: '打印成功',
         icon: "none"
       })
+      
     })
+    // this.toggleDialog2()
+  },
+  async print() { //点击打印按钮
+    let that = this
+    this.enterPrint()
+    // console.log(this.data.shopid)
+    // console.log(this.data.original_price)
+    //  console.log(this.data.shopcount)
+    //    console.log(this.data.shopprice)
+
+       let params = {
+         id:this.data.shopid,
+         price:this.data.shopprice,
+         number:this.data.shopcount,
+         original_price:this.data.original_price
+       }
+
+       this.receipt(this.data.zymid)
+
+       let res = await ajax({
+        url: 'api/order/EditOrderDetailGoods',
+        method: 'POST',
+        data: params
+      })
+      
+      console.log(res)
+    lpapi.print(function () {
+      wx.showToast({
+        title: '打印成功',
+        icon: "none"
+      })
+      
+    })
+    that.toggleDialog()
+
+
   },
   toggleDialog() {
 
     this.setData({
       showDialog: !this.data.showDialog
     });
+   
+    lpapi.closePrinter()
+
+  },
+  toggleDialog2() {
+
+    this.setData({
+      showDialog2: !this.data.showDialog2
+    });
+   
     lpapi.closePrinter()
 
   },
@@ -274,11 +405,11 @@ Page({
     })
   },
 
-  async receipt(e) { //接单
+  async receipt(id) { //接单
     var that = this
     let params = {
       status: 1,
-      id: e.currentTarget.dataset.id
+      id: id
     }
     let res = await ajax({
       url: 'api/store/updateStatus',
@@ -286,14 +417,17 @@ Page({
       data: params
     })
 
-    if (res.data.code == 0) {
+    console.log("接单",res.data)
 
+
+    if (res.data.code == 0) {
       wx.showToast({
         title: '接单成功',
         icon: 'none',
         duration: 300
       })
-      that.getShopList(that.data.currentTab)
+    
+      that.getShopList()
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -455,17 +589,10 @@ Page({
 
 
 
-      if (num == 1) {
-        params = {
-          type: 4,
-          isok: num - 1,
-        }
-      } else if (num == 2) {
-
         if (listindex == 1) {
           params = {
-            type: 2,
-            isok: 1,
+            type: 3,
+            isok: 0,
           }
         } else {
           params = {
@@ -473,23 +600,32 @@ Page({
             isok: 1,
           }
         }
-      }
+      
 
-
+      //  1按商品汇总，2按订单号，3按商品分类
+      // 确认等于接单
       console.log(params)
       let res = await ajax({
         url: "api/order/ShopOrderPrint",
         method: 'POST',
         data: params
+      
       })
-      console.log("获取商家订单", res.data.data)
+      console.log("获取商家订单", res.data)
+
+     
 
       if (res.data.code == 0) {
-        // setTimeout(function () {
-        //   wx.hideLoading()
-        // }, 100)
+          let arr = []
+        for(let i of res.data.data){
+            for(let j of i.details){
+                arr.push(j)
+            }
+        }
+
         that.setData({
           shopOrderList: res.data.data,
+          shoplen:arr.length
         })
       }
 

@@ -231,9 +231,9 @@
 
 .top-title{
   /* width: 400rpx; */
-  font-size: 26rpx;
+  font-size: 32rpx;
   font-weight: 600;
-  margin-left: 30rpx;
+  margin-left: 10rpx;
   margin-top: 10rpx;
   display: flex;
   align-items: center;
@@ -456,14 +456,14 @@
 
 
 .shopatt-left{
-  width:95%;
+  width:96%;
   display: block;
   margin-left:15rpx;
   /* background-color: pink; */
   border: 1px solid #ccc;
   border-radius: 10rpx;
   margin-top: 10rpx;
-  /* height: 200rpx; */
+  height: 260rpx;
   position: relative;
 }
 .flex{
@@ -614,7 +614,26 @@
   position: fixed;
   /* bottom: 500rpx; */
   width: 650rpx;
-  height: 1000rpx;
+  height: 500rpx;
+  margin-left: 50rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+  z-index:999999;
+  top: 100rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.zan-dialog__container1 {
+  position: fixed;
+  /* bottom: 500rpx; */
+  width: 650rpx;
+  height: 800rpx;
   margin-left: 50rpx;
   background: #f8f8f8;
   transform: translateY(300%);
@@ -630,6 +649,9 @@
   align-items: center;
 }
 .zan-dialog--show .zan-dialog__container {
+  transform: translateY(0);
+}
+.zan-dialog--show .zan-dialog__container1 {
   transform: translateY(0);
 }
 
@@ -811,6 +833,7 @@ page{
   display: flex;
   margin-top: 15rpx;
   position: relative;
+  align-items: center;
 }
 .main{
   height: 400rpx;
@@ -917,7 +940,35 @@ page{
   margin-top: 18rpx;
   position: relative;
 }
-
+.zymitem{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 10rpx;
+  justify-content: center;
+  margin-left: 100rpx;
+}
+.zymitem1{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 5rpx;
+  justify-content: center;
+}
+.ztmtext text{
+  font-size: 40rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(134,134,134,1);
+}
+.ztmtext view{
+  display: flex;
+  align-items: center;
+}
+.ztmtext input{
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx solid #ccc;
+}
 .clol2{
   width: 150rpx;
   height: 50rpx;
@@ -1003,15 +1054,16 @@ page{
 .top-title{
 
 
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-family: Source Han Sans CN;
   font-weight: 500;
-  color: #585858;
+  
+  color: #000;
 }
 .top-title_active{
 
 
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: 500;
   color:rgba(255,117,2,1);
   font-family:Source Han Sans CN;
@@ -1029,10 +1081,11 @@ page{
 .mynumber{
 
   /* margin-top: 20rpx; */
-  font-size: 20rpx;
+  font-size: 30rpx;
   font-family: Source Han Sans CN;
-  font-weight: 400;
-  color: #868686;
+  font-weight: 500;
+  color: red;
+  margin-top: 10rpx;
   margin-bottom: 10rpx;
   
 }
@@ -1059,11 +1112,11 @@ page{
 }
 .mytext2{
   
-  font-size: 20rpx;
+  font-size: 32rpx;
   font-family: Source Han Sans CN;
-  font-weight: 400;
-  color: #868686;
-  margin-top: 4rpx;
+  font-weight: 500;
+  color: #333;
+  margin-top: 10rpx;
 
 }
 .mytext{
@@ -1166,7 +1219,20 @@ page{
   z-index: 12;
   border-radius: 20rpx;
   box-shadow: 0px 3px 3px 2px gainsboro;
-  z-index:999999
+  z-index:9999999
+}
+.zan-dialog__container1 {
+  position: fixed;
+  bottom: 500rpx;
+  width: 650rpx;
+  /* height: 450rpx; */
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+  z-index:9999999
 }
 .zan-dialog--show .zan-dialog__container {
   transform: translateY(0);
@@ -1465,12 +1531,13 @@ float: left;
 }
 
 .right-img{
- height: 110rpx;
- width: 110rpx;
+ height: 180rpx;
+ width: 140rpx;
+ margin-top: 10rpx;
 }
 .right-img image{
- height: 110rpx;
- width: 110rpx;
+ height: 180rpx;
+ width: 140rpx;
 }
 .right-title{
  margin-left: 20rpx;
@@ -1526,5 +1593,15 @@ float: left;
   display: flex;
   align-items: center;
   justify-content: center;
+
+}
+.hhh{
+  height: 400px;
+  background-color: #000;
+  z-index: 99999999;
+}
+
+.canv{
+  margin-left: 200rpx;
 
 }

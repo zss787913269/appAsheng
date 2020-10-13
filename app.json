@@ -1,16 +1,16 @@
 {
   "pages": [
     "pages/index/index",
-    "details/handle/index", 
-    "pages/deliver/index",
-    "pages/user/index",
   
+    "pages/cart/index",
+    "details/handle/index", 
    
+    "pages/user/index",
+    "pages/deliver/index",
     "private/personaldata/index",
     "private/hotelinfo/index",
     "pages/yongjin/index",
     "component/getphone/index",
-    "pages/cart/index",
     "person/map/index",
     "person/add/index",
     "details/search/index",
@@ -24,7 +24,6 @@
     "private/hotelpeople/index", 
     "person/recharge/index",
     "person/cartdetal/index",
-   
     "details/detail/index",
     "pages/quickly/quickly",
     "details/becomeShop/index",
@@ -41,7 +40,6 @@
     "pages/examine/examine",
     "pages/makeanapp/index",
     "pages/created/index",
-
     "person/lection/index",
     "person/commis/index",
     "person/details/index",

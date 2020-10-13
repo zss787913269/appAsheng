@@ -102,14 +102,14 @@ Page({
           method: 'get'
         })
    
-        addreslist = `${res2.data.data.region} ${res2.data.data.address}`
+        addreslist = `${res2.data.data.address}`
         addreslistName = `${res2.data.data.name} ${res2.data.data.tel}`
         that.setData({
           addressid:0
         })
        
       }else{
-        addreslist = `${addressMsg.region} ${addressMsg.address}`
+        addreslist = `${addressMsg.address}`
         addreslistName = `${addressMsg.name} ${addressMsg.tel}`
         that.setData({
           addressid:addressMsg.id

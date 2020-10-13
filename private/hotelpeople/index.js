@@ -145,17 +145,12 @@ Page({
     })
   },
   payment(e) { //去支付页面
-    // let item = JSON.stringify(e.currentTarget.dataset.id)
-
-    // console.log(e.currentTarget)
-
-
 
 
     let items = e.currentTarget.dataset
 
     console.log(items)
-    if (items.docat == 0) {
+    if (items.docat == 1) {
       wx.showToast({
         title: "此订单中有商品未划价，等待划价",
         icon: 'none',

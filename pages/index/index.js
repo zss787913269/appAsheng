@@ -97,6 +97,12 @@ Page({
       moveParams2: moveParams2
     })
   },
+  ofen(){
+    // wx.reLaunch
+    wx.reLaunch({
+      url: "/pages/cart/index?page=2"
+    })
+  },
   getRect2(ele) { 
     //获取点击元素的信息,ele为传入的id
         var that = this;
@@ -252,6 +258,7 @@ getRect4(ele) {
   advertisementAdd(e) {
     var that = this
     let type = e.currentTarget.dataset.type
+    console.log("e.currentTarget.dataset.id",e.currentTarget.dataset.id)
     if (type == 1) {
       let tab = e.currentTarget.dataset.id.spec_base
       let tabCopy = JSON.parse(JSON.stringify(tab))
@@ -267,6 +274,7 @@ getRect4(ele) {
           }
         }
       }
+      console.log("tabCopy",tabCopy)
       that.setData({
         tableid: tabCopy,
         shopingid: e.currentTarget.dataset.id.id,
@@ -702,6 +710,8 @@ getRect4(ele) {
     let erjicarData = that.data.tableListre
     let yijicarData = that.data.tableList
 
+    console.log("yijicarData",yijicarData)
+
     if(res.data.data == 0){
       for(let i of erjicarData){
         i.count = ""
@@ -1043,23 +1053,49 @@ getRect4(ele) {
 
 
 
-    // console.log('第三', res.data.data);
+    console.log('第三', res.data.data);
     if (res.data.code == 0) {
     
       let arr = res.data.data
+   
+
       arr.forEach(item => {
         let itemFor = item.goods;
-        item.goods.sort(function (a, b) {
-          return a.price - b.price
-        })
+     
+    
+        // item.goods.sort(function (a, b) {
+        //   return a.price - b.price
+        // })
+
+ 
+     
+    
+
         itemFor.forEach(item1 => {
           item1.hidden = true
           if (item1.images) {
             item1.images = 'https://second.chchgg.com' + item1.images
           }
+
+            
+
+            // item1.spec_base.forEach((item3)=>{
+               
+            //     if(item3.title.indexOf("加工") != 0){
+            //         xx.unshift(item3)
+            //     }else{
+            //         xx.push(item3)
+            //     }
+            // })
+     
+          
           // item1.show_keyword = JSON.parse(item1.show_keyword)
         })
+    
+  
       })
+
+     
 
       that.setData({
         tableListone: arr,
@@ -1253,24 +1289,56 @@ getRect4(ele) {
     var that = this
     let tab = e.currentTarget.dataset.id.spec_base
 
-    console.log("clickse",tab)
+ 
+    console.log("tab",tab)
 
-    let tabCopy = JSON.parse(JSON.stringify(tab))
+    let arr = []
+
+    tab.forEach((item)=>{
+    
+      if(item.title.indexOf("加工") == 0){
+        arr.push(item)
+      }else{
+        arr.unshift(item)
+      }
+    })
+
+    console.log("arr",arr)
+
+    let tabCopy = JSON.parse(JSON.stringify(arr))
+
+
+    
+
     for (var i = 0; i < tabCopy.length; i++) {
       tabCopy[i].value = {}
     }
-    for (var i = 0; i < tab.length; i++) {
-      for (var j = 0; j < tab[i].value.length; j++) {
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < arr[i].value.length; j++) {
         if (i == 0 && j == 0) {
-          tabCopy[i].value[tab[i].value[j]] = true
+          tabCopy[i].value[arr[i].value[j]] = true
         } else {
-          tabCopy[i].value[tab[i].value[j]] = false
+          tabCopy[i].value[arr[i].value[j]] = false
         }
       }
     }
+
     console.log("tabCopy",tabCopy)
+
+    let oldarr = []
+
+    tabCopy.forEach((item)=>{
+    
+      if(item.title.indexOf("加工") == 0){
+        oldarr.push(item)
+      }else{
+        oldarr.unshift(item)
+      }
+    })
+    
+   
     that.setData({
-      tableid: tabCopy,
+      tableid: oldarr,
       shopingid: e.currentTarget.dataset.id.id,
       shopingid2: e.currentTarget.dataset.id.id,
       brand_id: e.currentTarget.dataset.id.brand_id,
@@ -1355,6 +1423,7 @@ getRect4(ele) {
 
       }
     }
+    console.log(tableId,"tableId")
     that.setData({
       tableid: tableId
     })
@@ -1365,7 +1434,7 @@ getRect4(ele) {
     var that = this
     let tableid = that.data.tableid
     let spec = []
-
+    // console.log(tableid,"tableid")
     for (var i = 0; i < tableid.length; i++) {
       let obj = {}
       for (let j in tableid[i].value) {
@@ -1373,15 +1442,34 @@ getRect4(ele) {
 
           obj.type = tableid[i].title
           obj.value = j
-          spec.push(obj)
+          spec.unshift(obj)
         }
       }
     }
 
+    console.log("spec",spec)
+
+    let zymarr = []
+    spec.forEach((item)=>{
+      
+    
+      if(item.type.indexOf("加工") == 0){
+        zymarr.push(item)
+      }else{
+        zymarr.unshift(item)
+      }
+    })
+
+    console.log("zymarr",zymarr)
+    
+
+   
+
     let params = {
       id: that.data.shopingid,
-      spec
+      spec:zymarr
     }
+
     console.log("params",params)
     let res = await ajax({
       url: '/api/goods/SpecDetail',
@@ -1397,7 +1485,7 @@ getRect4(ele) {
       let shopName = res.data.data.goods.title
       let dataList = res.data.data.info
 
-      console.log(res.data.data)
+      // console.log(res.data.data)
 
       that.setData({
         shopPrice: price,
