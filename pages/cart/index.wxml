@@ -28,7 +28,7 @@
 			<view bindtap="clickindex" data-index="2" class="{{listindex == 2 ? 'list-box_active' : 'list-box'}}">
 				<text>常买清单({{commonList.length == 0 ? 0 : commonList.length}})</text></view>
 			<view bindtap="clickindex" data-index="3" class="{{listindex == 3 ? 'list-box_active' : 'list-box'}}">
-				<text>今日订单({{commonList.length == 0 ? 0 : commonList.length}})</text></view>
+				<text>今日订单({{hotelOrderDetail.length == 0 ? 0 : hotelOrderDetail.length}})</text></view>
 		</view>
 		<view wx:if="{{listindex == 1}}">
 			<view class="main" wx:if="{{leftList.length != 0}}">
@@ -136,10 +136,13 @@
 											<text>{{items.title}}</text>
 										</view>
 										<view class="right-item-num">
-											<view class="right-item-price">
+											<!-- <view class="right-item-price">
 												<image class="right-item-num-jia" src="../../images/nav/gwc-jia.png"></image>
 												<text class="right-item-num-text">{{items.buy_number}}</text>
 												<image class="right-item-num-jian" src="../../images/nav/gwc-jian.png"></image>
+											</view> -->
+											<view class="right-item-price">
+												<text class="right-item-name">￥{{items.price}}</text>
 											</view>
 											<view class="right-item-gg">
 												<text>{{items.spec[0].value}}</text>
@@ -199,7 +202,7 @@
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -228,7 +231,7 @@
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -257,7 +260,7 @@
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -286,7 +289,7 @@
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -300,6 +303,7 @@
 
 		</view>
 	</view>
+	
 
 	<!-- <view wx:if="{{currentTab == 2}}">
 		<view class="titlebox">

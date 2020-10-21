@@ -223,3 +223,15 @@ page{
   text-align: center;
   line-height: 100rpx;
 }
+.b-right2{
+  width: 260rpx;
+  height: 100rpx;
+  background: #ccc;
+  opacity: 1;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 100rpx;
+}

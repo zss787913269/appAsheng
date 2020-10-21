@@ -144,12 +144,15 @@ Page({
         spec:this.data.spec
         
       }
+
+      console.log(params,"params")
   
         let res = await ajax({
           url: '/api/goods/addgoods',
           method: 'post',
           data:params
         })
+        console.log(res)
           //console.log("购买数量",that.data.num)
         if(res.data.code == 0){
           let res2 = await ajax({
@@ -163,6 +166,7 @@ Page({
               goods_mark: that.data.spec
             }
           })
+          console.log(res2)
   
           if (res2.data.code == 0) {
             wx.showToast({

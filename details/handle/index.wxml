@@ -21,10 +21,10 @@
 
   <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
-    <view class="main3">
+    <view class="main3" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">
 
-      <view class="top_box">
-        <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">查看详情</view>
+      <view class="top_box" >
+        <view class="more" >查看详情</view>
         <view class="mytitle">订单编号：{{item.order_no}}</view>
         <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
         <view class="imgbox">
@@ -58,7 +58,9 @@
 <view >
   <view class="mylist">
     <text bindtap="clickList" data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
+    <text bindtap="clickList" data-index="3" class="{{listindex == 3 ? 'shoplist' : ''}}">打印列表</text>
     <text bindtap="clickList" data-index="2" class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
+  
   </view>
 
 
@@ -85,7 +87,7 @@
       <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true"
         scroll-into-view="{{'inToview'+classfiySelect}}">
 
-       <view class="goprint" bindtap="allprint" > 去打印 </view>
+     
         <block wx:for="{{shopOrderList}}" wx:key="index">
 
           <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">{{item.name}}</view>
@@ -99,7 +101,7 @@
                 <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
                 <view class="mytext2">{{items.specvalue}}</view>
                 <view class="mytext2">单价：{{items.price}}</view>
-                <view class="mynumber"> 数量： {{utils.round(items.buy_number)}}</view>
+                <view class="mynumber"> 数量： {{items.buy_number}}</view>
               </view>
 
               <!-- <view class="nPrice">总价：￥{{items.total_price}}</view> -->
@@ -125,15 +127,83 @@
 
 
   </view>
+  <view class="main2" wx:if="{{listindex == 3}}">
+
+<view class="left">
+
+  <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true"
+    scroll-with-animation="true">
+    <view wx:for="{{shopOrderList}}" wx:key="unique">
+
+      <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
+        class="{{classfiySelect === id ? 'leftActive':'myNmae'}}">
+        <text> {{item.name}}</text>
+        <text class="mycount">{{item.details.length}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class='right'>
+ <view class="right-flex">
+  <view class="goprint" bindtap="printText"  data-print="1"> 打印全部 </view>
+  </view>
+  <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true"
+    scroll-into-view="{{'inToview'+classfiySelect}}">
+
+ 
+    <block wx:for="{{shopOrderList}}" wx:key="index">
+      <view class="peflex">
+       
+      <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">{{item.name}}</view>
+      <view class="pprint" bindtap="printText" data-data="{{item.details}}"> 打印分类 </view>
+        
+        </view>
+      <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
+        <view class="mytitle2"  >
+          <view class="right-img">
+            <image src="http://second.chchgg.com{{items.images}}"></image>
+          </view>
+          <view class="right-title" >
+            <!-- <view class="top-title">{{items.title}}</view> -->
+            <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
+            <view class="mytext2">{{items.specvalue}}</view>
+            <view class="mytext2">单价：{{items.price}}</view>
+            <view class="mynumber"> 数量： {{items.buy_number}}</view>
+          </view>
+
+          <!-- <view class="nPrice">总价：￥{{items.total_price}}</view> -->
+
+          <view class="config" >
+            <view class="queren" bindtap="opendig" data-item="{{items}}" data-count="5" > <text>打印标签</text></view>
+            <view class="quxiao" bindtap="opendig" data-item="{{items}}" data-count="1"><text>修改价格</text></view> 
+
+          </view>
+
+
+
+        </view>
+
+
+      </view>
+    </block>
+  </scroll-view>
+
+</view>
+
+
+
+
+</view>
 
   <view wx:if="{{listindex == 2}}">
 
     <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
-      <view class="main">
+      <view class="main" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="dy">
 
         <view class="top_box">
-          <view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="dy">查看详情</view>
+          <view class="more" >查看详情</view>
           <view class="mytitle">订单编号：{{item.order_no}}</view>
           <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
           <view class="imgbox">
@@ -221,9 +291,9 @@
         
       <view><text>商品名字：{{shopname}}</text></view>
       <view><text>规格：{{shopgg}}</text></view>
-      <view><text>价格：</text><input type="text" bindinput="getprice" value="{{shopprice}}" /></view>
-      <view><text>成本价：</text><input type="text" bindinput="getoprice" value="{{original_price}}" /></view>
-      <view><text>数量：</text><input type="text" bindinput="getcount" value="{{shopcount}}" /></view>
+     <!-- <view><text>价格：</text><input type="text" bindinput="getprice" value="{{shopprice}}" wx:if="{{listindex == 1}}" /><text wx:else>{{shopprice}}</text></view> -->
+      <view><text>商品价格：</text><input type="text" value="{{shopprice}}"  bindinput="getoprice"  wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{original_price}}</text></view>
+      <view><text>数量：</text><input type="text" bindinput="getcount" value="{{shopcount}}" wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{shopcount}}</text></view>
         </view>
       <view class="zymitem">
         <view class="bj2 listTitle2" bindtap="print"><text>确认</text></view>
@@ -249,7 +319,7 @@
 
      
        <view class="zymitem1">
-          <view class="bj2 listTitle2"  bindtap="print2"><text>确认</text></view>
+          <view class="bj2 listTitle2"  bindtap="draw"><text>确认</text></view>
           <view class="clol2" bindtap="toggleDialog2"><text>关闭</text></view>        
         </view>
 

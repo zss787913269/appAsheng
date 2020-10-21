@@ -642,8 +642,8 @@ getRect4(ele) {
   onLoad: function (options) {
     console.log(options);
 
+
     
-   
     var that = this
     if (options.referrer !== undefined) {
       wx.setStorageSync('referrer', options.referrer);
@@ -1837,6 +1837,9 @@ getRect4(ele) {
     this.getcart()
     this.getWork() 
     this.getMyCarNum()
+    if(this.data.currentTab != 0){
+      this.getsearchtre(this.data.currentTab)
+    }
      
   },
  

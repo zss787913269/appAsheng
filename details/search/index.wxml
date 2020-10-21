@@ -5,12 +5,10 @@
 		<image src="../../images/user/rmss-fdj.png"></image>
     <input placeholder="搜索商品" placeholder-class="placeholder" bindinput="int" value="{{value}}">
     </input>
-		<view class="user-header-name" bindtap="searchResult" wx:if="{{showsearch}}">
+		<view class="user-header-name" bindtap="searchResult" >
      <text class="with">搜索</text>	
  	 </view>
-			<view class="user-header-name" bindtap="clearseach" wx:else>
-      <text class="with">清空</text>	
- 	 </view>
+		
   </view>
  
 </view>

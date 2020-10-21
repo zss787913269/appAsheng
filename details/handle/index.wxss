@@ -1044,7 +1044,10 @@ page{
   border-top: 1rpx solid #F0F0F0;
   
 }
-
+.config{
+  position: absolute;
+  right: 0;
+}
 
 /* .mytitle{
   display: flex;
@@ -1053,7 +1056,7 @@ page{
 } */
 .top-title{
 
-
+  width: 400rpx;
   font-size: 32rpx;
   font-family: Source Han Sans CN;
   font-weight: 500;
@@ -1576,7 +1579,50 @@ float: left;
   color: rgba(255,117,2,1);
   font-size: 34rpx;
 }
+.right-flex{
+  display: flex;
+  justify-content: flex-end;
+}
 .goprint{
+  /* position: absolute;
+  right: 33rpx;
+  top: 15rpx; */
+  width: 130rpx;
+  height: 56rpx;
+  /* border: 1px solid #40B15D; */
+  opacity: 1;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #fff;
+  background-color: rgba(255,117,2,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.peflex{
+  display: flex;
+  align-items: center;
+}
+.pprint{
+  margin-left: 50rpx;
+  width: 130rpx;
+  height: 56rpx;
+  /* border: 1px solid #40B15D; */
+  opacity: 1;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #fff;
+  background-color: #40B15D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goprint1{
   position: absolute;
   right: 33rpx;
   top: 15rpx;
@@ -1589,7 +1635,7 @@ float: left;
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: #fff;
-  background-color: #40B15D;
+  background-color: rgba(255,117,2,1);
   display: flex;
   align-items: center;
   justify-content: center;

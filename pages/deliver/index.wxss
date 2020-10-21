@@ -569,7 +569,7 @@ page{
   position: fixed;
   bottom:150rpx;
   width: 650rpx;
-  /* height: 450rpx; */
+  /* height: 900rpx; */
   margin-left: 50rpx;
   background: #f8f8f8;
   transform: translateY(300%);

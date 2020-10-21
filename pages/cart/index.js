@@ -82,6 +82,13 @@ Page({
     this.getTopCount()
     this.getHotelOrderDetail()
 
+    if(this.data.ids.length != 0){
+      this.setData({
+        listindex:1
+      })
+    }
+   
+
   },
   detalis(e) { //跳转去详情页
 
@@ -642,11 +649,11 @@ Page({
           
 
         } else {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您已拒绝授权，将无法在微信中收到下单通知！',
-            showCancel: false,
-          })
+          // wx.showModal({
+          //   title: '温馨提示',
+          //   content: '您已拒绝授权，将无法在微信中收到下单通知！',
+          //   showCancel: false,
+          // })
         }
 
       }

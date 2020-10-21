@@ -324,7 +324,7 @@ Page({
         }) //酒店信息
         break;
       case "9":
-        wx.switchTab({
+        wx.navigateTo({
           url: '/private/hotelpeople/index'
         }) //酒店订单
         break;

@@ -84,7 +84,7 @@
       <text class="fk">实付款：</text><text class="price">￥ {{price}}</text>
       
     </view>
-    <view class="b-right" bindtap="payment">支付({{num}})</view>
+    <view class="{{flag ? 'b-right' : 'b-right2'}}" bindtap="payment">支付</view>
 </view>
 
 <!-- <view class="bz">

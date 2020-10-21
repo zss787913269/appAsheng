@@ -156,15 +156,18 @@ Page({
    
 
     var width = 80;
-    var height = 29* print.length ;
+    var height = 30* print.length ;
 
-    if(print.length == 1){
+    if(print.length <= 2){ 
       height = 100
+    }else if(print.length >= 10){
+      height = 17 * print.length
     }
     // let height2 = 200* print.length;
 
+    console.log(height)
 
-    console.log(print)
+    console.log(print.length)
     
 
 
@@ -196,13 +199,13 @@ Page({
     x = x + 5
     y = y + 2
     for (let i = 0; i < print.length; i++) {
-      console.log(i)
+  
       if(print[i].goods_mark == ''){
         print[i].goods_mark = "无"
       }
       x = 0
       y = y + 5
-      lpapi.drawText(`${print[i].title}`, x, y,4)
+      lpapi.drawText(`${print[i].title}`, x, y,3)
       x = x + 20
       lpapi.drawText(`${print[i].buy_number}  `, x, y,4)
       x = x + 20
@@ -215,7 +218,7 @@ Page({
       lpapi.drawText(`规格：${print[i].specvalue}`, x, y, 3)
       x = x + 30
       lpapi.drawText(`备注：${print[i].goods_mark}`, x, y, 3)
-      y = y + 5
+      y = y + 3
     }
     y = y + 5
     lpapi.drawText(`共计：${print.length}件商品`, 0, y, 4)
@@ -224,7 +227,7 @@ Page({
     y = y + 10
     lpapi.drawText(`验收员签名：`, 0, y, 4)
  
-    y = y + 20
+    // y = y + 20
 
 
    

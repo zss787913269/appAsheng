@@ -1,5 +1,6 @@
 //index.js
 import ajax from '../../utils/ajax'
+const util = require('../../utils/util.js')
 import regeneratorRuntime from '../../utils/runtime.js'
 //获取应用实例
 const app = getApp()
@@ -24,7 +25,8 @@ Page({
     where:'',   //从哪里来
     hoteItem:'',   //酒店订单传的数据
     addreslistName:"",
-    addressid:0
+    addressid:0,
+    flag:true
   },
 
   /**
@@ -171,96 +173,118 @@ Page({
     let that = this
 
 
-    let res = await ajax({
-      url: 'api/order/payor',
-      method: 'POST',
-      data: {
-        id: that.data.orderId,
-        payment_id: that.data.paymentId
-      }
-    })
-    console.log(res.data.data)
-    wx.hideLoading();
-    if (res.data.code == 0) {
-      //console.log("支付成功",res)
-      // 是否在线支付,非在线支付则支付成功
-      if (res.data.data.data.is_online_pay == 0) {
-        // 数据设置
-        // self.order_item_pay_success_handle(index);
-        wx.showToast({
-          title: '付款成功,正在跳转页面',
-          icon:"none",
-          duration:3000
-        })
-        setTimeout(function(){
-          wx.switchTab({
-            url: "/private/hotelpeople/index?idx=2"
-          });
-        },2000)
-        
 
-      } else {
-        wx.requestPayment({
-          timeStamp: res.data.data.data.timeStamp,
-          nonceStr: res.data.data.data.nonceStr,
-          package: res.data.data.data.package,
-          signType: res.data.data.data.signType,
-          paySign: res.data.data.data.paySign,
-          
-          success: function(res) {
-            // 数据设置
-            // self.order_item_pay_success_handle(index);
+      let res = await ajax({
+        url: 'api/order/payor',
+        method: 'POST',
+        data: {
+          id: that.data.orderId,
+          payment_id: that.data.paymentId
+        }
+      })
+      console.log(res)
+      wx.hideLoading();
+      if (res.data.code == 0) {
 
-            // 跳转支付页面
-            wx.showToast({
-              title: '付款成功,正在跳转页面',
-              duration:2000
-            })
-
-
-            setTimeout(function(){
-              wx.switchTab({
-                url: "/private/hotelpeople/index?idx=2"
-              });
-            },2000)
-
-            // wx.switchTab({
-            //   url: "/pages/index/index"
-            // });
        
-          },
-          fail: function(res) {
-            wx.showToast({
-              title: '付款失败,正在跳转页面',
-              icon:'none',
-              duration:2000
-            })
-            // wx.reLaunch({
+// 点击第一次的时候 变成false
+// 
+        //console.log("支付成功",res)
+        // 是否在线支付,非在线支付则支付成功
+        if (res.data.data.data.is_online_pay == 0) {
+         
+          // 数据设置
+          // self.order_item_pay_success_handle(index);
+          // wx.showToast({
+          //   title: '付款成功,正在跳转页面',
+          //   icon:"none",
+          //   duration:3000
+          // })
+          wx.showLoading({
+            title: '付款成功,正在跳转页面',
+          })
+          
+          setTimeout(function(){
+            // wx.navigateTo({
             //   url: "/private/hotelpeople/index?idx=2"
             // });
+            wx.hideLoading()
+            wx.navigateBack({
+              delta: 0,
+            })
+          },2000)
           
-          }
-        });
-      }
-    } else {
-      //console.log(res)
-      wx.showToast({
-        title: res.data.msg,
-        icon:'none',
-        duration:2000
-      })
+  
+        } else {
+          wx.requestPayment({
+            timeStamp: res.data.data.data.timeStamp,
+            nonceStr: res.data.data.data.nonceStr,
+            package: res.data.data.data.package,
+            signType: res.data.data.data.signType,
+            paySign: res.data.data.data.paySign,
+            
+            success: function(res) {
+              // 数据设置
+              // self.order_item_pay_success_handle(index);
+  
+              // 跳转支付页面
+       
 
-    }
-    //console.log(res)
-    fail: () => {
-      wx.hideLoading();
-      //   app.showToast("");
-      wx.showToast({
-        title: "服务器请求出错",
-        icon:'none',
-        duration:3000
-      })
-    }
+              wx.showLoading({
+                title: '付款成功,正在跳转页面',
+              })
+  
+  
+              setTimeout(function(){
+                // wx.switchTab({
+                //   url: "/private/hotelpeople/index?idx=2"
+                // });
+                wx.hideLoading()
+                wx.navigateBack({
+                  delta: 0,
+                })
+
+              },2000)
+  
+            },
+            // 2288 2256
+            fail: function(res) {
+              that.setData({
+                flag:true
+              })
+              wx.showToast({
+                title: '付款失败',
+                icon:'none',
+                duration:2000
+              })
+            }
+          });
+        }
+      } else {
+        //console.log(res)
+        that.setData({
+          flag:true
+        })
+        wx.showToast({
+          title: res.data.msg,
+          icon:'none',
+          duration:2000
+        })
+  
+      }
+      //console.log(res)
+      fail: () => {
+        wx.hideLoading();
+        //   app.showToast("");
+        wx.showToast({
+          title: "服务器请求出错",
+          icon:'none',
+          duration:3000
+        })
+      }
+
+
+    
 
   },
   switch: function(e) {
@@ -297,8 +321,20 @@ Page({
     })
   },
   payment: function() { //点击支付按钮
-    this.paymented()
+    
+  
+
+    if(this.data.flag){
+      this.paymented()
+    }
+    this.setData({
+      flag:false
+    })
+
   },
+  // payment: util.throttle(function () {
+  //   this.paymented()
+  // }),
   /**
    * 生命周期函数--监听页面显示
    */

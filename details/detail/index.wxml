@@ -5,9 +5,8 @@
 			<view class="peis">配送信息</view>
 		</view>
 		<view class="add_main">
-			<view class="myaddress">{{orderlist.address.province_name}} {{orderlist.address.city_name}}
-				{{orderlist.address.county_name}} {{orderlist.address.address}}</view>
-			<view class="call">电话号码 {{orderlist.address.tel}}</view>
+			<view class="myaddress">{{hotelAddress}}</view>
+			<view class="call">电话号码 {{tel}}</view>
 		</view>
 	</view>
 
