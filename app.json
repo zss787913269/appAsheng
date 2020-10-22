@@ -3,10 +3,6 @@
     "pages/index/index",
     "details/handle/index", 
     "details/detail/index",
-  
-  
-   
-  
     "pages/deliver/index",
     "pages/user/index",
     "pages/cart/index",

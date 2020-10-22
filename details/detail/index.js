@@ -9,6 +9,7 @@ var app = getApp()
 
 Page({
   data: {
+    zymdata:[],
     dgcount:1,
     printdata:[],
     classfiySelect: "",
@@ -41,7 +42,7 @@ Page({
     let that = this
 
     // let options = {
-    //   id:184,
+    //   id:190,
     //   enter:"dy"
     // }
 
@@ -96,9 +97,13 @@ Page({
     // let mydata = e.currentTarget.dataset.data
     let list = this.data.orderlist
     let item = this.data.orderlist.details
-    
+   
+
+
+    console.log("item",item)
    let  t = item[0]
     this.setData({
+      zymdata:item,
       printdata:item
     })
     this.openPrinter();this.toggleDialog2()
@@ -128,14 +133,21 @@ Page({
   },
   draw(){
 
-
-    var width,height;
-
     let k =  this.data.orderlist
-
+    let len = this.data.hotelOrderDetail.length
     let a = this.data.printdata
+
+    console.log(a,"a")
     let j = a[0]
     let that = this
+
+    // 数据打印完 就没了 
+    // 如果再次点击的时候 让数据还在
+    // 需要把外部的也删除 因为递归的时候 如果不删除就会重新读取 那么永远都是第一个
+    // 
+
+    console.log(this.data.dgcount,"递归长度")
+    console.log(len,"数据长度")
 
     if(this.data.dgcount == 1){
 
@@ -156,16 +168,21 @@ Page({
     y = y + 5
 
     lpapi.endDrawLabel();
-  //   lpapi.print(function () {
-  //     that.data.dgcount ++ 
-  //  })
+
 
     }else{
+      
+      let width = 90,height = 14
 
-      lpapi.startDrawLabel('test', this, 90, 14, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
+      // if(this.data.dgcount == len ){
+      //   height = 30
+      // }
+
+      lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
     
       if(j == undefined){
         
+
         wx.showToast({
           title: '打印完毕，请点击关闭按钮',
           icon:"none"
@@ -184,10 +201,6 @@ Page({
     }
 
 
-
-
-   
-  
      if(j == undefined){
       lpapi.endDrawLabel();
       return 

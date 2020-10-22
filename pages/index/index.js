@@ -81,6 +81,7 @@ Page({
     itemed: 'http://second.chchgg.com/public',
     currentIndex: 0,
     groupStart: true,
+    zymspec:""
   },
   toOldFood(e) { //去老菜新菜页面
     //////console.log(e.currentTarget.dataset.value)
@@ -1469,8 +1470,11 @@ getRect4(ele) {
       id: that.data.shopingid,
       spec:zymarr
     }
-
+    this.setData({
+      zymspec:zymarr
+    })
     console.log("params",params)
+
     let res = await ajax({
       url: '/api/goods/SpecDetail',
       method: 'POST',
@@ -1699,6 +1703,20 @@ getRect4(ele) {
         icon:"none"
       })
       return 
+    }
+
+    //zym
+
+    console.log(this.data.zymspec)
+
+    if(this.data.zymspec.length == 1){
+      if(this.data.zymspec[0].type.indexOf('加工') == 0){
+      wx.showToast({
+        title: '不能单选加工项,请重新选择',
+        icon:"none"
+      })
+      return 
+    }
     }
   
 
