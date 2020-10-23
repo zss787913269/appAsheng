@@ -439,8 +439,8 @@
 			<view class="mybt">
 				<!-- <view class="but3"  wx:if="{{true}}" bindtap="toggleDialog">添加需要的商品</view> -->
 				<view class="but3" wx:if="{{true}}" bindtap="showModal">添加需要的商品</view>
-				<!-- <view class="but" bindtap='submit'> 提交订单（{{ids.length}}）</view> -->
-				<view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view>
+				<view class="but" bindtap='submit'> 提交订单（{{ids.length}}）</view>
+				<!-- <view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view> -->
 
 			</view>
 			<!-- <view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view> -->

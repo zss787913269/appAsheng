@@ -17,22 +17,31 @@
 
 			<view class="main">
 
-				<view class="top_box">
-
+				<view class="top_box" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{6}}">
+					<view class="more">查看详情</view>
 					<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 					<view class="imgbox" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{6}}">
-						<image wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-						<view class="more">. . .</view>
+
+						<view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
+							<image wx:if="{{list.images}}" src="https://second.chchgg.com{{list.images}}" class="img"></image>
+							<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						</view>
+
 					</view>
 					<view class="all">
-						<text class="count">共{{item.order_goods_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
+						<text class="count">共{{item.order_goods_count}}件商品，合计：</text><text
+							class="price">￥{{item.total_price}}</text>
 					</view>
 
 				</view>
-				<view class="bottom">
-					<view  class="quxiao" bindtap="pickOrder" data-id="{{item.id}}">一键取货</view>
-					<view  class="queren" bindtap="printing" data-details="{{item}}">打印订单</view>
+				<view class="bottom2">
+
+					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
+					<view class="llbox">
+						<view class="quxiao" bindtap="pickOrder" data-id="{{item.id}}">一键取货</view>
+						<view class="queren" bindtap="printText" data-details="{{item}}">打印订单</view>
+					</view>
 				</view>
 			</view>
 
@@ -44,24 +53,32 @@
 
 			<view class="main">
 
-				<view class="top_box">
-
+				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}">
+					<view class="more">查看详情</view>
 					<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-					<view class="imgbox" bindtap="goDetail" data-id="{{item.id}}">
-						<image wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-						<view class="more">. . .</view>
+					<view class="imgbox">
+						<view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
+							<image wx:if="{{list.images}}" src="https://second.chchgg.com{{list.images}}" class="img"></image>
+							<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						</view>
 					</view>
 					<view class="all">
-						<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
+						<text class="count">共{{item.order_goods_count}}件商品，合计：</text><text
+							class="price">￥{{item.total_price}}</text>
 					</view>
 
 				</view>
-				<view class="bottom">
-					<view  class="quxiao"  bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>
-					<view  class="queren"  bindtap="upload" data-id="{{item.id}}">上传图片</view>
+				<view class="bottom2">
+
+					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
+					<view class="llbox">
+						<view class="quxiao" bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>
+						<view class="queren" bindtap="upload" data-id="{{item.id}}">上传图片</view>
+					</view>
 				</view>
 			</view>
+
 
 		</view>
 	</view>
@@ -71,44 +88,53 @@
 
 			<view class="main">
 
-				<view class="top_box">
-
+				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}">
+					<view class="more">查看详情</view>
 					<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-					<view class="imgbox" bindtap="goDetail" data-id="{{item.id}}">
-						<image wx:for="{{item.details}}" wx:for-item="list" src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-						<view class="more">. . .</view>
+					<view class="imgbox">
+						<view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
+							<image wx:if="{{list.images}}" src="https://second.chchgg.com{{list.images}}" class="img"></image>
+							<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						</view>
 					</view>
 					<view class="all">
-						<text class="count">共{{item.order_goods_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
+						<text class="count">共{{item.order_goods_count}}件商品，合计：</text><text
+							class="price">￥{{item.total_price}}</text>
 					</view>
 
 				</view>
-				<view class="bottom">
-					<view  class="quxiao" >联系商家</view>
-					<view  class="queren" >联系酒店</view>
+				<view class="bottom2">
+
+					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
+					<view class="llbox">
+						<view class="quxiao">联系商家</view>
+						<view class="queren">联系酒店</view>
+					</view>
 				</view>
 			</view>
+
+
 
 		</view>
 	</view>
 </view>
 
- 
-      <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" >
-  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
-          <view class="zan-dialog__mask" bindtap="toggleDialog" />
-          <view class="zan-dialog__container">
-            
-						<view class="listTitle2"    bindtap="toggleDialog" ><text class="bj3">关闭</text></view>
-          
-                <!-- <view class="printdata">打印数据</view> -->
-          
-                 <scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
-                 <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
-               </scroll-view>
-            
-               <view class="listTitle2"    bindtap="print" ><text class="bj2">打印</text></view>
 
-          </view>
-        </view>
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+	<!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+	<view class="zan-dialog__mask" bindtap="toggleDialog" />
+	<view class="zan-dialog__container">
+
+		<view class="listTitle2" bindtap="toggleDialog"><text class="bj3">关闭</text></view>
+
+		<!-- <view class="printdata">打印数据</view> -->
+
+		<scroll-view scroll-y="true" style="height:800rpx;margin-bottom:10rpx">
+			<canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
+		</scroll-view>
+
+		<view class="listTitle2" bindtap="draw"><text class="bj2">打印</text></view>
+
+	</view>
+</view>

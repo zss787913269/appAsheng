@@ -6,7 +6,6 @@ import regeneratorRuntime from '../../utils/runtime.js'
 //获取应用实例
 var app = getApp()
 
-
 Page({
   data: {
     zymdata:[],
@@ -31,7 +30,9 @@ Page({
     canvasWidth: 30,
     canvasHeight: 10,
     hotelAddress:"",
-    tel:""
+    tel:"",
+    len:"",
+    mylist:""
 
   },
 
@@ -96,15 +97,15 @@ Page({
 
     // let mydata = e.currentTarget.dataset.data
     let list = this.data.orderlist
-    let item = this.data.orderlist.details
+    let item = this.data.orderlist.details.concat()
    
-
 
     console.log("item",item)
    let  t = item[0]
     this.setData({
       zymdata:item,
-      printdata:item
+      printdata:item,
+     dgcount:1
     })
     this.openPrinter();this.toggleDialog2()
     var width = 70;
@@ -129,15 +130,20 @@ Page({
 
      lpapi.endDrawLabel();
     //  that.data.printdata.splice(0,1)
+
+   
    
   },
   draw(){
 
     let k =  this.data.orderlist
-    let len = this.data.hotelOrderDetail.length
+    let len = this.data.len.length
     let a = this.data.printdata
 
+
+
     console.log(a,"a")
+
     let j = a[0]
     let that = this
 
@@ -172,17 +178,15 @@ Page({
 
     }else{
       
-      let width = 90,height = 14
+      let width = 90,height = 12
 
-      // if(this.data.dgcount == len ){
-      //   height = 30
-      // }
+      if(this.data.dgcount == len ){
+        height = 30
+      }
 
       lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
     
       if(j == undefined){
-        
-
         wx.showToast({
           title: '打印完毕，请点击关闭按钮',
           icon:"none"
@@ -510,9 +514,16 @@ Page({
 
     if (res.data.code == 0) {
       hotelOrderDetail = res.data.data
-      
+      let len = []
+      for(let i of hotelOrderDetail){
+        for(let j of i.goods){
+          len.push(j)
+        }
+      }
+      console.log(len.length)
       this.setData({
         hotelOrderDetail,
+        len,
         classfiySelect:hotelOrderDetail[0].id
       })
     }

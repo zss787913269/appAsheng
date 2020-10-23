@@ -40,6 +40,10 @@ Page({
     canvasWidth: 30,
     canvasHeight: 10,
     showDialog: false,
+    dgcount:1,
+    len:"",
+    printdata:"",
+    zymdata:""
   },
 
   /**
@@ -147,7 +151,133 @@ Page({
       })
     })
   },
+  printText(e){
 
+    let item = e.currentTarget.dataset.details.details
+    let list = this.data.orderlist
+
+   
+
+
+    console.log("item",e.currentTarget.dataset.details)
+   let  t = item[0]
+    this.setData({
+      zymdata:e.currentTarget.dataset.details,
+      printdata:item,
+       dgcount:1,
+       len:e.currentTarget.dataset.details.details.length
+    })
+    this.openPrinter();this.toggleDialog()
+    var width = 90;
+    var height = 55;
+    let j = e.currentTarget.dataset.details
+    // let t = j[0]
+    
+    
+    lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
+  
+    let y = 0 ,x = 0
+    y = y + 5,lpapi.drawText(`配送单`, 22, y, 5),y = y + 8,lpapi.drawText(`酒店名字：${j.hotel_name}`, 0, y, 5)
+
+    y = y + 5,lpapi.drawText(`配送地址：${j.hotel_address}`, 0, y, 5)
+    y = y + 5,lpapi.drawText(`商品数量：${j.details.length}`, 0, y, 5)
+    y = y + 5,lpapi.drawText(`商品总价：${j.total_price}`, 0, y, 5),y = y + 5,lpapi.drawText(`时间：${j.add_time}`, 0, y, 5)
+
+    y = y + 8,lpapi.drawText(`商品名`, x, y, 4),x = x + 30,lpapi.drawText(`数量 `, x, y, 4),
+    x = x + 12,lpapi.drawText(`单价`, x, y, 4),x = x + 12, lpapi.drawText(`总价`, x, y, 4),x = x + 5,y = y + 2
+
+    x = 0,y = y + 4,lpapi.drawText(`${this.data.dgcount}.${t.title}`, x, y,3),x = x + 30,lpapi.drawText(`${t.buy_number}  `, x, y,3)
+    x = x + 12,lpapi.drawText(`${t.price} `, x, y,3),x = x + 12,lpapi.drawText(`${t.total_price} `, x, y,3)
+    x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${t.specvalue}`, x, y, 3), x = x + 30
+    y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+    y = y + 5
+
+     lpapi.endDrawLabel();
+    //  that.data.printdata.splice(0,1)
+   
+  },
+  draw(){
+
+    let k =  this.data.zymdata
+    let len = this.data.len
+    let a = this.data.printdata
+
+    console.log(a,"a")
+     console.log(k,"k")
+    let j = a[0]
+    let that = this
+
+    // 数据打印完 就没了 
+    // 如果再次点击的时候 让数据还在
+    // 需要把外部的也删除 因为递归的时候 如果不删除就会重新读取 那么永远都是第一个
+    // 
+
+    console.log(this.data.dgcount,"递归长度")
+    console.log(len,"数据长度")
+
+    if(this.data.dgcount == 1){
+
+      lpapi.startDrawLabel('test', this, 100, 55, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
+  
+    let y = 0 ,x = 0
+    y = y + 5,lpapi.drawText(`配送单`, 22, y, 5),y = y + 8,lpapi.drawText(`酒店名字：${k.hotel_name}`, 0, y, 5)
+    y = y + 5,lpapi.drawText(`配送地址：${k.hotel_address}`, 0, y, 5)
+    y = y + 5,lpapi.drawText(`商品数量：${len}`, 0, y, 5)
+    y = y + 5,lpapi.drawText(`商品总价：${k.total_price}`, 0, y, 5),y = y + 5,lpapi.drawText(`时间：${k.add_time}`, 0, y, 5)
+
+    y = y + 8,lpapi.drawText(`商品名`, x, y, 4),x = x + 30,lpapi.drawText(`数量 `, x, y, 4),
+    x = x + 12,lpapi.drawText(`单价`, x, y, 4),x = x + 12, lpapi.drawText(`总价`, x, y, 4),x = x + 5,y = y + 2
+
+    x = 0,y = y + 4,lpapi.drawText(`${this.data.dgcount}.${j.title}`, x, y,3),x = x + 30,lpapi.drawText(`${j.buy_number}  `, x, y,3)
+    x = x + 12,lpapi.drawText(`${j.price} `, x, y,3),x = x + 12,lpapi.drawText(`${j.total_price} `, x, y,3)
+    x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${j.specvalue}`, x, y, 3), x = x + 30
+    y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+    y = y + 5
+
+    lpapi.endDrawLabel();
+
+
+    }else{
+      
+      let width = 90,height = 12
+
+      if(this.data.dgcount == len ){
+        height = 30
+      }
+
+      lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
+    
+      if(j == undefined){
+        
+
+        wx.showToast({
+          title: '打印完毕，请点击关闭按钮',
+          icon:"none"
+        })
+         lpapi.endDrawLabel();
+        
+      }
+       let y = 0 ,x = 0
+        x = 0,y = y + 4,lpapi.drawText(`${this.data.dgcount}.${j.title}`, x, y,3),x = x + 30,lpapi.drawText(`${j.buy_number}  `, x, y,3)
+        x = x + 12,lpapi.drawText(`${j.price} `, x, y,3),x = x + 12,lpapi.drawText(`${j.total_price} `, x, y,3)
+        x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${j.specvalue}`, x, y, 3), x = x + 30
+        y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+        y = y + 3
+       lpapi.endDrawLabel();
+  
+    }
+
+
+     if(j == undefined){
+      lpapi.endDrawLabel();
+      return 
+    }
+    a.splice(0,1)
+     lpapi.print(function () {
+      that.data.dgcount ++ 
+      that.draw()
+   })
+  },
   printing: function (e) { //生成打印数据
     this.toggleDialog()
     this.openPrinter() //连接打印机    为空就是列表第一个

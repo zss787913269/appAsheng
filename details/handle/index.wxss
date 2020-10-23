@@ -849,11 +849,15 @@ page{
     flex-direction: column;
     position: relative;
 }
+.zybox{
+  display: flex;
+}
 .imgbox{
   margin-top: 40rpx;
   margin-left:108rpx;
-  position: relative;
+  /* position: relative; */
   display: flex;
+  
   flex: 1;
   flex-wrap: wrap;
   overflow: hidden;

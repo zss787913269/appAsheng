@@ -94,7 +94,9 @@
           <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
             <view class="mytitle2"  bindtap="opendig" data-item="{{items}}">
               <view class="right-img">
-                <image src="http://second.chchgg.com{{items.images}}"></image>
+
+                <image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
+                <image  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
               </view>
               <view class="right-title" >
                 <!-- <view class="top-title">{{items.title}}</view> -->
@@ -207,10 +209,15 @@
           <view class="mytitle">订单编号：{{item.order_no}}</view>
           <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
           <view class="imgbox">
-            <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list"
-              src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
 
+              <view  wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox" >
+           
+             <image wx:if="{{list.images}}" src="https://second.chchgg.com{{list.images}}"  class="img"></image>
+                <image  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"  class="img"></image>
+              </view>
+          
 
+            
 
           </view>
           <view class="all">
