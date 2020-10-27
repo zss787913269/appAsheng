@@ -22,7 +22,7 @@
 		<text>一键接单</text>
 	</view>
 
-	<view class="mysh" bindtap="printText" wx:if="{{showdy}}">
+	<view class="mysh" bindtap="printing" wx:if="{{showdy}}">
 		<text>一键打印</text>
 	</view>
 </view>
@@ -181,7 +181,7 @@
 			<canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
 		</scroll-view>
 
-		<view class="bj2 listTitle2" bindtap="draw"><text>打印</text></view>
+		<view class="bj2 listTitle2" bindtap="print"><text>打印</text></view>
 		<!-- <text class="myfirst" bindtap="toggleDialog">取消</text> -->
 
 	</view>

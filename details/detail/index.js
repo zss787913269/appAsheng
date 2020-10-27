@@ -180,9 +180,9 @@ Page({
       
       let width = 90,height = 12
 
-      if(this.data.dgcount == len ){
-        height = 30
-      }
+      // if(this.data.dgcount == len ){
+      //   height = 30
+      // }
 
       lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
     

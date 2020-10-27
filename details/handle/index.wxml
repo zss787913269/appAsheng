@@ -157,8 +157,9 @@
     <block wx:for="{{shopOrderList}}" wx:key="index">
       <view class="peflex">
        
-      <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">{{item.name}}</view>
-      <view class="pprint" bindtap="printText" data-data="{{item.details}}"> 打印分类 </view>
+      <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}" bindtap="showImg" data-data = "{{item}}">{{item.name}}</view>
+      <view class="pprint1" bindtap="printText" data-data="{{item.details}}" > 打印标签纸 </view>
+      <view class="pprint" bindtap="printText2" data-data="{{item}}" > 打印连续纸 </view>
         
         </view>
       <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
@@ -170,7 +171,7 @@
             <!-- <view class="top-title">{{items.title}}</view> -->
             <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
             <view class="mytext2">{{items.specvalue}}</view>
-            <view class="mytext2">单价：{{items.price}}</view>
+            <view class="mytext2">单价：{{items.original_price}}</view>
             <view class="mynumber"> 数量： {{items.buy_number}}</view>
           </view>
 
@@ -281,6 +282,64 @@
 
 
 
+<view class="zan-dialog {{ showDialog3 ? 'zan-dialog--show' : '' }}">
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+
+  <view class="zan-dialog__mask" bindtap="toggleDialog3" />
+  <view class="zan-dialog__container5">
+   
+    <view >
+      <view > 
+
+      <view class="tio-box">
+        <view class="clol3" bindtap="toggleDialog3">
+            <text>关闭</text>
+          </view>
+        <view><text>商品分类名称：{{dataList.name}}</text></view>
+      <view><text>商品类别数量：{{dataList.details.length}}</text></view>
+      <view><text>商品总价：{{zymshopprice}}</text></view>
+        </view>
+
+        
+
+      <view class="table-box">
+        
+            <view class="table-title-box">
+                <text class="sname">商品名</text>
+                <text class="scount">数量</text>
+                <text class="sprice">单价</text>
+                <text class="allprice">总价</text>
+            </view>
+        </view>
+        <scroll-view scroll-y="true" style="height:940rpx;margin-bottom:10rpx;">
+        <view class="table-box-item" wx:for="{{dataList.details}}" wx:key="id">
+        
+            <view class="table-title">
+                <text class="sname shoptitle" >{{index+1}}.{{item.title}}</text>
+                <text class="scount shoptitle">{{item.buy_number}}</text>
+                <text class="sprice shoptitle">{{item.original_price}}</text>
+                <text class="allprice shoptitle">{{item.original_price * item.buy_number}}</text>
+            </view>
+             <view class="table-bz">
+               <text class=" sname shoptitle">规格：{{item.specvalue}}</text>
+               <text class=" sname ka">备注：{{item.goods_mark == "" ? "无":item.goods_mark}}</text>
+              </view>
+            
+            
+        </view>
+      </scroll-view>
+      
+        </view>
+   
+      <view class="zymitem5">
+       
+       
+      </view>
+
+    </view>
+
+  </view>
+</view>
 
 <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
   <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
@@ -298,8 +357,7 @@
         
       <view><text>商品名字：{{shopname}}</text></view>
       <view><text>规格：{{shopgg}}</text></view>
-     <!-- <view><text>价格：</text><input type="text" bindinput="getprice" value="{{shopprice}}" wx:if="{{listindex == 1}}" /><text wx:else>{{shopprice}}</text></view> -->
-      <view><text>商品价格：</text><input type="text" value="{{shopprice}}"  bindinput="getoprice"  wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{original_price}}</text></view>
+      <view><text>商品价格：</text><input type="text" value="{{original_price}}"  bindinput="getoprice"  wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{original_price}}</text></view>
       <view><text>数量：</text><input type="text" bindinput="getcount" value="{{shopcount}}" wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{shopcount}}</text></view>
         </view>
       <view class="zymitem">
@@ -326,7 +384,8 @@
 
      
        <view class="zymitem1">
-          <view class="bj2 listTitle2"  bindtap="draw"><text>确认</text></view>
+          <view class="bj2 listTitle2"  bindtap="draw" wx:if="{{biaoqian}}"><text>打印</text></view>
+          <view   class="bj2 listTitle2"  bindtap="print2" wx:if="{{lianxu}}"><text>打印</text></view>
           <view class="clol2" bindtap="toggleDialog2"><text>关闭</text></view>        
         </view>
 
