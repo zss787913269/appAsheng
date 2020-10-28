@@ -158,14 +158,17 @@
       <view class="peflex">
        
       <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}" bindtap="showImg" data-data = "{{item}}">{{item.name}}</view>
-      <view class="pprint1" bindtap="printText" data-data="{{item.details}}" > 打印标签纸 </view>
+      <view class="pprint1" bindtap="printText" data-data="{{item}}" > 打印标签纸 </view>
       <view class="pprint" bindtap="printText2" data-data="{{item}}" > 打印连续纸 </view>
         
         </view>
       <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
         <view class="mytitle2"  >
           <view class="right-img">
-            <image src="http://second.chchgg.com{{items.images}}"></image>
+   
+            
+            <image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
+                <image  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
           </view>
           <view class="right-title" >
             <!-- <view class="top-title">{{items.title}}</view> -->
@@ -180,13 +183,8 @@
           <view class="config" >
             <view class="queren" bindtap="opendig" data-item="{{items}}" data-count="5" > <text>打印标签</text></view>
             <view class="quxiao" bindtap="opendig" data-item="{{items}}" data-count="1"><text>修改价格</text></view> 
-
           </view>
-
-
-
         </view>
-
 
       </view>
     </block>
@@ -384,7 +382,7 @@
 
      
        <view class="zymitem1">
-          <view class="bj2 listTitle2"  bindtap="draw" wx:if="{{biaoqian}}"><text>打印</text></view>
+          <view class="bj2 listTitle2"  bindtap="print3" wx:if="{{biaoqian}}"><text>打印</text></view>
           <view   class="bj2 listTitle2"  bindtap="print2" wx:if="{{lianxu}}"><text>打印</text></view>
           <view class="clol2" bindtap="toggleDialog2"><text>关闭</text></view>        
         </view>

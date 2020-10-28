@@ -68,7 +68,16 @@ page{
 .edit{
   position: absolute;
   right: 31rpx;
-  bottom: 80rpx;
+  bottom: 90rpx;
+  display: flex;
+  align-items: center;
+
+}
+.edittext{
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 300;
+  color: red;
 }
 .edit image{
   width: 28rpx;

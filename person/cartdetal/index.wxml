@@ -36,7 +36,7 @@
   </view> -->
 
   <view class="edit" bindtap="addresd">
-    <image src="../../images/user/a.png"></image>
+     <view class="edittext">添加或修改地址</view><image src="../../images/user/a.png"></image>
   </view>
 
 </view>

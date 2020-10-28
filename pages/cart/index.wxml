@@ -56,7 +56,7 @@
 							<view wx:for="{{leftList}}" wx:key="unique">
 								<view class="shop-name">
 									<text id="{{'inToview'+item.id}}"
-										class="{{classfiySelect == item.id ? 'top-title_active' : 'top-title' }}">类别：{{item.name}}类</text>
+										class="{{classfiySelect == item.id ? 'top-title_active' : 'top-title' }}">类别：{{item.name}}</text>
 								</view>
 								<view class="itemed" wx:for="{{item.goods}}" wx:key="unique" wx:for-item="items">
 									<checkbox class="checked" value="{{items.id}}" checked="{{items.isSelected}}" color='#3B9EF5' />
@@ -67,30 +67,35 @@
 											mode='widthFix' />
 									</view>
 									<view class="mytitle">
-										<text class="sstitle">{{items.title}} </text>
-										<text class="mytext2">{{items.spec[0].value}}</text>
-										<text class="mytext2" wx:if="{{items.goods_mark}}">备注：{{items.goods_mark}}</text>
-										<text class="mypri">单价：￥{{items.price}} </text>
+										<view>
+											<text class="sstitle">{{items.title}}/</text><text
+												class="righttext">{{items.spec[0].value}}</text>
+										</view>
+
+										<text class="mypri"><text class="dj">单价:</text><text class="djprice">￥{{items.price}} </text></text>
 										<text class="mypri"
-											wx:if="{{utils.tomyfix(items.price,items.stock) != items.price}}">总价：￥{{utils.tomyfix(items.price,items.stock)}}
-										</text>
+											wx:if="{{utils.tomyfix(items.price,items.stock) != items.price}}"><text class="zheji">合计:</text><text class="hejiprice">￥{{utils.tomyfix(items.price,items.stock)}}</text></text>
+										<text class="mytext3" wx:if="{{items.goods_mark}}">备注：{{items.goods_mark}}</text>
 
-
-									</view>
-									<view class="red" data-index="{{items.id}}" bindtap='remove'>
-										<image class="delimg" src="../../images/index/gwc-ljt@2x.png"></image>
-									</view>
-									<view class="bujin">
+										<view class="bujin">
 										<view data-index="{{index}}" data-item="{{items.id}}" bindtap='sub'>
 											<image class="marri" src="../../images/nav/gwc-jian.png"></image>
 										</view>
 										<view class="num">
-											<text>{{items.stock}}</text>
+											<text>{{utils.toNum(items.stock)}}</text>
 										</view>
 										<view data-index="{{index}}" data-item="{{items.id}}" bindtap='add'>
 											<image class="marle" src="../../images/nav/gwc-jia.png"></image>
 										</view>
 									</view>
+									</view>
+									
+						   	<view class="red" data-index="{{items.id}}" bindtap='remove'>
+										<image class="delimg" src="../../images/index/gwc-ljt@2x.png"></image>
+									</view>
+												 
+						
+									
 								</view>
 							</view>
 						</checkbox-group>
@@ -186,8 +191,8 @@
 
 			<view wx:if="{{currentTab1 == 1}}">
 				<view wx:for="{{wfk}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-					
-				 <view class="maina">
+
+					<view class="maina">
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
@@ -195,28 +200,30 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}"class="imga"></image>
+									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
 						<view class="bottoma">
 							<view class="myaba">下单员：{{item.user.nickname}}</view>
-							<view class="queren" wx:if="{{hotel_role != 1}}" bindtap="payment" data-docat="{{item.isdocat}}" data-id="{{item.id}}" data-num="{{item.detail.length}}" data-price="{{item.total_price}}">支付</view>
+							<view class="queren" wx:if="{{hotel_role != 1}}" bindtap="payment" data-docat="{{item.isdocat}}"
+								data-id="{{item.id}}" data-num="{{item.detail.length}}" data-price="{{item.total_price}}">支付</view>
 						</view>
 					</view>
 				</view>
 			</view>
 			<view wx:if="{{currentTab1 == 2}}">
 				<view wx:for="{{yfk}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-					
-				 <view class="maina">
+
+					<view class="maina">
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
@@ -224,14 +231,15 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}"class="imga"></image>
+									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -244,8 +252,8 @@
 			</view>
 			<view wx:if="{{currentTab1 == 3}}">
 				<view wx:for="{{dys}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-					
-				 <view class="maina">
+
+					<view class="maina">
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">查看详情</view>
@@ -253,14 +261,15 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}"class="imga"></image>
+									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -273,8 +282,8 @@
 			</view>
 			<view wx:if="{{currentTab1 == 4}}">
 				<view wx:for="{{ywc}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-					
-				 <view class="maina">
+
+					<view class="maina">
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
@@ -282,14 +291,15 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}"class="imga"></image>
+									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.total_price}}</text>
+								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
@@ -303,149 +313,22 @@
 
 		</view>
 	</view>
-	
 
-	<!-- <view wx:if="{{currentTab == 2}}">
-		<view class="titlebox">
-			<view class="addinfo">
-				<view class="addtop">
-					<image class="addimg" src="../../images/details/ddxq-psxx@2x.png"></image>
-					<view class="peis">配送信息</view>
-				</view>
-				<view class="add_main">
-					<view class="myaddress">酒店地址：{{hotelMsg.address}}</view>
-					<view class="call">电话号码 {{hotelMsg.tel}}</view>
-				</view>
-			</view>
-		</view>
 
-		<view class="main2">
-			<view class="left2">
-				<scroll-view scroll-y="true" class="ss" style="height: 800rpx" scroll-into-view="true"
-					scroll-with-animation="true">
-					<view wx:for="{{hotelOrderDetail}}" wx:key="unique">
-						<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
-							class="{{classfiySelect === item.id ? 'leftActive':'myNmae2'}}">
-							<text> {{item.name}}</text>
-							<text class="mycount">{{item.goods.length}}</text>
-						</view>
-					</view>
-				</scroll-view>
-			</view>
-			<view class='right2'>
-				<scroll-view scroll-y="true" style="height: 800rpx" scroll-with-animation="true"
-					scroll-into-view="{{'inToview'+classfiySelect}}">
-					<block wx:for="{{hotelOrderDetail}}" wx:key="index">
-				
-						<view class="shopatt-left_show" wx:for="{{item.goods}}" wx:key="index" wx:for-item="items">
-							<view class="mytitle2" id="{{'inToview'+item.id}}">
-								<view class="right-img">
-									<image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
-									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
-								</view>
-								<view class="right-title">
-									<view class="{{classfiySelect==item.id ? 'top-title_active2':'top-title2'}}">{{items.title}}</view>
-									<view class="mytext2">{{items.specvalue}}</view>
-									<view class="mynumber" wx:if="{{items.goods_mark !== ' '}}">
-										<text>备注：{{items.goods_mark}}</text>
-									</view>
-									<view class="mynumber"> X {{items.buy_number}}</view>
-								</view>
-							</view>
 
-							<view class="sbox" wx:if="{{items.is_pick == 0}}">
-								<view class="quxiao" bindtap="sqth" data-index="2" data-id="{{items.id}}"
-									data-shopid="{{items.order_id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
-								<view class="queren" wx:if="{{items.returned_quantity != 0  }}"><text>退货成功</text></view>
-							</view>
-							<view class="sbox" wx:else>
-								<view wx:if="{{items.is_order_ok == 0}}">
-							
-									<view class="quxiao" bindtap="sqth" data-index="1" data-id="{{items.id}}"
-										data-shopid="{{items.order_id}}" data-count="{{items.buy_number}}"><text>申请退货</text></view>
-									<view class="queren" wx:if="{{items.returned_quantity != 0  }}"><text>退货处理中</text></view>
-								</view>
-								<view wx:if="{{items.is_pick != 0}}">
-								
-									<view wx:if="{{items.returned_quantity == 0}}" class="shouhuobox">
-										<view class="queren" wx:if="{{items.is_order_ok == 0}}" bindtap="completeOrderDetail"
-											data-id="{{items.id}}"><text>确认收货</text></view>
-										<view class="queren" wx:else> 已收货 </view>
-									</view>
-								</view>
-							</view>
-						</view>
-					</block>
-				</scroll-view>
-
-			</view>
-		</view>
-
-	
-
-	</view>
-
-	<view wx:if="{{currentTab==3}}">
-
-		<view wx:for="{{completed}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-
-			<view class="maina">
-
-				<view class="top_boxa">
-					<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-					<view class="mytitlea">订单编号：{{item.order_no}}</view>
-			
-					<view class="imgboxa">
-						<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-							<image wx:if="{{list.images}}" src="{{list.images}}" class="imga"></image>
-							<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga"></image>
-							<text class="flex-titlea">{{list.title}}</text>
-						</view>
-					</view>
-					<view class="alla">
-						<text class="counta">共{{item.items_count}}件商品，合计：</text><text class="pricea">￥{{item.price}}</text>
-					</view>
-
-				</view>
-				<view class="bottoma">
-					<view class="myaba">下单员：{{item.user.nickname}}</view>
-					<view class="quxiaoa">已完成</view>
-				</view>
-			</view>
-		</view>
-	</view> -->
 
 
 	<view class="bottom" wx:if="{{currentTab == 1 && listindex != 2 && listindex != 3}}">
-		<view class="bbox"></view>
-		<view class="btno">
-			<!-- <text>共{{tableList.length}}件,合计</text> -->
-			<!-- <view class="zssflex">
 
-				<view class="color"><text class="heji">合计</text> ￥{{totalPrice}}元</view>
-			<view> 
-				<text wx:if="{{totalPrice < 300}}">采购额未满¥300，另收配送费¥30</text>
-				<text  wx:if="{{totalPrice > 300}}">免配送费</text>
-			</view>
-
-			</view> -->
-			<view class="myposi">
-				<text class="p1"> 总价：￥{{totalPrice}}元</text>
-				<!-- <text class="p2" wx:if="{{totalPrice < 300}}">采购额未满¥300，另收配送费¥30</text>
-				<text class="p3" wx:if="{{totalPrice > 300}}">免配送费</text> -->
-			</view>
-
-
-			<view class="mybt">
-				<!-- <view class="but3"  wx:if="{{true}}" bindtap="toggleDialog">添加需要的商品</view> -->
-				<view class="but3" wx:if="{{true}}" bindtap="showModal">添加需要的商品</view>
-				<view class="but" bindtap='submit'> 提交订单（{{ids.length}}）</view>
-				<!-- <view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view> -->
-
-			</view>
-			<!-- <view class="but" bindtap='dy'> 提交订单（{{ids.length}}）</view> -->
+		<view class="myposi">
+			<view><text class="heji1">合计</text><text class="qian">￥</text><text class="p1"> {{totalPrice}}</text> </view>
+			<view class="peisong"><text class="peisongText">配送费</text><text class="peisongM">￥0.00</text></view>
 		</view>
-		<!-- <view class="but" bindtap='mysubmit'> 提交订单</view> -->
+		<view class="bo-box">
+			<view class="but3" bindtap="showModal">添加需要的商品</view>
+			<view class="but" bindtap='submit'> <text>提交订单({{ids.length}})</text></view>
+		</view>
+
 	</view>
 
 
@@ -454,16 +337,9 @@
 <view class="bottom" wx:if="{{ currentTab == 1 && listindex == 2}}">
 	<view class="bbox"></view>
 	<view class="btno2">
-
 		<view class="but2" bindtap='cartAdd'> 加入到购物车（{{carlen}}）</view>
-
 	</view>
-	<!-- <view class="but" bindtap='mysubmit'> 提交订单</view> -->
-
-
 </view>
-
-
 <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
 	<!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
 	<view class="zan-dialog__mask" bindtap="toggleDialog" />
@@ -476,26 +352,19 @@
 			<view class="dbox">
 				<view>数量：</view>
 				<input placeholder="请输入商品数量" bindinput="inputnum" value="{{num2}}" placeholder-class="placeholder"></input>
-
 			</view>
 			<view class="dbox">
 				<view>备注：</view>
 				<input placeholder="请输入规格" bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input>
 			</view>
-
 			<view>
 				<text class="color">此商品：临时划价为6.00元，后期结算，多还少补</text>
 			</view>
-
 		</view>
 		<view class="ebox"><text class="quxiao" bindtap="toggleDialog">取消</text><text class="queren"
 				bindtap="queren">确认</text></view>
-
-
 	</view>
 </view>
-
-
 
 <view class="zan-dialog {{ showDialog2 ? 'zan-dialog--show2' : '' }}">
 	<view class="zan-dialog__mask2" bindtap="toggleDialog2" />
@@ -509,16 +378,12 @@
 				<text class="myfirst" bindtap="toggleDialog2">取消</text>
 				<text class="myfirst2" bindtap="config">确认</text>
 			</view>
-
 		</view>
 	</view>
 </view>
-
 <view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
 	<view class="myb">
-
-		<!-- showModalStatus: false, //遮罩的显示与隐藏 -->
 		<view class="mybbox">
 			<view class="dbox">
 				<view class="text-box"><text>商品名：</text></view>
@@ -536,18 +401,13 @@
 				<view class="input-box"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}"
 						placeholder-class="placeholder"></input></view>
 			</view>
-
 			<view class="tip">
 				<text>此商品：临时划价为10.00元，后期结算，多还少补</text>
 			</view>
-
 		</view>
 		<view class="ebox">
 			<text class="green" bindtap="hideBuyModal">取消</text>
 			<text class="yellow" bindtap="queren">确认</text>
 		</view>
-
-
-
 	</view>
 </view>

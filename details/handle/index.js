@@ -2,6 +2,8 @@ var lpapi = require('../../utils/LPAPI/LPAPI.js');
 import ajax from '../../utils/ajax'
 import regeneratorRuntime from '../../utils/runtime.js'
 var app = getApp()
+let   tempIndex = 0
+let   itemIndex = 0
 // details/handle/index.js
 Page({
 
@@ -42,8 +44,99 @@ Page({
     biaoqian:false,
     lianxu:false,
     showDialog3:false,
-    dataList:[]
+    dataList:[],
+    zymdata:""
   },
+  print3: function () {
+    tempIndex = this.data.printdata.length;
+    console.log(tempIndex,"tempIndex")
+    this.printOneLabel();
+  },
+  printNextLabel : function () {  
+    tempIndex--;
+    itemIndex++;
+    if (tempIndex <= 0) {
+      wx.showToast({
+        title: '打印成功',
+        duration: 2000,
+        mask: true,
+      })
+    }
+    else{      
+      this.printOneLabel();
+    }
+  },
+  printOneLabel : function () {   
+    let j = this.data.printdata
+    lpapi.setPrintPageGapType(2);
+    let y = 5 ,x = 5
+
+      lpapi.startDrawLabel('test1', this, 70, 80, 0);
+      y = y + 5,lpapi.drawText(`订单编号：${j[tempIndex-1].hotel.user_id}`, x, y, 5)
+      y = y + 10,lpapi.drawText(`商品名：${itemIndex+1}.${j[tempIndex-1].title}`, x, y, 5)
+      y = y + 5, lpapi.drawText(`单价：${j[tempIndex-1].original_price}`, x, y, 5)
+      y = y + 5, lpapi.drawText(`总价：${j[tempIndex-1].buy_number * j[tempIndex-1].original_price}`, x, y, 5)
+      y = y + 5,lpapi.drawText(`数量：${j[tempIndex-1].buy_number}`, x, y, 5)
+      y = y + 5,lpapi.drawText(`规格：${j[tempIndex-1].specvalue}`, x, y, 5)
+      y = y + 5,lpapi.drawText(`备注：${j[tempIndex-1].goods_mark}`, x, y, 5)
+    let self = this;
+    lpapi.endDrawLabel(function () {
+      lpapi.print(function () {
+        self.printNextLabel();
+      })
+    })
+  },
+  printText(e){
+
+    
+
+    console.log(e.currentTarget.dataset.data)
+    console.log('aaa',this.data.shopOrderList)
+
+    this.setData({
+      biaoqian:true,
+      lianxu:false
+    })
+
+    let mydata = e.currentTarget.dataset.data
+    let item = []
+    let that = this
+    if(mydata){
+      item = mydata.details
+    }else{
+      for(let i of that.data.shopOrderList){
+        for(let j of i.details){
+          item.push(j)
+        }
+      }
+    }
+
+    console.log("item",item)
+    
+    this.setData({
+      printdata:item,
+      zymdata:e.currentTarget.dataset.data
+    })
+    this.openPrinter();this.toggleDialog2()
+    var width = 70;
+    var height = 80;
+    let j = this.data.printdata[this.data.printdata.length-1]
+    lpapi.startDrawLabel('test1', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(2)
+  
+    let y = 10,x = 7
+    y = y + 5,lpapi.drawText(`订单编号：${j.hotel.user_id}`, x, y, 5)
+      y = y + 10,lpapi.drawText(`商品名：1.${j.title}`, x, y, 5)
+      y = y + 5, lpapi.drawText(`单价：${j.original_price}`, x, y, 5)
+      y = y + 5, lpapi.drawText(`总价：${j.buy_number * j.original_price}`, x, y, 5)
+      y = y + 5,lpapi.drawText(`数量：${j.buy_number}`, x, y, 5)
+      y = y + 5,lpapi.drawText(`规格：${j.specvalue}`, x, y, 5)
+      y = y + 5,lpapi.drawText(`规格：${j.goods_mark}`, x, y, 5)
+      y = y + 10
+     lpapi.endDrawLabel();
+    //  that.data.printdata.splice(0,1)
+   
+  },
+
   openPrinter: function () {
     // lpapi.scanedPrinters((didGetScanedPrinters) => {
     //   console.log(didGetScanedPrinters)
@@ -403,25 +496,8 @@ Page({
 
    
 
-    // this.openPrinter();this.toggleDialog2()
-  
-
-    // let list = e.currentTarget.dataset.data,height = 100 + list.details.length*12,width = 90
-
-    //     lpapi.startDrawLabel('test1', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(2)
-  
-    // let y = 0,x = 0
- 
-    //   y = y + 10,lpapi.drawText(`商品分类名称：${list.name}`, 0, y, 5)
-    //   y = y + 5, lpapi.drawText(`类别数量：${list.details.length}`, 0, y, 5)
-
-
-    //   lpapi.endDrawLabel();
-
-
     this.toggleDialog2()
     this.openPrinter() //连接打印机    为空就是列表第一个
-    lpapi.setPrintPageGapType(0)
     let print = e.currentTarget.dataset.data.details
     let item = e.currentTarget.dataset.data
    
@@ -499,51 +575,7 @@ Page({
    
   },
 
-  printText(e){
-
-    console.log(e.currentTarget.dataset.data)
-
-    this.setData({
-      biaoqian:true,
-      lianxu:false
-    })
-
-    let mydata = e.currentTarget.dataset.data
-    let item = []
-    let that = this
-    if(mydata){
-      item = mydata
-    }else{
-      for(let i of that.data.shopOrderList){
-        for(let j of i.details){
-          item.push(j)
-        }
-      }
-    }
-
-    console.log("item",item)
-    
-    this.setData({
-      printdata:item
-    })
-    this.openPrinter();this.toggleDialog2()
-    var width = 70;
-    var height = 80;
-    let j = this.data.printdata[0]
-    lpapi.startDrawLabel('test1', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(2)
-  
-    let y = 10,x = 7
-    y = y + 5,lpapi.drawText(`订单编号：${j.hotel.user_id}`, x, y, 5)
-      y = y + 10,lpapi.drawText(`商品名：${j.title}`, x, y, 5)
-      y = y + 5, lpapi.drawText(`单价：${j.price}`, x, y, 5)
-      y = y + 5, lpapi.drawText(`总价：${j.total_price}`, x, y, 5)
-      y = y + 5,lpapi.drawText(`数量：${j.buy_number}`, x, y, 5)
-      y = y + 5,lpapi.drawText(`规格：${j.specvalue}`, x, y, 5)
-      y = y + 10
-     lpapi.endDrawLabel();
-    //  that.data.printdata.splice(0,1)
-   
-  },
+ 
   draw(){
     var width = 70;
     var height = 80;

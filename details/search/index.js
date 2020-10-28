@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    zymspec:"",
     showsearch:true,
     showModalStatus2: false, //遮罩的显示与隐藏
     showDialog: false,
@@ -213,6 +214,16 @@ Page({
         url: "/component/zation/index"
       })
     } 
+
+    if(this.data.zymspec.length == 1){
+      if(this.data.zymspec[0].type.indexOf('加工') == 0){
+      wx.showToast({
+        title: '不能单选加工项,请重新选择',
+        icon:"none"
+      })
+      return 
+    }
+    }
 
     let res = await ajax({
       url: '/api/quickorder/getHotel',
@@ -550,25 +561,50 @@ Page({
     this.showModal()
     let that = this
     let id = e.currentTarget.dataset.id
-    let tab = e.currentTarget.dataset.item
+    let tab = e.currentTarget.dataset.item.spec_base
+    console.log("tab",tab)
 
+    let arr = []
 
-    let tabCopy = JSON.parse(JSON.stringify(tab))
+    tab.forEach((item)=>{
+    
+      if(item.title.indexOf("加工") == 0){
+        arr.push(item)
+      }else{
+        arr.unshift(item)
+      }
+    })
+
+    console.log("arr",arr)
+
+    let tabCopy = JSON.parse(JSON.stringify(arr))
     for (var i = 0; i < tabCopy.length; i++) {
       tabCopy[i].value = {}
     }
-    for (var i = 0; i < tab.length; i++) {
-      for (var j = 0; j < tab[i].value.length; j++) {
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < arr[i].value.length; j++) {
         if (i == 0 && j == 0) {
-          tabCopy[i].value[tab[i].value[j]] = true
+          tabCopy[i].value[arr[i].value[j]] = true
         } else {
-          tabCopy[i].value[tab[i].value[j]] = false
+          tabCopy[i].value[arr[i].value[j]] = false
         }
       }
     }
+      console.log("tabCopy",tabCopy)
+    let oldarr = []
+
+    tabCopy.forEach((item)=>{
+    
+      if(item.title.indexOf("加工") == 0){
+        oldarr.push(item)
+      }else{
+        oldarr.unshift(item)
+      }
+    })
+    
     //console.log("tabCopy",tabCopy)
     that.setData({
-      tableid: tabCopy,
+      tableid: oldarr,
  
     })
 
@@ -704,7 +740,6 @@ Page({
     var that = this
     let tableid = that.data.tableid
     let spec = []
-
     for (var i = 0; i < tableid.length; i++) {
       let obj = {}
       for (let j in tableid[i].value) {
@@ -712,15 +747,29 @@ Page({
 
           obj.type = tableid[i].title
           obj.value = j
-          spec.push(obj)
+          spec.unshift(obj)
         }
       }
     }
 
+    let zymarr = []
+    spec.forEach((item)=>{
+      if(item.type.indexOf("加工") == 0){
+        zymarr.push(item)
+      }else{
+       
+        zymarr.unshift(item)
+      }
+    })
+
+
     let params = {
       id: that.data.shopid,
-      spec
+      spec:zymarr
     }
+    this.setData({
+      zymspec:zymarr
+    })
     //console.log("params",params)
     let res = await ajax({
       url: '/api/goods/SpecDetail',

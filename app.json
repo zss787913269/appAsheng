@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/cart/index",
+  
     "details/handle/index",
     "pages/deliver/index",
     "details/detail/index",
     "pages/user/index",
-    "pages/cart/index",
     "private/personaldata/index",
     "private/hotelinfo/index",
     "pages/yongjin/index",
