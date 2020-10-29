@@ -14,7 +14,7 @@ Page({
   data: {
     zymshopprice:"",
     countList: [],
-    listindex: 3,
+    listindex: 1,
     classfiySelect: "",
     page: 1,
     currentTab: 1,
@@ -45,7 +45,8 @@ Page({
     lianxu:false,
     showDialog3:false,
     dataList:[],
-    zymdata:""
+    zymdata:"",
+    screenHeight:""
   },
   print3: function () {
     tempIndex = this.data.printdata.length;
@@ -684,7 +685,19 @@ Page({
             method: 'POST',
             data: params
           })
-          that.receipt(that.data.zymid)
+          if(res.data.code == 0){
+            that.receipt(that.data.zymid)
+            wx.showToast({
+              title: res.data.msg,
+              icon:"none"
+            })
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon:"none"
+            })
+          }
+       
           console.log("EditOrderDetailGoods",res.data)
           that.toggleDialog()
         }else if(this.data.listindex == 3){
@@ -736,11 +749,21 @@ Page({
     // lpapi.closePrinter()
 
   },
-  // onLoad: function (options) {
-  //   var that = this
-  //   this.getShopList(this.data.currentTab) //未接订单
+  onLoad: function () {
 
-  // },
+    let that = this
+    wx.getSystemInfo({
+      success (res) {
+        that.setData({
+          screenHeight:res.windowHeight - 90
+        })
+        
+        console.log("屏幕高度",res.screenHeight - 40)
+    
+      }
+    })
+
+  },
   onShow() {
     this.getShopList(this.data.currentTab) //未接订单
   },
@@ -1114,6 +1137,7 @@ Page({
           params = {
             type: 4,
             isok: 1,
+            page:1
           }
         }
       

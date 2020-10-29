@@ -84,13 +84,13 @@
 	</view>
 
 	<view wx:if="{{currentTab==3}}">
-		<view wx:for="{{deliveryListYes}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+		<view wx:for="{{deliveryListYes}}"  wx:key="unique" wx:for-index="idx">
 
 			<view class="main">
 
 				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}">
 					<view class="more">查看详情</view>
-					<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 					<view class="imgbox">
 						<view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
@@ -106,7 +106,7 @@
 				</view>
 				<view class="bottom2">
 
-					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
+					<view class="hotel_name">	{{idx+1}}	-- 酒店名：{{item.hotel_name}}</view>
 					<view class="llbox">
 						<view class="quxiao">联系商家</view>
 					<view class="queren" bindtap="printText" data-details="{{item}}">打印订单</view>

@@ -1337,20 +1337,21 @@ Page({
       })
       that.getHotelOrderDetail()
       that.getCount()
+      that.setData({
+        listindex:3
+      })
 
-      let hotel_juese = wx.getStorageSync('hotel_juese')
-      if (hotel_juese == 1) {
-        this.setData({
-          currentTab: 2
-        })
-      } else {
-        // wx.switchTab({
-        //   url: '/private/hotelpeople/index',
-        // })
-        that.setData({
-          listindex:3
-        })
-      }
+      // let hotel_juese = wx.getStorageSync('hotel_juese')
+      // if (hotel_juese == 1) {
+      //   this.setData({
+      //     currentTab: 2
+      //   })
+      // } else {
+      //   // wx.switchTab({
+      //   //   url: '/private/hotelpeople/index',
+      //   // })
+       
+      // }
 
     } else {
       wx.showToast({

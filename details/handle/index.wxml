@@ -1,20 +1,6 @@
 <wxs src='./index.wxs' module='utils' />
 
 
- <!-- <view class="swiper-tab">
-  <view class=" {{currentTab==1?'active':'swiper-tab-item'}}" data-current="1" bindtap="clickTab">未接单
-    <view wx:if="{{ count1!==0}}" class="total">{{count1}}</view>
-  </view>
-  <view class=" {{currentTab==2?'active':'swiper-tab-item'}}" data-current="2" bindtap="clickTab">已接单
-    <view wx:if="{{  count2!==0}}" class="total">{{count2}}</view>
-  </view>
-  <view class=" {{currentTab==3?'active':'swiper-tab-item'}}" data-current="3" bindtap="clickTab">已处理
-    <view wx:if="{{ count3!==0}}" class="total">{{count3}}</view>
-  </view>
-
-</view>
--->
-
 
 <view wx:if="{{false}}">
 
@@ -58,8 +44,8 @@
 <view >
   <view class="mylist">
     <text bindtap="clickList" data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
-    <text bindtap="clickList" data-index="3" class="{{listindex == 3 ? 'shoplist' : ''}}">打印列表</text>
-    <text bindtap="clickList" data-index="2" class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
+    <text bindtap="clickList" data-index="3" class="shoplist" class="{{listindex == 3 ? 'shoplist' : ''}}">打印列表</text>
+    <text bindtap="clickList" data-index="2" class="shoplist" class="{{listindex == 2 ? 'shoplist' : ''}}">订单列表</text>
   
   </view>
 
@@ -69,7 +55,7 @@
 
     <view class="left">
 
-      <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true"
+      <scroll-view scroll-y="true" class="ss" style='height:{{screenHeight}}px' scroll-into-view="true"
         scroll-with-animation="true">
         <view wx:for="{{shopOrderList}}" wx:key="unique">
 
@@ -84,7 +70,7 @@
 
     <view class='right'>
 
-      <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true"
+      <scroll-view scroll-y="true" style='height:{{screenHeight}}px' scroll-with-animation="true"
         scroll-into-view="{{'inToview'+classfiySelect}}">
 
      
@@ -102,7 +88,7 @@
                 <!-- <view class="top-title">{{items.title}}</view> -->
                 <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
                 <view class="mytext2">{{items.specvalue}}</view>
-                <view class="mytext2">单价：{{items.price}}</view>
+                <view class="mytext2">单价：{{items.original_price}}</view>
                 <view class="mynumber"> 数量： {{items.buy_number}}</view>
               </view>
 
@@ -132,14 +118,14 @@
   <view class="main2" wx:if="{{listindex == 3}}">
 
 <view class="left">
-
-  <scroll-view scroll-y="true" class="ss" style="height: 1000rpx" scroll-into-view="true"
+  
+  <scroll-view scroll-y="true" class="ss" style='height:{{screenHeight}}px' scroll-into-view="true"
     scroll-with-animation="true">
     <view wx:for="{{shopOrderList}}" wx:key="unique">
 
       <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
-        class="{{classfiySelect === id ? 'leftActive':'myNmae'}}">
-        <text> {{item.name}}</text>
+        class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+       <text> {{item.name}}</text>
         <text class="mycount">{{item.details.length}}</text>
       </view>
     </view>
@@ -150,14 +136,14 @@
  <view class="right-flex">
   <view class="goprint" bindtap="printText"  data-print="1"> 打印全部 </view>
   </view>
-  <scroll-view scroll-y="true" style="height: 1000rpx" scroll-with-animation="true"
+  <scroll-view scroll-y="true" style='height:{{screenHeight}}px' scroll-with-animation="true"
     scroll-into-view="{{'inToview'+classfiySelect}}">
 
  
     <block wx:for="{{shopOrderList}}" wx:key="index">
       <view class="peflex">
        
-      <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}" bindtap="showImg" data-data = "{{item}}">{{item.name}}</view>
+      <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}" bindtap="showImg" data-data = "{{item}}"><text>{{item.name}}</text></view>
       <view class="pprint1" bindtap="printText" data-data="{{item}}" > 打印标签纸 </view>
       <view class="pprint" bindtap="printText2" data-data="{{item}}" > 打印连续纸 </view>
         

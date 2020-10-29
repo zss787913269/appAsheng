@@ -14,7 +14,7 @@
 			<text class="hotelcount" wx:if="{{ completed.length>0}}">{{completed.length}}</text>
 		</view>
 	</view> -->
-	<view wx:if="{{currentTab == 1}}">
+	<view >
 		<view class="mylist">
 			<!-- <view class="center-box">
 				<text  bindtap="clickindex"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">购物车清单({{hotelCount == 0 ? 0 :hotelCount}})</text>
@@ -68,7 +68,7 @@
 									</view>
 									<view class="mytitle">
 										<view>
-											<text class="sstitle">{{items.title}}/</text><text
+											<text class="sstitle">{{items.title}} </text><text
 												class="righttext">{{items.spec[0].value}}</text>
 										</view>
 
@@ -207,7 +207,7 @@
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+								<text class="counta">共{{item.detail.length}}件商品，合计：</text><text
 									class="pricea">￥{{item.total_price}}</text>
 							</view>
 

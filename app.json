@@ -1,10 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/cart/index",
-  
-    "details/handle/index",
     "pages/deliver/index",
+    "details/handle/index",
+    "pages/cart/index",
     "details/detail/index",
     "pages/user/index",
     "private/personaldata/index",

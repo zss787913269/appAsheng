@@ -16,37 +16,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    location: "南宁站",
-    latitude: "22.827021497126506",
-    longitude: "108.31493788391113",
-    // 图标定位
-    markers: [{
-      latitude: "22.827021497126506",
-      longitude: "108.31493788391113",
-    }],
-    myimgid: "",
+   
     total2: "",
     total3: "",
-    ads: ['/images/temp/ad.jpg', '/images/temp/caipin.png'],
     deliveryList: [], //派送订单
     deliveryListYes: [], //已完成订单
-    currentTab: 1,
-    contact: false,
-    shopInfo: '',
-    showModal: false,
-    shopNum: 1,
-    shopPrice: '',
-    tuidanModal: false,
+    currentTab: 3,
     card_img: [],
     card_imgid: [], //图片id
     PeisongList: [],
     canvasWidth: 30,
     canvasHeight: 10,
     showDialog: false,
-    dgcount:1,
-    len:"",
-    printdata:"",
-    zymdata:""
+    dgcount: 1,
+    len: "",
+    printdata: "",
+    zymdata: "",
+    page: 1, //页面的递进数
+    canPull: true, //下拉是否触发
+    allPage: 1, //总页数
   },
 
   /**
@@ -57,7 +45,7 @@ Page({
     tempIndex = this.data.printdata.length;
     this.printOneLabel();
   },
-  printNextLabel : function () {  
+  printNextLabel: function () {
     tempIndex--;
     itemIndex++;
     if (tempIndex <= 0) {
@@ -67,68 +55,68 @@ Page({
         mask: true,
       })
       itemIndex = 1
-    }
-    else{      
+    } else {
       this.printOneLabel();
     }
   },
-  printOneLabel : function () {   
-    let printdata = this.data.printdata 
- 
-    let hotelmsg =  this.data.zymdata
+  printOneLabel: function () {
+    let printdata = this.data.printdata
+
+    let hotelmsg = this.data.zymdata
     // console.log(printdata[i].title)
 
     console.log(printdata)
-   
-  
+
+
     const width = 70
     const height = 55
     lpapi.setPrintPageGapType(0);
-  
+
     // lpapi.drawText(`${itemIndex}.${printdata[tempIndex-1].title}`, 2, 5, 3);
-    let y = 0 ,x = 0
+    let y = 0,
+      x = 0
 
-    if(itemIndex == 1){
+    if (itemIndex == 1) {
       lpapi.startDrawLabel('test', this, 90, 55, 0);
-      y = y + 5,lpapi.drawText(`配送单`, 22, y, 5),y = y + 8,lpapi.drawText(`酒店名字：${hotelmsg.hotel_name}`, 0, y, 5)
+      y = y + 5, lpapi.drawText(`配送单`, 22, y, 5), y = y + 8, lpapi.drawText(`酒店名字：${hotelmsg.hotel_name}`, 0, y, 5)
 
-      
-      y = y + 5,lpapi.drawText(`商品数量：${hotelmsg.details.length}`, 0, y, 5)
-      y = y + 5,lpapi.drawText(`商品总价：${hotelmsg.total_price}`, 0, y, 5),y = y + 5,lpapi.drawText(`时间：${hotelmsg.add_time}`, 0, y, 5)
-      y = y + 5,lpapi.drawText(`配送地址：${hotelmsg.hotel_address}`, 0, y, 4)
-  
-      y = y + 8,lpapi.drawText(`商品名`, x, y, 4),x = x + 30,lpapi.drawText(`数量 `, x, y, 4),
-      x = x + 12,lpapi.drawText(`单价`, x, y, 4),x = x + 12, lpapi.drawText(`总价`, x, y, 4),x = x + 5,y = y + 2
-      x = 0,y = y + 4,lpapi.drawText(`${itemIndex}.${printdata[tempIndex-1].title}`, x, y,3),x = x + 30,lpapi.drawText(`${printdata[tempIndex-1].buy_number}  `, x, y,3)
-      x = x + 12,lpapi.drawText(`${printdata[tempIndex-1].price} `, x, y,3),x = x + 12,lpapi.drawText(`${printdata[tempIndex-1].total_price} `, x, y,3)
-      x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${printdata[tempIndex-1].specvalue}`, x, y, 3), x = x + 30
-      if(printdata[tempIndex-1].goods_mark != ""){
+
+      y = y + 5, lpapi.drawText(`商品数量：${hotelmsg.details.length}`, 0, y, 5)
+      y = y + 5, lpapi.drawText(`商品总价：${hotelmsg.total_price}`, 0, y, 5), y = y + 5, lpapi.drawText(`时间：${hotelmsg.add_time}`, 0, y, 5)
+      y = y + 5, lpapi.drawText(`配送地址：${hotelmsg.hotel_address}`, 0, y, 4)
+
+      y = y + 8, lpapi.drawText(`商品名`, x, y, 4), x = x + 30, lpapi.drawText(`数量 `, x, y, 4),
+        x = x + 12, lpapi.drawText(`单价`, x, y, 4), x = x + 12, lpapi.drawText(`总价`, x, y, 4), x = x + 5, y = y + 2
+      x = 0, y = y + 4, lpapi.drawText(`${itemIndex}.${printdata[tempIndex-1].title}`, x, y, 3), x = x + 30, lpapi.drawText(`${printdata[tempIndex-1].buy_number}  `, x, y, 3)
+      x = x + 12, lpapi.drawText(`${printdata[tempIndex-1].price} `, x, y, 3), x = x + 12, lpapi.drawText(`${printdata[tempIndex-1].total_price} `, x, y, 3)
+      x = x + 10, y = y + 5, x = 0, lpapi.drawText(`规格：${printdata[tempIndex-1].specvalue}`, x, y, 3), x = x + 30
+      if (printdata[tempIndex - 1].goods_mark != "") {
         x = x + 10, lpapi.drawText(`备注：${printdata[tempIndex-1].goods_mark}`, x, y, 3), x = x + 30
       }
-      y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+      y = y + 3, lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
       y = y + 5
-    }else{
-  
-        
+    } else {
+
+
       let height = 12
-      if(printdata.length == itemIndex ){
+      if (printdata.length == itemIndex) {
         height = 30
       }
       lpapi.startDrawLabel('test', this, 90, height, 0);
-      x = 0,y = y + 4,lpapi.drawText(`${itemIndex}.${printdata[tempIndex-1].title}`, x, y,3),x = x + 30,lpapi.drawText(`${printdata[tempIndex-1].buy_number}  `, x, y,3)
-      x = x + 12,lpapi.drawText(`${printdata[tempIndex-1].price} `, x, y,3),x = x + 12,lpapi.drawText(`${printdata[tempIndex-1].total_price} `, x, y,3)
-      x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${printdata[tempIndex-1].specvalue}`, x, y, 3), x = x + 30
-      if(printdata[tempIndex-1].goods_mark != ""){
+      x = 0, y = y + 4, lpapi.drawText(`${itemIndex}.${printdata[tempIndex-1].title}`, x, y, 3), x = x + 30, lpapi.drawText(`${printdata[tempIndex-1].buy_number}  `, x, y, 3)
+      x = x + 12, lpapi.drawText(`${printdata[tempIndex-1].price} `, x, y, 3), x = x + 12, lpapi.drawText(`${printdata[tempIndex-1].total_price} `, x, y, 3)
+      x = x + 10, y = y + 5, x = 0, lpapi.drawText(`规格：${printdata[tempIndex-1].specvalue}`, x, y, 3), x = x + 30
+      if (printdata[tempIndex - 1].goods_mark != "") {
         x = x + 10, lpapi.drawText(`备注：${printdata[tempIndex-1].goods_mark}`, x, y, 3), x = x + 30
       }
-      y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+      y = y + 3, lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
       y = y + 5
     }
-  
 
 
-   
-  
+
+
+
     let self = this;
     lpapi.endDrawLabel(function () {
       lpapi.print(function () {
@@ -137,94 +125,29 @@ Page({
     })
   },
 
-  onReady: function (e) {
-    this.mapCtx = wx.createMapContext('myMap')
-  },
-  // 地图导航
-  getLoc: function (e) {
-    // //console.log(e.currentTarget.id);  // 获取当前点击的数组下标
-    var that = this;
-    wx.getLocation({
-      type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-      success: function (res) {
-        //使用微信内置地图查看位置接口
-        //console.log(res.data)
-        wx.openLocation({
-          latitude: parseFloat(that.data.latitude),  // 要去的地址经度，浮点数
-          longitude: parseFloat(that.data.longitude),  // 要去的地址纬度，浮点数
-          name: '终点位置',  // 位置名
-          address: that.data.location,  // 要去的地址详情说明
-          scale: 18,   // 地图缩放级别,整形值,范围从1~28。默认为最大
-          
-        });
-      },
-      cancel: function (res) {
-        //console.log('地图定位失败');
-      }
-    })
-  },
-  goDetail(e){
+
+  goDetail(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: "/details/detail/index?id="+id,
+      url: "/details/detail/index?id=" + id,
     })
 
   },
   onLoad: function (options) {
 
-    let that  = this
+    let that = this
 
     this.getDeliveryClerkList()
     this.getDistributorClerkList()
     this.getPeisongList()
-    // that.look()
 
-    // qqmapsdk = new QQMapWX({
-    //   key: 'JQEBZ-3GE65-UN5I5-QE5IV-Z7WEO-EAF37'
-    // });
-
-
-    // wx.getLocation({
-
-    //   type: 'wgs84',
-
-    //   success(res) {
-    //     //使用腾讯地图的reverseGeocoder方法获取地址信息
-
-    //     // //console.log(res)
-       
-    //     qqmapsdk.reverseGeocoder({
-
-    //       location: {
-
-    //         latitude: res.latitude, //纬度
-
-    //         longitude: res.longitude //经度
-    //       },
-      
-
-    //       success: function (addressRes) {
-
-    //         // //console.log(addressRes)
-
-    //         // const address = addressRes.result.formatted_addresses.recommend; //当前位置信息
-
-    //         // //console.log(address)
-
-    //       }
-    //     });
-    //   }
-
-    // })
 
   },
   onShow: function () {
     this.getDeliveryClerkList()
 
-   
   },
   openPrinter: function () {
-  
 
     lpapi.openPrinter('', function () {
       wx.showToast({
@@ -238,99 +161,127 @@ Page({
       })
     })
   },
-  printText(e){
+  printText(e) {
 
     let item = e.currentTarget.dataset.details.details
     let list = this.data.orderlist
     let that = this
 
-    console.log("item",e.currentTarget.dataset.details)
-   let  t = item[0]
+    console.log("item", e.currentTarget.dataset.details)
+    let t = item[0]
     this.setData({
-      zymdata:e.currentTarget.dataset.details,
-      printdata:item,
-       dgcount:1,
-       len:e.currentTarget.dataset.details.details.length
+      zymdata: e.currentTarget.dataset.details,
+      printdata: item,
+      dgcount: 1,
+      len: e.currentTarget.dataset.details.details.length
     })
     itemIndex = 1
-    this.openPrinter();this.toggleDialog()
-    var width = 90;var height = 55; let j = e.currentTarget.dataset.details
-    lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
-  
-    let y = 0 ,x = 0
-    y = y + 5,lpapi.drawText(`配送单`, 22, y, 5),y = y + 8,lpapi.drawText(`酒店名字：${j.hotel_name}`, 0, y, 5)
+    this.openPrinter();
+    this.toggleDialog()
+    var width = 90;
+    var height = 55;
+    let j = e.currentTarget.dataset.details
+    lpapi.startDrawLabel('test', this, width, height, 0);
+    lpapi.setItemOrientation(0);
+    lpapi.setItemHorizontalAlignment(0);
+    lpapi.setPrintPageGapType(0)
 
-  
-    y = y + 5,lpapi.drawText(`商品数量：${j.details.length}`, 0, y, 5)
-    y = y + 5,lpapi.drawText(`商品总价：${j.total_price}`, 0, y, 5),y = y + 5,lpapi.drawText(`时间：${j.add_time}`, 0, y, 5)
-    y = y + 5,lpapi.drawText(`配送地址：${j.hotel_address}`, 0, y, 4)
+    let y = 0,
+      x = 0
+    y = y + 5, lpapi.drawText(`配送单`, 22, y, 5), y = y + 8, lpapi.drawText(`酒店名字：${j.hotel_name}`, 0, y, 5)
 
-    y = y + 8,lpapi.drawText(`商品名`, x, y, 4),x = x + 30,lpapi.drawText(`数量 `, x, y, 4),
-    x = x + 12,lpapi.drawText(`单价`, x, y, 4),x = x + 12, lpapi.drawText(`总价`, x, y, 4),x = x + 5,y = y + 2
 
-    x = 0,y = y + 4,lpapi.drawText(`${this.data.dgcount}.${t.title}`, x, y,3),x = x + 30,lpapi.drawText(`${t.buy_number}  `, x, y,3)
-    x = x + 12,lpapi.drawText(`${t.price} `, x, y,3),x = x + 12,lpapi.drawText(`${t.total_price} `, x, y,3)
-    x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${t.specvalue}`, x, y, 3), x = x + 30
-    y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+    y = y + 5, lpapi.drawText(`商品数量：${j.details.length}`, 0, y, 5)
+    y = y + 5, lpapi.drawText(`商品总价：${j.total_price}`, 0, y, 5), y = y + 5, lpapi.drawText(`时间：${j.add_time}`, 0, y, 5)
+    y = y + 5, lpapi.drawText(`配送地址：${j.hotel_address}`, 0, y, 4)
+
+    y = y + 8, lpapi.drawText(`商品名`, x, y, 4), x = x + 30, lpapi.drawText(`数量 `, x, y, 4),
+      x = x + 12, lpapi.drawText(`单价`, x, y, 4), x = x + 12, lpapi.drawText(`总价`, x, y, 4), x = x + 5, y = y + 2
+
+    x = 0, y = y + 4, lpapi.drawText(`${this.data.dgcount}.${t.title}`, x, y, 3), x = x + 30, lpapi.drawText(`${t.buy_number}  `, x, y, 3)
+    x = x + 12, lpapi.drawText(`${t.price} `, x, y, 3), x = x + 12, lpapi.drawText(`${t.total_price} `, x, y, 3)
+    x = x + 10, y = y + 5, x = 0, lpapi.drawText(`规格：${t.specvalue}`, x, y, 3), x = x + 30
+    y = y + 3, lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
     y = y + 5
 
-     lpapi.endDrawLabel();
+    lpapi.endDrawLabel();
     //  that.data.printdata.splice(0,1)
-   
+
   },
-  draw(){
-    let k =  this.data.zymdata,len = this.data.len,a = this.data.printdata,j = a[0],that = this
-    console.log(this.data.dgcount,"递归数量")
-    console.log(len,"数据长度")
+  draw() {
+    let k = this.data.zymdata,
+      len = this.data.len,
+      a = this.data.printdata,
+      j = a[0],
+      that = this
+    console.log(this.data.dgcount, "递归数量")
+    console.log(len, "数据长度")
     // console.log(j.title,"标题")
-    if(this.data.dgcount == 1){
-      lpapi.startDrawLabel('test', this, 100, 55, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
-    let y = 0 ,x = 0
-    y = y + 5,lpapi.drawText(`配送单`, 22, y, 5),y = y + 8,lpapi.drawText(`酒店名字：${k.hotel_name}`, 0, y, 5)
-    y = y + 5,lpapi.drawText(`配送地址：${k.hotel_address}`, 0, y, 4)
-    y = y + 5,lpapi.drawText(`商品数量：${len}`, 0, y, 5)
-    y = y + 5,lpapi.drawText(`商品总价：${k.total_price}`, 0, y, 5),y = y + 5,lpapi.drawText(`时间：${k.add_time}`, 0, y, 5)
-    y = y + 5,lpapi.drawText(`配送地址：${k.hotel_address}`, 0, y, 4)
-    y = y + 8,lpapi.drawText(`商品名`, x, y, 4),x = x + 30,lpapi.drawText(`数量 `, x, y, 4),
-    x = x + 12,lpapi.drawText(`单价`, x, y, 4),x = x + 12, lpapi.drawText(`总价`, x, y, 4),x = x + 5,y = y + 2
-    x = 0,y = y + 4,lpapi.drawText(`${this.data.dgcount}.${j.title}`, x, y,3),x = x + 30,lpapi.drawText(`${j.buy_number}  `, x, y,3)
-    x = x + 12,lpapi.drawText(`${j.price} `, x, y,3),x = x + 12,lpapi.drawText(`${j.total_price} `, x, y,3)
-    x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${j.specvalue}`, x, y, 3), x = x + 30
-    y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
-    y = y + 5
-    lpapi.endDrawLabel();}else{let width = 90,height = 12
-      lpapi.startDrawLabel('test', this, width, height, 0);lpapi.setItemOrientation(0);lpapi.setItemHorizontalAlignment(0);lpapi.setPrintPageGapType(0)
-      if(j == undefined){
-        wx.showToast({ title: '打印完毕，请点击关闭按钮',icon:"none" }) 
+    if (this.data.dgcount == 1) {
+      lpapi.startDrawLabel('test', this, 100, 55, 0);
+      lpapi.setItemOrientation(0);
+      lpapi.setItemHorizontalAlignment(0);
+      lpapi.setPrintPageGapType(0)
+      let y = 0,
+        x = 0
+      y = y + 5, lpapi.drawText(`配送单`, 22, y, 5), y = y + 8, lpapi.drawText(`酒店名字：${k.hotel_name}`, 0, y, 5)
+      y = y + 5, lpapi.drawText(`配送地址：${k.hotel_address}`, 0, y, 4)
+      y = y + 5, lpapi.drawText(`商品数量：${len}`, 0, y, 5)
+      y = y + 5, lpapi.drawText(`商品总价：${k.total_price}`, 0, y, 5), y = y + 5, lpapi.drawText(`时间：${k.add_time}`, 0, y, 5)
+      y = y + 5, lpapi.drawText(`配送地址：${k.hotel_address}`, 0, y, 4)
+      y = y + 8, lpapi.drawText(`商品名`, x, y, 4), x = x + 30, lpapi.drawText(`数量 `, x, y, 4),
+        x = x + 12, lpapi.drawText(`单价`, x, y, 4), x = x + 12, lpapi.drawText(`总价`, x, y, 4), x = x + 5, y = y + 2
+      x = 0, y = y + 4, lpapi.drawText(`${this.data.dgcount}.${j.title}`, x, y, 3), x = x + 30, lpapi.drawText(`${j.buy_number}  `, x, y, 3)
+      x = x + 12, lpapi.drawText(`${j.price} `, x, y, 3), x = x + 12, lpapi.drawText(`${j.total_price} `, x, y, 3)
+      x = x + 10, y = y + 5, x = 0, lpapi.drawText(`规格：${j.specvalue}`, x, y, 3), x = x + 30
+      y = y + 3, lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3)
+      y = y + 5
+      lpapi.endDrawLabel();
+    } else {
+      let width = 90,
+        height = 12
+      lpapi.startDrawLabel('test', this, width, height, 0);
+      lpapi.setItemOrientation(0);
+      lpapi.setItemHorizontalAlignment(0);
+      lpapi.setPrintPageGapType(0)
+      if (j == undefined) {
+        wx.showToast({
+          title: '打印完毕，请点击关闭按钮',
+          icon: "none"
+        })
         lpapi.endDrawLabel();
       }
-       let y = 0 ,x = 0
-        x = 0,y = y + 4,lpapi.drawText(`${this.data.dgcount}.${j.title}`, x, y,3),x = x + 30,lpapi.drawText(`${j.buy_number}  `, x, y,3)
-        x = x + 12,lpapi.drawText(`${j.price} `, x, y,3),x = x + 12,lpapi.drawText(`${j.total_price} `, x, y,3)
-        x = x + 10,y = y + 5,x = 0, lpapi.drawText(`规格：${j.specvalue}`, x, y, 3), x = x + 30
-        y = y + 3,lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3) ,y = y + 3
-       lpapi.endDrawLabel();
+      let y = 0,
+        x = 0
+      x = 0, y = y + 4, lpapi.drawText(`${this.data.dgcount}.${j.title}`, x, y, 3), x = x + 30, lpapi.drawText(`${j.buy_number}  `, x, y, 3)
+      x = x + 12, lpapi.drawText(`${j.price} `, x, y, 3), x = x + 12, lpapi.drawText(`${j.total_price} `, x, y, 3)
+      x = x + 10, y = y + 5, x = 0, lpapi.drawText(`规格：${j.specvalue}`, x, y, 3), x = x + 30
+      y = y + 3, lpapi.drawText(`-----------------------------------------------------------------`, 0, y, 3), y = y + 3
+      lpapi.endDrawLabel();
     }
-     if(j == undefined){lpapi.endDrawLabel(); return }
-     a.splice(0,1)
-     lpapi.print(function () {
-      that.data.dgcount ++ 
+    if (j == undefined) {
+      lpapi.endDrawLabel();
+      return
+    }
+    a.splice(0, 1)
+    lpapi.print(function () {
+      that.data.dgcount++
       that.draw()
-   })
+    })
   },
   printing: function (e) { //生成打印数据
     this.toggleDialog()
     this.openPrinter() //连接打印机    为空就是列表第一个
     let print = e.currentTarget.dataset.details.details
     let item = e.currentTarget.dataset.details
-   
+
 
     var width = 80;
-    var height = 30* print.length ;
+    var height = 30 * print.length;
 
-    if(print.length <= 2){ 
+    if (print.length <= 2) {
       height = 100
-    }else if(print.length >= 10){
+    } else if (print.length >= 10) {
       height = 17 * print.length
     }
     // let height2 = 200* print.length;
@@ -338,7 +289,7 @@ Page({
     console.log(height)
 
     console.log(print.length)
-    
+
 
 
 
@@ -358,7 +309,7 @@ Page({
     lpapi.drawText(`配送地址：${item.hotel_address}`, 0, y, 3)
     y = y + 10
 
-  
+
     lpapi.drawText(`商品名`, x, y, 4)
     x = x + 20
     lpapi.drawText(`数量 `, x, y, 4)
@@ -369,19 +320,19 @@ Page({
     x = x + 5
     y = y + 2
     for (let i = 0; i < print.length; i++) {
-  
-      if(print[i].goods_mark == ''){
+
+      if (print[i].goods_mark == '') {
         print[i].goods_mark = "无"
       }
       x = 0
       y = y + 5
-      lpapi.drawText(`${print[i].title}`, x, y,3)
+      lpapi.drawText(`${print[i].title}`, x, y, 3)
       x = x + 20
-      lpapi.drawText(`${print[i].buy_number}  `, x, y,4)
+      lpapi.drawText(`${print[i].buy_number}  `, x, y, 4)
       x = x + 20
-      lpapi.drawText(`${print[i].price} `, x, y,4)
+      lpapi.drawText(`${print[i].price} `, x, y, 4)
       x = x + 20
-      lpapi.drawText(`${print[i].total_price} `, x, y,4)
+      lpapi.drawText(`${print[i].total_price} `, x, y, 4)
       x = x + 10
       y = y + 5
       x = 0
@@ -396,44 +347,20 @@ Page({
     lpapi.drawText(`商家总价：${item.total_price}元`, 0, y, 4)
     y = y + 10
     lpapi.drawText(`验收员签名：`, 0, y, 4)
- 
+
     // y = y + 20
 
 
-   
+
     lpapi.endDrawLabel();
-  
+
   },
-   toggleDialog() {
+  toggleDialog() {
     this.setData({
       showDialog: !this.data.showDialog
     });
 
-
   },
-  // zym
-  getLoc: function (e) {
-    // //console.log(e.currentTarget.id);  // 获取当前点击的数组下标
-    var that = this;
-    wx.getLocation({
-      type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-      success: function (res) {
-        //使用微信内置地图查看位置接口
-        wx.openLocation({
-          latitude: parseFloat(108.35090248706055), // 要去的地址经度，浮点数
-          longitude: parseFloat(22.797464226614665), // 要去的地址纬度，浮点数
-          name: '行行超甜酒店', // 位置名
-          address: "要去的地址详情说明", // 要去的地址详情说明
-          scale: 18, // 地图缩放级别,整形值,范围从1~28。默认为最大
-        });
-      },
-      cancel: function (res) {
-        //console.log('地图定位失败');
-      }
-    })
-  },
-
-
   upload: function (e) { //上传图片
     var that = this
     if (that.data.card_imgid.length > 9) {
@@ -480,8 +407,6 @@ Page({
             card_imgid: id
           })
         }
-
-
       },
       fail(res) {
         const data = res.data
@@ -513,7 +438,7 @@ Page({
 
         }
 
-        console.log("PeisongList",_this.data.PeisongList)
+        console.log("PeisongList", _this.data.PeisongList)
 
 
         _this.setData({
@@ -525,8 +450,6 @@ Page({
       }
     })
   },
-
-
   async enterSend(e) {
     let that = this
     let shopid = e.currentTarget.dataset.id,
@@ -543,22 +466,15 @@ Page({
         images_id: 1
       }
     }
-
-    //console.log(params)
-
     let res = await ajax({
       url: 'api/staff/completeOrder',
       method: 'post',
       data: params
     })
-
-    //console.log("确认送达", res)
-
     if (res.data.code == 0) {
       wx.showToast({
         title: '已确认送达',
       })
-
       this.getDistributorClerkList()
       this.getPeisongList()
     }
@@ -566,9 +482,8 @@ Page({
 
 
   },
-
   // 一键取货
-  async pickOrder(e){
+  async pickOrder(e) {
     var that = this
     let params = {
       id: e.currentTarget.dataset.id
@@ -578,341 +493,72 @@ Page({
       method: 'post',
       data: params
     })
-    
-    if(res.data.data.detailcount == res.data.data.pickcount){
+
+    if (res.data.data.detailcount == res.data.data.pickcount) {
       that.getDeliveryClerkList()
-    }else{
-      wx.showToast({
-        title: '供应商未接单',
-        icon:"none"
-      })
-    }
-
-    console.log("pickOrder",res.data.data)
-
-    
-  },
-
-  async takeDelivery(e) { //取货
-    var that = this
-    let params = {
-      id: e.currentTarget.dataset.id
-    }
-    let res = await ajax({
-      url: 'api/staff/pick',
-      method: 'post',
-      data: params
-    })
-
-    //console.log("取货", res)
-
-    if (res.data.msg == "success") {
-
-      wx.showToast({
-        title: '取货成功',
-        icon: 'none',
-        duration: 3000
-      })
-      that.getDeliveryClerkList()
-      that.lookApi()
-      // 行行超甜
-
     } else {
       wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
+        title: '供应商未接单',
+        icon: "none"
       })
     }
+
+    console.log("pickOrder", res.data.data)
+
+
   },
-  returnAndExchange(e) { //退换货
-    //console.log(e);
-    this.setData({
-      tuidanModal: true,
-      shopExch: e.currentTarget.dataset.item
-    })
-  },
+
   //打印
-  
   print() {
-    
-    lpapi.print(function(){
+
+    lpapi.print(function () {
       wx.showToast({
         title: '打印成功',
       })
     });
   },
-  hideModal() {
-    this.setData({
-      tuidanModal: false
-    })
-  },
-  async onConfirmTui() { //拒绝原因
-    var that = this
-    if (that.data.shopReason == undefined) {
-      wx.showToast({
-        title: '请输入拒绝原因',
-        icon: "none",
-        duration: 3000
-      })
-      return
-    }
-    let params = {
-      order_id: that.data.shopExch.id,
-      order_detail_id: that.data.shopExch.order_id,
-      status: 4,
-      type: 2,
-      title: that.data.shopReason
-    }
-    let res = await ajax({
-      url: 'api/quickorder/confirm',
-      method: 'post',
-      data: params
-    })
-    //console.log(res)
-    if (res.data.code == 0) {
-      wx.showToast({
-        title: '成功',
-        duration: 3000
-      })
-      that.setData({
-        tuidanModal: false
-      })
-    } else {
-      // wx.showToast({
-      //   title: res.data.msg,
-      //   icon: 'none',
-      //   duration: 3000
-      // })
-    }
-  },
-  async onCancelTui() { //确认退单
-    var that = this
-    // order_id=订单id, order_detail_id ,status=1同意,4拒绝  ,  title = 拒绝原因   type=1退货退款,2换货
-    let params = {
-      order_id: that.data.shopExch.id,
-      order_detail_id: that.data.shopExch.order_id,
-      status: 1,
-      type: that.data.shopExch.is_after_type
-    }
-    let res = await ajax({
-      url: 'api/quickorder/confirm',
-      method: 'post',
-      data: params
-    })
-    //console.log(res)
-    if (res.data.code == 0) {
-      wx.showToast({
-        title: '成功',
-        duration: 3000
-      })
-      that.setData({
-        tuidanModal: false
-      })
-    } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
-    }
-  },
-  shopNum(e) { //配送员输入的数量
-    this.setData({
-      shopNum: e.detail.value
-    })
-  },
-  inputChangeTui(e) { //获取配送员输入发拒单原因
-    this.setData({
-      shopReason: e.detail.value
-    })
-  },
-  shopPrice(e) { //配送员输入的价格
-    this.setData({
-      shopPrice: e.detail.value
-    })
-  },
-  onCancel() {
-    this.setData({
-      showModal: false,
-    })
-  },
-  async onConfirm() { //修改数量和价格
-    var that = this
-    if (that.data.shopPrice == '') {
-      wx.showToast({
-        title: '请输入价格',
-        icon: 'none',
-        duration: 3000
-      })
-      return
-    }
-    let params = {
-      id: that.data.shopOneInfo.id,
-      price: that.data.shopPrice,
-      number: that.data.shopNum,
-    }
-    let res = await ajax({
-      url: 'api/staff/upOrderByStaff',
-      method: 'post',
-      data: params
-    })
-    //console.log(res)
-    if (res.data.code == 0) {
-      wx.showToast({
-        title: '修改成功',
-        duration: 3000
-      })
-    } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
-    }
-    that.setData({
-      showModal: false
-    })
-  },
-  async orderReceiving(e) { //接单
-    var that = this
-    let params = {
-      id: e.currentTarget.dataset.id
-    }
-    //console.log('object', params);
-    let res = await ajax({
-      url: 'api/staff/sendture',
-      method: 'post',
-      data: params
-    })
-    if (res.data.code == 0) {
-      wx.showToast({
-        title: '接单成功',
-        duration: 3000
-      })
-      that.setData({
-        showModal: true,
-        shopOneInfo: e.currentTarget.dataset.item
-      })
-    } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: "none",
-        duration: 3000
-      })
-    }
-  },
-  look(e) { //查看清单
-    var that = this
-    that.setData({
-      detailedId: e.currentTarget.dataset.id,
-      detailedIndex: e.currentTarget.dataset.index,
-    })
-    //console.log(e.currentTarget.dataset)
-    that.lookApi()
-  },
-
-  async lookApi() {
-    var that = this
-    let idx = that.data.detailedIndex //点击哪个商品的索引
-    let params = {
-      id: that.data.detailedId
-    }
-    //console.log("params", params)
-    let res = await ajax({
-      url: 'api/staff/getOrderDetail',
-      method: 'post',
-      data: params
-    })
-
-    //console.log("lookApi", res.data.data)
-
-    if (res.data.code == 0) {
-      let shopInfo = res.data.data
-      let deliveryList = that.data.deliveryList
-      let peisongList = that.data.PeisongList
-      let finshList = that.data.deliveryListYes
-
-      for (var i = 0; i < shopInfo.length; i++) {
-        shopInfo[i].spec = JSON.parse(shopInfo[i].spec)
-      }
-      for (let i in deliveryList) {
-        if (i == idx) {
-          deliveryList[i].is_select = !deliveryList[i].is_select
-        } else {
-          deliveryList[i].is_select = false
-        }
-      }
-      for (let i in peisongList) {
-        if (i == idx) {
-          peisongList[i].is_select = !peisongList[i].is_select
-        } else {
-          peisongList[i].is_select = false
-        }
-      }
-
-      for (let i in finshList) {
-        if (i == idx) {
-          finshList[i].is_select = !finshList[i].is_select
-        } else {
-          finshList[i].is_select = false
-        }
-      }
-
-      that.setData({
-        contact: true,
-        shopInfo,
-        PeisongList: peisongList,
-        deliveryListYes: finshList,
-        deliveryList
-      })
-
-    } else {
-      wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
-      })
-    }
-  },
+  // 点击顶部栏切换 未取货/配送中/已完成
   clickTab(e) {
-
     let that = this
-
     this.setData({
-      currentTab: e.currentTarget.dataset.current
+      currentTab: e.currentTarget.dataset.current,
+      page:1
     })
-
-    if (e.currentTarget.dataset.current == 3) {
-      this.getDistributorClerkList()
-    } else if (e.currentTarget.dataset.current == 2) {
+      that.getDistributorClerkList()
       that.getPeisongList()
-    } else if (e.currentTarget.dataset.current == 1) {
       that.getDeliveryClerkList()
-    }
+  
   },
   async getDeliveryClerkList() { //获取配送员未处理订单
-    var that = this
+    let that = this
+
     let params = {
-      status: 0
+      status: 0,
+      page:this.data.page
     }
     let res = await ajax({
       url: 'api/staff/getStaffSendOrder',
       method: 'post',
       data: params
     })
-    console.log("获取配送员未处理订单", res)
+    console.log("获取配送员未处理订单", res.data)
     if (res.data.code == 0) {
-
-      let deliveryListOne = res.data.data.data
-      for (var i = 0; i < deliveryListOne.length; i++) {
-        deliveryListOne[i].is_select = false
+      if (this.data.page == 1) {
+        this.setData({
+          canPull: true
+        })
+        this.setData({
+          deliveryListOne: res.data.data.data,
+          allPage: res.data.data.page_total // 总页数
+        })
+      }else{
+        if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+          that.setData({ canPull: false }) }
+          let deliveryListOne = that.data.deliveryListOne.concat(res.data.data.data) // 大于1页的拼接
+          that.setData({
+            deliveryListOne
+          })   
       }
-      //console.log("deliveryListOne", deliveryListOne)
-      that.setData({
-        deliveryList: deliveryListOne,
-        total: res.data.data.total,
-      })
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -921,18 +567,19 @@ Page({
       })
     }
   },
-  detalis(e){    //跳转去详情页
+  detalis(e) { //跳转去详情页
 
-    console.log(e.currentTarget.dataset.shouhuo)
-    
     wx.navigateTo({
       url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
     })
   },
   // 配送中的数据
   async getPeisongList() {
+
+    let that = this
     let params = {
-      status: 1
+      status: 1,
+      page: that.data.page
     }
     let res = await ajax({
       url: 'api/staff/getStaffSendOrder',
@@ -940,44 +587,77 @@ Page({
       data: params
     })
 
-    console.log("peisongList",res)
-    let peisongList = res.data.data.data
-    for (var i = 0; i < peisongList.length; i++) {
-      peisongList[i].is_select = false
+    if(res.data.code == 0){
+      
+    if (this.data.page == 1) {
+      this.setData({
+        canPull: true
+      })
+      this.setData({
+        PeisongList: res.data.data.data,
+        allPage: res.data.data.page_total // 总页数
+      })
+    }else{
+      if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+        that.setData({ canPull: false }) }
+        let PeisongList = that.data.PeisongList.concat(res.data.data.data) // 大于1页的拼接
+        that.setData({
+          PeisongList
+        })   
+    }
+    }else{
+      wx.showToast({
+        title: res.data.msg,
+        icon:"none"
+      })
     }
 
-    this.setData({
-      PeisongList: peisongList,
-      total2: res.data.data.total,
-    })
+
     //console.log("total2", this.data.total2)
   },
 
   async getDistributorClerkList() { //获取配送员已处理订单
     var that = this
+
     let params = {
-      status: 2
-    }
+      status: 2,
+      page: that.data.page
+    } 
+
+    console.log(params,"parsadas")
+
+
+
     let res = await ajax({
       url: 'api/staff/getStaffSendOrder',
       method: 'post',
       data: params
     })
-    if (res.data.code == 0) {
-      //console.log('获取配送员已完成订单', res)
 
-      let deliveryListYes = res.data.data.data
-      for (var i = 0; i < deliveryListYes.length; i++) {
-        deliveryListYes[i].is_select = false
+    if (res.data.code == 0) {
+      console.log('获取配送员已完成订单', res.data.data)
+
+
+      if (this.data.page == 1) {
+        this.setData({
+          canPull: true
+        })
+        this.setData({
+          deliveryListYes: res.data.data.data,
+          allPage: res.data.data.page_total // 总页数
+        })
+      }else{
+        if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+          that.setData({ canPull: false }) }
+          let deliveryListYes = that.data.deliveryListYes.concat(res.data.data.data) // 大于1页的拼接
+          that.setData({
+            deliveryListYes
+          })
+
+          console.log("ssss",this.data.deliveryListYes)
+       
       }
 
-
-      let total = res.data.data.total
-      that.setData({
-        // deliveryListYes: that.data.deliveryListYes.concat(res.data.data.data),
-        deliveryListYes: res.data.data.data,
-        total3: res.data.data.total,
-      })
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -987,8 +667,31 @@ Page({
     }
   },
 
+  onReachBottom: function () {
+    
+    if(this.data.canPull){
+      let page = ++this.data.page
+      wx.showLoading({
+        title: '玩命加载中',
+      })
+      this.setData({page})
+      this.getDistributorClerkList()
+      setTimeout(() => {
+        // 隐藏加载框
+        wx.hideLoading();
+      }, 1000)
+      
+    }else{
+      wx.showToast({
+        title: '没有更多数据',
+        icon:'none'
+      })
+    }
 
-
+    
+    
+   
+  },
 
 
 })
