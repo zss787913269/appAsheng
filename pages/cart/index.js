@@ -82,11 +82,8 @@ Page({
     this.getTopCount()
     this.getHotelOrderDetail()
 
-    if(this.data.ids.length != 0){
-      this.setData({
-        listindex:1
-      })
-    }
+    console.log(this.data.ids,"ids")
+
    
 
   },
@@ -703,6 +700,10 @@ Page({
     console.log("hotelCount",res.data)
     if (res.data.code == 0) {
       let hotelCount, pcount
+
+
+      
+
       for (let i of res.data.data) {
         
         if (i.is_purchase == 1) {
@@ -713,6 +714,15 @@ Page({
       }
 
       console.log("hotelCount",hotelCount)
+
+      if(hotelCount > 0){
+        
+
+        this.setData({
+          listindex:1
+        })
+    
+      }
 
       that.getCount()
 
@@ -906,6 +916,8 @@ Page({
     var that = this
     let list = this.data.leftList
     let checkedAll
+
+    
 
     that.setData({
       ids: e.detail.value,
@@ -1318,6 +1330,9 @@ Page({
   },
   async subOrder(ids) { //酒店提交订单
     var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
     let res = await ajax({
       url: '/api/buy/add',
       method: 'POST',
@@ -1329,12 +1344,15 @@ Page({
       }
     })
 
+    
+
     if (res.data.code == 0) {
       wx.showToast({
         title: '提交成功',
         icon: 'none',
         duration: 3000
       })
+      wx.hideLoading()
       that.getHotelOrderDetail()
       that.getCount()
       that.setData({

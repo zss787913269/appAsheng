@@ -105,10 +105,10 @@ Page({
     integral: '', //我的积分   
     balance: '', //我的余额 ,
     show: false,
-    role:"",
-    avtor:"",
-    nickname:"",
-    name:""
+    role: "",
+    avtor: "",
+    nickname: "",
+    name: ""
 
   },
   onLoad: function () {
@@ -118,7 +118,7 @@ Page({
 
 
   },
-  
+
 
   getUserInfo() {
     let that = this
@@ -167,10 +167,13 @@ Page({
             let avtor = res.data.data.avatar
             let nickname = res.data.data.nickname
             let name = res.data.data.name
-         
+
 
             that.setData({
-              role,avtor,nickname,name
+              role,
+              avtor,
+              nickname,
+              name
             })
 
             if (role) {
@@ -260,18 +263,42 @@ Page({
       wx.navigateTo({
         url: "/component/zation/index"
       })
-      return 
+      return
     }
 
     let index = e.currentTarget.dataset.index
     console.log(index)
 
- 
 
-    let that = this 
+
+    let that = this
 
     switch (index) {
-   
+      case "s1":
+        wx.navigateTo({
+          url: "/details/information/index",
+        })
+        break;
+      case "s2":
+         wx.showToast({
+          title: '功能开发中，敬请期待',
+          icon: "none"
+        })
+
+        break;
+      case "s3":
+         wx.showToast({
+          title: '功能开发中，敬请期待',
+          icon: "none"
+        })
+
+        break;
+      case "s4":
+         wx.navigateTo({
+          url: `/private/kitchen/index?avtor=${that.data.avtor}`,
+        })
+
+        break;
       case "1":
         // wx.showToast({
         //   title: '功能开发中，敬请期待',
@@ -280,7 +307,7 @@ Page({
         wx.navigateTo({
           url: `/private/personaldata/index?name=${that.data.name}&nickname=${that.data.nickname}`,
         })
-      
+
         break;
       case "2":
         wx.showToast({
@@ -375,11 +402,11 @@ Page({
           url: `/pages/yongjin/index?role=${that.data.role}&avtor=${that.data.avtor}&nickname=${that.data.nickname}`,
         }) //佣金页面
         break;
-        case 'bd':
-          wx.navigateTo({
-            url: "/component/getphone/index",
-          }) //佣金页面
-          break;
+      case 'bd':
+        wx.navigateTo({
+          url: "/component/getphone/index",
+        }) //佣金页面
+        break;
     }
 
   },

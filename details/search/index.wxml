@@ -22,6 +22,7 @@
 		
 		<view class="want"><text>没有找到想要的商品？</text></view>
 		<view class="addshop"  bindtap="showModal2"><text>添加您需要的商品</text></view>
+		
 	</view>
 
 

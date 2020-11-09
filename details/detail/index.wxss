@@ -124,13 +124,13 @@
  
   height: 132rpx;
   margin-left: 45rpx;
-  border-bottom: 1rpx solid #EBEEF5;
+  border-bottom: 1rpx solid #ccc;
 }
 .shopatt-left_show{
  
   height: 210rpx;
   margin-left: 45rpx;
-  border-bottom: 1rpx solid #EBEEF5;
+  border-bottom: 1rpx solid #ccc;
   
 }
 .right-img{
@@ -232,7 +232,7 @@ align-items:flex-end;
 
 .main{
   display: flex;
-  height: 600rpx;
+  /* height: 600rpx; */
   background-color: #FFFFFF;
 }
 .right{
@@ -290,7 +290,7 @@ align-items:flex-end;
   position: absolute;
   bottom: 10rpx;
   right: 20rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: #979797;
@@ -443,6 +443,40 @@ align-items:flex-end;
 }
 
 .zan-dialog--show .zan-dialog__mask {
+  display: block;
+}
+.zan-dialog__mask3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  /* background: rgba(0, 0, 0, 0); */
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index:99999
+}
+
+.zan-dialog__container3 {
+  position: fixed;
+  bottom: 500rpx;
+  width: 650rpx;
+  height: 450rpx;
+  margin-left: 50rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+  z-index:999999
+}
+.zan-dialog--show3 .zan-dialog__container3 {
+  transform: translateY(0);
+}
+
+.zan-dialog--show3 .zan-dialog__mask3 {
   display: block;
 }
 
@@ -685,9 +719,10 @@ color: #868686;
   color: #FF963F;
 }
 .sbox{
-    border-top: 1rpx solid #EBEEF5;
+    /* border-top: 1rpx solid #EBEEF5; */
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     
 }
 .quxiao{
@@ -704,11 +739,10 @@ color: #868686;
   align-items: center;
   justify-content: center;
   margin-right: 20rpx;
-  margin-top: 18rpx;
+  
 }
 
 .queren{
-  margin-top: 18rpx;
   width: 152rpx;
   height: 48rpx;
   border: 1px solid #FF963F;
@@ -773,4 +807,42 @@ color: #868686;
   background-color: red;
   margin-right: 20rpx;
   border-radius: 10rpx;
+}
+.ztmtext{
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+}
+
+.ztmtext text{
+  font-size: 40rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(134,134,134,1);
+}
+.ztmtext view{
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.ztmtext input{
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx solid #ccc;
+}
+.clol2{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  background-color: red;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+}
+.zymitem{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 10rpx;
+  justify-content: center;
+  margin-left: 100rpx;
 }

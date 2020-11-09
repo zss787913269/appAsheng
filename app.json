@@ -1,11 +1,19 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/index/index",
+    "pages/user/index",
+    "private/kitchen/index",
+    "details/detail/index",
+    
+ 
+    "details/information/index",
+    
     "pages/deliver/index",
     "details/handle/index",
+    "pages/find/index",
+    "private/find/index",
+    "private/findone/index",
     "pages/cart/index",
-    "details/detail/index",
-    "pages/user/index",
     "private/personaldata/index",
     "private/hotelinfo/index",
     "pages/yongjin/index",
@@ -33,7 +41,7 @@
     "pages/about/index",
     "pages/exchange/index",
     "pages/logs/logs",
-    "pages/find/index",
+  
     "pages/cartdetal/index",
     "pages/workbench/index",
     "pages/examine/examine",
@@ -60,7 +68,6 @@
     "details/goshop/index",
     "details/supplier/index",
     "details/peinformation/index",
-    "details/information/index",
     "details/payment/index",
     "details/dishes/index",
     "details/dishesone/index",
@@ -68,12 +75,12 @@
     "details/reviews/index",
     "details/Promanage/index",
     "details/writeoff/index",
-    "private/kitchen/index",
+
     "private/staff/index",
     "private/Reply/index",
     "private/placeOrder/index",
-    "private/find/index",
-    "private/findone/index",
+
+   
     "component/zation/index",
     "private/superman/index"
   
@@ -102,8 +109,12 @@
         "iconPath": "images/tabar/car.png",
         "selectedIconPath": "images/tabar/car1.png"
       },
-   
-
+      {
+        "pagePath": "pages/find/index",
+        "text": "发现",
+        "iconPath": "images/tabar/sy-wd.png",
+        "selectedIconPath": "images/tabar/sy-wd1.png"
+      },
       {
         "pagePath": "pages/user/index",
         "text": "我的",

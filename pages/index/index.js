@@ -86,9 +86,13 @@ Page({
   toOldFood(e) { //去老菜新菜页面
     //////console.log(e.currentTarget.dataset.value)
     let value = e.currentTarget.dataset.value
-    wx.reLaunch({ //跳转到tab页面
-      url: '/pages/find/index?value=' + value + '&where=index'
+
+    wx.navigateTo({
+      url: '/pages/find/index?value=' + value + '&where=index',
     })
+    // wx.reLaunch({ //跳转到tab页面
+    //   url: '/pages/find/index?value=' + value + '&where=index'
+    // })
   },
   scrollMove2(e) {
     let moveParams2 = this.data.moveParams2;

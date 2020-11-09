@@ -39,7 +39,7 @@
 	<view class="left">
 
 		<!-- <scroll-view scroll-y="true" class="ss" style="height: 900rpx" bindscroll="scroll1" scroll-into-view="true" scroll-with-animation="true"> -->
-		<scroll-view scroll-y="true" class="ss" style="height: 600rpx" scroll-into-view="true" scroll-with-animation="true">
+		<scroll-view scroll-y="true" class="ss" style='height:{{screenHeight}}px' scroll-into-view="true" scroll-with-animation="true">
 			<!-- <view wx:for="{{secondaryClassification}}" wx:if="{{item.goods !=''}}" class="{{classfiySelect === item.id ? 'leftActive]':'leftbox'}}" wx:key="unique"> -->
 			<view wx:for="{{hotelOrderDetail}}" wx:key="unique">
 
@@ -55,7 +55,7 @@
 	</view>
 
 	<view class='right'>
-		<scroll-view scroll-y="true" style="height: 600rpx" scroll-with-animation="true"
+		<scroll-view scroll-y="true" style='height:{{screenHeight}}px' scroll-with-animation="true"
 			scroll-into-view="{{'inToview'+classfiySelect}}">
 			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
 			
@@ -73,10 +73,10 @@
 							<view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
 							<view class="mytext2">{{items.specvalue}}</view>
 							<view class="mytext2">单价：{{items.price}}</view>
-							<view class="mynumber"> X {{items.buy_number}}</view>
+							<view class="mynumber">数量：{{items.buy_number}}</view>
 						</view>
 
-						<view class="nPrice">总价：￥{{items.total_price}}</view>
+						<view class="nPrice">总价:￥{{items.total_price}}</view>
 
 					</view>
 
@@ -119,9 +119,10 @@
 
 					</view>
 
+					
+
 					<view class="sbox" wx:if="{{showqh}}">
-
-
+						<view class="quxiao" bindtap="editPriceAndCount" data-item="{{items}}">修改数量</view>
 						<view class="queren" wx:if="{{item.goods[0].is_pick == 0}}" bindtap="takeDelivery"
 							data-id="{{item.goods[0].id}}"><text>取货</text></view>
 						<view class="quxiao" wx:if="{{item.goods[0].is_pick == 1}}"><text>已取货</text></view>
@@ -185,5 +186,31 @@
 		<!-- <text class="myfirst" bindtap="toggleDialog">取消</text> -->
 
 	</view>
+</view>
+
+
+
+<view class="zan-dialog3 {{ showDialog3 ? 'zan-dialog--show3' : '' }}">
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+
+  <view class="zan-dialog__mask3" bindtap="toggleDialog3" />
+  <view class="zan-dialog__container3">
+
+
+    <view class="zssitem">
+
+      <view class="ztmtext">
+
+        <view><text>商品名字：{{shopPriceItem.title}}</text></view>
+        <view><text>规格：{{shopPriceItem.specvalue}}</text></view>
+        <view><text>商品价格：{{shopPriceItem.price}}</text></view>
+        <view><text>数量：</text><input type="text" value="{{shopPriceItem.buy_number}}" bindinput="bindnumberInput" /></view>
+      </view>
+      <view class="zymitem">
+        <view class="bj2 listTitle2" bindtap="priceEnter"><text>确认</text></view>
+        <view class="clol2" bindtap="toggleDialog3"><text>关闭</text></view>
+      </view>
+    </view>
+  </view>
 </view>
 

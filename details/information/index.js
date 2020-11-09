@@ -32,7 +32,7 @@ Page({
             "id": "2",
             "text": "吃"
         }], //擅长列表
-        background: '', //  工作经验
+        background: '无', //  工作经验
         address: '', //地址
         tel: '', //联系方式
         occupation: '', //职业
@@ -63,12 +63,16 @@ Page({
         var that = this;
         that.getOccupation();
         that.getBegood();
-        if(options.id==="1"){
-            that.setData({
-                options_id:options.id
-            })
-            that.getInfo();
-        }
+     
+        // if(options.id==="1"){
+        //     that.setData({
+        //         options_id:options.id
+        //     })
+           
+        // }
+
+        that.getInfo();
+ 
     
             //表单验证规则
         this.WxValidate = app.wxValidate({
@@ -123,36 +127,42 @@ Page({
             url: '/api/dishes/getSelfCookInfo',
             method: 'get',
         })
-        console.log(res);
-        let dataBox=res.data.data;
-        let pro_name="",pro_num=null;
-        this.data.selectArray.forEach((item,index)=>{
-            if(item.id===dataBox.pro_id){
-                pro_name=item.name;
-                pro_num=index;
-            }
-        })
-        let card_id=dataBox.card_img.split(",");
-        this.setData({
-            data_id:dataBox.id,
-            fullName:dataBox.name,
-            number:dataBox.card_no,
-            background:dataBox.work_experience,
-            address:dataBox.now_address,
-            tel:dataBox.tel,
-            price:dataBox.price,
-            cardPhoto:dataBox.cardimg[0],
-            otherPhoto:dataBox.cardimg[1],
-            healthyPhoto:dataBox.jiankang_img,
-            cookPhoto:dataBox.chushi_img,
-            styleGood_name:dataBox.disname,
-            jk_img:dataBox.jk_img,
-            ck_img:dataBox.ck_img,
-            occupation:pro_name,
-            occupationNum:pro_num,
-            card_img1:card_id[0],
-            card_img2:card_id[1]
-        })
+
+        console.log(res,"获取个人信息");
+
+        if(res.data.code == 0){
+            let dataBox=res.data.data;
+            let pro_name="",pro_num=null;
+            this.data.selectArray.forEach((item,index)=>{
+                if(item.id===dataBox.pro_id){
+                    pro_name=item.name;
+                    pro_num=index;
+                }
+            })
+            let card_id=dataBox.card_img.split(",");
+            this.setData({
+                data_id:dataBox.id,
+                fullName:dataBox.name,
+                number:dataBox.card_no,
+                background:dataBox.work_experience,
+                address:dataBox.now_address,
+                tel:dataBox.tel,
+                price:dataBox.price,
+                cardPhoto:dataBox.cardimg[0],
+                otherPhoto:dataBox.cardimg[1],
+                healthyPhoto:dataBox.jiankang_img,
+                cookPhoto:dataBox.chushi_img,
+                styleGood_name:dataBox.disname,
+                jk_img:dataBox.jk_img,
+                ck_img:dataBox.ck_img,
+                occupation:pro_name,
+                occupationNum:pro_num,
+                card_img1:card_id[0],
+                card_img2:card_id[1]
+            })
+        }
+       
+        
     },
     async getOccupation() { //获取厨师职业
         var that = this
@@ -315,14 +325,14 @@ Page({
             method: 'POST',
             data: e
         })
+
+        console.log("是否保存成功",res.data)
         wx.showToast({
             title: '发布成功',
             icon: 'none',
             duration: 3000,
             success(res){
-                wx.navigateBack({
-    
-                })
+           
             }
         })
     },
@@ -350,7 +360,7 @@ Page({
         }
         wx.chooseImage({
             count: 1,
-            sizeType: ['original', 'compressed'],
+            sizeType: ['compressed'],
             sourceType: [e],
             success(res) {
                 // tempFilePath可以作为img标签的src属性显示图片
@@ -382,15 +392,17 @@ Page({
         console.log(url, index)
         app.globalData.token = wx.getStorageSync('token')
         wx.uploadFile({
-            url: `https://second.chchgg.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, //仅为示例，非真实的接口地址
+            url: `http://debug.nncaixiao2.cn/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, //仅为示例，非真实的接口地址
             filePath: url,
             name: 'image',
             formData: {
                 'name': 'image'
             },
             success(res) {
+              
                 let data = JSON.parse(res.data)
-                console.log(data.data.id)
+                console.log(data)
+                
                 if (index == 0) { //返回上传照片的id，记录下来
                     _this.setData({
                         card_img1: data.data.id

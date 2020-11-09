@@ -14,30 +14,61 @@ Page({
     makeList:[],   //预约我的列表
     page:1,
     foods:"",//菜品
+    avtor:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  
   onLoad: function (options) {
       var that = this
-    let data = JSON.parse(options.userInfo)
-    console.log(data);
-    let food_name="";
-    data.dishes.forEach(item=>{
-      food_name+=item.name+",";
-    })
-    food_name=food_name.substring(0,food_name.lastIndexOf(','));
-    if(food_name===""){
-      food_name="无";
-    }
-      that.setData({
-        userInfo: data,
-        foods:food_name
+
+      console.log(options.avtor)
+      this.setData({
+        avtor:options.avtor
       })
-      that.getMyMakeList(that.data.page)
+
+      this.geiUserInfo()
+   
   },    
+  gotoshenqing(){
+    wx.navigateTo({
+      url: '/details/information/index',
+    })
+  },
   //跳转编辑页面
+  async geiUserInfo(){
+
+    let that = this
+        let res=await ajax({
+          url: '/api/dishes/getSelfCookInfo',
+          method: 'get',
+      })
+      console.log("获取个人信息",res.data.data,);
+
+      if(res.data.code == 0){
+        let data = res.data.data
+
+        let food_name="";
+        data.dishes.forEach(item=>{
+          food_name+=item.name+",";
+        })
+        food_name=food_name.substring(0,food_name.lastIndexOf(','));
+        if(food_name===""){
+          food_name="无";
+        }
+          that.setData({
+            userInfo: data,
+            foods:food_name
+          })
+          that.getMyMakeList(that.data.page)
+      }else{
+    
+      
+      }
+       
+  },
   gotoChange(){
     wx.navigateTo({
       url: '/details/information/index?id=1',
@@ -117,7 +148,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.geiUserInfo()
   },
 
   /**

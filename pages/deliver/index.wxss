@@ -569,8 +569,24 @@ page{
   align-content: center;
   
 }
+.bj2gree{
+  background-color: #ccc;
+  /* width: 150rpx; */
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
 .bj2{
-  width: 150rpx;
+  /* width: 150rpx; */
+  padding-left: 20rpx;
+  padding-right: 20rpx;
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;

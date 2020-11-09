@@ -1,9 +1,15 @@
-<view class="card">
+<view wx:if="{{userInfo == ''}}" class="myflex">
+	<button  bindtap="gotoshenqing">申请成为私厨</button>
+</view>
+<view wx:else> 
+
+	<view class="card">
 	<view class="cardname">
 		<view class="imged">
-			<image src="/images/index/zhuchu.png" mode="widthFix"></image>
+			<image src="{{avtor}}" mode="widthFix"></image>
 		</view>
-		<text class="redact_btn" bindtap="gotoChange">编辑信息</text>
+	
+		<text  class="redact_btn" bindtap="gotoChange">编辑信息</text>
 		<view class="xuanjie">
 			<text>{{userInfo.name}}</text>
 			<text class="fontsiz">擅长 : {{userInfo.disname}}</text>
@@ -25,7 +31,7 @@
         <input class="timetwo" placeholder="请输入"></input>
       </view>
     </view> -->
-		<view>菜系：{{userInfo.disname}}</view>
+		<view>菜系：{{userInfo.note}}</view>
 		<view>菜品:
 			<text class="food_margin"> {{foods}}</text>
     </view>
@@ -94,3 +100,6 @@
     </view>
   </view> -->
 </view>
+
+</view>
+

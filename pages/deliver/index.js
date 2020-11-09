@@ -21,7 +21,7 @@ Page({
     total3: "",
     deliveryList: [], //派送订单
     deliveryListYes: [], //已完成订单
-    currentTab: 3,
+    currentTab: 1,
     card_img: [],
     card_imgid: [], //图片id
     PeisongList: [],
@@ -524,14 +524,19 @@ Page({
       currentTab: e.currentTarget.dataset.current,
       page:1
     })
-      that.getDistributorClerkList()
-      that.getPeisongList()
+    if(e.currentTarget.dataset.current == 1){
       that.getDeliveryClerkList()
+    }else if(e.currentTarget.dataset.current == 2){
+      that.getPeisongList()
+    }else if(e.currentTarget.dataset.current == 3){
+      that.getDistributorClerkList()
+    }
+   
+    
   
   },
   async getDeliveryClerkList() { //获取配送员未处理订单
     let that = this
-
     let params = {
       status: 0,
       page:this.data.page
@@ -541,7 +546,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log("获取配送员未处理订单", res.data)
+    console.log("获取配送员未处理订单", res.data.data)
     if (res.data.code == 0) {
       if (this.data.page == 1) {
         this.setData({
@@ -551,6 +556,8 @@ Page({
           deliveryListOne: res.data.data.data,
           allPage: res.data.data.page_total // 总页数
         })
+        if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+          that.setData({ canPull: false }) }
       }else{
         if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
           that.setData({ canPull: false }) }
@@ -559,6 +566,7 @@ Page({
             deliveryListOne
           })   
       }
+      console.log("deliveryListOne",that.data.deliveryListOne)
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -624,10 +632,7 @@ Page({
       page: that.data.page
     } 
 
-    console.log(params,"parsadas")
-
-
-
+    
     let res = await ajax({
       url: 'api/staff/getStaffSendOrder',
       method: 'post',
@@ -635,9 +640,6 @@ Page({
     })
 
     if (res.data.code == 0) {
-      console.log('获取配送员已完成订单', res.data.data)
-
-
       if (this.data.page == 1) {
         this.setData({
           canPull: true
@@ -654,8 +656,6 @@ Page({
             deliveryListYes
           })
 
-          console.log("ssss",this.data.deliveryListYes)
-       
       }
 
     } else {
@@ -668,14 +668,23 @@ Page({
   },
 
   onReachBottom: function () {
-    
+
+
+
+    let that = this
     if(this.data.canPull){
       let page = ++this.data.page
       wx.showLoading({
         title: '玩命加载中',
       })
       this.setData({page})
-      this.getDistributorClerkList()
+      if(that.data.currentTab == 1){
+        that.getDeliveryClerkList()
+      }else if(that.data.currentTab == 2){
+        that.getPeisongList()
+      }else if(that.data.currentTab == 3){
+        that.getDistributorClerkList()
+      }
       setTimeout(() => {
         // 隐藏加载框
         wx.hideLoading();

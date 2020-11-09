@@ -46,8 +46,24 @@ Page({
     showDialog3:false,
     dataList:[],
     zymdata:"",
-    screenHeight:""
+    screenHeight:"",
+    checkValue:"",
+    page: 1, //页面的递进数
+    canPull: true, //下拉是否触发
+    allPage: 1, //总页数
   },
+  //选择框
+  checkboxChange(e) {
+  
+    let value = e.detail.value
+
+    // console.log(value)
+
+    this.setData({
+      checkValue:value
+    })
+  },
+
   print3: function () {
     tempIndex = this.data.printdata.length;
     console.log(tempIndex,"tempIndex")
@@ -471,17 +487,36 @@ Page({
   // 打成功以后在打下一个 如果判断打成功 如果成功以后在绘制下一个
   // 打印第一个 第一个打完绘制下一个
   showImg(e){
+   
     this.toggleDialog3()
-    console.log(e.currentTarget.dataset.data)
+    
+    let arr = [],sum = 0
+    if(e.currentTarget.dataset.item){
+        arr = e.currentTarget.dataset.item.details
+    }else{
 
-    let sum = 0
-    for(let i of e.currentTarget.dataset.data.details){
+      let value = this.data.checkValue
+
+   
+    
+       for(let i of value){
+        let obj = {}
+          obj.title = i.split(",")[0]
+          obj.specvalue = i.split(",")[1]
+          obj.buy_number = i.split(",")[2]
+          obj.original_price =i.split(",")[3]
+          arr.push(obj)
+       }  
+    }
+
+
+    for(let i of arr){
         sum = sum +  Number(i.original_price) * Number(i.buy_number)
     }
     console.log(sum)
 
     this.setData({
-      dataList:e.currentTarget.dataset.data,
+      dataList:arr,
       zymshopprice:sum
     })
     
@@ -787,6 +822,7 @@ Page({
   clickList(e) {
     let index = e.currentTarget.dataset.index
 
+    console.log(index)
     this.setData({
       listindex: index
     })
@@ -1064,115 +1100,7 @@ Page({
 
 
 
-  //zym
-  async getShopList(num) { //获取商家订单
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
-    // console.log(num)
-    // type = 2  按照订单 isok = 0 是未接单
-    // type = 3  商品汇总 isok = 1 已接单
-    //  type = 3   isok = 2 已完成
-    // 
-    let that = this
-    let params, listindex = this.data.listindex,
-      currentTab
 
-    // let res2 = await ajax({
-    //   url: 'api/store/OrderCount',
-    // })
-
-    // console.log("商家订单", res2.data)
-    // if (res2.data.code == 0) {
-
-    //   let countList = res2.data.data
-
-    //   if (this.data.first) {
-
-    //     if (countList[0] != 0) {
-    //       currentTab = 1
-    //     } else if (countList[1] != 0) {
-    //       currentTab = 2
-    //     } else if (countList[2] != 0) {
-    //       currentTab = 3
-    //     }
-    //     num = currentTab
-
-    //     that.setData({
-    //       first: false
-    //     })
-    //   }
-
-    //   if (currentTab == undefined) {
-    //     currentTab = that.data.currentTab
-    //   }
-
-
-
-    //   this.setData({
-    //     count1: countList[0],
-    //     count2: countList[1],
-    //     count3: countList[2],
-    //     currentTab: currentTab
-    //   })
-
-
-
-
-
-
-
-
-        if (listindex == 1) {
-          params = {
-            type: 3,
-            isok: 0,
-          }
-        }else if(listindex == 3){
-          params = {
-            type: 5,
-            isok: 1,
-          }
-        } else {
-          params = {
-            type: 4,
-            isok: 1,
-            page:1
-          }
-        }
-      
-
-      //  1按商品汇总，2按订单号，3按商品分类
-      // 确认等于接单
-      console.log(params)
-      let res = await ajax({
-        url: "api/order/ShopOrderPrint",
-        method: 'POST',
-        data: params
-      
-      })
-      console.log("获取商家订单", res.data)
-
-     
-
-      if (res.data.code == 0) {
-          let arr = []
-        for(let i of res.data.data){
-            for(let j of i.details){
-                arr.push(j)
-            }
-        }
-
-        that.setData({
-          shopOrderList: res.data.data.reverse(),
-          shoplen:arr.length
-        })
-      }
-
-    
-
-
-  },
   getTime() {
     var day2 = new Date();
     day2.setTime(day2.getTime());
@@ -1208,5 +1136,129 @@ Page({
     that.setData({
       classfiySelect: id
     })
+  },
+    //zym
+    async getShopList(page) { //获取商家订单
+      // wx.showLoading({
+      //   title: '加载中',
+      // })
+      // console.log(num)
+      // type = 2  按照订单 isok = 0 是未接单
+      // type = 3  商品汇总 isok = 1 已接单
+      //  type = 3   isok = 2 已完成
+      // 
+      let that = this
+      let params, listindex = this.data.listindex,
+        currentTab
+  
+          if (listindex == 1) {
+            params = {
+              type: 3,
+              isok: 0,
+            }
+          }else if(listindex == 2){
+            params = {
+              type: 5,
+              isok: 1,
+            }
+          } else {
+            params = {
+              type: 4,
+              isok: 1,
+              page:page
+            }
+          }
+        
+  
+        //  1按商品汇总，2按订单号，3按商品分类
+        // 确认等于接单
+     
+        console.log(params)
+        let res = await ajax({
+          url: "api/order/ShopOrderPrint",
+          method: 'POST',
+          data: params
+        
+        })
+       
+  
+        if (res.data.code == 0) {
+            let arr = []
+          for(let i of res.data.data.data){
+              for(let j of i.details){
+                  arr.push(j)
+              }
+          }
+  
+          let shopOrderList = res.data.data.data
+        
+          console.log("获取商家订单", shopOrderList)
+          if (listindex == 1 || listindex == 2) {
+            shopOrderList.sort(function(a,b){
+              // 如果数组里面有自定义商品
+              if (a.name.indexOf( "自定义商品" )  >=   0  ) {
+                // 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+                return   - 1 ;
+            } else   if (b.name.indexOf( "自定义商品" )  >=   0  ) {
+                  return   1 ;
+            }  else  {
+                  return  a.name.localeCompare(b);
+            }
+              })
+
+              
+          that.setData({
+            shopOrderList: shopOrderList,
+            shoplen:arr.length
+          })
+
+          }else{
+            if (this.data.page == 1) {
+              this.setData({
+                canPull: true
+              })
+              this.setData({
+                shopOrderList: res.data.data.data,
+                allPage: res.data.data.page_total // 总页数
+              })
+            }else{
+              if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+                that.setData({ canPull: false }) }
+                let shopOrderList = that.data.shopOrderList.concat(res.data.data.data) // 大于1页的拼接
+                that.setData({
+                  shopOrderList:shopOrderList
+                })
+      
+            }
+
+          
+          }
+  
+        }
+  
+  
+    },
+  onReachBottom: function () {
+    let that = this
+    if(this.data.canPull){
+      let page = ++this.data.page
+      wx.showLoading({
+        title: '玩命加载中',
+      })
+      if(that.data.listindex == 3){
+        that.getShopList(page)
+      }
+      setTimeout(() => {
+        wx.hideLoading();
+      }, 1000)
+    }else{
+       wx.showToast({
+        title: '没有更多数据',
+        icon:'none'
+      })
+    }
+
+  
+   
   },
 })

@@ -18,6 +18,7 @@ Page({
     shopId: '', //商品id
     showDialog: false,
     showDialog2: false,
+    showDialog3:false,
     countNumber: "", //输入框数量
     show: false,
     hotelOrderDetail: [], //商品
@@ -32,26 +33,42 @@ Page({
     hotelAddress:"",
     tel:"",
     len:"",
-    mylist:""
+    mylist:"",
+    shopPriceItem:{},
+    shopCountAndPirce:"",
+    screenHeight:""
 
   },
 
   onLoad: function (options) {
  
-    // console.log(options)
-
     let that = this
+    wx.getSystemInfo({
+      success (res) {
+        that.setData({
+          screenHeight:res.windowHeight - 300
+        })
+        
+        console.log("屏幕高度",that.data.screenHeight)
+    
+      }
+    })
+
+   
 
     // let options = {
-    //   id:190,
-    //   enter:"dy"
+    //   id:23,
+    //   enter:"6"
     // }
 
     this.setData({
       shopId:options.id
       // shopId:160
     })
-
+   this.setData({
+      shopId:options.id
+      // shopId:160
+    })
   
     if(options.enter == 4){
       that.setData({
@@ -76,6 +93,17 @@ Page({
     this.getlist(this.data.shopId)
     this.getOrderShop(this.data.shopId)
     this.getHotelOrderDetail(this.data.shopId)
+  },
+  priceEnter(){
+    let params = {
+      id:this.data.zymid,
+      price:this.data.shopprice,
+      number:this.data.shopcount,
+      original_price:this.data.original_price,
+      spectype:this.data.spectype,
+      specvalue:this.data.specvalue
+
+    }
   },
   openPrinter: function () {
   
@@ -437,6 +465,15 @@ Page({
 
     // console.log(1232)
     // lpapi.closePrinter()
+
+  },
+  
+  toggleDialog3() {
+    this.setData({
+      showDialog3: !this.data.showDialog3
+    });
+
+
 
   },
   toggleDialog(e) {
@@ -844,4 +881,53 @@ Page({
       })
     }
   },
+
+  editPriceAndCount(e){
+    this.toggleDialog3()
+    let item = e.currentTarget.dataset.item
+    console.log(item)
+
+    this.setData({
+      shopPriceItem:item
+    })
+
+  },
+  bindnumberInput(e){
+    this.setData({
+      shopCountAndPirce: e.detail.value
+    })
+  },
+  async priceEnter(){
+    let params = {
+      id:this.data.shopPriceItem.id,
+      price:this.data.shopPriceItem.price,
+      number:this.data.shopCountAndPirce,
+      original_price:this.data.shopPriceItem.original_price,
+      spectype:this.data.shopPriceItem.spectype,
+      specvalue:this.data.shopPriceItem.specvalue
+    }
+
+    let res = await ajax({
+      url: 'api/order/EditOrderDetailGoods',
+      method: 'POST',
+      data: params
+    })
+    this.toggleDialog3()
+    if(res.data.code == 0){
+      wx.showToast({
+        title: res.data.msg,
+        icon:"none"
+      })
+      this.getHotelOrderDetail(this.data.shopId)
+      this.getlist(this.data.shopId)
+    }else{
+      
+      wx.showToast({
+        title: res.data.msg,
+        icon:"none"
+      })
+
+    }
+    console.log(res)
+  }
 })

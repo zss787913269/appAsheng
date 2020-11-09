@@ -13,7 +13,7 @@
 	</view>
 
 	<view wx:if="{{currentTab==1}}">
-		<view wx:for="{{deliveryList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+		<view wx:for="{{deliveryListOne}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 			<view class="main">
 
@@ -37,7 +37,7 @@
 				</view>
 				<view class="bottom2">
 
-					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
+					<view class="hotel_name">{{idx+1}}---酒店名：{{item.hotel_name}}</view>
 					<view class="llbox">
 						<view class="quxiao" bindtap="pickOrder" data-id="{{item.id}}">一键取货</view>
 						<view class="queren" bindtap="printText" data-details="{{item}}">打印订单</view>
@@ -134,7 +134,8 @@
 			<canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
 		</scroll-view>
 
-		<view class="listTitle2" bindtap="print2"><text class="bj2">打印</text></view>
+		<view class="listTitle2"  bindtap="print2"><text class="bj2">打印</text></view>
+			<!--	<view class="listTitle2"><text class="bj2gree">打印中，请稍等</text></view>-->
 
 	</view>
 </view>
