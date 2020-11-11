@@ -98,7 +98,7 @@ Page({
       
       // 获取到用户的信息了，打印到控制台上看下
       wx.request({
-        url: 'https://second.chchgg.com/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的
+        url:`${app.globalData.headUrl}/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax`, //仅为示例，并非真实的
         // url: 'http://debug.nncaixiao2.cn/index.php?s=/api/user/wechatuserinfo?application=app&application_client_type=weixin&token=&ajax=ajax', //仅为示例，并非真实的
           method: 'POST',
           data: {

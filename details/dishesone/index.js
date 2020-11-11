@@ -175,6 +175,7 @@ Page({
       method: 'POST',
       data: params
     })
+    console.log("发布列表",res.data)
     if (res.data.code == 0) {
       that.setData({
         showModal: true
@@ -182,6 +183,9 @@ Page({
       setTimeout(function() {
         that.hideModal();
       }, 1000)
+      wx.reLaunch({
+        url: "/pages/user/index",
+      })
     }else{
       wx.showToast({
         title:res.data.msg,

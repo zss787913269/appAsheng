@@ -1,6 +1,10 @@
 <!--操作菜单-->
 <view class="view_power">
 	<view class="user_tab">
+	<view class="goUrl" wx:if="{{type_1 != 2}}">
+		<text class="notice" wx:if="{{type_1 == 0}}"> 您申请的资料正在审核，请等待</text>
+		<text class="notice" wx:if="{{type_1 == 1}}"> 您申请的资料未通过，请重新编辑</text>
+	</view>
 		<form bindsubmit='submit'>
 			<view class="goUrl" bindtap="goUrl" data-url="profit">
 				<label class="glable" for="male">你的姓名</label>

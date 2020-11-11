@@ -14,8 +14,8 @@
        <view class="shouctwo">
         <text class="xiang" bindtap="toFoodInfo" data-id="{{item.id}}">详情</text>
         <view>
-         <image src="/images/user/pinglun.png"></image><text class="shenhe">({{item.comment}})</text>
-         <image src="/images/user/zan.png"></image><text class="shenhe">({{item.fabulous}})</text>
+         <image src="/images/user/pl.png"></image><text class="shenhe">({{item.comment}})</text>
+         <image src="/images/user/dz.png"></image><text class="shenhe">({{item.fabulous}})</text>
         </view>
         
        </view>

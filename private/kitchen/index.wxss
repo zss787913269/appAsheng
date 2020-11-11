@@ -5,10 +5,19 @@ padding: 20rpx;
 box-sizing: border-box;
 }
 .myflex{
+  margin-top: 200rpx;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+.myflex text{
+  color: aquamarine;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  margin-bottom: 40rpx;
 }
 .noTime{
   width:100%;
@@ -127,6 +136,17 @@ box-sizing: border-box;
   color: #fff; 
   margin-top: 25rpx; 
 }
+.accept1{
+  width: 150rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius:30rpx;
+  background:#ccc;
+  color: #fff; 
+  margin-top: 25rpx; 
+}
+
 .nottom{
    padding-left:20rpx;
   padding-right:20rpx;

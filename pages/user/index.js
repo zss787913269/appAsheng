@@ -9,6 +9,7 @@ Page({
     showshop: false,
     showpeisong: false,
     pledge: "",
+    sichu:"",
     url: '/person/commis/index',
     url1: '/person/integral/index',
     url2: '/person/balance/index',
@@ -108,7 +109,8 @@ Page({
     role: "",
     avtor: "",
     nickname: "",
-    name: ""
+    name: "",
+    showAv:true //如果没有授权 就是true 显示授权按钮
 
   },
   onLoad: function () {
@@ -116,15 +118,24 @@ Page({
     var that = this
     that.getMyCommission()
 
+    console.log(app.globalData)
+
+    if(app.globalData.token == ''){
+      this.setData({
+        showAv:true //显示授权
+      })
+    }else{
+     this.setData({
+        showAv:false //显示授权完毕
+      })
+    }
 
   },
 
 
   getUserInfo() {
     let that = this
-    if (app.globalData.token == '') {
-
-    } else {
+  
       wx.login({
         async success(res3) {
 
@@ -148,6 +159,16 @@ Page({
 
           console.log("用户资料", res.data)
 
+          if(res.data.data.token == app.globalData.token){
+              that.setData({
+                showAv:false
+              })
+          }else{
+            that.setData({
+                showAv:true
+            })
+          }
+
           if (res.data.data.brand) {
             that.setData({
               showshop: true
@@ -167,13 +188,15 @@ Page({
             let avtor = res.data.data.avatar
             let nickname = res.data.data.nickname
             let name = res.data.data.name
+            let sichu = res.data.data.cook
 
 
             that.setData({
               role,
               avtor,
               nickname,
-              name
+              name,
+              sichu
             })
 
             if (role) {
@@ -194,7 +217,7 @@ Page({
 
 
 
-    }
+    
 
   },
 
@@ -242,24 +265,16 @@ Page({
     }))
   },
   sq() {
-    if (app.globalData.token == '') {
-      this.setData({
-        show: false
-      })
+    
       wx.navigateTo({
         url: "/component/zation/index"
       })
 
-    } else {
-      this.setData({
-        show: true
-      })
-    }
   },
   goToPage(e) {
 
 
-    if (app.globalData.token == '') {
+    if (app.globalData.token == '' || this.data.showAv) {
       wx.navigateTo({
         url: "/component/zation/index"
       })
@@ -276,20 +291,18 @@ Page({
     switch (index) {
       case "s1":
         wx.navigateTo({
-          url: "/details/information/index",
+          url: "/details/information/index", //注册私厨
         })
-        break;
-      case "s2":
-         wx.showToast({
-          title: '功能开发中，敬请期待',
-          icon: "none"
-        })
-
         break;
       case "s3":
-         wx.showToast({
-          title: '功能开发中，敬请期待',
-          icon: "none"
+        wx.navigateTo({
+          url:"/private/myFood/index", //菜品列表
+        })
+       
+        break;
+      case "s2":
+       wx.navigateTo({
+          url:"/details/preAbout/index",//预约列表
         })
 
         break;

@@ -1,16 +1,20 @@
 {
   "pages": [ 
-    "pages/index/index",
     "pages/user/index",
+    "pages/index/index",
+ 
+
+    "pages/find/index",
+    "private/myFood/index",
+    "details/peinformation/index",
+    "details/dishes/index",
+    "details/dishesone/index",
+    "details/release/index",
     "private/kitchen/index",
     "details/detail/index",
-    
- 
     "details/information/index",
-    
     "pages/deliver/index",
     "details/handle/index",
-    "pages/find/index",
     "private/find/index",
     "private/findone/index",
     "pages/cart/index",
@@ -41,7 +45,7 @@
     "pages/about/index",
     "pages/exchange/index",
     "pages/logs/logs",
-  
+    "details/Promanage/index",
     "pages/cartdetal/index",
     "pages/workbench/index",
     "pages/examine/examine",
@@ -67,13 +71,13 @@
     "details/comment/index",
     "details/goshop/index",
     "details/supplier/index",
-    "details/peinformation/index",
+ 
     "details/payment/index",
-    "details/dishes/index",
-    "details/dishesone/index",
-    "details/release/index",
+    
+ 
+   
     "details/reviews/index",
-    "details/Promanage/index",
+   
     "details/writeoff/index",
 
     "private/staff/index",
@@ -112,8 +116,8 @@
       {
         "pagePath": "pages/find/index",
         "text": "发现",
-        "iconPath": "images/tabar/sy-wd.png",
-        "selectedIconPath": "images/tabar/sy-wd1.png"
+        "iconPath": "images/tabar/sy-fx1.png",
+        "selectedIconPath": "images/tabar/sy-fx2.png"
       },
       {
         "pagePath": "pages/user/index",

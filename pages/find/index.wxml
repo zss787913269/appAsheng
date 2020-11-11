@@ -28,12 +28,16 @@
 
   <view class="xinchuang" wx:for="{{cookList}}" wx:key="index">
     <view data-item="{{item}}" bind:tap="goDetail" class="craed">
-      <view class="imged">
+      <view class="imged" wx:if="{{item.avatar}}">
         <text style="background-image:url({{item.avatar}})" class="tex-img"></text>
+      </view>
+
+      <view class="imged" wx:else>
+        <text style="background-image:url({{item.user.avatar}})" class="tex-img"></text>
       </view>
       <view class="xuanjie">
         <text>{{item.name}}</text>
-        <text>{{item.disname}}</text>
+        <text>{{item.note}}</text>
         <text>职位:{{item.proname}}</text>
         <text>￥{{item.price}} 起</text>
       </view>

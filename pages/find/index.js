@@ -22,7 +22,11 @@ Page({
     multiArray:[], //存时间
     multiIndex: [],   //表示选择了 range 中的第几个（下标从 0 开始）
     startDate:'',
-    cookNumber:''
+    cookNumber:'',
+    page: 1, //页面的递进数
+    canPull: true, //下拉是否触发
+    allPage: 1, //总页数，
+    searchRes:false
   },
   goDetail(e){
     console.log(e);
@@ -330,12 +334,14 @@ Page({
       })
     }
   },
-  async getCook() {    //厨师搜索
+  async getCook() {    //私厨搜索
     var that = this
     let parmes = {
       name: that.data.value,
     }
     let res = await ajax({ url: '/api/dishes/CookSearch', method: 'post', data: parmes })
+
+    console.log('厨师搜索',res.data)
     if (res.data.code == 0) {
       that.setData({
         cookList: res.data.data,
@@ -405,62 +411,102 @@ Page({
   clickTab: function(e) {
     var that = this;
     that.setData({
-      currentTab: e.target.dataset.current
-      
+      currentTab: e.target.dataset.current,
+      page:1
     })
     if (e.target.dataset.current == 1) {
-      that.getDishName(1)
+      that.getDishName()
       that.setData({
         inpNmae:'请输入食材或者菜名'
       })
     } else if (e.target.dataset.current == 2){
-      that.getCookName(1)
+      that.getCookName()
       that.setData({
         inpNmae: '请输入厨师名'
       })
     }
-    console.log(that.data.currentTab);
     // }
   },
-  async getCookName(page){    //获取私厨列表
+  async getCookName(){    //获取私厨列表
     var that = this
     let params = {
-      page
+      page:this.data.page
     }
     let res = await ajax({
       url: '/api/dishes/getCookList',
       method: 'POST',
       data:params
     })
-    that.setData({
-      cookList:that.data.cookList.concat(res.data.data.data)
-    })
-    console.log(res)
+    // that.setData({
+    //   cookList:that.data.cookList.concat(res.data.data.data)
+    // })
+    console.log(res.data)
+    if (this.data.page == 1) {
+      this.setData({
+        canPull: true
+      })
+      this.setData({
+        cookList: res.data.data.data,
+        allPage: res.data.data.page_total // 总页数
+      })
+    }else{
+      if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+        that.setData({ canPull: false }) }
+        let cookList = that.data.cookList.concat(res.data.data.data) // 大于1页的拼接
+        that.setData({
+          cookList:cookList
+        })
+
+    }
   },
   async getDishName(num) { //获取菜品列表
+
     var that = this
     let params = {
-      page:num
+      page:this.data.page
     }
     let res = await ajax({
       url: '/api/dishes/lists',
       method: 'POST',
       data: params
     })
-    console.log(res)
-    if(res.data.code == 0){
-      that.setData({
-        disNameList: that.data.disNameList.concat(res.data.data.data)
+
+    if (this.data.page == 1) {
+      this.setData({
+        canPull: true
+      })
+      this.setData({
+        disNameList: res.data.data.data,
+        allPage: res.data.data.page_total // 总页数
       })
     }else{
-      wx.showToast({
-        title: res.data.msg,
-        icon:'none',
-        duration:3000
-      })
+      if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
+        that.setData({ canPull: false }) }
+        let disNameList = that.data.disNameList.concat(res.data.data.data) // 大于1页的拼接
+        that.setData({
+          disNameList:disNameList
+        })
+
     }
+
+    console.log(this.data.disNameList,"disNameList")
+
+
+  
+    // console.log(res)
+    // if(res.data.code == 0){
+    //   that.setData({
+    //     disNameList: that.data.disNameList.concat(res.data.data.data)
+    //   })
+    // }else{
+    //   wx.showToast({
+    //     title: res.data.msg,
+    //     icon:'none',
+    //     duration:3000
+    //   })
+    // }
    
-    console.log(that.data.disNameList)
+    // console.log(that.data.disNameList)
   },
   fabulous() { //点赞取消   //需要传菜品id
     var that = this
@@ -495,6 +541,7 @@ Page({
       make_time:that.data.startDate,
       number: that.data.cookNumber
     }
+    console.log(params,"params")
     if (params.make_time == ''){
       wx.showToast({
         title: '请选择时间',
@@ -516,6 +563,8 @@ Page({
       method: 'POST',
       data: params
     })
+
+    console.log("预约",res.data)
     if(res.data.code == 0){
      wx.navigateTo({
        url: '/pages/makeanapp/index',
@@ -543,17 +592,40 @@ Page({
  * 页面上拉触底事件的处理函数
  */
   onReachBottom: function () {
-      var that = this
-      that.setData({
-        num:that.data.num + 1
-      })
-      if(that.data.currentTab == 1){
-        that.getDishName(that.data.num)
-      }else{
-        that.getCookName(that.data.num)
-      }
+      // var that = this
+      // that.setData({
+      //   num:that.data.num + 1
+      // })
+      // if(that.data.currentTab == 1){
+      //   that.getDishName(that.data.num)
+      // }else{
+      //   that.getCookName(that.data.num)
+      // }
    
-      console.log(that.data.num)
+      // console.log(that.data.num)
+
+ let that = this
+    if(this.data.canPull){
+      let page = ++this.data.page
+      wx.showLoading({
+        title: '玩命加载中',
+      })
+    if(that.data.currentTab == 1){
+        that.getDishName()
+      }else{
+        that.getCookName()
+      }
+      setTimeout(() => {
+        wx.hideLoading();
+      }, 1000)
+    }else{
+       wx.showToast({
+        title: '没有更多数据',
+        icon:'none'
+      })
+    }
+
+
   },
   getUserInfo: function(e) {
     console.log(e)

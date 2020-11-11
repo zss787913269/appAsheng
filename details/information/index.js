@@ -32,7 +32,8 @@ Page({
             "id": "2",
             "text": "吃"
         }], //擅长列表
-        background: '无', //  工作经验
+        type_1:"",//申请是否通过 0 未审核 1未通过 2通过
+        background: '', //  工作经验
         address: '', //地址
         tel: '', //联系方式
         occupation: '', //职业
@@ -131,6 +132,10 @@ Page({
         console.log(res,"获取个人信息");
 
         if(res.data.code == 0){
+
+           this.setData({
+               options_id:"1"
+           })
             let dataBox=res.data.data;
             let pro_name="",pro_num=null;
             this.data.selectArray.forEach((item,index)=>{
@@ -140,7 +145,10 @@ Page({
                 }
             })
             let card_id=dataBox.card_img.split(",");
+
+            console.log("id-------",Array.from(dataBox.dishes_id.split(",")))
             this.setData({
+                occupationId:dataBox.pro_id,
                 data_id:dataBox.id,
                 fullName:dataBox.name,
                 number:dataBox.card_no,
@@ -158,7 +166,9 @@ Page({
                 occupation:pro_name,
                 occupationNum:pro_num,
                 card_img1:card_id[0],
-                card_img2:card_id[1]
+                card_img2:card_id[1],
+                type_1:dataBox.type_1,
+                styleGood_id:Array.from(dataBox.dishes_id.split(","))
             })
         }
        
@@ -327,14 +337,22 @@ Page({
         })
 
         console.log("是否保存成功",res.data)
-        wx.showToast({
-            title: '发布成功',
-            icon: 'none',
-            duration: 3000,
-            success(res){
-           
-            }
-        })
+        if(res.data.code == 0){
+            wx.showToast({
+                title: '发布成功',
+                icon: 'none',
+                duration: 3000,
+                success(res){
+                    wx.navigateBack({})
+                }
+            })
+        }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon:'none'
+            })
+        }
+      
     },
 
     upload: function(e) {
@@ -392,7 +410,8 @@ Page({
         console.log(url, index)
         app.globalData.token = wx.getStorageSync('token')
         wx.uploadFile({
-            url: `http://debug.nncaixiao2.cn/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, //仅为示例，非真实的接口地址
+           url: `${app.globalData.headUrl}/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
+            // url: `http://debug.nncaixiao2.cn/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, //仅为示例，非真实的接口地址
             filePath: url,
             name: 'image',
             formData: {

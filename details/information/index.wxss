@@ -31,7 +31,11 @@
   border-bottom: 1px solid #999;
   position: relative
 }
-
+.notice{
+  color: pink;
+  font-family:Source Han Sans CN;
+  font-size: 26rpx;
+}
 .glable{
   width: 20%;
 }

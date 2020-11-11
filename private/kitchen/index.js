@@ -85,9 +85,12 @@ Page({
       id:e.currentTarget.dataset.id,
       status:1
     }
-    let res = await ajax({ url: 'api/user/upMakeStatus', method: 'POST', data: page })
+    let res = await ajax({ url: 'api/user/upMakeStatus', method: 'POST', data: params })
+
     if(res.data.code == 0){
-      console.log(res)
+
+      that.getMyMakeList()
+
       wx.showToast({
         title: '接受成功',
         icon:'none',
@@ -110,6 +113,7 @@ Page({
     let res = await ajax({ url: 'api/user/upMakeStatus', method: 'POST', data: page })
     if (res.data.code == 0) {
       console.log(res)
+      that.getMyMakeList()
       wx.showToast({
         title: '操作成功',
         icon:'none',
@@ -123,17 +127,15 @@ Page({
       })
     }
   },
-  async getMyMakeList(page){
+  async getMyMakeList(){
       var that = this
-      let params = {
-        page
-      }
-    let res = await ajax({ url: 'api/dishes/getMyAllComment', method: 'POST',data:page})
+   
+    let res = await ajax({ url: 'api/user/makeListToSelf', method: 'POST'})
+    console.log("makeList",res.data)
     if(res.data.code == 0){
-      console.log(res)
-      return
+
       that.setData({
-        makeList:that.data.makeList.concat(res.data.data.data)
+        makeList:res.data.data.data
       })
     }
   },

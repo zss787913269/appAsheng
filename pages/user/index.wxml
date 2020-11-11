@@ -2,8 +2,8 @@
 <view class="top">
 
   <view class="top-top">
-    <view class="imgbox" bindtap="sq">
-      <view wx:if="{{show}}" class="myav">
+    <view class="imgbox" >
+      <view wx:if="{{!showAv}}" class="myav">
         <view class="avtor">
        
           <image src="{{avtor}}"></image>
@@ -54,16 +54,7 @@
 
 </view>
 
-<view class="become" wx:if="{{modality}}">
-  <view class="become-top">
-    <image src="/images/details/cook.png" mode="widthFix" class="become-img"></image>
-    <view class="become-cook">成为私厨</view>
-  </view>
-  <view class="become-bottom">
-    <view class="btn determine" bindtap="determine">确定</view>
-    <view class="btn cancel" bindtap="cancel">取消</view>
-  </view>
-</view>
+
 <view class="address">
 
   <view class="item-box">
@@ -81,29 +72,30 @@
 
 </view>
 <view class="shop" >
-  <view class="shop-title"><text>私厨</text></view>
+  <view class="shop-title" ><text>私厨</text></view>
   <view class="shop-item-box">
-    <view class="shop-box" data-index="s1" bindtap="goToPage">
+    <!--  -->
+    <view class="shop-box"   wx:if="{{sichu == null}}" data-index="s1" bindtap="goToPage">
       <view>
-        <image src="{{imgulr}}wd-spxx.png" style="width:31rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-cwsj.png" style="width:31rpx;height:39rpx"></image>
       </view>
       <text>成为私厨</text>
     </view>
     <view class="shop-box" data-index="s2" bindtap="goToPage">
       <view>
-        <image src="{{imgulr}}wd-wdsp.png" style="width:37rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-yylb.png" style="width:37rpx;height:39rpx"></image>
       </view>
-      <text>添加菜品</text>
+      <text>我的预约列表</text>
     </view>
     <view class="shop-box" data-index="s3" bindtap="goToPage">
       <view>
-        <image src="{{imgulr}}wd-splb.png" style="width:39rpx;height:39rpx"></image>
+        <image src="{{imgulr}}wd-cplb.png" style="width:39rpx;height:39rpx"></image>
       </view>
       <text>菜品列表</text>
     </view>
     <view class="shop-box" data-index="s4" bindtap="goToPage">
       <view>
-        <image src="{{imgulr}}wd-cwsj.png" style="width:38rpx;height:45rpx"></image>
+        <image src="{{imgulr}}wd-wdzl.png" style="width:38rpx;height:45rpx"></image>
       </view>
       <text>我的资料</text>
     </view>

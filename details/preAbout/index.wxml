@@ -5,14 +5,21 @@
   <view class="middle" wx:for="{{makeList}}" wx:key="index">
     <view class="tbody">
       <view class="portrait">
-        <image src="{{item.avatar}}"></image>
+        <image src="{{item.cavatar.avatar}}"></image>
         <view class="introduce">
           <text>{{item.name}}</text>
           <!-- <text class="fontsiz">11-18日</text> -->
         </view>
       </view>
-      <view class="accept">
-        <text>已做完</text>
+
+      <view class="accept" wx:if="{{item.status == 0}}">
+        <text>等待接受</text>
+      </view>
+      <view class="accept1" class="accept" wx:if="{{item.status == 2}}">
+        <text>被拒绝</text>
+      </view>
+      <view class="accept" class="accept" wx:if="{{item.status == 1}}">
+        <text>已接受</text>
       </view>
     </view>
     <view class="nottom">
