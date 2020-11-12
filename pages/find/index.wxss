@@ -272,7 +272,7 @@
 
 .modalContent {
   border: 1px solid #ccc;
-  height: 50%;
+  height: 66%;
   width: 80%;
   position: absolute; /*让节点脱离文档流,我的理解就是,从页面上浮出来,不再按照文档其它内容布局*/
   margin: 0 auto;
@@ -296,13 +296,18 @@
 
 .contents {
   display: inline-block;
-  margin-top: 60rpx;
+  margin-top: 15rpx;
   padding-left: 20rpx;
 }
 
 .goUrl {
   display: flex;
   align-items: center;
+  margin-top: 15rpx;
+}
+.glable{
+  width: 30%;
+  font-size: 26rpx;
 }
 
 .goUrl input {
@@ -332,7 +337,7 @@
   background: #eee;
   border-radius:50rpx; 
   text-align: center;
-  color: #ccc;
+  color: #000;
   line-height: 50rpx;
 }
 .activeed{

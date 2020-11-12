@@ -87,9 +87,9 @@
             <text class="xiang">详情</text>
           </navigator>
           <view>
-            <image src="/images/user/pinglun.png"></image>
+            <image src="/images/user/pl.png"></image>
             <text class="shened">({{item.comment}})</text>
-            <image src="/images/user/zan.png" bindtap="giveFive" data-index="{{item.id}}"></image>
+            <image src="/images/user/dz.png" bindtap="giveFive" data-index="{{item.id}}"></image>
             <text class="shened">({{item.fabulous}})</text>
           </view>
         </view>
@@ -108,19 +108,36 @@
       <view class='contents'>
         <view class="goUrl" bindtap="goUrl" data-url="profit">
           <label class="glable" for="male">用餐时间</label>
-          <view style="margin-left:30rpx;">
+          <view style="margin-left:30rpx;background:#ccc;width:188px">
             <picker mode="multiSelector" bindchange="bindStartMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
               <view class="picker">
-                请选择：{{startDate}}
+                时间：{{startDate}}
               </view>
             </picker>
           </view>
         </view>
       </view>
+     
       <view class='contents'>
         <view class="goUrl" bindtap="goUrl" data-url="profit">
-          <label class="glable" for="male">用餐人数 </label>
+          <label class="glable" for="male">您的姓名</label>
+          <input type="text" name="sex" id="male" bindinput="getName"/>
+        </view>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">用餐人数</label>
           <input type="text" name="sex" id="male" bindinput="haveMeals"/>
+        </view>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">号  码 </label>
+          <input type="text" name="sex" id="male" bindinput="getNumber"/>
+        </view>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">地  址 </label>
+          <input type="text" name="sex" id="male" bindinput="getAddress"/>
+        </view>
+        <view class="goUrl" bindtap="goUrl" data-url="profit">
+          <label class="glable" for="male">要求(备注)</label>
+          <input type="text" name="sex" id="male" bindinput="getMark" />
         </view>
       </view>
       <view class="cansole">

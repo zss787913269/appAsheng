@@ -13,11 +13,9 @@ box-sizing: border-box;
   flex-direction: column;
 }
 .myflex text{
-  color: aquamarine;
   font-size: 30rpx;
   font-family: Source Han Sans CN;
   font-weight: 400;
-  margin-bottom: 40rpx;
 }
 .noTime{
   width:100%;
@@ -160,7 +158,70 @@ box-sizing: border-box;
 .food_margin{
   margin-left: 20rpx;
 }
+.top{
+  margin-top: 102rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-title{
+  text-align: center;
+  margin-top: 58rpx;
+}
+.top-title text{
+  
+  font-size: 40rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #000000;
+}
+.top-title view{
+  margin-top: 21rpx;
+  width: 640rpx;
+}
+.f-boottom{
+  position: absolute;
+  bottom: 130rpx;
 
+}
+.f-boottom view{
+  width: 574rpx;
+  height: 76rpx;
+  opacity: 1;
+  border-radius: 41rpx;
+  text-align: center;
+  line-height: 76rpx;
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.view-yellow{
+  background: #F5A623;
+  color: #FFFFFF;
+}
+.view-while{
+ margin-top: 42rpx; 
+background: #40B15D;
+color: #FFFFFF;
+}
+
+.top-title view text{
+  
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #9D9D9D;
+}
+.top-head{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top image{
+    width: 268rpx;
+    height: 268rpx;
+}
 
 
 

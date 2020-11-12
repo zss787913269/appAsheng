@@ -9,6 +9,9 @@ Page({
      * 页面的初始数据
      */
     data: {
+        countDownNum:60,
+        showcode:true,
+        code:"",//验证码
         cardPhoto: '/images/temp/zheng.png', //身份证照正面,默认图片
         otherPhoto: '/images/temp/fan.png', //身份证反面
         healthyPhoto: '/images/temp/kang.png', //健康证
@@ -32,7 +35,7 @@ Page({
             "id": "2",
             "text": "吃"
         }], //擅长列表
-        type_1:"",//申请是否通过 0 未审核 1未通过 2通过
+        type_1:3,//申请是否通过 0 未审核 1未通过 2通过
         background: '', //  工作经验
         address: '', //地址
         tel: '', //联系方式
@@ -65,12 +68,12 @@ Page({
         that.getOccupation();
         that.getBegood();
      
-        // if(options.id==="1"){
-        //     that.setData({
-        //         options_id:options.id
-        //     })
+        if(options.id==="1"){
+            that.setData({
+                options_id:options.id
+            })
            
-        // }
+        }
 
         that.getInfo();
  
@@ -98,10 +101,10 @@ Page({
                 maxlength: 100,
             },
 
-            number: {
-                required: true,
-                idcard: true,
-            },
+            // number: {
+            //     required: true,
+            //     idcard: true,
+            // },
         }, {
             fullName: {
                 required: '您填写的姓名格式错误',
@@ -117,9 +120,15 @@ Page({
                 required: '请输入您的工作经验',
             },
 
-            number: {
-                required: '请输入正确的身份证号',
-            },
+            // number: {
+            //     required: '请输入正确的身份证号',
+            // },
+        })
+    },
+  
+    goback(){
+        wx.navigateBack({
+          delta: 0,
         })
     },
     //获取个人信息
@@ -129,7 +138,7 @@ Page({
             method: 'get',
         })
 
-        console.log(res,"获取个人信息");
+        console.log(res.data,"获取个人信息");
 
         if(res.data.code == 0){
 
@@ -151,28 +160,37 @@ Page({
                 occupationId:dataBox.pro_id,
                 data_id:dataBox.id,
                 fullName:dataBox.name,
-                number:dataBox.card_no,
+                // number:dataBox.card_no,
+                number:'',
                 background:dataBox.work_experience,
                 address:dataBox.now_address,
                 tel:dataBox.tel,
                 price:dataBox.price,
-                cardPhoto:dataBox.cardimg[0],
-                otherPhoto:dataBox.cardimg[1],
-                healthyPhoto:dataBox.jiankang_img,
-                cookPhoto:dataBox.chushi_img,
+                // cardPhoto:dataBox.cardimg[0],
+                // otherPhoto:dataBox.cardimg[1],
+                // healthyPhoto:dataBox.jiankang_img,
+                // cookPhoto:dataBox.chushi_img,
+                cardPhoto:"",
+                otherPhoto:"",
+                healthyPhoto:'',
+                cookPhoto:'',
                 styleGood_name:dataBox.disname,
                 jk_img:dataBox.jk_img,
                 ck_img:dataBox.ck_img,
                 occupation:pro_name,
                 occupationNum:pro_num,
-                card_img1:card_id[0],
-                card_img2:card_id[1],
+                // card_img1:card_id[0],
+                // card_img2:card_id[1],
+                card_img1:'',
+                card_img2:'',
                 type_1:dataBox.type_1,
                 styleGood_id:Array.from(dataBox.dishes_id.split(","))
             })
+        }else{
+            this.setData({
+                type_1:3//还没有申请
+            })
         }
-       
-        
     },
     async getOccupation() { //获取厨师职业
         var that = this
@@ -183,7 +201,7 @@ Page({
         that.setData({
             selectArray: res.data.data
         })
-        console.log(res)
+      
     },
     async getBegood() { //获取厨师擅长菜系
         var that = this
@@ -191,6 +209,7 @@ Page({
             url: 'api/user/dishesList',
             method: 'get',
         })
+        console.log(res.data,'菜系')
         let styleGood=res.data.data;
         styleGood.splice(0,0,{id:null,name:"--"});
         let styleGood_box=[];
@@ -259,17 +278,27 @@ Page({
             occupation:occupation_name
         })
     },
+    bindKeyInput(e){
+        this.setData({
+            code: e.detail.value
+            })
+    },
     submit(e) {
         var that = this
         var formData = e.detail.value;
+
+        console.log(formData,"data")
         if (!this.WxValidate.checkForm(e)) {
             const error = this.WxValidate.errorList[0]
+
+            console.log(error,"error")
             wx.showToast({
                 title: `${error.msg}`,
                 duration: 3000,
                 icon: 'none',
             })
         } else {
+      
             var fullName = formData.fullName;
             var tel = formData.tel;
             var beGood = that.data.beGood;
@@ -280,49 +309,146 @@ Page({
             var price = formData.price;
             var params = {
                 name: fullName,
-                card_no: number,
+                // card_no: number,
+                card_no: '',
                 work_experience: background,
                 now_address: address,
                 occupation: that.data.occupation,
                 pro_id: that.data.occupationId,
-                card_img: `${that.data.card_img1},${that.data.card_img2}`,
-                jk_img: that.data.jk_img,
-                ck_img: that.data.ck_img,
+                // card_img: `${that.data.card_img1},${that.data.card_img2}`,
+                // jk_img: that.data.jk_img,
+                // ck_img: that.data.ck_img,
+                card_img: '',
+                jk_img: '',
+                ck_img: '',
                 tel: tel,
                 note: that.data.styleGood_name,
                 dishes_id: that.data.styleGood_id,
-                price: price
+                price: price,
+                code:that.data.code
             };
             console.log(params)
 
-            if (that.data.card_img1 == '' || that.data.card_img2 == '') {
-                wx.showToast({
-                    title: `请上传身份证照`,
-                    duration: 3000,
-                    icon: 'none',
-                })
-                return
-            }
-            if (that.data.jk_img == '') {
-                wx.showToast({
-                    title: `请上传健康证`,
-                    duration: 3000,
-                    icon: 'none',
-                })
-                return
-            }
-            if (that.data.ck_img == '') {
-                wx.showToast({
-                    title: `请上传厨师证`,
-                    duration: 3000,
-                    icon: 'none',
-                })
-                return
-            }
+            // if (that.data.card_img1 == '' || that.data.card_img2 == '') {
+            //     wx.showToast({
+            //         title: `请上传身份证照`,
+            //         duration: 3000,
+            //         icon: 'none',
+            //     })
+            //     return
+            // }
+            // if (that.data.jk_img == '') {
+            //     wx.showToast({
+            //         title: `请上传健康证`,
+            //         duration: 3000,
+            //         icon: 'none',
+            //     })
+            //     return
+            // }
+            // if (that.data.ck_img == '') {
+            //     wx.showToast({
+            //         title: `请上传厨师证`,
+            //         duration: 3000,
+            //         icon: 'none',
+            //     })
+            //     return
+            // }
             that.getSubmit(params)
         }
 
     },
+    countDown: function () {
+
+            let that = this;
+        
+            let countDownNum = 61;//获取倒计时初始值
+        
+            //如果将定时器设置在外面，那么用户就看不到countDownNum的数值动态变化，所以要把定时器存进data里面
+        
+            that.setData({
+        
+              timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
+        
+                //每隔一秒countDownNum就减一，实现同步
+        
+                countDownNum--;
+        
+                //然后把countDownNum存进data，好让用户知道时间在倒计着
+        
+                that.setData({
+        
+                  countDownNum: countDownNum
+        
+                })
+        
+                //在倒计时还未到0时，这中间可以做其他的事情，按项目需求来
+        
+                if (that.data.countDownNum == 0) {
+        
+                  //这里特别要注意，计时器是始终一直在走的，如果你的时间为0，那么就要关掉定时器！不然相当耗性能
+        
+                  //因为timer是存在data里面的，所以在关掉时，也要在data里取出后再关闭
+        
+                  clearInterval(that.data.timer);
+        
+                  //关闭定时器之后，可作其他处理codes go here
+        
+                  that.setData({
+        
+                    showcode:true
+        
+                  })
+        
+                }
+        
+              }, 1000)
+        
+            })
+      },
+      async sendCode() { //发送验证码
+        var that = this
+    
+        console.log(that.data.tel)
+    
+        wx.request({
+          url: `${app.globalData.headUrl}/api/Open/sendSMS`, //仅为示例，并非真实的接口地址
+          data: {
+            tel: that.data.tel,
+            type: 'hotel'
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success(res) {
+         
+            console.log(res.data)
+    
+              if (res.data.code == 0) {
+                that.countDown()
+                that.setData({
+                  showcode:false
+                })
+                wx.showToast({
+                  title: '发送成功',
+                  icon: 'none',
+                  duration: 3000
+                })
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                  duration: 3000
+                })
+              }
+    
+          }
+        })
+    
+    
+    
+    
+      },
     async getSubmit(e) {
         if(this.data.options_id==="1"){
             e.is_edit=1;
@@ -343,7 +469,9 @@ Page({
                 icon: 'none',
                 duration: 3000,
                 success(res){
-                    wx.navigateBack({})
+                    wx.reLaunch({
+                        url: "/pages/user/index",
+                      })
                 }
             })
         }else{

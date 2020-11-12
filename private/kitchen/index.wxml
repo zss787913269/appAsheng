@@ -1,9 +1,21 @@
 <view wx:if="{{userInfo == ''}}" class="myflex">
-	<text>您还不是私厨</text>
-	<button bindtap="gotoshenqing">申请成为私厨</button>
+	<view class="top-head">
+		<view class="top">
+			<image src="../../images/user/cwsc-sq@2x.png" alt="" />
+			<view class="top-title">
+				<text>你还没有成为私厨！</text>
+				<view>
+					<text>点击申请私厨，填写信息成为私厨</text>
+				</view>
+			</view>
+		</view>
+		<view class="f-boottom">
+			<view class="view-yellow" bindtap="gotoshenqing"><text>申请成为私厨</text></view>
+			<view class="view-while" bindtap="back"><text>返回</text></view>
+		</view>
+	</view>
 </view>
-<view wx:else>
-
+<view wx:if="{{showmain}}">
 	<view class="card">
 		<view class="cardname">
 			<view class="imged">
@@ -23,15 +35,6 @@
 	</view>
 	<view class="cardtime">
 		<view class="timeyue">
-			<!-- <view>预约时间</view>
-    <view>用餐时间
-      <view class="backgr">
-        <input class="timetwo" placeholder="请输入"></input>
-      </view> 用餐人数
-      <view class="backgr"> 
-        <input class="timetwo" placeholder="请输入"></input>
-      </view>
-    </view> -->
 			<view>菜系：{{userInfo.note}}</view>
 			<view>菜品:
 				<text class="food_margin"> {{foods}}</text>
@@ -52,7 +55,7 @@
 						<image src="{{item.avatar}}"></image>
 						<view class="introduce">
 							<text>{{item.nickname}}</text>
-							<!-- <text class="fontsiz">11-18日</text> -->
+						
 						</view>
 					</view>
 
@@ -87,31 +90,38 @@
 			</view>
 		</block>
 		<view class="noTime" wx:else>暂无预约</view>
-		<!-- 拒绝 -->
-		<!-- <view class="middle">
-    <view class="tbody">
-      <view class="portrait">
-        <image src="/images/index/zhuchu.png"></image>
-        <view class="introduce">
-          <text>这个名称</text>
-          <text class="fontsiz">11-18日</text>
-        </view>
-      </view>
-      <view class="accept">
-        <text>拒绝</text>
-      </view>
-    </view>
-    <view class="nottom">
-      <view>
-      <text class="color">用餐时间：</text>
-      <text>11月18日上午10.30-下午13.30</text>
-      </view>
-      <view>
-      <text class="color">用餐时间：</text>
-      <text>30个人，3桌</text>
-      </view>
-    </view>
-  </view> -->
+	
 	</view>
 
+</view>
+
+<view class="top-head" wx:if="{{userInfo.type_1 == 0}}">
+	<view class="top">
+		<image src="../../images/user/cwsc-sq@2x.png" alt="" />
+		<view class="top-title">
+			<text>审核申请中</text>
+			<view>
+				<text>您的申请正在快速审核中，请耐心等候...</text>
+			</view>
+		</view>
+	</view>
+	<view class="f-boottom">
+		<view class="view-while" bindtap="back"><text>返回</text></view>
+	</view>
+</view>
+
+<view class="top-head" wx:if="{{userInfo.type_1 == 1}}">
+	<view class="top">
+		<image src="../../images/user/cwsc-sq@2x.png" alt="" />
+		<view class="top-title">
+			<text>申请审核失败！</text>
+			<view>
+				<text>{{userInfo.mark}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="f-boottom">
+		<view class="view-yellow" bindtap="gotoChange"><text>点击修改</text></view>
+		<view class="view-while"><text>返回</text></view>
+	</view>
 </view>

@@ -71,13 +71,13 @@ App({
       seriesName: '',     // 产品系列名称，如 DT20
       devIntName: '',     // 内部型号名称，如 DT20S
     },
-    // headUrl:"https://second.chchgg.com",//线上版本
-     headUrl:"http://debug.nncaixiao2.cn",//测试版本
+    headUrl:"https://second.chchgg.com",//线上版本
+    //  headUrl:"http://debug.nncaixiao2.cn",//测试版本
   },
   wxRequest(method, url, data, callback, errFun, token) {
     wx.request({
-      // url: `${this.globalData.headUrl}/index.php?s=${url}&application=app&application_client_type=weixin&token=${this.globalData.token}&ajax=ajax`,
-      url: `http://debug.nncaixiao2.cn/index.php?s=${url}&application=app&application_client_type=weixin&token=${this.globalData.token}&ajax=ajax`,
+      url: `${this.globalData.headUrl}/index.php?s=${url}&application=app&application_client_type=weixin&token=${this.globalData.token}&ajax=ajax`,
+      // url: `http://debug.nncaixiao2.cn/index.php?s=${url}&application=app&application_client_type=weixin&token=${this.globalData.token}&ajax=ajax`,
       method: method,
       data: data,
       header: {

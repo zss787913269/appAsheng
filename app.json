@@ -1,10 +1,10 @@
 {
   "pages": [ 
-    "pages/user/index",
     "pages/index/index",
- 
-
     "pages/find/index",
+    "pages/user/index",
+    "details/information/index",
+    
     "private/myFood/index",
     "details/peinformation/index",
     "details/dishes/index",
@@ -12,7 +12,6 @@
     "details/release/index",
     "private/kitchen/index",
     "details/detail/index",
-    "details/information/index",
     "pages/deliver/index",
     "details/handle/index",
     "private/find/index",

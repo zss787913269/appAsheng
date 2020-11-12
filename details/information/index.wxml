@@ -1,54 +1,54 @@
-<!--操作菜单-->
-<view class="view_power">
+
+<view class="view_power" wx:if='{{type_1 != 0}}'>
 	<view class="user_tab">
-	<view class="goUrl" wx:if="{{type_1 != 2}}">
-		<text class="notice" wx:if="{{type_1 == 0}}"> 您申请的资料正在审核，请等待</text>
-		<text class="notice" wx:if="{{type_1 == 1}}"> 您申请的资料未通过，请重新编辑</text>
-	</view>
+
 		<form bindsubmit='submit'>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">你的姓名</label>
+			<view class="goUrl"  data-url="profit">
+				<label class="glable" for="male"><text>你的姓名</text></label>
 				<input type="text" name="fullName" placeholder="请输入" id="male" value="{{fullName}}" />
 			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
+			<!-- <view class="goUrl" bindtap="goUrl" data-url="profit">
 				<label class="glable" for="male">身份证号</label>
 				<input type="text" placeholder="请输入" name="number" id="male" value="{{number}}" />
-			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">工作经验</label>
+			</view> -->
+			<view class="goUrl"  data-url="profit">
+				<label class="glable" for="male"><text>工作经验</text></label>
 				<input type="text" name="background" placeholder="请输入" id="male" value="{{background}}" />
 
 			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">现居地址</label>
+			<view class="goUrl" data-url="profit">
+				<label class="glable" for="male"><text>现居地址</text></label>
 				<input type="text" placeholder="请输入" name="address" id="male" value="{{address}}" />
 			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">联系方式</label>
-				<input type="text" placeholder="请输入" name="tel" id="male" value="{{tel}}" />
+			<view class="goUrl"   data-url="profit">
+				<label class="glable" for="male"><text>联系方式</text></label>
+				<input type="text" style="width:30%" placeholder="请输入" name="tel" id="male" value="{{tel}}" />
+				<view class="codeinput" wx:if="{{!showcode}}" ><input type="number"  bindinput="bindKeyInput" value="{{code}}" placeholder="验证码" /></view>
+				<view class="getcode" bindtap="sendCode" wx:if="{{showcode}}"><text>获取验证码</text></view>
+				<view class="getcode" wx:if="{{!showcode}}"><text>{{countDownNum}}s后重发</text></view>
 			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">价 格</label>
+			<view class="goUrl"  data-url="profit">
+				<label class="glable" for="male"><text>价 格</text></label>
 				<input type="text" placeholder="请输入（元/天）" name="price" id="male" value="{{price}}" />
 			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">职业</label>
+			<view class="goUrl"  data-url="profit">
+				<label class="glable" for="male"><text>职业</text></label>
 				<view class="occupation">
 					<picker bindchange="changePosition" value="{{index}}" range="{{selectArray}}" range-key="name">
 						<view class="picker">
-							{{occupationNum==null? "请选择":occupation}}
+							{{occupationNum==null? "请选择职业":occupation}}
 						</view>
 					</picker>
 					<!-- <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select> -->
 				</view>
 				<!-- <input type="text" placeholder="请输入" name="occupation" id="male" value="{{occupation}}"/> -->
 			</view>
-			<view class="goUrl" bindtap="goUrl" data-url="profit">
-				<label class="glable" for="male">擅长菜系</label>
+			<view class="goUrl"  data-url="profit">
+				<label class="glable" for="male"><text>擅长菜系</text></label>
 				<view class="occupation">
 					<picker mode="multiSelector" bindchange="changeGoods"  value="{{index}}" range="{{beGoodBox}}" range-key="name">
 						<view class="picker">
-							{{styleGood_name==null? "请选择":styleGood_name}}
+							{{styleGood_name==null? "请选择菜系":styleGood_name}}
 						</view>
 					</picker>
 					<!-- <Select prop-array='{{beGood}}' bind:myget='getDatebeGood'></Select> -->
@@ -59,13 +59,13 @@
 				<button formType="submit" style="background:#ff9000;color:#fff;width:100%;">提 交</button>
 			</view>
 		</form>
-		<view class="downone">
+		<!-- <view class="downone">
 			<view class="itemname">
 				<text>身份证照</text>
 			</view>
 			<view class="itemone" bindtap="upload" data-index="0">
 				<image src="{{cardPhoto}}" mode="scaleToFill"></image>
-				<!-- <image wx:else src="/images/temp/zheng.png" mode="widthFix"></image> -->
+	
 			</view>
 			<view class="itemtwo" bindtap="upload" data-index="1">
 				<image src="{{otherPhoto}}" mode="scaleToFill"></image>
@@ -88,6 +88,21 @@
 				<image src="{{cookPhoto}}" mode="scaleToFill"></image>
 			</view>
 
+		</view> -->
+	</view>
+</view>
+<!-- 申请审核中 -->
+<view class="top-head" wx:if="{{type_1 == 0}}">
+	<view class="top">
+		<image src="../../images/user/cwsc-sq@2x.png" alt="" />
+		<view class="top-title">
+			 <text>审核申请中</text>
+			 <view>
+				 <text>您的申请正在快速审核中，请耐心等候...</text>
+				</view>
 		</view>
+	</view>
+	<view class="f-boottom">
+			<view class="view-while" bindtap="goback"><text>返回</text></view>
 	</view>
 </view>

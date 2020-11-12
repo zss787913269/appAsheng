@@ -26,6 +26,10 @@ Page({
     page: 1, //页面的递进数
     canPull: true, //下拉是否触发
     allPage: 1, //总页数，
+    name:"",//预约人名字
+    address:"",//预约地址
+    mark:"",//备注地址
+    number:"",//预约人号码
     searchRes:false
   },
   goDetail(e){
@@ -44,6 +48,35 @@ Page({
       url: '/details/dishes/index',
     })
   },
+  
+  // 名字
+  getName(e){
+    console.log(e.detail.value)
+    this.setData({
+      name:e.detail.value
+    })
+  },
+  // 地址
+  getAddress(e){
+    console.log(e.detail.value)
+    this.setData({
+      address:e.detail.value
+    })
+  },
+  // 号码
+  getNumber(e){
+    console.log(e.detail.value)
+    this.setData({
+      number:e.detail.value
+    })
+  },
+  //备注
+  getMark(e){
+    console.log(e.detail.value)
+    this.setData({
+      mark:e.detail.value
+    })
+  },
   pickerTap: function () {    //时间选择器
     var date = new Date();
 
@@ -57,7 +90,7 @@ Page({
       var date1 = new Date(date);
       date1.setDate(date.getDate() + i);
       var md = (date1.getMonth() + 1) + "-" + date1.getDate();
-      monthDay.push(md+'日');
+      monthDay.push(md);
     }
 
     var minuteIndex;
@@ -539,12 +572,48 @@ Page({
       cook_id: that.data.cookId,
       to_user_id: that.data.userId,
       make_time:that.data.startDate,
-      number: that.data.cookNumber
+      number: that.data.cookNumber,
+      address:that.data.address,
+      tel:that.data.number,
+      mark:that.data.mark,
+      name:that.data.name
     }
     console.log(params,"params")
     if (params.make_time == ''){
       wx.showToast({
         title: '请选择时间',
+        icon:'none',
+        duration:3000
+      })
+      return
+    }
+    if (params.name == ''){
+      wx.showToast({
+        title: '请输入名字',
+        icon:'none',
+        duration:3000
+      })
+      return
+    }
+    if (params.tel == ''){
+
+      wx.showToast({
+        title: '请输入号码',
+        icon:'none',
+        duration:3000
+      })
+      return
+    }else{
+      if (!(/^1[34578]\d{9}$/.test(params.tel))) {
+        wx.showToast({
+          title: '电话号码格式错误',
+          icon:'none',
+          duration:3000
+        })
+    }}
+    if (params.address == ''){
+      wx.showToast({
+        title: '请输入地址',
         icon:'none',
         duration:3000
       })

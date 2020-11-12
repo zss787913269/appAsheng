@@ -14,7 +14,8 @@ Page({
     makeList:[],   //预约我的列表
     page:1,
     foods:"",//菜品
-    avtor:""
+    avtor:"",
+    showmain:false,
   },
 
   /**
@@ -37,6 +38,11 @@ Page({
       url: '/details/information/index',
     })
   },
+  back(){
+    wx.navigateBack({
+      delta: 0,
+    })
+  },
   //跳转编辑页面
   async geiUserInfo(){
 
@@ -49,6 +55,12 @@ Page({
 
       if(res.data.code == 0){
         let data = res.data.data
+
+        if(res.data.data.type_1 == 2){
+          that.setData({
+            showmain:true
+          })
+        }
 
         let food_name="";
         data.dishes.forEach(item=>{
@@ -65,9 +77,16 @@ Page({
           that.getMyMakeList(that.data.page)
       }else{
     
-      
+        this.setData({
+          showmain:false
+        })
       }
        
+  },
+  edit(){
+    this.setData({
+      showmain:true
+    })
   },
   gotoChange(){
     wx.navigateTo({
