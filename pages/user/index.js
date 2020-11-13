@@ -157,7 +157,9 @@ Page({
             }
           })
 
-          console.log("用户资料", res.data)
+          console.log("用户资料", res.data.data.token)
+          console.log("gotoken",app.globalData.token)
+          
 
           if(res.data.data.token == app.globalData.token){
               that.setData({
@@ -294,6 +296,11 @@ Page({
           url: "/details/information/index", //注册私厨
         })
         break;
+          case "s8":
+        wx.navigateTo({
+          url: "/details/appointment/index", //厨师预约列表
+        })
+        break; 
       case "s3":
         wx.navigateTo({
           url:"/private/myFood/index", //菜品列表

@@ -1,10 +1,14 @@
 {
   "pages": [ 
     "pages/index/index",
+    "details/search/index",
+ 
+    "details/appointment/index",
+   
+    "details/preAbout/index",
     "pages/find/index",
     "pages/user/index",
     "details/information/index",
-    
     "private/myFood/index",
     "details/peinformation/index",
     "details/dishes/index",
@@ -23,7 +27,6 @@
     "component/getphone/index",
     "person/map/index",
     "person/add/index",
-    "details/search/index",
     "details/confirm/index",
     "person/slops/index",
     "person/recovery/index",
@@ -63,7 +66,6 @@
     "person/crecord/index",
     "details/dishname/index",
     "details/order/index",
-    "details/preAbout/index",
     "details/handled/index",
     "details/orderlist/index",
     "details/groupAll/index",

@@ -61,9 +61,9 @@
     <image src="{{imgulr}}wd-wdsc.png" data-index="1" bindtap="goToPage"></image>
     <text>个人资料</text>
   </view>
-  <view class="item-box" data-index="2" bindtap="goToPage">
+  <view class="item-box" data-index="s2" bindtap="goToPage">
     <image src="{{imgulr}}wd-grdd.png"></image>
-    <text>个人订单</text>
+    <text>预约列表</text>
   </view>
   <view class="item-box" data-index="3" bindtap="goToPage">
     <image src="{{imgulr}}wd-shdz.png"></image>
@@ -81,7 +81,7 @@
       </view>
       <text>成为私厨</text>
     </view>
-    <view class="shop-box" data-index="s2" bindtap="goToPage">
+    <view class="shop-box" data-index="s8" bindtap="goToPage">
       <view>
         <image src="{{imgulr}}wd-yylb.png" style="width:37rpx;height:39rpx"></image>
       </view>

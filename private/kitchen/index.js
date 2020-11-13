@@ -129,9 +129,10 @@ Page({
       id: e.currentTarget.dataset.id,
       status: 2
     }
-    let res = await ajax({ url: 'api/user/upMakeStatus', method: 'POST', data: page })
+    let res = await ajax({ url: 'api/user/upMakeStatus', method: 'POST', data: params})
+    console.log(res.data)
     if (res.data.code == 0) {
-      console.log(res)
+   
       that.getMyMakeList()
       wx.showToast({
         title: '操作成功',

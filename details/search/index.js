@@ -674,6 +674,9 @@ Page({
       value:e.detail.value
     })
 
+
+    that.searchResult()
+
     if(e.detail.value == ""){
       this.setData({
         searchList:[]
@@ -705,36 +708,50 @@ Page({
       keywords:that.data.value,
     }
 
+
     //console.log(parmes)
-
-    let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
-
-    if(res.data.code == 0){
-      if(res.data.data.length != 0){
+    if(parmes.keywords != ''){
     
-        this.setData({
-          searchList:res.data.data, showbtn:false,showsearch:!this.data.showsearch
-        })
+      let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
+     
+   
+
+ 
+      if(res.data.code == 0){
+    
+        if(res.data.data.length != 0){
+          this.setData({
+            searchList:res.data.data, showbtn:false,showsearch:!this.data.showsearch
+          })
+        }else{
+          this.setData({
+            showbtn:true,
+            searchList:[],
+            showsearch:!this.data.showsearch
+          })
+        }
       }else{
-        this.setData({
-          showbtn:true,
-          showsearch:!this.data.showsearch
+      
+        wx.showToast({
+          title: res.data.msg,
+          icon:"none"
         })
       }
-    }else{
-      wx.showToast({
-        title: res.data.msg,
-        icon:"none"
-      })
+  
+  
     }
-
-
+   
 
      
     //console.log("搜索结果",res.data)
 
   },
- 
+  qc(){
+    this.setData({
+      value:'',
+      searchList:[]
+    })
+  },
   async getShopPrice() {
 
     var that = this

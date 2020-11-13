@@ -22,7 +22,7 @@
 			</view>
 			<view class="goUrl"   data-url="profit">
 				<label class="glable" for="male"><text>联系方式</text></label>
-				<input type="text" style="width:30%" placeholder="请输入" name="tel" id="male" value="{{tel}}" />
+				<input type="text" style="width:30%" placeholder="请输入"  bindinput="getphone" name="tel" id="male" value="{{tel}}" />
 				<view class="codeinput" wx:if="{{!showcode}}" ><input type="number"  bindinput="bindKeyInput" value="{{code}}" placeholder="验证码" /></view>
 				<view class="getcode" bindtap="sendCode" wx:if="{{showcode}}"><text>获取验证码</text></view>
 				<view class="getcode" wx:if="{{!showcode}}"><text>{{countDownNum}}s后重发</text></view>

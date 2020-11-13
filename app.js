@@ -72,7 +72,7 @@ App({
       devIntName: '',     // 内部型号名称，如 DT20S
     },
     headUrl:"https://second.chchgg.com",//线上版本
-    //  headUrl:"http://debug.nncaixiao2.cn",//测试版本
+    // headUrl:"http://debug.nncaixiao2.cn",//测试版本
   },
   wxRequest(method, url, data, callback, errFun, token) {
     wx.request({

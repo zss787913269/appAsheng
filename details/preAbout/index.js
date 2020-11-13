@@ -26,7 +26,7 @@ Page({
     })
     console.log("获取我的预约列表",res.data)
     if(res.data.code == 0){
-      console.log(res)
+      // console.log(res)
       that.setData({
         makeList:res.data.data.data
       })

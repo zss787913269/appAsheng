@@ -610,7 +610,10 @@ Page({
           icon:'none',
           duration:3000
         })
-    }}
+        return
+    } 
+   
+  }
     if (params.address == ''){
       wx.showToast({
         title: '请输入地址',

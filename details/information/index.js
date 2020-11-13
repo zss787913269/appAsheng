@@ -131,6 +131,12 @@ Page({
           delta: 0,
         })
     },
+    getphone(e){
+        console.log(e.detail.value,"号码")
+        this.setData({
+            tel:e.detail.value
+        })
+    },
     //获取个人信息
     async getInfo(){
         let res=await ajax({
