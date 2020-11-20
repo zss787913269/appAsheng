@@ -3,7 +3,7 @@
   
   <view class="myinputbox">
 		<image src="../../images/user/rmss-fdj.png"></image>
-    <input placeholder="搜索商品" placeholder-class="placeholder" bindinput="int" value="{{value}}">
+    <input placeholder="搜索商品" placeholder-class="placeholder" confirm-type="search"   bindinput="int" value="{{value}}">
     </input>
 		 <view class="user-header-name" bindtap="searchResult" >
      <text class="with">搜索</text>	
@@ -29,8 +29,13 @@
 		
 	</view>
 
+	<view class="searchTitle" wx:if="{{showTitle}}">
+		
+				<text class="text33" wx:for="{{searchTitle}}" wx:key="idnex" bindtap="searchPage" data-text="{{item}}">{{item}}</text>
+			
+	</view>
 
-<view class="hotSearch" wx:if="{{false}}" >
+<view class="hotSearch"  wx:if="{{false}}" >
 <!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
   <view class="hotSearch-title">热门搜索</view>
   <view class="hotSearch-conter" >

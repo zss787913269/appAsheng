@@ -1,15 +1,14 @@
-
 <view class="top">
 
   <view class="top-top">
-    <view class="imgbox" >
+    <view class="imgbox">
       <view wx:if="{{!showAv}}" class="myav">
         <view class="avtor">
-       
+
           <image src="{{avtor}}"></image>
         </view>
         <view class="name">
-         
+
           <text>{{nickname}}</text>
         </view>
       </view>
@@ -54,16 +53,153 @@
 
 </view>
 
+<view class="shop">
+  <view class="flex">
+    <view class="hotel-title"><text>酒店订单</text></view>
+    <view class="right-flex" data-index="all" bindtap="goToPage">查看全部订单></view>
+  </view>
+  <view class="shop-item-box">
+    <view class="shop-box" data-index="9" bindtap="goToPage">
+      <text class="countflex" wx:if="{{hotelList.order.pay_status}}">{{hotelList.order.pay_status}}</text>
+      <view>
 
-<view class="address">
+        <image src="../../images/user/dsh.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>待支付</text>
+    </view>
+
+    <view class="shop-box" data-index="dsh" bindtap="goToPage">
+      <text class="countflex" wx:if="{{hotelList.order.needcheck}}">{{hotelList.order.needcheck}}</text>
+      <view>
+        <image src="../../images/user/dfk.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>待收货</text>
+    </view>
+    <view class="shop-box" data-index="8" bindtap="goToPage">
+      <view>
+        <image src="../../images/user/hotelmsg.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>酒店信息</text>
+    </view>
+    <view class="shop-box" data-index="10" bindtap="goToPage">
+      <view>
+        <image src="../../images/user/edit.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>注册/编辑</text>
+    </view>
+  </view>
+</view>
+<view class="address" wx:if="{{hotelList.id == 405}}" >
+
+  <view class="item-box">
+    <image src="../../images/user2/dd.png" data-index="5" bindtap="goToPage"></image>
+    <text>订单列表</text>
+  </view>
+  <view class="item-box" data-index="14" bindtap="goToPage">
+    <image  src="../../images/user2/ps.png" ></image>
+    <text>配送列表</text>
+  </view>
+
+</view>
+<view class="shop" wx:if="{{showshop}}">
+  <view class="shop-title"><text>商铺</text></view>
+  <view class="shop-item-box">
+ 
+    <view class="shop-box" data-index="5" bindtap="goToPage">
+      <view>
+        <image src="../../images/user2/dd.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>订单列表</text>
+    </view>
+    <view class="shop-box" data-index="6" bindtap="goToPage">
+      <view>
+        <image src="../../images/user2/dp.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>商品列表</text>
+    </view>
+    <view class="shop-box" data-index="4" bindtap="goToPage">
+      <view>
+        <image src="../../images/user/hotelmsg.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>商铺信息</text>
+    </view>
+  </view>
+</view>
+<view class="shop"  wx:if="{{sichu != null}}" >
+  <view class="shop-title" ><text>私厨</text></view>
+  <view class="shop-item-box">
+    <view class="shop-box" data-index="s8" bindtap="goToPage">
+      <view>
+        <image src="../../images/user2/yy.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>我的预约列表</text>
+    </view>
+    <view class="shop-box" data-index="s3" bindtap="goToPage">
+      <view>
+        <image src="../../images/user2/cp.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>菜品列表</text>
+    </view>
+    <view class="shop-box" data-index="s4" bindtap="goToPage">
+      <view>
+        <image src="../../images/user2/zl.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>我的资料</text>
+    </view>
+  </view>
+</view> 
+<view class="tool">
+
+  <view class="shop-title" ><text>常用工具</text></view>
+  <view class="tool-box">
+
+    <view class="shop-box" data-index="20" bindtap="goToPage">
+      <view class="shopimg"> 
+        <image src="../../images/user2/ewm.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>分享赚佣金</text>
+    </view>
+
+    <view class="shop-box" data-index="yj" bindtap="goToPage">
+      <view class="shopimg"> 
+        <image src="../../images/user2/yj.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>我的佣金</text>
+    </view>
+
+    <view class="shop-box" data-index="3" bindtap="goToPage">
+      <view class="shopimg"> 
+        <image src="../../images/user2/shdz.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>收货地址</text>
+    </view>
+
+    <view class="shop-box" data-index="s1" bindtap="goToPage">
+      <view class="shopimg"> 
+        <image src="../../images/user2/cwsc.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>成为私厨</text>
+    </view>
+    <view class="shop-box" data-index="7" bindtap="goToPage">
+      <view class="shopimg"> 
+        <image src="../../images/user2/cwsj.png" style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>成为商家</text>
+    </view>
+ 
+
+ 
+ 
+   
+  </view>
+
+</view>
+
+<!-- <view class="address">
 
   <view class="item-box">
     <image src="{{imgulr}}wd-wdsc.png" data-index="1" bindtap="goToPage"></image>
     <text>个人资料</text>
-  </view>
-  <view class="item-box" data-index="s2" bindtap="goToPage">
-    <image src="{{imgulr}}wd-grdd.png"></image>
-    <text>预约列表</text>
   </view>
   <view class="item-box" data-index="3" bindtap="goToPage">
     <image src="{{imgulr}}wd-shdz.png"></image>
@@ -74,7 +210,7 @@
 <view class="shop" >
   <view class="shop-title" ><text>私厨</text></view>
   <view class="shop-item-box">
-    <!--  -->
+ 
     <view class="shop-box"   wx:if="{{sichu == null}}" data-index="s1" bindtap="goToPage">
       <view>
         <image src="{{imgulr}}wd-cwsj.png" style="width:31rpx;height:39rpx"></image>
@@ -100,14 +236,14 @@
       <text>我的资料</text>
     </view>
   </view>
-</view>
+</view> 
 
 <view class="shop" wx:if="{{showshop}}">
   <view class="shop-title"><text>商铺</text></view>
   <view class="shop-item-box">
     <view class="shop-box" data-index="4" bindtap="goToPage">
       <view>
-        <image src="{{imgulr}}wd-spxx.png" style="width:31rpx;height:39rpx"></image>
+        <image src="../../images/user/hotelmsg.png" style="width:31rpx;height:39rpx"></image>
       </view>
       <text>商铺信息</text>
     </view>
@@ -131,62 +267,6 @@
     </view>
   </view>
 </view>
-
-<view class="shop">
-  <view class="shop-title"><text>酒店</text></view>
-  <view class="shop-item-box">
-    <view class="shop-box" data-index="8" bindtap="goToPage">
-      <view>
-        <image src="{{imgulr}}wd-jdxx.png" style="width:31rpx;height:39rpx"></image>
-      </view>
-      <text>酒店信息</text>
-    </view>
-    <view class="shop-box" data-index="9" bindtap="goToPage">
-      <view>
-        <image src="{{imgulr}}wd-jddd.png" style="width:37rpx;height:39rpx"></image>
-      </view>
-      <text>酒店订单</text>
-    </view>
-    <view class="shop-box" data-index="10" bindtap="goToPage">
-      <view>
-        <image src="{{imgulr}}wd-tjbj.png" style="width:39rpx;height:39rpx"></image>
-      </view>
-      <text>注册/编辑</text>
-    </view>
-    <view class="shop-box" data-index="bd" bindtap="goToPage">
-      <view>
-        <image src="{{imgulr}}wd-pslb.png" style="width:37rpx;height:39rpx"></image>
-      </view>
-      <text>绑定手机号码</text>
-    </view>
-  </view>
-</view>
-<!-- 
-<view class="shop">
-  <view class="shop-title"><text>泔水回收</text></view>
-  <view class="shop-item-box">
-    <view class="shop-box" data-index="11" bindtap="goToPage">
-     <view>
-      <image src="{{imgulr}}wd-jdrk.png" style="width:31rpx;height:39rpx"></image>
-     </view>
-      <text>酒店入口</text>
-    </view>
-    <view class="shop-box" data-index="12" bindtap="goToPage">
-    <view>
-        <image src="{{imgulr}}wd-ygrk.png" style="width:37rpx;height:39rpx"></image>
-    </view>
-      <text>员工入口</text>
-    </view>
-    <view class="shop-box" data-index="20" bindtap="goToPage">
-     <view>
-        <image src="{{imgulr}}wd-ygrk.png" style="width:37rpx;height:39rpx"></image>
-    </view>
-      <text>分享二维码</text>
-    </view>
-     <view class="shop-box">
-    </view>
-  </view>
-</view> -->
 
 <view class="shop">
   <view class="shop-title"><text>分享赚佣金</text></view>
@@ -233,4 +313,4 @@
 
     </view>
   </view>
-</view>
+</view> -->

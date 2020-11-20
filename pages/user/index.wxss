@@ -121,14 +121,13 @@ page{
 .shop-title{
   height: 64rpx;
   line-height: 64rpx;
-  border-bottom: 1rpx solid #EBEEF5;
+  /* border-bottom: 1rpx solid #EBEEF5; */
 }
 .shop-title text{
   margin-left: 77rpx;
-  font-size: 28rpx;
+  font-size: 32rpx;
   font-family: Source Han Sans CN;
   font-weight: 400;
-  line-height: 33px;
   color: #666666;
 }
 .shop-item-box{
@@ -149,6 +148,7 @@ page{
   align-items: center;
   justify-content: center;
   width: 25%;
+  position: relative;
 }
 .shop-box view{
     width: 50rpx;
@@ -162,4 +162,63 @@ page{
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: #666666;
+}
+
+.hotel-title{
+
+
+}
+.hotel-title text{
+  margin-left: 77rpx;
+  font-size: 32rpx !important;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #000000;
+
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+  
+    height: 64rpx;
+    line-height: 64rpx;
+    /* border-bottom: 1rpx solid #EBEEF5; */
+}
+.right-flex{
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.countflex{
+  background-color: #FF963F ;
+  border-radius: 50%;
+  position: absolute;
+  right: 40rpx;
+  display: block;
+  height: 32rpx;
+  width: 32rpx;
+  font-size: 24rpx !important;
+  top:0;
+  text-align: center;
+  line-height: 32rpx;
+  color: #fff !important;
+}
+.tool{
+  margin-top: 20rpx;
+  background: #FFFFFF;
+  opacity: 1;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.tool-box{
+  margin-top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+ 
+
+}
+.shopimg{
+  margin-top: 20rpx;
 }

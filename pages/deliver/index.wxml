@@ -135,7 +135,7 @@
 		</scroll-view>
 
 		<view class="listTitle2"  bindtap="print2"><text class="bj2">打印</text></view>
-			<!--	<view class="listTitle2"><text class="bj2gree">打印中，请稍等</text></view>-->
+		<!-- <view class="listTitle2"><text class="bj2gree">打印中，请稍等</text></view> -->
 
 	</view>
 </view>

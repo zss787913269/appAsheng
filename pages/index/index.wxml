@@ -111,11 +111,11 @@
 								</view>
 							</view>
 
-							<view class="bottomName" data-value="{{item.name}}" bindtap="toOldFood">
+							<!--		<view class="bottomName" data-value="{{item.name}}" bindtap="toOldFood">
 									<i class="fal fa-angle-double-right myri"></i>
 										<text class="r2">点击查看新菜推荐</text> 	
-
-							</view>
+							
+							</view>		-->
 						</view>
 					</block>
 				</view>

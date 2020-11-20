@@ -1,46 +1,5 @@
 <wxs src='./index.wxs' module='utils' />
 
-
-
-<view wx:if="{{false}}">
-
-
-  <view wx:for="{{shopOrderList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-
-    <view class="main3" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{5}}">
-
-      <view class="top_box">
-        <view class="more">查看详情</view>
-        <view class="mytitle">订单编号：{{item.order_no}}</view>
-        <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-        <view class="imgbox">
-          <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list"
-            src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
-
-          <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
-
-        </view>
-        <view class="all">
-          <text class="count">共{{item.details.length}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
-        </view>
-
-      </view>
-      <view class="bottom2">
-        <view class="hotel_name">酒店名：{{item.hotelname.h_name}}</view>
-        <view class="queren" bindtap="onekey" data-id="{{item.id}}"> 一键接单</view>
-
-      </view>
-    </view>
-
-
-
-  </view>
-</view>
-
-
-
-
-
 <view>
   <view class="mylist">
     <text bindtap="clickList" data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">商品列表</text>
@@ -88,7 +47,8 @@
           <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}">
             {{item.name}}</view>
           <view class="shopatt-left" wx:for="{{item.details}}" wx:key="index" wx:for-item="items">
-            <view class="mytitle2" bindtap="opendig" data-item="{{items}}">
+            <view class="mytitle2" >
+              <!--  <view class="mytitle2" bindtap="opendig" data-item="{{items}}">-->
               <view class="right-img">
 
                 <image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
@@ -105,8 +65,8 @@
               <!-- <view class="nPrice">总价：￥{{items.total_price}}</view> -->
 
               <view class="config">
-                <view class="queren"> <text>确认价格</text></view>
-                <!--   <view class="quxiao"><text>修改价格</text></view> -->
+                <view class="queren" bindtap="receipt" data-item="{{items.id}}"> <text>确认价格</text></view>
+                <view class="quxiao" bindtap="showConfirmPrice"  data-item="{{items}}" data-order='{{1}}'><text>修改价格</text></view>
 
               </view>
 
@@ -152,7 +112,7 @@
     <view class='right' wx:if="{{shopOrderList.length != 0}}">
       <view class="right-flex">
         <view class="goprint4" bindtap="showImg" wx:if="{{checkValue !=''}}">生成数据({{checkValue.length}})</view>
-        <view class="goprint" bindtap="printText" data-print="1"> 打印全部 </view>
+       <!-- <view class="goprint" bindtap="printText" data-print="1"> 打印全部 </view> -->
       </view>
       <scroll-view scroll-y="true" style='height:{{screenHeight}}px' scroll-with-animation="true"
         scroll-into-view="{{'inToview'+classfiySelect}}">
@@ -165,8 +125,8 @@
                 <view id="{{'inToview'+item.id}}" class="{{classfiySelect==item.id ? 'shopname_active':'shopname'}}"
                   bindtap="showImg" data-item="{{item}}">
                   <text>{{item.name}}</text></view>
-                <view class="pprint1" bindtap="printText" data-data="{{item}}"> 打印标签纸 </view>
-                <view class="pprint" bindtap="printText2" data-data="{{item}}"> 打印连续纸 </view>
+                  <!--    <view class="pprint1" bindtap="printText" data-data="{{item}}"> 打印标签纸 </view>
+                <view class="pprint" bindtap="printText2" data-data="{{item}}"> 打印连续纸 </view> -->
 
               </view>
 
@@ -191,9 +151,10 @@
                   <!-- <view class="nPrice">总价：￥{{items.total_price}}</view> -->
 
                   <view class="config">
-                    <view class="queren" bindtap="opendig" data-item="{{items}}" data-count="5"> <text>打印标签</text>
-                    </view>
-                    <view class="quxiao" bindtap="opendig" data-item="{{items}}" data-count="1"><text>修改价格</text></view>
+                    <!--   <view class="queren" bindtap="opendig" data-item="{{items}}" data-count="5"> <text>打印标签</text> 
+                    </view> 
+                    <view class="quxiao" bindtap="opendig" data-item="{{items}}" data-count="1"><text>修改价格</text></view> -->
+                     <view class="quxiao" bindtap="showConfirmPrice"  data-order='{{2}}' data-item="{{items}}" ><text>修改价格</text></view>
                   </view>
                 </view>
               </view>
@@ -221,9 +182,6 @@
               <image wx:if="{{list.images}}" src="https://second.chchgg.com{{list.images}}" class="img"></image>
               <image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
             </view>
-
-
-
 
           </view>
           <view class="all">
@@ -286,9 +244,6 @@
   </view>
 </view>
 
-
-
-
 <view class="zan-dialog {{ showDialog3 ? 'zan-dialog--show' : '' }}">
   <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
 
@@ -309,30 +264,22 @@
 
 
 
-        <view class="table-box">
-
-          <view class="table-title-box">
-            <text class="sname">商品名</text>
-            <text class="scount">数量</text>
-            <text class="sprice">单价</text>
-            <text class="allprice">总价</text>
-          </view>
-        </view>
+       
         <scroll-view scroll-y="true" style="height:940rpx;margin-bottom:10rpx;">
           <view class="table-box-item" wx:for="{{dataList}}" wx:key="id">
 
-            <view class="table-title">
-              <text class="sname shoptitle">{{index+1}}.{{item.title}}</text>
-              <text class="scount shoptitle">{{item.buy_number}}</text>
-              <text class="sprice shoptitle">{{item.original_price}}</text>
-              <text class="allprice shoptitle">{{item.original_price * item.buy_number}}</text>
+            <view class="zymflexa">
+              <text class="shoptitle">{{index+1}}.{{item.title}}</text>
+              <text class="shoptitle">{{item.buy_number}}</text>
+              <text class="shoptitle">规格：{{item.specvalue}}</text>
+           
+             
             </view>
-            <view class="table-bz">
-              <text class=" sname shoptitle">规格：{{item.specvalue}}</text>
-              <text class=" sname ka">备注：{{item.goods_mark == "" ? "无":item.goods_mark}}</text>
-            </view>
-
-
+            <view class="bortext">
+              <text class="shoptitle" wx:if="{{item.goods_mark}}">备注:{{item.goods_mark}}</text>
+             <!-- <view  class="zymflex2" ><text>备注:</text><input type="text"placeholder="请输入备注" /></view> -->
+              </view>
+              
           </view>
         </scroll-view>
 
@@ -348,59 +295,32 @@
   </view>
 </view>
 
-<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
-  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
+	<view class="myb">
+		<view class="mybbox">
+			<view class="dbox">
+				<view class="text-box"><text>商品名：</text></view>
+				<view class="text-title">{{popEditList.title}}</view>
+			</view>
+			<view class="dbox">
+				<view class="text-box"><text>价 格：</text></view>
+				<view class="input-box"> <input placeholder="{{popEditList.original_price}}"  bindinput="getEditPrice" type="digit" value=""
+						placeholder-class="placeholder"></input></view>
 
-  <view class="zan-dialog__mask" bindtap="toggleDialog" />
-  <view class="zan-dialog__container">
-
-    <scroll-view scroll-y="true" style="height:0rpx;margin-bottom:10rpx;">
-      <canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
-    </scroll-view>
-
-    <view>
-
-      <view class="ztmtext">
-
-        <view><text>商品名字：{{shopname}}</text></view>
-        <view><text>规格：{{shopgg}}</text></view>
-        <view><text>商品价格：</text><input type="text" value="{{original_price}}" bindinput="getoprice"
-            wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{original_price}}</text></view>
-        <view><text>数量：</text><input type="text" bindinput="getcount" value="{{shopcount}}"
-            wx:if="{{listindex == 1 || xxcount == 1}}" /><text wx:else>{{shopcount}}</text></view>
-      </view>
-      <view class="zymitem">
-        <view class="bj2 listTitle2" bindtap="print"><text>确认</text></view>
-        <view class="clol2" bindtap="toggleDialog"><text>关闭</text></view>
-      </view>
-
-    </view>
-
-  </view>
-</view>
-
-<view class="zan-dialog {{ showDialog2 ? 'zan-dialog--show' : '' }}">
-  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
-
-  <view class="zan-dialog__mask" bindtap="toggleDialog2" />
-  <view class="zan-dialog__container1">
-
-    <scroll-view scroll-y="true" style="height:650rpx;margin-bottom:10rpx;">
-      <canvas canvas-id="test1" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
-    </scroll-view>
-
-
-
-
-    <view class="zymitem1">
-      <view class="bj2 listTitle2" bindtap="print3" wx:if="{{biaoqian}}"><text>打印</text></view>
-      <view class="bj2 listTitle2" bindtap="print2" wx:if="{{lianxu}}"><text>打印</text></view>
-      <view class="clol2" bindtap="toggleDialog2"><text>关闭</text></view>
-    </view>
-
-
-
-
-
-  </view>
+			</view>
+			<view class="dbox">
+				<view class="text-box"><text>数 量：</text></view>
+				<view class="input-box"> <input placeholder="{{popEditList.buy_number}}"   type="digit" bindinput="getEditCount" value=""
+						placeholder-class="placeholder"></input></view>
+			</view>
+      <view class="tip">
+				<text>提示：修改价格是修改平台的价格，不是修改订单的价格</text>
+			</view>
+		</view>
+		<view class="ebox">
+			<text class="green" bindtap="hideBuyModal">取消</text>
+			<text class="yellow" bindtap="confirmEditPrice">确认</text>
+		</view>
+	</view>
 </view>

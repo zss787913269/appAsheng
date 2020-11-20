@@ -195,8 +195,9 @@ Page({
 
   // 去搜索页面
   goSearchPage(){
-      wx.navigateTo({
-        url: '/details/search/index?where=shop',
+   
+      wx.switchTab({
+        url: '/details/search/index',
       })
   },
   async getBanner() {

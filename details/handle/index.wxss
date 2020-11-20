@@ -969,6 +969,32 @@ page{
   color:#979797;
   opacity:1;
 }
+.zymflexa{
+  display: flex;
+  justify-content: space-evenly;
+  height: 40rpx;
+  
+}
+
+.zymflex2{
+  display: flex;
+  margin-left: 28rpx;
+  align-items: center;
+  margin-bottom: 5rpx;
+}
+.bortext{
+  border-bottom: 1rpx solid #ccc;
+}
+.zymflex2 text{
+  font-size:30rpx;
+  font-family:Source Han Sans CN;
+  font-weight:bold;
+  color:#979797;
+}
+.zymflex2 input{
+  border: 1rpx solid #ccc;
+  margin-left: 10rpx;
+}
 .bottom2{
   display: flex;
   justify-content: flex-end;
@@ -1797,8 +1823,11 @@ float: left;
   display: flex;
 }
 .shoptitle{
-  font-size: 22rpx;
+  font-size: 30rpx;
+  display: block;
 }
+
+
 .ka{
   margin-left: 40rpx;
   font-size: 22rpx;
@@ -1848,4 +1877,139 @@ float: left;
   color: #9F9F9F;
   opacity: 1;
   display: flex;
+}
+.text-box{
+    
+  
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #323232;
+  width: 128rpx;
+}
+.dbox input{
+  margin-left: 22rpx;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #AAAAAA;
+  width: 500rpx;
+ 
+}
+.input-box{
+  width: 565rpx;
+  height: 64rpx;
+  background: #FFFFFF;
+  border: 1rpx solid #707070;
+  opacity: 1;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+}
+.text-title{
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #707070;
+}
+.placeholder{
+  font-size: 24rpx;
+  color: #666666;
+  margin-left: 10rpx;
+}
+.color{
+  margin-top: 10rpx;
+  color: red;
+  font-size: 22rpx;
+}
+
+.ebox{
+  margin-top: 20rpx;
+  display: flex;
+  /* justify-content: space-evenly; */
+  height: 100rpx;
+  width: 750rpx;
+  /* border-top: 1px solid #F0F0F0; */
+  position: absolute;
+  bottom:0 ;
+}
+.green{
+  display: block;
+  width: 375rpx;
+  height: 100rpx;
+  background: #40B15D;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
+
+}
+.yellow{
+  display: block;
+  width: 375rpx;
+  height: 100rpx;
+  background: #FF963F;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.mybbox{
+    margin-left: 35rpx;
+    margin-top: 120rpx;
+}
+.dbox{
+  margin-top: 34rpx;
+  display: flex;
+  align-items: center;
+}
+.cover_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background:rgba(0,0,0,1);
+  opacity:0.57;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+.buy_box {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+  /* padding: 20rpx; */
+  overflow: hidden;
+  height: 688rpx;
+}
+.myb{
+  /* display: flex; */
+  align-items: center;
+  position: relative;
+  height: 568rpx;
+  /* background-color: #FF9000; */
+  /* justify-content: space-between; */
+}
+.tip{
+    
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF7502;
+  margin-top: 57rpx;
+  text-align: center;
 }

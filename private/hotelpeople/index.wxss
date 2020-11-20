@@ -416,6 +416,7 @@ page{
   overflow: hidden;
   width: 650rpx;
   height: 150rpx;
+  /* background-color: #f1f1f1; */
 }
 .flex-title{
   font-size: 20rpx;
@@ -509,7 +510,7 @@ page{
 }
 
 .quxiao{
-  width: 182rpx;
+  width: 200rpx;
   height: 58rpx;
   border: 1px solid #868686;
   opacity: 1;
@@ -524,8 +525,11 @@ page{
   margin-right: 20rpx;
 
 }
+.paidbox{
+  display: flex;
+}
 .queren{
-  width: 172rpx;
+  width: 200rpx;
   height: 58rpx;
   border: 1px solid #FF963F;
   opacity: 1;

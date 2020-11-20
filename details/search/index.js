@@ -34,7 +34,9 @@ Page({
     showbtn:false,
     title:"",
     spec:"",
-    num2:""
+    num2:"",
+    searchTitle:[],
+    showTitle:true,
   },
 
   /**
@@ -663,19 +665,21 @@ Page({
   searchPage(e){
     var that = this
      that.setData({
-       value:e.currentTarget.dataset.text
+       value:e.currentTarget.dataset.text,
+       showTitle:false
      })
      //console.log(that.data.value)
-    that.toSearchResult()
+    that.searchResult()
   },
   int(e){   //获取用户输入的搜索值
     var that = this
     that.setData({
-      value:e.detail.value
+      value:e.detail.value,
+      showTitle:true
     })
 
 
-    that.searchResult()
+    that.searchTitleList()
 
     if(e.detail.value == ""){
       this.setData({
@@ -695,56 +699,76 @@ Page({
   },
   async searchResult(){   
     let that = this
-
-
     if (app.globalData.token == '') {
       wx.navigateTo({
         url: "/component/zation/index"
       })
       return 
     }
-
     let parmes = {
       keywords:that.data.value,
     }
 
-
-    //console.log(parmes)
     if(parmes.keywords != ''){
     
       let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
-     
-   
-
- 
       if(res.data.code == 0){
-    
         if(res.data.data.length != 0){
           this.setData({
-            searchList:res.data.data, showbtn:false,showsearch:!this.data.showsearch
+            searchList:res.data.data, showbtn:false,showsearch:!this.data.showsearch,
+            showTitle:false
           })
         }else{
           this.setData({
             showbtn:true,
+            showTitle:false,
             searchList:[],
             showsearch:!this.data.showsearch
           })
         }
       }else{
-      
         wx.showToast({
           title: res.data.msg,
           icon:"none"
         })
       }
-  
-  
     }
-   
 
-     
-    //console.log("搜索结果",res.data)
 
+  },
+  async searchTitleList(){
+    let that = this
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+      return 
+    }
+    let parmes = {
+      keywords:that.data.value,
+    }
+    
+    let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
+
+    console.log(res.data.data)
+
+    let title = []
+
+      for(let i of res.data.data){
+        title.push(i.title)
+      }
+      if(title.length != 0){
+        that.setData({
+          showbtn:false,
+          searchList:[]
+        })
+      }
+
+      this.setData({
+        searchTitle:title
+      })
+      console.log(title)
+    
   },
   qc(){
     this.setData({

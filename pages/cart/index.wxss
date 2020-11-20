@@ -392,6 +392,9 @@ transform: translate(-50%, -50%) scale(1);
   justify-content: flex-end;
   
 }
+.paidbox{
+  display: flex;
+}
 .num{
   /* width: 40rpx; */
   text-align: center;
@@ -961,7 +964,7 @@ transform: translate(-50%, -50%) scale(1);
   position: relative;
 }
 .quxiao{
-  width: 152rpx;
+  width: 200rpx;
   height: 48rpx;
   border: 1px solid #868686;
   opacity: 1;
@@ -979,7 +982,7 @@ transform: translate(-50%, -50%) scale(1);
 
 .queren{
   margin-top: 18rpx;
-  width: 152rpx;
+  width: 200rpx;
   height: 48rpx;
   border: 1px solid #FF963F;
   opacity: 1;
@@ -993,6 +996,15 @@ transform: translate(-50%, -50%) scale(1);
   justify-content: center;
   margin-right: 20rpx;
 
+}
+.myab{
+  position: absolute;
+  left: 14rpx;
+  top: 11rpx;
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #6B6B6B;
 }
 .sbox{
   border-top: 1rpx solid #EBEEF5;

@@ -1,3 +1,4 @@
+<wxs src="./index.wxs" module="utils" />
 <view class="titlebox">
 	<view class="addinfo">
 		<view class="addtop">
@@ -72,12 +73,15 @@
 							<!-- <view class="top-title">{{items.title}}</view> -->
 							<view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
 							<view class="mytext2">{{items.specvalue}}</view>
-							<view class="mytext2">单价：{{items.price}}</view>
+							<view class="mytext2" wx:if="{{!showdy}}">单价：{{items.price}}</view>
+							<view class="mytext2" wx:else>单价：{{items.original_price}}</view>
 							<view class="mynumber">数量：{{items.buy_number}}</view>
 						</view>
 
-						<view class="nPrice">总价:￥{{items.total_price}}</view>
-
+				  		<view class="nPrice" wx:if="{{!showdy}}">总价:￥{{items.total_price}}</view>
+							<view class="nPrice" wx:else>总价:￥{{utils.getPrice(items.original_price,items.buy_number)}}</view>
+							
+						<!-- orderlist.original_price,orderlist.buy_number  	 <view class="nPrice" wx:if="{{!showdy}}">总价:￥{{items.total_price}}</view> -->
 					</view>
 
 
@@ -146,7 +150,9 @@
 
 	<view class="bo-bo">
 		<view class="heji2">合计</view>
-		<view class="zymbox"><text class="zym1">￥</text><text class="zym2">{{orderlist.total_price}}</text></view>
+		<view class="zymbox" wx:if="{{!showdy}}"><text class="zym1"  wx:if="{{!showdy}}">￥</text><text class="zym2">{{orderlist.total_price}}</text></view> 
+			<view class="zymbox" wx:else><text class="zym1">￥</text><text class="zym2">{{zymallshoppirc}}</text></view> 
+
 	</view>
 
 </view>

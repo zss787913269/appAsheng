@@ -1,13 +1,13 @@
 {
   "pages": [ 
     "pages/index/index",
+    "pages/user/index",
+
     "details/search/index",
- 
     "details/appointment/index",
-   
     "details/preAbout/index",
     "pages/find/index",
-    "pages/user/index",
+ 
     "details/information/index",
     "private/myFood/index",
     "details/peinformation/index",
@@ -37,7 +37,6 @@
     "private/hotelpeople/index", 
     "person/recharge/index",
     "person/cartdetal/index",
-  
     "pages/quickly/quickly",
     "details/becomeShop/index",
     "details/addshop/index",
@@ -72,20 +71,12 @@
     "details/comment/index",
     "details/goshop/index",
     "details/supplier/index",
- 
     "details/payment/index",
-    
- 
-   
     "details/reviews/index",
-   
     "details/writeoff/index",
-
     "private/staff/index",
     "private/Reply/index",
     "private/placeOrder/index",
-
-   
     "component/zation/index",
     "private/superman/index"
   
@@ -108,6 +99,7 @@
         "iconPath": "images/tabar/sy-sy.png",
         "selectedIconPath": "images/tabar/sy-sy1.png"
       },
+     
       {
         "pagePath": "pages/cart/index",
         "text": "购物车",
@@ -115,8 +107,14 @@
         "selectedIconPath": "images/tabar/car1.png"
       },
       {
-        "pagePath": "pages/find/index",
-        "text": "发现",
+        "pagePath": "details/search/index",
+        "text": "搜索",
+        "iconPath": "images/tabar/tabsear.png",
+        "selectedIconPath": "images/tabar/s2.png"
+      },
+      {
+        "pagePath":"pages/find/index",
+        "text": "私厨",
         "iconPath": "images/tabar/sy-fx1.png",
         "selectedIconPath": "images/tabar/sy-fx2.png"
       },

@@ -3,61 +3,26 @@
 		<!-- <view class=" {{currentTab==1?'active':'swiper-tab-item'}}"  data-current="1" bindtap="clickTab">未确认
 			<view wx:if="{{ wqr.length!==0}}" class="total">{{wqr.length}}</view>
 		</view> -->
-		<view class=" {{currentTab==1?'active':'swiper-tab-item'}}" data-current="1" bindtap="clickTab">未付款
-			<view wx:if="{{  wfk.length!==0}}" class="total">{{wfk.length}}</view>
+		<view class=" {{currentTab==2?'active':'swiper-tab-item'}}" data-current="2" bindtap="clickTab">全部
+			<view wx:if="{{ allList.length!==0}}" class="total">{{allList.length}}</view>
 		</view>
-		<view class=" {{currentTab==2?'active':'swiper-tab-item'}}" data-current="2" bindtap="clickTab">已付款
-			<view wx:if="{{ yfk.length!==0}}" class="total">{{yfk.length}}</view>
+		<view class=" {{currentTab==1?'active':'swiper-tab-item'}}" data-current="1" bindtap="clickTab">待支付
+			<view wx:if="{{  unpaid.length!==0}}" class="total">{{unpaid.length}}</view>
+		</view>
+		<view class=" {{currentTab==5?'active':'swiper-tab-item'}}" data-current="5" bindtap="clickTab">待发货
+			<view wx:if="{{  unsend.length!==0}}" class="total">{{unsend.length}}</view>
 		</view>
 		<view class=" {{currentTab==3?'active':'swiper-tab-item'}}" data-current="3" bindtap="clickTab">待验收
-			<view wx:if="{{ dys.length!==0}}" class="total">{{dys.length}}</view>
+			<view wx:if="{{ needcheck.length!==0}}" class="total">{{needcheck.length}}</view>
 		</view>
 		<view class=" {{currentTab==4?'active':'swiper-tab-item'}}" data-current="4" bindtap="clickTab">已完成
-			<view wx:if="{{  ywc.length!==0}}" class="total">{{ywc.length}}</view>
+			<view wx:if="{{  completed.length!==0}}" class="total">{{completed.length}}</view>
 		</view>
 	</view>
-
 </view>
-
-<!-- <view wx:if="{{currentTab==1}}">
-
-
-	<view wx:for="{{unconfirmed}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-
-		<view class="main">
-
-			<view class="top_box">
-			<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
-				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
-				<view class="imgbox">
-					<view  wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
-						<image  wx:if="{{list.images}}" src="{{list.images}}"  class="img"></image>
-						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
-						<text class="flex-title">{{list.title}}</text>
-				</view>
-				</view>
-				<view class="all">
-					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
-				</view>
-
-			</view>
-
-			<view class="bottom">
-				<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view bindtap="cancelOrder" class="quxiao" data-id="{{item.id}}">取消订单</view>
-				<view bindtap="confirmOrder" class="queren" data-id="{{item.id}}">确认订单</view>
-			</view>
-		</view>
-
-
-
-	</view>
-
-</view> -->
 <view wx:if="{{currentTab==1}}">
 
-	<view wx:for="{{wfk}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+	<view wx:for="{{unpaid}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 		<view class="main">
 
@@ -79,7 +44,8 @@
 			</view>
 			<view class="bottom">
 				<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="queren"  bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
+				<view class="queren" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}"
+					data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
 			</view>
 		</view>
 
@@ -89,13 +55,9 @@
 
 </view>
 <view wx:if="{{currentTab==2}}">
-
-
-
-	<view wx:for="{{paid}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+	<view wx:for="{{allList}}" wx:key="index" wx:for-index="idx">
 
 		<view class="main">
-
 			<view class="top_box">
 				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
 				<view class="mytitle">订单编号：{{item.order_no}}</view>
@@ -114,20 +76,32 @@
 			</view>
 			<view class="bottom">
 				<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="queren">已付款</view>
+				<view class="paidbox" wx:if="{{item.status_name != '已取消'}}">
+					<view class="quxiao" wx:if="{{item.shopStatus != '已接单'}}" bindtap="cancelOrder" data-id="{{item.id}}">取消订单
+					</view>
+					<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
+						data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
+						data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+					<view class="queren" wx:elif="{{ item.status_name == '待收货'  }}" bindtap="receivingGoods"
+						data-id="{{item.id}}">{{item.pay_status_name}}({{item.status_name}})</view>
+					<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
+					<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买</view>
+				</view>
+				<view class="paidbox" wx:else>
+					<view class="quxiao">{{item.status_name}}</view>
+					<view class="queren" bindtap="buyAgain" data-item="{{item}}">再次购买</view>
+				</view>
+
 			</view>
 		</view>
 
 
 
 	</view>
-
-
-
 </view>
 <view wx:if="{{currentTab==3}}">
 
-	<view wx:for="{{unaccepted}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+	<view wx:for="{{needcheck}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 		<view class="main">
 
@@ -150,12 +124,12 @@
 			</view>
 			<view class="bottom">
 				<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="queren" bindtap="receivingGoods" data-id="{{item.id}}">确认收货</view>
+
+				<view class="{{item.pay_status_name == '已支付' ? 'quxiao' : 'queren'}}" bindtap="receivingGoods"
+					data-id="{{item.id}}">{{item.pay_status_name}}({{item.status_name}})</view>
+
 			</view>
 		</view>
-
-
-
 	</view>
 
 </view>
@@ -179,17 +153,49 @@
 				<view class="all">
 					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
 				</view>
+ 
+			</view>
+			<view class="bottom">
+				<view class="myab">下单员：{{item.user.nickname}}</view>
+				<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
+					data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
+					data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+				<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
+				<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买</view>
+			</view>
+		</view>
+
+
+
+	</view>
+
+
+</view>
+<view wx:if="{{currentTab==5}}">
+
+	<view wx:for="{{unsend}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+
+		<view class="main">
+
+			<view class="top_box">
+				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
+				<view class="imgbox">
+					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
+						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
+						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						<text class="flex-title">{{list.title}}</text>
+					</view>
+				</view>
+				<view class="all">
+					<text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.total_price}}</text>
+				</view>
 
 			</view>
 			<view class="bottom">
 				<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="queren" wx:if="{{ hotel_role != 1 && item.pay_status == 0  }}" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
-
-				<view wx:else>
-					<view class="quxiao" wx:if="{{item.pay_status == 0}}">已完成(未支付)</view>
-					<view class="quxiao" wx:else>已完成</view>
-				</view>
-
+				<view class="quxiao">{{item.pay_status_name}}({{item.status_name}})</view>
 			</view>
 		</view>
 

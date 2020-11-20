@@ -1,28 +1,10 @@
 <wxs src='./index.wxs' module="utils"></wxs>
 
 <view>
-	<!-- <view class="swiper-tab">
-		<view class="{{currentTab==1?'hotel_active':'hotel'}}" data-current="1" bindtap="clickList">
-			<text>购物列表</text>
-		</view>
-		<view class="{{currentTab==2?'hotel_active':'hotel'}}" data-current="2" bindtap="clickList">
-			<text>今日订单</text>
-			<text class="hotelcount" wx:if="{{ jrdd.length>0}}">{{jrdd.length}}</text>
-		</view>
-		<view class="{{currentTab==3?'hotel_active':'hotel'}}" data-current="3" bindtap="clickList">
-			<text>已完成订单</text>
-			<text class="hotelcount" wx:if="{{ completed.length>0}}">{{completed.length}}</text>
-		</view>
-	</view> -->
-	<view >
-		<view class="mylist">
-			<!-- <view class="center-box">
-				<text  bindtap="clickindex"  data-index="1" class="shoplist" class="{{listindex == 1 ? 'shoplist' : ''}}">购物车清单({{hotelCount == 0 ? 0 :hotelCount}})</text>
 
-			</view>
-			<view class="center-box">
-				<text  bindtap="clickindex"  data-index="2"  class="{{listindex == 2 ? 'shoplist' : ''}}">常买清单({{commonList.length == 0 ? 0 : commonList.length}})</text>
-			</view> -->
+	<view>
+		<view class="mylist">
+
 			<view bindtap="clickindex" data-index="1" class="{{listindex == 1 ? 'list-box_active' : 'list-box'}}">
 				<text>购物车清单({{hotelCount == 0 ? 0 :hotelCount}})</text></view>
 			<view bindtap="clickindex" data-index="2" class="{{listindex == 2 ? 'list-box_active' : 'list-box'}}">
@@ -73,29 +55,30 @@
 										</view>
 
 										<text class="mypri"><text class="dj">单价:</text><text class="djprice">￥{{items.price}} </text></text>
-										<text class="mypri"
-											wx:if="{{utils.tomyfix(items.price,items.stock) != items.price}}"><text class="zheji">合计:</text><text class="hejiprice">￥{{utils.tomyfix(items.price,items.stock)}}</text></text>
+										<text class="mypri" wx:if="{{utils.tomyfix(items.price,items.stock) != items.price}}"><text
+												class="zheji">合计:</text><text
+												class="hejiprice">￥{{utils.tomyfix(items.price,items.stock)}}</text></text>
 										<text class="mytext3" wx:if="{{items.goods_mark}}">备注：{{items.goods_mark}}</text>
 
 										<view class="bujin">
-										<view data-index="{{index}}" data-item="{{items.id}}" bindtap='sub'>
-											<image class="marri" src="../../images/nav/gwc-jian.png"></image>
-										</view>
-										<view class="num">
-											<text>{{utils.toNum(items.stock)}}</text>
-										</view>
-										<view data-index="{{index}}" data-item="{{items.id}}" bindtap='add'>
-											<image class="marle" src="../../images/nav/gwc-jia.png"></image>
+											<view data-index="{{index}}" data-item="{{items.id}}" bindtap='sub'>
+												<image class="marri" src="../../images/nav/gwc-jian.png"></image>
+											</view>
+											<view class="num">
+												<text>{{utils.toNum(items.stock)}}</text>
+											</view>
+											<view data-index="{{index}}" data-item="{{items.id}}" bindtap='add'>
+												<image class="marle" src="../../images/nav/gwc-jia.png"></image>
+											</view>
 										</view>
 									</view>
-									</view>
-									
-						   	<view class="red" data-index="{{items.id}}" bindtap='remove'>
+
+									<view class="red" data-index="{{items.id}}" bindtap='remove'>
 										<image class="delimg" src="../../images/index/gwc-ljt@2x.png"></image>
 									</view>
-												 
-						
-									
+
+
+
 								</view>
 							</view>
 						</checkbox-group>
@@ -169,28 +152,29 @@
 
 		<view wx:if="{{listindex == 3}}">
 			<view class="swiper-tab">
-				<view class="{{currentTab1==1?'hotel_active':'hotel'}}" data-current="1" bindtap="clickList">
-					<text>未付款</text>
-					<text class="hotelcount" wx:if="{{ wfk.length>0}}">{{wfk.length}}</text>
-				</view>
 				<view class="{{currentTab1==2?'hotel_active':'hotel'}}" data-current="2" bindtap="clickList">
-					<text>已付款</text>
-					<text class="hotelcount" wx:if="{{ yfk.length>0}}">{{yfk.length}}</text>
+					<text>全部</text>
+					<text class="hotelcount" wx:if="{{ allList.length>0}}">{{allList.length}}</text>
+				</view>
+				<view class="{{currentTab1==1?'hotel_active':'hotel'}}" data-current="1" bindtap="clickList">
+					<text>待支付</text>
+					<text class="hotelcount" wx:if="{{ unpaid.length>0}}">{{unpaid.length}}</text>
+				</view>
+				<view class="{{currentTab1==5?'hotel_active':'hotel'}}" data-current="5" bindtap="clickList">
+					<text>待发货</text>
+					<text class="hotelcount" wx:if="{{ unsend.length>0}}">{{unsend.length}}</text>
 				</view>
 				<view class="{{currentTab1==3?'hotel_active':'hotel'}}" data-current="3" bindtap="clickList">
 					<text>待验收</text>
-					<text class="hotelcount" wx:if="{{ dys.length>0}}">{{dys.length}}</text>
+					<text class="hotelcount" wx:if="{{ needcheck.length>0}}">{{needcheck.length}}</text>
 				</view>
 				<view class="{{currentTab1==4?'hotel_active':'hotel'}}" data-current="4" bindtap="clickList">
 					<text>已完成</text>
-					<text class="hotelcount" wx:if="{{ ywc.length>0}}">{{ywc.length}}</text>
+					<text class="hotelcount" wx:if="{{ completed.length>0}}">{{completed.length}}</text>
 				</view>
 			</view>
-
-
-
 			<view wx:if="{{currentTab1 == 1}}">
-				<view wx:for="{{wfk}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+				<view wx:for="{{unpaid}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 					<view class="maina">
 
@@ -200,7 +184,7 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
@@ -221,7 +205,7 @@
 				</view>
 			</view>
 			<view wx:if="{{currentTab1 == 2}}">
-				<view wx:for="{{yfk}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+				<view wx:for="{{allList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 					<view class="maina">
 
@@ -231,27 +215,44 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+								<text class="counta">共{{item.detail.length}}件商品，合计：</text><text
 									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
 						<view class="bottoma">
-							<view class="myaba">下单员：{{item.user.nickname}}</view>
-							<view class="queren">已付款</view>
+							<view class="myab">{{idx + 1}}---下单员：{{item.user.nickname}}</view>
+							<view class="paidbox" wx:if="{{item.status_name != '已取消' }}">
+
+								<view class="quxiao" wx:if="{{item.shopStatus != '已接单' }}" bindtap="cancelOrder" data-id="{{item.id}}">
+									取消订单
+								</view>
+								<view class="queren" wx:if="{{ item.pay_status_name == '待支付'   }}" bindtap="payment"
+									data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
+									data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+								<view class="queren" wx:elif="{{ item.status_name == '待收货'  }}" bindtap="receivingGoods"
+									data-id="{{item.id}}">{{item.pay_status_name}}({{item.status_name}})</view>
+								<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
+								<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买
+								</view>
+							</view>
+							<view class="paidbox" wx:else>
+								<view class="quxiao">{{item.status_name}}</view>
+								<view class="queren" bindtap="buyAgain" data-item="{{item}}">再次购买</view>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 			<view wx:if="{{currentTab1 == 3}}">
-				<view wx:for="{{dys}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+				<view wx:for="{{needcheck}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 					<view class="maina">
 
@@ -261,14 +262,14 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+								<text class="counta">共{{item.detail.length}}件商品，合计：</text><text
 									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
@@ -281,7 +282,7 @@
 				</view>
 			</view>
 			<view wx:if="{{currentTab1 == 4}}">
-				<view wx:for="{{ywc}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+				<view wx:for="{{completed}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 					<view class="maina">
 
@@ -291,26 +292,61 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="http://second.chchgg.com{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
 							</view>
 							<view class="alla">
-								<text class="counta">共{{item.items_count}}件商品，合计：</text><text
+								<text class="counta">共{{item.detail.length}}件商品，合计：</text><text
 									class="pricea">￥{{item.total_price}}</text>
 							</view>
 
 						</view>
 						<view class="bottoma">
 							<view class="myaba">下单员：{{item.user.nickname}}</view>
-							<view class="queren">已完成</view>
+							<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
+								data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
+								data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+							<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
+							<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买
+							</view>
+						</view>
+
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{currentTab1 == 5}}">
+				<view wx:for="{{unsend}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+
+					<view class="maina">
+
+						<view class="top_boxa">
+							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
+							<view class="mytitlea">订单编号：{{item.order_no}}</view>
+
+							<view class="imgboxa">
+								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
+									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
+									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
+									</image>
+									<text class="flex-titlea">{{list.title}}</text>
+								</view>
+							</view>
+							<view class="alla">
+								<text class="counta">共{{item.detail.length}}件商品，合计：</text><text
+									class="pricea">￥{{item.total_price}}</text>
+							</view>
+
+						</view>
+						<view class="bottoma">
+							<view class="myab">{{idx + 1}}---下单员：{{item.user.nickname}}--{{item.status}}</view>
+							<view class="quxiao">{{item.pay_status_name}}({{item.status_name}})</view>
 						</view>
 					</view>
 				</view>
 			</view>
-
 		</view>
 	</view>
 
@@ -318,8 +354,8 @@
 
 
 
-	<view class="bottom" wx:if="{{currentTab == 1 && listindex != 2 && listindex != 3}}">
-
+	<!-- <view class="bottom" wx:if="{{currentTab == 1 && listindex != 2 && listindex != 3}}"> -->
+	<view class="bottom" wx:if="{{listindex == 1}}">
 		<view class="myposi">
 			<view><text class="heji1">合计</text><text class="qian">￥</text><text class="p1"> {{totalPrice}}</text> </view>
 			<view class="peisong"><text class="peisongText">配送费</text><text class="peisongM">￥0.00</text></view>
@@ -334,7 +370,7 @@
 
 </view>
 
-<view class="bottom" wx:if="{{ currentTab == 1 && listindex == 2}}">
+<view class="bottom" wx:if="{{listindex == 2}}">
 	<view class="bbox"></view>
 	<view class="btno2">
 		<view class="but2" bindtap='cartAdd'> 加入到购物车（{{carlen}}）</view>

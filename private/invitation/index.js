@@ -23,8 +23,9 @@ Page({
    */
   onReady: function () {
     var that = this
+   let code =  wx.getStorageSync('QRcode')
     that.setData({
-        code:wx.getStorageSync('QRcode')
+        code:`https://second.chchgg.com/${code}`
     })
     console.log(that.data.code)
   },

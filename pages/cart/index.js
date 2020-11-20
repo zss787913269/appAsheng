@@ -6,6 +6,13 @@ const app = getApp()
 
 Page({
   data: {
+    hotelstatus:"",
+    allList:[],//全部
+    unpaid:[],//未支付
+    needcheck:[],//待验收
+    completed:[],//已完成
+    unsend:[],//待发货
+    shopStatus:true,
     showModalStatus: false, //遮罩的显示与隐藏
     completed: [], //已经完成
     classfiySelect: "",
@@ -19,8 +26,7 @@ Page({
     checkedAll2: true,
     totalPrice: 0,
     totelid: [],
-    currentTab: 1,
-    currentTab1:1,
+    currentTab1:2,
     type: 1,
     hisList: [],
     hisTotalPrice: '',
@@ -57,7 +63,7 @@ Page({
 
   onLoad: function (options) {
 
-    console.log("options",options)
+    //console.log("options",options)
 
     this.getHotel()
     this.getTopCount()
@@ -65,6 +71,7 @@ Page({
     this.getHotelOrderDetail()
     this.getCommon()
     this.getOK()
+
 
       if(options.page == 2){
         this.setData({
@@ -75,21 +82,123 @@ Page({
   },
   onShow: function () {
     this.getHotel()
-    // console.log("ids",this.data.ids)
-    // console.log("leftList",this.data.leftList)
-
     this.getCount()
     this.getTopCount()
-    this.getHotelOrderDetail()
+    this.getHoteOrder()
 
-    console.log(this.data.ids,"ids")
-
-   
 
   },
+  async cancelOrder(e) { //取消订单
+    var that = this
+    let res = await ajax({
+      url: 'api/order/cancel',
+      method: 'POST',
+      data: {
+        id: e.currentTarget.dataset.id
+      }
+    })
+
+    if (res.data.code == 0) {
+      wx.showToast({
+        title: '取消成功',
+        icon: 'none',
+        duration: 3000
+      })
+      that.getHoteOrder()
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  buyAgain(e){
+    let item = e.currentTarget.dataset.item,that = this
+    console.log(item)
+  
+      for(let j of item.detail){
+        let params = {
+          is_purchase: 1,
+          goods_id: j.goods_id, //商品id
+          stock: j.buy_number, //商品数量  
+          // 商品规格
+          spec: j.spec,
+          goods_mark: ""
+        }
+        console.log("参数",params)
+        that.cartSend(params)
+      }
+    
+  },
+  async getHoteOrder(num) { //获取酒店订单列表
+
+    let that = this
+    
+    let res = await ajax({
+      url: 'api/order/TodayHotelOrderGoods',
+      method: 'POST',
+    })
+
+
+     if(res.data.code != 0){
+      wx.showToast({
+        title: '还未注册酒店，请先注册',
+        icon:"none"
+      })
+     }else{
+      let allList = res.data.data,unpaid = [],completed = [],needcheck = [],unsend = []
+      for(let i of allList){
+        if(i.status_name == '待确认'){
+        
+              for(let j of i.detail){ if(j.is_ok == 1){i.shopStatus = "已接单" } }
+        }
+
+
+        if(i.status == 3 ){
+          if(i.status_name == '待收货'){
+            i.shopStatus = "已接单"
+            needcheck.push(i)
+          }
+           
+          }
+  
+          if(i.status == 2){
+            if(i.status_name == '待发货'){
+              i.shopStatus = "已接单"
+              unsend.push(i)
+            }
+          }
+          if(i.status == 4){
+            if(i.status_name == '已完成'){
+              i.shopStatus = "已接单"
+              completed.push(i)
+            }
+           
+          }
+
+        if(i.status == 0 || i.status == 1 || i.pay_status_name == '待支付'){
+          if(i.status_name == '已取消'){
+            for(let j of i.detail){ if(j.is_ok == 1){i.shopStatus = "已接单" } }
+          }else{
+            unpaid.push(i)
+          }
+        }
+      }
+      console.log("全部商品",allList)
+        this.setData({ allList,unpaid,needcheck,completed,unsend})
+    
+     }
+      
+
+      
+
+   
+  },
+
   detalis(e) { //跳转去详情页
 
-    console.log(e.currentTarget.dataset.shouhuo)
+    //console.log(e.currentTarget.dataset.shouhuo)
 
     wx.navigateTo({
       url: `/details/detail/index?id=${e.currentTarget.dataset.id}&enter=${e.currentTarget.dataset.shouhuo}`,
@@ -111,7 +220,7 @@ Page({
       data: params
     })
 
-    console.log(res)
+    //console.log(res)
 
     if (res.data.code == 0) {
       wx.showToast({
@@ -133,7 +242,7 @@ Page({
 
     let items = e.currentTarget.dataset
 
-    console.log(items)
+    //console.log(items)
     if (items.docat == 1) {
       wx.showToast({
         title: "此订单中有商品未划价，等待划价",
@@ -183,7 +292,7 @@ Page({
   },
     // 遮罩层显示
   showModal() {
-    // //////console.log("点击了订单")
+    // ////////console.log("点击了订单")
 
     if (app.globalData.token == '') {
       wx.navigateTo({
@@ -191,6 +300,15 @@ Page({
       })
       return 
     }
+
+    if(this.data.hotel == false){
+      wx.showToast({
+        title: '还未注册酒店，请先注册',
+        icon: "none"
+      })
+      return 
+    }
+
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "ease",
@@ -230,7 +348,7 @@ Page({
           completed.push(i)
         }
       }
-      console.log("已完成", completed)
+      //console.log("已完成", completed)
 
       this.setData({
         completed
@@ -245,6 +363,8 @@ Page({
       url: '/api/quickorder/getHotel',
       method: 'get'
     })
+
+    console.log(res.data)
     if (res.data.data == null) {
       wx.showToast({
         title: '还未注册酒店，请先注册',
@@ -262,8 +382,7 @@ Page({
 
 
   },
-  async getCommon() {
-
+  async getCommon() {//常买清单
     let that = this
     let res = await ajax({
       url: "api/quickorder/AllOrderGoodsList",
@@ -272,12 +391,12 @@ Page({
     })
     let commomIds = []
     let list = res.data.data
-    console.log("常用清单", res.data.data)
+    //console.log("常用清单", res.data.data)
 
 
     if (res.data.code == 0) {
       for (let i of list) {
-        // console.log(i)
+        // //console.log(i)
         for (let j of i.goods) {
           j.isSelected = true,
             commomIds.push(j.id)
@@ -302,7 +421,7 @@ Page({
   async config(e) {
     let that = this
 
-    console.log(this.data.index)
+    //console.log(this.data.index)
 
     let index = this.data.index
     let number = this.data.countNumber,
@@ -319,7 +438,7 @@ Page({
         type: 1
       }
 
-      console.log("params", params)
+      //console.log("params", params)
 
       wx.showModal({
         title: '提示',
@@ -331,7 +450,7 @@ Page({
               method: 'POST',
               data: params
             })
-            console.log("申请退货", res.data)
+            //console.log("申请退货", res.data)
 
             if (res.data.code == 0) {
               wx.showToast({
@@ -346,7 +465,7 @@ Page({
               that.getHotelOrderDetail()
             }
           } else if (res.cancel) {
-            console.log('用户点击取消')
+            //console.log('用户点击取消')
           }
         }
       })
@@ -367,7 +486,7 @@ Page({
                 number
               }
             })
-            console.log("申请退货", res.data)
+            //console.log("申请退货", res.data)
 
             if (res.data.code == 0) {
               wx.showToast({
@@ -382,7 +501,7 @@ Page({
               that.getHotelOrderDetail()
             }
           } else if (res.cancel) {
-            console.log('用户点击取消')
+            //console.log('用户点击取消')
           }
         }
       })
@@ -434,13 +553,13 @@ Page({
     this.setData({
       listindex: index
     })
-
-    if (index == 2) {
+    if(index == 1){
+      this.getCount()
+    }else if (index == 2) {
       this.getCommon()
     }else if(index ==3){
-      this.getHotelOrderDetail()
+      this.getHoteOrder()
     }
-
 
   },
   inputname(e) {
@@ -492,7 +611,7 @@ Page({
       url: "api/test/sendwxappinfo",
       method: "post"
     })
-    console.log("小程序消息", res)
+    //console.log("小程序消息", res)
   },
   async getHotelOrderDetail(id) {
 
@@ -504,7 +623,7 @@ Page({
       method: 'POST',
     })
 
-    console.log("getHotelOrderDetail1", res.data)
+    //console.log("getHotelOrderDetail1", res.data)
 
     let hotelOrderDetail = res.data.data
 
@@ -512,11 +631,6 @@ Page({
     yfk = [],
     dys = [],
     ywc = []
-
-
-
-
-
   for (let i of hotelOrderDetail) {
     if (i.juese == 1) {
       if (userid == i.user_id) {
@@ -532,7 +646,7 @@ Page({
       }
     } else {
 
-      // console.log("22222222222",i)
+      // //console.log("22222222222",i)
       if (i.status == 1 || i.status == 0) {
         wfk.push(i)
       } else if (i.status == 2) {
@@ -546,10 +660,6 @@ Page({
     }
   }
 
-  // console.log("ywc", ywc)
-  // console.log("wfk", wfk)
-  // console.log("yfk", yfk)
-  // console.log("dys", dys)
 
 
     this.setData({
@@ -561,6 +671,8 @@ Page({
   async queren() {
 
     let that = this
+
+      
 
     if (that.data.num2 == "") {
       wx.showToast({
@@ -642,16 +754,7 @@ Page({
             url: "api/user/updatewxappsendmsgst",
             method: "post"
           })
-
-          
-
-        } else {
-          // wx.showModal({
-          //   title: '温馨提示',
-          //   content: '您已拒绝授权，将无法在微信中收到下单通知！',
-          //   showCancel: false,
-          // })
-        }
+        } 
 
       }
     })
@@ -659,34 +762,10 @@ Page({
   //点击切换列表
   clickList(e) {
     let index = e.currentTarget.dataset.current
-    // console.log(index)
-
-
     this.setData({
       currentTab1: index
     })
-
-    this.getHotelOrderDetail()
-
-    // if (!this.data.hotel) {
-    //   wx.showToast({
-    //     title: '还未注册酒店,请先注册',
-    //     icon: "none"
-    //   })
-    // } else {
-    //   if (index == 1) {
-    //     this.getCount()
-    //   } else if (index == 2) {
-    //     this.getHotelOrderDetail()
-    //   } else if (index == 3) {
-    //     this.getOK()
-    //   }
-    // }
-
-     
-
-
-
+    this.getHoteOrder()
 
   },
   async getTopCount() {
@@ -696,13 +775,8 @@ Page({
       method: "post"
     })
 
-    
-    console.log("hotelCount",res.data)
     if (res.data.code == 0) {
       let hotelCount, pcount
-
-
-      
 
       for (let i of res.data.data) {
         
@@ -713,39 +787,30 @@ Page({
         }
       }
 
-      console.log("hotelCount",hotelCount)
-
       if(hotelCount > 0){
-        
-
         this.setData({
           listindex:1
         })
-    
       }
-
       that.getCount()
-
       this.setData({
         hotelCount,
         pcount
       })
     }
 
-
-    // console.log("hotelCount", this.data.hotelCount)
   },
   sqth(e) {
 
-    console.log(e.currentTarget.dataset)
+    //console.log(e.currentTarget.dataset)
     let id = e.currentTarget.dataset.id
     let index = e.currentTarget.dataset.index
     let shopId = e.currentTarget.dataset.shopid
     let count = e.currentTarget.dataset.count
 
-    console.log("shopID",shopId)
+    //console.log("shopID",shopId)
 
-    // console.log(shopId)
+    // //console.log(shopId)
 
     this.setData({
       id,
@@ -767,9 +832,10 @@ Page({
       }
     })
 
-    console.log("确认收货", res)
+    //console.log("确认收货", res)
 
-    that.getHotelOrderDetail()
+    that.getHoteOrder()
+    
   },
 
   onkey() {
@@ -794,10 +860,10 @@ Page({
       }
     })
 
-    console.log("一键收货", res.data.data)
+    //console.log("一键收货", res.data.data)
 
     if (res.data.code == 0) {
-      that.getHotelOrderDetail()
+      that.getHoteOrder()
       wx.showToast({
         title: '收货成功',
         icon: "none"
@@ -807,7 +873,7 @@ Page({
 
   },
 
-  async getCount() {
+  async getCount() { //酒店购物车
     let that = this
 
     let params = {
@@ -819,7 +885,13 @@ Page({
       data: params
     })
 
-    console.log("酒店购物车", res.data)
+  
+    for (let i of res.data.data) {
+      for (let j of i.goods) {
+     
+        console.log("商品：",j.title+"-----"+"数量：",j.stock)
+      }
+    }
 
     if (res.data.code == 0) {
       let list = res.data.data
@@ -827,7 +899,7 @@ Page({
       let ids = []
 
       for (let i of list) {
-        // console.log(i)
+        // //console.log(i)
         for (let j of i.goods) {
           j.isSelected = true,
             ids.push(j.id)
@@ -885,7 +957,7 @@ Page({
         }
       }
     }
-    console.log(list)
+    //console.log(list)
 
     if (this.data.checkedAll == true) {
       that.setData({
@@ -942,7 +1014,7 @@ Page({
         totalPrice: 0
       })
     } else {
-      // console.log("2132")
+      // //console.log("2132")
       let num = 0
       for (let i of list) {
         for (let j of i.goods) {
@@ -986,15 +1058,14 @@ Page({
 
 
           if (res.data.code == 0) {
-            that.getCount(1)
-            that.getCount(0)
+            that.getCount()
             wx.showToast({
               title: '清空成功',
               icon: "none"
             })
           }
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          //console.log('用户点击取消')
         }
       }
     })
@@ -1014,6 +1085,7 @@ Page({
         stock: stock
       }
     })
+    console.log("加减商品",res.data)
   },
   remove(e) {
     const index = e.currentTarget.dataset.index;
@@ -1038,7 +1110,7 @@ Page({
             title: '删除成功',
             duration: 3000
           })
-          that.getCount(that.data.currentTab)
+          that.getCount()
         } else if (res.cancel) {
 
         }
@@ -1071,13 +1143,14 @@ Page({
             num = 1
           }
           j.stock = num;
+          tableList.push(j)
         }
 
-        tableList.push(j)
+      
       }
     }
 
-
+    console.log("减商品",tableList[index].stock)
 
     this.setData({
       leftList: list
@@ -1088,30 +1161,34 @@ Page({
   add(e) {
     const index = e.currentTarget.dataset.index;
     let item = e.currentTarget.dataset.item
-    // let tableList = this.data.tableList;
     let list = this.data.leftList
-
 
     let tableList = []
     for (let i of list) {
       for (let j of i.goods) {
-        tableList.push(j)
+     
         if (j.id == item) {
+          console.log('商品循环id',j.id)
+          console.log('点击商品id',item)
           let num = parseInt(j.stock);
           num = num + 1;
           j.stock = num;
+
+          tableList.push(j)
         }
+      
       }
     }
 
 
-
+    console.log("加商品",tableList[index].stock)
 
     this.setData({
       leftList: list
     })
     this.subadd(tableList[index].id, tableList[index].goods_id, tableList[index].stock)
     this.getTotalPrice()
+    
   },
 
   // 计算购物车商品价格
@@ -1136,23 +1213,6 @@ Page({
   },
 
 
-  clickTab: function (e) { //点击切换
-    var that = this;
-
-    // console.log(e)
-
-    if (e.currentTarget.dataset.current == 1) {
-      that.getCount(1)
-    } else if (e.currentTarget.dataset.current == 2) {
-      that.getHotelOrderDetail()
-      that.getCount(1)
-    }
-    that.setData({
-      currentTab: e.currentTarget.dataset.current
-    })
-
-  },
-
   checkboxChange2(e) {
     let value = e.detail.value
 
@@ -1173,7 +1233,7 @@ Page({
     })
 
 
-    // console.log(e.detail.value)
+    // //console.log(e.detail.value)
 
   },
 
@@ -1184,7 +1244,7 @@ Page({
     let carData = []
 
     for (let i of list) {
-      // console.log(i.split('#'))
+      // //console.log(i.split('#'))
       carData.push(i.split("#"))
     }
     if (this.data.checkboxNum == false) {
@@ -1228,8 +1288,8 @@ Page({
       }
       that.cartSend(params)
     }
-    // console.log("cartAdd", this.data.cartList)
-    // console.log("常用清单", this.data.commonList)
+    // //console.log("cartAdd", this.data.cartList)
+    // //console.log("常用清单", this.data.commonList)
 
   },
 
@@ -1242,7 +1302,7 @@ Page({
       data: params
     })
 
-    console.log("加入购物车", res.data)
+    //console.log("加入购物车", res.data)
 
 
     if (res.data.code == 0) {
@@ -1264,17 +1324,12 @@ Page({
       })
 
     }
-
-
-
-
   },
 
-  
   submit: function () { //提交订单
 
     if (app.globalData.token == '') {
-      wx.navigateTo({
+      wx.navigateTo({ 
         url: "/component/zation/index"
       })
       return 
@@ -1283,7 +1338,18 @@ Page({
     var item = that.data.ids
     var ids = item.toString()
 
-      console.log("总价格",this.data.totalPrice)
+
+    if (ids != '') {
+      that.subOrder(ids)
+    } else {
+      wx.showToast({
+        title: '无可提交商品',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+
+      //console.log("总价格",this.data.totalPrice)
       
       // let 
 
@@ -1293,39 +1359,28 @@ Page({
       //     content: '订单金额小于300元,需要额外支付30元配送费',
       //     success (res) {
       //       if (res.confirm) {
-      //         console.log('用户点击确定')
+      //         //console.log('用户点击确定')
       //       } else if (res.cancel) {
-      //         console.log('用户点击取消')
+      //         //console.log('用户点击取消')
       //       }
       //     }
       //   })
       // }
-    
+    // if (that.data.currentTab == 0) { //个人订单提交订单
+    //   if (ids != '') {
+    //     wx.navigateTo({
+    //       url: `/pages/cartdetal/index?ids=${ids}`
+    //     })
+    //   } else {
+    //     wx.showToast({
+    //       title: '无可提交商品',
+    //       icon: 'none',
+    //       duration: 3000
+    //     })
+    //   }
+    // } else if (that.data.currentTab == 1) { //酒店提交订单
 
-    if (that.data.currentTab == 0) { //个人订单提交订单
-      if (ids != '') {
-        wx.navigateTo({
-          url: `/pages/cartdetal/index?ids=${ids}`
-        })
-      } else {
-        wx.showToast({
-          title: '无可提交商品',
-          icon: 'none',
-          duration: 3000
-        })
-      }
-    } else if (that.data.currentTab == 1) { //酒店提交订单
-      if (ids != '') {
-        that.subOrder(ids)
-      } else {
-        wx.showToast({
-          title: '无可提交商品',
-          icon: 'none',
-          duration: 3000
-        })
-      }
-
-    }
+    // }
 
   },
   async subOrder(ids) { //酒店提交订单
@@ -1333,6 +1388,8 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
+
+    
     let res = await ajax({
       url: '/api/buy/add',
       method: 'POST',
@@ -1353,24 +1410,11 @@ Page({
         duration: 3000
       })
       wx.hideLoading()
-      that.getHotelOrderDetail()
+      that.getHoteOrder()
       that.getCount()
       that.setData({
         listindex:3
       })
-
-      // let hotel_juese = wx.getStorageSync('hotel_juese')
-      // if (hotel_juese == 1) {
-      //   this.setData({
-      //     currentTab: 2
-      //   })
-      // } else {
-      //   // wx.switchTab({
-      //   //   url: '/private/hotelpeople/index',
-      //   // })
-       
-      // }
-
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -1378,7 +1422,7 @@ Page({
         duration: 3000
       })
     }
-    console.log(res)
+    //console.log(res)
   },
 
 

@@ -36,7 +36,8 @@ Page({
     mylist:"",
     shopPriceItem:{},
     shopCountAndPirce:"",
-    screenHeight:""
+    screenHeight:"",
+    zymallshoppirc:""
 
   },
 
@@ -46,7 +47,7 @@ Page({
     wx.getSystemInfo({
       success (res) {
         that.setData({
-          screenHeight:res.windowHeight - 300
+          screenHeight:res.windowHeight - 330
         })
         
         console.log("屏幕高度",that.data.screenHeight)
@@ -733,6 +734,8 @@ Page({
 
     console.log(id)
 
+    
+
     let res = await ajax({
       url: 'api/Order/OrderInfo',
       method: 'POST',
@@ -745,8 +748,19 @@ Page({
     console.log('酒店订单信息',res.data.data)
 
     if (res.data.code == 0) {
+      let price = 0
+      for(let i of res.data.data[0].details){
+        price += (i.buy_number * i.original_price).toFixed(2)
+      }
+
+
+
+
+
+      console.log(price,"price")
       let address = ""
       let tel = ""
+
       if(res.data.data[0].address ==null){
         address = res.data.data[0].hotel_address,
         tel = res.data.data[0].hotel_tel
@@ -754,10 +768,12 @@ Page({
         address = res.data.data[0].address.address
         tel = res.data.data[0].address.tel
       }
+
       this.setData({
         orderlist: res.data.data[0],
         hotelAddress:address,
-        tel:tel
+        tel:tel,
+        zymallshoppirc:price
       })
     } else {
       wx.showToast({

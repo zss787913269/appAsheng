@@ -96,9 +96,9 @@
       </view>
     </view>
   </view>
-  <view class="absult" bindtap="toFoodPublish">
+  <!-- <view class="absult" bindtap="toFoodPublish">
   +
-</view> 
+</view>  -->
 </view>
 <!-- 模态框 -->
 <view>

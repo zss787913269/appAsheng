@@ -121,7 +121,7 @@ Page({
       // console.log("默认地址",res2.data.data)
      
      
-  
+  console.log(res.data.data.base,"商品价格")
  
 
     that.setData({
@@ -133,8 +133,7 @@ Page({
       actual_price: res.data.data.base, //商品价格,
 
     })
-    //console.log(res.data.data)
-    //console.log(that.data.ids)
+  
 
   },
   // 在支付前先提交地址
@@ -171,9 +170,6 @@ Page({
   async orderPay(e) {
     //console.log(e)
     let that = this
-
-
-
       let res = await ajax({
         url: 'api/order/payor',
         method: 'POST',
@@ -193,13 +189,6 @@ Page({
         // 是否在线支付,非在线支付则支付成功
         if (res.data.data.data.is_online_pay == 0) {
          
-          // 数据设置
-          // self.order_item_pay_success_handle(index);
-          // wx.showToast({
-          //   title: '付款成功,正在跳转页面',
-          //   icon:"none",
-          //   duration:3000
-          // })
           wx.showLoading({
             title: '付款成功,正在跳转页面',
           })

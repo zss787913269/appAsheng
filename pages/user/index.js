@@ -6,6 +6,7 @@ const app = getApp()
 
 Page({
   data: {
+    hotelList:[],
     showshop: false,
     showpeisong: false,
     pledge: "",
@@ -138,8 +139,6 @@ Page({
   
       wx.login({
         async success(res3) {
-
-
           let res2 = await ajax({
             url: "api/user/sendopenid",
             method: "post",
@@ -147,7 +146,6 @@ Page({
               authcode: res3.code
             }
           })
-
 
           let res = await ajax({
             url: "api/user/getUserInfo",
@@ -157,19 +155,34 @@ Page({
             }
           })
 
-          console.log("用户资料", res.data.data.token)
-          console.log("gotoken",app.globalData.token)
-          
+          console.log("用户资料", res)
 
-          if(res.data.data.token == app.globalData.token){
+
+
+          if(res.data.code == 0){
+           
+            wx.setStorageSync('openid', res2.data.data.openid),
+            wx.setStorageSync('QRcode', res.data.data.referrer_url),
+            wx.setStorageSync('enid', res.data.data.enid)
+            wx.setStorageSync('userid', res.data.data.id)
+            wx.setStorageSync('hotel_juese', res.data.data.hotel_juese)
+         if(res.data.data.token == ''){
+         
               that.setData({
-                showAv:false
+                showAv:true
               })
           }else{
+            wx.setStorageSync('token', res.data.data.token)
             that.setData({
-                showAv:true
+                showAv:false
             })
           }
+            that.setData({
+              hotelList:res.data.data
+            })
+          }
+
+         
 
           if (res.data.data.brand) {
             that.setData({
@@ -291,6 +304,11 @@ Page({
     let that = this
 
     switch (index) {
+      case "all":
+        wx.navigateTo({
+          url: '/private/hotelpeople/index'
+        }) //酒店订单
+        break;
       case "s1":
         wx.navigateTo({
           url: "/details/information/index", //注册私厨
@@ -372,9 +390,14 @@ Page({
         break;
       case "9":
         wx.navigateTo({
-          url: '/private/hotelpeople/index'
+          url: '/private/hotelpeople/index?index='+ 'dzf'
         }) //酒店订单
         break;
+        case "dsh":
+        wx.navigateTo({
+          url: '/private/hotelpeople/index?index='+ 'dsh'
+        }) //酒店订单
+        break; 
       case "10":
         wx.navigateTo({
           url: '/private/hotelAddress/index'
