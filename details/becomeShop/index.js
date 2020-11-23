@@ -9,15 +9,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    countDownNum:60,
+    showcode:true,
     region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     shopName: '', //店铺名称
-    account: '', //帐期
     category: [{
       "id": "0",
       "name": "暂无数据"
     }], //
     code: '', //验证码
-    address: '', //地址
     tel: '', //联系方式
     market: [{
       "id": "0",
@@ -55,18 +55,10 @@ Page({
         required: true,
         tel: true,
       },
-      address: {
-        required: true,
-        minlength: 2,
-        maxlength: 100,
-      },
       code: {
         required: true,
       },
-      account: {
-        required: true,
-        max:365,
-      },
+  
     }, {
       shopName: {
         required: '您填写的店铺名称错误',
@@ -74,16 +66,31 @@ Page({
       tel: {
         required: '您填写的联系方式错误',
       },
-      address: {
-        required: '请输入地址',
-      },
         code: {
         required: '请输入验证码',
       },
-        account: {
-        required: '请输入正确的帐期',
-      },
+   
     })
+  },
+  countDown: function () {
+
+        let that = this;
+        let countDownNum = 61;
+        that.setData({
+          timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
+            countDownNum--;
+            that.setData({
+              countDownNum: countDownNum
+            })
+            if (that.data.countDownNum == 0) {
+              clearInterval(that.data.timer);
+              that.setData({
+                showcode:true
+              })
+            }
+          }, 1000)
+    
+        })
   },
   //获取已有的信息
   async getExistingData(){
@@ -126,8 +133,6 @@ Page({
       })
       this.setData({
         shopName:allData.name,
-        account:allData.number,
-        address:allData.address,
         tel:allData.tel,
         foodMarket:allData.market_id,
         classMarket:allData.brand_category_id,
@@ -171,6 +176,10 @@ Page({
       data: params
     })
     if (res.data.code == 0) {
+      that.countDown()
+      that.setData({
+        showcode:false
+      })
       wx.showToast({
         title: '发送成功',
         icon: 'none',
@@ -249,17 +258,14 @@ Page({
       var shopName = formData.shopName;
       var tel = formData.tel;
       var code = formData.code;
-      var address = formData.address;
-      var account = formData.account;
       var params = {
         name: shopName,
-        number:account,
         code: code,
-        address: address,
         tel: tel,
         market_id: that.data.foodMarket,
         category_id: that.data.classMarket,
-        region: `${that.data.region}`   //省市区id
+        region: `${that.data.region}`,  //省市区id
+        address:"无"
       };
       console.log(params)
       if (that.data.foodMarket == null) {
@@ -289,7 +295,7 @@ Page({
       method: 'POST',
       data:e
     })
-    console.log(res)
+    console.log(res.data)
     if(res.data.code != 0){
       wx.showToast({
         title:res.data.msg,

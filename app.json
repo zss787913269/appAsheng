@@ -1,18 +1,23 @@
 {
   "pages": [ 
-    "pages/index/index",
     "pages/user/index",
+    "details/addshop/index",
+    "pages/index/index",
+  
 
+  
+
+  
+   
+  
+    "details/becomeShop/index",
     "details/search/index",
     "details/appointment/index",
     "details/preAbout/index",
     "pages/find/index",
- 
     "details/information/index",
     "private/myFood/index",
     "details/peinformation/index",
-    "details/dishes/index",
-    "details/dishesone/index",
     "details/release/index",
     "private/kitchen/index",
     "details/detail/index",
@@ -38,8 +43,6 @@
     "person/recharge/index",
     "person/cartdetal/index",
     "pages/quickly/quickly",
-    "details/becomeShop/index",
-    "details/addshop/index",
     "private/hotelAddress/index",
     "person/personl/index",
     "pages/pledge/index",

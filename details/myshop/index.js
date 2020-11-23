@@ -233,6 +233,7 @@ Page({
       })
   },
   addClass(){
+    
     wx:wx.navigateTo({
       url: '/details/addshop/index',
      

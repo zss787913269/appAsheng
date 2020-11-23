@@ -13,6 +13,16 @@
 .selectArrayText{
   line-height: 100rpx;
 }
+.toptitle{
+  margin-top: 10rpx;
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  font-size: 36rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #000;
+}
 .jin{
   background-color: #eee;
   padding-left:50rpx;

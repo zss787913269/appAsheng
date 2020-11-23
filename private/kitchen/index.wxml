@@ -31,7 +31,7 @@
 				<text class="fontsiz">电话：{{userInfo.tel}}</text>
 			</view>
 		</view>
-		<view bindtap="releaseFood" class="releaseFood">发布菜品</view>
+		<!-- <view bindtap="releaseFood" class="releaseFood">发布菜品</view> -->
 	</view>
 	<view class="cardtime">
 		<view class="timeyue">

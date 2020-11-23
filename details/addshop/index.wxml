@@ -8,19 +8,16 @@
   <text class='option' style='{{index==selectArray.length-1&&"border:0;"}}' wx:for='{{selectArray}}' wx:key='this' data-id="{{item.id}}" data-index='{{index}}' catchtap='optionTap'>{{item.name}}</text>
  </view>
 </view> -->
-<view class="titleed">
+<!-- <view class="titleed">
 	<label class="glable" for="male">商品类型</label>
 	<view class="mypicker">
 		<picker  mode = "selector" bindchange="bindPickerChange" value="{{index}}" range="{{selectArray}}" range-key="name"  data-id="index">
-		 <!-- <view class="picker" >{{selectArray[selectArrayIndex].name ? selectArray[selectArrayIndex].name : selectArray[0].name}}</view> -->
 		  <view class="picker" >{{selectArray[selectArrayIndex].name ? selectArray[selectArrayIndex].name : '请选择'}}</view>
 		</picker>
    <i class="fal fa-angle-down light shopa"></i>
 	</view>
-   
-	
-
-</view>
+</view> -->
+<view class="toptitle"><text>{{shopInfo.categoryname}}</text></view>
 
 <view class="titleed other" bindtap="open">
 	<label class="glable" for="male">商品类别</label>
@@ -34,12 +31,12 @@
 	<label class="glable" for="male">库存单位</label>
 	<input type="text" placeholder="" name="shopCompany" id="male" bindinput="intChang" value="{{shopCompany}}" />
 </view>
-<block wx:for="{{exhibition}}" wx:key="index">
+<!-- <block wx:for="{{exhibition}}" wx:key="index">
 	<view class="titleed">
 		<label class="glable" for="male">{{index}}</label>
 		<input type="text" placeholder="默认{{item}}" name="1" id="male" bindinput="intExhibition" data-index="{{index}}" />
 	</view>
-</block>
+</block> -->
 
 <block wx:for="{{quotationLine}}" wx:key="index">
 	<view class="titleed other">

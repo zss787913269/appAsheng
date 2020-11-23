@@ -40,6 +40,7 @@ Page({
     sHOPNAME:'',
     showSelectArray:false,
     listData:{},//装获取数据的
+    shopInfo:[]
   },
 
   /**
@@ -47,6 +48,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+
+
+    this.getInfo()
     // that.text()
     getApp().setWatcher(that.data, {
       numTwo:function(){
@@ -58,7 +62,7 @@ Page({
     this.setData({
       specificationsNum:''
     })
-    that.getOneCategory()
+    // that.getOneCategory()
     if(options.id != undefined){
       let optionsData=wx.getStorageSync('shopInfo');
       //console.log(optionsData);
@@ -69,53 +73,69 @@ Page({
       })
     }
   },
-
-  bindPickerChange: function(e) {
-   
-    let index = e.detail.value   // 获取点击的下拉列表的下标
-    let id = this.data.selectArray[index].id
-    this.setData({
-      selectArrayIndex: index,
-      one:id,
-      showSelectArray: !this.data.showSelectArray
-    });
-    this.getTwoCategory(this.data.one)
   
-  },
-  optionTap(e){
-    //console.log(e);
-      let index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-      this.setData({
-        selectArrayIndex: index,
-        one:e.currentTarget.dataset.id,
-        showSelectArray: !this.data.showSelectArray
-      });
-      this.getTwoCategory(this.data.one)
-  },
-  selectClick(){    //显示下拉框
-    this.setData({
-      showSelectArray:true
+  async getInfo(){
+    let res = await ajax({
+      url:"api/user/storeInfo",
+      method:"post"
     })
-  },
-  async  getOneCategory(){    //获取一级分类
-      var that = this
-      let res = await ajax({
-        url: 'api/store/getOneCategory',
-        method: 'get',
+    // console.log( res.data.data)
+    if(res.data.code == 0){
+      let id = res.data.data.brand_category_id
+       this.getTwoCategory(id)
+      this.setData({
+        shopInfo:res.data.data,
+        one:id
       })
-      if(res.data.code == 0){
-        //console.log(res)
-        that.setData({
-          selectArray: res.data.data,
-          // oneSpecId:res.data.data[0].spec_id
-        })
-      }else{
-        wx.showToast({
-          title:res.data.msg,
-          duration:3000
-        })
-      }
-    },
+    }
+},
+
+  // bindPickerChange: function(e) {
+   
+  //   let index = e.detail.value   // 获取点击的下拉列表的下标
+  //   let id = this.data.selectArray[index].id
+  //   this.setData({
+  //     selectArrayIndex: index,
+  //     one:id,
+  //     showSelectArray: !this.data.showSelectArray
+  //   });
+ 
+  
+  // },
+  // optionTap(e){
+  //   //console.log(e);
+  //     let index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+  //     this.setData({
+  //       selectArrayIndex: index,
+  //       one:e.currentTarget.dataset.id,
+  //       showSelectArray: !this.data.showSelectArray
+  //     });
+  //     this.getTwoCategory(this.data.one)
+  // },
+  // selectClick(){    //显示下拉框
+  //   this.setData({
+  //     showSelectArray:true
+  //   })
+  // },
+  // async  getOneCategory(){    //获取一级分类
+  //     var that = this
+  //     let res = await ajax({
+  //       url: 'api/store/getOneCategory',
+  //       method: 'get',
+  //     })
+  //     if(res.data.code == 0){
+  //       // console.log('一级分类',res.data.data)
+  //       that.setData({
+  //         selectArray: res.data.data,
+  //         // oneSpecId:res.data.data[0].spec_id
+  //       })
+  //     }else{
+  //       wx.showToast({
+  //         title:res.data.msg,
+  //         duration:3000
+  //       })
+  //     }
+  //   },
   open(){   //  打开选择二级  三级分类
     this.setData({
       condition: !this.data.condition
@@ -344,6 +364,8 @@ Page({
       method: 'POST',
       data: params
     })
+
+    console.log(res.data)
   
     if(res.data.code == 0){
       if(res.data.data == ''){

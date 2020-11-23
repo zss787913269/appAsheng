@@ -184,9 +184,13 @@ Page({
 
          
 
-          if (res.data.data.brand) {
+          if (res.data.data.brand != null) {
             that.setData({
               showshop: true
+            })
+          }else{
+            that.setData({
+              showshop: false
             })
           }
 

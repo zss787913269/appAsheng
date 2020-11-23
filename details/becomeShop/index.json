@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "成为商家",
+  "navigationBarTitleText": "商家入驻",
   "usingComponents": {
     "Select": "/component/select/select"
   }
