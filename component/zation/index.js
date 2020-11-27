@@ -171,9 +171,10 @@ Page({
     console.log("用户的信息如下：");
     console.log(item)
     setTimeout(function(){
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+      // wx.switchTab({
+      //   url: '/pages/index/index'
+      // })
+      wx.navigateBack({})
       // wx.navigateTo({
       //   url: "/component/subscribe/index",
       // })

@@ -67,11 +67,11 @@
 		<view class="item">
 			<view class="item-top">
 				<text class="item-title">{{item.title}}</text>
-				<text class="ms">产品描述：<text wx:for="{{item.show_keyword}}" wx:for-item="itemName" wx:key="index">{{itemName}}</text></text>
+				<!-- <text class="ms">产品描述：<text wx:for="{{item.show_keyword}}" wx:for-item="itemName" wx:key="index">{{itemName}}</text></text> -->
 				<!-- <text class="ms">商品描述：默认默认</text> -->
 			</view>
 			<view class="item-price">
-				<text>￥{{item.price}}元</text>
+				<text>￥{{item.spec_base[0].original_price}}元</text>
 			</view>
 		</view>
 

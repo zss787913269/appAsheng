@@ -1,16 +1,13 @@
 {
   "pages": [ 
     "pages/user/index",
-    "details/addshop/index",
-    "pages/index/index",
-  
-
-  
-
+    "details/editShopGoods/index",
   
    
-  
+    "details/addshop/index",
+    "pages/index/index",
     "details/becomeShop/index",
+    "pages/yongjin/index",
     "details/search/index",
     "details/appointment/index",
     "details/preAbout/index",
@@ -28,7 +25,6 @@
     "pages/cart/index",
     "private/personaldata/index",
     "private/hotelinfo/index",
-    "pages/yongjin/index",
     "component/getphone/index",
     "person/map/index",
     "person/add/index",

@@ -194,7 +194,12 @@
       <text>绑定手机</text>
     </view>
  
-
+   <view class="shop-box" data-index="14" bindtap="goToPage">
+      <view class="shopimg">  
+        <image  src="../../images/user2/ps.png"   style="width:50rpx;height:50rpx"></image>
+      </view>
+      <text>配送列表</text>
+    </view>
  
  
    

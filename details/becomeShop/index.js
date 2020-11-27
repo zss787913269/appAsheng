@@ -42,6 +42,14 @@ Page({
    */
   onLoad: function(options) {
     var that = this
+
+    
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    } 
+
     that.getFoodMarket()
  
     //表单验证规则
@@ -290,6 +298,7 @@ Page({
   },
   async getSubmit(e) {
     
+   
     let res = await ajax({
       url: 'api/user/storeadd',
       method: 'POST',
@@ -309,11 +318,16 @@ Page({
         icon: 'none',
         duration: 3000
       })
-      setTimeout(function () {
-        wx.navigateBack({
+      //zym 
+      wx.reLaunch({
+        url:  "/pages/user/index",
+      })
+      // setTimeout(function () {
+      //   wx.navigateBack({
 
-        })
-      }, 2000)
+      //   })
+
+      // }, 2000)
     }
   },
 
@@ -328,7 +342,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    if (app.globalData.token == '') {
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    } 
   },
 
   /**

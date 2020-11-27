@@ -886,12 +886,12 @@ Page({
     })
 
   
-    for (let i of res.data.data) {
-      for (let j of i.goods) {
+    // for (let i of res.data.data) {
+    //   for (let j of i.goods) {
      
-        console.log("商品：",j.title+"-----"+"数量：",j.stock)
-      }
-    }
+    //     console.log("商品：",j.title+"-----"+"数量：",j.stock)
+    //   }
+    // }
 
     if (res.data.code == 0) {
       let list = res.data.data

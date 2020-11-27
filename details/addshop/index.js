@@ -8,6 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    myArrIndex:'',
+    shopTitleName:"",//商品名称
+    card_img:'',
+    card_imgid:[],
     focus:false,
     selectArray: [{
       "id": "0",
@@ -51,6 +55,7 @@ Page({
 
 
     this.getInfo()
+    // this.getAttribute()
     // that.text()
     getApp().setWatcher(that.data, {
       numTwo:function(){
@@ -62,24 +67,99 @@ Page({
     this.setData({
       specificationsNum:''
     })
+    console.log(options,'options')
     // that.getOneCategory()
     if(options.id != undefined){
       let optionsData=wx.getStorageSync('shopInfo');
       //console.log(optionsData);
+      that.getGoods(options.id)
       that.setData({
         listData:optionsData,
         shopName:options.name,
-        shopId:options.id
+        shopId:options.id,
+        shopTitleName:options.name
       })
     }
   },
+  upload: function (e) {    //上传图片
+    var that = this
+    if(that.data.card_imgid.length > 9){
+      wx.showToast({
+        title: '最多只能上传9张图片',
+        icon: 'none',
+        duration:3000,
+      })
+      return
+    }
+    var index = e.currentTarget.dataset.index
+    wx.showActionSheet({
+      itemList: ['从手机相册选择', '拍照'],
+      success: function (res) {
+        that.getImg(res.tapIndex, index)
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
+  upImg(url, index) { //上传图片
+    let _this = this
+    console.log(url)
+    app.globalData.token = wx.getStorageSync('token')
+    wx.uploadFile({
+      url: `${app.globalData.headUrl}/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
+      filePath: url,
+      name: 'image',
+      formData: {
+        'name': 'image'
+      },
+      success(res) {
+        let data = JSON.parse(res.data)
+             //返回上传照片的id，记录下来
+        // let id = _this.data.card_imgid
+        // id.push(data.data.id)
+          _this.setData({
+            card_imgid: data.data.id
+          })
+        console.log(data,_this.data.card_imgid)
+        //do something
+      },
+      fail(res) {
+        const data = res.data
+        console.log(data + '失败')
+      }
+    })
+  },
   
+    getImg: function (e, index) {
+    var _this = this
+    if (e == 0) {
+      e = 'album'
+    } else {
+      e = 'camera'
+    }
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: [e],
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        let tempFilePaths = _this.data.card_img
+        tempFilePaths  =  res.tempFilePaths[0]
+        console.log(tempFilePaths)
+          _this.setData({
+            card_img: tempFilePaths
+          })
+        _this.upImg(res.tempFilePaths[0], index)
+      }
+    })
+  },
   async getInfo(){
     let res = await ajax({
       url:"api/user/storeInfo",
       method:"post"
     })
-    // console.log( res.data.data)
+    console.log("商品",res.data)
     if(res.data.code == 0){
       let id = res.data.data.brand_category_id
        this.getTwoCategory(id)
@@ -88,6 +168,16 @@ Page({
         one:id
       })
     }
+},
+  async getGoods(id){
+    let res = await ajax({
+      url:"api/goods/goodsinfo",
+      method:"post",
+      data:{
+        goods_id:id
+      }
+    })
+    console.log("detail",res.data)
 },
 
   // bindPickerChange: function(e) {
@@ -156,7 +246,16 @@ Page({
         shopCompany:e.detail.value
       })
   },
+  intName(e){
+    //console.log(e)
+    this.setData({
+      shopTitleName:e.detail.value
+    })
+},
   sendPrice(e){    //获取价格输入框的内容
+
+    console.log(e)
+
   var that = this
     let index = e.currentTarget.dataset.index   //
     let item = e.currentTarget.dataset.item
@@ -165,31 +264,32 @@ Page({
     let quotationLineCopy = that.data.quotationLine
     let quotationLineCopySall = that.data.quotationLineCopy
     let obj = that.data.obj
-    //console.log(idx)
+
     for (let k in that.data.quotationLine){
-      if (k == that.data.specificationsNum){
-        for (let j in that.data.quotationLine[k]) {
-          if (j == that.data.numTwo){
-            for (let i in that.data.quotationLine[k][j]) {
-              for (let g in that.data.quotationLine[k][j][i]){
-               if(idx == g){
-                 //console.log(g)
-                 quotationLineCopy[k][j][i][g] = value 
-                 quotationLineCopySall[k][j] = that.data.obj
-                 //console.log(quotationLineCopySall[k][j])
-                 quotationLineCopySall[k][j][g] = value
-                    that.setData({
-                      shopPrice: quotationLineCopySall
-                  })
-               }
-              }
+   
+          for (let j in that.data.quotationLine[k]) {
+           
+           
+              for (let i in that.data.quotationLine[k][j]) {
+                for (let g in that.data.quotationLine[k][j][i]){
+                 if(idx == g){
+                   //console.log(g)
+                   quotationLineCopy[k][j][i][g] = value 
+                   quotationLineCopySall[k][j] = that.data.obj
+                  
+                   quotationLineCopySall[k][j][g] = value
+                      that.setData({
+                        shopPrice: quotationLineCopySall
+                    })
+                 }
               
-         
+                
+          
+              }
             }
-          }
+            
           
         }
-      }
     }
     that.setData({
       quotationLine: quotationLineCopy
@@ -219,18 +319,28 @@ Page({
     //console.log(shopPrice)
    
       let params = {
-        title: that.data.threeClassification,
+        // title: that.data.threeClassification,
+        title:that.data.shopTitleName,
         one:that.data.one,
         two:that.data.twoId,
         category_id: that.data.threeId,
-        spec_id: that.data.spec_id,
+        spec_id: 1,
         price: shopPrice,
         show_name: that.data.exhibition,
-        inventory_unit:that.data.shopCompany
+        inventory_unit:that.data.shopCompany,
+        // zym
+        
       }
       console.log("params",params);
       if(id != undefined){
         params.id = id
+      }
+      if(params.title == ''){
+        wx.showToast({
+          title: '请输入商品名',
+          icon:"none"
+        })
+        return
       }
       //console.log(params)
     let res = await ajax({
@@ -277,13 +387,13 @@ Page({
       method: 'POST',
       data:params
     })
-    //console.log('id',res)
+    console.log('获取二级分类和绑定的属性分类',res.data)
     if(res.data.code == 0){
         
       // console.log("获取二级分类和绑定的属性分类",res.data.data)
       that.setData({
         provinces: res.data.data,
-        spec_id: res.data.data[0].spec_id,
+        spec_id: "",
         citys: res.data.data[0].three,
         twoClassification: res.data.data[0].name,
         threeClassification:res.data.data[0].three[0].name,
@@ -293,24 +403,24 @@ Page({
         shipId: res.data.data[0].three[0].spec_id
       })
     }
- 
-    if (that.data.shipId != 0 && that.data.shipId != null){
-      that.getAttribute(that.data.shipId)
-    } else{
-      if (that.data.spec_id != 0 && that.data.spec_id != null){
-        that.getAttribute(that.data.spec_id)
-      }else{
-        if (that.data.oneSpecId != 0 && that.data.oneSpecId != null){
-          that.getAttribute(that.data.oneSpecId)
-        }else{
-          wx.showToast({
-            title:'当前属性没有绑定',
-            icon:'none',
-            duration:3000
-          })
-        }
-      }
-    }
+    that.getAttribute(that.data.shipId)
+    // if (that.data.shipId != 0 && that.data.shipId != null){
+    //  
+    // } else{
+    //   if (that.data.spec_id != 0 && that.data.spec_id != null){
+    //     that.getAttribute(that.data.spec_id)
+    //   }else{
+    //     if (that.data.oneSpecId != 0 && that.data.oneSpecId != null){
+    //       that.getAttribute(that.data.oneSpecId)
+    //     }else{
+    //       wx.showToast({
+    //         title:'当前属性没有绑定',
+    //         icon:'none',
+    //         duration:3000
+    //       })
+    //     }
+    //   }
+    // }
     
   },
   bindChange(e){   //选择二，三级类别
@@ -319,40 +429,47 @@ Page({
     var val = e.detail.value
     let index = val[0]
     let idx = val[1]
-    // console.log(val)
-    console.log("spec_id",that.data.provinces[index].three[idx])
-    console.log("spec_id",that.data.provinces[index].three[idx].spec_id)
    
+
+      if(that.data.myArrIndex != index){
+        idx = 0
+      }
     that.setData({
-      spec_id: that.data.provinces[index].three[idx].spec_id,
+      // spec_id: that.data.provinces[index].three[idx].spec_id,
       citys:that.data.provinces[index].three,
       twoClassification: that.data.provinces[index].name,
       threeClassification: that.data.provinces[index].three[idx].name,
       twoId: that.data.provinces[index].id,
       threeId: that.data.provinces[index].three[idx].id,
       attribute: that.data.provinces[index].items,
-      shipId: that.data.provinces[index].three[idx].spec_id
+      shipId: that.data.provinces[index].three[idx].spec_id,
+      value:[index,idx],
+      myArrIndex:index
     })
+  
+    that.getAttribute(that.data.shipId)
     // console.log("spec_id",that.data.provinces)
-    if (that.data.shipId != 0 && that.data.shipId != null) {
-      that.getAttribute(that.data.shipId)
-    } else {
-      if (that.data.spec_id != 0 && that.data.spec_id != null) {
-        that.getAttribute(that.data.spec_id)
-      } else {
-        if (that.data.oneSpecId != 0 && that.data.oneSpecId != null) {
-          that.getAttribute(that.data.oneSpecId)
-        } else {
-          wx.showToast({
-            title: '当前属性没有绑定',
-            icon: 'none',
-            duration:3000
-          })
-        }
-      }
-    }
+    // if (that.data.shipId != 0 && that.data.shipId != null) {
+    //  
+    // } else {
+    //   if (that.data.spec_id != 0 && that.data.spec_id != null) {
+    //     that.getAttribute(that.data.spec_id)
+    //   } else {
+    //     if (that.data.oneSpecId != 0 && that.data.oneSpecId != null) {
+    //       that.getAttribute(that.data.oneSpecId)
+    //     } else {
+    //       wx.showToast({
+    //         title: '当前属性没有绑定',
+    //         icon: 'none',
+    //         duration:3000
+    //       })
+    //     }
+    //   }
+    // }
     // that.getAttribute(that.data.shipId)
   },
+
+  // zym 规格
   async getAttribute(id){
     var that = this
     //console.log(id)
@@ -376,7 +493,7 @@ Page({
         })
         return
       }
-      // console.log("getSpec",res.data.data)
+      console.log("getSpec",res.data.data)
       let quotationLineCopy = JSON.parse(JSON.stringify(res.data.data.spec))
       for (let i in quotationLineCopy){
         for (let j in quotationLineCopy[i]){
@@ -384,9 +501,7 @@ Page({
             for (let k in quotationLineCopy[i][j][g]) {
             }
           }
-         
           quotationLineCopy[i][j] = ''
-         
         }
       }
       that.setData({

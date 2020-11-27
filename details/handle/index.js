@@ -97,7 +97,12 @@ Page({
     let res = await ajax({  url: 'api/order/EditOrderDetailGoods', method: 'POST', data: params })
     console.log(res.data)
     if(res.data.code == 0){
+      this.getShopList()
       if(that.data.orderFirst == 1){ this.receipt(item.id)  } 
+      wx.showToast({
+        title: '修改成功',
+        icon:'none'
+      })
       this.hideBuyModal()
     }else{
       if(res.data.msg == '修改失败'){

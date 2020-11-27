@@ -119,7 +119,7 @@ Page({
       method: 'post',
       data: params
     })
-
+    
     if(res.data.code == 0){
       console.log("获取店铺商品",res.data.data.data)
       let listData = res.data.data.data.data
@@ -229,7 +229,8 @@ Page({
       key: 'shopInfo',
     })
       wx.navigateTo({
-        url: `/details/addshop/index?id=${e.currentTarget.dataset.id}&&name=${e.currentTarget.dataset.name}`,
+        url: `/details/editShopGoods/index?id=${e.currentTarget.dataset.id}&&name=${e.currentTarget.dataset.name}`,
+
       })
   },
   addClass(){

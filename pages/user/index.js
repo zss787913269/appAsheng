@@ -115,11 +115,13 @@ Page({
 
   },
   onLoad: function () {
+
+    this.getUserInfo()
     app.globalData.token = wx.getStorageSync('token')
     var that = this
     that.getMyCommission()
 
-    console.log(app.globalData)
+    // console.log(app.globalData)
 
     if(app.globalData.token == ''){
       this.setData({
@@ -136,7 +138,6 @@ Page({
 
   getUserInfo() {
     let that = this
-  
       wx.login({
         async success(res3) {
           let res2 = await ajax({
@@ -151,11 +152,12 @@ Page({
             url: "api/user/getUserInfo",
             method: "post",
             data: {
-              token: res2.data.data.openid
+              token: res2.data.data.openid,
+              unionid:res2.data.data.unionid
             }
           })
 
-          console.log("用户资料", res)
+          console.log("用户资料", res.data)
 
 
 

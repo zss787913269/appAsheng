@@ -129,7 +129,6 @@ Page({
     app.globalData.token = wx.getStorageSync('token')
     wx.uploadFile({
       url: `${app.globalData.headUrl}/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
-        // url: `http://debug.nncaixiao2.cn/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
       filePath: url,
       name: 'image',
       formData: {
