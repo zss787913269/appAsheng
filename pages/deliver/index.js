@@ -452,6 +452,7 @@ Page({
   },
   async enterSend(e) {
     let that = this
+    console.log(e.currentTarget.dataset)
     let shopid = e.currentTarget.dataset.id,
       params, imgid = that.data.card_imgid
 
@@ -471,6 +472,7 @@ Page({
       method: 'post',
       data: params
     })
+    console.log(res.data)
     if (res.data.code == 0) {
       wx.showToast({
         title: '已确认送达',
@@ -594,7 +596,7 @@ Page({
       method: 'post',
       data: params
     })
-
+    console.log(res.data)
     if(res.data.code == 0){
       
     if (this.data.page == 1) {

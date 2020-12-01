@@ -79,14 +79,28 @@
   margin-bottom:100rpx;  
   
 }
-.zhon{
+.getcode{
   width: 180rpx;
   height: 50rpx;
-  background:#ff9d34;
+  background:#ccc;
   color: #fff; 
   text-align: center;
   line-height: 50rpx;
   border-radius: 5rpx;
+  font-size: 24rpx;
+  margin-left:40rpx;  
+  border-radius: 20rpx;
+}
+
+.zhon{
+  width: 180rpx;
+  height: 50rpx;
+  background:#ff9d34;
+
+  color: #fff; 
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 20rpx;
   font-size: 30rpx;
   margin-left:40rpx;  
 }

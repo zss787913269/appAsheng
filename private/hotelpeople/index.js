@@ -208,6 +208,8 @@ Page({
 
 
     let items = e.currentTarget.dataset
+    let address = items.list.address
+    let msg = items.list.name +  ' ' +items.list.tel
 
     //console.log(items)
     if (items.docat == 1) {
@@ -218,7 +220,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
+        url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}&address=${address}&msg=${msg}`,
       })
     }
 

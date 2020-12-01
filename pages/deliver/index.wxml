@@ -52,7 +52,6 @@
 		<view wx:for="{{PeisongList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 			<view class="main">
-
 				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}">
 					<view class="more">查看详情</view>
 					<view class="mytitle">订单编号：{{item.order_no}}</view>
@@ -70,7 +69,6 @@
 
 				</view>
 				<view class="bottom2">
-
 					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
 					<view class="llbox">
 						<view class="quxiao" bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>

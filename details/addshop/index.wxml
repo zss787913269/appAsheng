@@ -11,6 +11,13 @@
 			<input type="text" placeholder="请输入商品名称" class="pickerIndex1" name="shopTitleName" maxlength="10" id="male"
 				bindinput="intName" value="{{shopTitleName}}" />
 		</view>
+
+		<view class="titleed">
+				<label class="" for="male">商品单位：</label>
+				<input type="text"  class="pickerIndex1" placeholder="请填写单位(斤、只、瓶、件等)" name="shopCompany" id="male" bindinput="intChang" value="{{shopCompany}}" />
+			</view>
+
+
 		<view class="shopSpecName">
 			<view wx:for="{{quotationLine}}" wx:key="index">
 				<view class="toptitle2"><text>{{index}}</text></view>
@@ -33,7 +40,17 @@
 				</view>
 			</view>
 		</view>
-
+			<view class="flex">
+				<view><text>上传图片：</text></view>
+			<view class="tiajia" >
+				<view bindtap="upload"  class="img-More" wx:if="{{card_img != ''}}">
+					<image class="" src="{{card_img}}"></image>
+				</view>
+				<view  bindtap="upload" class="img-up" wx:if="{{card_img == ''}}">
+					<text>+</text>
+				</view>
+			</view>
+			</view>
 		<view class="submit" bindtap="submit">
 			<text>提 交</text>
 		</view>

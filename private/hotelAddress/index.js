@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    countDownNum:60,
+    showcode:true,
     // ,type：1下单员，2厨师长，3采购，4仓库，5财务，6店长，7老板
     region: ['广西壮族自治区', '南宁市', '西乡塘区'],
     myValue:"",
@@ -67,7 +69,7 @@ Page({
   onLoad: function(options) {
     var that = this
     // that.getToekn()
-    that.getHotel()
+    // that.getHotel()
    
     this.WxValidate = app.wxValidate({
       fullName: {
@@ -109,6 +111,26 @@ Page({
         required: '请输入验证码',
       },
     })
+  },
+  countDown: function () {
+
+        let that = this;
+        let countDownNum = 61;
+        that.setData({
+          timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
+            countDownNum--;
+            that.setData({
+              countDownNum: countDownNum
+            })
+            if (that.data.countDownNum == 0) {
+              clearInterval(that.data.timer);
+              that.setData({
+                showcode:true
+              })
+            }
+          }, 1000)
+    
+        })
   },
  
   bindRegionChange: function (e) {
@@ -154,6 +176,7 @@ Page({
    
     if(res.data.code == 0){
             console.log('cehngl ')
+
             that.setData({ //角色二维码
               hotelQR: res.data.data.img_url,
               hotelRole: true
@@ -244,6 +267,10 @@ Page({
         title: '发送成功',
         icon: 'none',
         duration: 3000
+      })
+      that.countDown()
+      that.setData({
+        showcode:false
       })
     } else {
       wx.showToast({

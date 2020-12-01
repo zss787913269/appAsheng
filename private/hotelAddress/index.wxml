@@ -50,7 +50,8 @@
 		<view class="titleed">
 			<label class="" for="male">电　话:</label>
 			<input type="text" placeholder="请输入" class="pickerIndex2" name="tel" id="laoban" value="{{tel}}" bindinput='getInputValue' />
-			<view class="zhon"  bindtap="sendCode" >发送验证码</view>
+			<view class="zhon"  bindtap="sendCode" wx:if="{{showcode}}">发送验证码</view>
+			<view class="getcode" wx:if="{{!showcode}}"><text>{{countDownNum}}s后重发</text></view>
 		</view>
 		<view class="titleed" >
 			<label class="glable" for="male">验证码</label>

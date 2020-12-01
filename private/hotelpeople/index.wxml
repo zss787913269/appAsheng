@@ -28,7 +28,7 @@
 
 			<view class="top_box">
 				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="mytitle">酒店名：{{item.hotel.h_name}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
@@ -44,7 +44,7 @@
 			</view>
 			<view class="bottom">
 				<view class="myab">下单员：{{item.user.nickname}}</view>
-				<view class="queren" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}"
+				<view class="queren" bindtap="payment" data-docat="{{item.is_docat}}" data-id="{{item.id}}"  data-list='{{item.hotel}}'
 					data-num="{{item.items_count}}" data-price="{{item.total_price}}">支付</view>
 			</view>
 		</view>
@@ -60,7 +60,7 @@
 		<view class="main">
 			<view class="top_box">
 				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="mytitle">酒店名：{{item.hotel.h_name}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
@@ -81,7 +81,7 @@
 					</view>
 					<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
 						data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
-						data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+						data-price="{{item.total_price}}" data-list='{{item.hotel}}'>{{item.pay_status_name}}({{item.status_name}})</view>
 					<view class="queren" wx:elif="{{ item.status_name == '待收货'  }}" bindtap="receivingGoods"
 						data-id="{{item.id}}">{{item.pay_status_name}}({{item.status_name}})</view>
 					<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
@@ -108,7 +108,7 @@
 			<view class="top_box">
 				<view class="more" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">查看详情</view>
 
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="mytitle">酒店名：{{item.hotel.h_name}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
@@ -141,7 +141,7 @@
 
 			<view class="top_box">
 				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="mytitle">酒店名：{{item.hotel.h_name}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
@@ -158,6 +158,7 @@
 			<view class="bottom">
 				<view class="myab">下单员：{{item.user.nickname}}</view>
 				<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
+				data-list='{{item.hotel}}'
 					data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
 					data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
 				<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
@@ -179,7 +180,7 @@
 
 			<view class="top_box">
 				<view class="more" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
+				<view class="mytitle">酒店名：{{item.hotel.h_name}}</view>
 				<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">

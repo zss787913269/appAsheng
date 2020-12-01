@@ -6,6 +6,8 @@ const app = getApp()
 
 Page({
   data: {
+    myhotelListId:"",//当多个酒店的时候 选择的酒店
+    myhotelList:[],
     hotelstatus:"",
     allList:[],//全部
     unpaid:[],//未支付
@@ -14,6 +16,7 @@ Page({
     unsend:[],//待发货
     shopStatus:true,
     showModalStatus: false, //遮罩的显示与隐藏
+    myshowModalStatus:false,
     completed: [], //已经完成
     classfiySelect: "",
     listindex: 1,
@@ -85,9 +88,11 @@ Page({
     this.getCount()
     this.getTopCount()
     this.getHoteOrder()
-
-
+    this.getHotelListMsg()
   },
+
+  
+
   async cancelOrder(e) { //取消订单
     var that = this
     let res = await ajax({
@@ -140,10 +145,11 @@ Page({
       method: 'POST',
     })
 
+    console.log("全部商品",res.data)
 
      if(res.data.code != 0){
       wx.showToast({
-        title: '还未注册酒店，请先注册',
+        title: res.data.msg,
         icon:"none"
       })
      }else{
@@ -241,8 +247,10 @@ Page({
 
 
     let items = e.currentTarget.dataset
+    let address = items.list.address
+    let msg = items.list.name + '' +  items.list.tel
 
-    //console.log(items)
+    console.log(items)
     if (items.docat == 1) {
       wx.showToast({
         title: "此订单中有商品未划价，等待划价",
@@ -250,8 +258,9 @@ Page({
         duration: 3000
       })
     } else {
+     
       wx.navigateTo({
-        url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}`,
+        url: `/person/cartdetal/index?where=hote&&id=${items.id}&num=${items.num}&price=${items.price}&address=${address}&msg=${msg}`,
       })
     }
 
@@ -263,6 +272,27 @@ Page({
       url: "/details/detail/index?id=" + id,
     })
 
+  },
+  myhideBuyModal() {
+
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        myshowModalStatus: false
+      })
+
+    }.bind(this), 200)
   },
   hideBuyModal() {
 
@@ -290,6 +320,30 @@ Page({
 
     }.bind(this), 200)
   },
+      // 遮罩层显示
+      myshowModal() {
+        // ////////console.log("点击了订单")
+    
+ 
+    
+        var animation = wx.createAnimation({
+          duration: 200,
+          timingFunction: "ease",
+          delay: 0
+        })
+        this.animation = animation
+        animation.translateY(300).step()
+        this.setData({
+          animationData: animation.export(),
+          myshowModalStatus: true
+        })
+        setTimeout(() => {
+          animation.translateY(0).step()
+          this.setData({
+            animationData: animation.export() // export 方法每次调用后会清掉之前的动画操作。
+          })
+        }, 200)
+      },
     // 遮罩层显示
   showModal() {
     // ////////console.log("点击了订单")
@@ -1326,19 +1380,21 @@ Page({
     }
   },
 
-  submit: function () { //提交订单
+ submit: function () { //提交订单
 
+   
     if (app.globalData.token == '') {
       wx.navigateTo({ 
         url: "/component/zation/index"
       })
       return 
     }
+
+  
+   
     var that = this
     var item = that.data.ids
     var ids = item.toString()
-
-
     if (ids != '') {
       that.subOrder(ids)
     } else {
@@ -1383,46 +1439,132 @@ Page({
     // }
 
   },
-  async subOrder(ids) { //酒店提交订单
-    var that = this
-    wx.showLoading({
-      title: '提交中',
-    })
+  select(e){
+    let id = e.currentTarget.dataset.id
+    let mydata = this.data.myhotelList
+    for(let i of mydata){
+      if(i.id == id){
+        i.select = true
+      }else{
+        i.select = false
+      }
+    }
 
+    this.setData({
+      myhotelListId:id,
+      myhotelList:mydata
+    })
     
+  },
+  async myqueren(){
+  
+    let that = this
+    var item = that.data.ids
+    var ids = item.toString()
     let res = await ajax({
       url: '/api/buy/add',
       method: 'POST',
       data: {
         buy_type: "cart",
-        // buy_type: "goods",
         ids: ids,
+        hotel_id:that.data.myhotelListId,
         is_purchase: 1,
       }
     })
-
-    
+    console.log('myqueren',res.data)
 
     if (res.data.code == 0) {
-      wx.showToast({
-        title: '提交成功',
-        icon: 'none',
-        duration: 3000
-      })
       wx.hideLoading()
       that.getHoteOrder()
       that.getCount()
       that.setData({
         listindex:3
       })
+      this.myhideBuyModal()
     } else {
+      that.subOrder(ids)
+    }
+  },
+  
+  async getHotelListMsg(){
+    let that = this
+    let myres = await ajax({
+      url:  'api/quickorder/myhotel',
+      method: 'POST',
+    })
+
+    if(myres.data.code == 0){
+      let len = []
+      for(let i of myres.data.data){
+        if(i.status != 0){
+          len.push(i) }
+      }
+        that.setData({
+          myhotelList:len
+        })
+      }else{
+        wx.showToast({
+          title: myres.data.msg,
+          icon:'none'
+        })
+      }
+  },
+
+  async subOrder(ids) { //酒店提交订单
+    var that = this
+    var item = that.data.ids
+    var ids = item.toString()
+
+  //  点击提交订单的时候 先判断 是否超过两个酒店 未审核的要不要放在里面
+    console.log('myhotelList',this.data.myhotelList)
+    if(this.data.myhotelList.length > 1){
+      that.myshowModal()
+    }else if(this.data.myhotelList.length == 1){
+
+      console.log('酒店id',that.data.myhotelList[0].id)
+
+      let res = await ajax({
+        url: '/api/buy/add',
+        method: 'POST',
+        data: {
+          buy_type: "cart",
+          ids: ids,
+          is_purchase: 1,
+          hotel_id:that.data.myhotelList[0].id,
+        }
+      })
+
+      console.log(res.data,'sdasdsa')
+  
+      if (res.data.code == 0) {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'none',
+          duration: 3000
+        })
+        wx.hideLoading()
+        that.getHoteOrder()
+        that.getCount()
+        that.setData({
+          listindex:3
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none',
+          duration: 3000
+        })
+      }
+        
+    }else{
       wx.showToast({
-        title: res.data.msg,
-        icon: 'none',
-        duration: 3000
+        title: '酒店未审核，或没有酒店',
+        icon:'none'
       })
     }
-    //console.log(res)
+  
+   
+  
   },
 
 

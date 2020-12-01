@@ -50,7 +50,7 @@
 			<image src="../../images/user/splb-sptb.png"></image>
 			<text>{{shopInfo.name}}</text>
 		</view>
-		<view class="day"><text>账期：{{shopInfo.number}}天</text></view>
+		<!-- <view class="day"><text>账期：{{shopInfo.number}}天</text></view> -->
 	</view>
 </view>
 

@@ -177,10 +177,11 @@
 				<view wx:for="{{unpaid}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 					<view class="maina">
-
+						
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-							<view class="mytitlea">订单编号：{{item.order_no}}</view>
+							<view class="mytitlea">酒店名字：{{item.hotel.h_name}}</view>
+							<view class="mytitlea">下单时间：{{item.add_time}}</view>
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
@@ -199,7 +200,7 @@
 						<view class="bottoma">
 							<view class="myaba">下单员：{{item.user.nickname}}</view>
 							<view class="queren" wx:if="{{hotel_role != 1}}" bindtap="payment" data-docat="{{item.isdocat}}"
-								data-id="{{item.id}}" data-num="{{item.detail.length}}" data-price="{{item.total_price}}">支付</view>
+								data-id="{{item.id}}" data-num="{{item.detail.length}}" data-price="{{item.total_price}}" data-list='{{item.hotel}}'>支付</view>
 						</view>
 					</view>
 				</view>
@@ -211,7 +212,8 @@
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-							<view class="mytitlea">订单编号：{{item.order_no}}</view>
+							<view class="mytitlea">酒店名字：{{item.hotel.h_name}}</view>
+							<view class="mytitlea">下单时间：{{item.add_time}}</view>
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
@@ -228,7 +230,7 @@
 
 						</view>
 						<view class="bottoma">
-							<view class="myab">{{idx + 1}}---下单员：{{item.user.nickname}}</view>
+							<view class="myab">下单员：{{item.user.nickname}}</view>
 							<view class="paidbox" wx:if="{{item.status_name != '已取消' }}">
 
 								<view class="quxiao" wx:if="{{item.shopStatus != '已接单' }}" bindtap="cancelOrder" data-id="{{item.id}}">
@@ -236,7 +238,7 @@
 								</view>
 								<view class="queren" wx:if="{{ item.pay_status_name == '待支付'   }}" bindtap="payment"
 									data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
-									data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+									data-price="{{item.total_price}}" data-list="{{item.hotel}}">{{item.pay_status_name}}({{item.status_name}})</view>
 								<view class="queren" wx:elif="{{ item.status_name == '待收货'  }}" bindtap="receivingGoods"
 									data-id="{{item.id}}">{{item.pay_status_name}}({{item.status_name}})</view>
 								<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
@@ -258,7 +260,8 @@
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}">查看详情</view>
-							<view class="mytitlea">订单编号：{{item.order_no}}</view>
+							<view class="mytitlea">酒店名字：{{item.hotel.h_name}}</view>
+							<view class="mytitlea">下单时间：{{item.add_time}}</view>
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
@@ -288,8 +291,8 @@
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-							<view class="mytitlea">订单编号：{{item.order_no}}</view>
-
+							<view class="mytitlea">酒店名字：{{item.hotel.h_name}}</view>
+							<view class="mytitlea">下单时间：{{item.add_time}}</view>
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
 									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
@@ -307,8 +310,9 @@
 						<view class="bottoma">
 							<view class="myaba">下单员：{{item.user.nickname}}</view>
 							<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
+							
 								data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
-								data-price="{{item.total_price}}">{{item.pay_status_name}}({{item.status_name}})</view>
+								data-price="{{item.total_price}}" data-list="{{item.hotel}}">{{item.pay_status_name}}({{item.status_name}})</view>
 							<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
 							<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买
 							</view>
@@ -324,7 +328,8 @@
 
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
-							<view class="mytitlea">订单编号：{{item.order_no}}</view>
+							<view class="mytitlea">酒店名字：{{item.hotel.h_name}}</view>
+							<view class="mytitlea">下单时间：{{item.add_time}}</view>
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
@@ -341,7 +346,7 @@
 
 						</view>
 						<view class="bottoma">
-							<view class="myab">{{idx + 1}}---下单员：{{item.user.nickname}}--{{item.status}}</view>
+							<view class="myab">下单员：{{item.user.nickname}}--{{item.status}}</view>
 							<view class="quxiao">{{item.pay_status_name}}({{item.status_name}})</view>
 						</view>
 					</view>
@@ -363,6 +368,7 @@
 		<view class="bo-box">
 			<view class="but3" bindtap="showModal">添加需要的商品</view>
 			<view class="but" bindtap='submit'> <text>提交订单({{ids.length}})</text></view>
+			<!-- <view class="but" bindtap='myshowModal'> <text>提交订单({{ids.length}})</text></view> -->
 		</view>
 
 	</view>
@@ -417,6 +423,7 @@
 		</view>
 	</view>
 </view>
+<!-- 自定义商品 -->
 <view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
 	<view class="myb">
@@ -444,6 +451,33 @@
 		<view class="ebox">
 			<text class="green" bindtap="hideBuyModal">取消</text>
 			<text class="yellow" bindtap="queren">确认</text>
+		</view>
+	</view>
+</view>
+
+<!-- 选择酒店 -->
+<view class="cover_screen" bindtap="myhideBuyModal" wx:if="{{myshowModalStatus}}"></view>
+<view animation="{{animationData}}" class="buy_box" wx:if="{{myshowModalStatus}}">
+	<view class="myb">
+		<view class="mybbox">
+
+			<view><text>请选择酒店</text></view>
+			<block wx:for="{{myhotelList}}" wx:key='index'>
+			<view class="pay-box" bindtap="select"  data-id="{{item.id}}">
+				<view class="wx-left">
+					<text>{{item.h_name}}</text>
+				</view>
+				<view class="wx-right">
+					<image wx:if="{{item.select}}" src="../../images/user/tjdd-gou1.png"></image>
+					<image  wx:else src="../../images/user/tjdd-gou.png"></image>
+				</view>
+			</view>
+		</block>
+		</view>
+
+		<view class="ebox">
+			<text class="green" bindtap="myhideBuyModal">取消</text>
+			<text class="yellow" bindtap="myqueren">确认</text>
 		</view>
 	</view>
 </view>

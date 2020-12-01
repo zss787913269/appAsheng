@@ -85,7 +85,7 @@
       <view>
         <image src="../../images/user/edit.png" style="width:50rpx;height:50rpx"></image>
       </view>
-      <text>注册/编辑</text>
+      <text>添加酒店</text>
     </view>
   </view>
 </view>

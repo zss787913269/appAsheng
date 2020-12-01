@@ -231,15 +231,28 @@ Page({
       url: '/api/quickorder/getHotel',
       method: 'get'
     })
-    let hotelInfo = res.data.data
 
-    if(hotelInfo == null){
-      wx.showToast({
-        title: '请先添加酒店',
-        icon:"none"
-      })
-      return 
-    }
+    
+    let hotelist = res.data.data.hotelist,hotel = res.data.data.hotel,hotelInfo=[]
+
+    if(hotelist.length == 0 && hotel == null){
+        wx.showToast({
+          title: '请先添加酒店',
+          icon:"none"
+        })
+        return 
+      
+    }else if(hotelist.length != 0 && hotel != null){
+      hotelInfo = hotelist.concat(hotel.hotel)
+    }else if(hotelist.length != 0 && hotel == null){
+       hotelInfo = hotelist
+    }else if(hotelist.length == 0 && hotel != null){
+      hotelInfo = hotelInfo.concat(hotel.hotel)
+   }
+
+    console.log('hotelInfo',hotelInfo)
+
+   
   
 
     if(that.data.jgNumber === true && that.data.selectedNumber === ""){

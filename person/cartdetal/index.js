@@ -26,7 +26,8 @@ Page({
     hoteItem:'',   //酒店订单传的数据
     addreslistName:"",
     addressid:0,
-    flag:true
+    flag:true,
+    hotel_id:''
   },
 
   /**
@@ -38,8 +39,16 @@ Page({
     this.setData({
       price: options.price,
       orderId: options.id,
-      num:options.num
+      num:options.num,
+      addreslist:options.address,
+      addreslistName:options.msg
     })
+
+    // that.setData({
+    //   addressid:addressMsg.id,
+    //   addreslist: addreslist, //收货地址信息
+    //   addreslistName:addreslistName,
+    // })
     // this.setData({
     //   price: 216.15,
     //   orderId: 186,
@@ -98,23 +107,13 @@ Page({
     let addreslist 
     let addreslistName
     let addressMsg = res.data.data.base.address
-      if(res.data.data.base.address == null){
-        let res2 = await ajax({
-          url: '/api/quickorder/getHotel',
-          method: 'get'
-        })
-   
-        addreslist = `${res2.data.data.address}`
-        addreslistName = `${res2.data.data.name} ${res2.data.data.tel}`
-        that.setData({
-          addressid:0
-        })
-       
-      }else{
+      if(res.data.data.base.address != null){
         addreslist = `${addressMsg.address}`
         addreslistName = `${addressMsg.name} ${addressMsg.tel}`
         that.setData({
-          addressid:addressMsg.id
+          addressid:addressMsg.id,
+          addreslist: addreslist, //收货地址信息
+          addreslistName:addreslistName,
         })
       }
   
@@ -125,11 +124,11 @@ Page({
  
 
     that.setData({
-      addreslist: addreslist, //收货地址信息
+
       payment_list: paymentList, //支付方式
       goods_list: res.data.data.goods_list, //订单商品
       ids: e,
-      addreslistName:addreslistName,
+   
       actual_price: res.data.data.base, //商品价格,
 
     })
