@@ -1515,7 +1515,7 @@ swiper{
 .centername{
   display: flex;
   justify-content: space-between;
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
   position: relative;
   border-bottom: 1rpx solid rgba(225,225,225,1);
 
@@ -1688,4 +1688,13 @@ swiper{
 .zymitem{
   display: flex;
   flex-direction: column;
+}
+
+.upd_price{
+  margin-left: 20rpx;
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255,117,2,1);
+  
 }

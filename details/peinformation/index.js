@@ -172,7 +172,7 @@ Page({
     console.log(url, index)
     app.globalData.token = wx.getStorageSync('token')
     wx.uploadFile({
-      url: `https://second.chchgg.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, //仅为示例，非真实的接口地址
+      url: `https://wxapp.mccxx.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`, //仅为示例，非真实的接口地址
       filePath: url,
       name: 'image',
       formData: {

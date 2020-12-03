@@ -1,8 +1,11 @@
 {
   "pages": [ 
-    "pages/index/index",
-    "pages/user/index",
+    
     "pages/cart/index",
+    "pages/index/index",
+    "component/zation/index",
+  
+    "pages/user/index",
     "private/hotelinfo/index",
     "details/editShopGoods/index",
     "details/addshop/index",  
@@ -76,7 +79,6 @@
     "private/staff/index",
     "private/Reply/index",
     "private/placeOrder/index",
-    "component/zation/index",
     "private/superman/index"
   
   ],

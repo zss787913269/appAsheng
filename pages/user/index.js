@@ -15,7 +15,7 @@ Page({
     url1: '/person/integral/index',
     url2: '/person/balance/index',
     ads: ['/images/temp/ad.jpg', '/images/temp/ad_2.jpg'],
-    imgulr: "https://second.chchgg.com/static/banner/wxapp/common/",
+    imgulr: "https://wxapp.mccxx.com/static/banner/wxapp/common/",
     optionList2: {
       id: 1,
       name: '私厨',

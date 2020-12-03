@@ -179,7 +179,7 @@
 
             <view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
 
-              <image wx:if="{{list.images}}" src="https://second.chchgg.com{{list.images}}" class="img"></image>
+              <image wx:if="{{list.images}}" src="https://wxapp.mccxx.com{{list.images}}" class="img"></image>
               <image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
             </view>
 
@@ -222,7 +222,7 @@
         <view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
         <view class="imgbox">
           <image wx:if="{{list.images}}" wx:for="{{item.details}}" wx:for-item="list"
-            src="https://second.chchgg.com{{list.images}}" wx:key="index" class="img"></image>
+            src="https://wxapp.mccxx.com{{list.images}}" wx:key="index" class="img"></image>
 
           <!-- <view class="more"	bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{4}}" >. . .</view> -->
 

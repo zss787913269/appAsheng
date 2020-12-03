@@ -1080,7 +1080,7 @@ getRect4(ele) {
         itemFor.forEach(item1 => {
           item1.hidden = true
           if (item1.images) {
-            item1.images = 'https://second.chchgg.com' + item1.images
+            item1.images = 'https://wxapp.mccxx.com' + item1.images
           }
 
             

@@ -93,7 +93,7 @@
 		<view wx:if="{{listindex == 2}}">
 			<view class="main">
 				<view class="left">
-					<scroll-view scroll-y="true" class="ss" style="height: 900rpx" scroll-into-view="true"
+					<scroll-view scroll-y="true" class="ss" style='height:{{screenHeight}}px' scroll-into-view="true"
 						scroll-with-animation="true">
 						<view wx:for="{{commonList}}" wx:key="unique" class="leftbox2">
 							<view bindtap="clickLeftItem" data-id="{{item.id}}"
@@ -105,7 +105,7 @@
 					</scroll-view>
 				</view>
 				<view class="right">
-					<scroll-view scroll-y="true" style="height: 800rpx" scroll-with-animation="true"
+					<scroll-view scroll-y="true" style='height:{{screenHeight}}px' scroll-with-animation="true"
 						scroll-into-view="{{'inToview'+classfiySelect}}">
 						<checkbox-group bindchange="checkboxChange2">
 							<view wx:for="{{commonList}}" wx:key="unique">
@@ -135,11 +135,11 @@
 											<view class="right-item-gg">
 												<text>{{items.spec[0].value}}</text>
 											</view>
-											<view>
-												<view class="right-item-remove">
+											<!-- <view>
+												<view class="right-item-remove" bindtap="removeComment" data-id="{{items}}">
 													<image src="../../images/index/gwc-ljt@2x.png"></image>
 												</view>
-											</view>
+											</view> -->
 										</view>
 									</view>
 								</view>
@@ -185,7 +185,7 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
@@ -217,7 +217,7 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
@@ -265,7 +265,7 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
@@ -295,7 +295,7 @@
 							<view class="mytitlea">下单时间：{{item.add_time}}</view>
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
@@ -333,7 +333,7 @@
 
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
-									<image wx:if="{{list.images}}" src="https://second.chchgg.com/{{list.images}}" class="imga"></image>
+									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
 									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
@@ -377,8 +377,10 @@
 </view>
 
 <view class="bottom" wx:if="{{listindex == 2}}">
-	<view class="bbox"></view>
+	<!-- <view><checkbox checked="{{checkedAll}}" color='#3B9EF5' /><text class="xz">全选</text></view> -->
+	<view></view>
 	<view class="btno2">
+	
 		<view class="but2" bindtap='cartAdd'> 加入到购物车（{{carlen}}）</view>
 	</view>
 </view>

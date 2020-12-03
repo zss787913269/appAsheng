@@ -56,7 +56,7 @@
 		
 					<view bindtap="clickse" data-id="{{item.id}}" data-item="{{item}}" data-index="{{index}}">
 					<view class="topimg">
-						<image  wx:if="{{item.images}}" lazy-load="true" src="https://second.chchgg.com/{{item.images}}"></image>
+						<image  wx:if="{{item.images}}" lazy-load="true" src="https://wxapp.mccxx.com/{{item.images}}"></image>
 						<image  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 					</view>
 					<view class="centername">

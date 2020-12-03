@@ -25,7 +25,7 @@ Page({
     var that = this
    let code =  wx.getStorageSync('QRcode')
     that.setData({
-        code:`https://second.chchgg.com/${code}`
+        code:`https://wxapp.mccxx.com/${code}`
     })
     console.log(that.data.code)
   },

@@ -62,18 +62,28 @@ Page({
     yfk: "",
     dys: "",
     ywc: "",
+    screenHeight:"",
   },
 
   onLoad: function (options) {
 
     //console.log("options",options)
-
+    let that = this
     this.getHotel()
     this.getTopCount()
     this.getCount()
     this.getHotelOrderDetail()
     this.getCommon()
     this.getOK()
+
+    wx.getSystemInfo({
+      success (res) {
+        that.setData({
+          screenHeight:res.windowHeight - 150
+        })
+        console.log("屏幕高度",that.data.screenHeight)
+      }
+    })
 
 
       if(options.page == 2){
@@ -91,7 +101,9 @@ Page({
     this.getHotelListMsg()
   },
 
-  
+  removeComment(e){
+    console.log("商品",e.currentTarget)
+  },
 
   async cancelOrder(e) { //取消订单
     var that = this
@@ -234,7 +246,7 @@ Page({
         icon: 'none',
         duration: 3000
       })
-      that.getHotelOrderDetail()
+      that.getHoteOrder()
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -445,7 +457,7 @@ Page({
     })
     let commomIds = []
     let list = res.data.data
-    //console.log("常用清单", res.data.data)
+
 
 
     if (res.data.code == 0) {
@@ -464,12 +476,15 @@ Page({
       carlen = commomIds.length
     }
 
+  
+
 
 
     this.setData({
       commonList: list,
       carlen
     })
+    // console.log('常买清单',this.data.commonList)
 
   },
   async config(e) {
@@ -1002,7 +1017,7 @@ Page({
     for (let i of list) {
       for (let j of i.goods) {
         j.isSelected = !j.isSelected
-
+        // 当天 昨天 三天前 一周前 一个月
         if (this.data.checkedAll == false) {
           j.isSelected = true
         }
@@ -1270,6 +1285,8 @@ Page({
   checkboxChange2(e) {
     let value = e.detail.value
 
+    console.log(value)
+
 
     if (value.length == 0) {
       this.setData({
@@ -1308,6 +1325,8 @@ Page({
       })
       return
     }
+
+    console.log('sssss',this.data.cartList.length)
     if (this.data.cartList.length == 0) {
       for (let i of that.data.commonList) {
         for (let j of i.goods) {
@@ -1322,28 +1341,30 @@ Page({
           that.cartSend(params)
         }
       }
-    }
+    }else{
 
+      for (let i of carData) {
 
-    for (let i of carData) {
-
-      let spec = [{
-        type: i[2],
-        value: i[3]
-      }]
-
-      let params = {
-        is_purchase: 1,
-        goods_id: i[0], //商品id
-        stock: i[1], //商品数量  
-        // 商品规格
-        spec: spec,
-        goods_mark: ""
+        let spec = [{
+          type: i[2],
+          value: i[3]
+        }]
+  
+        let params = {
+          is_purchase: 1,
+          goods_id: i[0], //商品id
+          stock: i[1], //商品数量  
+          // 商品规格
+          spec: spec,
+          goods_mark: ""
+        }
+        that.cartSend(params)
       }
-      that.cartSend(params)
     }
+
+
     // //console.log("cartAdd", this.data.cartList)
-    // //console.log("常用清单", this.data.commonList)
+    // console.log("常用清单", this.data.commonList)
 
   },
 
@@ -1358,13 +1379,13 @@ Page({
 
     //console.log("加入购物车", res.data)
 
+      wx.showLoading({
+        title: '正在加入',
+
+      })
 
     if (res.data.code == 0) {
-      wx.showToast({
-        title: "加入购物车成功",
-        icon: 'none',
-        duration: 3000
-      })
+     wx.hideLoading()
       this.getCount()
       this.setData({
         listindex: 1

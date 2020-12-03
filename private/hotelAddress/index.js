@@ -60,7 +60,9 @@ Page({
     street: '', //当前选择的街道
     streetId: '', //当前选择的街道id   
     type:"",
-    show:true
+    show:true,
+    hotelInfoId:""
+   
   },
 
   /**
@@ -69,8 +71,14 @@ Page({
   onLoad: function(options) {
     var that = this
     // that.getToekn()
-    // that.getHotel()
-   
+
+   console.log(options.id)
+
+   this.setData({
+    hotelInfoId:options.id
+   })
+   that.getHotel()
+
     this.WxValidate = app.wxValidate({
       fullName: {
         required: true,
@@ -194,36 +202,24 @@ Page({
   },
   async getHotel() { //获取酒店
     var that = this
+    console.log(that.data.hotelInfoId,'id')
     let res = await ajax({
-      url: '/api/quickorder/getHotel',
-      method: 'get'
+      url: '/api/quickorder/getHotelInfo',
+      method: 'get',
+      data:{
+        id:that.data.hotelInfoId
+      }
+
     })
     let hotelInfo = res.data.data
 
-   
+         console.log(res.data)
 
     if (res.data.data != null) {
 
-      console.log(hotelInfo)
    
-      let userid = wx.getStorageSync('userid')
-      let htype,roleId
-  
+
    
-  
-      if(hotelInfo.user_id != userid){
-          htype = Number(hotelInfo.usertype)
-          roleId = Number(hotelInfo.usertype)
-          this.setData({
-            show:false
-          })
-      }else{
-         htype = Number(hotelInfo.type) - 1
-         roleId = Number(hotelInfo.type)
-         this.setData({
-          show:true
-        })
-      }
    
   
       that.setData({
@@ -233,8 +229,8 @@ Page({
         address: hotelInfo.address, //地址
         tel: hotelInfo.tel, //联系方式
         hotelId: hotelInfo.id,      
-        type:htype,
-        roleId:roleId,
+        type:hotelInfo.type -1,
+        roleId:hotelInfo.type -1,
         region:hotelInfo.region.split(",")
       })
     }

@@ -98,6 +98,7 @@
 								<image wx:if="{{items.images}}" lazy-load="true" src="{{items.images}}"></image>
 								<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
 							</view>
+							<view class="upd_price" wx:if="{{items.upd_day != '' && items.upd_days <= 7}}"><text>价格更新：{{items.upd_day}}</text></view>
 							<view class="centername">
 								<view class="carlogo">
 									<image src="../../images/index/car.png"></image>
@@ -107,6 +108,7 @@
 									<view class="nameprice"><text class="my1">￥</text><text class="my2">{{items.price}}</text><text
 											class="my3">/{{items.inventory_unit}}</text></view>
 								</view>
+							
 								<view class="rightname"><text>{{items.brand_name}}</text>
 								</view>
 							</view>
