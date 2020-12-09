@@ -91,26 +91,28 @@
 		<scroll-view scroll-y="true" style="height:1000rpx" scroll-with-animation="true" bindscroll="scroll"
 			scroll-into-view="{{'inToview'+classfiySelect2}}">
 			<view wx:for="{{tableListone}}" class="leftTitle" wx:if="{{item.goods !=''}}" wx:key="unique">
-				<view id="{{'inToview'+item.id}}">
+				<view id="{{'inToview'+item.id}}" class="felxboxitem">
 					<block wx:for="{{item.goods}}" wx:for-item="items" wx:key="index">
 						<view bindtap="clickse" data-id="{{items}}" data-index="{{index}}" class="zymitem">
 							<view class="topimg">
 								<image wx:if="{{items.images}}" lazy-load="true" src="{{items.images}}"></image>
-								<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
-							</view>
-							<view class="upd_price" wx:if="{{items.upd_day != '' && items.upd_days <= 7}}"><text>价格更新：{{items.upd_day}}</text></view>
-							<view class="centername">
+								<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
 								<view class="carlogo">
 									<image src="../../images/index/car.png"></image>
 								</view>
+								<view class="upd_price" wx:if="{{items.upd_day != '' && items.upd_days <= 7}}"><text>价格更新：{{items.upd_day}}</text></view>
+							</view>
+						
+							<view class="centername">
+								
+							
 								<view class="leftname">
-									<view class="{{classfiySelect == item.id ? 'nametitle_active' : 'nametitle' }}">{{items.title}}</view>
+									<view class="{{classfiySelect == item.id ? 'nametitle_active' : 'nametitle' }}"><text>{{items.title}}</text></view>
 									<view class="nameprice"><text class="my1">￥</text><text class="my2">{{items.price}}</text><text
 											class="my3">/{{items.inventory_unit}}</text></view>
 								</view>
 							
-								<view class="rightname"><text>{{items.brand_name}}</text>
-								</view>
+								<!--		 <view class="rightname"><text>{{items.brand_name}}</text></view> 	-->
 							</view>
 
 							<!--		<view class="bottomName" data-value="{{item.name}}" bindtap="toOldFood">

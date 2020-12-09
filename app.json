@@ -1,10 +1,10 @@
 {
-  "pages": [ 
-    
-    "pages/cart/index",
+  "pages": [
     "pages/index/index",
+    "pages/pageListTwo/index",
+    "pages/pageListOne/index", 
+    "pages/cart/index",
     "component/zation/index",
-  
     "pages/user/index",
     "private/hotelinfo/index",
     "details/editShopGoods/index",

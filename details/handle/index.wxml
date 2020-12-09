@@ -51,8 +51,8 @@
               <!--  <view class="mytitle2" bindtap="opendig" data-item="{{items}}">-->
               <view class="right-img">
 
-                <image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
-                <image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+                <image wx:if="{{items.images}}" src="https://wxapp.mccxx.com{{items.images}}"></image>
+                <image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
               </view>
               <view class="right-title">
                 <!-- <view class="top-title">{{items.title}}</view> -->
@@ -138,8 +138,8 @@
 
                     <checkbox value="{{items.title}},{{items.specvalue}},{{items.buy_number}},{{items.original_price}}"
                       checked="{{item.checked}}" />
-                    <image wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"></image>
-                    <image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+                    <image wx:if="{{items.images}}" src="https://wxapp.mccxx.com{{items.images}}"></image>
+                    <image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
                   </view>
                   <view class="right-title">
                     <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
@@ -180,7 +180,7 @@
             <view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
 
               <image wx:if="{{list.images}}" src="https://wxapp.mccxx.com{{list.images}}" class="img"></image>
-              <image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+              <image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="img"></image>
             </view>
 
           </view>

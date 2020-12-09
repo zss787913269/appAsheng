@@ -83,7 +83,7 @@ Page({
       })
 
     }.bind(this), 200)
-  },
+  },  
     // 遮罩层显示
   showModal2() {
     // ////////console.log("点击了订单")
@@ -835,7 +835,7 @@ Page({
     if (res.data.code == 0) {
     
       let price = res.data.data.price
-      let imgurl = 'http://second.chchgg.com'+res.data.data.goods.images
+      let imgurl = 'https://wxapp.mccxx.com'+res.data.data.goods.images
       let shopName = res.data.data.goods.title
       //console.log(res.data.data)
 
@@ -851,5 +851,11 @@ Page({
       // })
     }
   },
+
+  goCart(){
+    wx.reLaunch({
+      url: "/pages/cart/index?show=1",
+    })
+  }
  
 })

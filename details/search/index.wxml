@@ -1,162 +1,151 @@
 <wxs src="./index.wxs" module="utils" />
-<view class="header" >
-  
-  <view class="myinputbox">
+<view class="header">
+
+	<view class="myinputbox">
 		<image src="../../images/user/rmss-fdj.png"></image>
-    <input placeholder="搜索商品" placeholder-class="placeholder" confirm-type="search"   bindinput="int" value="{{value}}">
-    </input>
-		 <view class="user-header-name" bindtap="searchResult" >
-     <text class="with">搜索</text>	
+		<input placeholder="搜索商品" placeholder-class="placeholder" confirm-type="search" bindinput="int" value="{{value}}">
+		</input>
+		<view class="user-header-name" bindtap="searchResult">
+			<text class="with">搜索</text>
 		</view>
 
 		<!--	<view class="user-header-name" bindtap="qc" >
      <text class="with">清除</text>	
  	 </view>	-->
-		
-  </view>
- 
+
+	</view>
+
 </view>
 
 
-	<view class="nolist" wx:if="{{showbtn}}">
+<view class="nolist" wx:if="{{showbtn}}">
 
-		<view class="yuan">
-			<image  src="../../images/user/rmss-qs.png"></image>
-		</view>
-		
-		<view class="want"><text>没有找到想要的商品？</text></view>
-		<view class="addshop"  bindtap="showModal2"><text>添加您需要的商品</text></view>
-		
+	<view class="yuan">
+		<image src="../../images/user/rmss-qs.png"></image>
 	</view>
 
-	<view class="searchTitle" wx:if="{{showTitle}}">
-		
-				<text class="text33" wx:for="{{searchTitle}}" wx:key="idnex" bindtap="searchPage" data-text="{{item}}">{{item}}</text>
-			
-	</view>
-
-<view class="hotSearch"  wx:if="{{false}}" >
-<!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
-  <view class="hotSearch-title">热门搜索</view>
-  <view class="hotSearch-conter" >
-    <text class="texts" wx:for="{{hotSearch}}" wx:key="idnex" bindtap="searchPage" data-text="{{item}}">{{item}}</text>
-  </view>
-  <view class="hotSearch-title2">历史记录</view>
-  <view class="hotSearch-conter">
-    <text class="texts2"  wx:for="{{meSearch}}" wx:key="idnex">{{item}}</text>
-  </view>
-</view>
-
-
-	<view class="mainbox">
+	<view class="want"><text>没有找到想要的商品？</text></view>
+	<view class="addshop" bindtap="goCart"><text>添加您需要的商品</text></view>
 	
-		
-			<view wx:for="{{searchList}}" class="leftTitle"  wx:key="unique">
-					
-		
-					<view bindtap="clickse" data-id="{{item.id}}" data-item="{{item}}" data-index="{{index}}">
-					<view class="topimg">
-						<image  wx:if="{{item.images}}" lazy-load="true" src="https://wxapp.mccxx.com/{{item.images}}"></image>
-						<image  wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
-					</view>
-					<view class="centername">
-					<view class="carlogo">
-						<image src="../../images/index/car.png"></image>
-					</view>
-						<view class="leftname">
-							<!-- <view class="nametitle">{{items.title}}</view> -->
-								<view class="nametitle">{{item.title}}</view>
-							<view class="nameprice"><text class="my1">￥</text><text class="my2">{{item.price}}</text><text class="my3">/{{item.inventory_unit}}</text></view>
-						
-						</view>
-						<view class="rightname"><text>{{item.brand_name}}</text>
-						
-						</view>
-					</view>
-					<!-- <view class="bottomName" bindtap="toOldFood" data-value="{{item.name}}"> -->
-				<!-- <view class="bottomName" >
+
+</view>
+
+<view class="searchTitle" wx:if="{{showTitle}}">
+
+	<text class="text33" wx:for="{{searchTitle}}" wx:key="idnex" bindtap="searchPage" data-text="{{item}}">{{item}}</text>
+
+</view>
+
+<view class="hotSearch" wx:if="{{false}}">
+	<!-- <view class="hotSearch"  wx:if="{{historicalRecord}}"> -->
+	<view class="hotSearch-title">热门搜索</view>
+	<view class="hotSearch-conter">
+		<text class="texts" wx:for="{{hotSearch}}" wx:key="idnex" bindtap="searchPage" data-text="{{item}}">{{item}}</text>
+	</view>
+	<view class="hotSearch-title2">历史记录</view>
+	<view class="hotSearch-conter">
+		<text class="texts2" wx:for="{{meSearch}}" wx:key="idnex">{{item}}</text>
+	</view>
+</view>
+
+
+<view class="mainbox">
+
+
+	<view wx:for="{{searchList}}" class="leftTitle" wx:key="unique">
+
+
+		<view bindtap="clickse" data-id="{{item.id}}" data-item="{{item}}" data-index="{{index}}">
+			<view class="topimg">
+				<image wx:if="{{item.images}}" lazy-load="true" src="https://wxapp.mccxx.com/{{item.images}}"></image>
+				<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
+			</view>
+			<view class="centername">
+				<view class="carlogo">
+					<image src="../../images/index/car.png"></image>
+				</view>
+				<view class="leftname">
+					<!-- <view class="nametitle">{{items.title}}</view> -->
+					<view class="nametitle">{{item.title}}</view>
+					<view class="nameprice"><text class="my1">￥</text><text class="my2">{{item.price}}</text><text
+							class="my3">/{{item.inventory_unit}}</text></view>
+
+				</view>
+				<view class="rightname"><text>{{item.brand_name}}</text>
+
+				</view>
+			</view>
+			<!-- <view class="bottomName" bindtap="toOldFood" data-value="{{item.name}}"> -->
+			<!-- <view class="bottomName" >
 					<i class="fal fa-angle-double-right myri"></i>
 					<text class="r2" >点击查看新菜推荐</text>
 					</view> -->
-				</view>
-					
-	
-			
-				</view>
+		</view>
 
-	
+
+
 	</view>
 
 
-	<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
-			<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
-	
-			<view class="myb">
-			<view class="mflex">
-				<view class="imgb"><image class="imgurl" src="{{imgurl}}"></image></view>
-				<view>
-					<view class="mname">{{shopName}}</view>
-					<view class="shopPrice"><text>￥</text>{{utils.getPrice(shopPrice,num)}}</view>
-				</view>
-			</view>
-				<view>	<image bindtap="clickcancel" class="myclose" src="../../images/index/gwc-gb@2x.png"></image></view>
-			</view>
-				<view class="gg">
-					<view class="one" wx:for="{{tableid}}" wx:key="key">
-						<text class="jt">{{item.title}}</text>
-						<view class="onebox">
-							<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}" data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
-								<text class="{{itemName == true ? 'itemActive':'item'}}"  >{{indexName}} </text>
-							</view>
-						</view>
-					</view>
-				</view>
-        <view class="bz">
-          <text>备注： </text>
-          <input placeholder="请输入备注" placeholder-style="color:rgba(170,170,170,1);font-size:24rpx;" bindinput="modalInput" data-name="inputBz"></input>
-        </view>
-				<view class="liang">
-					<!-- <view class="mycount" >购买数量 </view>
-						<view class="addbox">
-							<view  class="jiabox" bindtap="bindPlus">
-							<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
-						</view>
-						<view class="numbercount">
-							<input type="number" bindchange="bindManual" value="{{num}}" />
-						</view>
-						<view  class="jiabox" bindtap="bindMinus">
-						<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
-						</view>
-						</view> -->
-				</view>
+</view>
 
-				<view class="mybottom">
-					<view class="btn2" >
-					<!-- <image class="gscg" src="../../images/index/gwc-grcg@2x.png"></image>
-						<text>个人采购</text> -->
-					
-						
-								<view class="addbox">
-									<view  class="jiabox" bindtap="bindPlus">
-										<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
-									</view>
-									<view class="numbercount">
-										<input type="number" bindchange="bindManual" value="{{num}}" />
-									</view>
-									<view  class="jiabox" bindtap="bindMinus">
-										<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
-									</view>
-								</view>
-		
 
-					</view>
-						<view class="btn1" bindtap="determine">
-						<image class="gscg1" src="../../images/index/gwc-gscg@2x.png"></image>
-						<text>加入购物车</text>
-					</view>
-					
+<view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
+
+	<view class="myb">
+		<view class="mflex">
+			<view class="imgb">
+				<image class="imgurl" src="{{imgurl}}"></image>
+			</view>
+			<view>
+				<view class="mname">{{shopName}}</view>
+				<view class="shopPrice"><text>￥</text>{{utils.getPrice(shopPrice,num)}}</view>
+			</view>
+		</view>
+		<view>
+			<image bindtap="clickcancel" class="myclose" src="../../images/index/gwc-gb@2x.png"></image>
+		</view>
+	</view>
+	<view class="gg">
+		<view class="one" wx:for="{{tableid}}" wx:key="key">
+			<text class="jt">{{item.title}}</text>
+			<view class="onebox">
+				<view style="margin-top:20rpx" wx:for="{{item.value}}" wx:key="unique" data-index="{{indexName}}"
+					data-indx="{{item.title}}" bindtap="clickgui" wx:for-item="itemName" wx:for-index="indexName">
+					<text class="{{itemName == true ? 'itemActive':'item'}}">{{indexName}} </text>
 				</view>
 			</view>
+		</view>
+	</view>
+	<view class="bz">
+		<text>备注： </text>
+		<input placeholder="请输入备注" placeholder-style="color:rgba(170,170,170,1);font-size:24rpx;" bindinput="modalInput"
+			data-name="inputBz"></input>
+	</view>
+	<view class="mybottom">
+		<view class="btn2">
+			<view class="addbox">
+				<view class="jiabox" bindtap="bindPlus">
+					<image class="addjian" src="../../images/index/gwc-jia@2x.png"></image>
+				</view>
+				<view class="numbercount">
+					<input type="number" bindchange="bindManual" value="{{num}}" />
+				</view>
+				<view class="jiabox" bindtap="bindMinus">
+					<image class="addjian" src="../../images/index/gwc-jian@2x.png"></image>
+				</view>
+			</view>
+
+
+		</view>
+		<view class="btn1" bindtap="determine">
+			<image class="gscg1" src="../../images/index/gwc-gscg@2x.png"></image>
+			<text>加入购物车</text>
+		</view>
+
+	</view>
+</view>
 
 
 
@@ -169,25 +158,28 @@
 		<view class="mybbox1">
 			<view class="dbox1">
 				<view class="text-box1"><text>商品名：</text></view>
-				<view class="input-box1"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}" placeholder-class="placeholder"></input></view>
+				<view class="input-box1"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}"
+						placeholder-class="placeholder"></input></view>
 			</view>
 			<view class="dbox1">
-				<view class="text-box1"><text>数    量：</text></view>
-				<view class="input-box1"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}" placeholder-class="placeholder"></input></view>
+				<view class="text-box1"><text>数 量：</text></view>
+				<view class="input-box1"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}"
+						placeholder-class="placeholder"></input></view>
 
 			</view>
 			<view class="dbox1">
-				<view class="text-box1"><text>备    注：</text></view>
-				<view class="input-box1"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}" placeholder-class="placeholder"></input></view>
+				<view class="text-box1"><text>备 注：</text></view>
+				<view class="input-box1"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}"
+						placeholder-class="placeholder"></input></view>
 			</view>
 
 			<view class="tip1">
-				<text >此商品：临时划价为10.00元，后期结算，多还少补</text>
+				<text>此商品：临时划价为10.00元，后期结算，多还少补</text>
 			</view>
 
 		</view>
 		<view class="ebox1">
-			<text class="green"  bindtap="hideBuyModal2">取消</text>
+			<text class="green" bindtap="hideBuyModal2">取消</text>
 			<text class="yellow" bindtap="queren">确认</text>
 		</view>
 

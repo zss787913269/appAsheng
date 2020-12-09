@@ -6,6 +6,7 @@ const app = getApp()
 
 Page({
   data: {
+    selectedNumber:0,
     myhotelListId:"",//当多个酒店的时候 选择的酒店
     myhotelList:[],
     hotelstatus:"",
@@ -39,7 +40,7 @@ Page({
     hotelCount: "",
     pcount: "",
     title: "",
-    num2: "",
+    num2: 1,
     spec: "",
     listindex: 1,
     hotelOrderDetail: [],
@@ -63,11 +64,23 @@ Page({
     dys: "",
     ywc: "",
     screenHeight:"",
+    searchTitle:"",
+    searchnHeight:"",
+    seachList:[],
+    clickList:[],
+    showList:false,//自定义商品的搜索
+    showSpec:false,//点击关键字的时候 规格的显示
+    shopingid:"",//商品id
+    getShopPrice:""
+    
   },
 
   onLoad: function (options) {
 
-    //console.log("options",options)
+    console.log("options",options)
+    if(options.show){
+      this.showModal()
+    }
     let that = this
     this.getHotel()
     this.getTopCount()
@@ -92,6 +105,255 @@ Page({
         })
       }
 
+  },
+  searchPage(e){
+    var that = this
+    let item = e.currentTarget.dataset.text
+
+    this.setData({
+      shopingid:item.id,
+      getShopPrice:item.price
+    })
+    console.log(item)
+    let arr = []
+    item.spec_base.forEach((item)=>{  
+      if(item.title.indexOf("加工") == 0){
+        arr.push(item)
+      }else{
+        arr.unshift(item)
+      }
+    })
+
+    let tab = arr
+    let tabCopy = JSON.parse(JSON.stringify(tab))
+    for (var i = 0; i < tabCopy.length; i++) {
+      tabCopy[i].value = {}
+    }
+    for (var i = 0; i < tab.length; i++) {
+      for (var j = 0; j < tab[i].value.length; j++) {
+        if (i == 0 && j == 0) {
+          tabCopy[i].value[tab[i].value[j]] = true
+        } else {
+          tabCopy[i].value[tab[i].value[j]] = false
+        }
+      }
+    }
+    console.log("tabCopy",tabCopy)
+     that.setData({
+       clickList:tabCopy,
+       title:e.currentTarget.dataset.text.title,
+       showSpec:true,
+       showList:false
+     })
+     //console.log(that.data.value)
+    // that.searchResult()
+  },
+  clickgui: function (e) {
+    var that = this;
+    let tableId = that.data.clickList
+    for (var i = 0; i < tableId.length; i++) {
+      if (tableId[i].title == e.currentTarget.dataset.indx) {
+        if (tableId[i].value[e.currentTarget.dataset.index] == true) {
+          tableId[i].value[e.currentTarget.dataset.index] = false
+          if (tableId[i].title.indexOf("净体") == 0) {
+            that.setData({
+              selectedNumber: ""
+            })
+          } else if (tableId[i].title.indexOf("活体") == 0) {
+            that.setData({
+              selectedNumber: ""
+            })
+          }
+
+        } else {
+          for (let j in tableId[i].value) {
+            tableId[i].value[j] = false
+            tableId[i].value[e.currentTarget.dataset.index] = true
+            if ((tableId[i].title.indexOf("净体") == 0 || tableId[i].title.indexOf("活体") == 0) && tableId.length > 2) {
+              if (tableId[i].title.indexOf("净体") == 0) {
+                that.data.selectedNumber = 0
+              } else if (tableId[i].title.indexOf("活体") == 0) {
+                that.data.selectedNumber = 1
+              }
+              if (tableId[0].value[j]) {
+                for (let z in tableId[1].value) {
+                  tableId[1].value[z] = false
+                  tableId[i].value[e.currentTarget.dataset.index] = true
+                }
+
+              }
+              if (tableId[1].value[j]) {
+                for (let z in tableId[0].value) {
+                  tableId[0].value[z] = false
+                  tableId[i].value[e.currentTarget.dataset.index] = true
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+    this.getprice()
+    
+    that.setData({
+      clickList: tableId
+    })
+ 
+  },
+  async getprice(){
+    
+    let spex = []
+    let that = this
+    let list = this.data.clickList
+    for (var i = 0; i < list.length; i++) {
+      for (let j in list[i].value) {
+        if (list[i].value[j] == true) {
+          let obj = {}
+          obj.type = list[i].title
+          obj.value = j
+          spex.push(obj)
+        }
+      }
+    }
+    let par = {
+      id: this.data.shopingid,
+      spec:spex
+    }
+   
+    console.log("par",par)
+
+    let res2 = await ajax({
+      url: '/api/goods/SpecDetail',
+      method: 'POST',
+      data: par
+    })
+
+    if(res2.data.code == 0){
+      that.setData({
+        getShopPrice:res2.data.data.price
+      })
+    }
+
+    console.log("价格",res2.data.data)
+  },
+  async cartSave(){
+    let that = this
+    let spex = []
+    let list = that.data.clickList
+    for (var i = 0; i < list.length; i++) {
+      for (let j in list[i].value) {
+        if (list[i].value[j] == true) {
+          let obj = {}
+          obj.type = list[i].title
+          obj.value = j
+          spex.push(obj)
+        }
+      }
+    }
+
+  
+    let params = {
+      goods_id: that.data.shopingid, //商品id
+      stock: that.data.num2, //商品数量  
+      // 商品规格
+      spec: spex,
+      goods_mark: that.data.spec,
+      is_purchase: 1
+    }
+
+    if(params.spec.length == 1){
+      if(params.spec[0].type.indexOf('加工') == 0){
+      wx.showToast({
+        title: '不能单选加工项,请重新选择',
+        icon:"none"
+      })
+      return 
+    }
+    }
+    console.log(params)
+
+
+   
+    let res = await ajax({
+      url: 'api/cart/save',
+      method: 'POST',
+      data: params
+    })
+
+    console.log(res.data)
+
+     if(res.data.code == 0){
+        wx.showToast({
+          title: "加入成功",
+          icon: 'none',
+          duration: 3000
+        })
+        this.hideBuyModal()
+        this.getCount()
+    }else{
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'none',
+        duration: 3000
+      })
+    }
+
+  },
+  async searchTitleList(){
+    let that = this
+
+    let parmes = {
+      keywords:that.data.title,
+    }
+    
+    let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
+
+    
+    if(res.data.code  == 0){
+      console.log("ssssdsadsadsa",res.data.data.slice(0,10))
+      let sList 
+
+      if(res.data.data.length < 10){
+        sList = res.data.data
+      }else{
+        sList = res.data.data.slice(0,10)
+      }
+
+
+
+      if(sList.length != 0){
+        that.setData({
+          searchnHeight:sList.length * 20,
+        })
+      }else{
+        that.setData({
+          searchnHeight:0,
+          showList:true
+        })
+      }
+
+      this.setData({
+        searchTitle:sList,
+        showList:true,
+        showSpec:false
+      })
+    }else{
+      that.setData({
+        searchnHeight:0,
+        searchTitle:[],
+        showList:false,
+        showSpec:false
+      })
+    }
+
+  
+  
+
+   
+      // console.log(title)
+    
   },
   onShow: function () {
     this.getHotel()
@@ -311,7 +573,12 @@ Page({
     // this.changeState()
     // 隐藏遮罩层
     this.setData({
-      jgNumber: false,num:1
+      jgNumber: false,num:1,
+      title:"",
+      showSpec:false,
+      showList:false,
+      num2:1
+
     })
     var animation = wx.createAnimation({
       duration: 200,
@@ -633,10 +900,19 @@ Page({
   },
   inputname(e) {
     let value = e.detail.value;
-
+    let that = this
     this.setData({
-      title: value
+      title: value,
     })
+
+
+    if(value == ''){ 
+      that.setData({
+        searchTitle:[]
+      })
+    }
+
+    this.searchTitleList()
   },
   inputnum(e) {
     let value = e.detail.value;
@@ -954,13 +1230,9 @@ Page({
       data: params
     })
 
-  
-    // for (let i of res.data.data) {
-    //   for (let j of i.goods) {
-     
-    //     console.log("商品：",j.title+"-----"+"数量：",j.stock)
-    //   }
-    // }
+    
+    console.log("购物车",res.data)
+   
 
     if (res.data.code == 0) {
       let list = res.data.data

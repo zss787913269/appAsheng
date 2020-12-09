@@ -33,7 +33,7 @@
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
 						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
-						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
 					</view>
 				</view>
@@ -65,7 +65,7 @@
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
 						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
-						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
 					</view>
 				</view>
@@ -113,7 +113,7 @@
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
 						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
-						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
 					</view>
 				</view>
@@ -146,7 +146,7 @@
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
 						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
-						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
 					</view>
 				</view>
@@ -185,7 +185,7 @@
 				<view class="imgbox">
 					<view wx:for="{{item.items}}" wx:for-item="list" wx:key="index" class="boxfelx">
 						<image wx:if="{{list.images}}" src="{{list.images}}" class="img"></image>
-						<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="img"></image>
+						<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="img"></image>
 						<text class="flex-title">{{list.title}}</text>
 					</view>
 				</view>

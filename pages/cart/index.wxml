@@ -4,7 +4,6 @@
 
 	<view>
 		<view class="mylist">
-
 			<view bindtap="clickindex" data-index="1" class="{{listindex == 1 ? 'list-box_active' : 'list-box'}}">
 				<text>购物车清单({{hotelCount == 0 ? 0 :hotelCount}})</text></view>
 			<view bindtap="clickindex" data-index="2" class="{{listindex == 2 ? 'list-box_active' : 'list-box'}}">
@@ -43,9 +42,9 @@
 								<view class="itemed" wx:for="{{item.goods}}" wx:key="unique" wx:for-item="items">
 									<checkbox class="checked" value="{{items.id}}" checked="{{items.isSelected}}" color='#3B9EF5' />
 									<view class="zymbox">
-										<image class="myimg" wx:if="{{items.images}}" src="http://second.chchgg.com{{items.images}}"
+										<image class="myimg" wx:if="{{items.images}}" src="https://wxapp.mccxx.com{{items.images}}"
 											mode='widthFix' />
-										<image class="myimg" wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg"
+										<image class="myimg" wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"
 											mode='widthFix' />
 									</view>
 									<view class="mytitle">
@@ -149,7 +148,6 @@
 				</view>
 			</view>
 		</view>
-
 		<view wx:if="{{listindex == 3}}">
 			<view class="swiper-tab">
 				<view class="{{currentTab1==2?'hotel_active':'hotel'}}" data-current="2" bindtap="clickList">
@@ -177,7 +175,7 @@
 				<view wx:for="{{unpaid}}" wx:key="index" wx:key="unique" wx:for-index="idx">
 
 					<view class="maina">
-						
+
 						<view class="top_boxa">
 							<view class="morea" bindtap="goDetail" data-id="{{item.id}}">查看详情</view>
 							<view class="mytitlea">酒店名字：{{item.hotel.h_name}}</view>
@@ -186,7 +184,7 @@
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
 									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
-									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
+									<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
@@ -200,7 +198,8 @@
 						<view class="bottoma">
 							<view class="myaba">下单员：{{item.user.nickname}}</view>
 							<view class="queren" wx:if="{{hotel_role != 1}}" bindtap="payment" data-docat="{{item.isdocat}}"
-								data-id="{{item.id}}" data-num="{{item.detail.length}}" data-price="{{item.total_price}}" data-list='{{item.hotel}}'>支付</view>
+								data-id="{{item.id}}" data-num="{{item.detail.length}}" data-price="{{item.total_price}}"
+								data-list='{{item.hotel}}'>支付</view>
 						</view>
 					</view>
 				</view>
@@ -218,7 +217,7 @@
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
 									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
-									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
+									<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
@@ -238,10 +237,12 @@
 								</view>
 								<view class="queren" wx:if="{{ item.pay_status_name == '待支付'   }}" bindtap="payment"
 									data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
-									data-price="{{item.total_price}}" data-list="{{item.hotel}}">{{item.pay_status_name}}({{item.status_name}})</view>
+									data-price="{{item.total_price}}" data-list="{{item.hotel}}">
+									{{item.pay_status_name}}({{item.status_name}})</view>
 								<view class="queren" wx:elif="{{ item.status_name == '待收货'  }}" bindtap="receivingGoods"
 									data-id="{{item.id}}">{{item.pay_status_name}}({{item.status_name}})</view>
 								<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
+								
 								<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买
 								</view>
 							</view>
@@ -266,7 +267,7 @@
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
 									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
-									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
+									<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
@@ -296,7 +297,7 @@
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
 									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
-									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
+									<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
@@ -310,9 +311,9 @@
 						<view class="bottoma">
 							<view class="myaba">下单员：{{item.user.nickname}}</view>
 							<view class="queren" wx:if="{{ item.pay_status_name == '待支付'  }}" bindtap="payment"
-							
 								data-docat="{{item.is_docat}}" data-id="{{item.id}}" data-num="{{item.items_count}}"
-								data-price="{{item.total_price}}" data-list="{{item.hotel}}">{{item.pay_status_name}}({{item.status_name}})</view>
+								data-price="{{item.total_price}}" data-list="{{item.hotel}}">
+								{{item.pay_status_name}}({{item.status_name}})</view>
 							<view class="quxiao" wx:else>{{item.pay_status_name}}({{item.status_name}})</view>
 							<view class="queren" wx:if="{{item.status_name == '已完成'}}" bindtap="buyAgain" data-item="{{item}}">再次购买
 							</view>
@@ -334,7 +335,7 @@
 							<view class="imgboxa">
 								<view wx:for="{{item.detail}}" wx:for-item="list" wx:key="index" class="boxfelxa">
 									<image wx:if="{{list.images}}" src="https://wxapp.mccxx.com/{{list.images}}" class="imga"></image>
-									<image wx:else src="http://second.chchgg.com/static/index/default/images/logo.jpg" class="imga">
+									<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" class="imga">
 									</image>
 									<text class="flex-titlea">{{list.title}}</text>
 								</view>
@@ -380,7 +381,7 @@
 	<!-- <view><checkbox checked="{{checkedAll}}" color='#3B9EF5' /><text class="xz">全选</text></view> -->
 	<view></view>
 	<view class="btno2">
-	
+
 		<view class="but2" bindtap='cartAdd'> 加入到购物车（{{carlen}}）</view>
 	</view>
 </view>
@@ -426,35 +427,72 @@
 	</view>
 </view>
 <!-- 自定义商品 -->
+
+
+
 <view class="cover_screen" bindtap="hideBuyModal" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatus}}">
-	<view class="myb">
-		<view class="mybbox">
-			<view class="dbox">
-				<view class="text-box"><text>商品名：</text></view>
-				<view class="input-box"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}"
-						placeholder-class="placeholder"></input></view>
-			</view>
-			<view class="dbox">
-				<view class="text-box"><text>数 量：</text></view>
-				<view class="input-box"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}"
-						placeholder-class="placeholder"></input></view>
+	<scroll-view scroll-y="true" class="ss" style='600px' scroll-into-view="true" scroll-with-animation="true">
 
+		<view class="myb">
+			<view class="mybbox">
+				<view class="dbox">
+					<view class="text-box"><text>商品名：</text></view>
+					<view class="input-box"><input placeholder="请输入商品名" bindinput="inputname" value="{{title}}"
+							placeholder-class="placeholder"></input></view>
+				</view>
+
+				<view class="searchBox" wx:if="{{showList}}">
+					<scroll-view scroll-y="true" class="ss" style='height:{{searchnHeight}}px' scroll-into-view="true"
+						scroll-with-animation="true">
+						<text wx:for="{{searchTitle}}" wx:key="idnex" bindtap="searchPage"
+							data-text="{{item}}">{{item.title}}</text>
+					</scroll-view>
+				</view>
+				<view wx:if="{{showSpec}}">
+					<view><text>价格：</text>	<text class="getShopprice">￥{{getShopPrice}}</text></view>
+						<view>
+							<view style="margin-top:20rpx" wx:for="{{clickList}}" wx:key="unique" wx:for-item='spceList'>
+						
+								<text>{{spceList.title}} </text>
+								<view class="onebox">
+									<!-- 老项鸡 -->
+									<view wx:for="{{spceList.value}}" wx:key='index' wx:for-item='list' wx:for-index="idx" data-index="{{idx}}"
+							data-indx="{{spceList.title}}" bindtap="clickgui">
+										<text  class="{{list == true ? 'itemActive':'item'}}">{{idx}}</text>
+									</view>
+								</view>
+							</view>
+						</view>
+				</view>
+
+
+				<view >
+					
+
+					<view class="dbox">
+						<view class="text-box"><text>数 量：</text></view>
+						<view class="input-box"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}"
+								placeholder-class="placeholder"></input></view>
+					</view>
+					<view class="dbox">
+						<view class="text-box"><text>备 注：</text></view>
+						<view class="input-box"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}"
+								placeholder-class="placeholder"></input></view>
+					</view>
+					<view class="tip"  wx:if="{{!showSpec}}">
+						<text>此商品：临时划价为10.00元，后期结算，多还少补</text>
+					</view>
+				</view>
 			</view>
-			<view class="dbox">
-				<view class="text-box"><text>备 注：</text></view>
-				<view class="input-box"> <input placeholder="请输入备注或规格" bindinput="inputspec" value="{{spec}}"
-						placeholder-class="placeholder"></input></view>
-			</view>
-			<view class="tip">
-				<text>此商品：临时划价为10.00元，后期结算，多还少补</text>
+			<!-- 如果平台有的商品 就不让他添加自定义商品 -->
+			<view class="ebox">
+				<text class="green" bindtap="hideBuyModal">取消</text>
+				<text class="yellow" wx:if="{{!showSpec}}" bindtap="queren">确认</text>
+					<text class="yellow" wx:else bindtap="cartSave">加入购物车</text>
 			</view>
 		</view>
-		<view class="ebox">
-			<text class="green" bindtap="hideBuyModal">取消</text>
-			<text class="yellow" bindtap="queren">确认</text>
-		</view>
-	</view>
+	</scroll-view>
 </view>
 
 <!-- 选择酒店 -->
@@ -465,16 +503,16 @@
 
 			<view><text>请选择酒店</text></view>
 			<block wx:for="{{myhotelList}}" wx:key='index'>
-			<view class="pay-box" bindtap="select"  data-id="{{item.id}}">
-				<view class="wx-left">
-					<text>{{item.h_name}}</text>
+				<view class="pay-box" bindtap="select" data-id="{{item.id}}">
+					<view class="wx-left">
+						<text>{{item.h_name}}</text>
+					</view>
+					<view class="wx-right">
+						<image wx:if="{{item.select}}" src="../../images/user/tjdd-gou1.png"></image>
+						<image wx:else src="../../images/user/tjdd-gou.png"></image>
+					</view>
 				</view>
-				<view class="wx-right">
-					<image wx:if="{{item.select}}" src="../../images/user/tjdd-gou1.png"></image>
-					<image  wx:else src="../../images/user/tjdd-gou.png"></image>
-				</view>
-			</view>
-		</block>
+			</block>
 		</view>
 
 		<view class="ebox">

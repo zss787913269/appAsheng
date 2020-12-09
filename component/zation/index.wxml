@@ -1,7 +1,7 @@
 <view>
     <view wx:if="{{canIUse}}">
         <view class='header'>
-            <image src="http://second.chchgg.com/static/index/default/images/logo.jpg" mode="widthFix" />
+            <image src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" mode="widthFix" />
         </view>
  
         <view class='content' bindtap="gotoikPage">

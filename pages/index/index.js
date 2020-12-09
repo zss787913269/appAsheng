@@ -78,7 +78,7 @@ Page({
     groupShop: [],
     // 一级分类
     firstclass: '',
-    itemed: 'http://second.chchgg.com/public',
+    itemed: 'https://wxapp.mccxx.com/public',
     currentIndex: 0,
     groupStart: true,
     zymspec:""
@@ -1294,8 +1294,6 @@ getRect4(ele) {
     this.showModal()
     var that = this
     let tab = e.currentTarget.dataset.id.spec_base
-
- 
     console.log("tab",tab)
 
     let arr = []
@@ -1490,7 +1488,7 @@ getRect4(ele) {
     if (res.data.code == 0) {
     
       let price = res.data.data.price
-      let imgurl = 'http://second.chchgg.com'+res.data.data.goods.images
+      let imgurl = 'https://wxapp.mccxx.com'+res.data.data.goods.images
       let shopName = res.data.data.goods.title
       let dataList = res.data.data.info
 

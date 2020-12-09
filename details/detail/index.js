@@ -66,10 +66,7 @@ Page({
       shopId:options.id
       // shopId:160
     })
-   this.setData({
-      shopId:options.id
-      // shopId:160
-    })
+   
   
     if(options.enter == 4){
       that.setData({

@@ -15,7 +15,7 @@
 
       <view wx:else class="myav" bindtap="sq">
         <view class="avtor">
-          <image src="http://second.chchgg.com/static/index/default/images/logo.jpg"></image>
+          <image src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
         </view>
         <view class="name">
           <text>点击登录账号</text>
