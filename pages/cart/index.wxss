@@ -1052,8 +1052,8 @@ transform: translate(-50%, -50%) scale(1);
 }
 
 .goindex view{
-  margin-top: 10rpx;
-  font-size: 36rpx;
+  margin-top: 20rpx;
+  font-size: 28rpx;
   font-family: Source Han Sans CN;
   font-weight: 500;
   color: #585858;

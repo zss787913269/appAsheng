@@ -1,11 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/user/index",
+    "pages/getYongjin/index",
+  
+    "component/zation/index",
+    "details/shopDetail/index",
+   
     "pages/pageListTwo/index",
     "pages/pageListOne/index", 
     "pages/cart/index",
-    "component/zation/index",
-    "pages/user/index",
     "private/hotelinfo/index",
     "details/editShopGoods/index",
     "details/addshop/index",  
@@ -97,8 +101,8 @@
     "list": [{
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/tabar/sy-sy.png",
-        "selectedIconPath": "images/tabar/sy-sy1.png"
+        "iconPath": "images/tabar/sy-sy1.png",
+        "selectedIconPath": "images/tabar/sy-sy.png"
       },
      
       {
@@ -114,10 +118,10 @@
         "selectedIconPath": "images/tabar/s2.png"
       },
       {
-        "pagePath":"pages/find/index",
-        "text": "私厨",
-        "iconPath": "images/tabar/sy-fx1.png",
-        "selectedIconPath": "images/tabar/sy-fx2.png"
+        "pagePath":"private/invitation/index",
+        "text": "分享赚佣金",
+        "iconPath": "images/tabar/jm.png",
+        "selectedIconPath": "images/tabar/jm2.png"
       },
       {
         "pagePath": "pages/user/index",

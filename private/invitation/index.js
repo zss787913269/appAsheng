@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    listindex: 1,
       code:'',    //邀请二维码
   },
 
@@ -17,7 +18,17 @@ Page({
       
       
   },
-
+  clicklist(e){
+    let index = e.currentTarget.dataset.index
+    this.setData({
+      listindex: index
+    })
+  },
+  go(){
+      wx.navigateTo({
+        url: '/pages/yongjin/index',
+      })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

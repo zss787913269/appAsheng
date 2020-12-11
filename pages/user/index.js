@@ -148,6 +148,8 @@ Page({
             }
           })
 
+          console.log('res3',res3)
+          console.log('res2',res2)
           let res = await ajax({
             url: "api/user/getUserInfo",
             method: "post",

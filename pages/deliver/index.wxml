@@ -9,14 +9,11 @@
 		<view class=" {{currentTab==3?'active':'swiper-tab-item'}}" data-current="3" bindtap="clickTab">已完成
 			<view wx:if="{{ deliveryListYes.length>0}}" class="total">{{deliveryListYes.length}}</view>
 		</view>
-
 	</view>
 
 	<view wx:if="{{currentTab==1}}">
 		<view wx:for="{{deliveryListOne}}" wx:key="index" wx:key="unique" wx:for-index="idx">
-
 			<view class="main">
-
 				<view class="top_box" bindtap="detalis" data-id="{{item.id}}" data-shouhuo="{{6}}">
 					<view class="more">查看详情</view>
 					<view class="mytitle">订单编号：{{item.order_no}}</view>

@@ -1087,22 +1087,32 @@ Page({
   // 订阅消息
   dy() {
     let that = this
-    wx.requestSubscribeMessage({
-      tmplIds: ['vYVFNRkK5EBsPGROgCXmIJJRUIIlZWrkS7hRQT4KibE'],
-      async success(res) {
 
-        that.submit()
-        //accept--用户同意 reject--用户拒绝 ban--微信后台封禁,可不管
-        if (res['vYVFNRkK5EBsPGROgCXmIJJRUIIlZWrkS7hRQT4KibE'] == 'accept') {
+    let juese = wx.getStorageSync('hotel_juese')
+// 1下单员，2厨师长，3采购，4仓库，5财务，6店长，7老板
+    if(juese == 1 || juese == 2 || juese ==6){
+      wx.requestSubscribeMessage({
+        tmplIds: ['vYVFNRkK5EBsPGROgCXmIJJRUIIlZWrkS7hRQT4KibE'],
+        async success(res) {
+  
+          that.submit()
+          //accept--用户同意 reject--用户拒绝 ban--微信后台封禁,可不管
+          if (res['vYVFNRkK5EBsPGROgCXmIJJRUIIlZWrkS7hRQT4KibE'] == 'accept') {
+  
+            let res = await ajax({
+              url: "api/user/updatewxappsendmsgst",
+              method: "post"
+            })
+          } 
+  
+        }
+      })
+    
+    }else{
+      that.submit()
+    }
 
-          let res = await ajax({
-            url: "api/user/updatewxappsendmsgst",
-            method: "post"
-          })
-        } 
-
-      }
-    })
+  
   },
   //点击切换列表
   clickList(e) {

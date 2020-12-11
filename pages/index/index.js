@@ -1533,7 +1533,8 @@ getRect4(ele) {
     // this.changeState()
     // 隐藏遮罩层
     this.setData({
-      jgNumber: false,num:1
+      jgNumber: false,num:1,
+      inputBz:''
     })
     var animation = wx.createAnimation({
       duration: 200,

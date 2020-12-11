@@ -368,7 +368,8 @@
 		</view>
 		<view class="bo-box">
 			<view class="but3" bindtap="showModal">添加需要的商品</view>
-			<view class="but" bindtap='submit'> <text>提交订单({{ids.length}})</text></view>
+			<!-- <view class="but" bindtap='dy'> <text>提交订单({{ids.length}})</text></view> -->
+				<view class="but" bindtap='submit'> <text>提交订单({{ids.length}})</text></view>
 			<!-- <view class="but" bindtap='myshowModal'> <text>提交订单({{ids.length}})</text></view> -->
 		</view>
 

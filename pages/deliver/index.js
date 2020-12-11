@@ -389,14 +389,20 @@ Page({
     //console.log(url)
     app.globalData.token = wx.getStorageSync('token')
     wx.uploadFile({
-      url: `https://wxapp.mccxx.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
+      // https://debug.nncaixiao2.cn
+      // url: `https://wxapp.mccxx.com/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
+      url:`https://debug.nncaixiao2.cn/index.php?s=/api/user/upload&application=app&application_client_type=weixin&token=${app.globalData.token}&ajax=ajax`,
       filePath: url,
       name: 'image',
       formData: {
         'name': 'image'
       },
       success(res) {
+
+        
         let data = JSON.parse(res.data)
+
+        console.log('大家按时打卡哈萨克多久啊是',data)
         //返回上传照片的id，记录下来
         let id = _this.data.card_imgid
 
@@ -426,7 +432,7 @@ Page({
         // tempFilePath可以作为img标签的src属性显示图片
         let tempFilePaths = _this.data.card_img
         tempFilePaths.push(res.tempFilePaths[0])
-        //console.log(tempFilePaths)
+        console.log(tempFilePaths)
 
 
 
@@ -438,7 +444,7 @@ Page({
 
         }
 
-        console.log("PeisongList", _this.data.PeisongList)
+        // console.log("PeisongList", _this.data.PeisongList)
 
 
         _this.setData({

@@ -1,16 +1,36 @@
-<view class="header">
+<!-- <view class="main-title">
+			<view bindtap="clicklist1" data-index="1" class="{{listindex1 == 1? 'erji' : 'yiji'}}">邀请二维码</view>
+			<view bindtap="clicklist1" data-index="2" class="{{listindex1 == 2 ? 'erji' : 'yiji'}}">我的推广佣金</view>
+		</view> -->
+
+<view>
+	<view class="header">
 	<image src="/images/details/yaoqing.png" mode="widthFix">
 	</image>
 </view>
-<view class="code">
 
+<view class="code">
 	<view class="getcode">
 		<text>邀请酒店并购买可获得佣金</text>
 	</view>
 	<view class="codene">
 		<image src="{{code}}" mode="widthFix"></image>
 	</view>
+</view>
+
+<view class="myflex">
+	<button open-type="share" class="share_btn">分享二维码</button>
+	<button bindtap="go" class="share_btn">我的推广佣金 </button>
 
 </view>
 
-<button open-type="share" class="share_btn">分享二维码</button>
+
+</view>
+
+
+<view wx:if="{{listIndex == 2}}">
+
+</view>
+
+
+

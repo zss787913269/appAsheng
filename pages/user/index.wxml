@@ -187,12 +187,12 @@
       <text>成为商家</text>
     </view>
 
-    <view class="shop-box" data-index="bd" bindtap="goToPage">
+    <!-- <view class="shop-box" data-index="bd" bindtap="goToPage">
       <view class="shopimg"> 
         <image src="../../images/user2/bdsh.png" style="width:50rpx;height:50rpx"></image>
       </view>
       <text>绑定手机</text>
-    </view>
+    </view> -->
  
    <view class="shop-box" data-index="14" bindtap="goToPage">
       <view class="shopimg">  

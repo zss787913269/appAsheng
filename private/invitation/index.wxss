@@ -3,6 +3,7 @@
 }
 .header image{
  width: 100%;
+ height: 320rpx !important;
 }
 .code{
   width: 90%;
@@ -27,12 +28,15 @@
   width: 100%;
   height: 100%;
 }
+.my{
+  margin-left: 40rpx;
+}
 .getcode{
   width: 550rpx;
-  height: 100rpx;
+  height: 70rpx;
   text-align: center;
-  line-height: 100rpx;
-  background: #f79837;
+  line-height: 70rpx;
+  background: #40B15D;
   color: #fff;
   border-radius:15rpx;
   position: absolute;
@@ -41,14 +45,53 @@
 }
 
 .share_btn{
-  width: 90vw;
-  height: 100rpx;
-  line-height: 100rpx;
-  background: #ffc33d;
+
+  background: #40B15D;
   color: #fff;
-  border-radius:50rpx;
-  padding: 0;
-  position: absolute;
-  bottom: 20rpx;
-  left: 25%;
+
+  
+}
+.share_btn1{
+
+  background: #98cfff;
+  color: #fff;
+
+
+  
+}
+
+
+.myflex{
+  margin-top: 25rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.main-title{
+  display: flex;
+  width: 750rpx;
+  justify-content: space-between;
+}
+.yiji{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  background: #6cb748;
+  color: #000;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+}
+.erji{
+  height: 80rpx;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background-color: #6cb748;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
 }

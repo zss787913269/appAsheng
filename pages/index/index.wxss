@@ -1551,6 +1551,7 @@ swiper{
   font-family:Source Han Sans CN;
   font-weight:400;
   color:rgba(79,79,79,1);
+  margin-top: 10rpx;
 }
 .nametitle_active{
   font-size:26rpx;
