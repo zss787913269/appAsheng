@@ -473,7 +473,7 @@
 
 					<view class="dbox">
 						<view class="text-box"><text>数 量：</text></view>
-						<view class="input-box"> <input placeholder="请输入商品数量" bindinput="inputnum" type="number" value="{{num2}}"
+						<view class="input-box"> <input placeholder="1" bindinput="inputnum" type="number" value="{{num2}}"
 								placeholder-class="placeholder"></input></view>
 					</view>
 					<view class="dbox">

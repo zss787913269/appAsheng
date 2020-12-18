@@ -116,10 +116,10 @@ Page({
   },
   onLoad: function () {
 
-    this.getUserInfo()
+   
     app.globalData.token = wx.getStorageSync('token')
     var that = this
-    that.getMyCommission()
+ 
 
     // console.log(app.globalData)
 
@@ -132,6 +132,9 @@ Page({
         showAv:false //显示授权完毕
       })
     }
+
+    // this.getUserInfo()
+    // that.getMyCommission()
 
   },
 
@@ -160,6 +163,23 @@ Page({
           })
 
           console.log("用户资料", res.data)
+
+
+            let myres = await ajax({
+            url: 'api/user/getUserProperty',
+            method: 'get',
+          })
+      
+          console.log("撒旦撒开绿灯就撒看",myres)
+          if (myres.data.data.Yongj === null) {
+            myres.data.data.Yongj = "0.00"
+          }
+          that.setData({
+            commission: myres.data.data.Yongj,
+            integral: myres.data.data.integral,
+            balance: myres.data.data.normal_money,
+            pledge: myres.data.data.pledge
+          })
 
 
 
@@ -250,8 +270,7 @@ Page({
         show: true
       })
     }
-    this.getMyCommission()
-    this.getUserInfo()
+   
     this.setData({
       modality: false
     })
@@ -286,6 +305,9 @@ Page({
     }, (err => {
       //console.log(err);
     }))
+
+    this.getUserInfo()
+    this.getMyCommission()
   },
   sq() {
     
@@ -525,7 +547,7 @@ Page({
       method: 'get',
     })
 
-    console.log(res.data)
+    console.log("撒旦撒开绿灯就撒看",res.data.data)
     if (res.data.data.Yongj === null) {
       res.data.data.Yongj = "0.00"
     }

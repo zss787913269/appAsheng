@@ -648,7 +648,7 @@ getRect4(ele) {
   onLoad: function (options) {
     console.log(options);
 
-
+  
     
     var that = this
     if (options.referrer !== undefined) {

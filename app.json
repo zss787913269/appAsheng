@@ -2,11 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/user/index",
+    "pages/yongjin/index",
+    "pages/myYongjin/index",
+    "private/invitation/index",
+    
+    "pages/deliver/index",
     "pages/getYongjin/index",
-  
     "component/zation/index",
     "details/shopDetail/index",
-   
     "pages/pageListTwo/index",
     "pages/pageListOne/index", 
     "pages/cart/index",
@@ -14,7 +17,7 @@
     "details/editShopGoods/index",
     "details/addshop/index",  
     "details/becomeShop/index",
-    "pages/yongjin/index",
+  
     "details/search/index",
     "details/appointment/index",
     "details/preAbout/index",
@@ -25,7 +28,7 @@
     "details/release/index",
     "private/kitchen/index",
     "details/detail/index",
-    "pages/deliver/index",
+  
     "details/handle/index",
     "private/find/index",
     "private/findone/index",
@@ -41,7 +44,6 @@
     "details/myshop/index",
     "private/shopinfo/index",
     "component/subscribe/index",
-    "private/invitation/index",
     "private/hotelpeople/index", 
     "person/recharge/index",
     "person/cartdetal/index",

@@ -1,4 +1,4 @@
-.header{
+/* .header{
   width: 100%;
 }
 .header image{
@@ -94,4 +94,58 @@
   background-color: #6cb748;
   font-family: Source Han Sans CN;
   font-weight: 500;
+} */
+
+page{
+  background-image: url(http://wxapp.mccxx.com/static/image/ad_user_qrcode.jpg);
+  background-size:100% 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottom{
+  position: absolute;
+  bottom: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.codene{
+  width: 60%;
+  height: 520rpx;
+  /* margin: 100rpx auto; */
+  border: 1px solid #98cfff;
+  border-radius:20rpx; 
+  padding: 20rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.codene image{
+  width: 100%;
+  height: 460rpx;
+}
+
+.left,.right{
+  width: 300rpx;
+  height: 80rpx;
+  border-radius: 100rpx;
+  background-color: #fff04d;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 38rpx;
+  font-weight: 500;
+  color: #fe0106;
+}
+.share_btn{
+  border: none;
+  border-radius: 100rpx;
+  width: 300rpx !important;
+  background-color: #fff04d;
 }

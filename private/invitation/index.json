@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "邀请二维码",
-  "navigationBarBackgroundColor": "#6cb748"
+  "navigationBarBackgroundColor": "#FE3C44",
+  "disableScroll":true
 }

@@ -473,7 +473,7 @@
 
 .leftTitle{
   width:720rpx;
-  height:434rpx;
+  /* height:434rpx; */
   background:rgba(255,255,255,1);
   box-shadow:0px 0px 12rpx rgba(144,144,144,1);
   opacity:1;

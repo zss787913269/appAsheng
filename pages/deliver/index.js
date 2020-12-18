@@ -45,6 +45,65 @@ Page({
     tempIndex = this.data.printdata.length;
     this.printOneLabel();
   },
+  getImg: function (e, index) {
+    var _this = this
+    if (e == 0) {
+      e = 'album'
+    } else {
+      e = 'camera'
+    }
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: [e],
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        let tempFilePaths = _this.data.card_img
+        tempFilePaths.push(res.tempFilePaths[0])
+        //console.log(tempFilePaths)
+          _this.setData({
+            card_img: tempFilePaths
+          })
+        _this.upImg(res.tempFilePaths[0], index)
+      }
+    })
+  },
+  async removeImg(e){    //删除图片
+        
+
+      console.log(e.currentTarget.dataset)
+
+      let params = {
+        type:1,
+        images_id:Number(e.currentTarget.dataset.id),
+        id:e.currentTarget.dataset.uid
+      }
+
+      console.log('params',params)
+
+      let res = await ajax({
+        url: 'api/upload/remove',
+        method: 'post',
+        data: params
+      })
+
+      console.log(res.data)
+
+      if(res.data.code == 0){
+        wx.showToast({
+          title: '删除成功',
+          icon:'none'
+        })
+        this.getPeisongList()
+      }else{
+        wx.showToast({
+          title: res.data.msg,
+          icon:'none'
+        })
+      }
+
+   
+  },
   printNextLabel: function () {
     tempIndex--;
     itemIndex++;
@@ -63,9 +122,9 @@ Page({
     let printdata = this.data.printdata
 
     let hotelmsg = this.data.zymdata
-    // console.log(printdata[i].title)
+    // //console.log(printdata[i].title)
 
-    console.log(printdata)
+    //console.log(printdata)
 
 
     const width = 70
@@ -167,7 +226,7 @@ Page({
     let list = this.data.orderlist
     let that = this
 
-    console.log("item", e.currentTarget.dataset.details)
+    //console.log("item", e.currentTarget.dataset.details)
     let t = item[0]
     this.setData({
       zymdata: e.currentTarget.dataset.details,
@@ -214,9 +273,9 @@ Page({
       a = this.data.printdata,
       j = a[0],
       that = this
-    console.log(this.data.dgcount, "递归数量")
-    console.log(len, "数据长度")
-    // console.log(j.title,"标题")
+    //console.log(this.data.dgcount, "递归数量")
+    //console.log(len, "数据长度")
+    // //console.log(j.title,"标题")
     if (this.data.dgcount == 1) {
       lpapi.startDrawLabel('test', this, 100, 55, 0);
       lpapi.setItemOrientation(0);
@@ -286,9 +345,9 @@ Page({
     }
     // let height2 = 200* print.length;
 
-    console.log(height)
+    //console.log(height)
 
-    console.log(print.length)
+    //console.log(print.length)
 
 
 
@@ -363,9 +422,9 @@ Page({
   },
   upload: function (e) { //上传图片
     var that = this
-    if (that.data.card_imgid.length > 9) {
+    if (that.data.card_imgid.length > 4) {
       wx.showToast({
-        title: '最多只能上传9张图片',
+        title: '最多只能上传4张图片',
         icon: 'none',
         duration: 3000,
       })
@@ -373,20 +432,22 @@ Page({
     }
     var id = e.currentTarget.dataset.id
 
+
+
     //console.log("currentTarget", e.currentTarget.dataset)
     wx.showActionSheet({
-      itemList: ['拍照'],
+      itemList: ['照片'],
       success: function (res) {
         that.getImg(res.tapIndex, id)
       },
       fail: function (res) {
-        //console.log(res.errMsg)
+        ////console.log(res.errMsg)
       }
     })
   },
   upImg(url, shopid) { //上传图片
     let _this = this
-    //console.log(url)
+    ////console.log(url)
     app.globalData.token = wx.getStorageSync('token')
     wx.uploadFile({
       // https://debug.nncaixiao2.cn
@@ -397,44 +458,69 @@ Page({
       formData: {
         'name': 'image'
       },
-      success(res) {
+      async success(res) {
 
-        
+      
         let data = JSON.parse(res.data)
 
-        console.log('大家按时打卡哈萨克多久啊是',data)
+        //console.log('大家按时打卡哈萨克多久啊是',data)
         //返回上传照片的id，记录下来
         let id = _this.data.card_imgid
 
         if (data.code == 0) {
 
-          id.push(data.data.id)
+          
           _this.setData({
-            card_imgid: id
+            card_imgid: data.data.id
           })
+
+          let params = {
+            type:1,
+            images_id:Number(_this.data.card_imgid),
+            id:shopid
+          }
+  
+          console.log('params',params)
+  
+          let res2 = await ajax({
+            url: 'api/upload/save',
+            method: 'post',
+            data: params
+          })
+  
+          console.log("图片",res2.data)
+          _this.getPeisongList()
+        
+            wx.showToast({
+              title: res2.data.msg,
+              icon:'none'
+            })
+          
+   
+
         }
       },
       fail(res) {
         const data = res.data
-        //console.log(data + '失败')
+        ////console.log(data + '失败')
       }
     })
   },
-  getImg: function (e, id) {
+   getImg(e, id) {
     var _this = this
 
-    //console.log("e", id)
+    ////console.log("e", id)
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
-      sourceType: ['camera'],
+      sourceType: ['camera','album'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         let tempFilePaths = _this.data.card_img
         tempFilePaths.push(res.tempFilePaths[0])
-        console.log(tempFilePaths)
+        //console.log(tempFilePaths)
 
-
+   
 
         let peisongList = _this.data.PeisongList
         for (var i = 0; i < peisongList.length; i++) {
@@ -444,7 +530,7 @@ Page({
 
         }
 
-        // console.log("PeisongList", _this.data.PeisongList)
+        //console.log("PeisongList", _this.data.PeisongList)
 
 
         _this.setData({
@@ -458,7 +544,7 @@ Page({
   },
   async enterSend(e) {
     let that = this
-    console.log(e.currentTarget.dataset)
+    //console.log(e.currentTarget.dataset)
     let shopid = e.currentTarget.dataset.id,
       params, imgid = that.data.card_imgid
 
@@ -478,7 +564,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log(res.data)
+    //console.log(res.data)
     if (res.data.code == 0) {
       wx.showToast({
         title: '已确认送达',
@@ -511,7 +597,7 @@ Page({
       })
     }
 
-    console.log("pickOrder", res.data.data)
+    //console.log("pickOrder", res.data.data)
 
 
   },
@@ -554,7 +640,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log("获取配送员未处理订单", res.data.data)
+    //console.log("获取配送员未处理订单", res.data.data)
     if (res.data.code == 0) {
       if (this.data.page == 1) {
         this.setData({
@@ -574,7 +660,7 @@ Page({
             deliveryListOne
           })   
       }
-      console.log("deliveryListOne",that.data.deliveryListOne)
+      //console.log("deliveryListOne",that.data.deliveryListOne)
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -602,7 +688,7 @@ Page({
       method: 'post',
       data: params
     })
-    console.log(res.data)
+    console.log('配送中数据',res.data)
     if(res.data.code == 0){
       
     if (this.data.page == 1) {
@@ -629,7 +715,7 @@ Page({
     }
 
 
-    //console.log("total2", this.data.total2)
+    ////console.log("total2", this.data.total2)
   },
 
   async getDistributorClerkList() { //获取配送员已处理订单

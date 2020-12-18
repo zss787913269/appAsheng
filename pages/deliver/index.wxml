@@ -46,10 +46,10 @@
 	</view>
 
 	<view wx:if="{{currentTab==2}}">
-		<view wx:for="{{PeisongList}}" wx:key="index" wx:key="unique" wx:for-index="idx">
+		<view wx:for="{{PeisongList}}"  wx:key="index" wx:key="unique" wx:for-index="idx">
 
 			<view class="main">
-				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}">
+				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}" >
 					<view class="more">查看详情</view>
 					<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
@@ -68,24 +68,32 @@
 				<view class="bottom2">
 					<view class="hotel_name">酒店名：{{item.hotel_name}}</view>
 					<view class="llbox">
-						<view class="quxiao" bindtap="enterSend" data-index="{{index}}" data-id="{{item.id}}">确认送达</view>
-						<view class="queren" bindtap="upload" data-id="{{item.id}}">上传图片</view>
+						<view class="quxiao" bindtap="enterSend" data-index="{{idx}}" data-id="{{item.id}}">确认送达</view>
+						<view class="queren" bindtap="upload" data-id="{{item.id}}" data-index="{{index}}">上传图片</view>
+					</view>
+				</view>
+				<view class="tiajia">
+					<view wx:for="{{item.images_id}}" wx:for-item="alist" wx:key="index" class="img-More">
+						<i class="fal fa-times-circle" bindtap="removeImg"  data-uid="{{item.id}}" data-id="{{alist.id}}"></i>
+						<image class="imgss" src="{{alist.url}}">
+						</image>
+					</view>
+					<view wx:if="{{alist.images_id.length < 4}}" bindtap="upload" data-id="{{item.id}}"  data-index="{{idx}}" class="img-up">
+						<text>+</text>
 					</view>
 				</view>
 			</view>
-
-
 		</view>
 	</view>
 
 	<view wx:if="{{currentTab==3}}">
-		<view wx:for="{{deliveryListYes}}"  wx:key="unique" wx:for-index="idx">
+		<view wx:for="{{deliveryListYes}}" wx:key="unique" wx:for-index="idx">
 
 			<view class="main">
 
 				<view class="top_box" bindtap="goDetail" data-id="{{item.id}}">
 					<view class="more">查看详情</view>
-				<view class="mytitle">订单编号：{{item.order_no}}</view>
+					<view class="mytitle">订单编号：{{item.order_no}}</view>
 					<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text></view>
 					<view class="imgbox">
 						<view wx:for="{{item.details}}" wx:for-item="list" wx:key="index" class="zybox">
@@ -101,10 +109,10 @@
 				</view>
 				<view class="bottom2">
 
-					<view class="hotel_name">	{{idx+1}}	-- 酒店名：{{item.hotel_name}}</view>
+					<view class="hotel_name"> {{idx+1}} -- 酒店名：{{item.hotel_name}}</view>
 					<view class="llbox">
 						<view class="quxiao">联系商家</view>
-					<view class="queren" bindtap="printText" data-details="{{item}}">打印订单</view>
+						<view class="queren" bindtap="printText" data-details="{{item}}">打印订单</view>
 					</view>
 				</view>
 			</view>
@@ -129,7 +137,7 @@
 			<canvas canvas-id="test" style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" />
 		</scroll-view>
 
-		<view class="listTitle2"  bindtap="print2"><text class="bj2">打印</text></view>
+		<view class="listTitle2" bindtap="print2"><text class="bj2">打印</text></view>
 		<!-- <view class="listTitle2"><text class="bj2gree">打印中，请稍等</text></view> -->
 
 	</view>

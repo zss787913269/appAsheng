@@ -42,8 +42,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  onShow(){
+    this.getTejia()
+  },
   onLoad: function (options) {
     var that = this
+    
     that.getHotSearch()
     that.getMeSearch()
     // that.getSpecDetail()
@@ -57,7 +61,14 @@ Page({
       where:options.where
     })
   },
+  async getTejia(){
+    let res = await ajax({
+      url: '/api/goods/tejialist',
+      method: 'POST'
+    })
 
+    console.log(res.data)
+  },
   hideBuyModal2() {
 
     // this.changeState()
@@ -727,6 +738,7 @@ Page({
       let res = await ajax({ url: 'api/index/searchgoods', method: 'post', data:parmes})
       if(res.data.code == 0){
         if(res.data.data.length != 0){
+          console.log("searchList",res.data.data)
           this.setData({
             searchList:res.data.data, showbtn:false,showsearch:!this.data.showsearch,
             showTitle:false
@@ -780,7 +792,7 @@ Page({
       this.setData({
         searchTitle:title
       })
-      console.log(title)
+      // console.log(title)
     
   },
   qc(){

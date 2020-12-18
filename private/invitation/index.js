@@ -1,6 +1,8 @@
 import ajax from '../../utils/ajax'
 import regeneratorRuntime from '../../utils/runtime.js'
 //获取应用实例
+
+var app = getApp()
 Page({
 
   /**
@@ -9,14 +11,44 @@ Page({
   data: {
     listindex: 1,
       code:'',    //邀请二维码
+      title:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    
       
-      
+  },
+  onShow(){
+    this.getMsg()
+
+    let code =  wx.getStorageSync('QRcode')
+
+
+
+    this.setData({
+      code:`${code}`
+    })
+  
+
+  },
+  async getMsg(){
+    
+    let res = await ajax({
+      url: '/api/index/adtitle',
+      method: 'get',
+      data:{
+        type:1
+      }
+    })
+
+    this.setData({
+      title:res.data
+    })
+    console.log(res.data)
   },
   clicklist(e){
     let index = e.currentTarget.dataset.index
@@ -34,46 +66,36 @@ Page({
    */
   onReady: function () {
     var that = this
-   let code =  wx.getStorageSync('QRcode')
-    that.setData({
-        code:`https://wxapp.mccxx.com/${code}`
+
+  },
+
+  
+  async clickImg(){
+    // api/index/Invite
+
+    let res = await ajax({
+      url: 'api/user/Invite',
+      method: 'get',
+    
     })
-    console.log(that.data.code)
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+ 
 
-  },
+      let that = this
+    if(res.data == '' ){
+      wx.navigateTo({
+        url: "/component/zation/index"
+      })
+    }else{
+      that.setData({ code:`${res.data}` })
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+        wx.setStorage({
+          data: res.data,
+          key: 'QRcode',
+        })
+    }
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+    console.log(res)
   },
 
   /**
@@ -81,9 +103,21 @@ Page({
    */
   onShareAppMessage: function () {
     let referrer=wx.getStorageSync('enid');
-    console.log("referrer",referrer)
+    let that = this
+    console.log("that.data.titl",that.data.title)
     return {
-      path: "/pages/index/index?referrer="+referrer
+      title:that.data.title,
+      path: "/private/invitation/index?referrer="+referrer
     }
   }
+  // onShareAppMessage: function () {
+  //   let referrer=wx.getStorageSync('enid');
+  //   console.log("referrer",referrer)
+  //   return {
+  //     title:"自定义标题",
+  //     path: "/private/invitation/index",
+  //     imageUrl:"../../images/tabar/car.png"
+  //   }
+  // }
+
 })

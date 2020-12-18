@@ -382,12 +382,43 @@ input-holder {
 page{
   background-color: #F2F2F2;
 }
-
+.tiajia{
+  margin: 20rpx 0 20rpx 20rpx;
+  background:#fafafa;
+  font-size: 100rpx;
+  color:#cccc;
+  text-align:center;
+  border-radius:5px;
+}
+.img-More{
+  width:150rpx;
+  height:150rpx;
+  float: left;
+  margin: 10rpx 20rpx 10rpx 10rpx;
+  position: relative;
+}
+.img-up{
+  width:150rpx;
+  height:150rpx;
+  float:left;
+  margin: 10rpx 20rpx 10rpx 10rpx;
+}
 .main{
-  height: 400rpx;
+  /* height: 400rpx; */
   margin-top: 20rpx;
   background:rgba(255,255,255,1);
   overflow: hidden;
+}
+.fa-times-circle{
+  position: absolute;
+  color: #000;
+  top:-15rpx;
+  right:-10rpx;
+  font-size: 36rpx;
+}
+.imgss{
+  width:150rpx;
+  height:150rpx;
 }
 .mytitle{
   margin-top: 22rpx;

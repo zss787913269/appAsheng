@@ -40,7 +40,7 @@ Page({
     hotelCount: "",
     pcount: "",
     title: "",
-    num2: 1,
+    num2: '',
     spec: "",
     listindex: 1,
     hotelOrderDetail: [],
@@ -253,6 +253,11 @@ Page({
       }
     }
 
+    if(that.data.num2 == ''){
+      that.setData({
+        num2:1
+      })
+    }
   
     let params = {
       goods_id: that.data.shopingid, //商品id
@@ -1017,21 +1022,24 @@ Page({
 
     let that = this
 
-      
-
-    if (that.data.num2 == "") {
-      wx.showToast({
-        title: '商品数量为空，请重新输入',
-        icon: "none"
-      })
-      return
-    } else if (this.data.title == "") {
+    if (this.data.title == "") {
       wx.showToast({
         title: '商品名字为空，请重新输入',
         icon: "none"
       })
       return
     }
+
+    if (that.data.num2 == "") {
+      that.setData({
+        num2:1
+      })
+      // wx.showToast({
+      //   title: '商品数量为空，请重新输入',
+      //   icon: "none"
+      // })
+      // return
+    } 
 
     let params = {
       title: this.data.title,
