@@ -1,55 +1,11 @@
-<view class="comtent">
+<view class="comtent" wx:for="{{list}}" wx:key='index'>
  <view class="recodfl">
-  <text>银行卡提现</text>
-  <text class="font">2019-05-01 11:00</text>
+  <text>{{item.status == 0 ? '等待系统打款':(item.status == 1 ? '已打款':'打款失败') }}</text>
+  <text class="font">提现时间：{{item.add_time}}</text>
  </view>
   <view class="recodfl">
-  <view><text class="color">-100</text><text>元</text></view>
+  <view><text class="color">{{item.money}}</text><text>元</text></view>
 
-  <text class="font">当前140元</text>
- </view>
-</view>
-<view class="comtent">
- <view class="recodfl">
-  <text>银行卡提现</text>
-  <text class="font">2019-05-01 11:00</text>
- </view>
-  <view class="recodfl">
-  <view><text class="color">-100</text><text>元</text></view>
-
-  <text class="font">当前140元</text>
- </view>
-</view>
-<view class="comtent">
- <view class="recodfl">
-  <text>银行卡提现</text>
-  <text class="font">2019-05-01 11:00</text>
- </view>
-  <view class="recodfl">
-  <view><text class="color">-100</text><text>元</text></view>
-
-  <text class="font">当前140元</text>
- </view>
-</view>
-<view class="comtent">
- <view class="recodfl">
-  <text>银行卡提现</text>
-  <text class="font">2019-05-01 11:00</text>
- </view>
-  <view class="recodfl">
-  <view><text class="color">-100</text><text>元</text></view>
-
-  <text class="font">当前140元</text>
- </view>
-</view>
-<view class="comtent">
- <view class="recodfl">
-  <text>银行卡提现</text>
-  <text class="font">2019-05-01 11:00</text>
- </view>
-  <view class="recodfl">
-  <view><text class="color">-100</text><text>元</text></view>
-
-  <text class="font">当前140元</text>
+  <!-- <text class="font">当前140元</text> -->
  </view>
 </view>

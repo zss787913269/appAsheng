@@ -134,16 +134,19 @@
 
 
                 <view class="mytitle2">
+                  <view class="{{ items.istoday == 1 ? 'mytext2' : 'mytext6'   }}">{{items.istoday==1 ? '今天' : '昨天'}}</view>
                   <view class="right-img">
-
+                  
                     <checkbox value="{{items.title}},{{items.specvalue}},{{items.buy_number}},{{items.original_price}}"
                       checked="{{item.checked}}" />
                     <image wx:if="{{items.images}}" src="https://wxapp.mccxx.com{{items.images}}"></image>
                     <image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
                   </view>
                   <view class="right-title">
+                   
                     <view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
                     <view class="mytext2">{{items.specvalue}}</view>
+                  
                     <view class="mytext2">单价：{{items.original_price}}</view>
                     <view class="mynumber"> 数量： {{items.buy_number}}</view>
                   </view>

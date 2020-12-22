@@ -6,6 +6,7 @@ const app = getApp()
 
 Page({
   data: {
+    wjs:"",
     hotelList:[],
     showshop: false,
     showpeisong: false,
@@ -14,6 +15,7 @@ Page({
     url: '/person/commis/index',
     url1: '/person/integral/index',
     url2: '/person/balance/index',
+    url4: '/private/commission/index',
     ads: ['/images/temp/ad.jpg', '/images/temp/ad_2.jpg'],
     imgulr: "https://wxapp.mccxx.com/static/banner/wxapp/common/",
     optionList2: {
@@ -170,7 +172,6 @@ Page({
             method: 'get',
           })
       
-          console.log("撒旦撒开绿灯就撒看",myres)
           if (myres.data.data.Yongj === null) {
             myres.data.data.Yongj = "0.00"
           }
@@ -178,10 +179,27 @@ Page({
             commission: myres.data.data.Yongj,
             integral: myres.data.data.integral,
             balance: myres.data.data.normal_money,
-            pledge: myres.data.data.pledge
+            pledge: myres.data.data.pledge,
+            // wjs:JSON.parse(myres2.data).total
           })
 
+            
+          let myres2 = await ajax({
+            url:'api/yongjin/yongjinjs0',
+            method:'get'
+          })
+        console.log("撒旦撒开绿灯就撒看",myres2)
 
+        if(myres2.data.code == 0){
+          that.setData({
+            wjs:myres2.data.data.total
+          })
+
+        }else{
+          that.setData({
+            wjs:0
+          })
+        }
 
           if(res.data.code == 0){
            
@@ -496,6 +514,8 @@ Page({
       })
       return
     }
+
+    console.log(e.currentTarget.dataset)
     wx.navigateTo({
       url: e.currentTarget.dataset.url
 

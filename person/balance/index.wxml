@@ -10,7 +10,7 @@
   <view class="tbody">
     <view class="content">
       <view class="leiron">
-        <text>{{balance}}</text>
+        <text>{{commission}}</text>
       </view>
     </view>
   </view>
@@ -30,11 +30,7 @@
 </view>
 
 <view class="bottom">
-  <view class="itemed">
-  <view class="item active" bindtap="chongzhi1">
-  <text>充 值</text>
-  </view>
-  </view>
+
    
   <view class="itemed">
   

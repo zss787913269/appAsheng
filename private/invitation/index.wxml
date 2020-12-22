@@ -43,10 +43,37 @@
 			<image src="https://wxapp.mccxx.com{{code}}"  mode="widthFix"></image>
 			<text>你的专属推广二维码</text>
 		</view>
-		<!-- <text wx:else>点击生成你的专属推广二维码</text> -->
+		<text class="ewmtext" wx:else bindtap="myshowModal">点击生成你的专属推广二维码</text>
 	</view>
 
  <view class="bottom">
 		<view class="left">	<button open-type="share" class="share_btn">分享二维码</button></view>
-		<view class="right"  ><button bindtap="go"  class="share_btn">我的推广佣金</button></view>
+		<!-- <view class="right"  ><button bindtap="zymshowModal"  class="share_btn">我的推广佣金</button></view> -->
+		<view class="right"  ><button bindtap="go"  class="share_btn">推广佣金</button></view>
  </view>
+
+ <view class="cover_screen" bindtap="myhideBuyModal" wx:if="{{myshowModalStatus}}"></view>
+<view animation="{{animationData}}" class="buy_box" wx:if="{{myshowModalStatus}}">
+	<view class="myb">
+		<view class="mybbox">
+				<view class="btop">
+					<text>请求获取你的昵称、头像、地区、及性别</text>
+				</view>
+				<view class="bbttom">
+					<button type="default"  bindtap="myhideBuyModal" size="default">取消</button>
+					<!-- <button type="primary" size="default">允许</button>  -->
+					<button  type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            允许
+        </button>
+				</view>
+		</view>
+	</view>
+</view>
+
+
+<view class="cover_screen" bindtap="azymhideBuyModal" wx:if="{{zymshowModalStatus}}"></view>
+<view animation="{{animationData}}" class="buy_box2" wx:if="{{zymshowModalStatus}}">
+	<view class="myb2" bindtap="azymhideBuyModal">
+				<image  src="http://wxapp.mccxx.com/static/image/ad_make_user.jpg"></image>
+	</view>
+</view>

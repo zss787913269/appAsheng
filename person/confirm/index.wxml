@@ -5,14 +5,14 @@
   <text>提 现 金 额</text>
 </view>
 <view class="tixain">
-  <view class="goUrl" bindtap="goUrl" data-url="profit">
+  <view class="goUrl" >
     <label class="glable" for="male">￥</label>
-    <input type="number" name="sex" id="male" />
+    <input type="digit" bindinput="bindinput"  name="sex" id="male" value="{{money}}" />
   </view>
 </view>
 <view class="jine">
   <view>
-    <text>可提现金额：</text>
+    <text>可提现佣金：</text>
     <text class="red">{{balance}}</text>
     <text>元</text>
   </view>

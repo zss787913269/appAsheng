@@ -27,11 +27,11 @@
 
   <view class="top-bottom">
     <view class="item">
-      <text class="price">0.00</text>
+      <text class="price" >{{wjs}}</text>
       <text class="text">未结算佣金</text>
     </view>
-    <view class="item" bindtap="golyj">
-      <text class="price">0.00</text>
+    <view class="item" bindtap="gotoikPage" data-url="{{url2}}">
+      <text class="price">{{commission}}</text>
       <text class="text">可提现佣金</text>
     </view>
     <view class="item">
@@ -39,15 +39,15 @@
       <text class="text">未付款金额</text>
     </view>
 
-    <view class="item2" bindtap="gotoikPage" data-url="{{url2}}">
-      <text class="price">{{balance}}</text>
+    <view class="item2" >
+      <text class="price" bindtap="gotoikPage" data-url="{{url4}}">{{balance}}</text>
       <text class="text">余额</text>
     </view>
 
   </view>
 
 
-  <view class="top-right">可提现积分</view>
+  <!-- <view class="top-right">可提现积分</view> -->
 
 
 

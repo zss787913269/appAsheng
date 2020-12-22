@@ -633,34 +633,19 @@ Page({
     let that = this
     let params = {
       status: 0,
-      page:this.data.page
     }
     let res = await ajax({
       url: 'api/staff/getStaffSendOrder',
       method: 'post',
       data: params
     })
-    //console.log("获取配送员未处理订单", res.data.data)
+    console.log("获取配送员未处理订单", res.data.data)
+  
     if (res.data.code == 0) {
-      if (this.data.page == 1) {
-        this.setData({
-          canPull: true
-        })
-        this.setData({
-          deliveryListOne: res.data.data.data,
-          allPage: res.data.data.page_total // 总页数
-        })
-        if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
-          that.setData({ canPull: false }) }
-      }else{
-        if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
-          that.setData({ canPull: false }) }
-          let deliveryListOne = that.data.deliveryListOne.concat(res.data.data.data) // 大于1页的拼接
-          that.setData({
-            deliveryListOne
-          })   
-      }
-      //console.log("deliveryListOne",that.data.deliveryListOne)
+      this.setData({
+        deliveryListOne: res.data.data.data,
+       
+      })
     } else {
       wx.showToast({
         title: res.data.msg,
@@ -681,7 +666,6 @@ Page({
     let that = this
     let params = {
       status: 1,
-      page: that.data.page
     }
     let res = await ajax({
       url: 'api/staff/getStaffSendOrder',
@@ -690,23 +674,10 @@ Page({
     })
     console.log('配送中数据',res.data)
     if(res.data.code == 0){
-      
-    if (this.data.page == 1) {
-      this.setData({
-        canPull: true
-      })
       this.setData({
         PeisongList: res.data.data.data,
-        allPage: res.data.data.page_total // 总页数
       })
-    }else{
-      if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
-        that.setData({ canPull: false }) }
-        let PeisongList = that.data.PeisongList.concat(res.data.data.data) // 大于1页的拼接
-        that.setData({
-          PeisongList
-        })   
-    }
+   
     }else{
       wx.showToast({
         title: res.data.msg,
@@ -723,7 +694,6 @@ Page({
 
     let params = {
       status: 2,
-      page: that.data.page
     } 
 
     
@@ -734,23 +704,10 @@ Page({
     })
 
     if (res.data.code == 0) {
-      if (this.data.page == 1) {
-        this.setData({
-          canPull: true
-        })
-        this.setData({
-          deliveryListYes: res.data.data.data,
-          allPage: res.data.data.page_total // 总页数
-        })
-      }else{
-        if (that.data.allPage == that.data.page) { // 到了最后一页，关闭开关，翻页失效
-          that.setData({ canPull: false }) }
-          let deliveryListYes = that.data.deliveryListYes.concat(res.data.data.data) // 大于1页的拼接
-          that.setData({
-            deliveryListYes
-          })
-
-      }
+      this.setData({
+        deliveryListYes: res.data.data.data,
+      })
+   
 
     } else {
       wx.showToast({
@@ -761,40 +718,7 @@ Page({
     }
   },
 
-  onReachBottom: function () {
 
-
-
-    let that = this
-    if(this.data.canPull){
-      let page = ++this.data.page
-      wx.showLoading({
-        title: '玩命加载中',
-      })
-      this.setData({page})
-      if(that.data.currentTab == 1){
-        that.getDeliveryClerkList()
-      }else if(that.data.currentTab == 2){
-        that.getPeisongList()
-      }else if(that.data.currentTab == 3){
-        that.getDistributorClerkList()
-      }
-      setTimeout(() => {
-        // 隐藏加载框
-        wx.hideLoading();
-      }, 1000)
-      
-    }else{
-      wx.showToast({
-        title: '没有更多数据',
-        icon:'none'
-      })
-    }
-
-    
-    
-   
-  },
 
 
 })

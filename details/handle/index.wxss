@@ -322,6 +322,12 @@
   color: rgb(168, 164, 164);
   margin-left: 10rpx;
 }
+.mytext6{
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: red;
+  margin-left: 10rpx;
+}
 .mytext{
   margin-top: 10rpx;
   color: red;

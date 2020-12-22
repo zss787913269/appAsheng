@@ -64,7 +64,7 @@ Page({
   //选择框
   showConfirmPrice(e) { //弹出修改价格框  行行超甜 11.19
 
-    console.log(e.currentTarget.dataset)
+    console.log('ssss',e.currentTarget.dataset)
 
     let item = e.currentTarget.dataset
 
@@ -76,7 +76,7 @@ Page({
 
     this.showModal()
   },
- 
+
   getEditCount(e){
     this.setData({getEditCount:e.detail.value })
   },
@@ -190,6 +190,8 @@ Page({
   clickLeftItem(e) { // 点击左侧
     this.setData({classfiySelect: e.currentTarget.dataset.id})
   },
+
+  //  orderid 是订单Id id 订单明细id-展示页里面对应的商品id   
   async getShopList(page) { //获取商家订单
     // type = 2  按照订单 isok = 0 是未接单 type = 3  商品汇总 isok = 1 已接单   type = 3   isok = 2 已完成
     let that = this,params, listindex = this.data.listindex

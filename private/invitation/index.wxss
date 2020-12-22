@@ -96,6 +96,10 @@
   font-weight: 500;
 } */
 
+.myb2 image{
+  width: 100%;
+  /* height: 100%; */
+}
 page{
   background-image: url(http://wxapp.mccxx.com/static/image/ad_user_qrcode.jpg);
   background-size:100% 100%;
@@ -148,4 +152,85 @@ page{
   border-radius: 100rpx;
   width: 300rpx !important;
   background-color: #fff04d;
+}
+
+.cover_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background:rgba(0,0,0,1);
+  opacity:0.57;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+.buy_box {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+  /* padding: 20rpx; */
+  overflow: hidden;
+  height: 500rpx;
+}
+.buy_box2 {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 30%;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+  /* padding: 20rpx; */
+  overflow: hidden;
+  height: 460rpx;
+}
+.btop{
+  font-size: 36rpx;
+  font-weight: 500rpx;
+  font-family: Source Han Sans CN;
+  margin-left: 34rpx;
+  margin-top: 20rpx;
+
+}
+.bbttom{
+  display: flex;
+  justify-content: space-around;
+  /* position: fixed; */
+
+  margin-top: 250rpx;
+}
+.ewmtext{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.myb{
+  /* display: flex; */
+  align-items: center;
+  position: relative;
+  /* height: 568rpx; */
+  /* background-color: #FF9000; */
+  /* justify-content: space-between; */
+}
+.myb2{
+  /* display: flex; */
+  /* align-items: center; */
+  position: relative;
+  /* height: 568rpx; */
+  /* background-color: #FF9000; */
+  /* justify-content: space-between; */
+}
+.mybbox{
+    /* margin-left: 35rpx; */
+    position: relative;
+    /* margin-top: 120rpx; */
+}
+.bbttom button{
+  width:300rpx !important;
 }
