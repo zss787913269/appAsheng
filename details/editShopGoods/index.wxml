@@ -1,0 +1,35 @@
+<view class="content">
+
+
+
+    <view class="titleed">
+			<text class="" >商品分类：</text>
+			<!-- <input type="text" placeholder="请输入" class="pickerIndex2" /> -->
+      <text class="pickerIndex2">{{list.category_name}}</text>
+		</view>
+
+		<view class="titleed">
+			<text class="" >商品名称：</text>
+			<input type="text" placeholder="请输入" class="pickerIndex2" value="{{list.title}}" />
+  
+		</view>
+		<!-- <view class="titleed">
+			<text class="" >：</text>
+			<input type="text" placeholder="请输入" class="pickerIndex2" />
+		</view> -->
+
+    <view wx:for="{{specList}}" wx:key = 'index'>
+      <text class="textFlex">{{item.type}}</text>
+    <view wx:for="{{item.data}}" wx:key='index' wx:for-item = "myitem" class="myflex">
+      <text class="texttitil" >{{myitem.name}}</text>
+      <input type="text" placeholder="{{myitem.original_price}}" class="pickerIndex2" value="" />
+    </view>
+    </view>   
+
+	
+		<view class="submit">
+			<button formType="submit" style="background:#ff9000;color:#fff;">提 交</button>
+		</view>
+
+</view>
+

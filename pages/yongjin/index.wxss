@@ -1,0 +1,460 @@
+page{
+  background-color: #F2F2F2;
+}
+ .top{
+  height: 120rpx;
+  width: 750rpx;
+  background-color: #40B15D;
+  position: relative;
+} 
+.top-top{
+  width: 750rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.itembox{
+  background-color: #fff;
+}
+.top-right{
+  width: 212rpx;
+  height: 50rpx;
+  background: #FF963F;
+  opacity: 1;
+  border-radius: 25rpx; 
+  font-size: 28rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #FFFFFF;
+  position: absolute;
+  right: 40rpx;
+  top: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+
+}
+.myav{
+  display: flex;
+  align-items: center;
+}
+
+.avtor{
+  height: 128rpx;
+  width: 128rpx;
+  border-radius: 69rpx;
+  margin-left: 60rpx;
+  overflow:hidden
+}
+
+.avtor image{
+  height: 128rpx;
+  width: 128rpx;
+  border-radius: 69rpx;
+  overflow:hidden
+}
+.imgbox{
+  display: flex; 
+  position: relative;
+  align-items: center;
+}
+.name{
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-left: 25rpx;
+}
+.top-bottom{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.getMonneny{
+  display: block;
+  background-color: #FF963F;
+  width: 80rpx;
+  height: 35rpx;
+  border-radius: 5rpx;
+  display: flex;
+  font-size: 26rpx;
+
+  align-items: center;
+  color: #ffffff;
+  justify-content: center;
+
+}
+.item{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.item:first-child{
+  border-right: 1rpx solid #FFFFFF;
+}
+.item2{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.price{
+ 
+  font-size: 42rpx;
+  font-family: PingFang-SC-Medium;
+  color: #FFFFFF;
+}
+.text{
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+.address{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 202rpx;
+  background-color: #ffffff;
+
+}
+.item-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.item-box image{
+  width: 86rpx;
+  height: 86rpx;
+}
+.item-box text{
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #666666;
+  text-align: center;
+}
+.main{
+  margin-top: 15rpx;
+}
+.main-title{
+  display: flex;
+  width: 750rpx;
+  justify-content: space-between;
+}
+.yiji{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  background: #FFFFFF;
+  color: #666666;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+}
+.erji{
+  height: 80rpx;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background-color: #FF963F;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+}
+
+.main-item-box{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 170rpx;
+  background-color: #FFFFFF;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+.touxiang image{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 69rpx;
+  overflow:hidden
+}
+.touxiang{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: -20rpx;
+}
+.touxiang text{
+  
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  display: block;
+  margin-top: 10rpx;
+  width: 300rpx;
+  color: #666666;
+    overflow:hidden; 
+  /* text-overflow:ellipsis; */
+  /* white-space:nowrap;  */
+  text-align: center;
+
+}
+.share_btn{
+  
+  position: absolute;
+  bottom: 300rpx;
+  left: 30%;
+  
+
+}
+
+.ssprice{
+  font-size: 26rpx;
+}
+.yjitem{
+  display: flex;
+  align-items: center;
+  background-color: #40B15D;
+  justify-content: space-between;
+  height: 200rpx;
+  position: relative;
+}
+.gotixian{
+    width: 120rpx;
+    height: 48rpx;
+    background: #FF963F;
+    opacity: 1;
+    border-radius: 25rpx;
+    line-height: 48rpx;
+    text-align: center;
+    /* margin-top: 90rpx;
+    margin-right: 60rpx; */
+    position: absolute;
+
+
+}
+.gotixian text{
+  
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.heyongjin{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.meyongjin{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.yjprice{
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+}
+.yjtext{
+ 
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+}
+
+
+qrcode{
+  position: fixed;
+  top:314rpx;
+  left:188rpx;
+  z-index:20;
+  background-color: #707070;
+}
+.zan-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.zan-dialog__container {
+  position: fixed;
+  bottom: 400rpx;
+  width: 584rpx;
+  height: 540rpx;
+  margin-left: 80rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;
+}
+
+.zan-dialog--show .zan-dialog__container {
+  transform: translateY(0);
+}
+
+.zan-dialog--show .zan-dialog__mask {
+  display: block;
+}
+.myimg{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.etitle{
+    height: 97rpx;
+    font-size: 36rpx;  
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    line-height: 97rpx;
+    color: #6B6B6B;
+}
+.ebox{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-evenly;
+  height: 101rpx;
+  width: 584rpx;
+  border-top: 1px solid #F0F0F0;
+}
+.quxiao{
+  display: block;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #6B6B6B;
+}
+.queren{
+  display: block;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  line-height: 33px;
+  color: #40B15D;
+}
+
+/* .top{
+  height: 50rpx;
+  background-color: #F13B23;
+}
+.head{
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+.head view{
+
+  font-size: 30rpx;
+   padding: 10rpx;
+   font-family: Source Han Sans CN;
+   font-weight: 500;
+}
+.item{
+  background-color: pink;
+  font-size: 30rpx;
+   padding: 10rpx;
+   font-family: Source Han Sans CN;
+   font-weight: 500;
+}
+
+.middl image{
+  margin-top: -50rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+.title{
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #000;
+  margin-top: 40rpx;
+
+}
+.middl{
+  display: flex;
+  flex-direction: column;
+  height: 320rpx;
+  width: 300rpx;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-top: 30rpx;
+  box-shadow: 10px 10px 5px #ccc;
+
+}
+.zhong{
+  width: 750rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fuhao{
+  color: red;
+}
+.price{
+  font-size: 40rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: red;
+}
+.textbox{
+  margin-top: 10rpx;
+}
+.box-title{
+  font-size: 34rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #000;
+  height: 100rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  line-height: 100rpx;
+ 
+}
+.box-title text{
+  margin-left: 20rpx;
+} */
+.offical{
+  width:100%;
+  position:fixed;
+  bottom: 0;
+  /* height:200rpx; */
+}
+
+.left{
+  
+}

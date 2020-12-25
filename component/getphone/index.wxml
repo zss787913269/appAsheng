@@ -1,0 +1,39 @@
+<view>
+	<view wx:if="{{canIUse}}">
+		<view class='header'>
+			<image src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" mode="widthFix" />
+		</view>
+
+		<view class='content'>
+			<view>使用手机号码进行绑定</view>
+
+
+			<view class="titleed">
+				<label class="glable" for="male">电　话</label>
+				<input type="text" placeholder="请输入手机号码" class="pickerIndex2" name="tel" id="laoban" value="{{tel}}" bindinput='getInputValue' />
+				<view class="zhon"  bindtap="sendCode" wx:if="{{showcode}}">发送验证码</view>
+				<view class="getcode" wx:if="{{!showcode}}"><text>{{countDownNum}}s后重发</text></view>
+			</view>
+			<view class="titleed" >
+				<label class="glable" for="male">验证码</label>
+				<input class="myinpu" type="number" placeholder="验证码" name="code" id="male"  bindinput="getcode" value="{{code}}" />
+			</view>
+
+      <view class="titleed" >
+				<label class="glable" for="male">登录密码</label>
+				<input class="pickerIndex3" type="number" placeholder="密码"  type="password"  bindinput="getpsw" value="{{psw}}" />
+      </view>
+      <view class="titleed" >
+				<label class="glable" for="male">重复密码</label>
+				<input class="pickerIndex3" type="number" placeholder="密码"  type="password"  bindinput="getpsw1" value="{{psw1}}" />
+			</view>
+		</view>
+
+
+
+		<button type="primary" bindtap="phonelogin">绑定手机号码</button>
+
+
+	</view>
+	<!-- <view >请升级微信版本</view> -->
+</view>

@@ -1,0 +1,24 @@
+<view class="imgbox">
+
+<image mode="top" src='https://img1.360buyimg.com/n6/jfs/t1/93226/12/9338/158966/5e0ef346E38b858b2/57ccc4e4b17cf214.jpg'  ></image>
+
+</view>
+
+<view class="top-title">
+  <view class="xixihhh">
+    <text class="name">五花肉</text>
+    <view><text class="p1">￥</text><text class="p2">31.90</text></view>
+    <text class="shopname">名厨菜小二</text>
+  </view>
+</view>
+
+<view class="detail">
+   <view class="d-box">
+    <view><text class="xq">详情</text></view>
+    <view class="fontbox">
+      <text>品名:五花肉</text>
+      <text>储存方式：0-4℃</text>
+      <text>储存方式：0-4℃</text>
+    </view>
+   </view>
+</view>

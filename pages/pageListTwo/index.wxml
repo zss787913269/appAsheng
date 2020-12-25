@@ -1,0 +1,65 @@
+<view class="headImg">
+  <image src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
+</view>
+<view class="scroll_table" bindtap="myscorll">
+	<scroll-view scroll-x scroll-x="true" style="width: 100%" bindscroll="scrollMove2" scroll-left='{{scrollLeft2}}'
+		scroll-with-animation="true">
+		<view class="swiper-tab">
+			<view wx:for="{{tableListre}}" id="scroll-item2-{{item.id}}" wx:key="unique"
+				class="swiper-tab-item {{currentTab==item.id?'active':''}}" data-index="{{item.id}}" data-current="{{item.id}}"
+				bindtap="clickTab">{{item}}
+			</view>
+		</view>
+	</scroll-view>
+</view>
+<view class="main">
+	<view class="left">
+
+		<scroll-view scroll-y="true" class="ss" style='height:{{screenHeight}}px' scroll-into-view="true" scroll-with-animation="true">
+		
+			<view wx:for="{{hotelOrderDetail}}" wx:key="unique">
+
+
+				<!-- <view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"> -->
+				<view class="myNmae" bindtap="clickLeftItem" data-id="{{item.id}}"
+					class="{{classfiySelect === item.id ? 'leftActive':'myNmae'}}">
+					<text> {{item.name}}</text>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+
+	<view class='right'>
+		<scroll-view scroll-y="true" style='height:{{screenHeight}}px' scroll-with-animation="true"
+			scroll-into-view="{{'inToview'+classfiySelect}}">
+			<block wx:for="{{hotelOrderDetail}}" wx:key="index">
+			
+			
+				<!-- <block  wx:key="index"> -->
+				<view class="{{show || showjd || showqh ?'shopatt-left_show':'shopatt-left'}}" wx:for="{{item.goods}}"
+					wx:key="index" wx:for-item="items">
+					<view class="mytitle" id="{{'inToview'+item.id}}">
+						<view class="right-img">
+							<image wx:if="{{items.images}}" src="https://wxapp.mccxx.com{{items.images}}"></image>
+							<image wx:else src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg"></image>
+						</view>
+						<view class="right-title">
+							
+							<view class="{{classfiySelect==item.id ? 'top-title_active':'top-title'}}">{{items.title}}</view>
+							<view class="mytext2">{{items.specvalue}}</view>
+							<view class="mytext2" >单价：{{items.price}}</view>
+							<view class="mynumber">数量：{{items.buy_number}}</view>
+						</view>
+
+				  		<view class="nPrice" >总价:￥{{items.total_price}}</view>
+					
+					</view>
+
+
+
+				</view>
+			</block>
+		</scroll-view>
+
+	</view>
+</view>

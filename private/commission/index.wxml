@@ -1,0 +1,48 @@
+<view class="header">
+  <view class="fr">
+    <navigator url="/person/crecord/index" hover-class="other-navigator-hover">
+      <text>充值/提现记录</text>
+    </navigator>
+  </view>
+  <view class="title">
+    <text>我的余额(元)</text>
+  </view>
+  <view class="tbody">
+    <view class="content">
+      <view class="leiron">
+        <text>{{balance}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="xian">
+  </view>
+  <view class="leiji">
+    <view>
+      <text>昨日提现</text>
+      <text>0.00</text>
+    </view>
+    <view class="leftder">
+      <text>累计提现</text>
+      <text>00.0</text>
+    </view>
+  </view>
+</view>
+
+<view class="bottom">
+  <view class="itemed">
+    <view class="item active" bindtap="chongzhi1">
+      <text>充 值</text>
+    </view>
+  </view>
+
+  <!-- <view class="itemed">
+
+    <view class="item">
+      <navigator url="/person/confirm/index" hover-class="other-navigator-hover">
+        <text>提 现</text>
+      </navigator>
+    </view>
+  </view> -->
+
+</view>

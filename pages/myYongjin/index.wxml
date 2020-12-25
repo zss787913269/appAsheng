@@ -1,0 +1,27 @@
+<view class="main">
+
+  <view class="top" > 
+    <view class="tix" bindtap="gotx" >提现</view>
+    <text>{{list.h_name}}</text>
+    <text class="all">佣金总额：<text class="allprice"> ￥{{list.mytotal}}</text> </text>
+  
+  </view>
+  <view class="center"  wx:for="{{list.order}}" wx:key='index'>
+    <view class="timeBox">
+      <text class="dd">订单号：{{item.order_no}}</text> <text class="time">{{item.add_time}}</text>
+    </view>
+
+    <view class="box">
+      <view class="box-item">
+        <text class="p1">￥{{item.total_price}}</text>
+        <text class="p2">订单金额</text>
+      </view>
+
+      <view class="box-item">
+        <text class="p1">￥{{item.yongjin}}</text>
+        <text class="p2">预计收入</text>
+      </view>
+    </view>
+  </view>
+  
+</view>

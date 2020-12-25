@@ -1,0 +1,44 @@
+<view class="main">
+	<view class="title"><text>{{list.name}}</text><text class="fonst" wx:if="{{list.is_enable == 0}}">{{list.is_enable == 0 ? '(未启用)' :''}}</text></view>
+	<view class="center">
+		<!-- <view class="center-item">
+			<text>订单总量</text>
+			<text>2000</text>
+		</view>
+		<view class="center-item">
+			<text>可提现金额</text>
+			<text>10800.00</text>
+		</view>
+		<view class="tixian">
+			<text>提现</text>
+		</view> -->
+	</view>
+	<view class="type">
+		<view class="type-item"><text>菜市场：</text><text>{{list.marketname}}</text></view>
+		<view class="type-item"><text>类别：</text><text>{{list.categoryname}}</text></view>
+	</view>
+	<view class="address">
+		<view>
+			<text>商铺地址：</text>
+			<text>{{list.address}}</text>
+		</view>
+	</view>
+
+
+</view>
+
+<view class="bottom">
+
+  <view class="btn" style="margin-left:20rpx">
+    <image style="height:37rpx;width:33rpx" src="../../images/user/spxx-spdd.png"></image>
+    <text>商铺订单</text>
+  </view>
+    <view class="btn">
+    <image style="height:39rpx;width:37rpx" src="../../images/user/spxx-wdsp.png"></image>
+    <text>商品列表</text>
+  </view>
+    <view class="btn">
+    <image style="height:37rpx;width:37rpx" src="https://wxapp.mccxx.com/static/banner/wxapp/common/wd-tjbj.png"></image>
+    <text>修改信息</text>
+  </view>
+</view>

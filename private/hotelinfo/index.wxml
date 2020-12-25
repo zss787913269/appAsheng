@@ -1,0 +1,108 @@
+<wxs src="./index.wxs" module="utils" />
+<view class="header">
+  <view class="headerbox" wx:for="{{hotelList}}" wx:key='index'>
+    <view class="title"><text>{{item.h_name}}</text><text class="mys" wx:if="{{item.status == 0}}">未审核</text></view>
+
+    <view class="identity ">
+    <view class="item">
+      <text class="id">我的身份</text>
+      <text class="name">{{utils.getType(item.type)}}</text>
+
+    </view>
+    <view class="item">
+      <text class="id">酒店负责人</text>
+      <text class="name">{{item.name}}</text>
+    </view>
+  </view> 
+    <view class="address">
+      <text class=" ">酒店地址：</text>
+      <text class="  ">{{item.address}}</text>
+    </view>
+    <view class="center">
+
+<view class="msg-box" bindtap="goHotel" data-index="1">
+  <image src="../../images/user/hotelmsg.png"></image>
+  <text>酒店订单</text>
+</view>
+<view class="msg-box" bindtap="goHotel" data-index="2" data-id="{{item.id}}">
+  <image src="../../images/user/edit.png"></image>
+  <text>修改酒店信息</text>
+</view>
+
+</view>
+    <view class="bottom">
+      <view class="b-title"><text>发送二维码</text></view>
+      <view class="flex">
+        <view class="flex-box" bindtap="sendQRCode" data-index="1" data-id="{{item.id}}">
+          <text>下单员</text>
+          <image wx:if="{{xdy.length != 0}}" src="{{xdy.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-xdy.png"></image>
+          <text wx:if="{{xdy.length != 0}}" class="color">{{xdy.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box" bindtap="sendQRCode" data-index="2" data-id="{{item.id}}">
+          <text>厨师长</text>
+          <image wx:if="{{csz.length != 0}}" src="{{csz.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-csz.png"></image>
+          <text wx:if="{{csz.length != 0}}" class="color">{{csz.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box" bindtap="sendQRCode" data-index="3" data-id="{{item.id}}">
+          <text>采购</text>
+          <image wx:if="{{cg.length != 0}}" src="{{cg.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-cg.png"></image>
+          <text wx:if="{{cg.length != 0}}" class="color">{{cg.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box" bindtap="sendQRCode" data-index="4" data-id="{{item.id}}">
+          <text>仓库</text>
+          <image wx:if="{{ck.length != 0}}" src="{{ck.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-ck.png"></image>
+          <text wx:if="{{ck.length != 0}}" class="color">{{ck.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box" bindtap="sendQRCode" data-index="5" data-id="{{item.id}}">
+          <text>财务</text>
+          <image wx:if="{{cw.length != 0}}" src="{{cw.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-cw.png"></image>
+          <text wx:if="{{cw.length != 0}}" class="color">{{cw.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box" bindtap="sendQRCode" data-index="6" data-id="{{item.id}}">
+          <text>店长</text>
+          <image wx:if="{{dz.length != 0}}" src="{{dz.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-dz.png"></image>
+          <text wx:if="{{dz.length != 0}}" class="color">{{dz.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box" bindtap="sendQRCode" data-index="7" data-id="{{item.id}}">
+          <text>老板</text>
+          <image wx:if="{{lb.length != 0}}" src="{{lb.avatar}}"></image>
+          <image wx:else src="{{urls}}jdxx-lb.png"></image>
+          <text wx:if="{{lb.length != 0}}" class="color">{{lb.nickname}}</text>
+          <text wx:else>未绑定</text>
+        </view>
+        <view class="flex-box">
+
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view wx:if="{{hotelList == ''}}" class="tip" bindtap="go">
+    <text>还未有酒店,点击去注册</text>
+</view>
+
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+  <!-- 如果想点击弹窗外不隐藏，取消bindtap点击事件即可 -->
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+    <view class="myimg">
+      <view class="etitle">发送二维码</view>
+      <image src="{{hotelQR}}" style="width:320rpx;height:327rpx;"></image>
+      <view class="ebox" bindtap="toggleDialog"><text class="quxiao">取消</text><text class="queren">确认</text></view>
+    </view>
+  </view>
+</view>

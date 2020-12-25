@@ -1,0 +1,81 @@
+/* details/shopDetail/index.wxss */
+.imgbox image{
+  width: 750rpx;
+  height: 400rpx;
+}
+page{
+  background-color: #f2f2f2;
+}
+.top-title{
+  margin-top: 20rpx;
+  width: 750rpx;
+  height: 260rpx;
+  background: #FFFFFF;
+  opacity: 1;
+}
+.name{
+  display: block;
+  font-size: 36rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #5C5C5C;
+  opacity: 1;
+  margin-top: 24rpx;
+}
+.xixihhh{
+  margin-left: 35rpx;
+  overflow: hidden;
+}
+.p1{
+
+  font-size: 41rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FF963F;
+}
+.p2{
+  
+    font-size: 47rpx;
+    font-family: Source Han Sans CN;
+    font-weight: bold;
+    color: #FF963F;
+}
+.shopname{
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #828282;
+  display: block;
+}
+.d-box{
+  overflow: hidden;
+  margin-left: 35rpx;
+  
+  
+}
+.xq{
+    
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: #5C5C5C;
+  margin-top: 20rpx;
+}
+.detail{
+  margin-top: 20rpx;
+  height: 277rpx;
+  background: #FFFFFF;
+  opacity: 1;
+}
+.fontbox{
+  display: flex;
+  flex-direction: column;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #828282;
+}
+.fontbox text{
+  margin-top: 20rpx;
+}

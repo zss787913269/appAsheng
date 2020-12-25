@@ -1,0 +1,12 @@
+var getAllPrice = function(a,b){
+  console.log(a)
+  console.log(b)
+  console.log("aaaa")
+  return (a*b).toFixed(2)
+}
+
+var round = function(a){
+  return Math.round(a)
+}
+
+module.exports = {getAllPrice:getAllPrice,round:round}

@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "details/search/index",
+    "pages/tejia/index",
+   
     "private/invitation/index",
     "pages/user/index",
     "private/commission/index",
-
-   
     "person/confirm/index",
     "pages/myYongjin/index",
     "pages/yongjin/index",
@@ -20,7 +21,6 @@
     "details/editShopGoods/index",
     "details/addshop/index",  
     "details/becomeShop/index",
-    "details/search/index",
     "details/appointment/index",
     "details/preAbout/index",
     "pages/find/index",
@@ -30,13 +30,10 @@
     "details/release/index",
     "private/kitchen/index",
     "details/detail/index",
-  
     "details/handle/index",
     "private/find/index",
     "private/findone/index",
-  
     "private/personaldata/index",
-  
     "component/getphone/index",
     "person/map/index",
     "person/add/index",
@@ -115,8 +112,8 @@
         "selectedIconPath": "images/tabar/car1.png"
       },
       {
-        "pagePath": "details/search/index",
-        "text": "搜索",
+        "pagePath": "pages/tejia/index",
+        "text": "特价商品",
         "iconPath": "images/tabar/tabsear.png",
         "selectedIconPath": "images/tabar/s2.png"
       },

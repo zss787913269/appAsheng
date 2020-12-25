@@ -1,0 +1,30 @@
+<view class="content">
+	<form bindsubmit='submit'>
+
+
+		<view class="titleed">
+			<label class="" for="male"><text>姓　名：</text></label>
+			<input type="text" bindinput="getfullName" placeholder="请输入" class="pickerIndex" name="nickName" id="male" value="{{fullName}}" />
+		</view>
+	
+		<view class="titleed">
+			<label class="" for="male"><text>昵　称：</text></label>
+			<input type="text"  bindinput="getnickname" placeholder="请输入" class="pickerIndex" name="fullName" id="male" value="{{nickName}}" />
+		</view>
+		
+		<view class="titleed">
+			<label class="" for="male">电　话:</label>
+			<input type="text" placeholder="请输入" class="pickerIndex2" name="tel" id="laoban" value="{{tel}}" bindinput='getInputValue' />
+			<view class="zhon"   wx:if="{{false}}" bindtap="sendCode" >发送验证码</view>
+		</view>
+		<view class="titleed" wx:if="{{false}}">
+			<label class="glable" for="male">验证码</label>
+			<input class="myinpu" type="text"  placeholder="请输入验证码" name="code" id="male" bindinput="getcode" value="{{code}}" />
+		</view>
+	
+
+		<view class="submit">
+			<button  bindtap="getSubmit" style="background:#ff9000;color:#fff;">提 交</button>
+		</view>
+	</form>
+</view>

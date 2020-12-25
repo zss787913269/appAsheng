@@ -1,0 +1,64 @@
+<view class="list">
+		<view class="title">
+			<text>预约列表</text>
+		</view>
+		<block wx:if="{{makeList != ''}}">
+			<view class="middle" wx:for="{{makeList}}" wx:key="index">
+				<view class="tbody">
+					<view class="portrait">
+						<image src="{{item.avatar}}"></image>
+						<view class="introduce">
+							<text>{{item.nickname}}</text>
+						
+						</view>
+					</view>
+
+					<view wx:if="{{item.status !== 0}}">
+						<view class="accept" wx:if="{{item.status == 1}}">
+							<text>已接受</text>
+						</view>
+						<view class="accept1" wx:if="{{item.status == 2}}">
+							<text>已拒绝</text>
+						</view>
+					</view>
+
+					<view wx:if="{{item.status == 0}}">
+						<view class="accept" bindtap="accept" data-id="{{item.id}}">
+							<text>接受</text>
+						</view>
+						<view class="accept" bindtap="refuse" data-id="{{item.id}}">
+							<text>拒绝</text>
+						</view>
+					</view>
+				</view>
+				<view class="nottom">
+					<view>
+						<view>
+						<text class="color">用餐人：</text>
+						<text>{{item.name}}</text>
+					</view>
+							<view>
+						<text class="color">联系方式：</text>
+						<text>{{item.tel}}</text>
+					</view>
+						<text class="color">用餐时间：</text>
+						<text>{{item.make_time}}</text>
+					</view>
+					<view>
+						<text class="color">用餐人数：</text>
+						<text>{{item.number}}</text>
+					</view>
+					<view>
+						<text class="color">用餐地址：</text>
+						<text>{{item.address}}</text>
+					</view>
+					<view>
+						<text class="color">用餐备注：</text>
+						<text>{{item.mark}}</text>
+					</view>
+				</view>
+			</view>
+		</block>
+		<view class="noTime" wx:else>暂无预约</view>
+	
+	</view>

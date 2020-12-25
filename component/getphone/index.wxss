@@ -1,0 +1,122 @@
+.header {
+  margin: 90rpx 0 90rpx 50rpx;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  width: 650rpx;
+  height: 300rpx;
+  line-height: 450rpx;
+}
+
+.header image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.content {
+  margin-left: 50rpx;
+  margin-bottom: 90rpx;
+}
+
+.content text {
+  display: block;
+  color: #9d9d9d;
+  margin-top: 40rpx;
+}
+.inputbox{
+  width: 565rpx;
+  height: 54rpx;
+  background: #FFFFFF;
+  border: 1px solid #707070;
+  border-radius: 60px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+
+.bottom {
+  border-radius: 80rpx;
+  margin: 70rpx 50rpx;
+  font-size: 35rpx;
+}
+.titleed{
+
+ height: 60rpx;
+ margin: 0 auto;
+ display: flex;
+ padding-left:20rpx;
+ box-sizing: border-box;
+ border-radius:10rpx;
+ /* background-color: seagreen; */
+ margin-top: 20rpx;
+ /* align-content: center; */
+ align-items: center;
+ 
+}
+.glable{
+  width: 20%;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.myinpu{
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  height: 60rpx;
+  margin-left: 20rpx;
+  width: 180rpx !important;
+  text-align: center;
+  font-size: 24rpx;
+  padding-left: 10rpx !important;
+
+}
+.pickerIndex2{
+  margin-left: 20rpx !important;
+  border:1rpx solid #ccc;
+  width:300rpx !important;
+  text-align: center;
+  display: block;
+  border-radius: 10rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-left: 0rpx !important;
+  /* z-index: 99999; */ 
+}
+.pickerIndex3{
+  margin-left: 20rpx !important;
+  border:1rpx solid #ccc;
+  width:300rpx !important;
+  text-align: center;
+  display: block;
+  border-radius: 10rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-left: 0rpx !important;
+  /* z-index: 99999; */
+}
+.zhon{
+  width: 180rpx;
+  height: 50rpx;
+  background:#ff9d34;
+  color: #fff; 
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 5rpx;
+  font-size: 24rpx;
+  margin-left:40rpx;  
+  border-radius: 10rpx;
+}
+
+.getcode{
+  width: 180rpx;
+  height: 50rpx;
+  background:#ccc;
+  color: #fff; 
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 5rpx;
+  font-size: 24rpx;
+  margin-left:40rpx;  
+  border-radius: 10rpx;
+}

@@ -1,0 +1,21 @@
+<view wx:for="{{list}}" wx:key="index">
+
+<view class="main"  >
+
+	<view class="top_box">
+
+		<view class="title">地址：{{item.address.city_name}}{{item.address.county_name}}</view>
+		<view class="timebox"><text class="time">下单时间：{{item.add_time}}</text><text class="ok">已完成</text></view>
+		<view class="imgbox">
+      <image wx:for="{{item.items}}" wx:for-item="list" src="{{list.images}}" wx:key="index" class="img"></image>
+			<view class="more" bindtap="goDetail"  data-id="{{item.id}}" >. . .</view>
+		</view>
+    <view class="all">
+     <text class="count">共{{item.items_count}}件商品，合计：</text><text class="price">￥{{item.price}}</text>
+    </view>
+
+	</view>
+<view class="bottom"><view bindtap="buy" data-id="{{item.id}}">再来一单</view></view>
+</view>
+
+</view>

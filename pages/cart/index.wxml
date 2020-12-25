@@ -232,7 +232,7 @@
 							<view class="myab">下单员：{{item.user.nickname}}</view>
 							<view class="paidbox" wx:if="{{item.status_name != '已取消' }}">
 
-								<view class="quxiao" wx:if="{{item.shopStatus != '已接单' }}" bindtap="cancelOrder" data-id="{{item.id}}">
+								<view class="quxiao" wx:if="{{item.shopStatus != '已接单' || item.status_name == '待发货' }}" bindtap="cancelOrder" data-id="{{item.id}}">
 									取消订单
 								</view>
 								<view class="queren" wx:if="{{ item.pay_status_name == '待支付'   }}" bindtap="payment"

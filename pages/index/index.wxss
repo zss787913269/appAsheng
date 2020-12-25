@@ -1711,8 +1711,8 @@ swiper{
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: red;
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  bottom: 5rpx;
+  bottom: 5rpx; */
   
 }

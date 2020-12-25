@@ -1,0 +1,20 @@
+<view>
+    <view >
+        <view class='header'>
+            <image src="https://wxapp.mccxx.com/static/index/default/images/logo.jpg" mode="widthFix" />
+        </view>
+ 
+        <view class='content' >
+            <view>申请获取以下权限</view>
+            <text>下单成功通知</text>
+            <text>邀请成员通知</text>
+        </view>
+ 
+        <button class='bottom' type='primary'  lang="zh_CN"  bindtap="dy">
+            授权订阅
+        </button>
+    
+    </view>
+    <!-- <view >请升级微信版本</view> -->
+</view>
+

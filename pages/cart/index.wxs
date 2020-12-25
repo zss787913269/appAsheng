@@ -1,0 +1,10 @@
+var tomyfix = function(a,b){
+    return (a*b).toFixed(2)
+}
+var toNum = function(a){
+  return Number(a)
+}
+module.exports = {
+  tomyfix:tomyfix,
+  toNum:toNum
+}

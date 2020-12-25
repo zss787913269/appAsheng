@@ -1,0 +1,91 @@
+/* pages/myYongjin/index.wxss */
+.main{
+  /* width: 90%; */
+  margin:20rpx 20rpx;
+  background-color: #fff;
+  overflow: hidden;
+  /* margin-bottom: 40rpx; */
+}
+page{
+  background-color: #f1f1f1;
+  /* overflow: hidden; */
+}
+.top{
+  height: 100rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  line-height: 100rpx;
+  margin-left: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.tix{
+  position: absolute;
+  right: 10rpx;
+  top: 30rpx;
+  height: 35rpx;
+  width: 80rpx;
+  font-size: 22rpx;
+  border-radius: 50rpx;
+  background-color: rgb(255,174,93);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  
+  
+}
+.timeBox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+.box{
+  display: flex;
+  justify-content: space-around;
+}
+.box-item{
+  display: flex;
+  flex-direction: column;
+
+}
+.p1{
+  font-size: 32rpx;
+  color: rgb(255,174,93);
+}
+.p2{
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: #717171;
+}
+.box{
+  /* border-bottom: 1rpx solid #ccc; */
+  margin-bottom: 20rpx;
+  margin-top: 35rpx;
+}
+.center{
+  height: 200rpx;
+  border-bottom: 1rpx solid #ccc;
+  border-top: 1rpx solid #ccc;
+  margin-bottom: 20rpx;
+}
+.dd{
+  margin-left: 30rpx;
+  color: #626262;
+
+}
+.time{
+  margin-right: 30rpx;
+  color: #717171;
+  font-size: 26rpx;
+}
+
+.all{
+  margin-right: 120rpx;
+  font-size: 32rpx;
+}
+.allprice{
+  font-size: 42rpx;
+  color: red;
+}

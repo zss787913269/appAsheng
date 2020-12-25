@@ -40,7 +40,7 @@
  </view> -->
  <view class="codene">
 		<view wx:if="{{code != ''}}"> 
-			<image src="https://wxapp.mccxx.com{{code}}"  mode="widthFix"></image>
+			<image src="https://wxapp.mccxx.com{{code}}"  show-menu-by-longpress='true'  mode="widthFix"></image>
 			<text>你的专属推广二维码</text>
 		</view>
 		<text class="ewmtext" wx:else bindtap="myshowModal">点击生成你的专属推广二维码</text>
@@ -76,4 +76,9 @@
 	<view class="myb2" bindtap="azymhideBuyModal">
 				<image  src="http://wxapp.mccxx.com/static/image/ad_make_user.jpg"></image>
 	</view>
+</view>
+
+
+<view class="offical" >
+ <official-account ></official-account>
 </view>

@@ -111,7 +111,7 @@ page{
 }
 .bottom{
   position: absolute;
-  bottom: 100rpx;
+  bottom: 200rpx;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -233,4 +233,28 @@ page{
 }
 .bbttom button{
   width:300rpx !important;
+}
+
+.official-account {
+  background-color: #fff;
+	position: fixed;
+  z-index: 3;
+  display: -webkit-inline-flex;
+  width: 100%;
+}
+
+.closeImg{
+  width: 50rpx;
+  height: 50rpx;
+  position: fixed;
+  right: 15rpx;
+  top: 5rpx;
+  z-index: 4;
+}
+
+.offical{
+  width:100%;
+  position:fixed;
+  bottom: 0;
+  /* height:200rpx; */
 }

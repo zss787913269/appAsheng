@@ -2,6 +2,7 @@
 <view class="top">
 </view>
 
+
 <view class="header" bindtap="goSearchPage">
 	<i class="fal fa-search myi"></i>
 	<view class="mysear">搜索商品</view>
@@ -100,7 +101,7 @@
 								<view class="carlogo">
 									<image src="../../images/index/car.png"></image>
 								</view>
-								<view class="upd_price" wx:if="{{items.upd_day != '' && items.upd_days <= 7}}"><text>价格更新：{{items.upd_day}}</text></view>
+							
 							</view>
 						
 							<view class="centername">
@@ -109,7 +110,8 @@
 								<view class="leftname">
 									<view class="{{classfiySelect == item.id ? 'nametitle_active' : 'nametitle' }}"><text>{{items.title}}</text></view>
 									<view class="nameprice"><text class="my1">￥</text><text class="my2">{{items.price}}</text><text
-											class="my3">/{{items.inventory_unit}}</text></view>
+											class="my3">/{{items.inventory_unit}}    </text> <text class="upd_price" wx:if="{{items.upd_day != '' && items.upd_days <= 7}}">{{items.upd_day}}</text></view>
+											<!--		 <view class="upd_price" wx:if="{{items.upd_day != '' && items.upd_days <= 7}}"><text>价格更新：{{items.upd_day}}</text></view>	-->
 								</view>
 							
 								<!--		 <view class="rightname"><text>{{items.brand_name}}</text></view> 	-->

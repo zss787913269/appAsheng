@@ -1,0 +1,169 @@
+page {
+  background-color: #f2f2f2;
+}
+
+.title {
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 32rpx;
+}
+.fonst{
+  font-size: 26rpx !important;
+}
+.title text {
+
+  font-size: 36rpx;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: #474747;
+  opacity: 1;
+}
+
+.main {
+  height: 496rpx;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 60rpx;
+}
+
+.center-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-item text:first-child {
+
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+}
+
+.center-item text:last-child {
+
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FF963F;
+}
+
+.tixian {
+  width: 100rpx;
+  height: 40rpx;
+  background: #FF963F;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+
+}
+
+.tixian text {
+  font-size: 22rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.type {
+  display: flex;
+  margin-top: 46rpx;
+  margin-left: 30rpx;
+  border-top: 1rpx solid #EBEEF5;
+  border-bottom: 1rpx solid #EBEEF5;
+  margin-right: 30rpx;
+}
+.type-item{
+  margin-top: 20rpx;
+  margin-left: 69rpx;
+  margin-bottom: 20rpx;
+}
+
+.type-item:last-child {
+  margin-left: 100rpx;
+}
+
+.type-item text:first-child {
+
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #666666;
+}
+
+.type-item text:last-child {
+
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+}
+
+.address {
+  margin-top: 26rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+}
+.address view{
+  margin-bottom: 20rpx;
+}
+.address text:first-child{
+  
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #666666;
+  margin-left: 69rpx;
+  
+}
+.address text:last-child{
+
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+}
+.bottom{
+  margin-top: 23rpx;
+  width: 750rpx;
+  height: 184rpx;
+  background: #FFFFFF;
+  opacity: 1;
+  border-radius: 20px; 
+}
+
+.btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 100rpx;
+  margin-left: 10rpx;
+}
+.bottom{
+  display: flex;
+  align-items: center;
+}
+.btn text{
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+}
